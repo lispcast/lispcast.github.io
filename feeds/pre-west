@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-West Prep 2015</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-2015</guid>
+                  <link>http://www.lispcast.com/pre-west-2015</link>
+                  <pubDate>Tue 17 Mar 2015 05:03:06 PM CDT</pubDate>
+                  <description>
+                    Prepare for Clojure/West with media from around the web and interviews.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-2015"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Alan Dipert and Micha Niskin</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-alan-dipert-micha-niskin</guid>
+                  <link>http://www.lispcast.com/pre-west-alan-dipert-micha-niskin</link>
+                  <pubDate>Wed 18 Mar 2015 09:26:24 AM CDT</pubDate>
+                  <description>
+                    Alan Dipert and Micha Niskin will talk about Boot.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Anthony Marcar</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-anthony-marcar</guid>
+                  <link>http://www.lispcast.com/pre-west-anthony-marcar</link>
+                  <pubDate>Wed 18 Mar 2015 09:21:45 PM CDT</pubDate>
+                  <description>
+                    Anthony Marcar will talk about Clojure in the enterprise.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-anthony-marcar"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Boris Kourtoukov</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-boris-kourtoukov</guid>
+                  <link>http://www.lispcast.com/pre-west-boris-kourtoukov</link>
+                  <pubDate>Wed 18 Mar 2015 09:56:01 PM CDT</pubDate>
+                  <description>
+                    Boris Kourtoukov will talk about Clojure and wearables.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-boris-kourtoukov"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Brandon Bloom</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-brandon-bloom</guid>
+                  <link>http://www.lispcast.com/pre-west-brandon-bloom</link>
+                  <pubDate>Fri 20 Mar 2015 01:57:40 AM CDT</pubDate>
+                  <description>
+                    Brandon Bloom will talk about Om.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-brandon-bloom"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Bruce Hauman</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-bruce-hauman</guid>
+                  <link>http://www.lispcast.com/pre-west-bruce-hauman</link>
+                  <pubDate>Fri 20 Mar 2015 10:28:55 PM CDT</pubDate>
+                  <description>
+                    Bruce Hauman will speak about Figwheel.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-bruce-hauman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Christopher Small</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-christopher-small</guid>
+                  <link>http://www.lispcast.com/pre-west-christopher-small</link>
+                  <pubDate>Fri 20 Mar 2015 11:01:14 PM CDT</pubDate>
+                  <description>
+                    Christopher Small will speak about raising chickens with Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-christopher-small"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Colin Fleming</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-colin-fleming</guid>
+                  <link>http://www.lispcast.com/pre-west-colin-fleming</link>
+                  <pubDate>Sat 21 Mar 2015 09:35:14 PM CDT</pubDate>
+                  <description>
+                    Colin Fleming will talk about debugging in Cursive.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-colin-fleming"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Dan Lidral-Porter</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-dan-lidral-porter</guid>
+                  <link>http://www.lispcast.com/pre-west-dan-lidral-porter</link>
+                  <pubDate>Sat 21 Mar 2015 10:33:56 PM CDT</pubDate>
+                  <description>
+                    Dan Lidral-Porter will talk about computer-generated art in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-dan-lidral-porter"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Elango Cheran</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-elango-cheran</guid>
+                  <link>http://www.lispcast.com/pre-west-elango-cheran</link>
+                  <pubDate>Sat 21 Mar 2015 11:28:46 PM CDT</pubDate>
+                  <description>
+                    Elango Cheran will talk about writing Clojure in other spoken languages.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-elango-cheran"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Elena Machkasova</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-elena-machkasova</guid>
+                  <link>http://www.lispcast.com/pre-west-elena-machkasova</link>
+                  <pubDate>Fri 03 Apr 2015 10:07:16 PM CDT</pubDate>
+                  <description>
+                    Elena Machkasova will talk about teaching Clojure to novice programmers.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-elena-machkasova"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Fumiko Hanreich</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-fumiko-hanreich</guid>
+                  <link>http://www.lispcast.com/pre-west-fumiko-hanreich</link>
+                  <pubDate>Mon 30 Mar 2015 11:09:44 PM EDT</pubDate>
+                  <description>
+                    Fumiko Hanreich will talk about HoneySQL.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-fumiko-hanreich"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Gary Fredericks</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-gary-fredericks</guid>
+                  <link>http://www.lispcast.com/pre-west-gary-fredericks</link>
+                  <pubDate>Fri 03 Apr 2015 10:07:16 PM CDT</pubDate>
+                  <description>
+                    Gary Fredericks will talk about functional random number generators.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-gary-fredericks"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Christopher Small</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-christopher-small</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-christopher-small</link>
+                  <pubDate>Thu 16 Apr 2015 09:09:46 AM CDT</pubDate>
+                  <description>
+                    Christopher Small will talk about automating chicken coops with Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-christopher-small"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Elena Machkasova</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-elena-machkasova</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-elena-machkasova</link>
+                  <pubDate>Wed 15 Apr 2015 01:17:55 PM CDT</pubDate>
+                  <description>
+                    Elena Machkasova interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-elena-machkasova"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Fumiko Hanreich</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-fumiko-hanreich</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-fumiko-hanreich</link>
+                  <pubDate>Wed 15 Apr 2015 09:30:06 PM CDT</pubDate>
+                  <description>
+                    Fumiko Hanreich interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-fumiko-hanreich"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Gary Fredericks</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-gary-fredericks</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-gary-fredericks</link>
+                  <pubDate>Thu 09 Apr 2015 01:45:04 PM CDT</pubDate>
+                  <description>
+                    Gary Fredericks interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-gary-fredericks"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Luke Vanderhart</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-luke-vanderhart</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-luke-vanderhart</link>
+                  <pubDate>Wed 15 Apr 2015 12:57:28 PM CDT</pubDate>
+                  <description>
+                    Luke Vanderhart interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-luke-vanderhart"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Morgan Mullaney</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-morgan-mullaney</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-morgan-mullaney</link>
+                  <pubDate>Wed 15 Apr 2015 01:35:01 PM CDT</pubDate>
+                  <description>
+                    Morgan Mullaney interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-morgan-mullaney"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Nathan Sorenson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-nathan-sorenson</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-nathan-sorenson</link>
+                  <pubDate>Wed 15 Apr 2015 11:43:27 PM CDT</pubDate>
+                  <description>
+                    Nathan Sorenson interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-nathan-sorenson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Yoko Harada</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-yoko-harada</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-yoko-harada</link>
+                  <pubDate>Fri 10 Apr 2015 09:35:05 PM CDT</pubDate>
+                  <description>
+                    Yoko Harada interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-yoko-harada"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: James MacAulay</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-james-macaulay</guid>
+                  <link>http://www.lispcast.com/pre-west-james-macaulay</link>
+                  <pubDate>Wed 15 Apr 2015 10:45:56 PM CDT</pubDate>
+                  <description>
+                    James MacAulay will talk about Zelkova and FRP.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-james-macaulay"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Jeanine Adkisson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-jeanine-adkisson</guid>
+                  <link>http://www.lispcast.com/pre-west-jeanine-adkisson</link>
+                  <pubDate>Fri 03 Apr 2015 11:49:08 PM CDT</pubDate>
+                  <description>
+                    Jeanine Adkisson will talk about prototyping a language in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-jeanine-adkisson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: John Hume</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-john-hume</guid>
+                  <link>http://www.lispcast.com/pre-west-john-hume</link>
+                  <pubDate>Sun 29 Mar 2015 07:18:19 PM CDT</pubDate>
+                  <description>
+                    Life of a clojure expression: a quick tour of clojure internals
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-john-hume"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Leon Barrett</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-leon-barrett</guid>
+                  <link>http://www.lispcast.com/pre-west-leon-barrett</link>
+                  <pubDate>Sat 04 Apr 2015 02:55:03 PM CDT</pubDate>
+                  <description>
+                    Leon Barrett will talk about parallelism in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-leon-barrett"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Luke Vanderhart</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-luke-vanderhart</guid>
+                  <link>http://www.lispcast.com/pre-west-luke-vanderhart</link>
+                  <pubDate>Thu 09 Apr 2015 04:15:58 PM CDT</pubDate>
+                  <description>
+                    Luke Vanderhart will talk about ReactJS.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-luke-vanderhart"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Melanie Mitchell</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-melanie-mitchell</guid>
+                  <link>http://www.lispcast.com/pre-west-melanie-mitchell</link>
+                  <pubDate>Tue 17 Mar 2015 11:22:56 PM CDT</pubDate>
+                  <description>
+                    Melanie Mitchell will talk about computer systems that recognize visual situations.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-melanie-mitchell"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Morgan Mullaney</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-morgan-mullaney</guid>
+                  <link>http://www.lispcast.com/pre-west-morgan-mullaney</link>
+                  <pubDate>Sat 04 Apr 2015 02:07:28 PM CDT</pubDate>
+                  <description>
+                    Morgan Mullaney will talk about functional game programming.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-morgan-mullaney"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Nathan Sorenson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-nathan-sorenson</guid>
+                  <link>http://www.lispcast.com/pre-west-nathan-sorenson</link>
+                  <pubDate>Wed 15 Apr 2015 11:10:22 PM CDT</pubDate>
+                  <description>
+                    Nathan Sorenson will talk about type systems and macros.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-nathan-sorenson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Nathaniel Smith and Ruth Linehan</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-nathaniel-smith-ruth-linehan</guid>
+                  <link>http://www.lispcast.com/pre-west-nathaniel-smith-ruth-linehan</link>
+                  <pubDate>Sat 04 Apr 2015 10:40:47 PM CDT</pubDate>
+                  <description>
+                    Nathaniel Smith and Ruth Linehan will talk about Trapperkeeper.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-nathaniel-smith-ruth-linehan"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Priyatam Mudivarti</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-priyatam-mudivarti</guid>
+                  <link>http://www.lispcast.com/pre-west-priyatam-mudivarti</link>
+                  <pubDate>Sat 04 Apr 2015 10:54:48 PM CDT</pubDate>
+                  <description>
+                    Priyatam Mudivarti will talk about generating CSS with Garden.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-priyatam-mudivarti"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Robert Krahn</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-robert-krahn</guid>
+                  <link>http://www.lispcast.com/pre-west-robert-krahn</link>
+                  <pubDate>Sun 05 Apr 2015 11:14:03 AM CDT</pubDate>
+                  <description>
+                    Robert Krahn will talk about cloxp.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-robert-krahn"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Ron Toland</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-ron-toland</guid>
+                  <link>http://www.lispcast.com/pre-west-ron-toland</link>
+                  <pubDate>Mon 06 Apr 2015 09:36:49 PM CDT</pubDate>
+                  <description>
+                    Ron Toland will talk about large-scale Clojure systems.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-ron-toland"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Ryan Neufeld</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-ryan-neufeld</guid>
+                  <link>http://www.lispcast.com/pre-west-ryan-neufeld</link>
+                  <pubDate>Sun 05 Apr 2015 11:44:16 AM CDT</pubDate>
+                  <description>
+                    Ryan Neufeld will talk about simulation testing.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-ryan-neufeld"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Sean Johnson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-sean-johnson</guid>
+                  <link>http://www.lispcast.com/pre-west-sean-johnson</link>
+                  <pubDate>Mon 06 Apr 2015 11:29:45 PM CDT</pubDate>
+                  <description>
+                    Sean Johnson will talk about pattern matching.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-sean-johnson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Soren Macbeth</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-soren-macbeth</guid>
+                  <link>http://www.lispcast.com/pre-west-soren-macbeth</link>
+                  <pubDate>Mon 06 Apr 2015 11:30:52 PM CDT</pubDate>
+                  <description>
+                    Soren Macbeth will talk about data crunching in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-soren-macbeth"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Timothy Gardner and Ramsey Nasser</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-timothy-gardner-ramsey-nasser</guid>
+                  <link>http://www.lispcast.com/pre-west-timothy-gardner-ramsey-nasser</link>
+                  <pubDate>Mon 06 Apr 2015 11:30:52 PM CDT</pubDate>
+                  <description>
+                    Timothy Gardner and Ramsey Nasser will talk about Arcadia.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-timothy-gardner-ramsey-nasser"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Tom Faulhaber</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-tom-faulhaber</guid>
+                  <link>http://www.lispcast.com/pre-west-tom-faulhaber</link>
+                  <pubDate>Mon 06 Apr 2015 11:29:45 PM CDT</pubDate>
+                  <description>
+                    Tom Faulhaber will talk about generating Excel sheets.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-tom-faulhaber"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Tyler Tallman</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-tyler-tallman</guid>
+                  <link>http://www.lispcast.com/pre-west-tyler-tallman</link>
+                  <pubDate>Wed 08 Apr 2015 06:12:04 PM CDT</pubDate>
+                  <description>
+                    Tyler Tallman will talk about modeling complex problems in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-tyler-tallman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Yoko Harada</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-yoko-harada</guid>
+                  <link>http://www.lispcast.com/pre-west-yoko-harada</link>
+                  <pubDate>Sun 29 Mar 2015 07:05:22 PM CDT</pubDate>
+                  <description>
+                    Yoko Harada will be speaking on ClojureBridge and the challenges of writing a curriculum for beginner programmers.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-yoko-harada"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Zach Tellman</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-zach-tellman</guid>
+                  <link>http://www.lispcast.com/pre-west-zach-tellman</link>
+                  <pubDate>Wed 15 Apr 2015 10:31:34 PM CDT</pubDate>
+                  <description>
+                    Zach Tellman will talk about Queueing Theory.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-zach-tellman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Zachary Kim</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-zachary-kim</guid>
+                  <link>http://www.lispcast.com/pre-west-zachary-kim</link>
+                  <pubDate>Thu 09 Apr 2015 09:28:16 AM CDT</pubDate>
+                  <description>
+                    Zachary Kim will talk about mobile development in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-zachary-kim"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

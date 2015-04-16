@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Reification</title>
+                  <guid isPermalink="false">http://www.lispcast.com/reification</guid>
+                  <link>http://www.lispcast.com/reification</link>
+                  <pubDate>Tue 05 Aug 2014 10:39:50 PM CDT</pubDate>
+                  <description>
+                    Reification means making an abstraction into a concrete value that can be manipulated at runtime. Reification is the core of what makes a language dynamic. Three types of reification in Clojure are discussed.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/reification"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

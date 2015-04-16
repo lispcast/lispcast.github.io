@@ -1,0 +1,229 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Use Task Analysis to Break a Skill Into Steps | LispCast</title>
+    <meta name="description" content="Many technical books skip very important skills you need to complete a task. To avoid skipping those skills, use task analysis to break a skill into steps.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/skipping-steps">
+              Use Task Analysis to Break a Skill Into Steps
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 07, 2015
+          </div>
+
+          
+<p>Summary: <em>Many technical books skip very important skills you need to complete a task. To avoid skipping those skills, use task analysis to break a skill into steps.</em></p>
+<center>
+<img src="http://www.lispcast.com/img/owl.jpg" />
+</center>
+
+<p>This image reminds me of <strong>so many programming language books</strong>. The first chapter introduces the syntax, the second chapter is about writing a blog. What about all the stuff in the middle? I work hard in the LispCast courses to avoid skipping these steps.</p>
+<p>The problem is clear: most technical skills are actually <strong>made up of hundreds if not thousands of smaller skills</strong>. I mean, tons of small decisions, perceptual skills, motor skills, etc. It's amazing really what people can chunk into a single idea. There are illustrators who think of the process as two steps. Likewise, many programmers are really good and think of complex code in two steps.</p>
+<p>Our job as teachers is as clear as the problem: <strong>break down a skill into all of the smaller skills</strong>, then teach each of the smaller skills and how they lead to the big skill. It's so easy to state, and yet most people don't do this, even when they're writing for a beginner audience.</p>
+<p>Why do so many programming language books spend so much time on syntax but fail at the intermediate stuff? It's because <strong>syntax is easy and usually already broken down for you</strong>. Once that's covered, it's hard to know the next step to teach if you haven't done the work of discovery. But they also focus on trivial stuff, like how to type literal integers. Hello? Really? If you bang on the number keys you can make integers.</p>
+<p>So, how do you do it? How do real teachers do it? It's actually kind of boring. The kind of boring process that you might look at and say &quot;oh, well, obviously&quot;. The process is simply to <strong>do it yourself and keep notes about every little thing you did</strong>. Ask yourself really specific questions like &quot;Why did I start with two circles? Why do they overlap?&quot;</p>
+<p>How do I make use of it in LispCast? <strong>I always start with the code I want my learners to be able to write.</strong> I write it all out first. Then I start breaking it down. Every construct (<code>if</code> statement, library function, etc.) is obviously something to teach. Then there are the value-add things, like <em>why</em> I chose one way over another. What questions do I ask myself to make the decisions? All of these things can and should be steps.</p>
+<p>Now, the next step is matching the steps to the learners. Maybe they already know something, so I can just mention it or if it's well known, just do it without mentioning it. Some things might still be difficult, so <strong>I might need to break them down further</strong>.</p>
+<p>At the same time, it could be better to avoid a certain concept. Like if you'd normally do it with a <code>cond</code> but they already know <code>if</code>, perhaps you should <strong>stick to what they know</strong> so you don't have to add several minutes to explain something that's not relevant to your topic. I try to go deep, so it's important to <strong>minimize the breadth</strong> of the material in order to finish on time. All of these little skills go into a curriculum, which I'll talk about in a future post.</p>
+<p>I don't think this process is hard or original. I learned it from a book about teaching. I do think that most people who write technical books might be subject-matter experts, but <strong>they don't have any training in teaching</strong>. Teaching is a huge advantage. Even a simple process like this could really differentiate you from the other technical authors out there. And breaking down a task tells you what you need to teach (no more writer's block).</p>
+<p>If you like the idea of teaching technical material, please sign up for my <em>Technical Teaching</em> mailing list, where I'll occasionally share skills for making material that helps people learn.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=98acb725b1"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <div class="subscribe-form-text">
+      <h3 class="subscribe-form-title">
+        
+Technical Teaching
+</h3>
+      <p class="subscribe-form-description">
+        
+I want to help people teach better. Sign up for this list and I'll occasionally send out some useful tips and skills that I've learned over the years.
+</p>
+      <div class="mc-field-group">
+        
+<label for="mce-FNAME">Name</label><br> <input id="mce-FNAME"
+               class="fname-field"
+               type="text"
+               value=""
+               placeholder="Name">
+</div>
+      <div>
+        
+<br> <label for="mce-EMAIL">Email</label><br> <input id="mce-EMAIL"
+               class="email-field"
+               type="email"
+               value=""
+               placeholder="Email"
+               name="EMAIL">
+</div>
+      <div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_98acb725b1">
+</div>
+      
+<br>
+<div>
+        
+<input class="subscribe-button"
+               type="submit"
+               value="Go!"
+               name="subscribe">
+</div>
+      
+<br>
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Stylesheet | LispCast</title>
+    <meta name="description" content="A stylesheet for the LispCast blog.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="alternate" type="application/rss+xml" title="{{blogtitle}}" href="/feed" />
+    <script src="/js/libs/modernizr-2.5.3.min.js"></script>
+  </head>
+
+  <body>
+
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+    <div id="container">
+      <div class="wrapper">
+        <div id="meta">
+          <img src="/img/lambda.png" id="lambda" />
+          <div id="left-bar">
+            <h1>LispCast</h1>
+            <p>By <a href="http://twitter.com/ericnormand">Eric Normand</a></p>
+            <p><a href="http://lispcast.com/feed">Feed</a></p>
+            <p><a href="http://clojuregazette.com/">Clojure Gazette</a></p>
+            <p><a href="https://github.com/ericnormand">github</a></p>
+            <p><a href="http://www.kickstarter.com/projects/376627045/lispcast-introduction-to-clojure-videos">Screencasts</a></p>
+          </div>
+        </div>
+        <div id="main" role="main">
+          
+          <article>
+            <h2><a href="#">Clojure and the Space Man</a> <span class="loguito"><a href="#">&lt;&lambda;&gt;</a></span></h2>
+
+            
+
+            <div class="endmark loguito"><a href="/">&lt;&lambda;&gt;</a></div>
+
+            <p><hr />You may be interested in my <a href="http://www.kickstarter.com/projects/376627045/lispcast-introduction-to-clojure-videos">Introduction to Clojure Videos</a>.</p>
+
+          </article>
+
+        </div>
+
+        <footer>
+          <div class="previous">previously: <a href="#">An Article from Yesterday</a></div>
+          <div class="next ">next: <a href="#">An Article from Tomorrow</a></div>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      window._gaq = [['_setAccount','{{gacode}}'],['_trackPageview'],['_trackPageLoadTime']];
+      Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Pre-Conj Interview: Colin Fleming | LispCast</title>
+    <meta name="description" content="Colin Fleming interview about Cursive Clojure.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-interview-colin-fleming">
+              Pre-Conj Interview: Colin Fleming
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 21, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#colin-fleming"><img src="http://www.lispcast.com/img/pre-conj/colin-fleming.jpg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>The next interview is with Colin Fleming. He is the developer of Cursive Clojure. His <a href="http://clojure-conj.org/speakers#colin-fleming">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> will be about that. Read the <a href="http://www.lispcast.com/pre-conj-colin-fleming">background to his talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Colin Fleming</strong>: I got into Clojure bit by bit, starting about four years ago. I was working in Java on highly concurrent transaction processing systems and the promise of a language that would make that easier was very appealing. I was also playing with Scheme at the time so it seemed like a good fit since I already knew the JVM really well.</p>
+<p>I’ve used IntelliJ for Java for years now and I wanted to use it for Clojure too, so I installed La Clojure, which was the only option at the time. But I quickly got frustrated with its limitations and started fixing it up, porting the parts I worked on to Clojure as I went. That was really my first real Clojure project, which in retrospect wasn’t a great choice - it was a tough project to get started on. But it evolved into Cursive, which I’m very happy with, so it worked out well in the end.</p>
+<p><strong>LC</strong>: Developing an IDE is quite a big task. And the web site indicates that you will charge for it. What has the response been? How many users do you have in the Early Access Program?</p>
+<p><strong>CF</strong>: Right, it’s definitely a big task. Initially Cursive started as a hobby, just scratching my own itch. But I quickly realised that if I was going to develop all the functionality I wanted to add it was at least a full-time job, probably more. I had just taken some time off after leaving my previous job at Google and I thought I would see if there was appetite in the Clojure community for a professionally-supported development environment, and the initial response on the Clojure mailing list was pretty positive.</p>
+<p>I released the first public beta version almost a year ago now, and the response has really been fantastic. Quite a few people have asked me when they’ll be able to pay for it so they can continue to support development, which is really nice to hear - I’m really happy people like Cursive so much. It’s hard to tell exactly how many people are using it, but each version tends to get around 10,000 downloads. There’s quite a long tail so it depends how long each version is out for, but generally there are around 2,000 downloads within 24 hours of making a release so I guess that’s roughly the number of people using it daily, or at least have it installed in the copy of IntelliJ that they use daily.</p>
+<p><strong>LC</strong>: I use Emacs but I can't really recommend it to someone who just wants to try Clojure. Does Cursive fit that bill and if so, how?</p>
+<p><strong>CF</strong>: Sure, I think Cursive is definitely easier to get started with than Emacs. In general IntelliJ’s interface is more like a standard application than Emacs, that familiarity helps a lot. And I try to make sure that Cursive is easy to get started with and to minimise the yak shaving required to open a Leiningen project and a REPL. There are still some outstanding things to do there, a big one has been that Cursive didn’t ship with default keybindings assigned - that’s fixed in the next release which should be out shortly. Cursive also has paredit turned on by default for Clojure which can confuse newbies, but it’s easy to toggle. And Cursive still doesn’t have a great story for a Clojurescript REPL, which is always a big pain point for people getting started - I’m hoping to fix this soon. Light Table really did a great job on that one.</p>
+<p>Cursive has a user guide with a lot of screenshots that should hopefully make it easier for people to get started. It’s not 100% up to date with all the latest features, but it should help people to get going. I think having one definitive source of friendly documentation really helps at the beginning. I’d actually like to have an interactive tutorial in the IDE that people could run that would show them how to use the editor and possibly the basics of Clojure too, but that’s looking like a v2 feature at this point.</p>
+<p><strong>LC</strong>: I've always liked IDE's for their ability to smooth over the rough parts of a language. And tooling often trumps terseness in a language with less tooling. What are some of the trouble-spots you see in Clojure, from a beginner's perspective, that haven't been addressed with tools?</p>
+<p><strong>CF</strong>: The classic one that a lot of people seem to struggle with is the stack traces - I’ve never found them to be too difficult, but I worked with Java for years so I know what they look like. It’s easy to forget how difficult things like that are for people new to the JVM. Leiningen has done a great job of hiding things like the class path and dependency management as well, which can be really tough.</p>
+<p>The other thing that I’d really love to see improved is the error messages. Since Clojure macro forms are essentially parsed by hand some of the error messages are really impenetrable. For example, something that might be a common newbie error like putting an <code>(:import)</code> clause ahead of the docstring in an ns form will give you a &quot;java.lang.Character cannot be cast to clojure.lang.Named” error, and will also frequently attribute it to the wrong namespace - these sorts of errors can be really discouraging for someone trying to get started. Cursive internally uses something similar to the seqex library (from Chris Houser and Jonathan Clagget’s great Illuminated Macros talk) for its parsing, I’d love to see libraries like that being used in Clojure core.</p>
+<p>Cursive doesn’t actually mark a lot of these errors in the editor yet, but I’d like to mark as many as possible. In particular, I’ll be able to mark things like function invocations with the wrong number of args, non-gensym’ed variables inside syntax-quote and many of the problems detected by tools like Kibit and Eastwood. I hope that’ll make Clojure less frustrating for newbies and more experienced folk alike.</p>
+<p><strong>LC</strong>: There's a bunch of stuff I'd like to ask you about. Let's talk about the practical side of developing an IDE. You say it's a plugin for IntelliJ. How much of the IntelliJ system are you able to leverage, how much is custom, and how much is a hack to fit the Clojure peg in the Java hole?</p>
+<p><strong>CF</strong>: Right, it’s currently only available as a plugin to IntelliJ. JetBrains actually put a lot of work into making their base platform reusable so I’ll be able to create a standalone IDE as well, as JetBrains have done with Redmine for Ruby, or PyCharm for Python. But it’s a reasonable amount of work and probably adds some support load with cross-platform issues so it hasn’t been a focus for me yet.</p>
+<p>The IntelliJ infrastructure is really great - it’s certainly saved me a huge amount of work being able to build on top of it. It’s very impressive how well abstracted it is, I’ve encountered very few places where I’ve had serious roadblocks from IntelliJ itself due to the nature of Clojure. Most of the real difficulties are just intrinsic to how flexible the syntax of Clojure is, they’re not problems with IntelliJ. Obviously all the base IDE functionality comes for free (project management, VCS support, indexing infrastructure, debugger and so forth) and the Java support is very easy to hook into which is important for Clojure. The biggest part that’s totally custom is the symbol resolution, which generally has to be written for each language anyway.</p>
+<p>Cursive also supports Clojurescript, and that’s been more challenging since the Javascript support in IntelliJ is only available in the paid Ultimate Edition and is closed source. Cursive currently implements fairly primitive Javascript support itself which is just enough for Clojurescript, but it would be nice to be able to integrate that better with the existing support - I’m hoping to in the future.</p>
+<p>The part that is very different in Cursive from a more standard IntelliJ language plugin is that it all has to be extensible since everything in Clojure is based on macros, even core language features. People will eventually have to be able to add support for the libraries they use or for the forms they define in internal projects so Cursive is internally based around an extension API that I’ll open up at some point soon. More conventional languages generally have a fixed syntax, even if it’s very flexible like Ruby for example, so this isn’t an issue for them but it’s essential for Clojure.</p>
+<p><strong>LC</strong>: In the talk description, you mention Rename Refactoring. It's not something I can say I miss in Emacs, but perhaps I don't know what I'm missing. Do people make use of that and other refactorings?</p>
+<p><strong>CF</strong>: Oh yes, I’d definitely argue that you don’t know what you’re missing out on! The two operations I use a lot are rename and find usages - I’d struggle to live without them now, especially find usages. I also recently added refactorings to extract and inline let bindings, which are really useful - people definitely use them a lot. I’m planning to add support soon for extracting and inlining functions, as well as introducing parameters which I use a lot in Java. Refactoring in Clojure will never be as accurate as in Java, but it’s still very useful. Things like marking unused local variables is also something which sounds trivial but really catches a lot of bugs while you’re editing.</p>
+<p>I think this is the main difference between something like IntelliJ and something like Emacs, actually. When I’m working on Java code in IntelliJ the refactorings and all the small operations they provide as intentions are so good that I really feel like I’m working directly on my program, not on text. We’ve all experienced that flow state when programming when you’re totally absorbed in what you’re doing and you lose track of time, whether you’ve eaten or need to go to the bathroom or whatever. IntelliJ makes it much easier for me to achieve that state because it provides a huge number of code manipulations that directly reflect what I want to do to my program, without me then having to muck around with text. I’ve seen comments online along the lines of “IntelliJ is great but I type so much faster in Emacs/vi/whatever”. I’d argue that approach is totally wrong - I don’t want to avoid typing because I’m lazy, I want to avoid typing because text manipulation is the wrong level of abstraction. Cursive is a long way from providing that experience, partly because of Clojure’s language characteristics and partly because it took teams of dozens of smart people at JetBrains years to achieve it for Java, but that’s always my ultimate aim whether or not I ever actually get there.</p>
+<p><strong>LC</strong>: What resources would you recommend people make use of before your talk in order to get the most out of it? Anything useful about refactorings or IntelliJ?</p>
+<p><strong>CF</strong>: I don’t think so, no - hopefully it’ll be pretty self-contained. I’ll be showing the features I’m talking about and explaining some of the implementation, so hopefully it’ll be understandable to everyone. And hopefully it’ll be interesting for everyone too!</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>CF</strong>: There’s a twitter feed for <a href="https://twitter.com/CursiveClojure">Cursive</a> and there are also some <a href="https://cursiveclojure.com/mailinglist.html">mailing lists for general Cursive discussion</a>. I’ve also been hanging out more in the #clojure channel on IRC as <em>cfleming</em> in case anyone has questions. I’ve been meaning to blog more about Cursive but so far that’s just one to-do item among many!</p>
+<p><strong>LC</strong>: Nice. One more question: what is Clojure's favorite breakfast?</p>
+<p><strong>CF</strong>: Cursive is most frequently powered by <a href="http://www.puredelish.co.nz/tropical-mango-nut-crunch-breakfast/">Tropical Mango and Nut Crunch</a>, but the true breakfast of the gods is scrambled eggs with little chunks of <a href="http://www.blackballsalami.co.nz/salami.php">Venison Pepperoni salami</a> cooked through it.</p>
+<p><strong>LC</strong>: Cool.</p>
+<p>Thanks for the great interview. It was fun.</p>
+<p><strong>CF</strong>: Thanks Eric, that was fun! I’m looking forward to seeing it, and to catching up at the conj too!</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/pre-conj-interview-ashton-kemerling">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/pre-conj-interview-zach-oakes">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Steven Yi</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-steven-yi</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-steven-yi</link>
+                  <pubDate>Mon 27 Oct 2014 09:44:13 AM CDT</pubDate>
+                  <description>
+                    Steven Yi interview about his music composition and synthesis systems.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-steven-yi"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Steven Yi</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-steven-yi</guid>
+                  <link>http://www.lispcast.com/pre-conj-steven-yi</link>
+                  <pubDate>Fri 10 Oct 2014 02:40:26 PM CDT</pubDate>
+                  <description>
+                    Steven Yi will talk about music systems on the JVM.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-steven-yi"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

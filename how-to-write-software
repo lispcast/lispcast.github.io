@@ -1,0 +1,205 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>How to Write Software | LispCast</title>
+    <meta name="description" content="Writing software alone and in a long term sustainable manner requires a lot of discipline. Upfront planning and avoidance of feature creep can turn a stressful project into a pleasure.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/how-to-write-software">
+              How to Write Software
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 08, 2015
+          </div>
+
+          
+<p>Summary: <em>Writing software alone and in a long term sustainable manner requires a lot of discipline. Upfront planning and avoidance of feature creep can turn a stressful project into a pleasure.</em></p>
+<p><em>UPDATE: I originally wrote this piece back in 2010. I was recently reminded of it and thought it would be good to revive this article from my old blog.</em></p>
+<h3 id="a-guide-for-the-solo-programmer">A guide for the solo programmer</h3>
+<p>I have created a planning and organization process for developing software. The process works for me. I need to organize my work ahead of time or I get stuck working on unimportant details.</p>
+<p>I have built minimalism into the process. I tend to work alone. Solo programming imposes very real limitations on the scope and completeness of software. One man can only do so much.</p>
+<p>My process includes nothing that cannot be found in <a href="http://www.jwz.org/doc/worse-is-better.html">Worse is Better</a>, <a href="http://catb.org/esr/writings/homesteading/cathedral-bazaar/ar01s04.html">The Cathedral and the Bazaar</a>, <a href="http://www.paulgraham.com/startuplessons.html">Paul Graham’s writing</a>, and <a href="http://gettingreal.37signals.com/">Getting Real</a>. These are well-written and well-known works. I thought I understood them when I read them, but I was wrong. It wasn’t until recently, after projects stalled and failed due to feature creep, that I understood the essence of the <em>release early, release often</em> idea. I have attempted to formalize the idea to be more actionable instead of philosophical.</p>
+<p>Here is my hard-earned process for writing software. Note that this is not a strict algorithm. Sometimes I will apply filters from Step 2 when I am doing experiments in Step 3.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Choose a purpose.</strong></p>
+<p>The software must serve a single purpose. Clearly defining it will illuminate the entire software process.</p></li>
+<li><p>For each release:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>List features.</strong></p>
+<p>List out all of the features you want in the software. Not all of these will make it into the release, but if it is <em>not</em> on this list, it will <em>not</em> make it into the release.</p></li>
+<li><p>Apply the following filters and transformations, in any order, repeatedly, until there is nothing further to filter out from the list of features.</p>
+<ul>
+<li><p><strong>Break features into subfeatures.</strong></p>
+<p>If a feature can be broken into two features, do it. All features must be atomic. For instance, an easy one would be if I want to send messages by email and through a web API, that’s two features. Rule of thumb: if it can break, it’s a separate feature.</p></li>
+<li><p><strong>Eliminate unnecessary features.</strong></p>
+<p>Features that are not essential to the purpose are unnecessary. Features that can be put off until the next version are unnecessary. In the above example, maybe email can wait until the next release. If it can wait, it will wait. You are trying to make a B line to release.</p></li>
+<li><p><strong>Fill in “hidden features”.</strong></p>
+<p>Remember, if it can break, it’s a feature. Sometimes there are features that need to be listed because of the existence of other features. If you support two different communication channels, you need a way to choose between them. Whatever mechanism presents that choice is a feature, too. List it.</p></li>
+<li><p><strong>Simplify features.</strong></p>
+<p>If a feature can be done more simply or more easily than what you originally intended, replace it. The primary way to release quickly is to simplify the release. Do you really need it to be customizable?</p></li>
+</ul></li>
+<li><p><strong>Design and carry out experiments.</strong></p>
+<p>Within your minimal set of features, there are often questions as to the best means of implementation. The experiments determine the answers to those questions.</p></li>
+<li><p><strong>Order the features in order of dependency.</strong></p>
+<p>The first feature is the one that does not depend on any others. Dependency is a complex and sneaky issue. You might say that a function needs a button to activate it. But the button is useless without the function. Which depends on which? Personally, dependency means dependent on another feature for usefulness. If I can activate a function in a very simple way (like immediately when the program starts), then that function does not depend on the button. The button depends on the function for its usefulness.</p></li>
+<li><p><strong>Sketch out the <em>first</em> remaining feature on paper.</strong></p>
+<p>Sketch out the code. The experiments should have instructed you in how to implement the feature. Rewrite the code repeatedly, eliminating fluff and abstraction until the code is minimal and perfect.</p></li>
+<li><p><strong>Type the code in.</strong></p>
+<p>Build it and test it.</p></li>
+<li><p><strong>Make the code rock solid.</strong></p>
+<p>Clean it up. As a solo programmer, you are <em>never</em> going to come back to this code and clean it up. You won’t have time. You will never have the time to hunt for bugs in this code. Make sure it works in every possible case. The code must catch every exception. It must handle the null case. The feature is not done until it is unbreakable. If you are doubting whether it’s worth your time to work this much on one feature, maybe you should eliminate the feature.</p></li>
+<li><p><strong>Loop to Step 5 until you run out of features.</strong></p></li>
+<li><p><strong>Release.</strong></p></li>
+</ol></li>
+</ol>
+<p>The essence of this process is to follow the <em>release early, release often</em> philosophy by reducing the amount of development between releases. I mistakenly thought that release often meant “write code really fast” in the past. Now I understand that it means write less but more important code between releases but write it correctly.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/data-functions-macros-why">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

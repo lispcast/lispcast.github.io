@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Data &gt; Functions &gt; Macros. But why?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/data-functions-macros-why</guid>
+                  <link>http://www.lispcast.com/data-functions-macros-why</link>
+                  <pubDate>Tue 23 Dec 2014 11:29:44 PM CST</pubDate>
+                  <description>
+                    &quot;Prefer data over functions&quot; is a common adage in Clojure circles. It is poorly debated because it is a terse statement in generalities. A valuable perspective is that data is transparent at runtime, while functions are not. This perspective gives a firm ground for discussion and design.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/data-functions-macros-why"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Paul deGrandis</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-paul-degrandis</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-paul-degrandis</link>
+                  <pubDate>Sat 25 Oct 2014 09:59:39 AM CDT</pubDate>
+                  <description>
+                    Paul deGrandis interview about data-driven systems.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-paul-degrandis"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Paul deGrandis</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-paul-degrandis</guid>
+                  <link>http://www.lispcast.com/pre-conj-paul-degrandis</link>
+                  <pubDate>Sun 12 Oct 2014 08:28:45 PM CDT</pubDate>
+                  <description>
+                    Paul deGrandis will talk about Data-Driven Systems.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-paul-degrandis"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

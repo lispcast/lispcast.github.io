@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Object-Oriented Dispatch is the Dual of Functional Dispatch</title>
+                  <guid isPermalink="false">http://www.lispcast.com/object-function-duals-dispatch</guid>
+                  <link>http://www.lispcast.com/object-function-duals-dispatch</link>
+                  <pubDate>Wed 11 Mar 2015 02:56:53 PM CDT</pubDate>
+                  <description>
+                    Object-oriented dispatch is contrasted with functional dispatch, but they are shown to be two one-dimensional projections of the same two-dimensional data. Clojure does not provide the two-dimensional representation, but does interesting things to transcend the one-dimensional views.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/object-function-duals-dispatch"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Object-Oriented Programming is the Dual of Functional Programming</title>
+                  <guid isPermalink="false">http://www.lispcast.com/object-oriented-vs-functional-duals</guid>
+                  <link>http://www.lispcast.com/object-oriented-vs-functional-duals</link>
+                  <pubDate>Sun 08 Feb 2015 11:22:31 AM CST</pubDate>
+                  <description>
+                    Object-Oriented Programming is often shown in contrast to Functional Programming. But they are so exactly opposite that they are duals, and so equivalent in important ways. Which one to use should be left up to the programmer, as is done in Clojure and Javascript.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/object-oriented-vs-functional-duals"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

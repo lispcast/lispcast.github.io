@@ -1,0 +1,185 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Clojure Consulting | LispCast</title>
+    <meta name="description" content="">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/consulting">
+              Clojure Consulting
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 07, 2014
+          </div>
+
+          
+<h2 id="who-am-i">Who am I?</h2>
+<p>My name is Eric Normand. I am a software engineer with deep Clojure experience. I have worked for large corporations, the federal government, and startups. My specialty is finding just the right abstraction to represent the problem. The solution, then, is easy. My other specialty is carving out a Minimum Viable Product from a Big Idea.</p>
+<p>I publish the <a href="http://www.clojuregazette.com/">Clojure Gazette</a>, <em>the</em> weekly Clojure newsletter. I also create Clojure training videos and sell them at <a href="http://www.purelyfunctional.tv/">PurelyFunctional.tv</a>. You can find me blogging at <a href="http://www.lispcast.com/">LispCast</a>.</p>
+<p>I have developed significant projects in both Clojure and ClojureScript, mostly on the web.</p>
+<h2 id="services">Services</h2>
+<h3 id="guided-refactoring">Guided Refactoring</h3>
+<p>Do you stare at your code wondering where the complexity is lurking? Do you think &quot;I know this code is bad, but where do I start?&quot;? Code gets stale over time. And sometimes it's poorly written. You want to refactor, but you need some help.</p>
+<p>I will pair program with your developers, working through tough refactorings. The code will be cleaner, more obvious, more organized, and generally more maintainable.</p>
+<p>Some tips to get started:</p>
+<ul>
+<li>Refactoring tested code is easier than refactoring untested code</li>
+<li>If you're having trouble getting started, start somewhere easy</li>
+<li>When in doubt, make many, small functions</li>
+</ul>
+<h3 id="test-overhaul">Test Overhaul</h3>
+<p>You would love to feel great about your code, but every time you open a file, all you see is a big mess. <strong>It makes you anxious to think about adding a new feature.</strong> And thinking about cleaning it up makes you feel worse.</p>
+<p>Your tests are too slow, too brittle, or don't cover enough cases. Or maybe you don't even have tests. I've been there many times. I will pair program with your developers, develop a testing plan, and get down and dirty. <strong>Tests are made to make developers feel comfortable in the code.</strong> You can have that warm feeling every time you open your editor.</p>
+<p>Some of the tools and techniques I bring to the table:</p>
+<ul>
+<li>Removing database/external service dependencies from tests</li>
+<li>Testing untested code</li>
+<li>Property-based testing using test.check (Clojure and ClojureScript)</li>
+<li>Better testing workflow (Emacs clojure-test-mode, humane-test-output, etc)</li>
+</ul>
+<h3 id="prototyping">Prototyping</h3>
+<p>You have a great idea. You've been thinking about it for a while, and it's pretty fleshed out. But your developer friends are too busy to work on it and you're not ready to pay a developer's salary to build it.</p>
+<p>What you need is a Minimum Viable Product to show to investors, get people using it, and test the idea before you invest lots of money in it.</p>
+<p>I will build your MVP. You bring the idea and wireframes, design sketches, and mockups. We will Skype and define the scope of work, which will detail the Minimum Viable Product. I will build the MVP in Clojure, host it in the Cloud, and deliver the code to you.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,1201 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: pre-conj | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-2014">
+              Pre-conj Prep 2014
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 20, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="prepare-for-the-conj">Prepare for the conj</h3>
+<p>People have been asking me how they can get ready for all of the great talks lined up for <a href="http://clojure-conj.org/">Clojure/conj</a>. <strong>There are many topics, and people are feeling overwhelmed.</strong> They might know about some of the ideas, but not all of them.</p>
+<p>Wouldn't it be nice to do just <strong>a little homework</strong> before the conj so that you would be sure to <strong>maximize your understanding</strong> and be able to participate in the conversations afterward?</p>
+<p>Unfortunately, googling any topic reveals lots of material, and it's not always the best. <strong>It would take hours</strong> to sift through the background material for just one topic.</p>
+<p>That's why I am publishing the Pre-conj Prep. Each day, I will send you <strong>one or two things to read or watch</strong> (whichever is better) to get up to speed on the topics of the talks (which are listed on the Clojure/conj speakers page). I'm used to finding great content for the Clojure Gazette, so you can be sure <strong>it will be helpful</strong>.</p>
+<p><strong>Conferences are ongoing conversations and explorations.</strong> Speakers discuss trends, best practices, and the future by drawing on the rich context built up in past conferences and other media. That rich context is what Pre-conj Prep is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <strong>understand and enjoy the talks and the hallway conversations</strong>.</p>
+<p>There are 18 talks listed. After I go through all of them (that will take 18 days), I will go further than the published topics into other helpful stuff to get ready for a great <em>conj</em>. I am trying to get <strong>interviews with the speakers, restaurant/event/city guides, and more</strong>, to make the conference a special one.</p>
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p>
+I'm excited about <a
+href="https://twitter.com/clojure_conj">@clojure_conj</a> , and am really loving these daily prep emails! Day 6 is here: <a
+href="http://t.co/XnUEJZN3bC">http://t.co/XnUEJZN3bC</a>
+</p>
+— Marcus Blankenship (@justzeros) <a
+href="https://twitter.com/justzeros/status/515963399000162304">September 27, 2014</a>
+</blockquote> <script async
+src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<h3 id="sign-up-below">Sign up below</h3>
+<p>
+  <form class="subscribe-form"
+        action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=1916f1ed86"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+        
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+  </form>
+</p>
+
+<p>Once you sign up, you'll start receiving the emails, starting with the first, one each day. It's a great way to get ready and excited for the conference.</p>
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p>
+I &lt;3 the pre-<a href="https://twitter.com/clojure_conj">@clojure_conj</a> prep mailing list <a href="http://t.co/EdXReojUX1">http://t.co/EdXReojUX1</a> Really clever way for a conf to help attendees get the most out of talks
+</p>
+— Danielle Sucher (@DanielleSucher) <a href="https://twitter.com/DanielleSucher/status/516625023814365186">September 29, 2014</a>
+</blockquote>
+
+
+<p>The conj is a single-track conference, which means all talks happen in series in a single auditorium. The advantage of that is that <strong>everyone has a very similar experience</strong>. We all see the same talks (unless you skip one). The disadvantage is that you can't choose a different talk if you don't know about a topic. <strong>Preparation is key to having a great experience.</strong></p>
+<p>As you probably know, conferences are social events. The talks are mostly an excuse to get together, meet each other, and talk about Clojure. The conversations that happen after a talk can be very rewarding. But if you don't understand why the topic is important, you may feel left out. Don't let that happen! <strong>You're travelling far and paying (or expensing) lots for the ticket, hotel, and travel.</strong> Make the most of it!</p>
+<p>
+  <form class="subscribe-form"
+        action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=1916f1ed86"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+        
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+  </form>
+</p>
+
+<p><a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This email list is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-brian-goetz">Pre-conj Prep: Brian Goetz</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-anna-pawlicka">
+              Pre-conj Prep: Anna Pawlicka
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 25, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-om-nom-nom-nomanna">Talk: <a href="http://clojure-conj.org/speakers#anna-pawlicka">Om nom nom nom</a></h3>
+<h4 id="background">Background</h4>
+<p><a href="http://clojure-conj.org/speakers#anna-pawlicka">Anna Pawlicka's talk</a> at the <em>conj</em> is about <a href="https://github.com/swannodette/om">Om</a>, <a href="https://twitter.com/swannodette">David Nolen</a>'s project, started in December of 2013. It's essentially a wrapper around Facebook's <a href="http://facebook.github.io/react/">React</a>. It's a way to define HTML components functionally and has been making quite a splash.</p>
+<p><a href="https://www.youtube.com/watch?v=DMtwq3QtddY">David Nolen's talk at Clojure/West</a> relates Om and React to the history of the GUI. It's the best high-level introduction I can imagine and discusses the ideas that motivated its design. If you watch one video to prepare for this talk, this should be it.</p>
+<p>For a good talk about React itself, check out Pete Hunt's talk <a href="https://www.youtube.com/watch?v=h3KksH8gfcQ">Be Predictable, Not Correct</a>. He's one of the main contributors to React and has been evangelizing it.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p>React is significant because it is very different from other Javascript MVC frameworks. It takes a very functional approach instead of object oriented. React makes much easier to reason about the UI. Om has also made waves because <a href="http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/">David Nolen has shown</a> that using <strong>ClojureScript's immutable data structures with React can be faster than Backbone.js</strong> (a very popular library) even though immutable data is commonly considered slower than mutable data.</p>
+<h3 id="about-anna-pawlickaanna">About <a href="http://clojure-conj.org/speakers#anna-pawlicka">Anna Pawlicka</a></h3>
+<p><a href="https://twitter.com/AnnaPawlicka">Twitter</a> - <a href="https://github.com/annapawlicka">Github</a> - <a href="http://annapawlicka.com/">Blog</a></p>
+<p><a href="http://clojure-conj.org/speakers#anna-pawlicka"><img src="http://www.lispcast.com/img/pre-conj/anna-pawlicka.jpeg" /></a></p>
+<p>Anna Pawlicka recently gave a talk at EuroClojure about <a href="https://vimeo.com/100976697">Reactive data visualisations with Om</a>. <a href="http://www.slideshare.net/annapawlicka/reactive-data-visualisations-with-om">The slides</a> are available (they're not visible in the video).</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-brian-goetz">Pre-conj Prep: Brian Goetz</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-ashton-kemerling">
+              Pre-conj Prep: Ashton Kemerling
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 26, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-generative-integration-teststalk">Talk: <a href="http://clojure-conj.org/speakers#ashton-kemerling">Generative Integration Tests</a></h3>
+<h4 id="background">Background</h4>
+<p><a href="http://clojure-conj.org/speakers#ashton-kemerling">Ashton Kemerling's talk</a> at the <em>conj</em> is about Generative Testing (also known as Property-based Testing) as applied to integration tests. Generative Testing is a methodology for generating many tests randomly to find failing cases (as opposed to writing each test by hand). It often <strong>finds difficult bugs</strong> and can present a very <strong>small, reproducible failing case</strong>.</p>
+<p>The best talk I have seen about Generative Testing is <a href="https://www.youtube.com/watch?v=zi0rHwfiX1Q">John Hughes' talk at Clojure/West</a>. John Hughes wrote Quickcheck for <a href="http://www.haskell.org/haskellwiki/Introduction_to_QuickCheck1">Haskell</a> and <a href="http://www.quviq.com/">Erlang</a>. <a href="https://twitter.com/reiddraper">Reid Draper</a> has recently ported it to Clojure in the form of <a href="https://github.com/clojure/test.check">test.check</a>. He also gave <a href="https://www.youtube.com/watch?v=JMhNINPo__g">a talk at Clojure/West about test.check</a>.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p>Generative testing is great for unit testing. It has already found bugs in Clojure itself. What's not obvious is how to apply the technique to integration tests to test the interaction of different systems. This talk appears to be an <strong>experience report</strong> from a company that has actually used Generative Integration Tests.</p>
+<h3 id="about-ashton-kemerlingtalk">About <a href="http://clojure-conj.org/speakers#ashton-kemerling">Ashton Kemerling</a></h3>
+<p><a href="https://twitter.com/ashton">Twitter</a> - <a href="https://github.com/AshtonKem">Github</a> - <a href="http://ashtonkemerling.com/">Blog</a></p>
+<p><a href="http://clojure-conj.org/speakers#ashton-kemerling"><img src="http://www.lispcast.com/img/pre-conj/ashton-kemerling.jpeg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-brian-goetz">Pre-conj Prep: Brian Goetz</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-bozhidar-batsov">
+              Pre-conj Prep: Bozhidar Batsov
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 27, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-the-evolution-of-the-emacs-tooling-for-clojuretalk">Talk: <a href="http://clojure-conj.org/speakers#bozhidar-batsov">The evolution of the Emacs tooling for Clojure</a></h3>
+<h4 id="background">Background</h4>
+<p><a href="http://clojure-conj.org/speakers#bozhidar-batsov">Bozhidar Batsov's talk</a> at the <em>conj</em> is about <a href="https://github.com/clojure-emacs/cider">CIDER</a>, which is the <strong>Clojure IDE and REPL built into Emacs</strong>. You should know that previously, the <strong>CIDER project was known as nrepl.el</strong> and it replaces SLIME, which is what we used to use in Emacs. CIDER connects to an <a href="https://github.com/clojure/tools.nrepl">nREPL</a> server.</p>
+<p>If you'd like to install and use CIDER, check out the <a href="http://www.braveclojure.com/using-emacs-with-clojure/">Using Emacs with Clojure</a> chapter from <a href="http://www.braveclojure.com/">Clojure for the Brave and True</a>.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p>Emacs with CIDER is the <strong>most popular IDE</strong> according to the <a href="http://cemerick.com/2013/11/18/results-of-the-2013-state-of-clojure-clojurescript-survey/">2013 State of Clojure Survey</a>. Bozhidar Batsov took over the project one year ago and CIDER has <strong>added many new features</strong>. I will enjoy hearing about all the things I don't use because I don't know about them.</p>
+<h3 id="about-bozhidar-batsovtalk">About <a href="http://clojure-conj.org/speakers#bozhidar-batsov">Bozhidar Batsov</a></h3>
+<p><a href="http://twitter.com/bbatsov">Twitter</a> - <a href="https://github.com/bbatsov">Github</a> - <a href="http://batsov.com/">Blog</a></p>
+<p><a href="http://clojure-conj.org/speakers#bozhidar-batsov"><img src="http://www.lispcast.com/img/pre-conj/bozhidar-batsov.jpeg" /></a></p>
+<p>Bozhidar Batsov is the maintainer of several Clojure- and Emacs-related projects, including <a href="https://github.com/clojure-emacs/cider">CIDER</a>, <a href="https://github.com/bbatsov/prelude">Prelude</a>, <a href="https://github.com/bbatsov/projectile">Projectile</a>, and the <a href="https://github.com/bbatsov/clojure-style-guide">Clojure Style Guide</a>.</p>
+<p>If you can believe it, Batsov only gets <a href="https://gratipay.com/bbatsov/">$30 per week on Gittip</a>, even though half the Clojure world uses his stuff. Reach into those pockets and <a href="https://gratipay.com/bbatsov/">sponsor some development</a>.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-brian-goetz">Pre-conj Prep: Brian Goetz</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-brian-goetz">
+              Pre-conj Prep: Brian Goetz
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 28, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-keynotetalk">Talk: <a href="http://clojure-conj.org/speakers#brian-goetz">Keynote</a></h3>
+<h4 id="background">Background</h4>
+<p><a href="http://clojure-conj.org/speakers#brian-goetz">Brian Goetz's talk</a> at the <em>conj</em> is the keynote, which doesn't have a description (which is common with keynotes). I would only be guessing if I said what the talk was about. But here are the things that I wouldn't be surprised to hear in a keynote by the Java Language Architect at a Clojure conference:</p>
+<ul>
+<li>Java Lambdas (their design and implementation)</li>
+<li>Future features of Java/JVM (that they're working on now)</li>
+<li>JVM and dynamic languages like Clojure</li>
+<li>How Java will approach concurrency</li>
+</ul>
+<p>Whatever he talks about, it will be important.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p>Rich Hickey made the decision to design Clojure as a hosted language. Clojure is tied to the JVM. Also, <strong>JVM languages are gaining popularity</strong>, and they obviously must play a part in Oracle's strategy. This talk has the potential to set the tone for Java's interaction with Clojure in the future.</p>
+<h3 id="about-brian-goetztalk">About <a href="http://clojure-conj.org/speakers#brian-goetz">Brian Goetz</a></h3>
+<p><a href="https://twitter.com/BrianGoetz">Twitter</a></p>
+<p><a href="http://clojure-conj.org/speakers#brian-goetz"><img src="http://www.lispcast.com/img/pre-conj/brian-goetz.jpg" /></a></p>
+<p>Brian Goetz is quite an important figure in the Java world. He's the Java Language Architect at Oracle (the company that produces Java). He was instrumental in bringing lambdas to Java 8. The book he wrote, <a href="http://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601/ref=cm_lmf_tit_15?tag=lisp0b-20">Java Concurrency in Practice</a> is one of the books on <a href="http://www.amazon.com/Clojure-Bookshelf/lm/R3LG3ZBZS4GCTH">Rich Hickey's reading list</a>.</p>
+<p>He's been giving a talk recently called <a href="https://vimeo.com/100753521">Lambda: A Peek Under the Hood</a> about the design decisions and how they are finally implemented in Java Bytecode.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-colin-fleming">
+              Pre-conj Prep: Colin Fleming
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 29, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-cursive-a-different-type-of-idetalk">Talk: <a href="http://clojure-conj.org/speakers#colin-fleming">Cursive: a different type of IDE</a></h3>
+<h4 id="background">Background</h4>
+<p><a href="http://clojure-conj.org/speakers#colin-fleming">Colin Fleming's talk</a> at the <em>conj</em> is about <a href="https://cursiveclojure.com/">Cursive Clojure</a>, a Clojure IDE that runs as a plugin for IntelliJ IDEA, a very popular Java IDE.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p>Cursive Clojure uses static analysis to provide some nice features that are hard to come by in Clojure editors, including underlining errors. Also, since it is built into IntelliJ, it handles projects (including projects with some Java classes) seamlessly. I have heard more than one person mention that they prefer it to Emacs after using Emacs for years.</p>
+<h3 id="about-colin-flemingtalk">About <a href="http://clojure-conj.org/speakers#colin-fleming">Colin Fleming</a></h3>
+<p><a href="https://twitter.com/CursiveClojure">Twitter</a></p>
+<p><a href="http://clojure-conj.org/speakers#colin-fleming"><img src="http://www.lispcast.com/img/pre-conj/colin-fleming.jpg" /></a></p>
+<p>You can install Cursive Clojure by following this <a href="https://cursiveclojure.com/userguide/">User Guide</a>.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-david-pick">
+              Pre-conj Prep: David Pick
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 30, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-building-a-data-pipeline-with-clojure-and-kafkatalk">Talk: <a href="http://clojure-conj.org/speakers#david-pick">Building a Data Pipeline with Clojure and Kafka</a></h3>
+<h4 id="background">Background</h4>
+<p><a href="http://clojure-conj.org/speakers#david-pick">David Pick's talk</a> at the <em>conj</em> is about <a href="http://kafka.apache.org/">Kafka</a>, which is a distributed messaging system. It implements a publish/subscribe model and runs in a cluster. Its documentation claims that Kafka has very high throughput.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p><a href="https://www.braintreepayments.com/">Braintree</a>, where David Pick works, is a huge payment processor, now owned by PayPal. They must have very strict availability and consistency requirements in addition to the scale. The talk description hints that Clojure was helpful to their success. Some of the best talks I've seen are this kind of experience report.</p>
+<h3 id="about-david-picktalk">About <a href="http://clojure-conj.org/speakers#david-pick">David Pick</a></h3>
+<p><a href="http://twitter.com/davidpick">Twitter</a> - <a href="https://github.com/dpick">Github</a></p>
+<p><a href="http://clojure-conj.org/speakers#david-pick"><img src="http://www.lispcast.com/img/pre-conj/david-pick.jpeg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-ghadi-shayban">
+              Pre-conj Prep: Ghadi Shayban
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 01, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-jvm-creature-comfortstalk">Talk: <a href="http://clojure-conj.org/speakers#ghadi-shayban">JVM Creature Comforts</a></h3>
+<p><a href="http://clojure-conj.org/speakers#ghadi-shayban">Ghadi Shayban's talk</a> at the <em>conj</em> is about the Java Virtual Machine. In case you don't know, the JVM was <strong>originally designed by James Gosling</strong> and originally only hosted Java. Recently, the JVM has become the <strong>target platform for some very popular languages</strong>, including Groovy, JRuby, Scala, and of course Clojure.</p>
+<h4 id="background">Background</h4>
+<p>I always recommend <strong>studying up on history</strong>. James Gosling gave a talk a while ago about <a href="http://www.infoq.com/presentations/gosling-jvm-lang-summit-keynote">How the JVM Spec Came To Be</a>. It's a personal history that chronicles the experiences that led up to the design decisions that are embedded in the JVM today. A good introduction to how the JVM method invocation works in bytecode (very basically) is <a href="https://www.youtube.com/watch?v=BOOXa06y96A">Charles Nutter's keynote at JAX 2012</a>. It's also a good introduction to <em>invokedynamic</em> and <em>Method Handles</em>, also mentioned in the talk description.</p>
+<p>Briefly, <a href="https://blogs.oracle.com/jrose/entry/dynamic_invocation_in_the_vm"><em>invokedynamic</em></a> is a way to <strong>dynamically dispatch</strong> based on language-specific semantics in a fast way. <a href="https://blogs.oracle.com/jrose/entry/method_handles_in_a_nutshell"><em>Method Handles</em></a> are a way to <strong>refer to a method directly</strong> as first-class values. Some other things mentioned: <a href="http://cr.openjdk.java.net/~jrose/values/values-0.html">value types</a> are a proposal to support immutable aggregate types directly in Java. <a href="http://cr.openjdk.java.net/~briangoetz/valhalla/spec-classdyn.html">classdynamic</a> is an idea for instantiating <em>patterns</em> of classes.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p>The JVM is evolving. The growing number of languages that compile to the JVM are influencing that evolution. <em>invokedynamic</em> is an example of such an influence. It is used extensively in JRuby and Nashorn (the new Javascript implementation on the JVM). The JVM is shaping up to be an even better host than when Rich Hickey chose to target it.</p>
+<h3 id="about-ghadi-shaybantalk">About <a href="http://clojure-conj.org/speakers#ghadi-shayban">Ghadi Shayban</a></h3>
+<p><a href="http://twitter.com/smashthepast">Twitter</a> - <a href="https://github.com/ghadishayban">Github</a></p>
+<p><a href="http://clojure-conj.org/speakers#ghadi-shayban"><img src="http://www.lispcast.com/img/pre-conj/ghadi-shayban.jpg" /></a></p>
+<p>Ghadi Shayban is an accomplished pianist. Check out <a href="https://www.youtube.com/watch?v=M8BbyF5sxRU">this</a> and <a href="https://www.youtube.com/watch?v=zJIEM-MG8KY">this</a>.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-glenn-vanderburg">
+              Pre-conj Prep: Glenn Vanderburg
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 02, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-cló-the-algorithms-of-tex-in-clojuretalk">Talk: <a href="http://clojure-conj.org/speakers#glenn-vanderburg">Cló: The Algorithms of TeX in Clojure</a></h3>
+<p><a href="http://clojure-conj.org/speakers#glenn-vanderburg">Glenn Vanderburg's talk</a> at the <em>conj</em> is about implementing the TeX algorithms in Clojure. TeX is a typesetting engine, often used through LaTeX. TeX was written by Donald Knuth in order to typeset his opus <em>The Art of Computer Programming</em>.</p>
+<h4 id="background">Background</h4>
+<p>If you're interested in a good understanding of typesetting using TeX, you can't do better than the <a href="http://web.mit.edu/jgross/www/LaTeX/texbook.pdf">TeXbook</a>, written by Knuth himself. It's an excellent guide to the TeX language and the underlying semantics. If you'd like to hear an interview with Knuth about why he decided to pause his life's work to solve digital typesetting, watch <a href="http://www.webofstories.com/play/donald.knuth/51">this</a> (and the following segments).</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p>TeX is written in an imperative style with mutation and is difficult to understand. <a href="http://rw4.cs.uni-sb.de/~heckmann/abstracts/neuform.html">Other attempts</a> have been made to re-implement the algorithms in a functional style. The work to re-implement typesetting in Clojure in a functional style can be instructive both of the specific algorithms and for imperative legacy systems in general.</p>
+<h3 id="about-glenn-vanderburgtalk">About <a href="http://clojure-conj.org/speakers#glenn-vanderburg">Glenn Vanderburg</a></h3>
+<p><a href="http://twitter.com/glv">Twitter</a> - <a href="https://github.com/glv">Github</a></p>
+<p><a href="http://clojure-conj.org/speakers#glenn-vanderburg"><img src="http://www.lispcast.com/img/pre-conj/glenn-vanderburg.jpg" /></a></p>
+<p>Glenn Vanderburg gave one of my favorite talks about software engineering. It's called <a href="https://www.youtube.com/watch?v=NP9AIUT9nos">Real Software Engineering</a>.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-interview-anna-pawlicka">
+              Pre-Conj Interview: Anna Pawlicka
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 24, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#anna-pawlicka"><img src="http://www.lispcast.com/img/pre-conj/anna-pawlicka.jpeg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>Anna Pawlicka generously agreed to do an interview about her <a href="http://clojure-conj.org/speakers#anna-pawlicka">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a>. The <a href="http://www.lispcast.com/pre-conj-anna-pawlicka">background to her talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Anna Pawlicka</strong>: During my final year at university I was looking for a contract work or a summer internship and my recruiter suggested a big data startup. Description mentioned Clojure so I solved some 4clojure problems and they sparked my interest. Computer Science course I studied was mostly based on Java so it was refreshing if not challenging to try functional programming. I got a Clojure in Action book, applied for the internship and luckily was offered the job. It was a fun summer: lots of Cascalog queries, friendly Clojure Dojos and interesting talks organised by London Clojure Community. It felt like home and you don’t walk away from that feeling. I stayed for both the language and community.</p>
+<p><strong>LC</strong>: You've been presenting and blogging a lot about Om. What are you using Om for and why?</p>
+<p><strong>AP</strong>: We’ve been recently working on a building performance platform at Mastodon C (project is open sourced). It’s built around high volumes of data and big part of it was UI programming. We were looking for something that performs well but isn’t t too complex and Om came out just in time for us to solve this problem. We’ve built the entire UI using Om and we combined it with d3.js and core.async for nice data visualisations and user interaction. I don’t think we’d be able to achieve that using vanilla JavaScript. Sure, there were some bumps along the way but the overall reusability makes it worth a while. Outside of my day job I’m working on a in-browser genetic algorithm testing tool, using Om and Quil, but with all the presenting and other activities I had to pause the development for a while.</p>
+<p><strong>LC</strong>: I've used React or Om for a few things and it quite simply enables me to develop UI interaction that would be too intricate otherwise. How has your experience with Om been relative to other frameworks?</p>
+<p><strong>AP</strong>: I haven’t used any frameworks as it’s just easier to mix and match various Clojure/ClojureScript libraries depending on one’s needs. Om was the first library we’ve tried for interacting with React and it suited our needs well enough that we haven’t had the need to try anything else. If you choose a framework, like let’s say Hoplon, you have to go with its programming model and you lose the ability to control every part of your stack.</p>
+<p><strong>LC</strong>: You say you're using Om with d3.js. Om is a very functional style, while d3 uses mutation pervasively. How does the integration work? How well do they work together?</p>
+<p><strong>AP</strong>: Fortunately both are driven by data so having d3 visualisations render on your application state change makes perfect sense. I use interop a lot, and although it doesn’t look as nice as pure ClojureScript, it does the job. We can easily replace iteration methods like map and reduce with their ClojureScript alternatives. The only problem is the type coercion between Clojure’s data structures and JavaScript’s Object. It’s not always immediately clear which one should be used where. The perfect option would be to control SVG via Om (or similar library) and use C2’s functions to calculate path data. But I haven’t tried that myself yet. Charts I’ve been working on are quite complex and d3 comes with this gold mine of resources that none of the other visualisation libraries has. I’m not yet done experimenting though.</p>
+<p><strong>LC</strong>: Can you explain the basic models of Om and d3?</p>
+<p><strong>AP</strong>: D3 performs data-driven DOM manipulation, e.g. you can build a bar chart out of an array of numbers and when your data changes so will your chart. D3 can manipulate any part of DOM and has lots of helper functions to compute our visualisations. React/Om works on DOM as well - we write functions that translate our data into a DOM, but the difference is that the DOM is virtual. Each time the data changes, React/Om compares the old and new state and computes the minimal set of transformations that will be applied to the real DOM. DOM operations are slow so naturally this virtual representation speeds things up by skipping unnecessary transformations. This means that both Om and d3 want to be in control of the DOM inside our component. To make use of both libraries, you can either have Om take care of everything (but this means we need to write functions to compute paths, scales, etc.), or you could use d3’s scales, projection helpers and path generation while having Om generate and manage SVG, or you can have an empty div rendered by Om and allow d3 to generate and manipulate the SVG inside. The latter is the most common approach, probably because we leave the decision whether to re-render to Om (skipping any insignificant data changes), and when Om decides to render the component, d3 takes care of the rest. We combine the best of both.</p>
+<p>My talk will include some of that, with examples, since you can’t have a dashboard without a nice chart :)</p>
+<p><strong>LC</strong>: I see. It sounds like they work well together. I wouldn't have guessed that.</p>
+<p>In the talk you mention live data. How does your system handle that?</p>
+<p><strong>AP</strong>: I don’t have an actual system that I plan to demo - the talk is based around various ways to create, reuse and combine Om components to display data. Long polling and HTTP streaming are available through <a href="http://http-kit.org/">HTTP Kit</a>, but I also like how <a href="https://github.com/ptaoussanis/sente">Sente</a> combines that with core.async. But the focus is mainly on the components themselves - how you can mix and match them.</p>
+<p><strong>LC</strong>: Really cool.</p>
+<p>Talks are always limited in time, and there's lots of context that you assume people have (or wish they have). What is something people can learn more about to help them get ready for your talk?</p>
+<p><strong>AP</strong>: I will try to keep the talk as self contained as possible, but I won’t be able to cover things like the basics of web development with ClojureScript - this would be material for a separate talk. However, more and more people are using ClojureScript so I hope most of the attendees shouldn’t have a problem with that. Those who feel that they need to prepare more will find lots of resources online.</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>AP</strong>: The usual: <a href="http://twitter.com/AnnaPawlicka">Twitter</a>, my <a href="http://www.annapawlicka.com/">blog</a> and GitHub <a href="https://github.com/annapawlicka">account</a>. I’m also often on #clojure and #clojurescript IRC channels if someone wants to chat.</p>
+<p><strong>LC</strong>: Ok. One last question: when they make a movie about programming languages, who will play Clojure?</p>
+<p><strong>AP</strong>: That's a tricky one! I'd say Leonardo DiCaprio since he's one of the best actors yet still without an Oscar (read: very good but underappreciated) :-)</p>
+<p><strong>LC</strong>: Thanks for a great, informative interview.</p>
+<p><strong>AP</strong>: Thanks for putting this together. It was my first interview and it was fun :)</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="page2.html">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

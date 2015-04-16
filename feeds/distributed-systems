@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Exponential Backoff</title>
+                  <guid isPermalink="false">http://www.lispcast.com/exponential-backoff</guid>
+                  <link>http://www.lispcast.com/exponential-backoff</link>
+                  <pubDate>Fri 13 Mar 2015 02:01:59 PM CDT</pubDate>
+                  <description>
+                    A common failure in distributed systems is a server with a rate limit or with no limit but begins failing due to load. A standard solution is to retry after waiting a small time, increasing that time after each failure. We create a macro to handle this waiting and retrying.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/exponential-backoff"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: David Pick</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-david-pick</guid>
+                  <link>http://www.lispcast.com/pre-conj-david-pick</link>
+                  <pubDate>Tue 30 Sep 2014 11:18:21 PM CDT</pubDate>
+                  <description>
+                    David Pick will talk about using Kafka from Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-david-pick"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: David Pick</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-david-pick</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-david-pick</link>
+                  <pubDate>Wed 15 Oct 2014 09:04:25 AM CDT</pubDate>
+                  <description>
+                    David Pick interview about Kafka and Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-david-pick"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Try Three Times</title>
+                  <guid isPermalink="false">http://www.lispcast.com/try-three-times</guid>
+                  <link>http://www.lispcast.com/try-three-times</link>
+                  <pubDate>Thu 05 Mar 2015 03:44:38 PM CST</pubDate>
+                  <description>
+                    Distributed systems fail in indistinguishable ways. Often, retrying is a good solution to intermittent errors. We create a retry macro to handle the retries in a generic way.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/try-three-times"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

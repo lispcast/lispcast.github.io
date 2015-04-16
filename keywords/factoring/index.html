@@ -1,0 +1,201 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: factoring | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/stop-refactoring-and-start-factoring">
+              Stop Refactoring and Start Factoring
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 24, 2014
+          </div>
+
+          
+<p>Summary: <em>Refactoring is focused on the quality of code, while factoring aims to uncover the underlying beauty of the problem domain, as expressed in code. Instead of cleaning up your code, try factoring.</em></p>
+<p>You have some code. You notice that it's not too readable. Maybe it's a little messy. There are some obvious code smells: some repeated code and large functions.</p>
+<p>You start refactoring. After a while, it's a clean, neat bit of code. It's very understandable and will be cheaper to modify next time.</p>
+<p><strong>But is it correct?</strong></p>
+<p>I don't mean in the &quot;all-the-tests-pass&quot; kind of way, because refactoring takes care of that. I mean: <strong>does the code do what it should?</strong> Refactoring only says that it does not modify the outward behavior of the code, not make it more correct. And although it's clear what the code <em>does</em> (thanks to all that cleanup), it's not clear that the code <em>does what it should</em>.</p>
+<p>I am a big fan of the book <a href="http://www.amazon.com/gp/product/0201485672/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0201485672&amp;linkCode=as2&amp;tag=lisp0b-20&amp;linkId=XFG25IMDVIX7JQY7">Refactoring</a> by Martin Fowler. It's an edifice of analytical thinking and presentation. Go read it now. <strong>It will make you a better thinker and programmer.</strong> However, I have a slight, semantic beef with refactoring. Here's Fowler's definition from the book:</p>
+<blockquote>
+<p><em>noun:</em> a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior</p>
+<p><em>verb:</em> to restructure software by applying a series of refactorings without changing its observable behavior</p>
+</blockquote>
+<p>That's a great definition of refactoring. My beef is not with the definition. <strong>My beef is with its purpose</strong>, which is to &quot;make it easier to understand and cheaper to modify&quot;. Again, it's a great thing to make your code easier to understand and cheaper to modify. But that's not what I'm after, most of the time.</p>
+<p>What I'm after is <em>code that models the problem</em>. This is the <strong>only reliable way to make software that works</strong>. Code that inadequately models the problem is littered with nested conditionals for special cases, is unnecessarily bound in time and context, and is generally obtuse. You might be able to understand what the code is doing, but it's unclear whether it should be doing it.</p>
+<p>The only known way to write code that models the problem is to <em>factor</em>. Let's get a definition:</p>
+<blockquote>
+<p><em>verb:</em> to decompose code to reveal the structure of the problem</p>
+</blockquote>
+<p><strong>Factoring is inherently about decomposition.</strong> It means splitting functions into smaller functions (along the structural lines of the problem). It means finding those functions which are fundamental to the problem (you can tell they are fundamental because they are used in multiple places). It means revealing symmetries. It means separating concerns. Factoring is about uncovering structural beauty in problem domains.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Symmetry, proportion, and harmony.</p>
+<p>The problem with factoring is that it takes a long time. And you actually <strong>have to understand the domain</strong>. You have to explore the problem a lot longer, perhaps trying different variations in the code, before you can be satisfied that the code models the problem. Time is not something we have in our &quot;Just ship it!&quot; modern world.</p>
+<p>The feeling of refactoring is like bringing order to a room: you put things away, you label things clearly, you might even throw out some old junk. But the feeling of factoring is like rebuilding a room for a specific purpose. Refactoring is cleaning up the kitchen. <strong>Factoring is taking the kitchen apart and building a new kitchen better suited to the styles of the individual chef.</strong> It's not practical to rebuild your kitchen all the time, though it is practical to tidy up. But when you do it, it makes all the difference.</p>
+<p>That metaphor gets at the other fundamental difference between factoring and refactoring: refactoring does not change the behavior of the code, while factoring might. It might because the code might turn out to be incorrect for the problem. Refactoring can reveal bugs. But if you're going to fix the bug, you've stopped refactoring and gone to something else. In factoring, changing the behavior is just part of the process. <strong>From the factoring perspective, you're not fixing a bug. You're correcting the expression of your problem.</strong></p>
+<p>Refactoring by design and definition is focused on the code itself. Factoring is more of a process. It's a journey the programmer takes into the heart of the problem. In its wake, the hills and valleys of the problem are mapped out in the code. <strong>And the programmer ends, like in most journeys, a different person.</strong></p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>I suggest you choose a good notation.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

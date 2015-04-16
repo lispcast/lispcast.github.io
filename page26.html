@@ -1,0 +1,672 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/indirection">
+              Indirection Mechanisms and Expressive Power
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 04, 2012
+          </div>
+
+          
+<h3 id="what-defines-a-languages-expressive-power">What defines a language's expressive power?</h3>
+<p>Expressive power is hard to pin down in programming languages. In this post, I want to explore how <em>indirection mechanisms</em> lend expressiveness to a language. By indirection, I mean something that happens at compile time or run time which was not explicitly specified in the code. By mechanism, I mean something with well-defined, rule-governed semantics.</p>
+<p>Indirection mechanisms are typically what makes a program shorter, easier to write, and easier to reason about. Instead of writing machine code directly, you are relying on the compiler or runtime to do the heavy lifting.</p>
+<p>I posit that the development of indirection mechanisms closely follows the development of multiplicative expressive power. One line of Python is worth far more than 100 lines of C and more than 1000 lines of Assembly. And rather than debate about expressive power in different languages, I'd like to simply catalog some of the more obvious and important indirection mechanisms out there.</p>
+<p>While many languages might share a given indirection mechanism, I don't know all languages, so I am just going to go with my personal experience and <em>group them roughly by programming languages</em> I am familiar with. I would love to hear of more mechanisms, if you know of them.</p>
+<h3 id="assembly">Assembly</h3>
+<p>Depending on the features available, Assembly can be seen as simply a more convenient language to write in than machine language. But this convenience comes from a indirection.</p>
+<ul>
+<li><p>Named instructions</p>
+<p>The assembler looks up the name of an instruction in a table and converts it to the machine code. It is much more convenient to remember a mnemonic sequence of characters than an arbitrary number.</p></li>
+<li><p>Labeled statements</p>
+<p>Instead of calculating a jump offset from the current instruction, you just name a line of code and the assembler will calculate it for you. It is much less error prone and immune to changes in the program.</p></li>
+</ul>
+<h3 id="c">C</h3>
+<p>C has many indirection mechanisms. Most of them were not invented in C. However, from a historical and pedagogical perspective, C is a good contrast to Assembly. Both are relatively low-level and ubiquitous, yet C is a huge leap beyond Assembly in terms of indirection.</p>
+<ul>
+<li><p>Automatic number coercion</p>
+<p>Numbers in C are automatically coerced &quot;up&quot; when operated on, whereas in machine language, the values would have to be explicitly converted. You reduce mathematical errors because the machine can do a better job than you.</p></li>
+<li><p>Function call semantics</p>
+<p>Function calls compile to a lot of code, including copying the arguments to the stack. Function calling in C is more convenient.</p></li>
+<li><p>Recursive expressions</p>
+<p>In machine code and Assembly, instructions are written linearly in sequence. In C, however, expressions can be nested. The compiler will convert them to the appropriate sequence of instructions. Nested expressions are easier to understand.</p></li>
+<li><p>Structured programming</p>
+<p>Conditionals and loops provide a simpler, less error-prone way to code than machine code jumps.</p></li>
+</ul>
+<h3 id="lisp">Lisp</h3>
+<p>Lisp's main evaluation semantic is the source of much veneration and arguably is the <em>Ur</em> indirection mechanism. I am talking about the <code>eval</code> function as defined in the original Lisp paper by McCarthy. There are more mechanism, but they are too many to list here.</p>
+<ul>
+<li><p>Eval</p>
+<p>Most values (so-called atoms) evaluate to themselves, symbols are looked up in the current environment, and to evaluate a list (a function call), evaluate its elements, then apply the first element (hopefully it's a function!) to the rest of the elements.</p>
+<p>The indirection comes from the late-binding of the symbol to its value. The environment can change, so the function call can have different meanings at different points in the program. This greatly facilitates incremental development.</p></li>
+<li><p>CLOS</p>
+<p>The Common Lisp Object System defines many indirection mechanisms for doing object-oriented programming. They include method combinations (before and after methods), class-based polymorphism, and method dispatch. The most interesting indirection mechanism is that a class can define its own indirection mechanism.</p></li>
+<li><p>Garbage collection</p>
+<p>Instead of writing routines for managing the memory of your program, the runtime will take care of recouping memory when it is no longer needed. A great productivity boost.</p></li>
+<li><p>Macros</p>
+<p>Lisp macro calls look like function calls, but they are expanded into code at compile time. This indirection mechanism essentially allows you to extend the language within the language.</p></li>
+</ul>
+<h3 id="smalltalk">Smalltalk</h3>
+<p>Smalltalk defined object-oriented programming as we know it today, based on a simple indirection mechanism: message passing. It also was the first language (that I know of) to make significant use of development tools. Like Lisp, I cannot list all of the indirection mechanisms in Smalltalk. They are too numerous.</p>
+<ul>
+<li><p>Method passing</p>
+<p>The main semantic of Smalltalk is message passing. A message consists of the name and the arguments. The name is looked up in the vtable of the receiving object. If it is found, the associated method is returned and called on the objects. Otherwise, the name is looked up in the vtable's parent, and its parent, to the end of the vtable list. This vtable lookup is both dynamic (it allows for changes to the vtable at runtime) and provides polymorphism (different kinds of objects can respond to the same message).</p></li>
+<li><p>Semantic refactoring</p>
+<p>Development tools before Smalltalk were usually confined to enhanced text editors. Smalltalk let you refactor code, meaning changing code not at the textual level but at the structural-semantic level. For instance, performing a &quot;rename&quot; operation on a method would not only change the name of the method in that class, but also change the code for all of the callers. This is another indirection mechanism which is now taken for granted in the Java and .NET worlds.</p></li>
+</ul>
+<h3 id="self">Self</h3>
+<p>Self is a prototype based object-oriented language.</p>
+<ul>
+<li><p>Slot access</p>
+<p>In Self, to access a slot from an object, the name of the slot is looked up in the object. If it is found, the value is returned. Otherwise, the <code>parent</code> slot is accessed, and the slot name is looked up in the parent recursively. This allows one to build objects that are mostly identical to an existing object except in a small way.</p></li>
+</ul>
+<h3 id="haskell">Haskell</h3>
+<ul>
+<li><p>Typeclass polymorphism</p>
+<p>Haskell, unlike Smalltalk, keeps the values (objects) separate from the vtables. It is the job of the compiler to reunite these two elements when necessary. This allows data types to be defined separately (even in different files) from the code defining the type's inclusion in typeclasses. The Haskell compiler, following well-defined semantics, will convert calls to a typeclass method into a call to a function with the vtable as an implicit argument. This enables a limited form of polymorphism, where the same name refers to different functions depending on the types.</p></li>
+<li><p>Pattern matching</p>
+<p>Pattern matching in Haskell means destructuring a value into component values while optionally binding names to values. It lets you write in one concise statement the equivalent of several conditionals and <code>let</code> statements.</p></li>
+</ul>
+<h3 id="clojure">Clojure</h3>
+<p>Clojure also deserves a mention for its championing of various mechanisms for controlling concurrent state.</p>
+<ul>
+<li><p>Concurrent state (refs, agents, atoms, etc.)</p>
+<p>The Clojure runtime provides many indirection mechanisms to deal with state. Refs, for instance, provide transactional semantics over different values. This allows one to write parallel programs without explicitly using locks.</p></li>
+</ul>
+<p>Indirection mechanisms are semantic abstractions afforded by the language. Like all abstractions, they are <a href="http://www.joelonsoftware.com/articles/LeakyAbstractions.html">prone to leakage</a>. How a language deals with the leaks might be just as important a choice as which mechanisms the language supports. For instance, what happens when you pass an object a message it doesn't understand? Some common options include: compiler error, thrown exception, silent failure, magic, or undefined behavior. These are damage control at best.</p>
+<p>A lot of the leakiness of abstractions has to do with how mechanical the indirection is, and how simple the rules of the mechanism are. A complex mechanism is hard to understand, while a non-deterministic mechanism will sometimes give unwanted behavior. And when things go wrong, it is hard to distinguish between complexity and non-determinism. We should therefore strive for simple, deterministic abstractions. And we should also strive to bake the failure into the model, and build systems to deal with abstraction failures upfront.</p>
+<p>I want to complete this list and keep it updated. Please <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;&#x77;&#110;&#x6f;&#114;&#x6d;&#x61;&#110;&#100;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'contact me'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x63;&#x6f;&#110;&#116;&#x61;&#x63;&#116;&#32;&#x6d;&#x65;&#32;&#40;&#x65;&#114;&#x69;&#x63;&#x77;&#110;&#x6f;&#114;&#x6d;&#x61;&#110;&#100;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript> if you have other ideas for indirection mechanisms and I'll add them here and credit them to you!</p>
+<p>To conclude: Different languages make different choices of which mechanisms to provide, and hence the endless variety of languages we see today. It is my hope that we will find more such abstractions which allow programmers to be even more productive in the future. Further, perhaps there are ways to make existing mechanisms more robust and which fail in more appropriate ways.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://colinm.org/language_checklist.html">
+              Programming Language Checklist
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/programming-language-checklist">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 03, 2012
+          </div>
+
+          
+<p>A funny and painfully true look at language development.</p>
+<p>I still think developing your own language is a great learning process.</p>
+<p>via <a href="http://news.ycombinator.org/user?id=akoumjian">akoumjian</a></p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/modern-language-wishlist">
+              Modern Language Wishlist
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 02, 2012
+          </div>
+
+          
+<p>I was brainstorming the other day about features that I expect to be easy in modern programming languages (plus libraries).</p>
+<p>Some of them are very common, some less common, and some might not exist yet. Some are basic services of the runtime and some are more conveniences for interacting with the modern networked world.</p>
+<p>None of them are impossible. I can point to examples of each of them in popular programming languages. But there is no language that has all of them. A lot of progress could be made with fortuitous curation of existing libraries.</p>
+<ul>
+<li><p>String manipulation</p>
+<p>String manipulation should be incredibly convenient. It's so common to parse something out of a string, or build up a new string. It should be so easy it disappears.</p>
+<ul>
+<li>Regular expressions</li>
+<li>Splitting</li>
+<li>Joining</li>
+<li>Replacing</li>
+</ul></li>
+<li><p>Polymorphism</p>
+<p>Polymorphism, as I'm describing it here, means the specific type of a value is an implementation detail that I can ignore. I can program to an &quot;interface&quot; and two values that implement the same interface can be treated interchangeably.</p></li>
+<li><p>Basic &quot;container&quot; types</p>
+<p>I don't think it's a stretch to say that we know enough, as a science and industry, to know exactly what we need from our containers. +1 for convenient syntax.</p>
+<ul>
+<li>Linked list</li>
+<li>Dynamic array</li>
+<li>Hash map</li>
+<li>Set</li>
+</ul></li>
+<li><p>Input/output</p>
+<p>It's still a little hard in some languages to read and write files. Especially binary.</p></li>
+<li><p>Web requests</p>
+<p>Our computers are approaching 100% time on the Internet. And the web is ubiquitous. You should be able to do web requests with one line.</p></li>
+<li><p>URL Manipulation</p>
+<p>URL's are very structured strings, but that doesn't mean we should be concatenating the strings ourselves. There needs to be a way to build URL's and break them into their individual components.</p></li>
+<li><p>Garbage Collection</p>
+<p>I just don't want to worry about memory management anymore.</p></li>
+<li><p>Namespaces</p>
+<p>It is convenient to avoid naming conflicts as your library ecosystem grows.</p></li>
+<li><p>Homoiconic</p>
+<p>Code can be manipulated as data.</p></li>
+<li><p>Extensible syntax</p>
+<p>I find I don't use macros much anymore. I do more with data-driven programming. But it is nice to have when you need it.</p></li>
+<li><p>Math-oriented numeric types</p>
+<p>There are times when I want numbers that are defined by their machine representations, such as C <code>int</code> and <code>double</code>. I'll call this &quot;machine-oriented numbers&quot;. There are times when I want a more abstract representation of numbers, that act like they taught me in Math class. I'll call this &quot;math-oriented numbers&quot;.</p>
+<p>With math-oriented numbers, the fear of overflowing should not exist and division is division.</p>
+<p>While we're at it, we could add in matrices, vectors, and even equations.</p></li>
+<li><p>Units</p>
+<p>Numeric values should be able to be qualified with a unit. You should be able to convert between units of the same kind.</p>
+<ul>
+<li>Mass</li>
+<li>Time</li>
+<li>Distance</li>
+<li>Temperature</li>
+<li>and combinations of the above (speed, acceleration, etc.)</li>
+</ul></li>
+<li><p>Time</p>
+<p>Time, dates, and calendars are hard. The language should solve the hard part for us.</p></li>
+<li><p>Error</p>
+<p>A number is rarely 100% accurate. There should be ways to represent the error and have it accumulate when combining different values. +1 for tracing the sources of error.</p></li>
+<li><p>Unification / pattern matching</p>
+<p>It's just for convenience. The important thing is how unification errors are dealt with. Hopefully, there is something better than catching an exception.</p></li>
+<li><p>Before / after functions</p>
+<p>This is sometimes known as aspects. But there is a lot of value being able to add functionality to existing functions without modifying the original code.</p></li>
+<li><p>Parser</p>
+<p>Convenient way to define parser grammars that generate AST's available in the language.</p></li>
+<li><p>CSV library</p>
+<p>CSV is a very common way to store tabular data, but it's not really a standard. There is enough variability in the format that a library is called for.</p></li>
+<li><p>Good error messages</p>
+<p>Good error messages need to help you locate and solve the problem. It's actually really hard to get right. You can see this a lot in newer languages. Languages with helpful errors are typically mature.</p></li>
+<li><p>Immutable values</p>
+<p>Values are values. They shouldn't change.</p></li>
+<li><p>Explicit model of time</p>
+<p>It is very rare to find in programming languages. Time needs to be modeled by the programming language so that we can sanely deal with concurrency. This is one of the bigger mini-revolutions happening in programming at the moment.</p></li>
+<li><p>Graphics</p>
+<p>Most languages make it really hard to draw on the screen. This just needs to be easier. Displaying images, shapes, colors, text, video, and associated manipulations: scaling, rotation, translation.</p></li>
+<li><p>Sound</p>
+<p>Same goes for sound: playing sounds should be easy! Listening to the microphone should be easy!</p></li>
+<li><p>Common file formats</p>
+<p>Reading common formats should be easy. At the very least, there should be a framework/convention for libraries for common formats to follow.</p></li>
+<li><p>Game input</p>
+<p>By this, I mean getting raw events about key down, key up, mouse movement, etc.</p></li>
+<li><p>GUI</p></li>
+<li><p>First-class functions</p>
+<p>Higher-order programming is an obvious win. +1 for lexical closures. +1 if you can store the functions to disk and read them back in!</p></li>
+<li><p>Easy way to store data in flat text files</p>
+<p>I don't want to have to write my own serialization routines.</p></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://yow.eventer.com/events/1004/talks/1054">
+              Escape from the Ivory Tower
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/escape-from-the-ivory-tower">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 28, 2012
+          </div>
+
+          
+<p>This brief history of Haskell is a nice introduction to how Haskell has developed. Jones tells a nice story punctuated by seminal publications that contributed to the ideas. He is a living example of how well the Cambridge accent was designed for giving lectures.</p>
+<blockquote>
+<p>Some programs work but are not well-typed. That is, they are the programs that you want to write but the compiler rejects them. So this is the &quot;Region of Abysmal Pain&quot;. Because that's where you think: &quot;Ugh! The type system is getting in my way! I know! I'll use an untyped language.&quot;</p>
+</blockquote>
+<p>It is very refreshing to hear someone straight from the top of the static typing pantheon acknowledge the pain of working with current, statically-typed languages.</p>
+<blockquote>
+<p>Now, of course there's always going to be a small Region of Abysmal Pain. There's rather a sort of sterile debate that happens between the static and the dynamic crowd. But I just want to remark that there's something not just self-indulgent but I think is actually quite important about the process of trying to find ways of making types more expressive so that they maintain the good property of being somewhat comprehensible and while moving closer to writing programs that you really want to write.</p>
+</blockquote>
+<blockquote>
+<p>Alright, so here's our plan for world domination: make the type system sufficiently expressive to the point where everybody will forget dynamic languages and write statically typed ones. I don't expect that will happen to me in my lifetime. But I regard Haskell as a kind of thought experiment that's trying to go in that direction.</p>
+</blockquote>
+<p>In the end, I think Simon Peyton Jones is the perfect mix of humility and hubris to lead the Haskell movement. He seems to have the patience to work with (and be excited about) an incomplete language (as Haskell was in the early days and still is in a lot of ways) without being dogmatic about the virtue of the current limitations.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://hellohappy.org/beautiful-web-type/">
+              Beautiful Web Type
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/beautiful-web-type">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 28, 2012
+          </div>
+
+          
+<p>Thanks for this curation of <a href="http://www.google.com/webfonts">Google Web Fonts</a>. Despite Google Web Fonts' excellent UI, I still have trouble finding the gems.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.infoq.com/presentations/Parser-Combinators">
+              Parser Combinators: How to Parse (nearly) Anything
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/parser-combinators-how-to-parse-nearly-everything">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 26, 2012
+          </div>
+
+          
+<p>This is the best video I've ever seen defining monadic parser combinators from the ground up. Nate Young explains <a href="https://github.com/youngnh/parsatron">his translation</a> of <a href="http://www.haskell.org/haskellwiki/Parsec">Parsec</a> into Clojure<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. I'm surprised he could show the code and explain it well in less than forty-five minutes.</p>
+<p>As you may know, I have my own PEG parser combinator library called <a href="https://github.com/ericnormand/squarepeg">squarepeg</a>. I began developing it as monadic, but decided that I didn't like having to write my own version of Haskell's <code>do</code> notation (<code>let-&gt;&gt;</code> in his version), which felt awkward in Clojure. Instead, squarepeg lets you bind variables and refer to them later within each parser itself (instead of in the code that builds the parser). There were a few other differences, but in general, I think the two libraries are more similar than different.</p>
+<p>One thing I think I will borrow from his library is counting the character position of the current parser to help report parsing errors. It's going on my TODO list.</p>
+<p>I have more plans for squarepeg when I get a chance. They include limiting the laziness of the parser and being able to report better error messages.</p>
+<p><strong>Update</strong> The kindly <a href="https://twitter.com/spariev">Sergey Pariev</a> clued me into the github repo of <a href="https://github.com/youngnh/parsatron">The Parsatron</a>.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Nate said his parser was available on Clojars under the name &quot;The Parsitron&quot;, but I could not find it.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://clojurescriptone.com/">
+              ClojureScript One
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/clojurescript-one">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 20, 2012
+          </div>
+
+          
+<p>Simply amazing.</p>
+<p>I tried to build a small project using ClojureScript and gave up, reverting back to Javascript. The workflow was awkward and information about the language was lacking. ClojureScript One aims to exemplify the power latent in ClojureScript by giving us a productive workflow from the very start. You clone the repo and use it as a starting point for your own project.</p>
+<p>I haven't explored this new project, but it is already impressive. It sets a high bar for new projects. It includes a well-designed home page, getting started videos, and nice documentation. But, more importantly, it hints at a new age in web development in much the same way as the <a href="http://www.youtube.com/watch?v=Gzj723LkRJY"><em>Blog in 15 Minutes</em></a> Ruby on Rails video ushered in the rise of Ruby on the web. Watch the ClojureScript One Getting Started video to have your mind blown.</p>
+<p>I also recommend a <a href="http://thinkrelevance.com/blog/2012/01/12/podcast-episode-003.html">podcast</a> about the goals of ClojureScript One.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/apple-equals-oranges">
+              apple == orange
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 30, 2011
+          </div>
+
+          
+<p>If you are reading this, you are probably a programmer. Let me ask you, for just a moment, to step out of your programmer shoes and answer these questions:</p>
+<ul>
+<li>Is this apple equal to that orange?</li>
+<li>Is that cloud equal to this house?</li>
+<li>Is my backpack equal to my television?</li>
+</ul>
+<p>The obvious answer is &quot;no&quot; to all of these. And so (please step back into your programmer shoes) we see in many languages I can ask a similar question:</p>
+<p>In Java:</p>
+<pre><code>apple.equals(orange)</code></pre>
+<p>Or in Clojure:</p>
+<pre><code>(= apple orange)</code></pre>
+<p>The answer to both questions is unsurprisingly <code>false</code>.</p>
+<p>And in Haskell?</p>
+<pre><code>apple == orange</code></pre>
+<p>Type error! The compiler is saying I cannot even ask the question.</p>
+<p>What model of reality is Haskell asserting?</p>
+<p>Is it telling me that I need to convert the apple and orange into values of the same type?</p>
+<pre><code>Fruit {name = &quot;apple&quot;} == Fruit {name = &quot;orange&quot;}</code></pre>
+<p>Is this question really different from <code>apple == orange</code>?</p>
+<p>Which model (Haskell's or Clojure's) more closely models reality?</p>
+<p>Is this behavior intentionally designed into Haskell or is it incidental behavior due to the choice of type system?</p>
+<p>Does this behavior make Haskell better or worse than a hypothetical Haskell that allowed the question to be asked?</p>
+<p>Deep questions.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://pchiusano.blogspot.com/2011/12/future-of-programming.html">
+              The future of programming
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/the-future-of-programming-pchiusano">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 30, 2011
+          </div>
+
+          
+<p>Paul Chiusano:</p>
+<blockquote>
+<p>In the functional programming world, there is insane amounts of code reuse happening, but along with this comes a fair bit of plumbing.</p>
+</blockquote>
+<p>The <em>plumbing</em> Chiusano is referring to is incidental complexity imposed by current static type systems without a good set of &quot;universal&quot; types. Dynamically typed languages often do not have the same plumbing problem because of the extra information available at runtime to do dynamic dispatching and the use of overloading. This incidental complexity is a huge hurdle to languages like Haskell, where half of the code is about converting from one type to another.</p>
+<p>This could be the fault of the codebase/libraries I am working with. In my practical Haskell experience, I have failed to find the zen of type/domain fit that static-typing enthusiasts talk about. Chiusano, however, hints that this problem is universal.</p>
+<blockquote>
+<p>It makes it clear that types are effective not just at preventing many software errors, but also in <em>guiding development</em>.</p>
+</blockquote>
+<p>I would love to see the adoption of standard type classes recognized by the Haskell compiler that could automatically handle the most common coercions safely. For instance, the compiler could &quot;upgrade&quot; function application to Functor application when the types match. It is beyond me whether this can be done &quot;safely&quot;. I suspect that it cannot.</p>
+<blockquote>
+<p>The second is to have more normalized types and type systems so that there is no incidental structure for code to broker between in the first place. To support this we'll see things like row types, unordered tuples, type sets, and so on, and any related type system machinery needed to make all this feasible and convenient.</p>
+</blockquote>
+<p>If modules were programmed to a small, standard set of types (and type classes), they would be more universally applicable. The compiler could &quot;overload&quot; functions automatically. The trick is to keep it safe. At the very least, the &quot;universal&quot; types would help programmers do it manually. We may already be seeing such a convergence.</p>
+<p>Not coincidentally, the built in Clojure data structures are usually all I need. Others appear to think the same. The Clojure ecosystem thrives from the consensus on a small, universal set. There is a lot of reuse and little boilerplate.</p>
+<p>See <a href="https://github.com/mmcgrana/ring">Ring</a> as an example of a universal datatype facilitating a flourishing community. It allows the problem domain (web programming) to be broken up into subproblems with little-to-no coordination between the groups. Clojure has a number of web frameworks and libraries that are all inter-compatible. I think this is unique among languages.</p>
+<blockquote>
+<p>The editor will search for a program to make the types align, show me the program for confirmation if I request it, and then not show this subexpression in the main editor view . . .</p>
+</blockquote>
+<p>Please give me this editor. It is technically feasible. <a href="http://www.haskell.org/hoogle/">Hoogle</a> can already do a pretty decent search based on the types of functions. All you need is a planner to find a path from one type to another.</p>
+<p>You could even help the search by defining a type class <code>Convertible</code> like this:</p>
+<pre><code>class Convertible a b where
+    convert :: a -&gt; b</code></pre>
+<p>All of the instances of <code>Convertible</code> would form graphs which could be searched for all paths between any two types. The editor could show a list of those paths and let you choose one.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://tele-task.de/archive/video/flash/14029/">
+              Programming and Scaling
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/programming-and-scaling">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 30, 2011
+          </div>
+
+          
+<p>A great Alan Kay-esque speech (by none other than Alan Kay himself).</p>
+<p>Alan Kay is a great thinker and I always enjoy his talks, but he needs someone to refine his presentations--particularly his verbal explanations. There are lots of great ideas and perspectives, but mostly he is just saying that &quot;we're doing it wrong&quot;. Much better would be to show us his analysis of a problem.</p>
+<p>In general, I finish his presentations feeling like everyone is doing everything wrong but with no concrete steps to take to correct it. We are thinking wrong (we need better perspectives), we are programming wrong, we are engineering wrong, we are learning the wrong things, we are doing computer science wrong, etc.</p>
+<p>I also finish thinking that a new and better way is possible, but again, with no idea of that better way except a vague notion of less and better code in less time.</p>
+<p>And then here I am, trapped in a world of crappy computers and crappy thinking, with a feeling of unease. I wish he would come down to Earth a little and apply that big brain with its great perspectives to a problem on-camera. It would be concrete and I could learn to emulate his thinking.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="page27.html">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="page25.html">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

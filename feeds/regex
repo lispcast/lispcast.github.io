@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Regexes in Clojure</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-regex</guid>
+                  <link>http://www.lispcast.com/clojure-regex</link>
+                  <pubDate>Thu 03 Jun 2014 08:45:37 PM CDT</pubDate>
+                  <description>
+                    With a few functions from the standard library, Clojure lets you do most of what you want with regular expressions with no muss.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-regex"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

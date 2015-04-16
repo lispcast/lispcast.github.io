@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-conj Prep 2014</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-2014</guid>
+                  <link>http://www.lispcast.com/pre-conj-2014</link>
+                  <pubDate>Sat 20 Sep 2014 11:12:51 PM CDT</pubDate>
+                  <description>
+                    Prepare for the Clojure/conj with media from around the web.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-2014"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Anna Pawlicka</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-anna-pawlicka</guid>
+                  <link>http://www.lispcast.com/pre-conj-anna-pawlicka</link>
+                  <pubDate>Thu 25 Sep 2014 09:00:28 AM CDT</pubDate>
+                  <description>
+                    Anna Pawlicka will give a talk about Om.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-anna-pawlicka"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Ashton Kemerling</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-ashton-kemerling</guid>
+                  <link>http://www.lispcast.com/pre-conj-ashton-kemerling</link>
+                  <pubDate>Fri 26 Sep 2014 07:20:33 AM CDT</pubDate>
+                  <description>
+                    Ashton Kemerling will talk about Generative Integration Tests.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-ashton-kemerling"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Bozhidar Batsov</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-bozhidar-batsov</guid>
+                  <link>http://www.lispcast.com/pre-conj-bozhidar-batsov</link>
+                  <pubDate>Sat 27 Sep 2014 09:29:50 AM CDT</pubDate>
+                  <description>
+                    Bozhidar Batsov will talk about CIDER, the Clojure IDE for Emacs.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-bozhidar-batsov"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Brian Goetz</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-brian-goetz</guid>
+                  <link>http://www.lispcast.com/pre-conj-brian-goetz</link>
+                  <pubDate>Sun 28 Sep 2014 10:45:08 AM CDT</pubDate>
+                  <description>
+                    Brian Goetz will give the keynote at Clojure/conj.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-brian-goetz"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Colin Fleming</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-colin-fleming</guid>
+                  <link>http://www.lispcast.com/pre-conj-colin-fleming</link>
+                  <pubDate>Mon 29 Sep 2014 10:49:29 AM CDT</pubDate>
+                  <description>
+                    Colin Fleming will talk about Cursive Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-colin-fleming"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: David Pick</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-david-pick</guid>
+                  <link>http://www.lispcast.com/pre-conj-david-pick</link>
+                  <pubDate>Tue 30 Sep 2014 11:18:21 PM CDT</pubDate>
+                  <description>
+                    David Pick will talk about using Kafka from Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-david-pick"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Ghadi Shayban</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-ghadi-shayban</guid>
+                  <link>http://www.lispcast.com/pre-conj-ghadi-shayban</link>
+                  <pubDate>Wed 01 Oct 2014 09:31:49 AM CDT</pubDate>
+                  <description>
+                    Ghadi Shayban will talk about the JVM.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-ghadi-shayban"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Glenn Vanderburg</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-glenn-vanderburg</guid>
+                  <link>http://www.lispcast.com/pre-conj-glenn-vanderburg</link>
+                  <pubDate>Thu 02 Oct 2014 09:04:18 AM CDT</pubDate>
+                  <description>
+                    Glenn Vanderburg will talk about implementing the TeX algorithms in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-glenn-vanderburg"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Anna Pawlicka</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-anna-pawlicka</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-anna-pawlicka</link>
+                  <pubDate>Fri 24 Oct 2014 10:35:29 PM CDT</pubDate>
+                  <description>
+                    Anna Pawlicka interview about Om.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-anna-pawlicka"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Ashton Kemerling</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-ashton-kemerling</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-ashton-kemerling</link>
+                  <pubDate>Mon 20 Oct 2014 09:36:09 AM CDT</pubDate>
+                  <description>
+                    Ashton Kemerling interview about generative testing.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-ashton-kemerling"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Bozhidar Batsov</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-bozhidar-batsov</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-bozhidar-batsov</link>
+                  <pubDate>Sun 26 Oct 2014 09:38:02 AM CDT</pubDate>
+                  <description>
+                    Bozhidar Batsov interview about CIDER.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-bozhidar-batsov"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Colin Fleming</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-colin-fleming</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-colin-fleming</link>
+                  <pubDate>Tue 21 Oct 2014 10:04:32 AM CDT</pubDate>
+                  <description>
+                    Colin Fleming interview about Cursive Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-colin-fleming"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: David Pick</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-david-pick</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-david-pick</link>
+                  <pubDate>Wed 15 Oct 2014 09:04:25 AM CDT</pubDate>
+                  <description>
+                    David Pick interview about Kafka and Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-david-pick"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Jeanine Adkisson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-jeanine-adkisson</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-jeanine-adkisson</link>
+                  <pubDate>Sat 18 Oct 2014 01:43:27 PM CDT</pubDate>
+                  <description>
+                    Jeanine Adkisson interview about variants.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-jeanine-adkisson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Julian Gamble</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-julian-gamble</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-julian-gamble</link>
+                  <pubDate>Fri 24 Oct 2014 10:34:36 PM CDT</pubDate>
+                  <description>
+                    Julian Gamble interview about core.async and ClojureScript.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-julian-gamble"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Lucas Cavalcanti</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-lucas-cavalcanti</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-lucas-cavalcanti</link>
+                  <pubDate>Fri 17 Oct 2014 10:59:24 AM CDT</pubDate>
+                  <description>
+                    Lucas Cavalcanti interview about Datomic superpowers.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-lucas-cavalcanti"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Paul deGrandis</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-paul-degrandis</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-paul-degrandis</link>
+                  <pubDate>Sat 25 Oct 2014 09:59:39 AM CDT</pubDate>
+                  <description>
+                    Paul deGrandis interview about data-driven systems.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-paul-degrandis"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Steve Miner</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-steve-miner</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-steve-miner</link>
+                  <pubDate>Sun 19 Oct 2014 09:15:48 AM CDT</pubDate>
+                  <description>
+                    Steve Miner talk about generating test.check generators.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-steve-miner"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Steven Yi</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-steven-yi</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-steven-yi</link>
+                  <pubDate>Mon 27 Oct 2014 09:44:13 AM CDT</pubDate>
+                  <description>
+                    Steven Yi interview about his music composition and synthesis systems.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-steven-yi"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Zach Oakes</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-zach-oakes</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-zach-oakes</link>
+                  <pubDate>Wed 22 Oct 2014 09:11:47 AM CDT</pubDate>
+                  <description>
+                    Zach Oakes interview about games in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-zach-oakes"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Zach Tellman</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-zach-tellman</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-zach-tellman</link>
+                  <pubDate>Thu 23 Oct 2014 11:29:13 AM CDT</pubDate>
+                  <description>
+                    Zach Tellman interview about his talk about composition.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-zach-tellman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Jeanine Adkisson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-jeanine-adkisson</guid>
+                  <link>http://www.lispcast.com/pre-conj-jeanine-adkisson</link>
+                  <pubDate>Fri 03 Oct 2014 09:13:42 AM CDT</pubDate>
+                  <description>
+                    Jeanine Adkisson will give a talk about Variants in Clojure at the Clojure/conj 2014.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-jeanine-adkisson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Julian Gamble</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-julian-gamble</guid>
+                  <link>http://www.lispcast.com/pre-conj-julian-gamble</link>
+                  <pubDate>Sat 04 Oct 2014 06:26:54 PM CDT</pubDate>
+                  <description>
+                    Julian Gamble will give a talk about core.async in ClojureScript.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-julian-gamble"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Lucas Cavalcanti and Edward Wible</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-lucas-cavalcanti-edward-wible</guid>
+                  <link>http://www.lispcast.com/pre-conj-lucas-cavalcanti-edward-wible</link>
+                  <pubDate>Wed 01 Oct 2014 02:25:56 PM CDT</pubDate>
+                  <description>
+                    Lucas Cavalcanti and Edward Wible will talk about Datomic.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-lucas-cavalcanti-edward-wible"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Michał Marczyk</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-michal-marczyk</guid>
+                  <link>http://www.lispcast.com/pre-conj-michal-marczyk</link>
+                  <pubDate>Mon 06 Oct 2014 10:50:02 AM CDT</pubDate>
+                  <description>
+                    Michał Marczyk will talk about Persistent Data Structures.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-michal-marczyk"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Nathan Herzing and Chris Shea</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-nathan-herzing-chris-shea</guid>
+                  <link>http://www.lispcast.com/pre-conj-nathan-herzing-chris-shea</link>
+                  <pubDate>Tue 07 Oct 2014 10:40:13 AM CDT</pubDate>
+                  <description>
+                    Nathan Herzing and Chris Shea will talk about Pedestal, Om, Datomic, and core.async.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-nathan-herzing-chris-shea"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Paul deGrandis</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-paul-degrandis</guid>
+                  <link>http://www.lispcast.com/pre-conj-paul-degrandis</link>
+                  <pubDate>Sun 12 Oct 2014 08:28:45 PM CDT</pubDate>
+                  <description>
+                    Paul deGrandis will talk about Data-Driven Systems.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-paul-degrandis"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Rich Hickey</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-rich-hickey</guid>
+                  <link>http://www.lispcast.com/pre-conj-rich-hickey</link>
+                  <pubDate>Fri 03 Oct 2014 09:02:39 PM CDT</pubDate>
+                  <description>
+                    Rich Hickey will talk about Transducers.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-rich-hickey"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj: Scheme Workshop</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-scheme-workshop</guid>
+                  <link>http://www.lispcast.com/pre-conj-scheme-workshop</link>
+                  <pubDate>Mon 17 Nov 2014 11:12:36 PM CST</pubDate>
+                  <description>
+                    Jason Hemann talks about the Scheme Workshop.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-scheme-workshop"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Steve Miner</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-steve-miner</guid>
+                  <link>http://www.lispcast.com/pre-conj-steve-miner</link>
+                  <pubDate>Thu 09 Oct 2014 08:54:32 AM CDT</pubDate>
+                  <description>
+                    Steve Miner will talk about generating test.check generators.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-steve-miner"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Steven Yi</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-steven-yi</guid>
+                  <link>http://www.lispcast.com/pre-conj-steven-yi</link>
+                  <pubDate>Fri 10 Oct 2014 02:40:26 PM CDT</pubDate>
+                  <description>
+                    Steven Yi will talk about music systems on the JVM.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-steven-yi"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Zach Oakes</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-zach-oakes</guid>
+                  <link>http://www.lispcast.com/pre-conj-zach-oakes</link>
+                  <pubDate>Sun 12 Oct 2014 08:29:03 PM CDT</pubDate>
+                  <description>
+                    Zach Oakes will talk about making games at runtime.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-zach-oakes"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Zach Tellman</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-zach-tellman</guid>
+                  <link>http://www.lispcast.com/pre-conj-zach-tellman</link>
+                  <pubDate>Mon 13 Oct 2014 12:50:39 PM CDT</pubDate>
+                  <description>
+                    Zach Tellman will talk about building composable software.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-zach-tellman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Alan Dipert and Micha Niskin</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-alan-dipert-micha-niskin</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-alan-dipert-micha-niskin</link>
+                  <pubDate>Fri 03 Apr 2015 10:07:08 PM CDT</pubDate>
+                  <description>
+                    Alan Dipert and Micha Niskin will talk about Boot.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-alan-dipert-micha-niskin"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Anthony Marcar</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-anthony-marcar</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-anthony-marcar</link>
+                  <pubDate>Fri 10 Apr 2015 09:32:03 PM CDT</pubDate>
+                  <description>
+                    Anthony Marcar will talk about large-scale production Clojure applications.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-anthony-marcar"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Brandon Bloom</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-brandon-bloom</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-brandon-bloom</link>
+                  <pubDate>Thu 09 Apr 2015 04:00:45 PM CDT</pubDate>
+                  <description>
+                    Brandon Bloom will talk about Om.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-brandon-bloom"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Colin Fleming</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-colin-fleming</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-colin-fleming</link>
+                  <pubDate>Sun 05 Apr 2015 04:59:35 PM CDT</pubDate>
+                  <description>
+                    Colin Fleming will talk about debugging in Cursive.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-colin-fleming"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: James MacAulay</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-james-macaulay</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-james-macaulay</link>
+                  <pubDate>Wed 15 Apr 2015 11:43:16 PM CDT</pubDate>
+                  <description>
+                    James MacAulay interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-james-macaulay"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: John Hume</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-john-hume</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-john-hume</link>
+                  <pubDate>Tue 14 Apr 2015 01:39:07 PM CDT</pubDate>
+                  <description>
+                    John Hume interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-john-hume"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Melanie Mitchell</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-melanie-mitchell</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-melanie-mitchell</link>
+                  <pubDate>Sun 05 Apr 2015 04:26:48 PM CDT</pubDate>
+                  <description>
+                    Melanie Mitchell will talk about computer systems that recognize visual situations.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-melanie-mitchell"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Ryan Neufeld</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-ryan-neufeld</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-ryan-neufeld</link>
+                  <pubDate>Tue 14 Apr 2015 11:33:53 PM CDT</pubDate>
+                  <description>
+                    Ryan Neufeld interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-ryan-neufeld"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Zach Tellman</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-zach-tellman</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-zach-tellman</link>
+                  <pubDate>Wed 15 Apr 2015 11:43:01 PM CDT</pubDate>
+                  <description>
+                    Zach Tellman interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-zach-tellman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Separation, Abstraction, and Cascading in CSS</title>
+                  <guid isPermalink="false">http://www.lispcast.com/cascading-separation-abstraction</guid>
+                  <link>http://www.lispcast.com/cascading-separation-abstraction</link>
+                  <pubDate>Sat 29 Dec 2012 12:29:33 AM CST</pubDate>
+                  <description>
+                    LESS and Sass (and similar solutions) have saved CSS for three reasons: separation, abstraction, and cascading. While I welcome them, CSS still has other problems which I believe can be solved.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/cascading-separation-abstraction"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>CSS has Weak Forms of Abstraction and Combination</title>
+                  <guid isPermalink="false">http://www.lispcast.com/css-abstraction-combination</guid>
+                  <link>http://www.lispcast.com/css-abstraction-combination</link>
+                  <pubDate>Sat 08 Feb 2014 01:44:44 PM CST</pubDate>
+                  <description>
+                    According to the requirements proposed by Abelson and Sussman, CSS does not provide adequate means of combination and abstraction to be considered a powerful language.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/css-abstraction-combination"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>LESS has Better Forms of Abstraction than CSS</title>
+                  <guid isPermalink="false">http://www.lispcast.com/less-abstraction-combination</guid>
+                  <link>http://www.lispcast.com/less-abstraction-combination</link>
+                  <pubDate>Wed 12 Feb 2014 10:16:42 PM CST</pubDate>
+                  <description>
+                    LESS has obviously better forms of abstraction and combination than CSS. It has recursive style definitions, which is enough to consider it a &quot;powerful language&quot;.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/less-abstraction-combination"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Priyatam Mudivarti</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-priyatam-mudivarti</guid>
+                  <link>http://www.lispcast.com/pre-west-priyatam-mudivarti</link>
+                  <pubDate>Sat 04 Apr 2015 10:54:48 PM CDT</pubDate>
+                  <description>
+                    Priyatam Mudivarti will talk about generating CSS with Garden.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-priyatam-mudivarti"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Separation of Presentation and Content</title>
+                  <guid isPermalink="false">http://www.lispcast.com/separation-of-presentation-and-content</guid>
+                  <link>http://www.lispcast.com/separation-of-presentation-and-content</link>
+                  <pubDate>Thu 17 Apr 2014 01:56:15 PM CDT</pubDate>
+                  <description>
+                    One reason to separate style from content is to reuse HTML or CSS. Ultimately, we would like a solution where we can reuse both.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/separation-of-presentation-and-content"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

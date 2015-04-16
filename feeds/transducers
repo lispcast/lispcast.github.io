@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-conj Prep: Rich Hickey</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-rich-hickey</guid>
+                  <link>http://www.lispcast.com/pre-conj-rich-hickey</link>
+                  <pubDate>Fri 03 Oct 2014 09:02:39 PM CDT</pubDate>
+                  <description>
+                    Rich Hickey will talk about Transducers.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-rich-hickey"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

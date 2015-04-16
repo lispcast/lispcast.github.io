@@ -1,0 +1,1360 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: clojure | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/3-things-java-can-steal-from-clojure">
+              3 Things Java Programmers Can Steal from Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 09, 2013
+          </div>
+
+          
+<p>The other day I wrote about some <a href="http://www.lispcast.com/java-learn-from-clojure">principles that programming in Clojure</a> makes very clear. Those principles could be applied just as well in Java, and often are. However, there are some things that make Clojure distinct.</p>
+<p>Three of those distinctions are the way it deals with state change (using an <a href="http://en.wikipedia.org/wiki/Software_transactional_memory">STM</a>), the <a href="http://clojure.org/data_structures">Persistent Data Structures</a>, and the literal syntax for data with a reader (now called <a href="https://github.com/edn-format/edn">edn</a>). Diving into the <a href="https://github.com/clojure/clojure">source code for Clojure</a>, I realized that these three bits were written in Java. And that means that they can be used from Java. It is certainly not as easy as using them in Clojure, but they are all three powerful enough to warrant using them if you are using Java. <a href="http://mvnrepository.com/artifact/org.clojure/clojure/1.5.0">You simply need to add one more JAR to your project (or add a maven dependency).</a> I have constructed a few minimal examples of their use.</p>
+<h3 id="persistent-data-structures">1. Persistent Data Structures</h3>
+<p>Clojure comes with several powerful and fast collection classes. The interesting thing about them is that they are immutable. If you want to add an object to a list, you actually create a new list containing the old elements and the new element. Instead of using copy-on-write, it reuses most of the internal structure of the original list, so only a small number of objects need to be allocated. It turns out that this can be done very quickly, comparable to using an <code>ArrayList</code>.</p>
+<p>The following example illustrates three of the more useful data structures: Vector, HashMap, and HashSet.</p>
+<pre><code>package persistent;
+
+import clojure.lang.IPersistentMap;
+import clojure.lang.IPersistentSet;
+import clojure.lang.IPersistentVector;
+import clojure.lang.PersistentHashMap;
+import clojure.lang.PersistentHashSet;
+import clojure.lang.PersistentVector;
+
+public class PersistentTest {
+  public static void main(String[] args) {
+    IPersistentMap m = PersistentHashMap.create(&quot;abc&quot;, &quot;xyz&quot;);
+    m = m.assoc(1, 4); // add a new key/value pair
+    m = m.assoc(&quot;key&quot;, &quot;value&quot;);
+    m = m.without(&quot;abc&quot;); // remove key &quot;abc&quot; 
+    System.out.println(m);
+        
+    IPersistentVector v = PersistentVector.create(1, 2, 3);
+    v = v.assocN(0, &quot;a string&quot;); // change index 0
+    v = v.cons(&quot;should be last&quot;); // add a string at the end
+    System.out.println(v);
+            
+    IPersistentSet s = PersistentHashSet.create(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);
+    s = (IPersistentSet) s.cons(&quot;d&quot;); // add d to the set
+    s = (IPersistentSet) ((IPersistentMap) s).without(&quot;a&quot;); // remove an element
+    s.contains(&quot;g&quot;); // should return false
+    System.out.println(s);
+  }
+}</code></pre>
+<p>Now, it ain't pretty. But it's actually no worse than quite a few native Java libraries I've seen. There may be a better way to do this, but this one works.</p>
+<h3 id="software-transactional-memory">2. Software Transactional Memory</h3>
+<p>Clojure uses <a href="http://en.wikipedia.org/wiki/Multiversion_concurrency_control">Multiversion concurrency control</a> to provide a safe way to manage concurrent access to state shared between threads. In Clojure, they are called <a href="http://clojure.org/refs">refs</a>. I won't go very deep into how it works. Suffice it to say that <a href="http://clojure.org/refs">Clojure refs</a> gives you non-blocking reads and transactional updates without having to do locking yourself. There are two caveats: 1 is that the value you give to the ref has to be immutable. 2 is that you should not perform IO (or perform any mutation) inside of the transaction.</p>
+<pre><code>package stm;
+
+import java.util.concurrent.Callable;
+
+import clojure.lang.LockingTransaction;
+import clojure.lang.Ref;
+
+public class STMTest {
+  public static void main(String[] args) {
+    // final needed to be used in anonymous class
+    final Ref r = new Ref(1);
+    final Ref s = new Ref(5);
+
+    try {
+      // run this in a transaction
+      // don&#39;t do IO inside
+      LockingTransaction.runInTransaction(
+        new Callable&lt;Object&gt;() {
+          public Object call(){
+            s.set((Integer)r.deref() + 10);
+            r.set(2);
+            return null;
+          }
+        }
+      );
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+        
+    System.out.println(r.deref());
+    System.out.println(s.deref());
+  }
+}</code></pre>
+<h3 id="extensible-data-notation">3. Extensible Data Notation</h3>
+<p>With <a href="https://github.com/clojure/clojure/blob/master/changes.md">Clojure 1.5</a>, <a href="https://github.com/edn-format/edn">edn</a> has become a standard part of the language. Edn is like an extensible JSON where the keys of objects can be any value (not just strings). It is based on the Clojure literal syntax, much in the same way that JSON is based on Javascript literal syntax. It is a nice way to serialize data. And since you already have the JAR in your project, it's a no brainer to use it.</p>
+<pre><code>package edn;
+
+import java.io.PushbackReader;
+import java.io.StringReader;
+
+import clojure.lang.EdnReader;
+import clojure.lang.PersistentHashMap;
+
+public class EDNTest {
+  public static void main(String[] args) {
+    // reading from a string
+    System.out.println(
+      EdnReader.readString(&quot;{\&quot;x\&quot; 1 \&quot;y\&quot; 2}&quot;, PersistentHashMap.EMPTY));
+
+    // reading from a Reader
+    // really, you can use any Reader wrapped in a PushbackReader
+    System.out.println(
+      EdnReader.read(new PushbackReader(new StringReader(&quot;#{10 2 3}&quot;)),
+                     PersistentHashMap.EMPTY));
+  }
+}</code></pre>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-brian-goetz">Pre-conj Prep: Brian Goetz</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/atom-problem">
+              Atom code explanation
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 28, 2014
+          </div>
+
+          
+<p>Summary: <em>I go over a real-world example of how atoms and immutable values allow you to compose constructs in ways that are easy to reason about and less prone to error.</em></p>
+<p>The other day I was in IRC #clojure and someone asked a good question. They had code like the following, and they couldn't understand why <strong>they couldn't modify a map</strong>.</p>
+<pre><code>(def state (atom {}))
+
+(doseq [x [1 2 3]]
+  (assoc @state :x x))
+
+(println @state)
+</code></pre>
+<p>What does this print? Well, the asker wanted it to print <code>{:x 3}</code>. But it printed <code>{}</code>. To understand what's happening, <strong>let's go step by step</strong>.</p>
+<p><code>{}</code> creates an empty map. It's literal syntax for a <em>constructor</em> for a map. This one happens to be empty.</p>
+<p><code>(atom {})</code> takes the empty map that was just created and passes it to the function <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/atom/"><code>atom</code></a>, which constructs a new <code>clojure.lang.Atom</code>. Atoms are objects, and its current state is the empty map we just passed in.</p>
+<p><code>(def state (atom {}))</code> defines a new var called <code>state</code> in the current namespace.</p>
+<p>At this point, we've got a variable called <code>state</code> whose value is an atom that holds an empty map.</p>
+<p><code>(doseq [x [1 2 3]]</code> loops over the numbers 1, 2, and 3. <code>x</code> will be bound to each of those numbers, in turn.</p>
+<p><code>@state</code> gets transformed into <code>(deref state)</code>, which returns the current value of <code>state</code>. <code>:x</code> is a literal keyword, and <code>x</code> is a reference to the <code>x</code> bound inside the loop.</p>
+<p><code>(assoc @state :x x)</code> creates a <em>new map</em> by taking the current value of <code>state</code> (which happens to be <code>{}</code>) and associating <code>:x</code> with <code>x</code> (which will be <code>1</code>, <code>2</code>, and <code>3</code> as the loop happens). The value is returned by <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/assoc"><code>assoc</code></a>, and then thrown away, since it isn't bound to anything.</p>
+<p>Then <code>(println @state)</code> will print the current value of <code>state</code>, which still is <code>{}</code>.</p>
+<p>This code shows a common problem that beginners face in Clojure: how do <strong>immutable data structures</strong> (like maps) and the <strong>concurrency primitives</strong> (like <code>atom</code>) work together to manage state?</p>
+<p>The answer is quite simple (<a href="http://www.infoq.com/presentations/Simple-Made-Easy">in the Rich Hickeyan sense</a>) and elegant. <strong>By separating the ideas of value and state, Clojure has made it easy to express precisely the behavior you want in concurrent systems.</strong></p>
+<p>The value is the map. It is immutable. It cannot change. It is a single value, and it will always be the same. That means <strong>threads can share the value with no worries that one of them will change it</strong>.</p>
+<p>The state is the atom. It's a mutable object. And being an object, it has methods that define its interface. In the code above, we saw that you can call <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/deref"><code>deref</code></a> on an atom to get its current value. <code>deref</code> is basically a getter.</p>
+<p>The main way to <em>change</em> the value of an atom is using <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/swap!"><code>swap!</code></a>. <code>swap!</code> takes an atom and a function (plus optional arguments) and <strong>calls the function on the current value of the atom</strong>. It then sets the value of the atom to the return value of the function. So let's use that to fix the code.</p>
+<pre><code>
+(def state (atom {}))
+
+(doseq [x [1 2 3]]
+  (swap! state assoc :x x))
+
+(println @state)
+</code></pre>
+<p><code>swap!</code> takes the atom (<code>state</code>) and a function (<code>assoc</code>) and some arguments (<code>:x x</code>). It calls <code>assoc</code> on the current value of <code>state</code> with those extra arguments and sets the value of the atom to the return value of the function.</p>
+<p>The <code>swap!</code> expression is almost (but not) the same as this code:</p>
+<pre><code>
+(reset! state (assoc @state :x x)) ;; never do this
+</code></pre>
+<p><a href="http://grimoire.arrdem.com/1.6.0/clojure.core/reset!"><code>reset!</code></a> changes the state of the atom but without regard to the current value. This new code is bad because it's not thread-safe. <strong>Use <code>swap!</code> if you need to use the current value to determine the new value.</strong></p>
+<p>So what does an atom do? What does it represent?</p>
+<p>Atoms guarantee one very important thing: that <strong>each state is calculated from the last state</strong>. The <code>swap!</code> operation is <em>atomic</em>. No matter how many threads are trying to change the value, each change is calculated from the previous value and no previous values are lost. That's its contract as an object and it's one of the important ways that <strong>Clojure helps with concurrency</strong>.</p>
+<p>How can a value be lost?</p>
+<p>If we have two threads, each trying to change <code>state</code> in the same incorrect way (using <code>reset!</code>), the order of evaluation will have several steps:</p>
+<ol style="list-style-type: decimal">
+<li><code>(deref state)   ;; call this value *1</code></li>
+<li><code>(assoc *1 :x x) ;; call this value *2</code></li>
+<li><code>(reset! state *2)</code></li>
+</ol>
+<p>Because the threads are running concurrently, the operations have a chance of interleaving their steps in unwanted ways. For instance, threads A and B might interleave like this:</p>
+<ol style="list-style-type: decimal">
+<li>A: <code>(deref state)    ;; call this value *1A</code></li>
+<li>A: <code>(assoc *1A :x x) ;; call this value *2A</code></li>
+<li>B: <code>(deref state)    ;; call this value *1B</code></li>
+<li>B: <code>(assoc *1B :x x) ;; call this value *2B</code></li>
+<li>B: <code>(reset! state *2B)</code></li>
+<li>A: <code>(reset! state *1A)</code></li>
+</ol>
+<p>What happened? On line 6, A set the value of <code>state</code> to the value it calculated on line 2. So <strong>B's work is completely discarded</strong>. That's probably not what was intended. What's worse is that that is one of many possible interleavings, some of which work and some don't. Welcome to concurrency!</p>
+<p>What you probably wanted was to make sure that <em>no</em> work is discarded. You want the operation to be <em>atomic</em>. That's why it's called an atom. <code>swap!</code> is atomic. A <code>swap!</code> to an atom occurs &quot;all at once&quot;, instead of on three lines like the <code>reset!</code> example. If two threads are doing <code>swap!</code>, there are two possible interleavings.</p>
+<ol style="list-style-type: decimal">
+<li>A: <code>(swap! state assoc :x x)</code></li>
+<li>B: <code>(swap! state assoc :x x)</code></li>
+</ol>
+<p>And</p>
+<ol style="list-style-type: decimal">
+<li>B: <code>(swap! state assoc :x x)</code></li>
+<li>A: <code>(swap! state assoc :x x)</code></li>
+</ol>
+<p>These are usually what you want. If <em>only one</em> or <em>neither one</em> works, <strong>atom is not the right construct for you</strong>.</p>
+<p>So there you go. Atomic mutable state with immutable values gives you a nice, <strong>composable concurrency semantics</strong>. You could do it with locks but it's harder to ensure you're doing it correctly. It's slightly higher-level than locks yet it provides tremendous value. <strong>Atoms are easier to reason about and less prone to errors.</strong></p>
+<p>If you'd like to learn the basics of Clojure, I recommend my video course called <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. I don't go over concurrency, but you will learn lots of functional programming. Go check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">the description</a> to see if it's right for you.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+<li><a href="http://www.lispcast.com/clojure-regex">Regexes in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-gazette-looking-forward-2015">
+              Clojure Gazette Looking Forward
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 19, 2015
+          </div>
+
+          
+<p>Summary: <em>I am looking for more sponsors for the Clojure Gazette and I need your help.</em></p>
+<p>I have some big plans for the Clojure Gazette this year.</p>
+<p>As far as I can tell, the Clojure Gazette is the only Clojure-focussed newsletter out there<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. It's usually a collection of links to material I think would interest and educate people interested in Clojure. It's not always directly about Clojure. But Clojurists seem to be <strong>interested in a variety of things</strong>. Sometimes the issue is based around a strong theme, like Haskell or Object Oriented Programming. And sometimes it is an interview. This year, I'd like to do more themed issues are more interviews.</p>
+<p>I think it <strong>plays an important part in the community</strong>. I have interviewed the Google Summer of Code participants for a couple of years now. The interviews let the community know what they were working on and what progress they had made. And some of the themed issues got the most positive commentary I've ever received. People seem to want to learn and to have existing information organized for them.</p>
+<p>As you can imagine, the Clojure Gazette takes a lot of work to put out each week. There are over 3,200 subscribers now, and it's growing every day. In July 2014, I began inviting sponsors to <strong>purchase a placement in issues of the Gazette</strong>. I've had a few generous sponsors contact me, which got me a few months of sponsorship.</p>
+<p>The sponsorships have been a success, in different ways. One job advertisement got hundreds of clicks and valuable exposure to a company that is just beginning to use Clojure. Others brought qualified visitors to developer-related services. I'm very greatful to Clojure/conj, which bought a placement. <strong>It is a big vote of confidence when the official Clojure conference asks to put their logo in your newsletter.</strong></p>
+<p>Now I am trying to be more active to find the sponsors. The goals for the Gazette are modest. None of them require any more money, just more time and work, and a little more organization. But the total time input is significant. With a small amount of funding, <strong>I'll be able to justify increasing the quality of the Gazette</strong>. I've always thought it would become a business one day. Putting money on the line always makes things more crisp and professional.</p>
+<p>Now is where I ask for a favor. If you can spare a few moments, would you please think about whether you get value from the Gazette and what you can do to <strong>send some sponsors my way</strong>. It may be contacting the hiring department at your company and suggesting a paid job listing. Or it could be experimenting with selling your company's service to the thousands of smart Clojure programmers subscribed to the newsletter. Or maybe you just want to show your appreciation and get some good karma in the community. I appreciate all help. Get in touch by <script type="text/javascript">
+<!--
+h='&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x65;&#114;&#x69;&#x63;&#32;&#x61;&#116;&#32;&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript>, <a href="http://twitter.com/ericnormand">twitter</a>, or call me at 504-302-3742.</p>
+<p>Here is a link to the <a href="http://www.clojuregazette.com/Clojure_Gazette_Media_Kit_Current.pdf">current version of the Media Kit</a> if you'd like more information.</p>
+<p>Thanks</p>
+<p>Eric &lt;<script type="text/javascript">
+<!--
+h='&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x65;&#114;&#x69;&#x63;&#32;&#x61;&#116;&#32;&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript>&gt;</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+<li><a href="http://www.lispcast.com/clojure-regex">Regexes in Clojure</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>There is <a href="http://defnewsletter.com/">(def newsletter)</a> which has not had an issue since October 2013.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-is-imperative">
+              Clojure is Imperative
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 22, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure is an imperative language. Its operations are defined in terms of concrete actions. But those actions are often the same actions available to the programmer at runtime. This makes it easy to bootstrap.</em></p>
+<p>Update: <em><a href="http://twitter.com/bitemyapp">أخلاق الخيميائي</a> pointed out that I was wrong about the size of GHC. Luckily it was not salient to my point so I just removed that part of the article.</em></p>
+<p>Update: <em>After talking with several people, I've decided that my writing was really unclear. I've done some major editing to make it as clear as I can. Thanks to everyone who commented and helped me clarify my thinking and writing.</em></p>
+<p>I was recently <a href="http://blog.cognitect.com/cognicast/062-eric-normand">on the Cognicast</a> and I mentioned something really important to me, but I did not go that deep into it.</p>
+<p>Clojure, and Lisps in general, are <em>imperative languages</em>. Yes, they are good for doing <a href="http://www.lispcast.com/what-is-functional-programming"><em>functional programming</em></a>, but their <strong>main paradigm is executing lists of commands in order</strong>.</p>
+<p>On the podcast I mentioned the first imperative example that came to mind, which was the <code>do</code> form, which executes each expression in the body and returns the value of the last expression. <strong>You would only want to execute an expression and throw away its value for its <em>side effects</em>.</strong></p>
+<p>But why is that important to me? It got me thinking about a deeper but related idea.</p>
+<p>Clojure is a <em>relatively</em> transparent layer above the JVM. I say &quot;relatively&quot; because languages do get quite a bit more opaque<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. But it manages to be powerful through well-chosen abstractions.</p>
+<p>I should be a little more specific about what I mean by &quot;transparent&quot; and &quot;opaque&quot;. This should be the most controversial part of this post, so I want to get this right. These are not formal definitions. <strong>Transparency/opaqueness measures abstractions.</strong> Opaque abstractions show less of the underlying machinery. Transparent abstractions show their machinery. This is a spectrum.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<p>Clojure's functions are rather opaque. Defining a function (with <code>fn</code>) in Clojure creates a class and instantiates it with the values from its lexical environment. This happens without having to think about classes. You're not thinking about the machinery. The machinery leaks out sometimes, like when you're looking at stack traces. But in general, an illusion is maintained.</p>
+<p>But Clojure's <code>def</code> form is pretty transparent. You do have to think about what it's doing, about the current namespace, the order of the <code>defs</code> in a namespace, etc. There is not much of an illusion to maintain.</p>
+<p>Haskell has a well-defined execution semantics. It's formally defined and you can step through the execution of a Haskell program by hand if you want. In that sense, it's imperative. But the execution order is obscured by the somewhat opaque abstraction of <em>lazy evaluation</em>. <strong>Clojure's execution order is more or less directly the execution order of the JVM it runs on--hence more transparent.</strong></p>
+<p>The reason this is important is that <strong>Clojure's strategy is to be transparent</strong> unless there is significant gain. This is part of what is meant by &quot;embracing the host&quot;. Haskell's strategy is orthogonal to the transparency/opaqueness axis. Haskell aims to be formally well-defined. Formal semantics allows deep static analysis and program transformation.</p>
+<p>Besides the strategy of being transparent, what I like even more about Clojure is that the <strong>many abstractions are <em>defined in the same abstractions</em> that you have available as a programmer</strong>.</p>
+<p>This is from the <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/def/">docstring of def</a>:</p>
+<blockquote>
+<p>Creates and interns a global var with the name of symbol in the current namespace (*ns*) or locates such a var if it already exists. If init is supplied, it is evaluated, and the root binding of the var is set to the resulting value. If init is not supplied, the root binding of the var is unaffected.</p>
+</blockquote>
+<p>Creating a var? I can do that. Interning it? I can do that, too. Setting the root binding? Easy! The core can be kept minimal because abstractions can build on each other. If you get the abstractions right, the amount of code you have to write in your implementation language is small.</p>
+<p>And this gets to the heart of it: <em>you</em> can write a Lisp yourself. Many people have. You can <strong>write an easy Lisp compiler in a weekend</strong> and build features on top of it, almost <strong>never having to change the original compiler</strong>.</p>
+<p>This is the magic of <a href="http://www.lispcast.com/two-kinds-of-bootstrapping">bootstrapped languages</a> like Lisps. They have a <strong>small core that you need to get right, then everything else can be written in that core</strong>. It's the ultimate minimal virtual machine.</p>
+<p>What's the relationship between bootstrapping and transparency? <strong>The more opaque the abstractions, the more the language must do to maintain the illusion.</strong> Lisps are easy to bootstrap because the abstractions chosen are either transparent and trivial to implement (like <code>def</code> or <code>if</code>) or opaque and powerful (like <code>fn</code>).</p>
+<p>I like Lisps (and Clojure) because <strong>I feel that I can understand them and build them myself</strong>. I don't <em>actually</em> understand everything, but I <em>could</em> if I tried. Somewhere along the way I developed a deep interest in bootstrapping. <strong>Bootstrapping is compounded leverage.</strong> You build small abstractions on top of the previous ones, and use those to build yet grander ones.</p>
+<p>If you like this attitude toward programming languages, <strong>you should learn a Lisp</strong>. I suggest Clojure, and I recommend the <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure video series</a>. You'll learn about building up powerful abstractions, one layer at a time, in a small amount of code.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-regex">Regexes in Clojure</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>There are more transparent languages as well, but they tend to be obscure.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>As an aside to those who read previous versions of this post, what I meant by imperative/declarative was transparent/opaque. I botched it and I'm trying to get this idea right.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-regex">
+              Regexes in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 03, 2014
+          </div>
+
+          
+<p>Summary: <em>With a few functions from the standard library, Clojure lets you do most of what you want with regular expressions with no muss.</em></p>
+<p><strong>Clojure is designed to be hosted.</strong> Instead of defining a standard Regular Expression semantics that works on all platforms, Clojure defers to the host's semantics. On the JVM, you're using Java regexes. In ClojureScript, it's Javascript regexes. That's the first thing to know.</p>
+<p>Other than the semantics of the regexes themselves, <strong>the API is standardized across all platforms in the core library</strong>. And the syntax is convenient because you don't need to double escape your special characters.</p>
+<h3 id="literal-representation">Literal representation</h3>
+<p>Regexes can be constructed in Clojure using a <strong>literal syntax</strong>. Strings with a hash in front are interpreted as regexes.</p>
+<pre><code>#&quot;regex&quot;</code></pre>
+<p>On the JVM, the above line will create an instance of <a href="http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html"><code>java.util.regex.Pattern</code></a>. In ClojureScript, it will create a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"><code>RegExp</code></a>. Remember, the two regular expression languages are <strong>similar but different</strong>.</p>
+<h3 id="matching-with-groups">Matching (with groups)</h3>
+<p>There is a nice <strong>function that matches the whole string</strong>. It is called <a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-matches"><code>re-matches</code></a>. The return is a little complex. If the whole string does not match, it returns <code>nil</code>, which is nice because <code>nil</code> is falsey.</p>
+<pre><code>=&gt; (re-matches #&quot;abc&quot; &quot;zzzabcxxx&quot;)
+   nil</code></pre>
+<p>If the string does match, and there are no groups (parens) in the regex, then it returns the matched string.</p>
+<pre><code>=&gt; (re-matches #&quot;abc&quot; &quot;abc&quot;)
+   &quot;abc&quot;</code></pre>
+<p>If it matches but there are groups, then it returns a vector. The first element in the vector is the entire match. The remaining elements are the group matches.</p>
+<pre><code>=&gt; (re-matches #&quot;abc(.*)&quot; &quot;abcxyz&quot;)
+   [&quot;abcxyz&quot; &quot;xyz&quot;]</code></pre>
+<p>The three different return types can get tricky, but in general I do have groups, so it's either a vector or <code>nil</code>, which is easy to handle. You can even <strong>destructure it before you test it</strong>.</p>
+<pre><code>(let [[_ fn ln] (re-matches #&quot;(\w+)\s(\w+)&quot; full-name)]
+  (if fn ;; successful match
+    (println fn ln)
+    (println &quot;Unparsable name&quot;)))</code></pre>
+<h3 id="matching-substrings">Matching substrings</h3>
+<p><code>re-matches</code> matches the whole string. But often, we want to find a match within a string. <strong><a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-find"><code>re-find</code></a> returns the first match within the string.</strong> The return values are similar to <code>re-matches</code>.</p>
+<h4 id="no-match-returns-nil">No match returns <code>nil</code></h4>
+<pre><code>=&gt; (re-find #&quot;sss&quot; &quot;Loch Ness&quot;)
+nil</code></pre>
+<h4 id="match-without-groups-returns-matched-string">Match without groups returns matched string</h4>
+<pre><code>=&gt; (re-find #&quot;s+&quot; &quot;dress&quot;)
+&quot;ss&quot;</code></pre>
+<h4 id="match-with-groups-returns-a-vector">Match with groups returns a vector</h4>
+<pre><code>=&gt; (re-find #&quot;s+(.*)(s+)&quot; &quot;success&quot;)
+   [&quot;success&quot; &quot;ucces&quot; &quot;s&quot;]</code></pre>
+<h3 id="finding-all-substrings-that-match">Finding all substrings that match</h3>
+<p>The last function from <code>clojure.core</code> I use a lot is <a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-seq"><code>re-seq</code></a>, which returns a <strong>lazy seq of all of the matches</strong>, not just the first. The elements of the seq are whatever type <code>re-find</code> would have returned.</p>
+<pre><code>=&gt; (re-seq #&quot;s+&quot; &quot;mississippi&quot;)
+   (&quot;ss&quot; &quot;ss&quot;)</code></pre>
+<h3 id="replacing-regex-matches-within-a-string">Replacing regex matches within a string</h3>
+<p>Well, matching strings is cool, but often you'd like to <strong>replace a substring that matches with some other string</strong>. <a href="https://clojure.github.io/clojure/clojure.string-api.html#clojure.string/replace"><code>clojure.string/replace</code></a> will replace all substring matches with a new string. Let's take a look:</p>
+<pre><code>=&gt; (clojure.string/replace &quot;mississippi&quot; #&quot;i..&quot; &quot;obb&quot;)
+   &quot;mobbobbobbi&quot;</code></pre>
+<p>This function is actually <strong>quite versatile</strong>. You can <strong>refer directly to the groups</strong> in the replacement string:</p>
+<pre><code>=&gt; (clojure.string/replace &quot;mississippi&quot; #&quot;(i)&quot; &quot;$1$1&quot;)
+   &quot;miissiissiippii&quot;</code></pre>
+<p>You can also replace with the <strong>value of a function</strong> applied to the match:</p>
+<pre><code>=&gt; (clojure.string/replace &quot;mississippi&quot; #&quot;(.)i(.)&quot;
+     (fn [[_ b a]]
+       (str (clojure.string/upper-case b)
+            &quot;--&quot;
+            (clojure.string/upper-case a))))
+   &quot;M--SS--SS--Ppi&quot;</code></pre>
+<p>You can <strong>replace just the first occurence</strong> with <code>clojure.string/replace-first</code>.</p>
+<h3 id="splitting-a-string-on-a-regex">Splitting a string on a regex</h3>
+<p>Let's say you want to <strong>split a string on some character pattern</strong>, like one or more whitespace. You can use <a href="https://clojure.github.io/clojure/clojure.string-api.html#clojure.string/split"><code>clojure.string/split</code></a>:</p>
+<pre><code>=&gt; (clojure.string/split &quot;This is a string    that I am splitting.&quot; #&quot;\s+&quot;)
+   [&quot;This&quot; &quot;is&quot; &quot;a&quot; &quot;string&quot; &quot;that&quot; &quot;I&quot; &quot;am&quot; &quot;splitting.&quot;]</code></pre>
+<p>Nice!</p>
+<h3 id="other-functions">Other functions</h3>
+<p>Those are all of the functions I use routinely. There are some more, which are useful when you need them.</p>
+<h4 id="re-patternre-pattern"><a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-pattern"><code>re-pattern</code></a></h4>
+<p>Construct a regex from a <code>String</code>.</p>
+<h4 id="re-matcherre-matcher"><a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-matcher"><code>re-matcher</code></a></h4>
+<p>This one is not available in ClojureScript. On the JVM, it creates a <a href="http://docs.oracle.com/javase/7/docs/api/java/util/regex/Matcher.html"><code>java.util.regex.Matcher</code></a>, which is used for iterating over subsequent matches. This is not so useful since <code>re-seq</code> exists.</p>
+<p>If you find yourself with a <code>Matcher</code>, you can call <code>re-find</code> on it to get the next match (instead of the first). You can also call <a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-groups"><code>re-groups</code></a> from the most recent match. Unless you need a <code>Matcher</code> for some Java API, just stick to <code>re-seq</code>.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Well, that's regexes as I use them. They're super useful and easy to use in Clojure once you get the hang of them.</p>
+<p>If you're interested in learning the fundamentals of Clojure, may I suggest my own <a href="http://purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video series. It guides you through a deep experience of the language. You'll learn REPL skills, how to set up a project, and how to develop a DSL, all in a fun, interactive way.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-test-directory">
+              Clojure Test Directory
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 30, 2015
+          </div>
+
+          
+<p>Summary: <em>Where to put your tests is a common question. You could put them anywhere, but you want to pick a place that makes it easy to find, easy to exclude from production, and work well with your tools. My recommendation is to follow what most projects do, which takes care of all of these requirements.</em></p>
+<p>You want to write some tests in Clojure. Maybe they're unit tests. Maybe they're integration tests. The first question you must answer is <strong>where do you put your tests?</strong></p>
+<p>And you don't want them just anywhere. You actually have some important requirements dealing with where they are:</p>
+<ul>
+<li>They should not be compiled/run on production.</li>
+<li>They need to be easily findable.</li>
+<li>They should be runnable from the command line.</li>
+<li>They should be runnable from the REPL.</li>
+</ul>
+<p>Here's my recommendation, which is the <em>de facto</em> standard of organizing your tests. It works with Leiningen, CIDER, and vim-fireplace.</p>
+<p>First, you make a new namespace structure in a <code>test/</code> directory. It should mirror the <code>src/</code> directory.</p>
+<p>If you have:</p>
+<pre><code>src/
+  lispcast/
+    core.clj
+    init.clj
+    util.clj</code></pre>
+<p>Then your test directory should look like:</p>
+<pre><code>test/
+  lispcast/
+    core_test.clj
+    init_test.clj
+    util_test.clj</code></pre>
+<p>But also notice the second point: that the structure is the same, but the names are slightly different, but it a systematic way. It's really easy: you just add <code>-test</code> to the namespace name, which becomes <code>_test</code> in the file name.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Then, you put all the tests that test <code>lispcast.core</code> into <code>lispcast.core-test</code>. Now they're easy to find!</p>
+<p>If you need to write a test that crosses two different namespaces (like an integration test might), then you can just make a new test namespace that doesn't correspond to one or the other.</p>
+<p>Leiningen will load the <code>test/</code> directory selectively, depending on if you're deploying to production (it won't load <code>test/</code>) or running the tests (it <em>will</em> load <code>test/</code>).</p>
+<p>So, it's that easy. <strong>You are free, of course, to put the tests wherever you like.</strong> But this is my recommendation!</p>
+<p>If you're getting into testing in Clojure, you should check out <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>. It's an interactive course. It has animations, screencasts, exercises, code samples, and text.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>
+</h3>
+    
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test"> <img class="subscribe-form-image"
+           src="http://www.purelyfunctional.tv/img/clojure-test-shot.jpg"> </a>
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Learn how to use <code>clojure.test</code>, the built-in Clojure testing library. It's used for all sorts of tests, from unit to integration. This course will teach you the fundamentals of the library and the common conventions that will help you make the most of your tests. Subscribe now and be the first to know when the course is published. Also, get lots of free Clojure resources when you sign up. <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">Learn more.</a>
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-interview-ashton-kemerling">Pre-Conj Interview: Ashton Kemerling</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Clojure file names have to replace <code>-</code> (hyphens) with <code>_</code> (underscores) to be compatible with Java.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-web-security">
+              Clojure Web Security
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 05, 2014
+          </div>
+
+          
+<p>Summary: <em>Use the OWASP Top Ten Project to minimize security vulnerabilities in your Clojure web application.</em></p>
+<p>Aaron Bedra gave a very damning talk about <a href="https://www.youtube.com/watch?v=CBL59w7fXw4">the security of Clojure web applications</a>. He went so far as to say that Clojure web apps are some of the worst he has seen. You should <a href="https://www.youtube.com/watch?v=CBL59w7fXw4">watch the talk</a>. He has some good recommendations.</p>
+<p>One of the jobs of web frameworks is to handle security concerns inherent in the web itself. Because most Clojure programmers build their own web stack, they often <strong>fail to look at the security implications of their application</strong>. They do not protect their site from even the easiest and most common forms of vulnerabilities. These vulnerabilities are problems with the way the web works, not with the particular server technology, yet it has become the server's responsibility to mitigate the vulnerabilities. Luckily, <strong>the vulnerabilities are well-studied and there are known fixes</strong>.</p>
+<p>The <a href="https://www.owasp.org/index.php/Main_Page">Open Web Application Security Project (OWASP)</a> does a very good job of documenting common web vulnerabilities and providing good fixes for them. They have a project called the <a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project#tab=OWASP_Top_10_for_2013">Top Ten Project</a> which every web developer should refer to regularly and use to improve the security of their app. You should also run through the <a href="https://code.google.com/p/owasp-asvs/wiki/ASVS">Application Security Verification Standard</a> checklists to audit your code. <strong>But the Top Ten should get you to understand the basics.</strong></p>
+<p>Warning: <em>I am not a security expert. You should do your own research. The code I present here is my own interpretation of the OWASP recommendations. It has not been audited by experts. Do your own research!</em></p>
+<p>Also, security is an ongoing concern. <strong>If you have any comments, suggestions, or questions, please bring them up!</strong></p>
+<p>Here is the Top Ten 2013 with a small breakdown and a Clojure solution, if applicable.</p>
+<h3 id="a1.-injectiona1"><a href="https://www.owasp.org/index.php/Top_10_2013-A1-Injection">A1. Injection</a></h3>
+<p>If a server accepts input from the outside and then <strong>parses and interprets that input as a scripting or query language, it is open to attack</strong>. The most common form is SQL Injection, where an input form is posted to the server, the value of that form is concatenated into a string to make a SQL statement, and then the SQL statement is sent to the database to be executed. What happens if a malicious user types in <code>&quot;'; DELETE FROM USERS;&quot;</code>?</p>
+<p>My preferred solution to SQL Injection in Clojure is to <strong>always use parameterized SQL statements</strong>. <code>clojure.java.jdbc</code>, supports these directly. <strong>The parameters will be escaped, making injection impossible.</strong></p>
+<p>Another problem is if you want to read in some Clojure data from the client, and you call <code>clojure.core/read-string</code> on it. <strong><code>read-string</code> will execute arbitrary Java constructors.</strong> For instance:</p>
+<pre><code>#java.io.FileWriter[&quot;myfile.txt&quot;]</code></pre>
+<p>This will create the file <code>myfile.txt</code> or overwrite if it already exists. Also, there is a form (called read-eval form) to execute code at read-time:</p>
+<pre><code>#=(println &quot;Hello, vulnerability!&quot;)</code></pre>
+<p><strong>Read in that string, and it will print. Any code could be in there.</strong></p>
+<p>The solution is to <strong>never use <code>clojure.core/read-string</code></strong>. Use <code>clojure.edn/read-string</code>, which is a well-documented format. It does not run arbitrary constructors. It has no read-eval forms.</p>
+<p>Summary: <em>Always use parameterized SQL and use <code>clojure.edn/read-string</code> instead of <code>clojure.core/read-string</code> on edn input.</em></p>
+<h3 id="a2-broken-authentication-and-session-managementa2"><a href="https://www.owasp.org/index.php/Top_10_2013-A2-Broken_Authentication_and_Session_Management">A2 Broken Authentication and Session Management</a></h3>
+<h4 id="authentication">Authentication</h4>
+<p>This is a big topic and I can't address it all here. Clojure has the <a href="https://github.com/cemerick/friend">Friend library</a>, which is the closest thing we have to a de facto standard. My suggestion is simply to <strong>read the entire Friend README</strong> and evaluate whether you should use it. This is serious stuff. Read it.</p>
+<h4 id="session-management">Session Management</h4>
+<p><strong>Ring provides a session system which is fairly good.</strong> It meets many of the <a href="https://code.google.com/p/owasp-asvs/wiki/Verification_V3">OWASP Application Security Verification Standard V3</a> requirements. But it does not handle all of them automatically. <strong>You still need code audits.</strong> For instance, if you are logging requests, OWASP recommends against logging the session key. You must ensure that the session key is added after the request is logged.</p>
+<p>The ASVS also recommends expiring your sessions after inactivity and also after a fixed period, regardless of activity. Ring sessions do not do this automatically (the builtin mechanism has no notion of expiration) and the <strong>default implementations of session stores will store and accept sessions indefinitely</strong>. A simple middleware will do the trick of expiring them in both cases:</p>
+<pre><code>(defn wrap-expire-sessions [hdlr &amp; [{:keys [inactive-timeout
+                                            hard-timeout]
+                                     :or {:inactive-timeout (* 1000 60 15)
+                                          :hard-timeout (* 1000 60 60 2)}}]]
+  (fn [req]
+    (let [now (System/currentTimeMillis)
+          session (:session req)
+          session-key (:session/key req)]
+      (if session-key ;; there is a session
+        (let [{:keys [last-activity session-created]} session]
+          (if (and last-activity
+                   (&lt; (- now last-activity) inactive-timeout)
+                   session-created
+                   (&lt; (- now session-created) hard-timeout))
+            (let [resp (hdlr req)]
+              (if (:session resp)
+                (-&gt; resp
+                    (assoc-in [:session :last-activity] now)
+                    (assoc-in [:session :session-created] session-created))
+                resp))
+            ;; expired session
+            ;; block request and delete session
+            {:body &quot;Your session has expired.&quot;
+             :status 401
+             :headers {}
+             :session nil}))
+        ;; no session, just call the handler
+        ;; assume friend or other system will handle it
+        (hdlr req)))))</code></pre>
+<p>Set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#HttpOnly_Attribute">HttpOnly attribute</a> on the session cookie. Very important for preventing stealing of session ids from XSS attacks.</p>
+<p><em>Do not</em> set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Domain_and_Path_Attributes">Domain attribute</a>, and <em>do</em> set the Path if you want something more restrictive than <code>/</code> (the Ring session default).</p>
+<p><em>Do not</em> set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Expire_and_Max-Age_Attributes">Expire and Max-Age</a> attributes. Setting them makes the browser store the session id on disk, which simply expands the number of ways an attacker can get ahold of it.</p>
+<p><a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Session_ID_Name_Fingerprinting">Change the session cookie name to something utterly generic</a>, like &quot;id&quot;. You don't want to leak more information than necessary about how your sessions work.</p>
+<p>Use HTTPS if you can and set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Secure_Attribute">Secure</a> attribute of the cookie.</p>
+<p>Do not use in-cookie sessions. In-memory are good but they can't scale past one machine. <a href="https://github.com/ptaoussanis/carmine"><code>carmine</code></a> has a redis-based session implementation.</p>
+<p>Summary: <em>Here's how I use Ring sessions (with <code>carmine</code>) based on these OWASP recommendations.</em></p>
+<pre><code>(session/wrap-session
+   (wrap-expire-sessions
+    handler
+    {:inactive-timeout 500
+     :hard-timeout 3000})
+   {:cookie-name &quot;id&quot;
+    :store (taoensso.carmine.ring/carmine-store redis-db
+             {:expiration-secs (* 60 60 15)
+             :key-prefix &quot;&quot;}) ;; leak nothing!
+    :cookie-attrs {:secure true :httponly true}})</code></pre>
+<h3 id="a3-cross-site-scripting-xssa3"><a href="https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS)">A3 Cross-Site Scripting (XSS)</a></h3>
+<p>Whenever text from one user is shown to another user, there is the potential for injecting code (HTML, JS, or CSS) that is run in the victim's browser. Imagine if Facebook allowed any HTML in the post submission form. A malicious user could add a <code>&lt;script&gt;</code> tag with some keystroke logging code. <strong>Anybody who viewed that post in their feed would also get the key logger installed.</strong> That would be bad.</p>
+<p>XSS is common because of how easy it is to make an app that stores user input (from a form post) in a database, then constructs the page out of stuff from the database. If you're not extremely careful, <strong>you could create a place where people can exploit each other</strong>.</p>
+<p>The solution is to <strong>only use scrubbed or escaped values to build HTML pages</strong>. Because HTML pages can include different languages (HTML, CSS, JS), text needs to be scrubbed differently in each context. OWASP has a <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">set of rules to follow which will guarantee XSS prevention</a>.</p>
+<p><code>hiccup.util/escape-html</code> (also aliased as <code>hiccup.core/h</code>) will escape all dangerous HTML characters into HTML entities. JS and CSS still need to be handled, and rules for HTML attributes need to be followed.</p>
+<p>If you want to allow some HTML elements, you will need to do a complex scrub. Luckily, <strong>Google has a <a href="https://code.google.com/p/owasp-java-html-sanitizer/wiki/GettingStarted">nice Java library that sanitizes HTML</a></strong>. Use it.</p>
+<p>Summary: <em>Validate and scrub input from the user and scrub/escape text on output.</em></p>
+<h3 id="a4-insecure-direct-object-referencesa4"><a href="https://www.owasp.org/index.php/Top_10_2013-A4-Insecure_Direct_Object_References">A4 Insecure Direct Object References</a></h3>
+<p>This one is a biggie: <strong>each handler has to do authentication</strong>. Does the particular logged in user have access to the resources requested? There's no way to automate this with a middleware. But having <em>some</em> system is better than doing it ad hoc each time. Remember: an attacker can construct any URL, including URLs with a database key in it. Don't assume that just because a request contains a key, the user must have the rights to it.</p>
+<p>Summary: <em>Always check the authority of the requesting session before performing an action.</em></p>
+<h3 id="a5-security-misconfigurationa5"><a href="https://www.owasp.org/index.php/Top_10_2013-A5-Security_Misconfiguration">A5 Security Misconfiguration</a></h3>
+<p>This is about keeping your software up to date and making sure the settings of all software makes sense.</p>
+<h3 id="a6-sensitive-data-exposurea6"><a href="https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure">A6 Sensitive Data Exposure</a></h3>
+<p>Having data is risky. Don't let it leak out.</p>
+<h3 id="a7-missing-function-level-access-controla7"><a href="https://www.owasp.org/index.php/Top_10_2013-A7-Missing_Function_Level_Access_Control">A7 Missing Function Level Access Control</a></h3>
+<p>Use an authorization system (<a href="https://github.com/cemerick/friend">Friend</a>) and audit the roles used for access control.</p>
+<h3 id="a8-cross-site-request-forgery-csrfa8"><a href="https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)">A8 Cross-Site Request Forgery (CSRF)</a></h3>
+<p>Let's imagine you have a bank account at Bank of Merica. You just checked your balance and didn't log out. Then you go to some public forum, where someone has posted a cool file. There's a big download button. You click it, and the next thing you know, you're on your bank page and all of your money has been transfered out of your account.</p>
+<p>What happened?</p>
+<p>The download button said &quot;Download&quot; but <strong>it was really a form submit button</strong>. The form had hidden fields &quot;to-account&quot;, and &quot;amount&quot;. The action of the form was &quot;http://www.bankofmerica.com/transfer-money&quot;. By clicking that button, <strong>the form was posted to the bank, and because you were just logged in, oops, it transfered all your money away</strong>.</p>
+<p>The solution is that you only want to <strong>accept form posts that come directly from your site</strong>, which you control. You don't want some random person to convince people to click on other sites to be able to transfer people's money like that.</p>
+<p>There are several possible solutions. One approach is to add a secret to the session and also insert that secret into every form. That is the approach taken by the <a href="https://github.com/weavejester/ring-anti-forgery">ring-anti-forgery</a> library.</p>
+<p>The solution that I like is to do a <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet#Double_Submit_Cookies">double-submit</a>. This means you submit a secret token in the cookie (sent with each web request) and in a hidden field in the form. The server confirms that the cookie and the hidden field match. But the hidden field in the form is added by a small Javascript script which reads it from the cookie. <strong>Browsers don't allow Javascript to read cookies from other sites, so you guarantee that they form was posted from your site.</strong></p>
+<p>There are three parts to the solution.</p>
+<ol style="list-style-type: decimal">
+<li>Install a secret token as a cookie.</li>
+<li>Install a script to add the hidden field to all forms.</li>
+<li>Check that the field matches the cookie on POSTs.</li>
+</ol>
+<p>Here is some code to do 1 and 3.</p>
+<pre><code>(defn is-form-post? [req]
+  (and (= :post (:request-method req))
+       (let [ct (get-in req [:headers &quot;content-type&quot;])]
+         (or (= &quot;application/x-www-form-urlencoded&quot; ct)
+             (= &quot;multipart/form-data&quot; ct)))))
+
+(defn csrf-tokens-match? [req]
+  (let [cookie-token (get-in req [:cookies &quot;csrf&quot;])
+        post-token   (get-in req [:form-params &quot;csrf&quot;])]
+    (= cookie-token post-token)))
+
+(defn wrap-csrf-cookie [hdlr]
+  (fn [req]
+    (let [cookie (get-in req [:cookies &quot;csrf&quot;]
+                         (str (java.util.UUID/randomUUID)))]
+      (assoc-in (hdlr req) [:cookies &quot;csrf&quot;] cookie))))
+
+(defn wrap-check-csrf [hdlr]
+  (fn [req]
+    (if (is-form-post? req)
+      (if (csrf-tokens-match? req)
+        ;; we&#39;re safe
+        (hdlr req)
+        ;; possible attack
+        {:body &quot;CSRF tokens don&#39;t match.&quot;
+         :status 400
+         :headers {}})
+      ;; we don&#39;t check other requests
+      (hdlr req))))</code></pre>
+<p>The Javascript should be something like this:</p>
+<pre><code>(def csrf-script &quot;(function() {
+  var cookies = document.cookie;
+  var matches = cookies.match(/csrf=([^;]*);/);
+  var token   = matches[1];
+  $(&#39;form&#39;).each(function(i, form) {
+    if(form.attr(&#39;method&#39;).toLowerCase() === &#39;post&#39;) {
+      var hidden = $(&#39;&lt;input /&gt;&#39;);
+      hidden.attr(&#39;type&#39;, &#39;hidden&#39;);
+      hidden.attr(&#39;name&#39;, &#39;csrf&#39;);
+      hidden.attr(&#39;value&#39;, token);
+      form.append(hidden);
+    }
+  })
+}());&quot;)</code></pre>
+<p>You should add it to all HTML pages. Note that this example script requires jQuery. Put it right before the <code>&lt;/body&gt;</code>.</p>
+<pre><code>[:script csrf-script]</code></pre>
+<p>The nice thing about this solution is that it is <strong>strict by default</strong>. If you don't include the script, form posts won't work (assuming <code>wrap-check-csrf</code> is in your middleware stack).</p>
+<p>Summary: <em>CSRF attacks take advantage of properties of the browser (instead of properties of your server), so their defense can largely be automated.</em></p>
+<h3 id="a9-using-components-with-known-vulnerabilitiesa9"><a href="https://www.owasp.org/index.php/Top_10_2013-A9-Using_Components_with_Known_Vulnerabilities">A9 Using Components with Known Vulnerabilities</a></h3>
+<p>Software with known vulnerabilities is easily attacked using scripts. You should ensure that all of your software is up-to-date.</p>
+<h3 id="a10-unvalidated-redirects-and-forwardsa10"><a href="https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards">A10 Unvalidated Redirects and Forwards</a></h3>
+<p>One common pattern for login workflow is to have a query parameter that contains the url to redirect to. Since it's a user parameter, <strong>it's open to the world and could be a doorway for attackers</strong>.</p>
+<p>For example, let's say someone sends an email to someone asking them to log in to their bank account. In it, there's this link:</p>
+<pre><code>http://www.bankofmerica.com/login?redirect=http://attackersite.com</code></pre>
+<p>What happens when they click? They see the legitimate site of their bank, which they trust. But it redirects them to the attacker's site, which has been designed to look like the bank site. <strong>The user might miss this change of domains and unwittingly reveal private information.</strong></p>
+<p>What can you do?</p>
+<p>OWASP recommends never performing redirects, which is impractical. The next best thing is to never base the redirect on a user parameter. This would work, but puts a lot of trust in the developers and security auditors to check that the policy is enforced. <strong>My preferred solution allows redirects that conform to a whitelist of patterns.</strong></p>
+<pre><code>(def redirect-whitelist
+  [#&quot;https://www.bankofmerica.com/&quot; ;; homepage
+   #&quot;https://www.bankofmerica.com/account&quot; ;; account page
+   ...
+  ])
+
+(defn wrap-authorized-redirects [hdlr]
+  (fn [req]
+    (let [resp (hdlr req)
+          loc (get-in resp [:headers &quot;Location&quot;])]
+      (if loc
+        (if (some #(re-matches % loc) redirect-whitelist)
+          ;; redirect on our whitelist, it&#39;s ok!
+          resp
+          ;; possible attack
+          (do
+            ;; log it
+            (warning &quot;Possible redirect attack: &quot; loc)
+            ;; change redirect back to home page
+            (assoc-in resp [:headers &quot;Location&quot;] &quot;https://www.bankofmerica.com/&quot;)))
+        resp))))</code></pre>
+<p>Summary: <em>Redirect attacks can largely be avoided by checking the redirect URL against a whitelist.</em></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Web security is hard. It takes education and vigilance to keep our servers secure. Luckily, the main security flaws of the web are well-understood and well-documented. However, this is only half of the work. These need to be translated into Clojure either as libraries and simply as &quot;best practices&quot;. Further, these libraries and practices need to be discussed and kept top-of-mind.</p>
+<p>If programming the web in Clojure interests you, you might be interested in my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure</a> video series. It covers all of the basics of web development, building a foundation to understand the entire Clojure web stack.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/complex-syntax">
+              Complex Syntax
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 19, 2014
+          </div>
+
+          
+<p>Summary: <em>Lisps are revered for their simple syntax, but parens are complex. They complect function calls and macro calls, which have drastically different semantics.</em></p>
+<p>One of the problems that people have with Lisps is that they hate the parentheses. Clojure does a pretty good job of minimizing unnecessary parens and giving them a much clearer meaning. But there's a deeper problem that people express all the time when they're first learning. It's frustrating to watch people struggle with it, because it's not their fault. <strong>It's a problem with Lisps in general.</strong></p>
+<p>Parens in all Lisps I've seen, including Clojure, are complex. I'm not using the word lightly. <strong>Parens complect two similar but distinct ideas: macro application and function application.</strong></p>
+<p>Macros and functions are obviously different. Macros are expanded at a time just before compilation called &quot;macro-expansion time&quot;. They typically cannot be accessed at runtime. Functions, on the other hand, are applied at runtime. And they are first-class, meaning they are runtime values. In addition, the calling semantics are different. Macros are call-by-name. The code of each gets passed unevaluated. Functions are call-by-value. <strong>Functions and macros are two distinct species.</strong></p>
+<p>However, despite being distinct semantics, the syntax for calling the two is identical. Parens complect applying macros with applying functions. Beginners trip up on this all the time. Their head is already spinning from the notion that some of the things they are learning are macros, called at compile time. Now add on top that the syntax of the language does not help one bit in distinguishing macro calls from function calls. <strong>You just have to memorize what's a macro and what's a function.</strong></p>
+<p>We learned in <a href="http://www.thecorememory.com/Next_700.pdf">The Next 700 Programming Languages</a> that our syntax should serve to elucidate the semantics. Lisp just fails at this pretty hard. The only consolation is that <strong>you actually can remember, with time and experience, what's a macro and what's a function</strong>. Every Lisp programmer is proof of that.</p>
+<p>A simple solution would be to have <strong>a weird syntax for calling macros</strong>. You know, instead of parens, you use something else. Something that distinguishes the two to decomplect them. This would have broad and deep implications for the language that I cannot begin to fathom.</p>
+<p>The takeaway for the beginner is that, sorry, Clojure won't help you much with this, but <strong>it's very important to know what's a macro and what's a function</strong>. You just have to keep track in your head. If you're not sure, you can call <code>clojure.repl/doc</code><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> on any symbol. If it names a macro, it will tell you.</p>
+<p>So, there you have it. <strong>Lisps complect function calls and macro calls</strong>, which have drastically different semantics, using the same notation. Common Lisp and Scheme use parens for much more than that, making the syntax complex and context-dependent<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>. Clojure removes a lot of those parens, replacing them with square braces or removing them altogether. However, the complexity of macro and function calls remains.</p>
+<p>Despite this, Clojure is still a great language! If you'd like to learn Clojure, I have to recommend the <a href="http://purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video series.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>That's a macro.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>For instance, inside of a <code>let</code>, parens take on the meaning of grouping the bindings and also grouping the variable with its value.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/conj-mental-bump">
+              The conj Mental Bump
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 23, 2015
+          </div>
+
+          
+<p>Summary: <em><code>conj</code> can be confusing if you're used to other languages. It is not a commonly defined operation. Most languages define common positional adding operations. <code>conj</code>, however, has more useful semantics. How do you use <code>conj</code> usefully if you can't guarantee the position?</em></p>
+<p>When I was at university, we were taught object-oriented programming as it exists in Java. We learned about interfaces, inheritance, and the <a href="http://en.wikipedia.org/wiki/Liskov_substitution_principle"><em>Liskov Substitution Principle</em></a>. It makes sense. If you're claiming that you've got a (sub)type of car, <strong>it still has to do everything a car can do</strong>. Otherwise it's not really a subtype of car.</p>
+<h3 id="the-point-of-confusion">The point of confusion</h3>
+<p>Whenever I'm teaching someone Clojure, there's <strong>a point in the journey where everyone gets at least curious</strong>, if not outright confused.</p>
+<pre><code>(conj &#39;(1 2 3) 4) ;;=&gt; &#39;(4 1 2 3)</code></pre>
+<p>vs</p>
+<pre><code>(conj [1 2 3] 4) ;;=&gt; [1 2 3 4]</code></pre>
+<p>What's the deal? <strong>Does <code>conj</code> add to the beginning or the end?</strong> What possible contract could allow both of these behaviors?</p>
+<p>Then I show them that the confusion goes even deeper:</p>
+<pre><code>(conj #{1 2 3} 4) ;;=&gt; #{1 4 2 3} ;; or some other random order</code></pre>
+<p>and</p>
+<pre><code>(conj {1 2 3 4} [5 6]) ;;=&gt; {1 2 3 4 5 6}</code></pre>
+<p>What gives? How is this even possible? <strong>Do hashmaps and linked lists even share a common class ancestor?</strong></p>
+<p>The answer is, <em>sure, if you want them to</em>. The student must get over a tiny conceptual bump. And once that bump is surmounted, poof, a new way of seeing is discovered.</p>
+<h3 id="the-bump">The bump</h3>
+<p>Let's get over that bump right here, right now.</p>
+<p>Let's imagine a traditional collection interface, let's call it <code>List</code>. It has two methods, <code>addFirst</code> and <code>addLast</code> that add new elements. So you write an algorithm that adds a bunch of items to the end with <code>addLast</code>. It takes a <code>List</code> as argument, because that's <strong>the least subtype you need to perform the algorithm</strong>.</p>
+<p>You call that algorithm with an <code>ArrayList</code>, which has the nice property that <code>addLast</code> is constant time. Woohoo! <strong>Your algorithm is fast and great.</strong></p>
+<p>A few months later, you get a phone call from another developer. He's complaining that he used your routine and can't figure out why it's so slow. It was working fine for a while, but <strong>as the users generated more records in the database</strong>, the routine was grinding to a hault.</p>
+<p>You check out the code and immediately see the problem: the database query was returning not an <code>ArrayList</code> but a <code>LinkedList</code>. The implementation of <code>addLast</code> on <code>LinkedList</code>s is actually linear. <strong>Adding a bunch of stuff to the end was turning into a quadratic operation.</strong></p>
+<p>Let's say that again: even though the location semantics of the operation were the same, <code>addLast</code> on one had constant time and on the other had linear time. They both gave equivalent lists, but one of them was too slow. <strong>Does this satisfy the Liskov Substitution Principle?</strong> In practice, can you <em>really</em> substitute one for the other? <strong>Algorithmic complexity matters.</strong></p>
+<p>Clojure avoids that mess (while swapping it for another, which I'll get to shortly). It defines <code>conj</code>, which means not &quot;put this at the beginning&quot; or &quot;put this at the end&quot;, but &quot;hey, collection, you know yourself better than I ever can. Please add this wherever it makes sense for you as long as you <strong>do it in constant time</strong>. Thanks.&quot;<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p>Practically, that means that <code>conj</code> on <code>LinkedList</code> adds to the front, because that's constant time. And <code>conj</code> on <code>ArrayList</code> adds to the end. But, because the operation doesn't talk about order, like <code>addFirst</code> and <code>addLast</code> do, you can now extend <code>conj</code> to <code>Set</code> and even <code>Map</code> if you consider key/value pairs as single items. And that means that linear algorithms using <code>conj</code> will <strong>remain linear regardless of which collection you use</strong>.</p>
+<h3 id="the-mess-that-clojure-chooses-over-the-other-mess">The mess that Clojure chooses over the other mess</h3>
+<p>Does this satisfy the Liskov Substitution Principle? Well, that depends on how you look at it. You certainly <strong>don't guarantee that you get the same or even equivalent answers out</strong>. Consider this:</p>
+<pre><code>(def a [1 2 3])
+(def b &#39;(1 2 3))
+
+(= a b) ;;=&gt; true
+(= (conj a 4) (conj b 4)) ;;=&gt; false</code></pre>
+<p>So, here, performing the same operation on two equal values does not give equal results. That's kind of hard to reason about. <strong>But it's a similar tradeoff that you see with other operations that don't guarantee order.</strong> For instance, imagine two sets <code>a</code> and <code>b</code>.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<pre><code>(= a b) ;;=&gt; true
+
+(= (seq a) (seq b)) ;;=&gt; could be false!</code></pre>
+<p>The order of most sets is not guaranteed! This means that Clojure has some operations that do not maintain equality. <code>conj</code> just happens to be one of them.</p>
+<h3 id="whats-the-point">What's the point?</h3>
+<p>So Clojure does not provide <code>add</code> operations that guarantee order regardless of collection type. Fine. What's the point?</p>
+<p>The point is that, in practice, <code>conj</code> is more useful than <code>addFirst</code> and <code>addLast</code> combined. By defining a function using <code>conj</code>, <strong>it will work on a broader number of collections</strong>. It might give different answers for each, but it won't explode on one and do fine on the rest. And often <strong>the answers it gives are just fine</strong>. A basic version of <code>into</code> can be defined very easily. It works on all collections (for both <code>to</code> and <code>from</code>).</p>
+<pre><code>(defn into [to from]
+  (reduce conj to from))</code></pre>
+<h3 id="common-usage">Common usage</h3>
+<p>One last thing before I wrap up: because the <em>collection itself</em> defines where the item will be added, I often find myself choosing the collection based on where I need it. A common idiom in Common Lisp was to make a new list by <code>cons</code>ing onto the front, then reversing it at the end because you really wanted them in the other order. In Clojure, there's no need, because you can just use a vector (and use <code>conj</code>). <strong>As long as the vector is local to the algorithm, it's not part of the contract, so it's your choice.</strong></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Java was wrong. <code>addFirst</code> and <code>addLast</code> cannot be substituted in <code>LinkedList</code> and <code>ArrayList</code>. They have <strong>different algorithmic complexities</strong> and at some point one's performance will be totally unacceptable. The operation that <em>does</em> allow for substitutibility in algorithm complexity is <code>conj</code>, which is always constant time. But then it doesn't maintain equality. However, I find that <code>conj</code> is way more natural and helps algorithmic reasoning more than guaranteeing <em>where</em> the item is placed.</p>
+<p>If you'd like to learn Clojure, I recommend my video course <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a>. It's a great introduction to the language using animations, exercises, and screencasts. It's designed to give a deep dive straight to what makes Clojure interesting. It begins with syntax, goes through functional programming, and ends with data-driven programming.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It's even polite!<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><code>(def a (set (range 100))) (def b (apply sorted-set (range 100)))</code><a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/convince-your-boss-to-use-clojure">
+              Convince your boss to use Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 16, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure has been successfully adopted by many companies. There are many resources available by people who did the hard work of introducing Clojure to their team.</em></p>
+<p><strong>Do you want to get paid to write Clojure?</strong> Let's face it. Clojure is fun, productive, and more concise than many languages. And probably more concise than the one you're using at work, especially if you are working in a large company. You might code on Clojure at home. Or maybe you want to get started in Clojure but don't have time if it's not for work.</p>
+<p>One way to get paid for doing Clojure is to <strong>introduce Clojure into your current job</strong>. I've compiled a bunch of resources for getting Clojure into your company.</p>
+<p>Take these resources and do your homework. <strong>Bringing a new language into an existing company is not easy.</strong> I've summarized some of the points that stood out to me, but the resources are excellent so please have a look yourself.</p>
+<h3 id="the-strategy">The Strategy</h3>
+<p>Before you begin your quest to introduce Clojure, you're going to need a good strategy. By far the best presentation of a strategy is by Neal Ford. Neal Ford is a Director at ThoughtWorks and has a <strong>great strategy for introducing Clojure</strong> into an existing company. <a href="https://www.youtube.com/watch?v=2WLgzCkhN2g">Watch this video</a>.</p>
+<ol style="list-style-type: decimal">
+<li>Spread Clojure outside of the company.</li>
+<li>Get a groundswell of people inside the company.</li>
+<li>Use Clojure for things it's great at.</li>
+<li>Get the Clojure jar file included.</li>
+</ol>
+<p>If your company happens to be using Ruby, Joshua Ballanco has some great tips for <a href="http://www.infoq.com/presentations/clojure-rails-immutant">How to Sneak Clojure Into Your Rails Shop</a>.</p>
+<p>Sean Corfield helped move a sizeable legacy application to Clojure. He's got some <a href="http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise/">good, sobering advice</a>.</p>
+<ol style="list-style-type: decimal">
+<li>Be ready to explain the lack of a framework.</li>
+<li>OOP habits are ingrained.</li>
+<li>Don't underestimate the difficulty.</li>
+</ol>
+<p>A lot of great <a href="http://blog.jayfields.com/2012/01/lessons-learned-while-introducing-new.html">advice from someone who's actually done it</a>.</p>
+<ol style="list-style-type: decimal">
+<li>Find allies.</li>
+<li>Answer the questions.</li>
+<li>Take responsibility.</li>
+<li>Get help.</li>
+<li>Be an advocate.</li>
+</ol>
+<p>Some <a href="https://vimeo.com/100485825">great advice from Logan Campbell</a>, someone who convinced his coworkers to use Clojure at a Post Office.</p>
+<ol style="list-style-type: decimal">
+<li>Be positive: if they say &quot;We need static typing&quot;, say &quot;Great! Clojure has that!&quot; (which it does with Typed Clojure).</li>
+<li>Show them working code.</li>
+<li>Be ready for performance questions.</li>
+</ol>
+<h3 id="material-for-other-developers">Material for other developers</h3>
+<p><a href="http://getprismatic.com">Prismatic</a> has been using Clojure to great success. They've written about <a href="http://blog.getprismatic.com/om-sweet-om-high-functional-frontend-engineering-with-clojurescript-and-react/">how <strong>Clojure is used throughout their stack</strong></a>. This is a great introduction to answer the question &quot;Why Clojure?&quot;. Spread <a href="http://blog.getprismatic.com/om-sweet-om-high-functional-frontend-engineering-with-clojurescript-and-react/">this post</a> whenever anyone asks <em>why?</em>.</p>
+<p>Leo Polovets polled Clojurists at Factual and <a href="http://www.quora.com/Why-would-someone-learn-Clojure">summarized their answers</a> to <strong><em>Why Clojure?</em></strong>.</p>
+<p>A while ago, <a href="http://wit.io/posts/clojure-all-grown-up">this great post</a> was trending on Hacker News. It explains <strong><em>Why Clojure?</em></strong>.</p>
+<h3 id="material-for-the-project-manager">Material for the project manager</h3>
+<p>If you'd like a <strong>high-level overview of the business advantages to using Clojure</strong>, you can do a lot worse than asking Cognitect, the company that develops Clojure itself. They've published a <a href="http://cognitect.com/consulting/case-studies/roomkey">case study</a>, meant for non-tech folks, to understand the implications. It's focused mainly on Datomic, but it touches on Clojure.</p>
+<p>Though a little hyperbolic, <a href="https://thoughtworks.github.io/p2/issue09/two-months-early/">this post</a> is <strong>a good one for the skeptical manager</strong>, the one who wonders whether their team can really learn a new technology quickly enough to justify the cost.</p>
+<p>For those who <strong>like to follow industry trends</strong> and what others are recommending, look no further than the ThoughtWorks Technology Radar. It's a compendium of recommendations, published regularly, that takes a <strong>realistic view of a constantly changing landscape</strong>. <a href="http://www.thoughtworks.com/radar/languages-and-frameworks/clojure">Clojure has been rated at <em>Adopt</em> since October 2012</a>. A lot of secondary Clojure technologies are also on the radar, including <a href="http://www.thoughtworks.com/radar/languages-and-frameworks/core-async">core.async</a>, <a href="http://www.thoughtworks.com/radar/languages-and-frameworks/om">om</a>, <a href="http://www.thoughtworks.com/radar/platforms/datomic">Datomic</a>, and <a href="http://www.thoughtworks.com/radar/languages-and-frameworks/clojurescript">ClojureScript</a>.</p>
+<h3 id="documentation-training-support">Documentation, Training, Support</h3>
+<p>I mainly want to show that there's plenty out there and plenty of new stuff coming out, not recommend anything specific.</p>
+<h4 id="books">Books</h4>
+<p>There's plenty going on with documentation. There are many books available on Amazon. These are all of the same quality as any enterprise Java book.</p>
+<ul>
+<li><a href="http://www.amazon.com/gp/product/1449394701?tag=lisp0b-20">Clojure Programming</a></li>
+<li><a href="http://www.amazon.com/The-Joy-Clojure-Michael-Fogus/dp/1617291412/ref=sr_1_2?tag=lisp0b-20">The Joy of Clojure</a></li>
+<li><a href="http://www.amazon.com/Programming-Clojure-Stuart-Halloway/dp/1934356867/ref=sr_1_4?tag=lisp0b-20">Programming Clojure</a></li>
+<li><a href="http://www.amazon.com/Clojure-Action-Amit-Rathore/dp/1617291528/ref=sr_1_13?tag=lisp0b-20">Clojure in Action</a></li>
+<li><a href="http://www.amazon.com/Mastering-Clojure-Macros-Cleaner-Smarter/dp/1941222226/ref=sr_1_3?tag=lisp0b-20">Mastering Clojure Macros</a></li>
+<li><a href="http://www.amazon.com/Clojure-Cookbook-Recipes-Functional-Programming/dp/1449366171/ref=sr_1_6?tag=lisp0b-20">Clojure Cookbook</a></li>
+<li><a href="http://www.amazon.com/Web-Development-Clojure-Build-Bulletproof/dp/1937785645/ref=sr_1_5?tag=lisp0b-20">Web Development with Clojure</a></li>
+<li><a href="http://www.amazon.com/Clojure-Data-Analysis-Cookbook-Rochester/dp/178216264X/ref=sr_1_12?tag=lisp0b-20">Clojure Data Analysis Cookbook</a></li>
+<li><a href="http://www.amazon.com/Mastering-Clojure-Data-Analysis-Rochester/dp/1783284137/ref=sr_1_7?tag=lisp0b-20">Mastering Clojure Data Analysis</a></li>
+<li><a href="http://www.amazon.com/Clojure-Machine-Learning-Akhil-Wali/dp/1783284358/ref=sr_1_8?tag=lisp0b-20">Clojure for Machine Learning</a></li>
+<li><a href="http://www.amazon.com/Functional-Programming-Patterns-Scala-Clojure/dp/1937785475/ref=sr_1_9?tag=lisp0b-20">Functional Programming Patterns in Scala and Clojure</a></li>
+</ul>
+<h4 id="videos">Videos</h4>
+<p>Videos are an up-and-coming type of training, but there's plenty out there.</p>
+<ul>
+<li><a href="http://purelyfunctional.tv">LispCast</a></li>
+<li><a href="http://shop.oreilly.com/product/0636920030409.do">Clojure Inside Out</a></li>
+<li><a href="http://shop.oreilly.com/product/0636920030393.do">Functional Thinking</a></li>
+<li><a href="http://www.pluralsight.com/training/Courses/TableOfContents/clojure-fundamentals-part-one">Clojure Fundamentals</a></li>
+<li><a href="http://www.pluralsight.com/training/Courses/TableOfContents/clojure-concurrency-tutorial">Clojure Concurrency</a></li>
+</ul>
+<h4 id="training">Training</h4>
+<p>Besides these courses, there are often Clojure courses before or after the Clojure conferences.</p>
+<ul>
+<li><a href="https://skillsmatter.com/explore?content=courses&amp;location=&amp;q=clojure">Skills Matter Clojure Courses</a></li>
+<li><a href="http://cognitect.com/consulting">Cognitect Training</a></li>
+</ul>
+<h4 id="support">Support</h4>
+<p>Besides the normal IRC (#clojure on freenode), <a href="https://groups.google.com/forum/#!forum/clojure">Google Group</a>, and <a href="http://dev.clojure.org/jira/browse/CLJ">Jira</a>, Cognitect <a href="http://cognitect.com/support">offers support</a>.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Clojure is gaining traction. It's fun, it's productive. But it's still a little fringe in larger companies. Though it will still take a lot of work, <strong>these resources should help you make a case for Clojure</strong>. It's my mission to help people thrive with Clojure. If you'd like to keep up to date on what's happening in the Clojure world, you may be interested in getting the <a href="http://www.clojuregazette.com">Clojure Gazette</a> for free. Sign up <a href="http://www.clojuregazette.com">here</a>.</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="page2.html">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

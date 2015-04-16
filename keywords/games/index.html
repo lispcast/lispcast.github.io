@@ -1,0 +1,626 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: games | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-interview-zach-oakes">
+              Pre-Conj Interview: Zach Oakes
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 22, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#zach-oakes"><img src="http://www.lispcast.com/img/pre-conj/zach-oakes.jpg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>I had a conversation with Zach Oakes about game development in Clojure. He is <a href="http://clojure-conj.org/speakers#zach-oakes">giving a talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a>. Read the <a href="http://www.lispcast.com/pre-conj-zach-oakes">background to his talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: Briefly, how did you get into Clojure?</p>
+<p><strong>Zach Oakes</strong>: Being hosted on the JVM was my original draw to Clojure. I wanted to hack on an anonymous networking project called I2P, which is written in Java, but I wanted to use a more enjoyable language. Clojure's interop made it effortless, and later on I came to enjoy the other aspects of Clojure as well.</p>
+<p><strong>LC</strong>: How long have you been into games programming?</p>
+<p><strong>ZO</strong>: Games were how I originally got into programming as a teenager. However, I had a ten-year period where I did nothing but crypto software. I only got back into games last year, and since Clojure was my favorite language by then, it was inevitable that I would start using it for game development.</p>
+<p><strong>LC</strong>: What is the main concept of play-clj? Is it based on immutable game states, or something else?</p>
+<p><strong>ZO</strong>: The main technical concept is that most of your game should just be list transformations, so your code mostly consists of using normal Clojure functions to transform your entities. It definitely encourages immutability, but since it builds on top of a Java framework, there are times when you will need to mutate things.</p>
+<p><strong>LC</strong>: What is the advantage of using list transformations instead of mutating game objects? Is this a drastic departure from normal game architectures?</p>
+<p><strong>ZO</strong>: The advantage of functional programming in games is the same as in other kinds of software; the code becomes simpler to understand, and parallelism becomes trivial. I think this is very unusual for game development. Many games keep entities as class data members that the methods mutate directly, which quickly becomes a mess.</p>
+<p>That said, I think the REPL is by far the biggest reason to use Clojure for game development. A disciplined programmer might be able to avoid the aforementioned mess, but it's hard to replicate the runtime modifiability of Clojure if your language wasn't built for it, and I think it has a big effect on how you make your game.</p>
+<p><strong>LC</strong>: What kind of response from game programmers have you had to using functional programming in games?</p>
+<p><strong>ZO</strong>: So far the response to functional game development has been tepid. They are understandably conservative about their technical choices due to the performance sensitivity of games, but nonetheless they are slowly adopting functional idioms in their non-functional languages. The next step is to get them to use a functional language. I think it's up for grabs, and the languages that are hosted and provide an excellent REPL will have the advantage.</p>
+<p><strong>LC</strong>: Can you tell us a little about play-clj? Is it based on a Java framework?</p>
+<p><strong>ZO</strong>: Yes, play-clj is essentially a big wrapper around libGDX, a popular Java framework. I used it to teach Java game development, and eventually made play-clj so I could use Clojure instead. It is a fairly thick wrapper and hopefully a nice teaching tool.</p>
+<p>The core of the library is <code>defscreen</code>, a macro in which you provide functions that will be run during various events like &quot;on-show&quot; and &quot;on-key-down&quot;. Making a game consists primarily of transforming your entities in response to these events.</p>
+<p>There is always a design compromise when you build on top of a large object-oriented framework, but I think it is crucial to leverage existing work to make it practical to use a functional language to build games worth shipping.</p>
+<p><strong>LC</strong>: Yeah, I agree. Game frameworks have a lot of work put into them. Was it a challenge combining OO/mutable state with the Clojure functional approach?</p>
+<p><strong>ZO</strong>: It's definitely a challenge, and since this is the first library I've ever made I have been learning as I go along. I took some inspiration from neko, a Clojure wrapper for the Android API, since it is doing something similar. I don't try to hide mutations; most of the library is just a series of macros that allow you to use the underlying Java classes with a nicer syntax.</p>
+<p>That said, you can at least keep your core game logic free of side-effects by deferring those mutations until later. In my play-clj games, I typically first map over my entities with a series of pure functions, then afterwards I do various side-effecting things like playing sounds and rendering. This allows me to trivially parallelize the pure portion of my code while also doing the necessary side-effecting things.</p>
+<p><strong>LC</strong>: That's pretty cool. I've always wanted to program games, but every time I start, I get lost in a forest of spaghetti code. Have you found that a functional approach makes that better?</p>
+<p><strong>ZO</strong>: I think it definitely imposes discipline on your game's code. It is easy in Java to make your entities and other objects data members in a class and mutate them from methods without even explicitly passing them as arguments, which is an easy path to spaghetti code. In play-clj, entities are records so transforming them requires explicitly passing them to functions and returning new ones at the end.</p>
+<p>I would say that play-clj also imposes an additional degree of structure as well. It has its own built-in system for managing state, including its own entity system, which is exposed to you in the defscreen macro. I think this causes play-clj games to essentially have the same general design. The downside is that it makes a lot of design decisions for you, so more advanced Clojure programmers may desire a thinner wrapper.</p>
+<p><strong>LC</strong>: What resources could a beginner use beforehand to make the most of your talk?</p>
+<p><strong>ZO</strong>: I wrote a tutorial for play-clj that people could check out if they'd like to see how it works:</p>
+<p><a href="https://github.com/oakes/play-clj/blob/master/TUTORIAL.md">https://github.com/oakes/play-clj/blob/master/TUTORIAL.md</a></p>
+<p>There are also some example games they could play to see it in action:</p>
+<p><a href="https://github.com/oakes/play-clj-examples">https://github.com/oakes/play-clj-examples</a></p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>ZO</strong>: I don't do much social networking, unless Reddit/HN count. I suppose the best way to see what I'm up to is follow <a href="gh">my Github</a>!</p>
+<p><strong>LC</strong>: One last question: If Clojure were a Star Trek character from the original series, what character would it be?</p>
+<p><strong>ZO</strong>: I suppose Clojure would be all the redshirts collectively. It sounds like a bad thing, but when they died they were always replaced, so I guess that means Clojure will live forever.</p>
+<p><strong>LC</strong>: Thanks for the informative interview. It was a pleasure.</p>
+<p>*include: templates/pre-conj.html</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-zach-oakes">
+              Pre-conj Prep: Zach Oakes
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 12, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-making-games-at-runtime-with-clojuretalk">Talk: <a href="http://clojure-conj.org/speakers#zach-oakes">Making Games at Runtime with Clojure</a></h3>
+<p><a href="http://clojure-conj.org/speakers#zach-oakes">Zach Oakes' talk</a> at the <em>conj</em> is about making games in a dynamic programming environment.</p>
+<h4 id="background">Background</h4>
+<p>Clojure, and Lisps in general, are famous for dynamic programming. That means being able to modify the program as it is running without restarting it. Wouldn't it be nice to develop games in this way? It seems like the perfect fit, since video games are so visual, you'd want to see what your code changes look like very quickly. This talk will explore this. <a href="https://nightmod.net/">Nightmod</a> is a development environment written by Zach Oakes to modify a game in one window while it is running in another. It is based on the <a href="https://github.com/oakes/play-clj">play-clj</a> library, which he also wrote.</p>
+<h4 id="why-it-matters">Why it matters</h4>
+<p>Game programming is a huge industry dominated by static languages with long code-compile-run cycles. Games cost millions of dollars to make, so even small improvements in developer productivity can save lots of money.</p>
+<p>But further, games are hugely complex systems that are often on the cutting edge of programming. Functional programming has a lot to say about complex systems, yet there has not been a lot of functional programming in commercial games. The domain is ripe for exploration and discovery.</p>
+<h3 id="about-zach-oakestalk">About <a href="http://clojure-conj.org/speakers#zach-oakes">Zach Oakes</a></h3>
+<p><a href="https://github.com/oakes">Github</a></p>
+<p><a href="http://clojure-conj.org/speakers#zach-oakes"><img src="http://www.lispcast.com/img/pre-conj/zach-oakes.jpg" /></a></p>
+<p>You can support Zach Oakes at <a href="https://gratipay.com/oakes/">Gratipay</a>.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-morgan-mullaney">
+              Pre-West Interview: Morgan Mullaney
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 15, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<p><a href="http://clojurewest.org/speakers#mmullaney"><img src="http://www.lispcast.com/img/pre-west/morgan.jpg"
+style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Morgan Mullaney is the next interview participant. She is <a href="http://clojurewest.org/speakers#mmullaney">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about why clojure is good for programming games. The <a href="http://www.lispcast.com/pre-west-morgan-mullaney">background to her talk</a> is available, if you like.</p>
+<h3 id="interview-with-morgan-mullaney">Interview with Morgan Mullaney</h3>
+<p><strong>Nola</strong>: How long ago did you learn Clojure?</p>
+<p><strong>Morgan</strong>: Learning a language is more a drawn-out process with lots of stops and starts than a discrete event, but I first wrote a 'hello world' in Clojure in 2011 and I've been using it &quot;professionally&quot; for about 2 years</p>
+<p><strong>Nola</strong>: What recommendations do you have for someone learning clojure?</p>
+<p><strong>Morgan</strong>:</p>
+<ul>
+<li><p>Read Kyle's <a href="https://aphyr.com/posts/301-clojure-from-the-ground-up-welcome"><em>Clojure from the Ground Up</em></a>, which is unique in that it captures the elegance and beauty of functional programming while being totally approachable to people who haven't programmed before, or who have only used imperative/OO languages.</p></li>
+<li><p>Explore with small, discrete, hackable projects. Twitter bots are a great choice because it's quick to get one working, and there are so many neat things you can do with them. Don't believe me? Look at how <a href="https://twitter.com/badpng/">neat this is</a>.</p></li>
+</ul>
+<p><strong>Nola</strong>: Have you made games in other languages besides Clojure? If so, which languages?</p>
+<p><strong>Morgan</strong>: I've poked around with game making in Python, Common Lisp, and Twine, but nothing terribly serious in any of those.</p>
+<p><strong>Nola</strong>: What is your favorite computer game(s) to play?</p>
+<p><strong>Morgan</strong>: Gosh what a broad question. It's impossible to pick favorites, but I keep picking up FTL and Starbound over and over. One that really stands out in recent memory is Porpentine's &quot;With Those We Love Alive&quot; which is just <em>moving</em>. If you haven't already, definitely <a href="http://aliendovecote.com/uploads/twine/empress/empress.html">go check it out</a>.</p>
+<p><strong>Nola</strong>: If Clojure was a food, what would it be?</p>
+<p><strong>Morgan</strong>: Hummus, with some coffee beans mixed into it. Nothing against coffee, but what is it doing in here?</p>
+<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-morgan-mullaney">
+              Pre-West Prep: Morgan Mullaney
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 04, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-well-i-wouldnt-want-to-make-a-dysfunctional-gametalk">Talk: <a href="http://clojurewest.org/speakers#mmullaney">Well I wouldn't want to make a <em>dys</em>functional game</a></h3>
+<p><a href="http://clojurewest.org/speakers#mmullaney">Morgan Mullaney's talk</a> at <em>Clojure/West</em> is about writing games using Lisp and functional programming.</p>
+<h4 id="background">Background</h4>
+<p>I agree with the <a href="http://clojurewest.org/speakers#mmullaney">talk description</a>; Lisp in games has a long and storied history. The biggest success I know of is Crash Bandicoot, which used a Lisp that allowed the game to get closer to the hardware. There's a nice series of articles <a href="http://all-things-andy-gavin.com/2011/02/02/making-crash-bandicoot-part-1/">about the creation of Crash Bandicoot</a>. The creators wrote their own version of Lisp. <a href="http://all-things-andy-gavin.com/2011/03/12/making-crash-bandicoot-gool-part-9/">Part 9</a> of the series has a nice, detailed description of the language. There's also an article I like about <a href="http://prog21.dadgum.com/23.html">writing games in a functional style</a>. John Carmack (of id Software fame) has also been <a href="https://www.youtube.com/watch?v=1PhArSujR_A&amp;feature=youtu.be&amp;t=2m5s">talking about Lisp and Haskell recently</a>.</p>
+<h3 id="about-morgan-mullaneytalk">About <a href="http://clojurewest.org/speakers#mmullaney">Morgan Mullaney</a></h3>
+<p><a href="http://morganastra.me/">Homepage</a> - <a href="https://github.com/morganastra">GitHub</a> - <a href="https://twitter.com/morganastra">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#mmullaney"><img src="http://www.lispcast.com/img/pre-west/morgan.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-timothy-gardner-ramsey-nasser">
+              Pre-West Prep: Timothy Gardner and Ramsey Nasser
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 06, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-games-and-3d-graphics-in-arcadiatalk">Talk: <a href="http://clojurewest.org/speakers#tgardner">Games and 3D Graphics in Arcadia</a></h3>
+<p><a href="http://clojurewest.org/speakers#tgardner">Timothy Gardner and Ramsey Nasser's talk</a> at <em>Clojure/West</em> is about <a href="http://arcadia-unity.tumblr.com/">Arcadia</a>, the integration of Clojure and Unity 3D.</p>
+<h4 id="background">Background</h4>
+<p>It took a lot of work to get Clojure running with Unity 3D. For one, Unity 3D is based on .NET, so the version of Clojure for the CLR had to be updated and retrofitted to work with it. But Unity 3D is a very popular game engine that exports to lots of major platforms, including consoles. This gives Clojure an inroad into even more systems. I've always wanted to program games, and this gives me hope that I'll do it one day.</p>
+<p>For background, the two speakers have given several talks about Arcadia. At <a href="https://www.youtube.com/watch?v=tJr_TD1BtF0">Strange Loop 2014</a>, at <a href="https://www.youtube.com/watch?v=lHz5A19h9Z8">CodeMesh 2014</a>, and at the <a href="https://www.youtube.com/watch?v=tBvNIJzlWEI">Clojure NYC Meetup</a>.</p>
+<h3 id="about-timothy-gardnertalk">About <a href="http://clojurewest.org/speakers#tgardner">Timothy Gardner</a></h3>
+<p><a href="http://timsgardner.com/">Homepage</a> - <a href="https://twitter.com/timsgardner">Twitter</a> - <a href="https://github.com/timsgardner">GitHub</a></p>
+<p><a href="http://clojurewest.org/speakers#tgardner"><img src="http://www.lispcast.com/img/pre-west/tgardner.jpg" /></a></p>
+<h3 id="about-ramsey-nassertalk">About <a href="http://clojurewest.org/speakers#tgardner">Ramsey Nasser</a></h3>
+<p><a href="http://nas.sr/">Homepage</a> - <a href="https://twitter.com/ra">Twitter</a> - <a href="https://github.com/nasser">GitHub</a></p>
+<p><a href="http://clojurewest.org/speakers#tgardner"><img src="http://www.lispcast.com/img/pre-west/rnasser.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

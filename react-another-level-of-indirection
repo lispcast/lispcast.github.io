@@ -1,0 +1,211 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>React: Another Level of Indirection | LispCast</title>
+    <meta name="description" content="React provides a better abstraction over the DOM than MVC frameworks ever can. React is the last piece of the puzzle for ClojureScript web frontend development.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/react-another-level-of-indirection">
+              React: Another Level of Indirection
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 31, 2013
+          </div>
+
+          
+<blockquote>
+<p>Any problem in computer science can be solved with another level of indirection. -- David Wheeler</p>
+</blockquote>
+<p>The <a href="http://facebook.github.io/react/">React</a> library from Facebook makes DOM programming functional by using a Virtual DOM. The Virtual DOM is an <em>indirection mechanism</em> that solves the difficult problem of DOM programming: <strong>how to deal with incremental changes to a stateful tree structure</strong>. By abstracting away the statefulness, the Virtual DOM turns the real DOM into an immediate mode GUI, which is perfect for functional programming. Further, the Virtual DOM provides <strong>the last piece of the Web Frontend Puzzle for ClojureScript</strong>.</p>
+<p>David Nolen has written up a <a href="http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/">short explanation</a> of how the Virtual DOM works, as well as some amazing performance benchmarking of React in a ClojureScript context. His work is important, so you should read it. I'd like to focus a bit more on the expressivity and why <strong>I would use React even if it were not so fast</strong>.</p>
+<p>One can view MVC frameworks as an attempt to impose some structure on the code that has to interface with the DOM. The bargain they propose is this: <strong>wrap the DOM in View objects</strong>, so that subtrees of DOM nodes are managed by a View object. <strong>Wrap your state in Model objects</strong>, which will notify the View objects of changes. You thereby keep a <em>layer of indirection between Models and Views</em>, which inherently need different structure and need to change independently.</p>
+<p>The layer of indirection (usually an event or observer system) solves a <em>coupling problem</em>. It decouples your state from the DOM, while <strong>leaving you to deal with all of the difficulties of the DOM</strong>. You are essentially making a new type of DOM that is better suited to your GUI domain than plain HTML, but is still a PITA. It is little more than a coat of paint. <em>The DOM is still stateful.</em></p>
+<p>React takes a different approach. It provides a level of indirection which solves the actual problem with the DOM--statefulness. The DOM has become a smart canvas. <strong>Paint the whole picture again, but only the different parts get wet.</strong></p>
+<p>Instead of wrapping the DOM in View objects, you create a Virtual DOM (completely managed by React) which mirrors the real DOM. When the model changes, you generate a new Virtual DOM. The differences are calculated and converted into batch operations to the real DOM. In essence, <strong>React is a function which takes two DOMs and generates a list of DOM operations</strong>, <em>i.e.</em>, <strong>it's referentially transparent</strong>.</p>
+<p>It's easy to imagine how this changes the game. <strong>You no longer need an initializer to set up the DOM and observers to modify it.</strong> The first Virtual DOM rendering is like the second one, in fact like any other! Your &quot;View&quot;, if you want to call it that, is simply a function from state to Virtual DOM nodes. <strong>If the state and DOM nodes are immutable, all the better.</strong> There's less work to know if it has changed.</p>
+<p>This also means that your Views can be composed functionally. Define a component (as a function) and your subcomponents, and build them up functionally. All of the functional abstraction and refactoring that you're used to is available. If you're doing it right, <strong>your code should get shorter, easier to read, and more fun to maintain</strong>.</p>
+<p>My (short) experience rewriting a program to use React converted me. It was the only library I have used that actually made DOM programming fun and functional--and dare I say my code now works!</p>
+<p>Which gets me to my last point, which is that React is the final puzzle piece for ClojureScript web frontend development.</p>
+<ul>
+<li>Problem: <strong>Global state management</strong></li>
+<li><p>Solution: Atoms and persistent data structures</p></li>
+<li>Problem: <strong>Client-server communication</strong></li>
+<li><p>Solution: EDN (also solved pretty well by JSON)</p></li>
+<li>Problem: <strong>Callback hell</strong></li>
+<li><p>Solution: core.async</p></li>
+<li>Problem: <strong>Stateful DOM</strong></li>
+<li><p>Solution: React</p></li>
+</ul>
+<p>Any other problems left? I can't think of any. That's something to <a href="http://www.twitter.com/ericnormand"><em>discuss on Twitter</em></a>.</p>
+<p>I suggest you try React. <a href="https://github.com/swannodette/om"><em>Om</em></a> by David Nolen is the most mature React ClojureScript library I know of. It does a bit more than I've described here (Om manages your state tree for you, among other things) and is evolving quickly. I have some code that generates React Virtual DOM using <code>hiccup</code> style with macros (so the work is done at compile time), but other than that, contains only half-baked implementations of what's in Om. If you're interested in the <code>hiccup</code> macros, <em>let me know what you'd use it for and I'll put it on github</em>.</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/deconstructing-functional-programming">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/Hindley-Milner-in-Clojure">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

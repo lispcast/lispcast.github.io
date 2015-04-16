@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>How to avoid &quot;Makes sense if you already understand it.&quot;</title>
+                  <guid isPermalink="false">http://www.lispcast.com/learning-is-about-skills</guid>
+                  <link>http://www.lispcast.com/learning-is-about-skills</link>
+                  <pubDate>Fri 13 Mar 2015 10:10:30 PM CDT</pubDate>
+                  <description>
+                    Most technical writing is obtuse unless you already know the topic. Focus on the learner and their skills and it will clarify your writing.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/learning-is-about-skills"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

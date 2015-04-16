@@ -1,0 +1,211 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Church vs Curry Types | LispCast</title>
+    <meta name="description" content="Static vs dynamic typing debates often flounder because the debators see from two different perspectives without knowing it. Learning to identify the two perspectives can calm the discussion. The tension between the two perspectives has led to Gradual Typing and other technologies.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/church-vs-curry-types">
+              Church vs Curry Types
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 15, 2014
+          </div>
+
+          
+<p>Summary: <em>Static vs dynamic typing debates often flounder because the debators see from two different perspectives without knowing it. Learning to identify the two perspectives can calm the discussion. The tension between the two perspectives has led to Gradual Typing and other technologies.</em></p>
+<p>Many discussions about type systems around the internet fail to be interesting because one or both parties are not versed in type theory. There's a less common (yet related) reason, which I have begun to notice more and more: people who are not familiar with the <a href="http://en.wikipedia.org/wiki/Simply_typed_lambda_calculus#Intrinsic_vs._extrinsic_interpretations">difference between Church Types and Curry Types</a>. These are also known, respectively, as Intrinsic Types and Extrinsic types. Because the participants are not aware of the two perspectives, they blame the other one for ignorance, when in fact they just have a different perspective.</p>
+<p>Church Types are what Haskell has. Church types are named for Alonzo Church, the inventor of the lambda calculus. In a Church-style system, types are an <em>intrinsic</em> part of the semantics of the language. <strong>The language would be different without the types--it may even be meaningless.</strong> With an intrinsic type system, the meaning of the program is different from the runtime behavior of the program. One way to think of this is that so much of the meaning of the program occurs <em>at compile time</em> that you can begin to think of the program having properties you can reason about even if you never run the program.</p>
+<p>The other kind of types are Curry types (aka extrinsic types). They are named for Haskell Curry, the man the Haskell language is named after. Curry-style types is when a system of types is applied that is <strong>not part of the semantics of the language</strong>. This is what Clojure has in <code>core.typed</code>. <strong>The meaning of a Clojure program is not dependent on it passing the type checker</strong>--it can be run without it. The type checker simply alerts you to type errors in your code. Note that you could consider your type checker to be your own head, which, as flawed as it may be, is what most Clojure programmers use. The types could be anywhere outside of the language.</p>
+<p>Each perspective is valuable and bears its own fruit. Intrinsic types are great because you are <strong>guaranteed to have a mathematically-sound</strong><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> safety net at all times. You always have something you can <em>reason</em> about. Such is not guaranteed for extrinsic type checkers. They may not be able to reason about your code at all.</p>
+<p>Extrinsic types are useful because you can apply <strong>multiple type systems to your code</strong><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>--or even write something that you don't know how to prove is sound. There are more benefits on both sides, but you get the idea.</p>
+<p>We now have a new perspective which is slightly &quot;higher&quot; than either of them. We can now see that both perspectives exist and talk about them as such. <strong>What can we see/say now that we couldn't before?</strong></p>
+<p>A famous <a href="http://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/">article by Robert Harper</a> exemplifies the Church perspective very well. It argues that untyped programs are a subset of typed programs. They are programs that have a single type and all values are of that one type. So instead of being liberating, dynamic languages restrict you to one type. Notice the <strong>assumption that languages have a type system by default</strong> which is typical of the Church-style perspective. We can now say &quot;This reasoning is correct given that perspective.&quot;</p>
+<p>On the other side, you'll often see a dynamic typist say the exact opposite: that well-typed programs are a subset of dynamically typed programs. In other words, well-typed programs are just dynamic programs with fewer errors. Curry-style to the core: <strong>static type errors are something that is added onto the semantics of the language</strong>. We can now see that they are right, from their perspective.</p>
+<p>Here's a diagram:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/ChurchvsCurry.png" alt="Church vs Curry Types Language Subset Diagrams" /><p class="caption">Church vs Curry Types Language Subset Diagrams</p>
+</div>
+<p>Notice how they're isomorphic? That means something, I just don't know what :)</p>
+<p>My ambitious hope is that this perspective will quiet a lot of the fighting as people recognize that they are just <strong>perpetuating a rift in the field of mathematics</strong> that happened a long time ago. The perspectives are irreconcilable now, but that could change. A paper called <a href="https://www.cs.cmu.edu/~fp/papers/andrews08.pdf">Church and Curry: Combining Intrinsic and Extrinsic Typing</a> builds a language with both kinds of types. And <a href="http://www.cs.colorado.edu/~siek/pubs/pubs/2006/siek06:_gradual.pdf">Gradual Typing</a> and <a href="http://homepages.inf.ed.ac.uk/wadler/topics/blame.html">Blame Calculus</a> are investigating the intersection of static and dynamic typing. Let's stop fighting, make some cool tools and use them well.</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/Hindley-Milner-in-Clojure">Hindley-Milner in Clojure</a></li>
+<li><a href="http://www.lispcast.com/on-type-unity">On Type Unity</a></li>
+<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
+<li><a href="http://www.lispcast.com/ambrose-interview-typed-clojure">Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>As sound as the type system in the language.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>See <a href="http://goto.ucsd.edu/~rjhala/liquid/haskell/blog/about/">Liquid Haskell</a> for an example of applying an extrinsic type system on Haskell.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/json-serialization-api-clojure">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/ring-1-3">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

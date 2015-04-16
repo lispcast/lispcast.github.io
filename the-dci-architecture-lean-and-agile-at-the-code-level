@@ -1,0 +1,215 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>The DCI Architecture: Lean and Agile at the Code Level | LispCast</title>
+    <meta name="description" content="">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.infoq.com/presentations/The-DCI-Architecture">
+              The DCI Architecture: Lean and Agile at the Code Level
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/the-dci-architecture-lean-and-agile-at-the-code-level">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 20, 2012
+          </div>
+
+          
+<p>James Coplien's criticism of Java (that it cannot do proper object-oriented programming) is my essential criticism of static languages in general: <em>what if the model of programs that your language enforces does not allow you to program well?</em></p>
+<p>Coplien describes a style of programming that, although not especially encouraged by Smalltalk, was at least possible as an architectural convention. And listening to Alan Kay, I get the impression that the early Smalltalk group was programming with a concept like Roles in mind, though there was no explicit construct for it in the language.</p>
+<p>That concept was what we now refer to as &quot;duck typing&quot;. To fulfill a &quot;methodful role&quot;, you simply needed to have all of the required methods defined.</p>
+<p>Now, how would Clojure handle DCI? Well, quite naturally, actually. There are three building block concepts in DCI described in the video, each with a terrible name.</p>
+<ol style="list-style-type: decimal">
+<li>Classes (data)</li>
+<li>Methodful Roles (interfaces)</li>
+<li>Methodless Roles (variables)</li>
+</ol>
+<p>In Clojure, &quot;classes&quot; are simply data, perhaps validated to conform to a schema, perhaps wrapped in a <code>ref</code> to get state. &quot;Methodful roles&quot; are groups of functions that can operate on data. If you're feeling frisky, you can use protocols. &quot;Methodless roles&quot; are variables in your program, each assigned to the data which will play that role.</p>
+<p>Let's look at the main example in Clojure.</p>
+<pre><code>;; money source role: debit and balance
+(defn debit [source amount]
+  (update-in source [:balance] #(- % amount)))
+
+(defn balance [source]
+  (:balance source))
+
+;; money destination role: credit
+(defn credit [dest amount]
+    (update-in dest [:balance] #(+ % amount)))
+
+;; the use case for doing a transfer    
+(defn transfer [amount source destination]
+  (dosync
+    (when (&lt; (balance @source) amount)
+      (throw (ex-info &quot;Insufficient funds.&quot; {:account @source :amount amount})))
+    (alter   source       debit amount) ;; debiting is not commutative if we check balance
+    (commute destination credit amount)))
+
+;; our two accounts
+(def savings  (ref {:balance 1000}))
+(def checking (ref {:balance 25}))
+
+;; we can transfer 20 bucks from savings to checking
+(transfer 20 savings checking)</code></pre>
+<p>I wrote this just to make sure I was not kidding myself that &quot;DCI&quot; is dead-obvious if your language does not get in the way. Object-oriented conventions today make this complicated enough that you need to read books on it to understand. How many files would you need to write in Java to do this?</p>
+<ol style="list-style-type: decimal">
+<li>MoneySource interface</li>
+<li>MondeyDestination interface</li>
+<li>Transfer Use Case</li>
+<li>Account Class (or two, depending on the differences between savings and checking)</li>
+</ol>
+<p>If you can modify the account class(es) to implement the interfaces, you should be ok with those files. But if you can't, you'll have to use the &quot;Bridge&quot; pattern that I learned in school. Basically, you make a new class for each combination of class and interface. So you would have SavingsAccountMoneySource, SavingsAccountMoneyDestination, CheckingAccountMoneySource, and CheckingAccountMoneyDestination. And OOP was supposed to need less code!</p>
+<p>This video tells me that object-oriented programming as it is taught today has been going way down the wrong track. The lessons the static object-oriented languages have learned from the dynamic ones are the wrong lessons. Duck typing allowed programmers to elegantly implement these ideas without restrictions from the compiler. And inheritance was about reuse more than subtyping. Modern OO style takes and does not give back.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/deferring-type-errors-to-runtime">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/the-datomic-architecture-and-data-model">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

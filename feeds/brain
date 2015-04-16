@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Making True/False Questions Easy</title>
+                  <guid isPermalink="false">http://www.lispcast.com/making-true-false-easy</guid>
+                  <link>http://www.lispcast.com/making-true-false-easy</link>
+                  <pubDate>Sat 21 Sep 2013 09:09:14 AM CDT</pubDate>
+                  <description>
+                    
+&lt;p&gt;When I was training as a teacher, I gave a simple quiz with True/False (T/F) questions. The results were terrible. Worse than chance. On one question, &lt;strong&gt;about 20% of the class got it right&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;I had asked a simple question involving a logical AND:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;True or False?&lt;br /&gt;A parallelogram has parallel opposite sides AND it has five sides.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Eighty percent of the class chose 'True', even though all parallelograms have four sides. The other teachers told me the question was difficult because it was a T/F question. &lt;strong&gt;They said they never give T/F questions because they only confuse the kids.&lt;/strong&gt; They said I should just forget about T/F and try a different type of question. But it was my class and my time to explore teaching and I knew that this question was not that hard. Several connections became clear in my mind: &lt;a href=&quot;http://lispcast.com/why-technical-explanation-alone-is-not-enough&quot;&gt;using the right part of their brains&lt;/a&gt;, &lt;a href=&quot;http://lispcast.com/tap-into-your-social-brain&quot;&gt;making the problem about people&lt;/a&gt;, and &lt;a href=&quot;http://lispcast.com/use-your-imagination&quot;&gt;using their imaginations effectively&lt;/a&gt;. I wanted to give it a shot.&lt;/p&gt;
+&lt;p&gt;I planned the next class around answering True/False questions. There would be an &lt;strong&gt;experiment&lt;/strong&gt; to confirm my suspicion (that the kids were using the wrong part of their brains), a lesson using an &lt;strong&gt;imaginative process&lt;/strong&gt;, and then a &lt;strong&gt;similar quiz&lt;/strong&gt; to see how it worked.&lt;/p&gt;
+&lt;p&gt;The next morning in class, I wrote the T/F question on the blackboard and called a student up to answer it. He read it and said 'True' (the wrong answer). I asked him &amp;quot;what about this part?&amp;quot;, pointing to the false part. He was clearly confused. The part about five sides was obviously false to him. He then began &lt;em&gt;looking around&lt;/em&gt;&lt;sup&gt;&lt;a href=&quot;#fn1&quot; class=&quot;footnoteRef&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; through the question and stopped at the first part (the true part). He pointed at it and said 'True', as if it negated the fact that the other part was false. It's hard to describe, but I was convinced that he was simply looking for something that was true to make the whole question true. &lt;strong&gt;And he thought that it was the right answer.&lt;/strong&gt; My hypothesis was confirmed: he was using a visual strategy when it was not called for.&lt;/p&gt;
+&lt;p&gt;I then demonstrated an imagination process for solving True/False questions. It went like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When solving a True/False question, I first imagine someone standing in front of me. He says the statement from the question to me. If he is lying, the answer is &lt;em&gt;False&lt;/em&gt;. If he is telling the truth, the answer is &lt;em&gt;True&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I asked a couple of people to carry out the process while narrating it to me. They seemed to be able to do it (and they got it right). So then I gave the quiz.&lt;/p&gt;
+&lt;p&gt;The result? Correct answers went &lt;strong&gt;from 20% to 80%&lt;/strong&gt;. I felt like I was finally testing their knowledge of the material and not their understanding of test-taking strategies.&lt;/p&gt;
+&lt;p&gt;How did it work? By &lt;strong&gt;converting the problem from a logic skill to a social skill&lt;/strong&gt;, the students could totally bypass the need to process difficult symbolic rules. And we could solve it as a social problem by using a structured process of imagination.&lt;/p&gt;
+&lt;p&gt;True/False questions are difficult because there are &lt;strong&gt;so many levels of binary confusion&lt;/strong&gt;. First, you are looking for the correct (as opposed to the incorrect) answer. Then you must determine the truth value of the whole statement, which is a function of the truth values of the sub-statements. It's just a lot of levels to keep in your head.&lt;/p&gt;
+&lt;p&gt;The imaginative process cuts through all of that and asks one question: is he lying. &lt;strong&gt;You are offloading the processing to the social part of your brain&lt;/strong&gt;, which can easily do it if framed in the right way.&lt;sup&gt;&lt;a href=&quot;#fn2&quot; class=&quot;footnoteRef&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h3 id=&quot;you-might-also-like&quot;&gt;You might also like&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/learning-is-about-skills&quot;&gt;How to avoid &amp;quot;Makes sense if you already understand it.&amp;quot;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/pre-west-elena-machkasova&quot;&gt;Pre-West Prep: Elena Machkasova&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/pre-west-interview-elena-machkasova&quot;&gt;Pre-West Interview: Elena Machkasova&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/tap-into-your-social-brain&quot;&gt;Tap Into Your Social Brain&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&quot;fn1&quot;&gt;&lt;p&gt;Looking indicates visual thinking. &lt;a href=&quot;http://lispcast.com/why-technical-explanation-alone-is-not-enough&quot;&gt;Use the right part of the brain.&lt;/a&gt;&lt;a href=&quot;#fnref1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&quot;fn2&quot;&gt;&lt;p&gt;In my last post, I hinted at a better way to teach how to determine whether a function is a pure function. The better way is to imagine a robot in front of you. Can he run that function &amp;quot;in his head&amp;quot;? Or does he need to effect the outside world?&lt;a href=&quot;#fnref2&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/making-true-false-easy"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

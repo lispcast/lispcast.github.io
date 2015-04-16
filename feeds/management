@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Healthcare.gov and the Gulf Between Planning and Reality</title>
+                  <guid isPermalink="false">http://www.lispcast.com/healthcare-gov-gulf-between-planning-and-reality</guid>
+                  <link>http://www.shirky.com/weblog/2013/11/healthcare-gov-and-the-gulf-between-planning-and-reality/</link>
+                  <pubDate>Sun 24 Nov 2013 12:31:04 AM CST</pubDate>
+                  <description>
+                    
+&lt;p&gt;Clay Shirky nails it with nice, narrative style.&lt;/p&gt;
+&lt;h3 id=&quot;you-might-also-like&quot;&gt;You might also like&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/cascading-separation-abstraction&quot;&gt;Separation, Abstraction, and Cascading in CSS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/clojure-web-security&quot;&gt;Clojure Web Security&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/hiccup-tips&quot;&gt;Hiccup Tips&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/json-serialization-api-clojure&quot;&gt;JSON Serialization for APIs in Clojure&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/healthcare-gov-gulf-between-planning-and-reality"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

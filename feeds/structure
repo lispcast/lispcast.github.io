@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>The Content of Your Code</title>
+                  <guid isPermalink="false">http://www.lispcast.com/the-content-of-your-code</guid>
+                  <link>http://www.lispcast.com/the-content-of-your-code</link>
+                  <pubDate>Mon 06 Oct 2014 02:25:46 PM CDT</pubDate>
+                  <description>
+                    Code style is important, but way less important than content. Yet everyone talks about style because it's easier. Let's talk about content.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/the-content-of-your-code"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

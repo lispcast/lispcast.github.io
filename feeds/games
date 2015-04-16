@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Zach Oakes</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-zach-oakes</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-zach-oakes</link>
+                  <pubDate>Wed 22 Oct 2014 09:11:47 AM CDT</pubDate>
+                  <description>
+                    Zach Oakes interview about games in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-zach-oakes"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Zach Oakes</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-zach-oakes</guid>
+                  <link>http://www.lispcast.com/pre-conj-zach-oakes</link>
+                  <pubDate>Sun 12 Oct 2014 08:29:03 PM CDT</pubDate>
+                  <description>
+                    Zach Oakes will talk about making games at runtime.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-zach-oakes"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Morgan Mullaney</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-morgan-mullaney</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-morgan-mullaney</link>
+                  <pubDate>Wed 15 Apr 2015 01:35:01 PM CDT</pubDate>
+                  <description>
+                    Morgan Mullaney interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-morgan-mullaney"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Morgan Mullaney</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-morgan-mullaney</guid>
+                  <link>http://www.lispcast.com/pre-west-morgan-mullaney</link>
+                  <pubDate>Sat 04 Apr 2015 02:07:28 PM CDT</pubDate>
+                  <description>
+                    Morgan Mullaney will talk about functional game programming.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-morgan-mullaney"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Timothy Gardner and Ramsey Nasser</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-timothy-gardner-ramsey-nasser</guid>
+                  <link>http://www.lispcast.com/pre-west-timothy-gardner-ramsey-nasser</link>
+                  <pubDate>Mon 06 Apr 2015 11:30:52 PM CDT</pubDate>
+                  <description>
+                    Timothy Gardner and Ramsey Nasser will talk about Arcadia.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-timothy-gardner-ramsey-nasser"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

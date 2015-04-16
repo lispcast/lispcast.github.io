@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Clojure for the Brave and True</title>
+                  <guid isPermalink="false">http://www.lispcast.com/brave-clojure</guid>
+                  <link>http://www.braveclojure.com/</link>
+                  <pubDate>Wed 11 Sep 2013 12:43:47 PM CDT</pubDate>
+                  <description>
+                    
+&lt;p&gt;I am pretty excited about this project. Please check it out.&lt;/p&gt;
+&lt;h3 id=&quot;you-might-also-like&quot;&gt;You might also like&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/3-things-java-can-steal-from-clojure&quot;&gt;3 Things Java Programmers Can Steal from Clojure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/atom-problem&quot;&gt;Atom code explanation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/clojure-gazette-looking-forward-2015&quot;&gt;Clojure Gazette Looking Forward&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/clojure-is-imperative&quot;&gt;Clojure is Imperative&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/brave-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

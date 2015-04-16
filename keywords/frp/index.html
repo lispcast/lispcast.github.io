@@ -1,0 +1,459 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: frp | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/elm-frp-clojure-core-async">
+              Elm FRP in Clojure core.async
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 14, 2014
+          </div>
+
+          
+<p>Summary: <em>Elm is an exciting FRP language. I implemented the FRP part in Clojure using core.async.</em></p>
+<p>I like to read research papers. I have ever since I was in high school. <strong>I've always wanted it to be pretty easy to just translate the pseudocode for an algorithm for a paper and then have it working without any trouble.</strong></p>
+<p>Of course, this rarely happens. Either the pseudo-code leaves out important details, or it's expressed in terms that are not available abstractions in any language I know. So then <strong>I am left to puzzle it all out</strong>, and who has the time?</p>
+<p>A few months ago I read the <a href="https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf">fantastic thesis</a> by <a href="https://twitter.com/czaplic">Evan Czaplicki</a><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> where he introduces <a href="http://elm-lang.org/">Elm</a>. It includes a novel way to express <strong>asynchronous Functional Reactive Programming</strong> (which he calls <em>Concurrent FRP</em>) and a way to express GUI layouts functionally.</p>
+<p><strong>I highly recommend the <a href="https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf">thesis</a>.</strong> It is very clear and readable, and points you to valuable resources.</p>
+<p>The reason I was reading it was because I think <strong>FRP has a bright future</strong>. It's definitely got potential for simplifying the way we write interactive applications. I wanted to learn how it works so that I could build bigger castles in the sky.</p>
+<p>Elm FRP is pretty cool. It is, first of all, very few parts. <strong>You build bigger abstractions from those small parts.</strong> It is built so that events trickle through the graph in order. In other words, they're synchronized.</p>
+<p>But the other interesting thing is that sometimes you don't want things to be synchronized. What if one of the calculations takes a long time? You don't want the GUI to stop responding to mouse events while that slow thing is happening. Elm lets you segment the graph into different <strong>subgraphs that can propagate concurrently</strong>.</p>
+<p>Seriously, just read the thesis.</p>
+<p>While I was reading it, I got to <strong>this page where he lays out all of the FRP functions in Concurrent ML</strong>. It's not uncommon for entire Computer Science theses to be written, passed, and published without a line of runnable code. But here it was, in <em>real code</em> (no pseudocode). I don't know ML, but I do know Haskell, which is related. And I started puzzling through it, trying to understand it.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/elm-frp.png" alt="Elm FRP in Concurrent ML" /><p class="caption">Elm FRP in Concurrent ML</p>
+</div>
+<p>By flipping between the text and the code, I got it. And then I realized: <strong>everything I needed to write this was in Clojure with core.async</strong>. So I got to work.</p>
+<p>It took a while of playing with different representations, but I got something I can use and that is pretty much a direct translation of the Concurrent ML code from the thesis. I toyed with some deeper factorizations, but I think they only muddy what's going on. And <strong>it runs in both Clojure and ClojureScript</strong>. It's <a href="https://github.com/ericnormand/elm-frp">available on Github</a>.</p>
+<p>And, of course, I needed to test my creation, so <strong>I ported the <a href="http://elm-lang.org/edit/examples/Intermediate/Mario.elm">Mario example from the Elm website</a></strong>. You have to click on it to start it. Use the arrow keys to walk left/right and up to jump. It captures your keystrokes. Click outside of the box to get your scrolling keys back.</p>
+<div id="mario" style="width: 100%; height: 200px" tabindex="100"></div>
+
+<script src="http://www.lispcast.com/files/mario.js"></script>
+
+<p><a href="https://github.com/ericnormand/elm-frp/blob/master/src/cljs/elm/examples/mario.cljs">The code for Mario.</a></p>
+<p>Now, <strong>I didn't write all of the cool GUI stuff</strong> from the second part of the thesis. I was learning Om so I decided to use that. That's why that part is so long. Writing Om components is basically as long as writing HTML + CSS.</p>
+<p>And Elm is a language built around these FRP abstractions, so a lot of the signals are built in. I had to write <strong>event handlers to capture the mouse clicks and keyboard events</strong>. But right in the <a href="https://github.com/ericnormand/elm-frp/blob/e8a5d222e5f7cb2efd90393a6ff1a55e797a8dd2/src/cljs/elm/examples/mario.cljs#L74">middle of mario.cljs</a>, you'll see a very straightforward translation of the Mario example from Elm.</p>
+<p>There are a few differences between the Elm version and the Clojure version. Clojure is untyped, so I was able to <strong>eliminate a channel</strong> used only to carry an input node id. That instead is passed along with the message on a single channel.</p>
+<p>Also, I added a node type called &quot;pulse&quot; which I use for emitting time deltas for calculating physics. I'm not sure if Elm internally does something similar for its timers but it seems like the correct solution. The trick is you want to <strong>emit a zero time delta</strong> while other events are firing, and an actual time delta when the timer ticks.</p>
+<p>Finally, instead of the graph being global as in the thesis, it's all tied to an &quot;event stream&quot;, which is where you send the events which get channeled to the correct input signal. You can have <strong>multiple event streams and hence multiple graphs</strong>.</p>
+<p>The implementation is very straightforward. You have to know the basics of Clojure core.async, plus <a href="http://rupsshankar.tumblr.com/post/66648884392/demystifying-core-asyncs-tap-and-mult"><code>mult</code> and <code>tap</code></a>. core.async brings Clojure a new set of abstractions that let us <strong>tap into more research and learn from more languages</strong>. And that makes me happy :)</p>
+<p>If you'd like to learn core.async, I have to recommend my own video course <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a>. It teaches the <strong>most important concepts from core.async</strong> using story, animation, and exercises. It is no exaggeration to say that it was the most anticipated Clojure video when it came out. Go check out a <a href="http://www.purelyfunctional.tv/core-async#preview">preview</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Go say Hi to him!<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-james-macaulay">
+              Pre-West Interview: James MacAulay
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 15, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#jmacaulay"><img src="http://www.lispcast.com/img/james-macaulay"
+      style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>James MacAulay is the next interview participant. He is <a href="http://clojurewest.org/speakers#jmacaulay">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about Functional Reactive Programming with the clojure library Zelkova. The <a href="http://www.lispcast.com/pre-west-james-macaulay">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-james-macaulay">Interview with James MacAulay</h3>
+<p><strong>Nola</strong>: How long have you been doing clojure and how did you get into it?</p>
+<p><strong>James</strong>: I've been writing Clojure in my spare time on-and-off for about three years.</p>
+<p>In late 2011 I was on a small team developing a JavaScript MVC framework, and we had this problem of managing state in the browser over long periods of time. Our response was to let mutation happen all over the place and keep track of it all with a network of observed properties. It felt fun and empowering at first, but unfortunately it resulted in systems that were very difficult to reason about.</p>
+<p>At some point I looked at the system and realized that all it needed to do was handle external events one at a time, and render some views based on those events. It was all starting to look like one big function to me...so I figured I should give a serious look at what functional programming was all about. Clojure had some really compelling answers to the questions I had, and soon I was hooked.</p>
+<p><strong>Nola</strong>: Any suggestions for someone wanting to dive into clojure?</p>
+<p><strong>James</strong>: If you're coming from an Object-Oriented background, take your time just getting used to writing different kinds of functions without relying on mutable state. The more you do it, the more fun it is, and it ends up being a really valuable habit to have when writing software in any language.</p>
+<p><strong>Nola</strong>: What languages did you do before clojure?</p>
+<p><strong>James</strong>: Mainly Ruby and JavaScript. In university it was Java more than anything else, but we were exposed to a number of other languages in smaller doses: Scheme, Prolog, C, x86 Assembly are the ones I'm most thankful for. When I first got interested in functional programming I dug into Haskell for a bit before Clojure really grabbed me.</p>
+<p><strong>Nola</strong>: Your talk is about Zelkova which is heavily inspired by Elm. Have you done much with Elm or implemented Functional Reactive Programming in other languages?</p>
+<p><strong>James</strong>: I first really got the Elm bug at Strange Loop 2013, where I saw Evan Czaplicki live code the Mario demo first-hand. I started playing with both Elm and Bacon.js, a JavaScript FRP library. Last summer I decided to try my hand at implementing FRP in Clojure, and figured I should read Evan's thesis to see how Elm works. I hadn't implemented any kind of FRP before, but Clojure seemed like a great language to do it in.</p>
+<p>My experience with the Elm thesis was very similar to the one Eric Normand described having at around the same time – the code in the paper was just begging for a core.async implementation. I started hacking away, and learned a ton about both Elm and core.async in the process.</p>
+<p>At Strange Loop 2014, I got to meet Evan and we had a really great chat about Elm and my work on porting its FRP system to Clojure and ClojureScript. He encouraged me to share my work and clarified a lot of things for me, and I've been poking away at Zelkova ever since.</p>
+<p><strong>Nola</strong>: What is the average airspeed velocity of an unladed Clojure REPL?</p>
+<p><strong>James</strong>: I try not to throw my laptop across the room when I get frustrated :)</p>
+<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-james-macaulay">
+              Pre-West Prep: James MacAulay
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 15, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-composing-interactive-applications-with-zelkovatalk">Talk: <a href="http://clojurewest.org/speakers#jmacaulay">Composing interactive applications with Zelkova</a></h3>
+<p><a href="http://clojurewest.org/speakers#jmacaulay">James MacAulay's talk</a> at <em>Clojure/West</em> is about Zelkova, his Functional Reactive Programming library.</p>
+<h4 id="background">Background</h4>
+<p>Zelkova is a Functional Reactive Programming (FRP) library inspired by the <a href="http://elm-lang.org">Elm</a> FRP model. FRP is a model for building composable &quot;signals&quot; that maintain the state of the system over time. The talk promises to show us how to use it with Om to create interactive applications.</p>
+<p>There are many resources out there, but I recommend <a href="https://www.youtube.com/watch?v=F-nTU3Wy26I">this talk about Functional Reactive Programming in Elm</a> by Elm's creator Evan Czaplicki. It shows the possibilities of FRP. <a href="https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf">His thesis</a>, which describes the basic constructs of Elm, is <em>surprisingly</em> approachable. I recommend that highly. Also, James MacAulay himself did a <a href="https://www.youtube.com/watch?v=gH3M2nweKJ0">Papers We Love presentation</a> about it, which is worth watching.</p>
+<h3 id="about-james-macaulaytalk">About <a href="http://clojurewest.org/speakers#jmacaulay">James MacAulay</a></h3>
+<p><a href="https://github.com/jamesmacaulay">GitHub</a> - <a href="https://twitter.com/jamesmacaulay">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#jmacaulay"><img src="http://www.lispcast.com/img/pre-west/jmacaulay.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

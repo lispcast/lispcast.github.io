@@ -1,0 +1,214 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: structure | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/the-content-of-your-code">
+              The Content of Your Code
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 06, 2014
+          </div>
+
+          
+<p>Summary: <em>Code style is important, but way less important than content. Yet everyone talks about style because it's easier. Let's talk about content. I'll start with some bullet points.</em></p>
+<p>In fiction writing, there is a fine, but visible, line between style and content. Style is your <strong>choice of words and grammar</strong> while you're telling a story. Content is <strong>the parts of the story</strong> itself. It's the characters, the plot devices, the motivations, etc.</p>
+<p>Style is important. Classic works of literature usually have a good style. But content is more important. Good style can enhance a story. But a story can be retold many times, each with a different style, because a good character and story can stand on its own. <strong>No amount of style is going to save crappy storytelling</strong> with uninteresting characters. It didn't work for The Matrix 2 &amp; 3, and man, did not help at all in the Star Wars prequels.</p>
+<p>You can roughly divide programming decisions along a similar line. Coding style versus coding content. <strong>So much advice falls on the style side.</strong> It talks about variable naming, function length, what parts of a language not to use.</p>
+<p>Where is all the stuff about code content? How do we choose an algorithm? How do we pick a data structure? Basically, how do we translate a real-world problem into a computational model? How do we determine if a program correctly models the problem? How do we judge if one model is better than another? The answer is so simplistic. <strong>A model fits a problem if the structure of the model matches the structure of the problem.</strong></p>
+<p>Structure, structure, structure.</p>
+<p>Here are some bullet points:</p>
+<h3 id="choose-the-right-collection">1. Choose the right collection</h3>
+<p>Here's a good example that we should all be familiar with. How do you choose between an array and a map? Well, if your problem is to do things in order, an array is the better choice because it is naturally ordered. If your problem is &quot;I have an x and I need a y&quot;, a map is probably better, because maps associate one value with another. <strong>The data structure's properties mirror the properties of the problem.</strong></p>
+<h3 id="factor-your-code">2. Factor your code</h3>
+<p>Refactoring is improving the style of your code without changing the content. But <a href="http://www.lispcast.com/stop-refactoring-and-start-factoring">factoring</a> is changing the structure of your code to reveal the <strong>underlying structure of the problem</strong>. This is the only reliable way to get a one-to-one mapping between code and reality.</p>
+<h3 id="determine-the-essential-structure-of-the-problem">3. Determine the essential structure of the problem</h3>
+<p>I have <a href="http://www.lispcast.com/java-learn-from-clojure#represent-computation-not-the-world">written before</a> about finding the essential idea in a problem. Object Oriented Programming advice tends to recommend <strong>picking each of the objects in the real world and creating a class for each</strong>. So, if you're modeling students and courses, regardless of the problem you're solving, you should have a student class and a course class.</p>
+<p>This practice comes from the early days of OOP, when it was still used a lot in simulations. I can see the benefit of representing each thing in your simulation as an object. But we're not building a simulation. <strong>A university registration system is not a university simulator.</strong> We are not simulating students. We are not simulating courses. We need to be looking at the problem we're trying to solve.</p>
+<h4 id="how-is-it-already-done">How is it already done?</h4>
+<p>I really think the best way is to look at the process that is already being used. If you're hired to replace a manual, pen-and-paper system, you have a head start over a new system. Computerizing an existing process is easier because <strong>the problem is already well-understood</strong>. Go ask the registrar's office how they are doing it.</p>
+<p>Let's say that each department keeps a large list of all the courses they give each semester. For each semester, they start a new notebook and make a page for each course. As students register, they write down their name. If they unregister, they cross them out. They leave room for enough students between each course, sometimes skipping a page. They put post-it notes sticking out the top so they can quickly turn to the page for a course when a student comes in the office.</p>
+<p>Wow! Your job is now way easier. You just have to <strong>replicate that notebook in code</strong>. That is so much easier than modeling students and courses. And once it's done, you have a place for improvements that are only possible in a computer.</p>
+<h4 id="finding-the-essence">Finding the essence</h4>
+<p>But let's say it's a new university, trying to get a head start on old universities by organizing everything on a computer. So there's no existing process. You've got to make it up.</p>
+<p>What do you do if the structure is not obvious? How do you determine the structure of a poem? Reading. Re-reading. Underlining. Arrows. Notes. Clarifying definitions. Basically, look for structure. Dig it all up. Then use your judgment about what is important. There often is not one single kind of structure, but <strong>a constellation of structure</strong>.</p>
+<h3 id="factor-out-incidence-from-essence">4. Factor out incidence from essence</h3>
+<p>The incidental structure just happens because of the choice of solution instead of the structure of the problem. <strong>The structure inherent in the problem is essential structure.</strong></p>
+<p>In the notebook used for registering students, there are some incidental implementation details that you don't want to replicate. In the notebook, they left some blank space for more students after each page so that they wouldn't run out of room. But running out of room is not an issue in a computer (no university is that big). So <strong>you can leave that part out</strong>.</p>
+<p>But less obviously, the fact that there is a separate page for each course is also incidental. It's not important that the students in one class all be stored in a single place. What's important is that at any time, a student can register for the course (random access!) and that at any time, a teacher can list all students in a particular course (random access!). We need a way to <em>project</em> a list of students <em>quickly enough</em> in a course from however it is stored.</p>
+<p>But it turns out that, if you factor correctly and find the essence, <strong>your solution should be generic</strong>. Why? Because structure is generic. It is pure content. The correct solution to this problem is to make a system to manage many-to-many relationships. Relational databases can do this easily with one table. You could make a <code>ManyToMany&lt;A, B&gt;</code> class. Those are implementation details that are incidental. What's essential is the many-to-many part.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>We need more discussion about the content of programs. Style is important, but we need people to create acronyms and rules of thumb for choosing program constructs. The <em>Design Patterns</em> book (and movement) were important in this respect. It documented patterns of common structure. But <strong>it failed to do a good job teaching the how</strong>, and added an air of mystery.</p>
+<p>Although this process is language-agnostic, Clojure is great for finding essential structure. One thing I like about Clojure is that the <strong>data structures are described in terms of their usage structure</strong>. And Rich Hickey has expressed many times that to understand a problem, to design a solution, we must <strong>pull things apart</strong> into its essential parts.</p>
+<p>If you'd like to learn Clojure and see how it might help you think in terms of structure, I can recommend my <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video course. It builds up skills from complete beginner to decomposing a problem into a generic solution.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
+<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
+<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
+<li><a href="http://www.lispcast.com/what-is-functional-programming">What is Functional Programming?</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,516 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: types | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/church-vs-curry-types">
+              Church vs Curry Types
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 15, 2014
+          </div>
+
+          
+<p>Summary: <em>Static vs dynamic typing debates often flounder because the debators see from two different perspectives without knowing it. Learning to identify the two perspectives can calm the discussion. The tension between the two perspectives has led to Gradual Typing and other technologies.</em></p>
+<p>Many discussions about type systems around the internet fail to be interesting because one or both parties are not versed in type theory. There's a less common (yet related) reason, which I have begun to notice more and more: people who are not familiar with the <a href="http://en.wikipedia.org/wiki/Simply_typed_lambda_calculus#Intrinsic_vs._extrinsic_interpretations">difference between Church Types and Curry Types</a>. These are also known, respectively, as Intrinsic Types and Extrinsic types. Because the participants are not aware of the two perspectives, they blame the other one for ignorance, when in fact they just have a different perspective.</p>
+<p>Church Types are what Haskell has. Church types are named for Alonzo Church, the inventor of the lambda calculus. In a Church-style system, types are an <em>intrinsic</em> part of the semantics of the language. <strong>The language would be different without the types--it may even be meaningless.</strong> With an intrinsic type system, the meaning of the program is different from the runtime behavior of the program. One way to think of this is that so much of the meaning of the program occurs <em>at compile time</em> that you can begin to think of the program having properties you can reason about even if you never run the program.</p>
+<p>The other kind of types are Curry types (aka extrinsic types). They are named for Haskell Curry, the man the Haskell language is named after. Curry-style types is when a system of types is applied that is <strong>not part of the semantics of the language</strong>. This is what Clojure has in <code>core.typed</code>. <strong>The meaning of a Clojure program is not dependent on it passing the type checker</strong>--it can be run without it. The type checker simply alerts you to type errors in your code. Note that you could consider your type checker to be your own head, which, as flawed as it may be, is what most Clojure programmers use. The types could be anywhere outside of the language.</p>
+<p>Each perspective is valuable and bears its own fruit. Intrinsic types are great because you are <strong>guaranteed to have a mathematically-sound</strong><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> safety net at all times. You always have something you can <em>reason</em> about. Such is not guaranteed for extrinsic type checkers. They may not be able to reason about your code at all.</p>
+<p>Extrinsic types are useful because you can apply <strong>multiple type systems to your code</strong><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>--or even write something that you don't know how to prove is sound. There are more benefits on both sides, but you get the idea.</p>
+<p>We now have a new perspective which is slightly &quot;higher&quot; than either of them. We can now see that both perspectives exist and talk about them as such. <strong>What can we see/say now that we couldn't before?</strong></p>
+<p>A famous <a href="http://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/">article by Robert Harper</a> exemplifies the Church perspective very well. It argues that untyped programs are a subset of typed programs. They are programs that have a single type and all values are of that one type. So instead of being liberating, dynamic languages restrict you to one type. Notice the <strong>assumption that languages have a type system by default</strong> which is typical of the Church-style perspective. We can now say &quot;This reasoning is correct given that perspective.&quot;</p>
+<p>On the other side, you'll often see a dynamic typist say the exact opposite: that well-typed programs are a subset of dynamically typed programs. In other words, well-typed programs are just dynamic programs with fewer errors. Curry-style to the core: <strong>static type errors are something that is added onto the semantics of the language</strong>. We can now see that they are right, from their perspective.</p>
+<p>Here's a diagram:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/ChurchvsCurry.png" alt="Church vs Curry Types Language Subset Diagrams" /><p class="caption">Church vs Curry Types Language Subset Diagrams</p>
+</div>
+<p>Notice how they're isomorphic? That means something, I just don't know what :)</p>
+<p>My ambitious hope is that this perspective will quiet a lot of the fighting as people recognize that they are just <strong>perpetuating a rift in the field of mathematics</strong> that happened a long time ago. The perspectives are irreconcilable now, but that could change. A paper called <a href="https://www.cs.cmu.edu/~fp/papers/andrews08.pdf">Church and Curry: Combining Intrinsic and Extrinsic Typing</a> builds a language with both kinds of types. And <a href="http://www.cs.colorado.edu/~siek/pubs/pubs/2006/siek06:_gradual.pdf">Gradual Typing</a> and <a href="http://homepages.inf.ed.ac.uk/wadler/topics/blame.html">Blame Calculus</a> are investigating the intersection of static and dynamic typing. Let's stop fighting, make some cool tools and use them well.</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/Hindley-Milner-in-Clojure">Hindley-Milner in Clojure</a></li>
+<li><a href="http://www.lispcast.com/on-type-unity">On Type Unity</a></li>
+<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
+<li><a href="http://www.lispcast.com/ambrose-interview-typed-clojure">Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>As sound as the type system in the language.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>See <a href="http://goto.ucsd.edu/~rjhala/liquid/haskell/blog/about/">Liquid Haskell</a> for an example of applying an extrinsic type system on Haskell.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/Hindley-Milner-in-Clojure">
+              Hindley-Milner in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 13, 2014
+          </div>
+
+          
+<p>
+<center>
+  
+<a href="http://ro-che.info/ccc/17" title="Why static vs dynamic typing battles are rarely interesting."><img src="/img/typing.png" alt="Typing Comic from Cartesian Closed Comics" /></a>
+</center>
+</p>
+<p>All sarcasm aside, the above diagram has a kernel of truth. The important thing to note is that the intersection between &quot;Proponents of dynamic typing&quot; and &quot;People familiar with type theory&quot; is very small.</p>
+<p>In an effort to increase the size of that intersection, I decided to familiarize myself with a little more type theory. I developed an implementation of Hindley-Milner which operates on a simple Lisp-like λ-calculus with let polymorphism. Everything you need for Hindley-Milner Algorithm W.</p>
+<h3 id="background">Background</h3>
+<p>Hindley-Milner is a type system that is used by ML and Haskell. Algorithm W is a fast algorithm for inferencing Hindley-Milner which is syntax-directed (meaning it is based on the type of expression) and recursively defined. In this way, it is similar to <a href="http://www.paulgraham.com/rootsoflisp.html">Lisp's <code>eval</code></a>.</p>
+<h3 id="implementation">Implementation</h3>
+<p>I based my implementation on a paper called <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.65.7733&amp;rep=rep1&amp;type=pdf"><em>Algorithm W Step by Step</em></a> which implemented it in Haskell. My implementation started very similar to that implementation and diverged as I refactored it into a more Clojure-esque style.</p>
+<p>This implementation uses no in-place mutation, instead using a &quot;substitution style&quot; which is slightly harder to read. It is, however, easier to write and prove correct.</p>
+<p>In addition to the type inferencer, I wrote an interpreter for the same language, just because. My original intent was to expose (to myself) the similarities between syntax-driven type inference and <code>eval</code>. There might be some, but the full clarity I desire is yet many refactorings away. Note that the interpreter and type inferencer are completely independent, except that both apply to the same set of expressions.</p>
+<p>I added a couple of minor luxuries to the language having to do with currying. Writing fully parentheisized function applications for curried functions is a pain, as is writing a hand-curried function with multiple arguments. I added two syntax transformations which transform them into a more Lispy style. For example:</p>
+<pre><code>(fn [a b c d e f] 1) =&gt; (fn a (fn b (fn c (fn d (fn e (fn f 1))))))</code></pre>
+<p>and</p>
+<pre><code>(+ 1 2) =&gt; ((+ 1) 2)</code></pre>
+<p>I'm pretty sure the syntactic transformation is completely safe. All of my tests still type check.</p>
+<p>The final luxury is that it is a lazily-evaluated language. That's not strictly necessary, but it is strictly cool. It builds up thunks (Clojure delays and promises) and a trampoline is used to get the values out. This lets me define <code>if</code> as a function. The only special forms are <code>let</code> and <code>fn</code>.</p>
+<h3 id="where-to-find-it">Where to find it</h3>
+<p>You can find the code in the <a href="https://github.com/ericnormand/hindley-milner">ericnormand/hindley-milner</a> Github repo. I don't promise that it has no bugs. But it does have a small and growing test suite. Pull requests are welcome and I will continue to expand and refactor it.</p>
+<h3 id="what-i-learned">What I learned</h3>
+<p>Type unification is why the error messages of most type inferencers are so bad. Unification by default only has local knowledge and is commutative (<code>unify a b == unify b a</code>). No preference is given to either argument. A lot of work must have gone into making the error messages of Haskell as good as they are.</p>
+<p>Let polymorphism is useful and I'm glad that Haskell has it.</p>
+<p>Hindley-Milner is powerful, but it does not by itself work magic on a languageq. A language still requires a lot of good design and a well-chosen set of types.</p>
+<h3 id="your-turn">Your turn</h3>
+<p>I think you should implement Hindley-Milner in the language of your choice for a small toy λ-calculus. There is a lot to learn from it, even if you never program using a Hindley-Milner language. At the very least, you'll know what the fuss is about.</p>
+<p>If you think it would be helpful, have a look at <a href="https://github.com/ericnormand/hindley-milner">my implementation</a>. Like I said, pull requests are welcome.</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
+<li><a href="http://www.lispcast.com/on-type-unity">On Type Unity</a></li>
+<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
+<li><a href="http://www.lispcast.com/ambrose-interview-typed-clojure">Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/on-type-unity">
+              On Type Unity
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 02, 2013
+          </div>
+
+          
+<blockquote>
+<p>It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures. -- <a href="http://www.cs.yale.edu/quotes.html">Alan Perlis</a></p>
+</blockquote>
+<p>In his essay titled &quot;<a href="http://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/">Dynamic languages are static languages</a>&quot;, Robert Harper states:</p>
+<blockquote>
+<p>the so-called <em>untyped</em> (that is &quot;dynamically typed&quot;) languages are, in fact, <em>unityped</em>. Rather than have a variety of types from which to choose, there is but one!</p>
+</blockquote>
+<p>The notion that a language with <em>no</em> types also has <em>one</em> type is absurd, so we must proceed and allow the perspective that a language with dynamic typing actually has a single static type. The argument is <a href="http://trevorjim.com/tar-pit-thinking/">very rhetorical</a>, but it does seem to be a valuable perspective<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. However, I disagree with the final conclusion:</p>
+<blockquote>
+<p>And this is precisely what is wrong with dynamically typed languages: rather than affording the <em>freedom</em> to ignore types, they instead impose the <em>bondage</em> of restricting attention to a <em>single</em> type! Every single value has to be a value of that type, you have no choice!</p>
+</blockquote>
+<p>I believe that a well-chosen type is freeing.</p>
+<p>In Smalltalk, &quot;everything is an object&quot;. This statement is one of the first things you might hear about the language--from people who use it and like it. What is that statement but a declaration of having one type? That one type, with its single operation (send message), is what made Smalltalk so powerful.</p>
+<p>Smalltalk's power comes from adhering to a small, firm discipline that others also adhere to. Much like the laws of a government might be binding in a certain sense, in another they give rise to the freedom and privilege citizens enjoy in society. The prohibition of murder allows us the freedom to move about without fear of death. The rules governing market transactions ensure a minimum of fairness. Everyone benefits.</p>
+<p>In the same way, Smalltalk's message passing presents a very small point of agreement in order to participate in the bounty of the runtime. Powerful tools, services, and metaprogramming facilities were available for the small price of conforming to a very simple type.</p>
+<p>Far from being restrictive, a single type is <em>freeing</em>. The rhetoric of &quot;bondage&quot; does not hold, since there is an existential proof of a single type being the source of freedom and power. I wonder if a paucity of perspectives is part of the reason such an obvious flaw can arise in an intelligent essay. There are no sides in the search for better tools. We will want to combine the powerful elements from as many different perspectives as possible.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
+<li><a href="http://www.lispcast.com/Hindley-Milner-in-Clojure">Hindley-Milner in Clojure</a></li>
+<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
+<li><a href="http://www.lispcast.com/ambrose-interview-typed-clojure">Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Which I will gladly add to my repertoire, thank you very much!<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-nathan-sorenson">
+              Pre-West Prep: Nathan Sorenson
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 15, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-domain-specific-type-systemstalk">Talk: <a href="http://clojurewest.org/speakers#nsorenson">Domain Specific Type Systems</a></h3>
+<p><a href="http://clojurewest.org/speakers#nsorenson">Nathan Sorenson's talk</a> at <em>Clojure/West</em> is about type systems for DSLs.</p>
+<h4 id="background">Background</h4>
+<p>Clojure is a dynamically typed language. The types are encoded in the classes of objects. However, when we develop a DSL, we are designing a new language and are free to build in a static type system for that DSL. Nathan Sorenson's talk addresses some of the hardest but most important work in developing a type system: the error messages and interoperability. And it seems practical: he'll be developing a query DSL for Datomic.</p>
+<p>If you're new to macros, you may want to read the <a href="http://www.braveclojure.com/writing-macros/">macro chapter from Clojure for the Brave and True</a>. If you're really interested in Type Theory, you're in for a treat with <a href="https://www.youtube.com/watch?v=ev7AYsLljxk">this recording of Robert Harper</a>.</p>
+<h3 id="about-nathan-sorensontalk">About <a href="http://clojurewest.org/speakers#nsorenson">Nathan Sorenson</a></h3>
+<p><a href="https://github.com/takeoutweight">GitHub</a> - <a href="https://twitter.com/takeoutweight">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#nsorenson"><img src="http://www.lispcast.com/img/pre-west/nsorenson.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://us4.campaign-archive2.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=c43c157edd">
+              Ambrose Bonnaire-Sergeant interviewed about Typed Clojure
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/ambrose-interview-typed-clojure">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 08, 2013
+          </div>
+
+          
+<p>Way back in May 2012, Ambrose was beginning work on Typed Clojure for Google Summer of Code. I interviewed him to get an idea of what kind of type system we could expect. Since he's now running a very successful <a href="http://www.indiegogo.com/projects/typed-clojure">crowd funding campaign</a>, I thought I'd bring up this blast from the past.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://blog.fogus.me/2013/10/07/scala-sharp-and-gets-things-cut/">
+              Scala: sharp and gets things cut
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/sharp-and-gets-things-cut">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 08, 2013
+          </div>
+
+          
+<p>Michael Fogus is right (as usual) about this one. Someone with Odersky's stature should not fear lack of humilty but instead lack of confidence.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
+<li><a href="http://www.lispcast.com/Hindley-Milner-in-Clojure">Hindley-Milner in Clojure</a></li>
+<li><a href="http://www.lispcast.com/on-type-unity">On Type Unity</a></li>
+<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

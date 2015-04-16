@@ -1,0 +1,1170 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-yoko-harada">
+              Pre-West Prep: Yoko Harada
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 29, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This summary was graciously written by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<h3 id="talk-joys-and-pains-to-write-a-clojure-curriculum-for-beginnerstalk">Talk: <a href="http://clojurewest.org/speakers#yharada">Joys and Pains to Write a Clojure Curriculum for Beginners</a></h3>
+<p>Yoko Harada will be speaking on ClojureBridge and the challenges of writing a curriculum for beginner programmers.</p>
+<h4 id="background">Background</h4>
+<p><a href="http://www.clojurebridge.org/">ClojureBridge</a> aims to increase diversity within the Clojure community by offering free, beginner-friendly Clojure programming workshops for women. The curriculum is a work in progress which you can see <a href="https://github.com/ClojureBridge/curriculum">here</a>. They can use help and you can look at the issues on <a href="https://github.com/ClojureBridge/curriculum">github</a> to see what is needed!</p>
+<p>Please watch the introductory <a href="https://www.youtube.com/watch?v=eWVaNaKUGzU">talk on ClojureBridge</a> by founder Bridget Hillyer.</p>
+<h3 id="about-yoko-haradatalk">About <a href="http://clojurewest.org/speakers#yharada">Yoko Harada</a></h3>
+<p><a href="https://github.com/yokolet">Github</a> - <a href="http://twitter.com/yokolet">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#yharada"><img src="http://www.lispcast.com/img/pre-west/yoko-harada.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-test-launch">
+              LispCast Intro to clojure.test
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 28, 2015
+          </div>
+
+          
+<p>Summary: <em>LispCast Intro to clojure.test will launch this week.</em></p>
+<p><a href="http://www.purelyfunctional.tv/intro-to-clojure-test"><em>LispCast Intro to clojure.test</em></a> is ready for launch! It's been incubating in the <em>PurelyFunctional.tv Early Access Program</em> (PEAP) for a month. People who opted in to the PEAP got an early version of the course, have been asking questions on the forum, learning a ton, and having a direct impact on the quality of the course. I'm so glad I did it this way. It let me test out the new course format and work out the kinks with the help of my customers.</p>
+<p>And now it is clear the new course format has performed really well. It's very interactive. It contains exercises, animations, screencasts, code samples, and narration. All directed at getting <code>clojure.test</code> installed in your brain, best practices, conventions, and all.</p>
+<p>It's suitable for beginners to Clojure and for anyone who wants to learn how to properly use <code>clojure.test</code>. <code>clojure.test</code> is the main testing library that comes with Clojure and works well with Leiningen, CIDER, vim fireplace, midje, <code>test.check</code>, and more!</p>
+<p>The course will launch this week. Sign up to learn when it comes out.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>
+</h3>
+    
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test"> <img class="subscribe-form-image"
+           src="http://www.purelyfunctional.tv/img/clojure-test-shot.jpg"> </a>
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Learn how to use <code>clojure.test</code>, the built-in Clojure testing library. It's used for all sorts of tests, from unit to integration. This course will teach you the fundamentals of the library and the common conventions that will help you make the most of your tests. Subscribe now and be the first to know when the course is published. Also, get lots of free Clojure resources when you sign up. <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">Learn more.</a>
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/new-course-format">New Course Format</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/unit-testing-in-functional-languages">
+              Example-based Unit Testing in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 26, 2015
+          </div>
+
+          
+<p>Summary: <em>Unit testing in Clojure is straightforward. Here are a few testing ideas as they apply to Clojure.</em></p>
+<p>Most of the Unit Testing literature discusses how to unit test Object Oriented code. However, Unit Testing is very useful for functional code, including Clojure. <strong>I'd like to document a few unit testing ideas as they relate to Clojure.</strong></p>
+<h3 id="the-unit-youre-testing-is-the-function">The Unit you're testing is the function</h3>
+<p>Unit testing is about testing the smallest unit of code. In Object Oriented languages, the unit is the class. In functional languages, <strong>the unit is typically the function</strong>. This is true in Clojure. If you're testing individual functions, you're unit testing Clojure.</p>
+<h3 id="example-based-tests">Example-based tests</h3>
+<p>The easiest kind of tests to do is example-based, which means you test that <strong>for a given argument, you get a known return value</strong>. Let's look at a simple example:</p>
+<pre><code>(deftest addition-tests
+  (is (= 5 (+ 3 2)))
+  (is (= 10 (+ 5 5))))</code></pre>
+<p>You're testing that <code>+</code> works on two different inputs! Notice: 2 lines and 2 inputs, it looks like we'll get <strong>linear growth in tests as our coverage increases</strong>.</p>
+<h3 id="round-trip-testing">Round-trip testing</h3>
+<p>Ok, it's not exactly unit testing, if you are strictly going by the definition of &quot;unit&quot;, because you're actually testing <em>two</em> functions. But who's really being so strict? A really <em>useful</em> kind of test is the <strong>round-trip test</strong>.</p>
+<p>In Clojure, <code>pr-str</code> prints a value readably, meaning if the value <em>can</em> be read back in, this will make a string that could be read in using <code>clojure.edn/read-string</code>. You can do a round-trip from value to string back to value, and the two values should be equal. <strong>You're testing the property that these two functions are inverses of each other.</strong></p>
+<p>Example:</p>
+<pre><code>(deftest pr-str-read-string-round-trip
+  (is (= [1 2 3] (read-string (pr-str [1 2 3]))))
+  (is (= {:a :b :c :d} (read-string (pr-str {:a :b :c :d})))))</code></pre>
+<p>Again, we're getting <strong>linear test growth</strong>.</p>
+<p>Here's another example where I test that addition is the opposite of subtraction:</p>
+<pre><code>(deftest +---round-trip
+  (is (= 5 (-&gt; 5 (+ 10) (- 10))))
+  (is (= 10 (-&gt; 10 (+ 100) (- 100)))))</code></pre>
+<h3 id="what-examples-to-test">What examples to test</h3>
+<p>If you're writing example-based tests one-by-one, and you're getting linear benefit for your examples, you've really <strong>got to maximize what you test</strong>, because linear growth is actually quite bad. In that case, what do you test? The best thing to test are the corner cases. Corner cases are mostly domain-dependent, but there are some domain-independent ones.</p>
+<h4 id="empty-collections">Empty collections</h4>
+<p>It's good to test what happens when you call a function on an empty collection. It could be that you didn't handle that, or didn't handle it correctly. The biggest gotcha is stuff like dividing by the size of the collection. If it's empty, the size is zero, and that's undefined.</p>
+<h4 id="empty-strings">Empty strings</h4>
+<p>The bane of the web programmer's existence, empty strings are usually not valid input, but of course that doesn't stop someone from passing one in. Are you testing that it's valid?</p>
+<h4 id="zero">Zero</h4>
+<p>Zero is actually a typical corner case. Try it out.</p>
+<h4 id="one">One</h4>
+<p>One is also a typical corner case.</p>
+<h4 id="normal-cases">Normal cases</h4>
+<p>You should have at least one normal case to test the expected behavior. A normal case is a list with 5 elements, or a small integer (7, 12, 34).</p>
+<h4 id="bugs">Bugs</h4>
+<p>Now, here's the thing that makes having a test system set up totally worth it: <strong>having a place to put test for known and fixed bugs</strong>. If someone reports a bug, it's really nice to reproduce it in code in a failing test <em>before</em> you fix it. If the bug happened once, it could happen again, so make it part of your anti-regression suite.</p>
+<h3 id="multiple-assertions-on-the-return-value">Multiple assertions on the return value</h3>
+<p>One last thing that happens in Clojure is you want to assert a few things about the same return value. Instead of calling the function several times, why not save the value and assert a few things about it?</p>
+<pre><code>(deftest map-test
+  (let [return (map - [1 2 3 4 5 6 7])]
+    (is (= 7 (count return)))
+    (is (every? neg? return))))</code></pre>
+<h3 id="one-step-further">One step further</h3>
+<p>Ok, I've mentioned a few times that example-based testing does not scale. Code coverage grows linearly as the number of examples grows. How do you get better than linear? One way is to use <a href="https://github.com/clojure/test.check">property-based testing</a> (also known as generative testing). Instead of the programmer giving examples, the program generates examples! Here's a preview:</p>
+<pre><code>(defspec edn-roundtrips 50
+  (prop/for-all [a gen/any]
+    (= a (-&gt; a prn-str edn/read-string))))</code></pre>
+<p>This tests that any value (<code>gen/any</code>) can be printed to a string and read back in, and you get an equivalent value. Three lines. You can run this with as many randomly generated values as you'd like. Thousands. Millions. With three lines. That's leverage.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Ok, those are just a few ideas that could <strong>get you started with example-based unit testing in Clojure</strong>. If you'd like to start automated testing in Clojure, I suggest you check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Intro to clojure.test</a>. <code>clojure.test</code> is the built-in, standard Clojure testing library that most systems use (or are compatible with). The LispCast course is an interactive course with animation, examples, screencasts, text, code samples, and more!</p>
+<p>Now, if you'd like to up your game at testing, and want to get more than linear bang for your buck, you've got to get into <a href="https://github.com/clojure/test.check">generative testing</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>
+</h3>
+    
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test"> <img class="subscribe-form-image"
+           src="http://www.purelyfunctional.tv/img/clojure-test-shot.jpg"> </a>
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Learn how to use <code>clojure.test</code>, the built-in Clojure testing library. It's used for all sorts of tests, from unit to integration. This course will teach you the fundamentals of the library and the common conventions that will help you make the most of your tests. Subscribe now and be the first to know when the course is published. Also, get lots of free Clojure resources when you sign up. <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">Learn more.</a>
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/conj-mental-bump">
+              The conj Mental Bump
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 23, 2015
+          </div>
+
+          
+<p>Summary: <em><code>conj</code> can be confusing if you're used to other languages. It is not a commonly defined operation. Most languages define common positional adding operations. <code>conj</code>, however, has more useful semantics. How do you use <code>conj</code> usefully if you can't guarantee the position?</em></p>
+<p>When I was at university, we were taught object-oriented programming as it exists in Java. We learned about interfaces, inheritance, and the <a href="http://en.wikipedia.org/wiki/Liskov_substitution_principle"><em>Liskov Substitution Principle</em></a>. It makes sense. If you're claiming that you've got a (sub)type of car, <strong>it still has to do everything a car can do</strong>. Otherwise it's not really a subtype of car.</p>
+<h3 id="the-point-of-confusion">The point of confusion</h3>
+<p>Whenever I'm teaching someone Clojure, there's <strong>a point in the journey where everyone gets at least curious</strong>, if not outright confused.</p>
+<pre><code>(conj &#39;(1 2 3) 4) ;;=&gt; &#39;(4 1 2 3)</code></pre>
+<p>vs</p>
+<pre><code>(conj [1 2 3] 4) ;;=&gt; [1 2 3 4]</code></pre>
+<p>What's the deal? <strong>Does <code>conj</code> add to the beginning or the end?</strong> What possible contract could allow both of these behaviors?</p>
+<p>Then I show them that the confusion goes even deeper:</p>
+<pre><code>(conj #{1 2 3} 4) ;;=&gt; #{1 4 2 3} ;; or some other random order</code></pre>
+<p>and</p>
+<pre><code>(conj {1 2 3 4} [5 6]) ;;=&gt; {1 2 3 4 5 6}</code></pre>
+<p>What gives? How is this even possible? <strong>Do hashmaps and linked lists even share a common class ancestor?</strong></p>
+<p>The answer is, <em>sure, if you want them to</em>. The student must get over a tiny conceptual bump. And once that bump is surmounted, poof, a new way of seeing is discovered.</p>
+<h3 id="the-bump">The bump</h3>
+<p>Let's get over that bump right here, right now.</p>
+<p>Let's imagine a traditional collection interface, let's call it <code>List</code>. It has two methods, <code>addFirst</code> and <code>addLast</code> that add new elements. So you write an algorithm that adds a bunch of items to the end with <code>addLast</code>. It takes a <code>List</code> as argument, because that's <strong>the least subtype you need to perform the algorithm</strong>.</p>
+<p>You call that algorithm with an <code>ArrayList</code>, which has the nice property that <code>addLast</code> is constant time. Woohoo! <strong>Your algorithm is fast and great.</strong></p>
+<p>A few months later, you get a phone call from another developer. He's complaining that he used your routine and can't figure out why it's so slow. It was working fine for a while, but <strong>as the users generated more records in the database</strong>, the routine was grinding to a hault.</p>
+<p>You check out the code and immediately see the problem: the database query was returning not an <code>ArrayList</code> but a <code>LinkedList</code>. The implementation of <code>addLast</code> on <code>LinkedList</code>s is actually linear. <strong>Adding a bunch of stuff to the end was turning into a quadratic operation.</strong></p>
+<p>Let's say that again: even though the location semantics of the operation were the same, <code>addLast</code> on one had constant time and on the other had linear time. They both gave equivalent lists, but one of them was too slow. <strong>Does this satisfy the Liskov Substitution Principle?</strong> In practice, can you <em>really</em> substitute one for the other? <strong>Algorithmic complexity matters.</strong></p>
+<p>Clojure avoids that mess (while swapping it for another, which I'll get to shortly). It defines <code>conj</code>, which means not &quot;put this at the beginning&quot; or &quot;put this at the end&quot;, but &quot;hey, collection, you know yourself better than I ever can. Please add this wherever it makes sense for you as long as you <strong>do it in constant time</strong>. Thanks.&quot;<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p>Practically, that means that <code>conj</code> on <code>LinkedList</code> adds to the front, because that's constant time. And <code>conj</code> on <code>ArrayList</code> adds to the end. But, because the operation doesn't talk about order, like <code>addFirst</code> and <code>addLast</code> do, you can now extend <code>conj</code> to <code>Set</code> and even <code>Map</code> if you consider key/value pairs as single items. And that means that linear algorithms using <code>conj</code> will <strong>remain linear regardless of which collection you use</strong>.</p>
+<h3 id="the-mess-that-clojure-chooses-over-the-other-mess">The mess that Clojure chooses over the other mess</h3>
+<p>Does this satisfy the Liskov Substitution Principle? Well, that depends on how you look at it. You certainly <strong>don't guarantee that you get the same or even equivalent answers out</strong>. Consider this:</p>
+<pre><code>(def a [1 2 3])
+(def b &#39;(1 2 3))
+
+(= a b) ;;=&gt; true
+(= (conj a 4) (conj b 4)) ;;=&gt; false</code></pre>
+<p>So, here, performing the same operation on two equal values does not give equal results. That's kind of hard to reason about. <strong>But it's a similar tradeoff that you see with other operations that don't guarantee order.</strong> For instance, imagine two sets <code>a</code> and <code>b</code>.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<pre><code>(= a b) ;;=&gt; true
+
+(= (seq a) (seq b)) ;;=&gt; could be false!</code></pre>
+<p>The order of most sets is not guaranteed! This means that Clojure has some operations that do not maintain equality. <code>conj</code> just happens to be one of them.</p>
+<h3 id="whats-the-point">What's the point?</h3>
+<p>So Clojure does not provide <code>add</code> operations that guarantee order regardless of collection type. Fine. What's the point?</p>
+<p>The point is that, in practice, <code>conj</code> is more useful than <code>addFirst</code> and <code>addLast</code> combined. By defining a function using <code>conj</code>, <strong>it will work on a broader number of collections</strong>. It might give different answers for each, but it won't explode on one and do fine on the rest. And often <strong>the answers it gives are just fine</strong>. A basic version of <code>into</code> can be defined very easily. It works on all collections (for both <code>to</code> and <code>from</code>).</p>
+<pre><code>(defn into [to from]
+  (reduce conj to from))</code></pre>
+<h3 id="common-usage">Common usage</h3>
+<p>One last thing before I wrap up: because the <em>collection itself</em> defines where the item will be added, I often find myself choosing the collection based on where I need it. A common idiom in Common Lisp was to make a new list by <code>cons</code>ing onto the front, then reversing it at the end because you really wanted them in the other order. In Clojure, there's no need, because you can just use a vector (and use <code>conj</code>). <strong>As long as the vector is local to the algorithm, it's not part of the contract, so it's your choice.</strong></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Java was wrong. <code>addFirst</code> and <code>addLast</code> cannot be substituted in <code>LinkedList</code> and <code>ArrayList</code>. They have <strong>different algorithmic complexities</strong> and at some point one's performance will be totally unacceptable. The operation that <em>does</em> allow for substitutibility in algorithm complexity is <code>conj</code>, which is always constant time. But then it doesn't maintain equality. However, I find that <code>conj</code> is way more natural and helps algorithmic reasoning more than guaranteeing <em>where</em> the item is placed.</p>
+<p>If you'd like to learn Clojure, I recommend my video course <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a>. It's a great introduction to the language using animations, exercises, and screencasts. It's designed to give a deep dive straight to what makes Clojure interesting. It begins with syntax, goes through functional programming, and ends with data-driven programming.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It's even polite!<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><code>(def a (set (range 100))) (def b (apply sorted-set (range 100)))</code><a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-elango-cheran">
+              Pre-West Prep: Elango Cheran
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 21, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-exploring-programming-clojure-in-other-human-languagestalk">Talk: <a href="http://clojurewest.org/speakers#echeran">Exploring Programming Clojure in Other Human Languages</a></h3>
+<p><a href="http://clojurewest.org/speakers#echeran">Elango Cheran's talk</a> at <em>Clojure/West</em> is about writing Clojure in other spoken languages.</p>
+<h4 id="background">Background</h4>
+<p>I once heard someone from Poland say that they didn't mind so much that programming languages are mostly English-based. They compared it to classical music, where most terms are adapted from Italian. It's just part of learning the craft.</p>
+<p>That said, making basic English a pre-requisite is a huge burden for the would-be programmer. Being able to write code using terms from your own language and characters from your own language could go a long way to making programming more accessible. Elango claims that Clojure is well-suited for the task because it has macros. That's intriguing.</p>
+<p>Read his blog post about using <a href="http://www.elangocheran.com/blog/2014/10/exploring-programming-in-thamil-not-english-through-clojure/">unicode characters in Clojure</a>. It introduces <a href="https://github.com/echeran/clj-thamil">clj-thamil</a>, a library for wrapping built-in Clojure with Thamil equivalents.</p>
+<h3 id="about-elango-cherantalk">About <a href="http://clojurewest.org/speakers#echeran">Elango Cheran</a></h3>
+<p><a href="http://www.elangocheran.com/blog/">Homepage</a> - <a href="https://github.com/echeran">GitHub</a> - <a href="https://twitter.com/elangoc">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#echeran"><img src="http://www.lispcast.com/img/pre-west/echeran.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-dan-lidral-porter">
+              Pre-West Prep: Dan Lidral-Porter
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 21, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-generating-art-in-many-worldstalk">Talk: <a href="http://clojurewest.org/speakers#dlidral-porter">Generating Art in Many Worlds</a></h3>
+<p><a href="http://clojurewest.org/speakers#dlidral-porter">Dan Lidral-Porter's talk</a> at <em>Clojure/West</em> is about computer-generated art in Clojure.</p>
+<h4 id="background">Background</h4>
+<p>Dan's talk is about his solution for creating interesting art while live coding. Since there's a huge space to explore, you don't want to make your audience watch all the boring parts of the exploration. His solution is to be able to see the art ahead of the audience so <em>they</em> don't have to see it unless you've discovered it's interesting.</p>
+<p>Check out some of <a href="https://vimeo.com/user1217375">his generated art</a>. He's also the creator of <a href="http://labmaniac.com/">this very cool ClojureScript + Om + Zelkova app</a> for exploring <em>Magic: The Gathering</em> decks.</p>
+<h3 id="about-dan-lidral-portertalk">About <a href="http://clojurewest.org/speakers#dlidral-porter">Dan Lidral-Porter</a></h3>
+<p><a href="https://github.com/aperiodic">GitHub</a> - <a href="https://twitter.com/aperiodic">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#dlidral-porter"><img src="http://www.lispcast.com/img/pre-west/dlidral-porter.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-colin-fleming">
+              Pre-West Prep: Colin Fleming
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 21, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-debugging-clojure-code-with-cursivetalk">Talk: <a href="http://clojurewest.org/speakers#cfleming">Debugging Clojure code with Cursive</a></h3>
+<p><a href="http://clojurewest.org/speakers#cfleming">Colin Fleming's talk</a> at <em>Clojure/West</em> is about debugging Clojure in Cursive.</p>
+<h4 id="background">Background</h4>
+<p>Colin Fleming is the developer behind <a href="https://cursiveclojure.com/">Cursive</a>. Cursive is the #2 most popular Clojure IDE (behind Emacs and just ahead of vim). It is based on IntelliJ, and so has a lot of useful JVM features. This talk will focus on debugging and also how the JVM debuggers fare with functional code.</p>
+<p>For a great introduction to Cursive, see <a href="https://www.youtube.com/watch?v=vt1y2FbWQMg">Colin Fleming's talk at Clojure/conj</a> last year.</p>
+<h3 id="about-colin-flemingtalk">About <a href="http://clojurewest.org/speakers#cfleming">Colin Fleming</a></h3>
+<p><a href="https://twitter.com/CursiveClojure">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#cfleming"><img src="http://www.lispcast.com/img/pre-west/colin-fleming.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-christopher-small">
+              Pre-West Prep: Christopher Small
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 20, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-strange-coop-how-clojure-saved-my-chickens-from-the-evil-racoonstalk">Talk: <a href="http://clojurewest.org/speakers#csmall">Strange Coop: How Clojure saved my chickens from the evil racoons</a></h3>
+<p><a href="http://clojurewest.org/speakers#csmall">Christopher Small's talk</a> at <em>Clojure/West</em> is about using Clojure to build a smart chicken coop.</p>
+<h4 id="background">Background</h4>
+<p>Christopher Small used Clojure on a <a href="http://beagleboard.org/BLACK">BeagleBone Black</a> (a small Linux-based computer) to build a smart chicken coop. He will talk about what it takes to get Clojure running on it. Here is his <a href="https://github.com/clj-bots/bonejure">BeagleBone Black and Clojure project</a> on GitHub.</p>
+<h3 id="about-christopher-smalltalk">About <a href="http://clojurewest.org/speakers#csmall">Christopher Small</a></h3>
+<p><a href="http://www.metasoarous.com/">Homepage</a> - <a href="https://github.com/metasoarous">GitHub</a> - <a href="https://twitter.com/metasoarous">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#csmall"><img src="http://www.lispcast.com/img/pre-west/small.jpeg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-bruce-hauman">
+              Pre-West Prep: Bruce Hauman
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 20, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-developing-clojurescript-with-figwheeltalk">Talk: <a href="http://clojurewest.org/speakers#bhauman">Developing ClojureScript with Figwheel</a></h3>
+<p><a href="http://clojurewest.org/speakers#bhauman">Bruce Haumans's talk</a> at <em>Clojure/West</em> is about Figwheel, his tool for compiling and auto-reloading ClojureScript in the browser.</p>
+<h4 id="background">Background</h4>
+<p>One of the characteristics of web development is that it is highly dependent on visual feedback. The various languages are loose enough in their semantics that it is hard to verify their correctness past how they look. Typically, you write some code then reload the browser to see the changes.</p>
+<p>This can work, but each time you reload, you lose all of the Javascript state in the browser, which can make each change take a long time. Each time you reload, you have to reinstatiate the state, either manually or automatically. Figwheel solves this problem in a different way: whenever your ClojureScript file changes, recompile it and push it to the browser (over WebSockets). If you set the ClojureScript up right, your state will be preserved.</p>
+<p>I have used Figwheel and it absolutely changes ClojureScript development. It's one of the first things I set up in a new ClojureScript project. This talk will explain how to work it into your workflow.</p>
+<p>Read this <a href="http://rigsomelight.com/2014/05/01/interactive-programming-flappy-bird-clojurescript.html">introductory blogpost about Figwheel</a> with a demo video.</p>
+<h3 id="about-bruce-haumantalk">About <a href="http://clojurewest.org/speakers#bhauman">Bruce Hauman</a></h3>
+<p><a href="http://rigsomelight.com/">Homepage</a> - <a href="https://github.com/bhauman">GitHub</a> - <a href="https://twitter.com/bhauman">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#bhauman"><img src="http://www.lispcast.com/img/pre-west/hauman.jpeg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-brandon-bloom">
+              Pre-West Prep: Brandon Bloom
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 20, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-building-circlecis-frontend-with-omtalk">Talk: <a href="http://clojurewest.org/speakers#bbloom">Building CircleCI's Frontend With Om</a></h3>
+<p><a href="http://clojurewest.org/speakers#bbloom">Brandon Bloom's talk</a> at <em>Clojure/West</em> is about Om in production.</p>
+<h4 id="background">Background</h4>
+<p>It's hard to believe, but Om was actually started in December 2013. That's just 16 months ago. There hasn't been a lot of time for companies to explore it in production. Brandon Bloom helped build <a href="http://circleci.com">CircleCI</a>'s <a href="https://github.com/circleci/frontend">ClojureScript and Om frontend</a>, which is now open source. This will be a wonderful glimpse into the challenges and advantages of Om in a production system.</p>
+<p>At last year's Clojure/West, <a href="https://www.youtube.com/watch?v=DMtwq3QtddY">David Nolen introduced Om and the design decisions behind it</a>. And more recently at React.js Conf 2015, <a href="https://www.youtube.com/watch?v=5hGHdETNteE">David Nolen went a bit deeper</a>.</p>
+<h3 id="about-brandon-bloomtalk">About <a href="http://clojurewest.org/speakers#bbloom">Brandon Bloom</a></h3>
+<p><a href="http://www.brandonbloom.name/">Homepage</a> - <a href="https://github.com/brandonbloom">GitHub</a> - <a href="https://twitter.com/brandonbloom">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#bbloom"><img src="http://www.lispcast.com/img/pre-west/brandon%20bloom.jpeg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="page6.html">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="page4.html">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,250 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>CSS and the Lambda Calculus | LispCast</title>
+    <meta name="description" content="Using LESS, we can almost achieve the expressive power of the Lambda Calculus as applied to styling. The expressive power is enough to create reusable styles applied to reusable HTML components.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/css-and-the-lambda-calculus">
+              CSS and the Lambda Calculus
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            May 09, 2014
+          </div>
+
+          
+<p>Summary: <em>Using LESS, we can almost achieve the expressive power of the Lambda Calculus as applied to styling. The expressive power is enough to create reusable styles applied to reusable HTML components.</em></p>
+<p>Let's continue our exploration and analysis of <a href="http://www.lispcast.com/css-abstraction-combination">CSS</a> and <a href="http://www.lispcast.com/less-abstraction-combination">LESS</a>. This <a href="http://www.lispcast.com/keywords/functional-css/">series is about Functional CSS</a>. Our aim is to <strong>determine a good way to use HTML and CSS so that <a href="http://www.lispcast.com/separation-of-presentation-and-content">we can reuse both</a></strong>. We can't talk about &quot;Functional&quot; without talking about the Lambda Calculus.</p>
+<p>The Lambda Calculus includes three things: <em>variables</em>, <em>abstractions</em>, and <em>applications</em>. Let's look at some Javascript.</p>
+<pre><code>(function(x) { return x + x; })(10);</code></pre>
+<p>In the above code, <code>x</code> is a variable, the function definition is a lambda abstraction, and calling the function (with the parens at the end) is called application. Luckily, <strong>Javascript gives us an additional kind of abstraction where we can name an expression</strong> to be reused:</p>
+<pre><code>var f = function(x) { return x + x; };
+f(10);</code></pre>
+<p>We can name the function <code>f</code>, then apply it by referring to the name. What's more, we can <strong>compose them pretty well</strong>.</p>
+<pre><code>var g = function(x) { return x * x; };
+var h = function(x, y) { return g(x) + g(y); };
+h(10, 20);</code></pre>
+<p>We're composing function <code>g</code> by <em>applying</em> it inside of the definition of <code>h</code>. You're probably saying &quot;duh!&quot;--and rightly so. It's so common to do.</p>
+<p>Which is why it's hard to understand why CSS does not include all of these parts. Let's at least <em>try</em> to <strong>decompose CSS into some parts</strong>.</p>
+<pre><code>.some-class { width: 10px; height: 20px; }</code></pre>
+<p>Here, we're <em>applying</em> the rule which contains two properties (<code>width</code> and <code>height</code>) to all of the elements that have the class <code>.some-class</code>. <code>.some-class</code> is the <em>argument</em> to the rule's application. In fake Javascript, it would look something like this<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>:</p>
+<!-- -->
+
+<pre><code>function(element) {
+  element.width  = 10;
+  element.height = 20;
+}(document.getElementsByClassName(&#39;some-class&#39;));</code></pre>
+<p>That is, we are <em>immediately</em> applying the abstraction to the argument. CSS has no way, as Javascript does, of <em>naming</em> the abstraction for use later. We definitely <em>want</em> that. What's more, <strong>there's no way to compose two rules together</strong>. In Javascript, we could refer to <code>g</code> within <code>h</code>. But in CSS, there's no way to do that.</p>
+<p>LESS does have this ability. Since LESS is a superset of CSS, we can start with the above CSS code. Let's repeat it:</p>
+<pre><code>.some-class { width: 10px; height: 20px; }</code></pre>
+<p>Now we <em>abstract</em> it by naming it and then <em>apply</em> the name:</p>
+<pre><code>.small-box() { width: 10px; height: 20px; }
+.some-class { .small-box(); }</code></pre>
+<p>That's somewhat better. We've got a reusable component (<code>.small-box</code>) and we've also added <strong>a bit more meaning to our code because we have a meaningful name</strong>. What's more, LESS lets you compose:</p>
+<pre><code>.small-box() { width: 10px; height: 20px; }
+.my-button() { .small-box(); border: 1px solid black; }
+
+.some-class { .my-button(); }</code></pre>
+<p>Here we've made an abstraction called <code>.my-button</code> by using <code>.small-box</code> inside. That's composition. And that's on par with our Javascript examples above.</p>
+<p>There's one more thing that we might want that even Javascript doesn't have. Javascript has first-class functions. That's really nice. But there are many things in Javascript that are not first-class. For instance, the arithmetic operators (<code>+</code>, <code>*</code>, <code>-</code>, <code>/</code>) cannot be passed to a function or assigned to variables. <strong>They are treated differently by the language.</strong> They are a bit like properties in CSS: all you can do with them is refer to them directly in an expression.</p>
+<p>But what if Javascript did have first-class arithmetic functions? We can certainly fake them out.</p>
+<pre><code>var plus  = function(a, b) { return a + b; };
+var times = function(a, b) { return a * b; };
+var minus = function(a, b) { return a - b; };
+var over  = function(a, b) { return a / b; };</code></pre>
+<p>Now we have functions that act just like the operators--and they're first-class. It's also way more consistent: every operator is a function.</p>
+<p>We can do something similar in LESS. Imagine we took every property and did what I do to these:</p>
+<pre><code>.width(@w)  { width:  @w; }
+.height(@h) { height: @h; }
+. . .</code></pre>
+<p>Now we have the consistency that everything is at least referrable as a mixin. This is pretty good.</p>
+<p>We can now define our styles--and name them--in this subset of LESS. <strong>Styles may reference other styles.</strong> And rules with selectors may reference styles. You could import pure styles from an external library, then refer to them in your rules, where you apply them to selectors. <strong>The HTML does not have to change, and neither do the styles.</strong></p>
+<p><strong>Rules--where styles and selectors are tied together--will change the most.</strong> As common sets of styles are used together often, you might think about factoring them out into a new style, which would be added to your organization's standard style library. Also, as HTML components solidify, you could begin to firm up the class names and their structure, reusing them in a more permanent way. Yet, even though these two assets (the standard styles and the standard class names / HTML structures) are permanent, you can still change how they are styled by changing the rules. <strong>Both assets retain their value over time.</strong></p>
+<h3 id="a-fly-in-the-ointment">A fly in the ointment</h3>
+<p>Even though we have tremendous power over that given by CSS, <strong>we are not at the level of first-class styles</strong>. The following will NOT work in LESS, though we would expect it to.</p>
+<pre><code>/* refer to variable like a mixin */
+.apply(@style, @arg) { @style(@arg); }
+
+.width(@w) { width: @w; }
+
+/* pass in .width mixin */
+#xyz { .apply(.width, 10px); }</code></pre>
+<p>The problem is that <strong>you cannot use a mixin named with a variable</strong>. The same limitation exists in SCSS (SASS). The following is invalid.</p>
+<pre><code>@mixin apply($s, $a) { @include $s($a); }</code></pre>
+<p>Why can't a mixin be assigned to a variable? Mixins appear to be in a different namespace from variables, and only mixin syntax can appear in the mixin position. Though I don't think <code>apply</code> itself would be very useful, it would indicate a <strong>recursive abstraction power that could be used well</strong>.</p>
+<p>Not being able to write <code>apply</code> hints that the developers of these two languages are thinking at the syntax level. They have added some great features, but <strong>they have not truly modeled the problem semantically</strong>. Instead, it feels like a mix of special-cased syntax rules and string interpolation. <a href="http://lesscss.org/features/#detached-rulesets-feature">You can assign a ruleset to a variable, but not a mixin?</a></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>LESS (and SASS, etc) have some very powerful features that are miles above CSS in terms of abstraction and composition. I hate using plain CSS after using LESS--LESS is just so much more expressive. You can do some impressive and useful things with them, and I continue to use them. I want to write about <strong>how I use a subset of LESS and a strict discipline in HTML to make styling easier and more maintainable</strong>. In addition, I'd like to <strong>explore what a better-designed style language might look like</strong>.</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Please ignore the fact that CSS does operate on sets of elements, not simple elements.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/separation-of-presentation-and-content">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/lists-in-clojure">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

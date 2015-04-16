@@ -1,0 +1,1167 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: clojure | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/core-async-code-style">
+              core.async Code Style
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 10, 2014
+          </div>
+
+          
+<p>Summary: <em>If your functions return <code>core.async</code> channels instead of taking callbacks, you encourage them to be called within <code>go</code> blocks. Unchecked, this encouragement could proliferate your use of <code>go</code> blocks unnecessarily. There are some coding conventions that can minimize this problem.</em></p>
+<p>I've been using (and enjoying!) <code>core.async</code> for about a year now (mostly in ClojureScript). It has been a huge help for <strong>easily building concurrency patterns</strong> that would be incredibly difficult to engineer (and maintain and change) without it.</p>
+<p>Over that year, I've developed <strong>some practices for writing code with <code>core.async</code></strong>. I'm putting them here as an <a href="http://discuss.purelyfunctional.tv/t/core-async-code-styles/46">invitation for discussion</a>.</p>
+<h3 id="use-callback-style-if-possible">Use callback style, if possible</h3>
+<p>A style develops when using <code>core.async</code> where you convert what would in regular ClojureScript be a callback style with <em>return-a-channel</em> style. The channel will contain the result of the call when it is ready.</p>
+<p>Using this style to keep you out of &quot;callback hell&quot; is overkill. &quot;Callback hell&quot; is not caused by a single callback. It is caused by the <strong>eternal damnation of coordinating multiple callbacks</strong> when they could be called in any order at any time. <strong>Callbacks invert control.</strong></p>
+<p><code>core.async</code> quenches the hellfire because coordinating channels within a <code>go</code> block is easy. The <code>go</code> block decides which values to read in which order. <strong>Control is restored to the code in a procedural style.</strong></p>
+<p>But return-a-channel style is not exactly free of sin. If you return a channel too much, <strong>the code that calls those functions will likely end up in a <code>go</code> block</strong>.</p>
+<p><code>go</code> blocks will proliferate. <code>go</code> blocks incur extra cost, especially in ClojureScript where they happen asynchronously, meaning at the next iteration of the event loop, <strong>which is indeterminately far away</strong>.</p>
+<p>Furthermore, <code>go</code> blocks might begin nesting (a function whose body is a <code>go</code> block is called by another function whose body is a <code>go</code> block, etc), which is correct semantically but <strong>probably won't give you the performance you're looking for</strong>. It's best to avoid it.</p>
+<p>&quot;How?&quot; you say? The most important rule is to only use <code>core.async</code> in a particular function when necessary. If you can get by with just a callback, don't use <code>core.async</code>. <strong>Just use a callback.</strong> For instance, let's say you have an <code>ajax</code> function that takes a callback and you're trying to make a small API wrapper for convenience. You could make it return a channel like this:</p>
+<pre><code>(defn search-google [query]
+  (let [c (chan)]
+    (ajax (str &quot;http://google.com/?q=&quot; query) #(put! c %))
+    c))</code></pre>
+<p>The interesting thing to note is that <code>core.async</code> is not being used very well above. Yes, you get rid of a callback, but <strong>there isn't much coordination happening</strong>, so it's not needed. It's best to keep it straightforward, like this:</p>
+<pre><code>(defn search-google [query cb]
+   (ajax (str &quot;http://gooogle.com/?q=&quot; query) cb))</code></pre>
+<p>You're <strong>just doing one bit of work here</strong> (basically constructing a URL), which is a good sign. But how do you &quot;lift&quot; this into <code>core.async</code>?</p>
+<h3 id="section"><code>&lt;&lt;&lt;</code></h3>
+<p>There's a common pattern in Javascript (not ubiquitous, but very common) to put the callback at the end of the parameter list. Since the callback is last, <strong>you can easily write something to add it automatically</strong>.</p>
+<pre><code>(defn &lt;&lt;&lt; [f &amp; args]
+  (let [c (chan)]
+    (apply f (concat args [(fn [x]
+                             (if (or (nil? x)
+                                     (undefined? x))
+                                   (close! c)
+                                   (put! c x)))]))
+    c))</code></pre>
+<p>This little function is very handy. It automatically <strong>adds a callback to a parameter list</strong>. You call it like this:</p>
+<pre><code>(go
+  (js/console.log (&lt;! (&lt;&lt;&lt; search-google &quot;unicorn droppings&quot;))))</code></pre>
+<p>This function lifts <code>search-google</code>, a regular asynchronous function written with callback style, into <code>core.async</code> return-a-channel style. With this function, <strong>if I always put the callback at the end, I can use my functions from within regular ClojureScript code and also from <code>core.async</code> code</strong>. I can also use any function (and there are many) that happen to have the callback last. This convention has two parts: <strong>always put the callback last and use <code>&lt;&lt;&lt;</code> when you need it</strong>. With this function, I can reserve <code>core.async</code> for coordination (what it's good at), not merely simple asynchrony.</p>
+<h3 id="convention"><code>&lt;convention</code></h3>
+<p>There are times when writing a function using <code>go</code> blocks and returning channels <em>is</em> the best way. In those cases, I've adopted a naming convention. I <strong>put a <code>&lt;</code> prefix in front of functions that return channels</strong>. I tried it at the end of the name, but I like how it looks at the beginning.</p>
+<pre><code>(go
+  (js/console.log (&lt;! (&lt;do-something 1 2 3))))</code></pre>
+<p>The left-arrow of <code>&lt;do-something</code> fits right into the <code>&lt;!</code>. It also visually matches <code>(&lt;&lt;&lt; do-something 1 2 3)</code>, so it <strong>makes correct code look correct and <a href="http://www.joelonsoftware.com/articles/Wrong.html">wrong code look wrong</a></strong>. The naming convention extends to named values as well:</p>
+<pre><code>(def &lt;values (chan))
+
+(go
+  (while true
+    (js/console.log (inc (&lt;! &lt;values)))))</code></pre>
+<h3 id="conclusion">Conclusion</h3>
+<p>These conventions are a great compromise between ease of using <code>core.async</code> (<code>&lt;&lt;&lt;</code>) and universality (callbacks being universal in JS). The naming convention (<code>&lt;</code> prefix) visually marks code that should be used with <code>core.async</code>. These practices have taken me a long way. I'd love to discuss them with you <a href="http://discuss.purelyfunctional.tv/t/core-async-code-styles/46">here</a>.</p>
+<p>If you know Clojure and you are interested in learning <code>core.async</code> in a fun, interactive style, check out the <a href="http://purelyfunctional.tv/core-async">LispCast Clojure core.async videos</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/core-async-conveyor-belts-true-history">
+              Conveyor Belts: Nature's core.async Channels
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 13, 2014
+          </div>
+
+          
+<h3 id="a-true-history">A true history</h3>
+<p>Summary: <em>Conveyor belts are strikingly similar to Clojure core.async channels. While it could be a coincidence, there is speculation that conveyor belts were influenced by a deep understanding of core.async.</em></p>
+<p><strong>Who invented the conveyor belt?</strong> No one knows for sure. Many historians believe that it was Henry Ford, seeking to mechanize the transportation of car parts from one part of the factory to another. This conservative view is plausible. Henry Ford designed much of the assembly line in his factories.</p>
+<p>Despite the simplicity of this explanation, a small minority of researchers believe that there was a man behind Henry Ford who was the true inventor of the conveyor belt. Not much is known about him, but <strong>historians have pieced together a different story</strong>. This article is about that story.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/henry_ford.jpg" alt="Henry Ford in front of his invention." /><p class="caption">Henry Ford in front of his invention.</p>
+</div>
+<p>This is a classic picture of Henry Ford standing in front of his creation. Recent advances in <a href="https://www.youtube.com/watch?v=Vxq9yj2pVWk">digital imaging enhancement</a> have allowed us to learn a little more about the people that influenced Ford who, until recently, have <strong>lived within his shadow</strong>.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/strange_man.jpg" alt="Strange man who is suspected true inventor of conveyor belt." /><p class="caption">Strange man who is suspected true inventor of conveyor belt.</p>
+</div>
+<p>While the identity of this man is not known, historians have reassembled a story from bits and pieces of Henry Ford's journals and quotes. It is believed (by those few, brave historians) that <strong>this man is the true inventor of the conveyor belt</strong>. He looks eerily similar to the famed inventor of Clojure, Rich Hickey. However, the chronologies do not match up, so this hypothesis is easily ruled out.</p>
+<h3 id="conveyor-belt-similarities-to-core.async-channels">Conveyor belt similarities to core.async channels</h3>
+<p>It is well understood that the conveyor belt is a poor, physical compromise on the much more reasonable abstraction of the Clojure core.async channel. As lossy as the copy is, it is still quite useful. <strong>core.async channels and conveyor belts have many properties in common.</strong></p>
+<h4 id="things-can-be-put-onto-and-taken-off-of-a-conveyor-belt">Things can be put onto and taken off of a conveyor belt</h4>
+<p>The similarity here is uncanny. It is almost as if the inventor of the conveyor belt <strong>had some knowledge of the core.async operations</strong>.</p>
+<h4 id="the-conveyor-belt-serves-as-a-buffer">The conveyor belt serves as a buffer</h4>
+<p>Again, it is striking that the conveyor belt can serve nearly the same purpose as a core.async channel. On long conveyor belts, the people taking things off and putting things on <strong>might not even know each other</strong>. And for things that take an unknown amount of time, you can just point to the conveyor belt and say &quot;Wait here for the thing you need.&quot; <strong>They don't have to know when or from where it is coming.</strong></p>
+<h4 id="things-can-be-taken-off-in-the-same-order-they-are-put-on">Things can be taken off in the same order they are put on</h4>
+<p>This is something that perhaps the conveyor belt has lost. While <strong>core.async channels always maintain their own semantics</strong> for choosing which thing is taken next, conveyor belts are basically dumb and expose all of their contents. However, it is clear that you could enforce the common &quot;first-in-first-out&quot; queue behavior by always taking the last item from a conveyor belt.</p>
+<h4 id="when-the-conveyor-belt-is-full-the-putter-has-to-wait">When the conveyor belt is full, the &quot;putter&quot; has to wait</h4>
+<p>What happens when the conveyor belt fills up? Well, you <strong>wait for some room</strong>. Everyone has had this experience where you're at the supermarket and the cashier is taking too long to ring up your food so the conveyor belt fills up. You just have to wait with a dumb look while they look up the code for celery.</p>
+<h4 id="when-the-conveyor-belt-is-empty-the-taker-waits">When the conveyor belt is empty, the &quot;taker&quot; waits</h4>
+<p>Conversely to the full belt situation, when the belt is empty the taker must wait. This is what happens when the cashier is faster than the shopper at the supermarket. <strong>There's nothing to do but wait</strong> for some groceries to reach the end of the belt.</p>
+<h3 id="differences-between-conveyor-belts-and-core.async-channels">Differences between conveyor belts and core.async channels</h3>
+<p>Though the evidence that core.async influenced the development of the conveyor belt is overwhelming, there are some differences due to the <strong>physical limitations of time and space</strong>.</p>
+<h4 id="non-instantaneous-transfer">Non-instantaneous transfer</h4>
+<p>Though not truly instantaneous, core.async channels do operate at the speed of light. When a value is put onto a channel, <strong>it is immediately available to be taken</strong>. Contrast this with conveyor belts, which slowly move objects along a physical belt.</p>
+<h4 id="limited-in-length">Limited in length</h4>
+<p>Conveyor belts have finite length. But core.async channels can be passed around just like any other object. They, in fact, are not limited by space at all. Also, the length of a conveyor belt is equivalent to its size as a buffer. But core.async channels have <strong>properly decomplected buffer size from &quot;distance&quot; of travel</strong>.</p>
+<h4 id="no-droppingsliding-semantics">No dropping/sliding semantics</h4>
+<p>It is quite curious that this important feature of core.async channels has not been copied to conveyor belts. <strong>core.async channels can be set up to drop either the newest value added or the oldest value added.</strong> Conveyor belts that do that are considered defective. The best explanation is that physical goods are so expensive compared to computing ephemeral values that it is uneconomical to trow away any items after they are made.</p>
+<p>The jury is still out as to whether core.async influenced the development of conveyor belts. Was Tony Hoare, who invented Communicating Sequential Processes (on which core.async is based) given the secret to CSP by this same man? This hypothesis becomes more convincing when we see the immense similarities between conveyor belts and core.async channels.</p>
+<p>Here is a picture of Rich Hickey being picked up by a friend after Strange Loop 2014.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/delorian.jpg" alt="Rich Hickey being picked up by his friend after Strange Loop" /><p class="caption">Rich Hickey being picked up by his friend after Strange Loop</p>
+</div>
+<p>If you would like to explore the mysteries of the strange and tangled similarities between conveyor belts and core.async, you might want to try <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a>. It's a video series that introduces the concepts using animations, code, and exercises.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/data-first-programming">
+              Data-First Programming
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 27, 2015
+          </div>
+
+          
+<p>Summary: <em>If something is important, you should deal with it sooner and more often. That's the approach Clojure takes to data representations. It means serialization of internal data is a non-issue.</em></p>
+<p>Netflix has a counterintuitive but brilliant system called <em>Chaos Monkey</em>. Chaos Monkey will randomly kill services. It is trying to simulate, in the microcosm of a business day, the craziness that happens in the production macrocosm. Services die, servers fail, latency spikes, and networks partition. It might not be soon, but eventually it will happen. Better deal with it now, when people are at work to deal with it. Chaos Monkey encourages you to <strong>write your code to work in such a chaos-filled environment so that unexpected failures are a breeze.</strong> The idea is an instance of the more general principle of &quot;if something is important, deal with it sooner and more often&quot;.</p>
+<p>There's something related to this idea of surfacing the errors early that I've been thinking about. It's about data. Have you ever written some classes and everything is well and good. And then after a while, you need to serialize that to disk or across a network. Now you have to come up with some format (maybe JSON or XML) to represent your class. Then, whenever the class changes, <strong>you have to remember to change the data format to keep them in sync</strong>. It's kind of painful!</p>
+<p>Well, I'll tell you, that rarely happens in Clojure. Because in Clojure, you often <strong>start with data structures</strong>. Meaning, you're already thinking in data, modeling in data, and working in data. <strong>Serialization becomes a non-issue</strong>, because Clojure data structures come built in with <a href="https://github.com/edn-format/edn">readers and writers</a>. Just like causing errors to happen early because they will happen eventually, Clojure programmers code in data <em>in part</em> because you're going to need data (serialization and deserialization) eventually.</p>
+<p>If this idea intrigues you, you may want to check out Clojure. Its <strong>data structures are cutting edge</strong>! Check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> if you would like to get into functional programming using animations, exercises, and screencasts.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/data-functions-macros-why">
+              Data > Functions > Macros. But why?
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 23, 2014
+          </div>
+
+          
+<p>Summary: <em>&quot;Prefer data over functions&quot; is a common adage in Clojure circles. It is poorly debated because it is a terse statement in generalities. A valuable perspective is that data is transparent at runtime, while functions are not. This perspective gives a firm ground for discussion and design.</em></p>
+<p>There's a design rule of thumb in Clojure that says that we should prefer functions to macros and to prefer data to functions. People talk about <em>why</em>, people react saying that functions <em>are</em> data, etc. It's all true, but it's all missing the point. It doesn't get at the fundamental, structural difference. And I think the discussion breaks down because people speak in generalities and not much is made measurable and concrete. But the pregression from macros to functions to data is, in my opinion, increasing in one important aspect, and that's the <a href="http://www.lispcast.com/reification"><strong>availability at runtime</strong></a>. Discussions should hinge on whether availability at runtime is desirable, which of course needs to be determined on a case-by-case basis.</p>
+<h3 id="macros">Macros</h3>
+<p>Macros in Clojure are simply not available at runtime. By definition, they are expanded at compile time. It would be hard to make sense to be passing around macros as runtime values. Try to pass a macro as an argument to a function. You can't.</p>
+<p>Further, once a macro has been expanded, it is no longer clear that it's expanded code even came from that macro. <strong>Macros are opaque at runtime.</strong></p>
+<h3 id="functions">Functions</h3>
+<p>Functions <em>are</em> first-class values. They can be passed around to functions, stored in maps, etc. They are totally available at runtime to be called.</p>
+<p>But, calling them is about all you can do with them (besides building new functions with them, like with composition). You can't even easily inspect the code that's inside them, nor get at the environment they have closed over. And that's kind of the point. The function is a useful unit of computation. <strong>It's not a unit of semantics.</strong></p>
+<p>A function, too, is opaque in its way. A function, at runtime, is a black box. What does it do? You can't tell. You can't even tell how the function got there. Was it a <code>fn</code> defined in code? Or was it the result of function composition using <code>comp</code>? <strong>That information is not available at runtime.</strong></p>
+<h3 id="data">Data</h3>
+<p>In Clojure, by <em>data</em>, people are really talking about the immutable data structures available in Clojure. Just to be concrete, let's narrow the definition of Clojure data down to edn.</p>
+<p>Edn data is available at runtime. It's first-class in the way that functions are and macros are not. But it is also transparent. <strong>The structure of the data is completely available at runtime</strong>, unlike the structure of the function. This is why data is preferable.</p>
+<p>Because data is available at runtime, you can do many things with it. Does the data describe a computation? Well, write an interpreter. <strong>Interpreters are much easier to write than compilers</strong> (macros) because the interpreter runs at runtime in the dynamic environment of the program. Compilers (and macros) separate out the two phases of compile-time and runtime. You have to keep track of the difference in your code. And Lisp is totally well-suited for writing interpreters. The first Lisp was defined in itself, for crying out loud.</p>
+<p>And since it's just edn, it can also be <strong>manipulated using all of the tools available in the language</strong>. Maps can be <code>assoc</code>ed to. Sequences can be iterated. Transfering it over the wire is easy. Storing it to disk in a way that can be read in is easy. Try pretty-printing a function. But pretty-printing a data structure? Easy.</p>
+<p>And, finally, the other thing about data is that it can be interpreted in different ways by different interpreters. I'm not trying to say that you might implement two algorithms for doing the same thing. What I'm getting at is that you can compute from it, or analyze it, or algebraically transform it, etc. <strong>It has become a semantic system in its own right.</strong></p>
+<h3 id="discussion">Discussion</h3>
+<p><em>Why not work with code, which is data in Clojure?</em></p>
+<p>You can argue that since code is data, why should I use data structures likes maps and vectors instead of actual code, represented as lists? This is actually a very valid point, and I think this is one of the better arguments. Lisp was defined in terms of an interpreter for data structures which together provide a powerful programming model. <strong>It would be foolish to discard this power and define our own for no reason.</strong></p>
+<p>The best reason I can think of is that our data is usually a very restricted form of code, many times not Turing complete. <strong>Turing complete code is proven to be impossible to analyze.</strong> But our restricted data model is powerful in exactly the way we need it (for our specific problem), but not <em>generally</em> powerful (as in Turing complete). So we can design it to be analyzable.</p>
+<p>If we can restrict the power to be less-than-Turing-complete, we can analyze it at runtime. <strong>If analyzing it at runtime is desirable, then it is desirable to represent it as data.</strong></p>
+<p><em>The semantics of data is vague, while code is well-defined. Why should we use data instead of code?</em></p>
+<p>Ok, this is also a good point. Clojure code, in theory, is well defined. At the very least, it is defined as whatever the compiler does. Most of the time, it is well-documented and well-understood. <strong>But your ad-hoc data structure, which represents some computation, has all sorts of assumptions baked in, like what keys are valid when, that are undocumented, have poor error messages, and maybe corner cases.</strong></p>
+<p>Wow, such a good point. When you're designing a DSL, this is always a challenge. But, just like restricting your power to below Turing complete can make your analysis way easier, <strong>keeping your semantic model simple and well-defined is the key to making it worthwhile.</strong> If the semantic model is simple, it could be beneficial to have it available at runtime. For instance, you could create a custom editor for it. If it's just functions, that's out.</p>
+<p><em>Hasn't this discussion happened many times before? I mean, Ant started off ok, but then it was its own programming language and it sucked.</em></p>
+<p>This is very true. People have talked before about the difference between internal and external DSLs, and how external DSLs eventually lose because they need all sorts of conditionals and loops, which the internal DSLs had by default. In my experience, this is true.</p>
+<p>My personal guideline is that I only prefer data after I have bound the problem to a well-understood domain. That means that I have to write the program first in code, using functions, before I realize that, yes, this could be described very succinctly and declaratively as data. This took a long time and lots of mistakes to understand. <strong>I essentially will only refactor to a data-driven approach after I already have it written and working.</strong></p>
+<h3 id="conclusions">Conclusions</h3>
+<p>I've been coding in Lisp for a long time, so <strong>I've internalized this idea of data-driven programming</strong>. It's the main idea of <a href="http://www.amazon.com/exec/obidos/ASIN/1558601910">Paradigms of Artificial Intelligence Programming</a>, one of the best Lisp books out there, and a big influence on me. What the guideline of &quot;Prefer data over functions&quot; means <em>to me</em> is that when it's beneficial, one should choose data, even if functions are easy to write. Data is more flexible and more available at runtime. It's one of those all-things-being-equal situations. But all things are rarely equal. <strong>Data is often more verbose and error-prone than straight code.</strong></p>
+<p>But there is a sweet spot where data is vastly superior. In those cases, it makes your code more readable. It is more amenable to analysis. It can be passed over the wire. <strong>When I find one of those cases, you bet I'll prefer data over functions.</strong></p>
+<p>I think that doing data-driven programming is one of the things Clojure excels at, even more than other Lisps, because of its literal data structure syntax. <strong>Data-driven programming is one of the deep experiences that I wish everyone could have.</strong> And it's the primary goal of <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>, my 1.5 hour video course filled with visuals, animations, exercises, and screencasts. Check out <a href="http://www.purelyfunctional.tv/intro-to-clojure#preview">the preview</a>.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/four-features-javascript-can-steal-from-clojure">
+              4 Features Javascript can steal from Clojure(Script)
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 17, 2014
+          </div>
+
+          
+<p>Summary: <em>ClojureScript adds a lot of value on top of the Javascript platform. But some of that value can be had directly in Javascript without using a new language.</em></p>
+<p><strong>ClojureScript is a dialect of Clojure that compiles to Javascript.</strong> It lets you run Clojure in a browser or on Node. Just like Clojure, it has immutable data structures, literals for those data structures, macros, and core.async support.</p>
+<p>These features are very powerful and they give ClojureScript a lot of power above Javascript. But a lot of that power can be had in Javascript through libraries, tools, and now some ES6 features. If you can't make the switch to ClojureScript, these tools might help you out. If you've heard of all the cool stuff that ClojureScript can do, well, this might be <strong>a good way to dip your toes in</strong> before you jump in.</p>
+<h3 id="use-clojurescripts-awesome-data-structures-in-javascriptmori">1. <a href="http://swannodette.github.io/mori/">Use ClojureScript's awesome data structures in Javascript</a></h3>
+<p>David Nolen, the maintainer of ClojureScript, has wrapped up the <strong>ClojureScript immutable data structures to be used as a Javascript library</strong> which he calls <a href="http://swannodette.github.io/mori/">mori</a>. He's put in a lot of work to make it convenient to use from Javascript. It's not just the datastructures. It also has all of the functional goodness that makes them powerful to use.</p>
+<h3 id="write-csp-like-core.async-without-core.asynccsp">2. <a href="https://github.com/ubolonton/js-csp">Write CSP like core.async without core.async</a></h3>
+<p>CSP stands for Communicating Sequential Processes. It's a model of concurrency that is <strong>used in Go and in Clojure core.async</strong>. It's a powerful tool, especially in Javascript, where you don't have threads. Once you use it, you'll never go back.</p>
+<p>Well, thanks to Generators in EcmaScript 6, <strong>you can write CSP code in Javascript</strong>. There's a library called <a href="https://github.com/ubolonton/js-csp">js-csp</a> that does just that.</p>
+<h3 id="better-data-formats-than-jsontransit">3. <a href="https://github.com/cognitect/transit-format">Better data formats than JSON</a></h3>
+<p>JSON is a great format for data exchange, but <strong>it has limitations</strong>. One of the biggest limitations is that it is not extensible. You cannot define new types. Wouldn't it be nice to have values that get parsed as Javascript Date objects? Another limitation is that map keys can only be strings.</p>
+<p>The <a href="https://github.com/edn-format/edn">edn format</a> is <strong>Clojure's literal syntax made into a data format</strong>. It includes many data structures, including symbols, keywords, sets, maps, lists, and vectors. It is also extensible with tagged literals, meaning a small tag can be placed in front of a value to indicate the semantic meaning of that value. There are a couple of built-in tags, such as #instant for Dates and #uuid for, yes, UUIDs. But the important thing is <strong>you can define your own and define how they get parsed</strong>.</p>
+<p>There's a <a href="https://github.com/shaunxcode/jsedn">Javascript library</a> for parsing and generating edn.</p>
+<p>edn is a great format, but parsing it in Javascript is never going to be as fast as parsing JSON. The JSON parser is written in C and highly optimized. Because of that limitation, the folks who build Clojure wrote <a href="https://github.com/cognitect/transit-format">Transit</a>, which is <strong>a data format that serializes to JSON</strong>. It's semantically equivalent to edn, so it's extensible, but it's also JSON, so it's fast to parse. There's a <a href="https://github.com/cognitect/transit-js">Javascript implementation</a>.</p>
+<h3 id="write-your-own-syntax-with-macrossweet">4. <a href="http://sweetjs.org/">Write your own syntax with macros</a></h3>
+<p>Macros are one of those legendary things Lisps are known for. They let you write code that writes code. Well, that's kind of a meaningless statement. Think of it more like extensible syntax. You can <strong>write a new type of syntax</strong> which will be <strong>translated to plain Javascript</strong>.</p>
+<p>There's a macro system for Javascript called <a href="http://sweetjs.org/">Sweet.js</a>. The macro system is similar to the one found in Scheme systems. This isn't directly from Clojure, but you get the same power. <strong>Macros are a great way to extend a language.</strong> You no longer have to wait for a new language feature to be implemented. You can do it yourself.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>The Javascript community is active and growing. There are plenty of smart people making cool libraries that can revolutionize your programs. One of Clojure's philosophies is to have <strong>a small core language and extend</strong>, to the extent possible, using libraries<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. So, those libraries can often be leveraged outside of Clojure, which is true in the case of mori. Or they are simply standardized to work cross-platform, like edn and Transit. CSP and macros are simply powerful tools that can be added to many languages.</p>
+<p><strong>Go give these tools a try.</strong> If you like them, you might like Clojure/ClojureScript. They will be here when you're ready. And when you <em>are</em> ready, I must recommend <a href="www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course designed and produced to take you from zero to Clojure.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Those libraries often contain macros which extend the base language.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/Hindley-Milner-in-Clojure">
+              Hindley-Milner in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 13, 2014
+          </div>
+
+          
+<p>
+<center>
+  
+<a href="http://ro-che.info/ccc/17" title="Why static vs dynamic typing battles are rarely interesting."><img src="/img/typing.png" alt="Typing Comic from Cartesian Closed Comics" /></a>
+</center>
+</p>
+<p>All sarcasm aside, the above diagram has a kernel of truth. The important thing to note is that the intersection between &quot;Proponents of dynamic typing&quot; and &quot;People familiar with type theory&quot; is very small.</p>
+<p>In an effort to increase the size of that intersection, I decided to familiarize myself with a little more type theory. I developed an implementation of Hindley-Milner which operates on a simple Lisp-like λ-calculus with let polymorphism. Everything you need for Hindley-Milner Algorithm W.</p>
+<h3 id="background">Background</h3>
+<p>Hindley-Milner is a type system that is used by ML and Haskell. Algorithm W is a fast algorithm for inferencing Hindley-Milner which is syntax-directed (meaning it is based on the type of expression) and recursively defined. In this way, it is similar to <a href="http://www.paulgraham.com/rootsoflisp.html">Lisp's <code>eval</code></a>.</p>
+<h3 id="implementation">Implementation</h3>
+<p>I based my implementation on a paper called <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.65.7733&amp;rep=rep1&amp;type=pdf"><em>Algorithm W Step by Step</em></a> which implemented it in Haskell. My implementation started very similar to that implementation and diverged as I refactored it into a more Clojure-esque style.</p>
+<p>This implementation uses no in-place mutation, instead using a &quot;substitution style&quot; which is slightly harder to read. It is, however, easier to write and prove correct.</p>
+<p>In addition to the type inferencer, I wrote an interpreter for the same language, just because. My original intent was to expose (to myself) the similarities between syntax-driven type inference and <code>eval</code>. There might be some, but the full clarity I desire is yet many refactorings away. Note that the interpreter and type inferencer are completely independent, except that both apply to the same set of expressions.</p>
+<p>I added a couple of minor luxuries to the language having to do with currying. Writing fully parentheisized function applications for curried functions is a pain, as is writing a hand-curried function with multiple arguments. I added two syntax transformations which transform them into a more Lispy style. For example:</p>
+<pre><code>(fn [a b c d e f] 1) =&gt; (fn a (fn b (fn c (fn d (fn e (fn f 1))))))</code></pre>
+<p>and</p>
+<pre><code>(+ 1 2) =&gt; ((+ 1) 2)</code></pre>
+<p>I'm pretty sure the syntactic transformation is completely safe. All of my tests still type check.</p>
+<p>The final luxury is that it is a lazily-evaluated language. That's not strictly necessary, but it is strictly cool. It builds up thunks (Clojure delays and promises) and a trampoline is used to get the values out. This lets me define <code>if</code> as a function. The only special forms are <code>let</code> and <code>fn</code>.</p>
+<h3 id="where-to-find-it">Where to find it</h3>
+<p>You can find the code in the <a href="https://github.com/ericnormand/hindley-milner">ericnormand/hindley-milner</a> Github repo. I don't promise that it has no bugs. But it does have a small and growing test suite. Pull requests are welcome and I will continue to expand and refactor it.</p>
+<h3 id="what-i-learned">What I learned</h3>
+<p>Type unification is why the error messages of most type inferencers are so bad. Unification by default only has local knowledge and is commutative (<code>unify a b == unify b a</code>). No preference is given to either argument. A lot of work must have gone into making the error messages of Haskell as good as they are.</p>
+<p>Let polymorphism is useful and I'm glad that Haskell has it.</p>
+<p>Hindley-Milner is powerful, but it does not by itself work magic on a languageq. A language still requires a lot of good design and a well-chosen set of types.</p>
+<h3 id="your-turn">Your turn</h3>
+<p>I think you should implement Hindley-Milner in the language of your choice for a small toy λ-calculus. There is a lot to learn from it, even if you never program using a Hindley-Milner language. At the very least, you'll know what the fuss is about.</p>
+<p>If you think it would be helpful, have a look at <a href="https://github.com/ericnormand/hindley-milner">my implementation</a>. Like I said, pull requests are welcome.</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
+<li><a href="http://www.lispcast.com/on-type-unity">On Type Unity</a></li>
+<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
+<li><a href="http://www.lispcast.com/ambrose-interview-typed-clojure">Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/how-to-use-new-relic-with-clojure-on-heroku">
+              How to Use New Relic with Clojure on Heroku
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 03, 2013
+          </div>
+
+          
+<p><a href="https://www.heroku.com/">Heroku</a> is a great service, especially for the lone developer who wants free hosting for an app.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> The free hosting works just like the paid service except that your server will be &quot;spun down&quot;, meaning that after five minutes of no activity, <strong>your server is stopped</strong>. It will be &quot;spun up&quot; again when there is a request. This spin up process can take a while and certainly <strong>does not give a good user experience</strong>.</p>
+<p>Luckily there is a recommended way of avoiding this delay. The solution is to run <a href="http://newrelic.com/">New Relic</a> monitoring, which periodically polls your server, avoiding the five minutes of no activity and hence <strong>keeping your server running</strong>.</p>
+<p>In addition to keeping your server from falling asleep, it also gathers lots of profiling information that could help you understand your server as it runs in production. Luckily, <strong>both Heroku and New Relic offer free tiers</strong>. This brings us to my favorite financial formula:</p>
+<center>
+<strong>Free + Free = Free</strong>
+</center>
+
+
+<p>You can also use this process with the paid versions. Note also that <strong>Heroku itself recommends setting this up</strong>, so don't feel guilty!</p>
+<h2 id="instructions">Instructions</h2>
+<p>I am assuming you are already using Heroku and have a working app hosted there, using an uberjar deploy. You also have the <a href="https://toolbelt.heroku.com">Heroku Toolbelt</a> installed.</p>
+<h3 id="add-the-new-relic-add-on-to-your-app.">1. Add the New Relic add-on to your app.</h3>
+<pre><code>$ heroku addons:add newrelic:stark</code></pre>
+<p>I recommend the <code>stark</code> plan for free apps. You can choose any of the <a href="https://addons.heroku.com/newrelic#stark">New Relic tiers</a>.</p>
+<h3 id="find-and-download-the-latest-new-relic-java-api-release.">2. Find and download the latest New Relic Java API release.</h3>
+<p><a href="http://download.newrelic.com/newrelic/java-agent/newrelic-agent/">This download page</a> lists all of the versions. Find the latest one and download the ZIP file.</p>
+<h3 id="unzip-the-zip-file-into-the-base-of-your-app.">3. Unzip the ZIP file into the base of your app.</h3>
+<pre><code>$ cd projects/my-app
+$ unzip ~/Downloads/newrelic-java-3.2.0.zip</code></pre>
+<p>It should unzip into a <code>newrelic/</code> directory.</p>
+<h3 id="check-your-.gitignore-file-for-.jar">4. Check your <code>.gitignore</code> file for <code>*.jar</code></h3>
+<p>New Relic includes its own JAR file which needs to be deployed with your app in the git repo. My <code>.gitignore</code> included a line <code>*.jar</code> which would exclude all JAR files. Remove this line if you see it.</p>
+<h3 id="add-the-.gitignore-and-the-newrelic-directory-to-your-repo.">5. Add the .gitignore and the <code>newrelic/</code> directory to your repo.</h3>
+<pre><code>$ git add .gitignore
+$ git add newrelic
+$ git commit -m &quot;Add New Relic monitoring agent.&quot;</code></pre>
+<p>Make sure the file <code>newrelic/newrelic.jar</code> was added.</p>
+<h3 id="release-to-heroku.">6. Release to Heroku.</h3>
+<pre><code>$ git push heroku master</code></pre>
+<h3 id="configure-your-app-to-use-new-relic.">7. Configure your app to use New Relic.</h3>
+<p>We need to add a new JVM option. There is an environment variable called <code>JVM_OPTS</code> which is typically used to do this. Find out what value it has now.</p>
+<pre><code>$ heroku config</code></pre>
+<p>Find the line starting with <code>JVM_OPTS:</code>. Mine says &quot;<code>-Xmx400m</code>&quot;. Now we add this to the variable: &quot;<code>-javaagent:newrelic/newrelic.jar</code>&quot;.</p>
+<pre><code>$ heroku config:set JVM_OPTS=&quot;-Xmx400m -javaagent:newrelic/newrelic.jar&quot;</code></pre>
+<p>The app should restart with the new options. Visit your <a href="https://dashboard.heroku.com/apps">Heroku dashboard</a>, find your app, and click on the New Relic addon to see the New Relic Dashboard for your app. The first load might take some time, but subsequent loads will be at full speed and it won't spin down. load!</p>
+<p>References:</p>
+<ul>
+<li><a href="https://devcenter.heroku.com/articles/newrelic">New Relic guide on Heroku Dev Center</a></li>
+<li><a href="http://rafael-chacon.com/post/19069499949/new-relic-clojure-heroku-easy-steps-integration">New Relic + Clojure + Heroku: Easy Steps Integration</a></li>
+</ul>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>We use (and pay for) Heroku at work and we like the paid service, too!<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/is-core-async-against-clojure-philosophy">
+              Is core.async Against the Clojure Philosophy?
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 06, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure core.async is a way to manage mutable state. Isn't that against functional programming?</em></p>
+<p>When core.async was first announced, there was a lot of fanfare. But among the celebration, there was some consternation about core.async. <strong>Isn't core.async against the functional principles of Clojure?</strong> Aren't channels just mutable state? Aren't the <code>&lt;!</code> and <code>&gt;!</code> operations mutation?</p>
+<p>Well, it's true. core.async is about mutation. <strong>It's procedural code.</strong> Go blocks run their bodies one step at a time. It's imperative.</p>
+<p>But that's what Clojure is all about. It <strong>makes functional programming easy</strong> (with <code>fn</code>s, immutable data structures, and higher order functions). It also makes mutable state <em>easy to reason about</em>. It does not eliminate it. <strong>It simply gives you better abstractions.</strong> That's what Atoms, Refs, Vars, and Agents are: useful abstractions for dealing with state.</p>
+<p>core.async is just another abstraction for dealing with state. But, following the Clojure philosophy, it was chosen to be easy to reason about. <strong>The hardest part about coordinating and communicating with independent threads normally is that neither of them know what the other is doing.</strong> You can make little signals using shared memory. But those signals get complicated fast once you scale past two threads.</p>
+<p>And that's what a channel is: it's just <strong>a shared coordination point</strong>. But it has some cool properties that make it super easy to reason about:</p>
+<ol>
+<li>Carry semantics: the channel carries its own coordination semantics (buffering, unbuffered, etc).</li>
+<li>Simple interface: channels have put, take, and close. That's it.</li>
+<li>Very scalable: any number of processes can use a single channel with no additional cost.</li>
+<li>Decoupling: consumers don't need to know producers and <em>vice versa</em>.</li>
+</ol>
+<p>Channels are awesome, but they're not the whole story. The other part of core.async is the go block. <a href="http://www.lispcast.com/core-async-browser-motivation">Go blocks are another abstraction</a>. They allow you to <strong>write code in an imperative style that blocks on channels</strong>. You get to use loops and conditionals, as well as local let variables, global variables, and function calls -- everything you're already using, but augmented with the coordination power of channels.</p>
+<p>All of these features add up to something you can reason about <em>locally</em>. That's the key: <strong>the code you're looking at now can be understood without looking at other code</strong>.</p>
+<p>But there's a downside: you now have more choices. In theory, they're easier choices. But that requires you to understand the choices. <strong>You need to understand the abstractions, the idioms, and the tradeoffs.</strong> That's the goal of the <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a> video course. If you'd like to use core.async but you don't know where to start, this is a good place.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/json-serialization-api-clojure">
+              JSON Serialization for APIs in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 10, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure is well-suited for processing JSON, but there are some decisions you have to make to suit your application. The major decisions are actually easy, though they took me a while to figure out.</em></p>
+<p>I tend to use JSON instead of <a href="https://github.com/edn-format/edn"><code>edn</code></a> for an API serialization format, if only because JSON is more readily readable from other languages. I could do both, but it's good to <strong>eat your own dogfood and test those JSON code paths</strong>.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p><code>edn</code> is better, but JSON is generally pretty good. However, JSON's expressibility is decidedly a subset of the Clojure data structures, so there is <strong>considerable loss of information</strong> when going from Clojure to JSON. That information is not recovered in a round-trip, at least not automatically. There are lots of decisions that have to go into how to, at least partially, recover this.</p>
+<p>One bit of information that is lost is the type of keys to a map. JSON only allows strings as keys. Clojure allows anything. But most of the time, <strong>I find myself using <em>keywords</em> for keys</strong>. I say most, but really, it's the vast majority. Maps are bundles of named values pretty much all the time.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> So the optimal decision, after trying lots of combinations, is to convert keywords to strings (the default in JSON libraries I've seen) when emitting JSON; and to convert map keys (always strings in JSON) to keywords (also known as <code>keywordize-keys</code>) when parsing JSON. That covers nearly all cases, and pinpointed special cases can cover the rest.</p>
+<p>But that's not the end of the keyword/string story. What about namespaces? Surprisingly, the two major JSON libraries, <code>clojure.data.json</code> and <code>cheshire</code> handle things differently. <strong>How do you parse a JSON key that has a slash in it, indicating a namespace?</strong> If we're keywordizing (as I suggest above), they both give namespaced keywords (<code>keyword</code> will parse around the <code>/</code>). But when emitting JSON, they act differently. <code>clojure.data.json</code> will emit the <code>name</code> of the keyword (and ignore the <code>namespace</code>) while <code>cheshire</code> emits a string with <code>&quot;namespace/name&quot;</code>.</p>
+<p>I like to keep the namespace, or, put another way, I like to drop as little information as possible. So I prefer the namespace approach. I'm not sure how to get <code>clojure.data.json</code> to do that. <strong>I just use <code>cheshire</code></strong>.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup> The other gotcha for namespaces is that ClojureScript's <code>clj-&gt;js</code> and <code>js-&gt;clj</code> are similarly asymetrical.<sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup></p>
+<p>Keywords in other places besides the keys of maps will just get turned into strings, but they don't get converted back to keywords. That sucks, but it's minor. You'll just have to <strong>convert them back some other way</strong>. At work, we use <a href="https://github.com/prismatic/schema">Prismatic Schema</a>'s coercions. They do the trick nicely, in a declarative way.</p>
+<p>So, back to other JSON issues. The other issue is other data types. Dates, URI's, and UUID's are in our data as well. Dates, well, it's up to you how to encode them. I've always been a fan of the Unix timestamp. It's not exactly human readable, but it's universally parseable. There's also <strong>the ISO datetime format, which is probably a better bet</strong>--it's human readable and agreed upon among API designers. You could emit that as a string and coerce back to a Date object later.</p>
+<p>URI's and UUID's are by definition strings, so that's easy. How do you set up <code>cheshire</code> to handle the encoders? It's pretty simple, really.</p>
+<pre><code>(cheshire.generate/add-encoder java.net.URI cheshire.generate/encode-str)</code></pre>
+<p>That means add the encoder for the <code>java.net.URI</code> type to be encoded as a JSON string. <code>str</code> will be called on the value. You can figure out the other types you need. There are <strong>some JSON emission settings built-in, including Date (the ISO string format) and UUID</strong>. Weirdly URI is not in there, so you have to add it.</p>
+<p>What's next? Oh, pretty-printing. Yeah, I pretty-print my JSON to go over the wire. It's nice for debugging. I mean, who wants to <code>curl</code> one long, 1000-character line of JSON? <strong>Put some whitespace</strong>, please! How to do that?</p>
+<pre><code>(cheshire.core/generate-string mp {:pretty true})</code></pre>
+<p>That's right, it's basically built in, but you have to specify it. But, oh man, <strong>that's long</strong>. I don't want to type that, especially because my lazy fingers are going to not do it one time, then I'm going to look at the JSON in my browser and see a one-line JSON mess. So, what do I do? I put all my JSON stuff for each project in <code>json.clj</code>. It's got all my <code>add-encoder</code> stuff, and it's got two extra functions, just for laziness<sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup>:</p>
+<pre><code>(defn parse [s]
+  (cheshire.core/parse-string s true))
+
+(defn gen [o]
+  (cheshire.core/generate-string o {:pretty true}))</code></pre>
+<p>Or of course whatever options you want to pass those functions. This one is my choice--you make your choice. But <strong>these two functions are all I use most of the time</strong>. Parsing strings and generating strings. Woohoo! Much shorter and less to keep in my little head.</p>
+<p>Well, that just about wraps up my JSON API story. There's the slight detail of <strong>outputting JSON from <code>liberator</code></strong>, which is its own blog post. And there's a bit of <strong>generative testing I do to really challenge my assumptions</strong> about how I set up the round-tripping. But that, too, is another blog post for another day. Oh, and what about <strong>all that JSON middleware</strong>? Again, another post.</p>
+<p>If you like peanut butter and you like jelly, you will probably like peanut butter and jelly sandwiches. If you like web and you like Clojure, you will most definitely like <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure</a>, which is a <strong>gentle, soothing, visually rich video course ushering in the fundamentals of Clojure web development</strong> through your eyes and ears and down through your fingertips and into your very own Heroku-hosted web server. At least <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#preview">watch the preview</a>!</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It may be hubristic to think anyone else will use my API.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>There are exceptions, but these typically are not communicated to the outside. Those that are need special-casing. C'est la vie!<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p><code>:key-fn</code> in <code>clojure.data.json</code> only works for keys, not all keywords. Emitting a keyword in any other place emits the <code>str</code> of it, which includes the <code>:</code> in the string. Ick.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><code>clj-&gt;js</code> uses <code>name</code> for keywords and <code>str</code> for symbols, so keywords lose their namespace when emitting JSON, but retain their namespace when parsing key strings as keywords.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>also known as ease, peace of mind, DRY, and cleanliness<a href="#fnref5">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/lists-in-clojure">
+              Warty Lists in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            May 27, 2014
+          </div>
+
+          
+<p>Summary: <em>Lists are kind of warty in Clojure. Care should be taken, especially by those coming from other Lisps.</em></p>
+<p>One of the things that still trips me up in Clojure is the actual types of lists. I used to program in Common Lisp, where things are a bit easier to understand: something is either a list or an atom. Lists are built out of conses and end with <code>nil</code>. Everything else is an atom.</p>
+<p>Coming from Common Lisp, one might expect this to work:</p>
+<pre><code>=&gt; (listp (cons 1 nil))</code></pre>
+<p>In CL, it will be true. In Clojure, it is also true. (Try it out yourself!) Launch a REPL. Go to <a href="http://tryclj.com/">Try Clojure</a>.</p>
+<pre><code>=&gt; (list? (cons 1 nil))</code></pre>
+<p>What about this:</p>
+<pre><code>=&gt; (list? (cons 1 (cons 1 nil)))</code></pre>
+<p>We're consing onto a list, should be a list, no?</p>
+<p>In Common Lisp, yes. In Clojure?</p>
+<p>NO!</p>
+<p>That's not a list. Go ahead, try it at your Clojure REPL.</p>
+<p>What gives? How is that possible? Are we living in a Kafkaesque ECMAScript World?</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/kafkaesque.png" />
+</div>
+<p>Well . . . probably.</p>
+<p>What's going on? Put on your Indiana Jones fedora. We're going on an adventure deep into the heart of the Clojure JVM implementation.</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders3.jpg" />
+</div>
+<p>First, how is <code>list?</code> defined?</p>
+<p><a href="https://github.com/richhickey/clojure/blob/a1eff35124b923ef8539a35e7a292813ba54a0e0/src/clj/clojure/core.clj#L4961">In clojure.core</a>:</p>
+<pre><code>(defn list?
+  &quot;Returns true if x implements IPersistentList&quot;
+  {:added &quot;1.0&quot;}
+  [x] (instance? clojure.lang.IPersistentList x))</code></pre>
+<p>Great, <code>list?</code> is just an instance check. <strong>What classes implement <code>clojure.lang.IPersistentList</code>?</strong> According to the javadoc on the Clojure sources, there are two: <code>PersistentQueue</code> and <code>PersistentList</code>. There's also a static inner class in <code>PersistentList</code> called <code>EmptyList</code>.</p>
+<p>Let's see those at the REPL:</p>
+<pre><code>=&gt; (type ())
+  clojure.lang.PersistentList$EmptyList
+=&gt; (list? ())
+  true
+
+=&gt; (type (list 1 2 3))
+  clojure.lang.PersistentList
+=&gt; (list? (list 1 2 3))
+  true
+
+=&gt; (type clojure.lang.PersistentQueue/EMPTY)
+  clojure.lang.PersistentQueue
+=&gt; (list? clojure.lang.PersistentQueue/EMPTY)
+  true</code></pre>
+<p>These all return true when given to <code>list?</code>. What about <code>(cons 1 nil)</code>?</p>
+<pre><code>=&gt; (type (cons 1 nil))
+  clojure.lang.PersistentList
+=&gt; (list? (cons 1 nil))
+  true</code></pre>
+<p>Great. <strong>Consing onto nil gives you a list</strong>. Let's cons onto a list:</p>
+<pre><code>=&gt; (type (cons 0 (list 1 2 3)))
+  clojure.lang.Cons
+=&gt; (list? (cons 0 (list 1 2 3)))
+  false</code></pre>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders4.jpg" />
+</div>
+<p>Oh, no! Why does consing onto <code>nil</code> create a list, but <strong>consing onto a list create a cons</strong>? Poisonous dart averted! Back to the source code!</p>
+<p><a href="https://github.com/richhickey/clojure/blob/a1eff35124b923ef8539a35e7a292813ba54a0e0/src/clj/clojure/core.clj#L22">In clojure.core</a>:</p>
+<pre><code>(def
+ ^{:arglists &#39;([x seq])
+    :doc &quot;Returns a new seq where x is the first element and seq is
+    the rest.&quot;
+   :added &quot;1.0&quot;}
+
+ cons (fn* cons [x seq] (. clojure.lang.RT (cons x seq))))</code></pre>
+<p>So it calls <code>clojure.lang.RT/cons</code>. We can <a href="https://github.com/clojure/clojure/blob/1.5.x/src/jvm/clojure/lang/RT.java#L565">look that up</a>:</p>
+<pre><code>static public ISeq cons(Object x, Object coll){
+    //ISeq y = seq(coll);
+    if(coll == null)
+        return new PersistentList(x);
+    else if(coll instanceof ISeq)
+        return new Cons(x, (ISeq) coll);
+    else
+        return new Cons(x, seq(coll));
+}</code></pre>
+<p>Wow! The code is clear: if the second argument is <code>null</code> (<code>nil</code>), <strong>it makes a <code>PersistentList</code></strong>. Otherwise, it constructs a <code>clojure.lang.Cons</code>, which is not a list! We're at the root of our wart, but there's nothing we can really do about it except keep exploring.</p>
+<p>If I have a list (according to <code>list?</code>) and I want to add an element to the front to make a new list, how do I do that?</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders%205.jpg" />
+</div>
+<p>Well, the answer is a little disappointing:</p>
+<pre><code>=&gt; (def ls (list 1 2 3))
+=&gt; (def ls2 (conj ls 0))
+=&gt; (list? ls2)
+  true</code></pre>
+<p><code>conj</code> will maintain the type, <code>cons</code> will not. What happens if I <code>conj</code> onto a <code>Cons</code>?</p>
+<pre><code>=&gt; (def c (cons 1 (cons 2 nil)))
+=&gt; (conj c 0)
+  (0 1 2)
+=&gt; (type (conj c 0))
+  clojure.lang.Cons</code></pre>
+<p>So, there you have it. It's a bit of a wart having all of these slightly different types and predicates like <code>list?</code> that slice them up in odd ways. Sometimes it's like running away from a giant paper-mache ball.</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders6.jpg" />
+</div>
+<p>In Clojure's defense, I will say that <strong>I rarely use <code>list?</code></strong>, if at all. It's <strong>not a very useful function</strong> in <code>clojure.core</code>. I'm usually working at a much higher level than that, thinking in terms of sequences (an abstraction), not their concrete implementations. And in the end, you never get out of danger.</p>
+<iframe width="560" height="315" src="//www.youtube.com/embed/lQg7QKDButo" frameborder="0" allowfullscreen></iframe>
+
+<p>There you have it. If you'd like to learn more Clojure, I have a nice video series:</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="page3.html">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="index.html">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

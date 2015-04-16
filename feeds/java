@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>3 Things Java Programmers Can Steal from Clojure</title>
+                  <guid isPermalink="false">http://www.lispcast.com/3-things-java-can-steal-from-clojure</guid>
+                  <link>http://www.lispcast.com/3-things-java-can-steal-from-clojure</link>
+                  <pubDate>Sat 09 Mar 2013 03:38:24 PM CST</pubDate>
+                  <description>
+                    Many of the cool parts of Clojure are written in Java. That means you can access those parts from any Java code. Just include the Clojure JAR, import the classes, and you've got better tools.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Brian Goetz</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-brian-goetz</guid>
+                  <link>http://www.lispcast.com/pre-conj-brian-goetz</link>
+                  <pubDate>Sun 28 Sep 2014 10:45:08 AM CDT</pubDate>
+                  <description>
+                    Brian Goetz will give the keynote at Clojure/conj.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-brian-goetz"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

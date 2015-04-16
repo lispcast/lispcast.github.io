@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Jeanine Adkisson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-jeanine-adkisson</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-jeanine-adkisson</link>
+                  <pubDate>Sat 18 Oct 2014 01:43:27 PM CDT</pubDate>
+                  <description>
+                    Jeanine Adkisson interview about variants.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-jeanine-adkisson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Jeanine Adkisson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-jeanine-adkisson</guid>
+                  <link>http://www.lispcast.com/pre-conj-jeanine-adkisson</link>
+                  <pubDate>Fri 03 Oct 2014 09:13:42 AM CDT</pubDate>
+                  <description>
+                    Jeanine Adkisson will give a talk about Variants in Clojure at the Clojure/conj 2014.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-jeanine-adkisson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

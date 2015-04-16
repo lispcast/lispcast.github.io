@@ -1,0 +1,261 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Atom code explanation | LispCast</title>
+    <meta name="description" content="I go over a real-world example of how atoms and immutable values allow you to compose constructs in ways that are easy to reason about and less prone to error.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/atom-problem">
+              Atom code explanation
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 28, 2014
+          </div>
+
+          
+<p>Summary: <em>I go over a real-world example of how atoms and immutable values allow you to compose constructs in ways that are easy to reason about and less prone to error.</em></p>
+<p>The other day I was in IRC #clojure and someone asked a good question. They had code like the following, and they couldn't understand why <strong>they couldn't modify a map</strong>.</p>
+<pre><code>(def state (atom {}))
+
+(doseq [x [1 2 3]]
+  (assoc @state :x x))
+
+(println @state)
+</code></pre>
+<p>What does this print? Well, the asker wanted it to print <code>{:x 3}</code>. But it printed <code>{}</code>. To understand what's happening, <strong>let's go step by step</strong>.</p>
+<p><code>{}</code> creates an empty map. It's literal syntax for a <em>constructor</em> for a map. This one happens to be empty.</p>
+<p><code>(atom {})</code> takes the empty map that was just created and passes it to the function <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/atom/"><code>atom</code></a>, which constructs a new <code>clojure.lang.Atom</code>. Atoms are objects, and its current state is the empty map we just passed in.</p>
+<p><code>(def state (atom {}))</code> defines a new var called <code>state</code> in the current namespace.</p>
+<p>At this point, we've got a variable called <code>state</code> whose value is an atom that holds an empty map.</p>
+<p><code>(doseq [x [1 2 3]]</code> loops over the numbers 1, 2, and 3. <code>x</code> will be bound to each of those numbers, in turn.</p>
+<p><code>@state</code> gets transformed into <code>(deref state)</code>, which returns the current value of <code>state</code>. <code>:x</code> is a literal keyword, and <code>x</code> is a reference to the <code>x</code> bound inside the loop.</p>
+<p><code>(assoc @state :x x)</code> creates a <em>new map</em> by taking the current value of <code>state</code> (which happens to be <code>{}</code>) and associating <code>:x</code> with <code>x</code> (which will be <code>1</code>, <code>2</code>, and <code>3</code> as the loop happens). The value is returned by <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/assoc"><code>assoc</code></a>, and then thrown away, since it isn't bound to anything.</p>
+<p>Then <code>(println @state)</code> will print the current value of <code>state</code>, which still is <code>{}</code>.</p>
+<p>This code shows a common problem that beginners face in Clojure: how do <strong>immutable data structures</strong> (like maps) and the <strong>concurrency primitives</strong> (like <code>atom</code>) work together to manage state?</p>
+<p>The answer is quite simple (<a href="http://www.infoq.com/presentations/Simple-Made-Easy">in the Rich Hickeyan sense</a>) and elegant. <strong>By separating the ideas of value and state, Clojure has made it easy to express precisely the behavior you want in concurrent systems.</strong></p>
+<p>The value is the map. It is immutable. It cannot change. It is a single value, and it will always be the same. That means <strong>threads can share the value with no worries that one of them will change it</strong>.</p>
+<p>The state is the atom. It's a mutable object. And being an object, it has methods that define its interface. In the code above, we saw that you can call <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/deref"><code>deref</code></a> on an atom to get its current value. <code>deref</code> is basically a getter.</p>
+<p>The main way to <em>change</em> the value of an atom is using <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/swap!"><code>swap!</code></a>. <code>swap!</code> takes an atom and a function (plus optional arguments) and <strong>calls the function on the current value of the atom</strong>. It then sets the value of the atom to the return value of the function. So let's use that to fix the code.</p>
+<pre><code>
+(def state (atom {}))
+
+(doseq [x [1 2 3]]
+  (swap! state assoc :x x))
+
+(println @state)
+</code></pre>
+<p><code>swap!</code> takes the atom (<code>state</code>) and a function (<code>assoc</code>) and some arguments (<code>:x x</code>). It calls <code>assoc</code> on the current value of <code>state</code> with those extra arguments and sets the value of the atom to the return value of the function.</p>
+<p>The <code>swap!</code> expression is almost (but not) the same as this code:</p>
+<pre><code>
+(reset! state (assoc @state :x x)) ;; never do this
+</code></pre>
+<p><a href="http://grimoire.arrdem.com/1.6.0/clojure.core/reset!"><code>reset!</code></a> changes the state of the atom but without regard to the current value. This new code is bad because it's not thread-safe. <strong>Use <code>swap!</code> if you need to use the current value to determine the new value.</strong></p>
+<p>So what does an atom do? What does it represent?</p>
+<p>Atoms guarantee one very important thing: that <strong>each state is calculated from the last state</strong>. The <code>swap!</code> operation is <em>atomic</em>. No matter how many threads are trying to change the value, each change is calculated from the previous value and no previous values are lost. That's its contract as an object and it's one of the important ways that <strong>Clojure helps with concurrency</strong>.</p>
+<p>How can a value be lost?</p>
+<p>If we have two threads, each trying to change <code>state</code> in the same incorrect way (using <code>reset!</code>), the order of evaluation will have several steps:</p>
+<ol style="list-style-type: decimal">
+<li><code>(deref state)   ;; call this value *1</code></li>
+<li><code>(assoc *1 :x x) ;; call this value *2</code></li>
+<li><code>(reset! state *2)</code></li>
+</ol>
+<p>Because the threads are running concurrently, the operations have a chance of interleaving their steps in unwanted ways. For instance, threads A and B might interleave like this:</p>
+<ol style="list-style-type: decimal">
+<li>A: <code>(deref state)    ;; call this value *1A</code></li>
+<li>A: <code>(assoc *1A :x x) ;; call this value *2A</code></li>
+<li>B: <code>(deref state)    ;; call this value *1B</code></li>
+<li>B: <code>(assoc *1B :x x) ;; call this value *2B</code></li>
+<li>B: <code>(reset! state *2B)</code></li>
+<li>A: <code>(reset! state *1A)</code></li>
+</ol>
+<p>What happened? On line 6, A set the value of <code>state</code> to the value it calculated on line 2. So <strong>B's work is completely discarded</strong>. That's probably not what was intended. What's worse is that that is one of many possible interleavings, some of which work and some don't. Welcome to concurrency!</p>
+<p>What you probably wanted was to make sure that <em>no</em> work is discarded. You want the operation to be <em>atomic</em>. That's why it's called an atom. <code>swap!</code> is atomic. A <code>swap!</code> to an atom occurs &quot;all at once&quot;, instead of on three lines like the <code>reset!</code> example. If two threads are doing <code>swap!</code>, there are two possible interleavings.</p>
+<ol style="list-style-type: decimal">
+<li>A: <code>(swap! state assoc :x x)</code></li>
+<li>B: <code>(swap! state assoc :x x)</code></li>
+</ol>
+<p>And</p>
+<ol style="list-style-type: decimal">
+<li>B: <code>(swap! state assoc :x x)</code></li>
+<li>A: <code>(swap! state assoc :x x)</code></li>
+</ol>
+<p>These are usually what you want. If <em>only one</em> or <em>neither one</em> works, <strong>atom is not the right construct for you</strong>.</p>
+<p>So there you go. Atomic mutable state with immutable values gives you a nice, <strong>composable concurrency semantics</strong>. You could do it with locks but it's harder to ensure you're doing it correctly. It's slightly higher-level than locks yet it provides tremendous value. <strong>Atoms are easier to reason about and less prone to errors.</strong></p>
+<p>If you'd like to learn the basics of Clojure, I recommend my video course called <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. I don't go over concurrency, but you will learn lots of functional programming. Go check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">the description</a> to see if it's right for you.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+<li><a href="http://www.lispcast.com/clojure-regex">Regexes in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/two-kinds-of-bootstrapping">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/just-hack-something-together">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

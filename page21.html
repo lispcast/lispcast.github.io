@@ -1,0 +1,507 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.infoq.com/presentations/Knockbox-an-Eventual-Consistency-Toolkit">
+              Knockbox, an Eventual Consistency Toolkit
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/knockbox-an-eventual-consistency-toolkit">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 24, 2012
+          </div>
+
+          
+<p>I originally dismissed <a href="https://github.com/reiddraper/knockbox">Knockbox</a> as yet another concurrency paradigm for Clojure. But after watching this lecture by its creator, I have changed my mind. The few use cases he gives are enough to convince me that I may someday use it, if only to give a bit of structure to edit conflict resolution.</p>
+<p>It appears to follow the Clojure library trend and implements work from a <a href="http://hal.archives-ouvertes.fr/inria-00555588/">published academic paper</a>.</p>
+<p>I will keep it in mind when I want lock-free eventual consistency.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.infoq.com/presentations/Building-User-Interfaces-with-Seesaw">
+              Building User Interfaces with Seesaw
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/building-user-interfaces-with-seesaw">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 24, 2012
+          </div>
+
+          
+<p><a href="https://github.com/daveray/seesaw">Seesaw</a> represents the best of Clojure: a monstrous Java library tamed to be pleasant and docile.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://cemerick.com/2012/07/19/2012-state-of-clojure-survey/">
+              2012 State of Clojure survey
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/state-of-clojure-2012">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 24, 2012
+          </div>
+
+          
+<p>Chas Emerick is at it again. Please fill in the survey if you have ever been exposed to Clojure. This is the third year that cemerick has conducted the survey. He does a great job at summarizing the data with nice graphs. Have a look at the <a href="http://cemerick.com/2011/07/11/results-of-the-2011-state-of-clojure-survey/">2011</a> and <a href="http://cemerick.com/2010/06/07/results-from-the-state-of-clojure-summer-2010-survey/">2010</a> survey results. The survey is useful to the entire community. Please participate.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.extremetech.com/extreme/133067-unbreakable-crypto-store-a-30-character-password-in-your-brains-subconscious-memory">
+              Unbreakable Crypto
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/unbreakable-crypto">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 19, 2012
+          </div>
+
+          
+<p>Good to see someone innovating on user authentication. Username + password is old as dirt.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://prog21.dadgum.com/142.html">
+              Your Coding Philosophies are Irrelevant
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/your-coding-philosophies-are-irrelevant">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 15, 2012
+          </div>
+
+          
+<p>James Hague:</p>
+<blockquote>
+<p>Now imagine there are two finished apps that solve roughly identical problems. One is enjoyable to use and popular and making a lot of money. The other just doesn't feel right in a difficult to define way. One of these apps follows all of your development ideals, but which app is it? What if the successful product is riddled with singletons, doesn't check result codes after allocating memory (but the sizes of these allocations are such that failures only occur in pathological cases), and the authors don't know about test-driven development?</p>
+</blockquote>
+<p>Imagine two pieces of medical equipment. One is easy to use, easy to clean, and always reliable. The other is buggy, has lots of crevices and corner which seem to collect infected goo, and needs constant maintenance. One of these apps was created by a rigorous design process, extensive testing, and built in an immaculate, air-conditioned factory manned by attractive MD/PhDs. The other was created in a basement from spare parts by a high school dropout with bad hygiene. What if the beautiful machine was created by the dropout?</p>
+<p>Is it even possible? Is it possible that software can be successful over time if it is not well-built? In my experience, messy software eventually drags new development (including bug fixes) to a halt. Time needs to be invested in cleanup.</p>
+<p>What I hear Hague saying is that some software architecture choices do not matter. This is true. But some do matter. They are not just important to you as a programmer. They are directly related to the number of bugs, the time it takes to fix a bug, and the time it takes to make a new feature. Don't throw the baby out with the bathwater.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.michaelnielsen.org/ddi/how-to-answer-a-question-a-simple-system/">
+              How to answer a question: a simple system
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/how-to-answer-a-question">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 15, 2012
+          </div>
+
+          
+<p><a href="http://scholarworks.uno.edu/td/877/">My Master's thesis</a><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> was very related to this topic, so I thought I would share a little anecdote.</p>
+<p>Michael Nielsen:</p>
+<blockquote>
+<p>As I describe in detail below, their approach was to take the question asked, to rewrite it in the form of a search engine query, or perhaps several queries, and then extract the answer by analysing the Google results for those queries.</p>
+</blockquote>
+<p>While I was researching my thesis, I came across <a href="http://ilpubs.stanford.edu:8090/421/1/1999-65.pdf">a paper by Sergey Brin</a> (cofounder of Google) which described a system called DIPRE which tried to do a similar thing using the Google index, though before Google was Google. My favorite quote from the paper was &quot;the Google search engine and other research projects&quot;. Brin has been aware of the power of huge sets of redundant documents for a long time.</p>
+<p>The system Nielsen describes is interesting and worth a look. I will just nitpick a little.</p>
+<ol style="list-style-type: decimal">
+<li>Why do so much query rewriting? Google does a lot of query augmentation itself now. Also, a high number of documents means it is very likely to find the question exactly as it was posed. Try asking Google a question and see if you can find the answer on the results page.</li>
+<li>The system does not actually get rid of domain knowledge: it replaces part of the algorithm with a Google search, but there is a lot of domain knowledge of the English language used to extract the data from the text. An implementation of the system would use a simple statistical model of answers to find the text to extract.</li>
+<li>The system of weighting queries is very hard to justify mathematically. Much better would be a probabilistic system, such as Naive Bayes. Naive Bayes is very simple and, modulo a naive assumption, is mathematically correct.</li>
+<li>Be careful with questions like &quot;Who shot JFK?&quot; It is difficult for humans to answer, let alone computers.</li>
+</ol>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The introduction to my thesis is a pretty good introduction to the techniques of information extraction in general.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://stackoverflow.com/questions/10947636/idiomatic-way-to-represent-sum-type-either-a-b-in-clojure/10951001#10951001">
+              Idiomatic way to represent sum type (Either a b) in Clojure
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/idiomatic-way-to-represent-either">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 13, 2012
+          </div>
+
+          
+<blockquote>
+<p>how do you represent sum types, also known as tagged unions and variant records? Something like <code>Either a b</code> in Haskell or <code>Either[+A, +B]</code> in Scala.</p>
+</blockquote>
+<p><code>Either</code> has two uses: to return a value of one of two types or to return two values of the same type that should have different semantics based on the tag.</p>
+<p>The first use is only important when using a static type system. <code>Either</code> is basically the minimum solution possible given the constraints of the Haskell type system. With a dynamic type system, you can return values of any type you want. <code>Either</code> is not needed.</p>
+<p>The second use <em>is</em> significant but can be accomplished quite simply in two (or more) ways:</p>
+<ol style="list-style-type: decimal">
+<li><code>{:tag :left :value 123} {:tag :right :value &quot;hello&quot;}</code></li>
+<li><code>{:left 123}             {:right &quot;hello&quot;}</code></li>
+</ol>
+<blockquote>
+<p>What I'd like to ensure, is that :tag is always there, and it can take only one of the specified values, and corresponding value is consistently of the same type/behaviour and cannot be nil, and there is an easy way to see that I took care of all cases in the code.</p>
+</blockquote>
+<p>If you would like to ensure this statically, Clojure is probably not your language. The reason is simple: expressions do not have types until runtime--until they return a value.</p>
+<p>The reason a macro will not work is that at macro expansion time, you do not have runtime values--and hence runtime types. You have compile-time constructs like symbols, atoms, sexpressions, etc. You can <code>eval</code> them, but using <code>eval</code> is considered bad practice for a number of reasons.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/programming-language-stages-of-development">
+              Programming Languages and Piaget's Stages of Cognitive Development
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 13, 2012
+          </div>
+
+          
+<p>I rewatched <a href="http://video.google.com/videoplay?docid=-533537336174204822">Doing with Images makes Symbols</a> recently and there was one bit that I had not absorbed before.</p>
+<p>In the talk, he explains the cryptic title. He took a simplified model of <a href="http://www.simplypsychology.org/piaget.html">Piaget's Stages of Cognitive Development</a>: corporal -&gt; visual -&gt; symbolic. He wanted to bring these three stages into relation with each other, so he made a sentence: &quot;Doing with Images makes Symbols&quot;. Doing, of course, is the body stage. Images is the visual stage. And symbols is the abstract symbolic stage.</p>
+<h3 id="doing">Doing</h3>
+<p>Imagine the <a href="http://el.media.mit.edu/logo-foundation/index.html">Logo programming language</a>. Logo is perfect for small children because it helps tie the visual and symbolic to their main mode of experience. Young children are primarily focused on their own bodily experience. They have trouble thinking from other points of view. But by translating their own actions (moving around) into symbolic instructions (Logo code), they can <em>see</em> the turtle performing the actions. Logo's turtle takes on the child's point of view and makes it visual. <strong>The child learns to see his/her own perspective from the outside</strong>. The coordinate system is egocentric. For example, the <code>FORWARD</code> command moves the turtle in the direction it is facing.</p>
+<p>Smalltalk includes the same egocentric perspective. Each object has its own perspective of the other objects in the system. Smalltalk objects could ask &quot;who are my neighbors in the list I am in&quot;. Squeak simulates a space that the objects inhabit which includes collision detection. This perspective, I would argue, is one of the unsung benefits of Object-Oriented Programming: the ability to program from the <strong>perspective of a single object at a time</strong>, freeing your mind from thinking about the inner workings of the rest of the objects. Objects are not just meant to be strung together but can be &quot;embodied&quot; by their programmer who sees from their unique perspective.</p>
+<h3 id="symbols">Symbols</h3>
+<p>The other end of the developmental spectrum is the symbolic. The obvious choice for symbolic programming is Lisp. Programs take on a very abstract quality and require advanced programming techniques. In this perspective, the programmer has a god-like, symbolic semantic of the workings of the system and <strong>builds abstractions in a calculus with simple yet powerful rules</strong>. Further, the programmer manipulates code in code. The coordinate system is abstract and relational. Shapes are manipulated in an abstract representation, not as pixels occupying space. A value may encode abstract knowledge (line between a and b) instead of specific coordinates.</p>
+<h3 id="images">Images</h3>
+<p>In the middle is the visual stage. I am going out on a limb, but I would like to posit that Java exemplifies this middle-ground perspective. In this perspective, you think and understand visually. You draw diagrams. <strong>You think in terms of archetypal interactions</strong> (client-server, MVC, etc). You can simultaneously conceptualize several roles in a single group of interacting objects. The coordinate system is cartesian, taking an external, objective perspective.</p>
+<p>This is not to say that Java does not include any corporal perspective, nor that Lisp is all symbolic. I am talking in broad generalities about <em>predominance</em>.</p>
+<h3 id="not-one-at-a-time-but-all-at-once">Not one-at-a-time but all-at-once</h3>
+<p>The interesting thing about Piaget's stages are that they are stages of dominance, not a rocket-stage-jettison progression. That is, we can still, as adults, think in terms of any of the prior levels. In fact, <strong>the most successful scientists and mathematicians work on the earliest levels (corporal/visual)</strong>. Einstein claimed he had body sensations about relativity and his disabilities with abstract symbols is well documented. These three types of thinking are done by different <em>parts</em> of the brain. The parts are always there but take dominant roles at different times in your life.</p>
+<p>How this relates to programming language design is that when we are designing a programming system, <strong>we should include all of these ways of thinking</strong> so that the programmer can choose the best way to think about the problem. The easiest way to draw a circle is from a self-centered perspective in terms of motion and gross actions. The easiest way to plan a protocol is visually with boxes and lines or swim lane diagrams. Once translated into symbolic code, syntactic and semantic abstractions become evident, and can be manipulated as such.</p>
+<p>The trick of good language design is to facilitate programming at any level and translation into the other levels. <strong>How can we perform this trick?</strong></p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.infoq.com/presentations/Why-is-a-Monad-Like-a-Writing-Desk">
+              Why is a Monad Like a Writing Desk?
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/why-is-a-monad-like-a-writing-desk">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 13, 2012
+          </div>
+
+          
+<p>The best explanation of Monads for beginners I have seen yet.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.infoq.com/presentations/Statistical-Graphics-ClojureScript">
+              Statistical Graphics, ClojureScript, &c.
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/statistical-graphics-clojurescript">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 13, 2012
+          </div>
+
+          
+<p>Kevin Lynagh shows off some cool code for easily generating (and automatically updating!) DOM from Clojurescript. I can't wait to get to experiment with this.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="page22.html">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="page20.html">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

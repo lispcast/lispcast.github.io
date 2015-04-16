@@ -1,0 +1,258 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Pre-Conj Interview: Jeanine Adkisson | LispCast</title>
+    <meta name="description" content="Jeanine Adkisson interview about variants.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-interview-jeanine-adkisson">
+              Pre-Conj Interview: Jeanine Adkisson
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 18, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#jeanine-adkisson"><img src="http://www.lispcast.com/img/pre-conj/jeanine-adkisson.jpg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>Jeanine Adkisson was kind enough to answer some questions. Her <a href="http://clojure-conj.org/speakers#jeanine-adkisson">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> will be about variants in Clojure. Read the <a href="http://www.lispcast.com/pre-conj-jeanine-adkisson">background to her talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Jeanine Adkisson</strong>: Through work, actually. I'd seen clojure around and studied some of its features from a language design perspective, but I've never really been a lisper, so it hadn't occurred to me to actually use it until we started a migration to datomic at GoodGuide. I admit to being a bit skeptical - I often find that lisps are a bit oversold - but a coworker of mine (<a href="https://twitter.com/bonkydog">@bonkydog</a>) started really gushing about generative testing, core.typed, and the awesomeness that is leiningen, so I decided to give it a closer look.</p>
+<p><strong>LC</strong>: Your talk is about Variants. Can you explain Variants and how they are useful?</p>
+<p><strong>JA</strong>: Sure! Variants are a functional design pattern that should be familiar to anyone who's worked in the Haskell/ML family of languages (and to a lesser extent, Erlang). Their main purpose is to provide a structured way to manage polymorphism. In lisps and other single-type languages, they're not that widespread because we don't have to convince a type-checker that our polymorphism works out in the end. But we still have to convice users of our libraries and our doc writers that our functions make sense!</p>
+<p>The method of representing variants I'll be talking about came out of some frustrations I was having at porting part of a language over to clojure, and finding it difficult to represent and destructure the trees I needed to process. But I was really impressed at how quickly David Nolen and Ambrose BS got back to me and shipped patches that made this approach possible (and typeable!).</p>
+<p><strong>LC</strong>: You mean David Nolen patched ClojureScript and Ambrose BS patched core.typed?</p>
+<p>I wonder what it means about dynamic languages like Clojure that you can add Variants as a library instead of making it an integral part like in Haskell. What do you think about that?</p>
+<p><strong>JA</strong>: Yeah, actually it was a bugfix the <code>match</code> macro and the way that core.typed handled vectors that were key. What's even more interesting about variants is that there is really no library to write - all the machinery is already there. The solution isn't even particularly clever or novel - it's already in use in, for example, instaparse. It's just not on people's radars, or they have misconceptions about the approach from their OO training.</p>
+<p>I love the fact that you can backport this pattern into a language that's not explicitly built for it. I wouldn't necessarily count that as a strength for dynamic languages in general though - I find a language's strengths often come from ways in which semantics are restricted. Clojure is already a great example of this because it explicitly rejects the use of willy-nilly mutable structures, to great benefit. Sure, you can program that way in Ruby, but the tools are already there in Clojure.</p>
+<p>What I find coolest about the Clojure case is the extent to which core.typed has been able to backport types onto a mostly untyped ecosystem. The general problems with dynamic languages are still there, but they have to be made explicit with union types. How many functions surprised you by outputting <code>(U &lt;thing&gt; (Value nil))</code>? But because it's powerful enough to support variants in a lightweight and usable way, I think we now have a tool to deal with one of the most common culprits of surprise nils.</p>
+<p><strong>LC</strong>: I think the approach is worthy of study. I flipflop between statically typed vs dynamically typed because there are obvious problems with both. How close does your core.match and core.typed solution come to a full-on ML/Haskell-style, integrated solution?</p>
+<p><strong>JA</strong>: It's pretty comparable, and actually has some advantages. Since it's just vectors and keywords, it's trivial to handle in a generic way, and as long as you're not putting functions or host objects in them it's trivial to serialize and send over the wire. (Haskell and ML can do most of this programming for you with various generic programming extensions, but it's not straightforward or obvious). But yeah, core.typed is capable of refining types based on the tag matching code generated by core.match - a little roundabout, but it gets the job done. The match macro can also match against more than one object at a time, something OO languages constantly struggle with. There's a <em>little</em> more macro work to be done in core.typed to make it really straightforward to do variants, but it's a relatively trivial syntactic transformation.</p>
+<p>In terms of typed vs. untyped, I think there's lessons to be learned from both. My instinct is to say that we just haven't really figured out how to make typed systems all that usable. Haskell and ML went a long way towards this, and I think they kind of hit a wall because of their restriction that compilation be decidable. In other words, the compiler is not allowed to infinite-loop - which sounds like a good idea until you line up all the restrictions required to make that happen. In dynamic languages, we don't have a semantic separation between &quot;compile-time&quot; and &quot;run-time&quot;, but we still talk about &quot;load-time&quot; vs &quot;run-time&quot;. And at load-time you can wield the full turing-complete power of the language. That's why I'm also excited about projects like Agda and Idris, which, while still statically typed and compiled, blur the lines between runtime and compile time - moving away from strict decidability guarantees in exchange for a more expressive system.</p>
+<p><strong>LC</strong>: A lot of the audience is going to be new to Clojure or they have never heard of variants. Is there a resource that you think would help make the most of their time? Just a little pre-reading or pre-watching so they feel confident with the material?</p>
+<p><strong>JA</strong>: Yeah, there's unfortunately not a whole lot targeting clojure or other lisps, which is one of the reasons I wanted to give this talk. There's a great section in the <a href="http://ocaml.org/learn/tutorials/data_types_and_matching.html#Variantsqualifiedunionsandenums">ocaml tutorial</a> about them, and <a href="http://learnyouahaskell.com/making-our-own-types-and-typeclasses#algebraic-data-types">Learn You a Haskell</a> covers them as well (although they call them ADTs). The approach I'll be talking about is most like what's used in Erlang, as in the <a href="http://learnyousomeerlang.com/syntax-in-functions#in-case-of">temperature example here</a>.</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>JA</strong>: Probably the best way to keep up with me is on twitter at <a href="https://twitter.com/jneen_">@jneen_</a> (note the final underscore), or on github as <a href="https://github.com/jneen">@jneen</a>.</p>
+<p><strong>LC</strong>: One last question: If Clojure were a comic book superhero, what would its superpower be?</p>
+<p><strong>JA</strong>: Hahaha, I'd probably say a shapeshifter, like most lisps I suppose.</p>
+<p><strong>LC</strong>: Thanks for an excellent interview. I had fun.</p>
+<p><strong>JA</strong>: Awesome, thanks!</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/pre-conj-interview-lucas-cavalcanti">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/pre-conj-interview-steve-miner">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Clojure Gazette Looking Forward</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-gazette-looking-forward-2015</guid>
+                  <link>http://www.lispcast.com/clojure-gazette-looking-forward-2015</link>
+                  <pubDate>Mon 19 Jan 2015 02:18:48 PM CST</pubDate>
+                  <description>
+                    I am looking for more sponsors for the Clojure Gazette and I need your help.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

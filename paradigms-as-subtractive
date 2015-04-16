@@ -1,0 +1,218 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Programming Paradigms and Expressive Power | LispCast</title>
+    <meta name="description" content="">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/paradigms-as-subtractive">
+              Programming Paradigms and Expressive Power
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 09, 2012
+          </div>
+
+          
+<p>I recently watched a <a href="http://skillsmatter.com/podcast/agile-testing/bobs-last-language">talk by Uncle Bob Martin called <em>The Last Programming Language</em></a>. Since I had just written a post relating <a href="/indirection">indirection mechanisms to expressive power</a>, I was intrigued by Uncle Bob's idea and wanted to explore it further.</p>
+<p>Uncle Bob gives a brief history of programming paradigms. Here are the ones he mentions:</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Modular_programming">Modular Programming</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Structured_programming">Structured Programming</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented Programming</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Functional_programming">Functional Programming</a></li>
+</ul>
+<p>His perspective was that programming paradigms are generally subtractive.</p>
+<ul>
+<li>Modular programming removed large programs</li>
+<li>Structured programming removed GOTOs</li>
+<li>Object Oriented programming removed hand-rolled vtables</li>
+<li>Functional programming removed mutable state</li>
+</ul>
+<p>He concludes by saying that there's nothing left to take away and a language of the future would have to have all of these.</p>
+<blockquote>
+<p>Perspective is worth 80 IQ points. -- Alan Kay</p>
+</blockquote>
+<p>The idea that paradigms are subtractive is interesting. It is interesting to look at what is taken away. However, I would rather say that paradigms replace a manual, error-prone pattern with a more reliable one (usually through <a href="/indirection">indirection</a>). Structured programming didn't just ban GOTO. It also encouraged conditionals and loops. Object Oriented programming didn't just prohibit tables of function pointers, it gave a unified syntax and semantics for message dispatch. But, still, I do appreciate the perspective.</p>
+<p>On the other hand, I think Uncle Bob has left out many interesting paradigms from his history. <a href="http://en.wikipedia.org/wiki/Programming_paradigm">Wikipedia lists 59 paradigms</a> in a hierarchy. (Note that they are not mutually exclusive!) Let's see if we can apply his subtractive perspective to those paradigms.</p>
+<h3 id="aspect-oriented-programmingaop"><a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">Aspect-oriented programming</a></h3>
+<p><strong>. . . aims to increase modularity by allowing the separation of cross-cutting concerns.</strong></p>
+<h4 id="what-does-it-remove">What does it remove?</h4>
+<p>The mixing of concerns.</p>
+<h3 id="concatenative-programmingcp"><a href="http://en.wikipedia.org/wiki/Concatenative_programming_language">Concatenative programming</a></h3>
+<p><strong>A concatenative programming language is a point-free programming language in which all expressions denote functions and the juxtaposition of expressions denotes function composition.</strong></p>
+<h4 id="what-does-it-remove-1">What does it remove?</h4>
+<p>Explicit arguments to functions (point-free!).</p>
+<h3 id="constraint-programmingconp"><a href="http://en.wikipedia.org/wiki/Constraint_programming">Constraint programming</a></h3>
+<p><strong>. . . is where relations between variables are stated in the form of constraints.</strong></p>
+<h4 id="what-does-it-remove-2">What does it remove?</h4>
+<p>Specifying the sequence of steps to execute.</p>
+<h3 id="logic-programminglogic"><a href="http://en.wikipedia.org/wiki/Logic_programming">Logic programming</a></h3>
+<p><strong>. . . is the use of mathematical logic for computer programming.</strong></p>
+<h4 id="what-does-it-remove-3">What does it remove?</h4>
+<p>Much like constraints, it removes the explicit steps to execute.</p>
+<h3 id="array-programmingarray"><a href="http://en.wikipedia.org/wiki/Array_programming">Array programming</a></h3>
+<p><strong>. . . is the generalization of operations on scalar values to apply transparently to vectors, matrices, and higher dimensional arrays.</strong></p>
+<h4 id="what-does-it-remove-4">What does it remove?</h4>
+<p>The distinction between scalar and vector quantities.</p>
+<h3 id="language-oriented-programminglop"><a href="http://en.wikipedia.org/wiki/Language-oriented_programming">Language-oriented programming</a></h3>
+<p><strong>. . . is the creation of a domain-specific language for the problem, then solve the problem in that language.</strong></p>
+<h4 id="what-does-it-remove-5">What does it remove?</h4>
+<p>General purpose programming languages.</p>
+<p>One more.</p>
+<h3 id="event-driven-programmingep"><a href="http://en.wikipedia.org/wiki/Event-driven_programming">Event-driven programming</a></h3>
+<p><strong>. . . means the flow of the program is determined by response to events.</strong></p>
+<h4 id="what-does-it-remove-6">What does it remove?</h4>
+<p>The <code>main</code> function?</p>
+<p>The perspective has some merits. But it also has flaws. I've already mentioned that it does not specify what the removed thing is replaced with, which may be more important than the removal itself. Also, the perspective probably does not apply to all programming paradigms, as Uncle Bob claims. He's exhibiting a blindness toward the possibility of future change because he can't imagine it.</p>
+<p>I also don't think we have come to the end of programming paradigms. Although I can't predict what paradigms will be invented in the future (if I could, I'd just invent it), I don't think we're looking at mere incremental improvement. It's just that after racking my brain I can't come up with much.</p>
+<p><a href="http://www.infoq.com/presentations/We-Really-Dont-Know-How-To-Compute">This video</a> holds some ideas.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/introduction-to-logic-programming-with-clojure">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/clojure-gazette">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

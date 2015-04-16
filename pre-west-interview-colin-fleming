@@ -1,0 +1,251 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Pre-West Interview: Colin Fleming | LispCast</title>
+    <meta name="description" content="Colin Fleming will talk about debugging in Cursive.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-colin-fleming">
+              Pre-West Interview: Colin Fleming
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 05, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#cfleming"><img src="http://www.lispcast.com/img/pre-west/colin-fleming.jpg"
+      style="height:150px;float:right"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Colin Fleming generously agreed to do an interview about his <a href="http://clojurewest.org/speakers#cfleming">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. The <a href="http://www.lispcast.com/pre-west-colin-fleming">background to the talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Colin Fleming</strong>: Several years ago I was working in Java on online transaction processing systems. I was interested in the promise that Clojure had to make such systems easier to work with, in particular the concurrency aspects. I also liked Clojure philosophically, a lot of the ideas behind it really resonated with me.</p>
+<p>I really wanted to use IntelliJ since I use it all the time and love it, but the existing plugin for it was fairly immature. I ended up porting a lot of it from Java to Clojure and that became Cursive, which is still the main Clojure project I've worked on.</p>
+<p><strong>LC</strong>: This year you're talking about debugging in Cursive. I never run an interactive debugger in Clojure, mostly because I don't have one readily available. I do remember using one in Java all the time. What am I missing?</p>
+<p><strong>CF</strong>: I use the debugger in Cursive pretty much every day, probably in a similar way to which you used to in Java. Cursive's debugger is basically IntelliJ's JVM debugger so it works in very much the same way with some Clojure-specific extensions. So you can stop at breakpoints, step, evaluate Clojure expressions, have conditional breakpoints where the conditions are Clojure expressions and all that. I'm working on some more Clojure-specific functionality like having a REPL running when stopped at a breakpoint too, which I think will be pretty nice. That said, the current expression evaluation works pretty well, and you can interactively inspect the returned objects and so on.</p>
+<p>An argument I hear a lot is that a debugger is not required when you have a REPL, since you can interactively test parts of your application more easily. I think it's definitely the case that the REPL allows some of the exploration of a live system that previously required a debugger, but I've never understood why you wouldn't want both. All my work is on Cursive, where I'm integrating with a massive framework that I don't understand well, it's written in Java and is totally stateful so it's actually pretty tough to test at a REPL like that sometimes. The debugger is critical to being able to see what the framework is doing, working without it would be much harder than it is.</p>
+<p><strong>LC</strong>: Is the debugger ready for prime time? If not, what is left?</p>
+<p><strong>CF</strong>: Yes, definitely - it's all working pretty well now. That said, nothing is ever totally done, I still have improvements I'd like to make to it. Performance is sometimes an issue, because the JDI really likes you to know the exact name of the class you're working with. That's basically impossible to predict from source code in Clojure so you end up having to filter through a lot of classes. I hope to be able to improve that somewhat. Recent versions of IntelliJ also added functionality which displays the results of evaluated expressions right in the editor while debugging, similar to Light Table's inline REPL evaluation. Cursive doesn't support that for Clojure code yet, but I'll fix that soon. And a fair amount of Java leaks through in the UI since it's based on IntelliJ's Java debugger - variables are displayed with their mangled names, and so on. JetBrains are actually in the process of migrating their Java debugger from an old proprietary framework to a new language-agnostic one that they use to develop debuggers for other languages. Once that's complete hopefully I can tidy that up.</p>
+<p><strong>LC</strong>: You're really making me want to jump into Cursive. I used to use the debugger all the time. Basically, I'd write code unsure of what it would do, and just jump in and see. That was in Java, so there was still a long compile step. Is that better in Cursive since it's an interactive compiler?</p>
+<p><strong>CF</strong>: Sure, using Cursive you can debug an arbitrary script which will just have the standard Clojure script startup time, or even better you can debug a REPL session. This means that you can put breakpoints in your code, and when that code is hit by whatever you're executing in your REPL it'll stop. I use this a lot when running tests and trying to figure out why a particular test isn't working. Cursive takes care of disabling locals clearing when running like this, and there's also a toggle button in the REPL toolbar for it which you can use when connecting to a remote JVM.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>CF</strong>: The best way to get updates about Cursive is <a href="https://twitter.com/CursiveClojure">on Twitter</a> or on the <a href="https://cursiveclojure.com/mailinglist.html">mailing list</a>. I also have a <a href="https://twitter.com/colinfleming">personal Twitter handle</a>, but that mostly serves to collect fans of the Scottish tennis player. They must be quite confused by my occasional tweets.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>CF</strong>: I'm going to go with blue cheese. It's a taste that you have to acquire, but once you do there's nothing better!</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/pre-west-interview-melanie-mitchell">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/pre-west-ron-toland">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

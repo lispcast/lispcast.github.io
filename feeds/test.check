@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Steve Miner</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-steve-miner</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-steve-miner</link>
+                  <pubDate>Sun 19 Oct 2014 09:15:48 AM CDT</pubDate>
+                  <description>
+                    Steve Miner talk about generating test.check generators.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-steve-miner"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Steve Miner</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-steve-miner</guid>
+                  <link>http://www.lispcast.com/pre-conj-steve-miner</link>
+                  <pubDate>Thu 09 Oct 2014 08:54:32 AM CDT</pubDate>
+                  <description>
+                    Steve Miner will talk about generating test.check generators.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-steve-miner"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

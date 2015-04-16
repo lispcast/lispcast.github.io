@@ -1,0 +1,304 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>The Ultimate Guide to Learning Clojure for Free | LispCast</title>
+    <meta name="description" content="There are many great resources out there for learning Clojure. Some of the resources are paid, but fortunately many of the best resources are absolutely free.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/ultimate-guide-to-learning-clojure-for-free">
+              The Ultimate Guide to Learning Clojure for Free
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 11, 2014
+          </div>
+
+          
+<p>Summary: <em>There are many great resources out there for learning Clojure. Some of the resources are paid, but fortunately many of the best resources are absolutely free.</em></p>
+<p><strong>Are you interested in learning Clojure?</strong> Would you like to get started without risking your money on a book? Is there something that can help you even know whether you want to learn Clojure?</p>
+<p>Well, yes.</p>
+<p>I learned Clojure for free. In fact, I'm a bit of a cheapskate. For many years I would avoid spending money if there was a free alternative. I also keep an eye on resources that pop up around the internet.</p>
+<p>I have assembled what I believe to be the best resources to start with if you want to get into Clojure but want to spend $0.</p>
+<h3 id="beginner">Beginner</h3>
+<p>Start here if you have never programmed in Clojure before.</p>
+<h4 id="reading">Reading</h4>
+<ul>
+<li><a href="https://github.com/ClojureBridge/curriculum">ClojureBridge Curriculum</a></li>
+</ul>
+<p>The ClojureBridge curriculum is a community effort that is informed by real-world workshops. It is excellent for starting.</p>
+<ul>
+<li><a href="http://www.braveclojure.com/">Clojure for the Brave and True</a></li>
+</ul>
+<p>A fun and adventurous guide through the Clojure journey.</p>
+<ul>
+<li><a href="http://aphyr.com/tags/Clojure-from-the-ground-up">Clojure from the Ground Up</a></li>
+</ul>
+<p>A direct approach to bringing more people (especially underrepresented groups) to the Clojure community. The style of this book is very direct and approachable.</p>
+<h4 id="exercises">Exercises</h4>
+<p>For beginners, these two exercise sets will give you plenty of practice with the details of the language.</p>
+<ul>
+<li><a href="http://www.4clojure.com/">4Clojure</a></li>
+</ul>
+<p>Exercises you can do right in your browser.</p>
+<ul>
+<li><a href="http://clojurekoans.com/">Clojure Koans</a></li>
+</ul>
+<p>Exercises you do with git and an editor on your local machine.</p>
+<h4 id="editors-and-installation">Editors and Installation</h4>
+<ul>
+<li><a href="https://github.com/ClojureBridge/curriculum/blob/master/outline/setup.md">ClojureBridge: Getting Set Up</a></li>
+</ul>
+<p>The best install guide is from <a href="http://www.clojurebridge.org/">ClojureBridge</a>. If you follow this completely you'll have Light Table installed, which is a great (and open source) editor that makes Clojure development very easy.</p>
+<h4 id="documentation">Documentation</h4>
+<ul>
+<li><a href="https://github.com/jafingerhut/clojure-cheatsheets/tree/master/pdf">Clojure Cheatsheet</a></li>
+</ul>
+<p>An organized list of built-in Clojure functions and macros.</p>
+<ul>
+<li><a href="http://conj.io/">Grimoire</a></li>
+</ul>
+<p>A searchable version of the cheatsheet with documentation, source code, and examples.</p>
+<h4 id="workshops-and-events">Workshops and Events</h4>
+<ul>
+<li><a href="http://www.clojurebridge.org/">ClojureBridge</a></li>
+</ul>
+<p>ClojureBridge hosts free workshops around the world to encourage diversity in the Clojure community. Go to one if you can.</p>
+<ul>
+<li><a href="http://clojure.meetup.com/">Clojure Meetups</a></li>
+</ul>
+<p>There are many groups on Meetup.com that are interested in Clojure and functional programming. Find one in your area and get in touch.</p>
+<h4 id="online-community">Online Community</h4>
+<ul>
+<li><a href="http://irc.lc/freenode/clojure/irctc">#clojure IRC channel on freenode</a></li>
+</ul>
+<p>Always hundreds of people on and someone to help you if you get stuck.</p>
+<ul>
+<li><a href="https://groups.google.com/forum/#!forum/clojure">Clojure Google Group</a></li>
+</ul>
+<p>Clojure discussion group. This contains everything from announcements of new library releases to beginners asking questions.</p>
+<ul>
+<li><a href="http://stackoverflow.com/">stackoverflow</a></li>
+</ul>
+<p>Ask questions on stackoverflow. They are usually answered very quickly.</p>
+<h4 id="videos">Videos</h4>
+<ul>
+<li><a href="https://vimeo.com/68375202">Stuart Halloway: Introduction to Clojure</a></li>
+</ul>
+<p>A great high-level introduction to the philosophy behind Clojure.</p>
+<h3 id="intermediate">Intermediate</h3>
+<p>Once you've got the basics and need to go deeper.</p>
+<h4 id="reading-1">Reading</h4>
+<ul>
+<li><a href="https://github.com/clojure-cookbook/clojure-cookbook">Clojure Cookbook</a></li>
+</ul>
+<p>An open source, community-built book (also available for purchase). It includes many real-world, practical &quot;recipes&quot;.</p>
+<h4 id="exercises-1">Exercises</h4>
+<ul>
+<li><a href="http://exercism.io/">exercism.io</a></li>
+</ul>
+<p>Once you're writing Clojure code, do these exercises and get comments on your style.</p>
+<ul>
+<li><a href="https://projecteuler.net/">Project Euler</a></li>
+</ul>
+<p>These exercises are not Clojure-specific. They are small problems but are usually tricky enough to require deep thinking. I cut my Clojure teeth on Project Euler before other systems existed.</p>
+<h4 id="documentation-1">Documentation</h4>
+<ul>
+<li><a href="https://clojure.github.io/clojure/clojure.core-api.html">Clojure API Docs</a></li>
+</ul>
+<p>The official documentation.</p>
+<ul>
+<li><a href="http://clojuredocs.org/">ClojureDocs</a></li>
+</ul>
+<p>A searchable community documentation project.</p>
+<ul>
+<li><a href="http://crossclj.info/">CrossClj</a></li>
+</ul>
+<p>Cross-references between Clojure libraries. Very interesting stuff.</p>
+<h4 id="editors">Editors</h4>
+<p>At this point, you may want to think about dedicating some time to learning a different editor. Emacs is the most popular, and many people use vim.</p>
+<ul>
+<li><a href="http://clojure-doc.org/articles/tutorials/emacs.html">Emacs + CIDER</a></li>
+</ul>
+<p>An Emacs plugin called CIDER is the most popular way to use Emacs with Clojure. It gives you lots of functionality.</p>
+<ul>
+<li><a href="http://www.neo.com/2014/02/25/getting-started-with-clojure-in-vim">vim + Fireplace</a></li>
+</ul>
+<p>Many people use vim, so if you like it, here's a setup guide.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>There is a ton of value in these free resources. But if you'd like to venture into something that is tailored for bringing up up to speed in Clojure from nothing to writing code and you don't mind paying, check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's 95 minutes of screencasts, exercises, and visuals and there's nothing else like it.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/pre-conj-scheme-workshop">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/data-functions-macros-why">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

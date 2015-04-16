@@ -1,0 +1,266 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Willy Wonka and the core.async Guidelines | LispCast</title>
+    <meta name="description" content="There are a few conventions in core.async that are not hard to use once you've learned them. But learning them without help can be tedious. This article presents three guidelines that will get you through the learning curve.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/willy-wonka-core-async">
+              Willy Wonka and the core.async Guidelines
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 10, 2014
+          </div>
+
+          
+<p>Summary: <em>There are a few conventions in core.async that are not hard to use once you've learned them. But learning them without help can be tedious. This article presents three guidelines that will get you through the learning curve.</em></p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/willy-wonka.jpg" alt="Willy Wonka, inventor of CSP." /><p class="caption">Willy Wonka, inventor of CSP.</p>
+</div>
+<h3 id="introduction">Introduction</h3>
+<p>The more you use core.async, <strong>the more you feel like Willy Wonka</strong>. He knew how to maximize the effectiveness of the Oomploompa. And while core.async comes with a lot of functions built in, he knew exactly which ones to use at which time.</p>
+<p>In this extremely rare glimpse into the functioning of his mysterious factory, we take a look at the guidelines Wonka himself follows when orchestrating the work of the Oompaloompas.</p>
+<h3 id="when-to-use-go-versus-thread">When to use <code>go</code> versus <code>thread</code>?</h3>
+<div class="figure">
+<img src="http://www.lispcast.com/img/oompa.jpeg" alt="Willy Wonka with his Thread Pool." /><p class="caption">Willy Wonka with his Thread Pool.</p>
+</div>
+<h4 id="background">Background</h4>
+<p>Each Oompaloompa is a thread. Willy Wonka has a special group of Oompaloompas he calls a <em>thread pool</em>. Their assigment is simple: they manage a group of tasks that Wonka calls <code>go</code> blocks. Whenever Wonka has an appropriate task, he writes a <code>go</code> block and hands it to the Oompaloompas to work on.</p>
+<p>As the Oompaloompas work, they take one task and do it until the task <em>parks</em>. When it parks, they put it down and pick up another task that isn't parked. <strong>Tasks become unparked when they get new input</strong> from the chocolate pipes. Then the Oompaloompas can continue working on them.</p>
+<p>At one time, Wonka used to give the thread pool all sorts of tasks. He would give them very long calculation tasks, like weighing each chocolate bean in his chocolate bean mountain. He noticed that when they did this, <strong>lots of tasks were left undone, even though they were not parked</strong>, because all of the Ooompaloompas were busy doing something else.</p>
+<p>So he came up with a guideline.</p>
+<h4 id="avoid-long-calculations-and-blocking-inside-go-blocks">Avoid long calculations and blocking inside <code>go</code> blocks</h4>
+<p>Does your code do significant I/O, like downloading a file or writing to the network? Are you doing a very long calculation?</p>
+<p>Then use a <code>thread</code>. <strong>If it will take a long time or block, you want a dedicated thread.</strong> It can work as long as it wants, and even block. That way it doesn't slow down the work of the thread pool.</p>
+<p>Otherwise, you can use a <code>go</code> block.</p>
+<h3 id="when-to-use-single--versus-double-bang">When to use single- versus double-bang (!)</h3>
+<div class="figure">
+<img src="http://www.lispcast.com/img/oompa-loompa-2.jpg" alt="A couple of blocked Oompaloompas." /><p class="caption">A couple of blocked Oompaloompas.</p>
+</div>
+<h4 id="background-1">Background</h4>
+<p>Wonka also noticed that he needed to <strong>write different instructions</strong> for his two types of Oompaloompa. When he wrote a <code>go</code> block, he needed to say &quot;park while you wait for input&quot;. But for the other Oompaloompas created with <code>thread</code> (or for his own work), he needed an instruction that said &quot;block while you wait for input&quot;.</p>
+<p>So he came up with a little notation convention. If you're just parking, so you're in a <code>go</code> block, use one bang. If you're outside of a <code>go</code> block, meaning you need to block, use two bangs.</p>
+<p>These were his versions of his basic instructions:</p>
+<p><code>&gt;!</code>, <code>&lt;!</code>, and <code>alts!</code> versus <code>&gt;!!</code>, <code>&lt;!!</code>, and <code>alts!!</code>. The convention is easy.</p>
+<h4 id="use-single-bang-versions-in-go-blocks-and-double-bang-versions-outside.">Use single-bang versions in <code>go</code> blocks and double-bang versions outside.</h4>
+<p>The single-bang versions of these functions are meant to park a <code>go</code> block. Although they are defined as functions, they have special meaning to the <code>go</code> macro. In fact, if you actually run the functions (outside of a <code>go</code> block), they will throw an exception unconditionally, telling you <strong>they are meant to be inside a go block</strong>.</p>
+<p>The double-bang versions are blocking. That means that the thread they are running on will block if the channel is not ready. They can be used outside of a <code>go</code> block (anywhere) or inside of a <code>thread</code> block. <strong>It's safe to block inside a <code>thread</code> block since it's a dedicated thread.</strong></p>
+<h3 id="put"><code>put!</code></h3>
+<div class="figure">
+<img src="http://www.lispcast.com/img/wonka-angry.jpg" alt="Willy Wonka writing instructions for his mailman." /><p class="caption">Willy Wonka writing instructions for his mailman.</p>
+</div>
+<h4 id="background-2">Background</h4>
+<p>Like all factories, Willy Wonka's needs deliveries. When the UPS truck comes, there's plenty of boxes to unload. But Wonka is busy. So he leaves a note outside for the delivery guy.</p>
+<p>The note tells the guy where to put everything so the Oompaloompas know where to find it. When he says where to put a box, he spells it <code>put!</code>. That is, it has a bang.</p>
+<p>It's unfortunate because <strong>the other functions with a bang mean they park</strong>. But <code>put!</code> does not park. Wonka was just angry one day, and the convention stuck.</p>
+<p>But the delivery guy knows that Wonka is eccentric, so he doesn't take it personally and does his job. He puts stuff in its places, without blocking.</p>
+<h4 id="use-put-to-get-stuff-into-your-channels-from-outside.">Use <code>put!</code> to get stuff into your channels from outside.</h4>
+<p><code>put!</code> is a way to <strong>get values from outside of core.async</strong> into core.async without blocking. For instance, if you're using a callback-style, which is very common in Javascript, you will want to make your callback call <code>put!</code> to get the value onto a channel.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>That's it! Now to eat some chocolate!</p>
+<p>core.async is really cool, but it has a learning curve. Once you learn these conventions, you will begin to feel the power they give you, whether you're making chocolate or building cars. If you'd like to learn core.async and <strong>feel like Willy Wonka</strong>, I recommend the <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a> videos. They build up a deep understanding of the fundamental concepts in a fun and gradual way.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/pre-conj-steve-miner">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/pre-conj-steven-yi">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

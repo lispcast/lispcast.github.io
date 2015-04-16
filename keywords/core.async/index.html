@@ -1,0 +1,1271 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: core.async | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/core-async-browser-motivation">
+              core.async in Browsers
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 29, 2014
+          </div>
+
+          
+<p>Summary: <em>Javascript's concurrency model forces code to give up control of when a callback will be called. <code>core.async</code> gives you back that control and hence lets you code in a more natural style.</em></p>
+<p>Well, there comes a time in every programmer's life when they take a look at the <a href="http://www.thoughtworks.com/radar/#/languages-and-frameworks/core-async">ThoughtWorks Technology Radar</a> and they realize that <code>core.async</code> is in the Trial circle, meaning <strong>you should see if you might want to use it</strong>.</p>
+<p>And if you're there, right there in that phase of your programming trajectory, eyeballing <code>core.async</code> for your next (or current) project, Welcome. This post is for you. Here it goes.</p>
+<p><strong>Why <code>core.async</code>?</strong> Well, the short answer is that it makes concurrency much, much, much, very much easier. I mean, let's face it: <strong>concurrency is so hard by itself</strong>, it has plenty of muches to spare. Now, I haven't used <code>core.async</code> a lot on the JVM. I wrote some, but it wasn't really the right thing for it. I plan on writing more later, I just haven't had the right project for it.</p>
+<p>But I have used it a lot in ClojureScript in browsers. <sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> And it is nice. It lets you do things that you could write yourself, given enough time. But you're more likely to solve the 16-ring Tower of Hanoi before you get all the kinks out. It's much better to <strong>let a machine do the hard work</strong>. That's what the 20th Century was all about: machines instead of muscle. And the 21st Century will be about computers instead of brains. Best get ahead of the curve.</p>
+<p>I say you should let the machine do the work, but maybe that's too vague. Let's look at a concrete example. First, <strong>how do you do an ajax request then do something with the value?</strong> Easy:</p>
+<pre><code>(ajax &quot;http://example.com/json-api&quot;
+      #(js/console.log %))</code></pre>
+<p><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<p>We're in Javascript, so we have to pass a callback which will get the result. That was easy. A little harder is <strong>making two API calls and doing something with both results</strong>.</p>
+<pre><code>(ajax &quot;http://example.com/random-number&quot;
+      (fn [r1]
+        (ajax &quot;http://example.com/non-random-number&quot;
+              (fn [r2]
+                (js/console.log (/ (:n r1) (:n r2)))))))</code></pre>
+<p>Alright, that wasn't too bad. <strong>A little indentation never hurt anyone.</strong> But, wait a second! <strong>We don't do the second request until the first request is already done.</strong> I've got a browser the size of a minivan and a 20 Megabit internet connection, and I'm doing one request at a time? That sucks!</p>
+<p>We could start them both at the same time. But what order will they come back in? Welcome to the world of concurrency!!!! Things happening (maybe) at the same time, or at least <strong>you don't know what order they will happen in!</strong></p>
+<p>Well, let's try something. What if <strong>the first one to finish wrote its result down, then the second one to finish would know that it was second</strong> and it could do the final calculation? What would that look like?</p>
+<pre><code>(def r1 (atom nil))
+(def r2 (atom nil))
+
+(defn final-calculation []
+  (js/console.log (/ @r1 @r2)))
+
+(defn try-final-calculation []
+  (when (and @r1 @r2)
+    (final-calculation)))
+
+(ajax &quot;http://example.com/random-number&quot;
+  #(do
+    (reset! r1 %)
+    (try-final-calculation)))
+
+(ajax &quot;http://example.com/non-random-number&quot;
+  #(do
+    (reset! r2 %)
+    (try-final-calculation)))</code></pre>
+<p>Ok, well, that should work. What happens if you have to do 3 AJAX requests? Not so bad, either. What about 17? Oh, man, that sucks. We could do something like make a super-promise, where <strong>you can promise many values and only call a function at the end</strong> when they're all there. Yes, you can do that. It really wouldn't be hard, even.</p>
+<pre><code>(defn super-promise
+  &quot;Create a promise for many values. Use `deliver`
+  to add values.
+
+  keys: all of these keys must be present before calling f
+  f: the function to call. Will be passed a map.&quot;
+  [keys f]
+  (let [r (atom {})]
+    (add-watch r :promise
+               (fn [_ _ _ s]
+                 (when (every? #(contains? s %) keys)
+                   (f s))))
+    r))
+
+(defn deliver [promise key value]
+  (swap! promise assoc key value))
+
+(def rs (super-promise [:r1 :r2]
+                       (fn [{:keys [r1 r2]}]
+                         (js/console.log (/ (:n r1) (:n r2))))))
+
+(ajax &quot;http://example.com/random-number&quot;
+  #(deliver rs :r1 %))
+
+(ajax &quot;http://example.com/non-random-number&quot;
+  #(deliver rs :r2 %))</code></pre>
+<p>Fhew! That's done. It works. It scales to many simultaneous AJAX calls. It's generic. Well, generic for <em>this</em> particular pattern. If we have a different pattern, we'd have to <strong>come up with a different solution</strong>.</p>
+<p>We're looking through a small porthole into <em>callback hell</em>. The identifying characteristic of callback hell is that you give over control from your code, which was all nice and procedural and easy to follow, you give the control over to whatever demon is going to call that callback. You sell your virtual soul for a bit of asynchrony. But you can't cheat the Devil. When all is said and done, all of your work gets done but <strong>you need some savior angel to help you coordinate all of the pieces back together again</strong>. In this case, it's the super-promise, which works in the first circle of hell, but even Dante can't help you if you go further.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup></p>
+<p>Now that we've got a decent solution <em>to this particular problem</em> established pre-<code>core.async</code>, let's look at what it would be using <code>core.async</code>. We'll assume that our <code>ajax-channel</code> function returns a <code>core.async</code> channel.</p>
+<pre><code>(let [r1-channel (ajax-channel &quot;http://example.com/random-number&quot;)
+      r2-channel (ajax-channel &quot;http://example.com/non-random-number&quot;)]
+  (go
+    (js/console.log (/ (:n (&lt;! r1-channel)) (:n (&lt;! r2-channel))))))</code></pre>
+<p>Let me just get it out of the way and never mention it again: <em>it's shorter</em>. It's shorter even than the naive solution using two atoms. And it's shorter than the <code>super-promise</code> solution even if you don't include the <code>super-promise</code> code. I'm done talking about the size, because <strong>it's only a little important</strong>.</p>
+<p>Now that that's out there, on to the more significant stuff. First and foremost is that <strong>you never lose control</strong>. The code even reads procedurally. Start two ajax requests and remember the channels. Start a <code>go</code> block (which means run the code asynchronously) and log the result of dividing the first result by the second result.</p>
+<p>Does it scale? You betcha! Imagine we need to make 192 imaginary AJAX calls before the Devil takes his due. The <em>only</em> way to do that is to <strong>do them all as fast as the browser fairies let you</strong>.</p>
+<pre><code>(let [numbers (range 192)
+      urls (map #(str &quot;http://example.com/choir?angelid=&quot; %) numbers)
+      channels (map ajax-channel urls)]
+  (go
+    (doseq [c channels]
+      (js/console.log &quot;Got: &quot; (&lt;! c)))))</code></pre>
+<p>The AJAX requests come back as fast as they can (meaning arbitrary order), and the results are logged in their original (numeric) order. <strong>You could do them in any order you want. That's because you're not giving up control.</strong></p>
+<p>How does this work? How can you have asynchrony and not give up control?</p>
+<p>I alluded to it before: <strong>you're making the machine do the work</strong>. That <code>go</code> block up there is actually a powerful macro that transforms your procedural code into a mess of callbacks (like in our <code>super-promise</code> example) that you would never want to write yourself. I mean, maybe you want to, but maybe you're nuts. <strong>And you'll get it wrong.</strong></p>
+<p>The transformation in the <code>go</code> block is pretty easy, as things go. It's mechanical. It's easy like lifting a car with your hands. Put enough leverage (by using a jack) and you can do it. It converts an easy motion (pushing down on the lever or turning the screw) into a powerful force. The <code>go</code> macro converts your easy code into a bunch of callbacks and coordinates them with a powerful state machine which will <strong>angelically reassemble them without ever losing control</strong>.</p>
+<p>It's all good-ol' callbacks and mutable state underground. But above ground, you've got code that's easy to reason about. No Devil's bargain. You've got an angel negotiating for you. That's the key thing! Channels are amazingly easy to reason about because <strong>each channel is so simple</strong>. But that's a story for another day!</p>
+<p>I should just mention that, yes, <code>core.async</code> is about procedural programming. Channels are mutable state. <code>core.async</code> is made for the small <strong>part of your code that is procedural and side-effecting</strong>. Every program has got such a part. If you're doing concurrent things (and in Javascript, you always are), <code>core.async</code> might be able to help provide a first-class mechanism for communication and coordination.</p>
+<p>That's what you might call the &quot;core&quot; of <code>core.async</code> in ClojureScript. <strong>It's about regaining control of your asynchronous calls and not smearing your logic across your code in little bits contained in callbacks.</strong> You keep your code's semantic integrity and you keep your sanity.</p>
+<p>If <strong>staying out of callback hell is to your liking</strong>, you just might like the divine help of a LispCast video course dedicated to teaching <code>core.async</code> in a gentle, graceful way. Presented in a unique visual format and at just the right pace, LispCast <a href="http://www.purelyfunctional.tv/core-async#channel-preview">Clojure core.async</a> will guide you to a deep understanding of the fundamentals of <code>core.async</code> so you can clean up your code, get more concurrency, and get back control.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Don't say &quot;the browser&quot; because there are many and they are different.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Let's imagine these functions exist and work as expected.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>And thank Clojure for the <code>atom</code>, which is like a cross or holy water when you find yourself <em>down there</em>.<a href="#fnref3">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/core-async-code-style">
+              core.async Code Style
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 10, 2014
+          </div>
+
+          
+<p>Summary: <em>If your functions return <code>core.async</code> channels instead of taking callbacks, you encourage them to be called within <code>go</code> blocks. Unchecked, this encouragement could proliferate your use of <code>go</code> blocks unnecessarily. There are some coding conventions that can minimize this problem.</em></p>
+<p>I've been using (and enjoying!) <code>core.async</code> for about a year now (mostly in ClojureScript). It has been a huge help for <strong>easily building concurrency patterns</strong> that would be incredibly difficult to engineer (and maintain and change) without it.</p>
+<p>Over that year, I've developed <strong>some practices for writing code with <code>core.async</code></strong>. I'm putting them here as an <a href="http://discuss.purelyfunctional.tv/t/core-async-code-styles/46">invitation for discussion</a>.</p>
+<h3 id="use-callback-style-if-possible">Use callback style, if possible</h3>
+<p>A style develops when using <code>core.async</code> where you convert what would in regular ClojureScript be a callback style with <em>return-a-channel</em> style. The channel will contain the result of the call when it is ready.</p>
+<p>Using this style to keep you out of &quot;callback hell&quot; is overkill. &quot;Callback hell&quot; is not caused by a single callback. It is caused by the <strong>eternal damnation of coordinating multiple callbacks</strong> when they could be called in any order at any time. <strong>Callbacks invert control.</strong></p>
+<p><code>core.async</code> quenches the hellfire because coordinating channels within a <code>go</code> block is easy. The <code>go</code> block decides which values to read in which order. <strong>Control is restored to the code in a procedural style.</strong></p>
+<p>But return-a-channel style is not exactly free of sin. If you return a channel too much, <strong>the code that calls those functions will likely end up in a <code>go</code> block</strong>.</p>
+<p><code>go</code> blocks will proliferate. <code>go</code> blocks incur extra cost, especially in ClojureScript where they happen asynchronously, meaning at the next iteration of the event loop, <strong>which is indeterminately far away</strong>.</p>
+<p>Furthermore, <code>go</code> blocks might begin nesting (a function whose body is a <code>go</code> block is called by another function whose body is a <code>go</code> block, etc), which is correct semantically but <strong>probably won't give you the performance you're looking for</strong>. It's best to avoid it.</p>
+<p>&quot;How?&quot; you say? The most important rule is to only use <code>core.async</code> in a particular function when necessary. If you can get by with just a callback, don't use <code>core.async</code>. <strong>Just use a callback.</strong> For instance, let's say you have an <code>ajax</code> function that takes a callback and you're trying to make a small API wrapper for convenience. You could make it return a channel like this:</p>
+<pre><code>(defn search-google [query]
+  (let [c (chan)]
+    (ajax (str &quot;http://google.com/?q=&quot; query) #(put! c %))
+    c))</code></pre>
+<p>The interesting thing to note is that <code>core.async</code> is not being used very well above. Yes, you get rid of a callback, but <strong>there isn't much coordination happening</strong>, so it's not needed. It's best to keep it straightforward, like this:</p>
+<pre><code>(defn search-google [query cb]
+   (ajax (str &quot;http://gooogle.com/?q=&quot; query) cb))</code></pre>
+<p>You're <strong>just doing one bit of work here</strong> (basically constructing a URL), which is a good sign. But how do you &quot;lift&quot; this into <code>core.async</code>?</p>
+<h3 id="section"><code>&lt;&lt;&lt;</code></h3>
+<p>There's a common pattern in Javascript (not ubiquitous, but very common) to put the callback at the end of the parameter list. Since the callback is last, <strong>you can easily write something to add it automatically</strong>.</p>
+<pre><code>(defn &lt;&lt;&lt; [f &amp; args]
+  (let [c (chan)]
+    (apply f (concat args [(fn [x]
+                             (if (or (nil? x)
+                                     (undefined? x))
+                                   (close! c)
+                                   (put! c x)))]))
+    c))</code></pre>
+<p>This little function is very handy. It automatically <strong>adds a callback to a parameter list</strong>. You call it like this:</p>
+<pre><code>(go
+  (js/console.log (&lt;! (&lt;&lt;&lt; search-google &quot;unicorn droppings&quot;))))</code></pre>
+<p>This function lifts <code>search-google</code>, a regular asynchronous function written with callback style, into <code>core.async</code> return-a-channel style. With this function, <strong>if I always put the callback at the end, I can use my functions from within regular ClojureScript code and also from <code>core.async</code> code</strong>. I can also use any function (and there are many) that happen to have the callback last. This convention has two parts: <strong>always put the callback last and use <code>&lt;&lt;&lt;</code> when you need it</strong>. With this function, I can reserve <code>core.async</code> for coordination (what it's good at), not merely simple asynchrony.</p>
+<h3 id="convention"><code>&lt;convention</code></h3>
+<p>There are times when writing a function using <code>go</code> blocks and returning channels <em>is</em> the best way. In those cases, I've adopted a naming convention. I <strong>put a <code>&lt;</code> prefix in front of functions that return channels</strong>. I tried it at the end of the name, but I like how it looks at the beginning.</p>
+<pre><code>(go
+  (js/console.log (&lt;! (&lt;do-something 1 2 3))))</code></pre>
+<p>The left-arrow of <code>&lt;do-something</code> fits right into the <code>&lt;!</code>. It also visually matches <code>(&lt;&lt;&lt; do-something 1 2 3)</code>, so it <strong>makes correct code look correct and <a href="http://www.joelonsoftware.com/articles/Wrong.html">wrong code look wrong</a></strong>. The naming convention extends to named values as well:</p>
+<pre><code>(def &lt;values (chan))
+
+(go
+  (while true
+    (js/console.log (inc (&lt;! &lt;values)))))</code></pre>
+<h3 id="conclusion">Conclusion</h3>
+<p>These conventions are a great compromise between ease of using <code>core.async</code> (<code>&lt;&lt;&lt;</code>) and universality (callbacks being universal in JS). The naming convention (<code>&lt;</code> prefix) visually marks code that should be used with <code>core.async</code>. These practices have taken me a long way. I'd love to discuss them with you <a href="http://discuss.purelyfunctional.tv/t/core-async-code-styles/46">here</a>.</p>
+<p>If you know Clojure and you are interested in learning <code>core.async</code> in a fun, interactive style, check out the <a href="http://purelyfunctional.tv/core-async">LispCast Clojure core.async videos</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/core-async-conveyor-belts-true-history">
+              Conveyor Belts: Nature's core.async Channels
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 13, 2014
+          </div>
+
+          
+<h3 id="a-true-history">A true history</h3>
+<p>Summary: <em>Conveyor belts are strikingly similar to Clojure core.async channels. While it could be a coincidence, there is speculation that conveyor belts were influenced by a deep understanding of core.async.</em></p>
+<p><strong>Who invented the conveyor belt?</strong> No one knows for sure. Many historians believe that it was Henry Ford, seeking to mechanize the transportation of car parts from one part of the factory to another. This conservative view is plausible. Henry Ford designed much of the assembly line in his factories.</p>
+<p>Despite the simplicity of this explanation, a small minority of researchers believe that there was a man behind Henry Ford who was the true inventor of the conveyor belt. Not much is known about him, but <strong>historians have pieced together a different story</strong>. This article is about that story.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/henry_ford.jpg" alt="Henry Ford in front of his invention." /><p class="caption">Henry Ford in front of his invention.</p>
+</div>
+<p>This is a classic picture of Henry Ford standing in front of his creation. Recent advances in <a href="https://www.youtube.com/watch?v=Vxq9yj2pVWk">digital imaging enhancement</a> have allowed us to learn a little more about the people that influenced Ford who, until recently, have <strong>lived within his shadow</strong>.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/strange_man.jpg" alt="Strange man who is suspected true inventor of conveyor belt." /><p class="caption">Strange man who is suspected true inventor of conveyor belt.</p>
+</div>
+<p>While the identity of this man is not known, historians have reassembled a story from bits and pieces of Henry Ford's journals and quotes. It is believed (by those few, brave historians) that <strong>this man is the true inventor of the conveyor belt</strong>. He looks eerily similar to the famed inventor of Clojure, Rich Hickey. However, the chronologies do not match up, so this hypothesis is easily ruled out.</p>
+<h3 id="conveyor-belt-similarities-to-core.async-channels">Conveyor belt similarities to core.async channels</h3>
+<p>It is well understood that the conveyor belt is a poor, physical compromise on the much more reasonable abstraction of the Clojure core.async channel. As lossy as the copy is, it is still quite useful. <strong>core.async channels and conveyor belts have many properties in common.</strong></p>
+<h4 id="things-can-be-put-onto-and-taken-off-of-a-conveyor-belt">Things can be put onto and taken off of a conveyor belt</h4>
+<p>The similarity here is uncanny. It is almost as if the inventor of the conveyor belt <strong>had some knowledge of the core.async operations</strong>.</p>
+<h4 id="the-conveyor-belt-serves-as-a-buffer">The conveyor belt serves as a buffer</h4>
+<p>Again, it is striking that the conveyor belt can serve nearly the same purpose as a core.async channel. On long conveyor belts, the people taking things off and putting things on <strong>might not even know each other</strong>. And for things that take an unknown amount of time, you can just point to the conveyor belt and say &quot;Wait here for the thing you need.&quot; <strong>They don't have to know when or from where it is coming.</strong></p>
+<h4 id="things-can-be-taken-off-in-the-same-order-they-are-put-on">Things can be taken off in the same order they are put on</h4>
+<p>This is something that perhaps the conveyor belt has lost. While <strong>core.async channels always maintain their own semantics</strong> for choosing which thing is taken next, conveyor belts are basically dumb and expose all of their contents. However, it is clear that you could enforce the common &quot;first-in-first-out&quot; queue behavior by always taking the last item from a conveyor belt.</p>
+<h4 id="when-the-conveyor-belt-is-full-the-putter-has-to-wait">When the conveyor belt is full, the &quot;putter&quot; has to wait</h4>
+<p>What happens when the conveyor belt fills up? Well, you <strong>wait for some room</strong>. Everyone has had this experience where you're at the supermarket and the cashier is taking too long to ring up your food so the conveyor belt fills up. You just have to wait with a dumb look while they look up the code for celery.</p>
+<h4 id="when-the-conveyor-belt-is-empty-the-taker-waits">When the conveyor belt is empty, the &quot;taker&quot; waits</h4>
+<p>Conversely to the full belt situation, when the belt is empty the taker must wait. This is what happens when the cashier is faster than the shopper at the supermarket. <strong>There's nothing to do but wait</strong> for some groceries to reach the end of the belt.</p>
+<h3 id="differences-between-conveyor-belts-and-core.async-channels">Differences between conveyor belts and core.async channels</h3>
+<p>Though the evidence that core.async influenced the development of the conveyor belt is overwhelming, there are some differences due to the <strong>physical limitations of time and space</strong>.</p>
+<h4 id="non-instantaneous-transfer">Non-instantaneous transfer</h4>
+<p>Though not truly instantaneous, core.async channels do operate at the speed of light. When a value is put onto a channel, <strong>it is immediately available to be taken</strong>. Contrast this with conveyor belts, which slowly move objects along a physical belt.</p>
+<h4 id="limited-in-length">Limited in length</h4>
+<p>Conveyor belts have finite length. But core.async channels can be passed around just like any other object. They, in fact, are not limited by space at all. Also, the length of a conveyor belt is equivalent to its size as a buffer. But core.async channels have <strong>properly decomplected buffer size from &quot;distance&quot; of travel</strong>.</p>
+<h4 id="no-droppingsliding-semantics">No dropping/sliding semantics</h4>
+<p>It is quite curious that this important feature of core.async channels has not been copied to conveyor belts. <strong>core.async channels can be set up to drop either the newest value added or the oldest value added.</strong> Conveyor belts that do that are considered defective. The best explanation is that physical goods are so expensive compared to computing ephemeral values that it is uneconomical to trow away any items after they are made.</p>
+<p>The jury is still out as to whether core.async influenced the development of conveyor belts. Was Tony Hoare, who invented Communicating Sequential Processes (on which core.async is based) given the secret to CSP by this same man? This hypothesis becomes more convincing when we see the immense similarities between conveyor belts and core.async channels.</p>
+<p>Here is a picture of Rich Hickey being picked up by a friend after Strange Loop 2014.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/delorian.jpg" alt="Rich Hickey being picked up by his friend after Strange Loop" /><p class="caption">Rich Hickey being picked up by his friend after Strange Loop</p>
+</div>
+<p>If you would like to explore the mysteries of the strange and tangled similarities between conveyor belts and core.async, you might want to try <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a>. It's a video series that introduces the concepts using animations, code, and exercises.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/elm-frp-clojure-core-async">
+              Elm FRP in Clojure core.async
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 14, 2014
+          </div>
+
+          
+<p>Summary: <em>Elm is an exciting FRP language. I implemented the FRP part in Clojure using core.async.</em></p>
+<p>I like to read research papers. I have ever since I was in high school. <strong>I've always wanted it to be pretty easy to just translate the pseudocode for an algorithm for a paper and then have it working without any trouble.</strong></p>
+<p>Of course, this rarely happens. Either the pseudo-code leaves out important details, or it's expressed in terms that are not available abstractions in any language I know. So then <strong>I am left to puzzle it all out</strong>, and who has the time?</p>
+<p>A few months ago I read the <a href="https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf">fantastic thesis</a> by <a href="https://twitter.com/czaplic">Evan Czaplicki</a><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> where he introduces <a href="http://elm-lang.org/">Elm</a>. It includes a novel way to express <strong>asynchronous Functional Reactive Programming</strong> (which he calls <em>Concurrent FRP</em>) and a way to express GUI layouts functionally.</p>
+<p><strong>I highly recommend the <a href="https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf">thesis</a>.</strong> It is very clear and readable, and points you to valuable resources.</p>
+<p>The reason I was reading it was because I think <strong>FRP has a bright future</strong>. It's definitely got potential for simplifying the way we write interactive applications. I wanted to learn how it works so that I could build bigger castles in the sky.</p>
+<p>Elm FRP is pretty cool. It is, first of all, very few parts. <strong>You build bigger abstractions from those small parts.</strong> It is built so that events trickle through the graph in order. In other words, they're synchronized.</p>
+<p>But the other interesting thing is that sometimes you don't want things to be synchronized. What if one of the calculations takes a long time? You don't want the GUI to stop responding to mouse events while that slow thing is happening. Elm lets you segment the graph into different <strong>subgraphs that can propagate concurrently</strong>.</p>
+<p>Seriously, just read the thesis.</p>
+<p>While I was reading it, I got to <strong>this page where he lays out all of the FRP functions in Concurrent ML</strong>. It's not uncommon for entire Computer Science theses to be written, passed, and published without a line of runnable code. But here it was, in <em>real code</em> (no pseudocode). I don't know ML, but I do know Haskell, which is related. And I started puzzling through it, trying to understand it.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/elm-frp.png" alt="Elm FRP in Concurrent ML" /><p class="caption">Elm FRP in Concurrent ML</p>
+</div>
+<p>By flipping between the text and the code, I got it. And then I realized: <strong>everything I needed to write this was in Clojure with core.async</strong>. So I got to work.</p>
+<p>It took a while of playing with different representations, but I got something I can use and that is pretty much a direct translation of the Concurrent ML code from the thesis. I toyed with some deeper factorizations, but I think they only muddy what's going on. And <strong>it runs in both Clojure and ClojureScript</strong>. It's <a href="https://github.com/ericnormand/elm-frp">available on Github</a>.</p>
+<p>And, of course, I needed to test my creation, so <strong>I ported the <a href="http://elm-lang.org/edit/examples/Intermediate/Mario.elm">Mario example from the Elm website</a></strong>. You have to click on it to start it. Use the arrow keys to walk left/right and up to jump. It captures your keystrokes. Click outside of the box to get your scrolling keys back.</p>
+<div id="mario" style="width: 100%; height: 200px" tabindex="100"></div>
+
+<script src="http://www.lispcast.com/files/mario.js"></script>
+
+<p><a href="https://github.com/ericnormand/elm-frp/blob/master/src/cljs/elm/examples/mario.cljs">The code for Mario.</a></p>
+<p>Now, <strong>I didn't write all of the cool GUI stuff</strong> from the second part of the thesis. I was learning Om so I decided to use that. That's why that part is so long. Writing Om components is basically as long as writing HTML + CSS.</p>
+<p>And Elm is a language built around these FRP abstractions, so a lot of the signals are built in. I had to write <strong>event handlers to capture the mouse clicks and keyboard events</strong>. But right in the <a href="https://github.com/ericnormand/elm-frp/blob/e8a5d222e5f7cb2efd90393a6ff1a55e797a8dd2/src/cljs/elm/examples/mario.cljs#L74">middle of mario.cljs</a>, you'll see a very straightforward translation of the Mario example from Elm.</p>
+<p>There are a few differences between the Elm version and the Clojure version. Clojure is untyped, so I was able to <strong>eliminate a channel</strong> used only to carry an input node id. That instead is passed along with the message on a single channel.</p>
+<p>Also, I added a node type called &quot;pulse&quot; which I use for emitting time deltas for calculating physics. I'm not sure if Elm internally does something similar for its timers but it seems like the correct solution. The trick is you want to <strong>emit a zero time delta</strong> while other events are firing, and an actual time delta when the timer ticks.</p>
+<p>Finally, instead of the graph being global as in the thesis, it's all tied to an &quot;event stream&quot;, which is where you send the events which get channeled to the correct input signal. You can have <strong>multiple event streams and hence multiple graphs</strong>.</p>
+<p>The implementation is very straightforward. You have to know the basics of Clojure core.async, plus <a href="http://rupsshankar.tumblr.com/post/66648884392/demystifying-core-asyncs-tap-and-mult"><code>mult</code> and <code>tap</code></a>. core.async brings Clojure a new set of abstractions that let us <strong>tap into more research and learn from more languages</strong>. And that makes me happy :)</p>
+<p>If you'd like to learn core.async, I have to recommend my own video course <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a>. It teaches the <strong>most important concepts from core.async</strong> using story, animation, and exercises. It is no exaggeration to say that it was the most anticipated Clojure video when it came out. Go check out a <a href="http://www.purelyfunctional.tv/core-async#preview">preview</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Go say Hi to him!<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/is-core-async-against-clojure-philosophy">
+              Is core.async Against the Clojure Philosophy?
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 06, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure core.async is a way to manage mutable state. Isn't that against functional programming?</em></p>
+<p>When core.async was first announced, there was a lot of fanfare. But among the celebration, there was some consternation about core.async. <strong>Isn't core.async against the functional principles of Clojure?</strong> Aren't channels just mutable state? Aren't the <code>&lt;!</code> and <code>&gt;!</code> operations mutation?</p>
+<p>Well, it's true. core.async is about mutation. <strong>It's procedural code.</strong> Go blocks run their bodies one step at a time. It's imperative.</p>
+<p>But that's what Clojure is all about. It <strong>makes functional programming easy</strong> (with <code>fn</code>s, immutable data structures, and higher order functions). It also makes mutable state <em>easy to reason about</em>. It does not eliminate it. <strong>It simply gives you better abstractions.</strong> That's what Atoms, Refs, Vars, and Agents are: useful abstractions for dealing with state.</p>
+<p>core.async is just another abstraction for dealing with state. But, following the Clojure philosophy, it was chosen to be easy to reason about. <strong>The hardest part about coordinating and communicating with independent threads normally is that neither of them know what the other is doing.</strong> You can make little signals using shared memory. But those signals get complicated fast once you scale past two threads.</p>
+<p>And that's what a channel is: it's just <strong>a shared coordination point</strong>. But it has some cool properties that make it super easy to reason about:</p>
+<ol>
+<li>Carry semantics: the channel carries its own coordination semantics (buffering, unbuffered, etc).</li>
+<li>Simple interface: channels have put, take, and close. That's it.</li>
+<li>Very scalable: any number of processes can use a single channel with no additional cost.</li>
+<li>Decoupling: consumers don't need to know producers and <em>vice versa</em>.</li>
+</ol>
+<p>Channels are awesome, but they're not the whole story. The other part of core.async is the go block. <a href="http://www.lispcast.com/core-async-browser-motivation">Go blocks are another abstraction</a>. They allow you to <strong>write code in an imperative style that blocks on channels</strong>. You get to use loops and conditionals, as well as local let variables, global variables, and function calls -- everything you're already using, but augmented with the coordination power of channels.</p>
+<p>All of these features add up to something you can reason about <em>locally</em>. That's the key: <strong>the code you're looking at now can be understood without looking at other code</strong>.</p>
+<p>But there's a downside: you now have more choices. In theory, they're easier choices. But that requires you to understand the choices. <strong>You need to understand the abstractions, the idioms, and the tradeoffs.</strong> That's the goal of the <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a> video course. If you'd like to use core.async but you don't know where to start, this is a good place.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-interview-julian-gamble">
+              Pre-Conj Interview: Julian Gamble
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 24, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#julian-gamble"><img src="http://www.lispcast.com/img/pre-conj/julian-gamble.jpg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>The next interview is with Julian Gamble. His <a href="http://clojure-conj.org/speakers#julian-gamble">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> is about core.async and ClojureScript. Read the <a href="http://www.lispcast.com/pre-conj-julian-gamble">background to his talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Julian Gamble</strong>: It was about 2007, I was a Java Programmer toying with Rails. I was reading Steve Yegge and his amazing but incendiary blog posts. These had a big theme on languages and expressiveness.</p>
+<p>I got curious enough to play with Common Lisp and Racket. I eventually worked through The Little Lisper - and found it hugely inspiring. I also read SICP and Paradigms of Artificial Intelligence Programming and was amazed (coming from Java) at what was possible with functional programming and homoiconicity.</p>
+<p>In 2008 I was looking for a way to combine the power of Lisp and my Java background. I had a look at ABCL and Kawa and found they didn't really have much of a community behind them.</p>
+<p>Then the Rich Hickey videos started coming out, &quot;Clojure for Java Programmers&quot; etc. Then lots of Java/Lisp people started coming out of the woodwork. I was fascinated by the design choices made and how opinionated the language was. I was delighted by the community that seemed to have come from thin air.</p>
+<p>In 2009 Stu Halloway's Programming Clojure book came out and I devoured it. Then I went back and worked through the Little Lisper chapters in Clojure - and found functional programming had a lot more to it than a first-year course for students in the 80s. This meant idiomatic functional programming didn't work like that anymore. (Although the idea of building a Lisp from a few primitives is still very elegant).</p>
+<p>In 2011 a Clojure User group started up in Sydney run out of Thoughtworks. This was a fantastic chance to meet up with people who programmed and developed their skills just for the joy of it - rather than just to pay a mortgage.</p>
+<p>In 2013 Dave Thomas started running LambdaJam in Australia, and it meant that the functional programming community because more social and more willing to look at each others ideas across languages. It also meant we developed a shared appreciation for the heritage of functional programming. We also developed a deeper appreciation of academic ideas and their linkage back to our practice.</p>
+<p>So now in 2014 when Rich Hickey gives a talk on Transducers, and explains that folds are fundamental - I go and read the linked papers from Hutton and Bird. Then I can go and talk about this with my local community of Clojure people. This is something that I wouldn't have done two years ago.</p>
+<p>Clojure has been a great ride!</p>
+<p><strong>LC</strong>: In your talk description, you mention that you will relate core.async to the concurrency semantics we already know. Can you explain this briefly?</p>
+<p><strong>JG</strong>: The assumption here is that most Clojure people have a Java or C# background. From this background they would have an understanding of how to put process on a thread, similar to how we might use a future in Clojure. Alternatively, Clojure people may have seen how we can pass a function to an agent in Clojure.</p>
+<p>Now it is true that core.async go blocks have some very specific queue sleep/wait semantics (CSP) that make it different to other concurrency models. In addition, core.async in JavaScript runs as part of the single-thread model of JavaScript, so it isn't semantically a thread, more of a 'process'.</p>
+<p>Given those assumptions, the primitives we find for doing concurrency in core.async are very similar to the concurrency models we have seen in the past in OO languages or in Clojure.</p>
+<p>In this talk we'll take a look at an example of taking a well known graphical example in Clojure, port it to ClojureScript and core.async. What we find is that many of the Clojure concurrency paradigms have a natural analogue in ClojureScript and core.async.</p>
+<p><strong>LC</strong>: Are there any topics to read up on or resources to look at that could help a beginner make the most of your talk?</p>
+<p><strong>JG</strong>: First thing to look at is David Nolen's <a href="http://swannodette.github.io/2013/08/02/100000-processes/">10,000 processes</a> and also <a href="http://swannodette.github.io/2013/08/02/100000-dom-updates/">this one</a>.</p>
+<p><a href="https://github.com/swannodette/swannodette.github.com/blob/master/code/blog/src/blog/processes/core.cljs">Take a look at the source code</a> and try and understand what it is doing.</p>
+<p>Also take a look at <a href="http://www.youtube.com/watch?v=enwIIGzhahw&amp;t=32m20s">Tim Baldridge's 2013 Conj talk at 32:20</a></p>
+<p>Also take a look at <a href="https://github.com/halgari/clojure-conj-2013-core.async-examples/blob/master/src/clojure_conj_talk/core.clj#L568-612">the code here</a>: (lines 568-612)</p>
+<p>Watch the 1969 version of The Italian Job.</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>JG</strong>: They can follow me on twitter with <a href="https://twitter.com/juliansgamble">@juliansgamble</a>.</p>
+<p>Or they can send me an email @ <script type="text/javascript">
+<!--
+h='&#106;&#x75;&#108;&#x69;&#x61;&#110;&#x67;&#x61;&#x6d;&#98;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#x69;&#108;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x6d;&#x61;&#x69;&#108;&#32;&#x61;&#116;&#32;&#106;&#x75;&#108;&#x69;&#x61;&#110;&#x67;&#x61;&#x6d;&#98;&#108;&#x65;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript> and ask me what I'm up to.</p>
+<p>(I've also been known to present at <a href="http://www.meetup.com/clj-syd/">clj-syd on meetup.com</a> - but that is probably only of interest to Sydney readers).</p>
+<p><strong>LC</strong>: One last question: If Clojure could eat, what would be its favorite food?</p>
+<p><strong>JG</strong>: Well I'm a huge fan of Dan Friedman's work on The Little Lisper/Schemer - which has frequent food references, such as a peanut butter and jelly sandwich. The book will at random reserve an empty page and state:</p>
+<p>THIS SPACE RESERVED FOR JELLY STAINS!</p>
+<p>So the answer would have to be PBJ sandwich!</p>
+<p>(But for all the British, European, Australian and New Zealand Readers - we all know it as peanut butter and strawberry jam - and some might be puzzled by the combination of these two condiments, but would still appreciate Friedman's book.)</p>
+<p><strong>LC</strong>: Thanks for a great interview!</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-julian-gamble">
+              Pre-conj Prep: Julian Gamble
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 04, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-applying-the-paradigms-of-core.async-in-clojurescripttalk">Talk: <a href="http://clojure-conj.org/speakers#julian-gamble">Applying the paradigms of core.async in ClojureScript</a></h3>
+<p><a href="http://clojure-conj.org/speakers#julian-gamble">Julian Gamble's talk</a> at the <em>conj</em> is about <a href="https://github.com/clojure/core.async/">core.async</a> in ClojureScript. core.async is an implementation of CSP for Clojure and ClojureScript. It allows for concurrency, and communication using an abstraction called channels. It is similar to built-in facilities in the Go programming language.</p>
+<h4 id="background">Background</h4>
+<p>core.async provides two main abstractions: go blocks and channels. Go blocks are lightweight processes that give the basic type of independent concurrency. To coordinate and communicate between the go blocks, the go blocks take values from and put values to channels.</p>
+<h4 id="why-it-matters">Why it matters</h4>
+<p><a href="https://github.com/clojure/core.async/">core.async</a> is important because it is a very powerful way to structure your code. Further, core.async is a library, not a core feature of the language, even though in many languages it is a fundamental part of the language. Finally, core.async gives Javascript (through ClojureScript) a much needed asynchrony model that is more expressive than callbacks.</p>
+<h3 id="about-julian-gambletalk">About <a href="http://clojure-conj.org/speakers#julian-gamble">Julian Gamble</a></h3>
+<p><a href="http://twitter.com/juliansgamble">Twitter</a> - <a href="https://github.com/juliangamble">Github</a> - <a href="http://juliangamble.com/blog/">Blog</a></p>
+<p><a href="http://clojure-conj.org/speakers#julian-gamble"><img src="http://www.lispcast.com/img/pre-conj/julian-gamble.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/token-buckets-in-core-async">
+              Token Buckets with core.async
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 10, 2014
+          </div>
+
+          
+<p>Summary: <em>Token Bucket is a simple algorithm for rate limiting a resource. It's easy to understand because you can reason about it in terms of real-world objects. core.async makes this algorithm very clear and easy.</em></p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/token%20bucket.png" alt="Token + BucketImage credits: token and bucket." /><p class="caption">Token + Bucket<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+</div>
+<p>You know you've got a good abstraction when you find lots of algorithms that are easy and clear to write using them. One algorithm that I really like because it's <strong>practical and simple</strong> is called the <a href="http://en.wikipedia.org/wiki/Token_bucket">Token Bucket</a>. It's used for <strong>rate limiting a resource</strong>. And it's very easy to write in core.async.</p>
+<p>Let me digress a little. Here in the US, we have a complicated voting system. Not only do your presidential votes count only indirectly, but the counting is done with machines that vary from state to state. Some of those systems are so complicated. It's a little scary because it's hard to know how those machines work.</p>
+<p>I mean, relatively hard. It's obviously possible to know, if you study enough. But <strong>compare it to papers in a box</strong>. I know there's all sorts of room for corruption in the papers in a box system. But it's understandable by children. Well, as long as they can count.</p>
+<p>The token bucket is similarly simple. There's a bucket. You put tokens in it at a certain rate (for instance, once per hour). If you have a token, you can take an action (ride the subway, send a packet, read a file), then you lose the token (it's good for one ride). If you don't have a token, you can wait. <strong>Everything slows down to the rate of tokens falling into the bucket.</strong></p>
+<p>It's so simple. It so easily <strong>corresponds to a real-world situation</strong> you can imagine. I love that type of algorithm.</p>
+<h3 id="an-implementation">An implementation</h3>
+<p>Let's build Token Bucket in core.async.</p>
+<p>First, we need a bucket. For that, we'll use a core.async channel with a buffer. Let's just start with size 10.</p>
+<pre><code>(def bucket (chan 10))</code></pre>
+<p>Bucket is done. Now, we need something to <strong>add tokens to the bucket at a given rate</strong>.</p>
+<pre><code>(go
+  (while true
+    (&gt;! bucket :token)
+    (&lt;! (timeout 1000))))</code></pre>
+<p>That will add one token to the bucket every second.</p>
+<p>We can rate limit an existing channel by <strong>forcing it to take a token before values get through</strong>.</p>
+<pre><code>(defn limit-rate [c]
+  (let [out (chan)]
+    (go
+      (loop []
+        (let [v (&lt;! c)]
+          (if (nil? v) ;; c is closed
+            (close! out)
+            (do
+              (&lt;! bucket) ;; wait for a token
+              (&gt;! out v)
+              (recur))))))
+    out))</code></pre>
+<h3 id="corner-cases">Corner cases</h3>
+<p>Ok, it's not that simple. There are two corner cases.</p>
+<ol style="list-style-type: decimal">
+<li>What happens when nobody takes a token out of the bucket? Do you keep putting coins in?</li>
+</ol>
+<p>The answer is yes. In the next hour, there are two tokens, so two can come through. But then . . .</p>
+<ol start="2" style="list-style-type: decimal">
+<li>What do you do when the bucket gets really full and a whole bunch of people take tokens out at the same time?</li>
+</ol>
+<p>Well, you let them all through. One token, one ride. There's no other coordination. And that means it's really important to choose the size of your bucket.</p>
+<p>The number of tokens your bucket can hold is called the <em>burstiness</em>. It's because when the bucket is full, you could get a rampage of people trying to get on the subway. How many people should be allowed through at that point? <strong>The burstiness is the maximum that should come through at a time.</strong></p>
+<p>We have our two parameters: the <em>rate</em> and the <em>burstiness</em>. Let's incorporate all of that.</p>
+<pre><code>(defn limit-rate [c r b]
+  (let [bucket (chan b) ;; burstiness
+        out (chan)]
+    (go
+      (while true
+        (&gt;! bucket :token)
+        (&lt;! (timeout (int (/ 1000 r)))))) ;; rate
+    (go
+      (loop []
+        (let [v (&lt;! c)]
+          (if (nil? v) ;; channel is closed
+            (close! out)
+            (do
+              (&lt;! bucket) ;; wait for a token
+              (&gt;! out v)
+              (recur))))))
+    out))</code></pre>
+<p>The burstiness is taken care of in the size of the buffer. The buffer will fill up if no one takes a token. Since we're using blocking buffers, <strong>putting tokens into a full bucket will block</strong> until something takes a token--exactly as the algorithm describes.</p>
+<p>Well, that's it. It's easy. And now <strong>we have a way to limit the rate of a channel</strong>. We can use it to limit the rates of other things, too, like a function call or access to a database. I use it to rate limit an API.</p>
+<p>core.async makes this algorithm nice and easy to use. There's a library that does this for you in a very convenient package. It's called <a href="https://github.com/brunoV/throttler">Throttler</a>. Bruno Vecchi has done the work of making this work well as a library. If you'd like to learn core.async, I recommend my <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async videos</a>. It's a gentle and fun introduction to a great topic. You will learn everything you need to write Token Bucket and more!</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Image credits: <a href="http://www.flickr.com/photos/coldfire/2605474584">token</a> and <a href="http://www.flickr.com/photos/rubyblossom/4227534087">bucket</a>.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/willy-wonka-core-async">
+              Willy Wonka and the core.async Guidelines
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 10, 2014
+          </div>
+
+          
+<p>Summary: <em>There are a few conventions in core.async that are not hard to use once you've learned them. But learning them without help can be tedious. This article presents three guidelines that will get you through the learning curve.</em></p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/willy-wonka.jpg" alt="Willy Wonka, inventor of CSP." /><p class="caption">Willy Wonka, inventor of CSP.</p>
+</div>
+<h3 id="introduction">Introduction</h3>
+<p>The more you use core.async, <strong>the more you feel like Willy Wonka</strong>. He knew how to maximize the effectiveness of the Oomploompa. And while core.async comes with a lot of functions built in, he knew exactly which ones to use at which time.</p>
+<p>In this extremely rare glimpse into the functioning of his mysterious factory, we take a look at the guidelines Wonka himself follows when orchestrating the work of the Oompaloompas.</p>
+<h3 id="when-to-use-go-versus-thread">When to use <code>go</code> versus <code>thread</code>?</h3>
+<div class="figure">
+<img src="http://www.lispcast.com/img/oompa.jpeg" alt="Willy Wonka with his Thread Pool." /><p class="caption">Willy Wonka with his Thread Pool.</p>
+</div>
+<h4 id="background">Background</h4>
+<p>Each Oompaloompa is a thread. Willy Wonka has a special group of Oompaloompas he calls a <em>thread pool</em>. Their assigment is simple: they manage a group of tasks that Wonka calls <code>go</code> blocks. Whenever Wonka has an appropriate task, he writes a <code>go</code> block and hands it to the Oompaloompas to work on.</p>
+<p>As the Oompaloompas work, they take one task and do it until the task <em>parks</em>. When it parks, they put it down and pick up another task that isn't parked. <strong>Tasks become unparked when they get new input</strong> from the chocolate pipes. Then the Oompaloompas can continue working on them.</p>
+<p>At one time, Wonka used to give the thread pool all sorts of tasks. He would give them very long calculation tasks, like weighing each chocolate bean in his chocolate bean mountain. He noticed that when they did this, <strong>lots of tasks were left undone, even though they were not parked</strong>, because all of the Ooompaloompas were busy doing something else.</p>
+<p>So he came up with a guideline.</p>
+<h4 id="avoid-long-calculations-and-blocking-inside-go-blocks">Avoid long calculations and blocking inside <code>go</code> blocks</h4>
+<p>Does your code do significant I/O, like downloading a file or writing to the network? Are you doing a very long calculation?</p>
+<p>Then use a <code>thread</code>. <strong>If it will take a long time or block, you want a dedicated thread.</strong> It can work as long as it wants, and even block. That way it doesn't slow down the work of the thread pool.</p>
+<p>Otherwise, you can use a <code>go</code> block.</p>
+<h3 id="when-to-use-single--versus-double-bang">When to use single- versus double-bang (!)</h3>
+<div class="figure">
+<img src="http://www.lispcast.com/img/oompa-loompa-2.jpg" alt="A couple of blocked Oompaloompas." /><p class="caption">A couple of blocked Oompaloompas.</p>
+</div>
+<h4 id="background-1">Background</h4>
+<p>Wonka also noticed that he needed to <strong>write different instructions</strong> for his two types of Oompaloompa. When he wrote a <code>go</code> block, he needed to say &quot;park while you wait for input&quot;. But for the other Oompaloompas created with <code>thread</code> (or for his own work), he needed an instruction that said &quot;block while you wait for input&quot;.</p>
+<p>So he came up with a little notation convention. If you're just parking, so you're in a <code>go</code> block, use one bang. If you're outside of a <code>go</code> block, meaning you need to block, use two bangs.</p>
+<p>These were his versions of his basic instructions:</p>
+<p><code>&gt;!</code>, <code>&lt;!</code>, and <code>alts!</code> versus <code>&gt;!!</code>, <code>&lt;!!</code>, and <code>alts!!</code>. The convention is easy.</p>
+<h4 id="use-single-bang-versions-in-go-blocks-and-double-bang-versions-outside.">Use single-bang versions in <code>go</code> blocks and double-bang versions outside.</h4>
+<p>The single-bang versions of these functions are meant to park a <code>go</code> block. Although they are defined as functions, they have special meaning to the <code>go</code> macro. In fact, if you actually run the functions (outside of a <code>go</code> block), they will throw an exception unconditionally, telling you <strong>they are meant to be inside a go block</strong>.</p>
+<p>The double-bang versions are blocking. That means that the thread they are running on will block if the channel is not ready. They can be used outside of a <code>go</code> block (anywhere) or inside of a <code>thread</code> block. <strong>It's safe to block inside a <code>thread</code> block since it's a dedicated thread.</strong></p>
+<h3 id="put"><code>put!</code></h3>
+<div class="figure">
+<img src="http://www.lispcast.com/img/wonka-angry.jpg" alt="Willy Wonka writing instructions for his mailman." /><p class="caption">Willy Wonka writing instructions for his mailman.</p>
+</div>
+<h4 id="background-2">Background</h4>
+<p>Like all factories, Willy Wonka's needs deliveries. When the UPS truck comes, there's plenty of boxes to unload. But Wonka is busy. So he leaves a note outside for the delivery guy.</p>
+<p>The note tells the guy where to put everything so the Oompaloompas know where to find it. When he says where to put a box, he spells it <code>put!</code>. That is, it has a bang.</p>
+<p>It's unfortunate because <strong>the other functions with a bang mean they park</strong>. But <code>put!</code> does not park. Wonka was just angry one day, and the convention stuck.</p>
+<p>But the delivery guy knows that Wonka is eccentric, so he doesn't take it personally and does his job. He puts stuff in its places, without blocking.</p>
+<h4 id="use-put-to-get-stuff-into-your-channels-from-outside.">Use <code>put!</code> to get stuff into your channels from outside.</h4>
+<p><code>put!</code> is a way to <strong>get values from outside of core.async</strong> into core.async without blocking. For instance, if you're using a callback-style, which is very common in Javascript, you will want to make your callback call <code>put!</code> to get the value onto a channel.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>That's it! Now to eat some chocolate!</p>
+<p>core.async is really cool, but it has a learning curve. Once you learn these conventions, you will begin to feel the power they give you, whether you're making chocolate or building cars. If you'd like to learn core.async and <strong>feel like Willy Wonka</strong>, I recommend the <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a> videos. They build up a deep understanding of the fundamental concepts in a fun and gradual way.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Just Hack Something Together</title>
+                  <guid isPermalink="false">http://www.lispcast.com/just-hack-something-together</guid>
+                  <link>http://www.lispcast.com/just-hack-something-together</link>
+                  <pubDate>Thu 04 Sep 2014 10:54:53 PM CDT</pubDate>
+                  <description>
+                    Lisp is viewed as difficult and academic but it is a great language for hacking a solution together.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/just-hack-something-together"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>A Personal Lisp Crisis</title>
+                  <guid isPermalink="false">http://www.lispcast.com/a-personal-lisp-crisis</guid>
+                  <link>http://blog.jacius.info/2012/05/29/a-personal-lisp-crisis/</link>
+                  <pubDate>Wed 11 Sep 2013 12:20:58 PM CDT</pubDate>
+                  <description>
+                    
+&lt;blockquote&gt;
+&lt;p&gt;There are other languages with healthier communities, more momentum, cleaner cores, and features on par with CL. So I have to ask myself, why bother with CL?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I had a similar experience with Common Lisp. Great language, snobby community, little progress, needs more modern amenities.&lt;/p&gt;
+&lt;h3 id=&quot;you-might-also-like&quot;&gt;You might also like&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/just-hack-something-together&quot;&gt;Just Hack Something Together&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/a-personal-lisp-crisis"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

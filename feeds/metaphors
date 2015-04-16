@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>The Paper Metaphor</title>
+                  <guid isPermalink="false">http://www.lispcast.com/paper-metaphor</guid>
+                  <link>http://www.lispcast.com/paper-metaphor</link>
+                  <pubDate>Fri 27 Feb 2015 12:57:38 PM CST</pubDate>
+                  <description>
+                    Functional programs follow a simple rule: never write on the same paper twice. Imperative programs are free to define their own rules. Both have interesting consequences.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/paper-metaphor"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

@@ -1,0 +1,257 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Conveyor Belts: Nature's core.async Channels | LispCast</title>
+    <meta name="description" content="Conveyor belts are strikingly similar to Clojure core.async channels. While it could be a coincidence, there is speculation that conveyor belts were influenced by a deep understanding of core.async.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/core-async-conveyor-belts-true-history">
+              Conveyor Belts: Nature's core.async Channels
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 13, 2014
+          </div>
+
+          
+<h3 id="a-true-history">A true history</h3>
+<p>Summary: <em>Conveyor belts are strikingly similar to Clojure core.async channels. While it could be a coincidence, there is speculation that conveyor belts were influenced by a deep understanding of core.async.</em></p>
+<p><strong>Who invented the conveyor belt?</strong> No one knows for sure. Many historians believe that it was Henry Ford, seeking to mechanize the transportation of car parts from one part of the factory to another. This conservative view is plausible. Henry Ford designed much of the assembly line in his factories.</p>
+<p>Despite the simplicity of this explanation, a small minority of researchers believe that there was a man behind Henry Ford who was the true inventor of the conveyor belt. Not much is known about him, but <strong>historians have pieced together a different story</strong>. This article is about that story.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/henry_ford.jpg" alt="Henry Ford in front of his invention." /><p class="caption">Henry Ford in front of his invention.</p>
+</div>
+<p>This is a classic picture of Henry Ford standing in front of his creation. Recent advances in <a href="https://www.youtube.com/watch?v=Vxq9yj2pVWk">digital imaging enhancement</a> have allowed us to learn a little more about the people that influenced Ford who, until recently, have <strong>lived within his shadow</strong>.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/strange_man.jpg" alt="Strange man who is suspected true inventor of conveyor belt." /><p class="caption">Strange man who is suspected true inventor of conveyor belt.</p>
+</div>
+<p>While the identity of this man is not known, historians have reassembled a story from bits and pieces of Henry Ford's journals and quotes. It is believed (by those few, brave historians) that <strong>this man is the true inventor of the conveyor belt</strong>. He looks eerily similar to the famed inventor of Clojure, Rich Hickey. However, the chronologies do not match up, so this hypothesis is easily ruled out.</p>
+<h3 id="conveyor-belt-similarities-to-core.async-channels">Conveyor belt similarities to core.async channels</h3>
+<p>It is well understood that the conveyor belt is a poor, physical compromise on the much more reasonable abstraction of the Clojure core.async channel. As lossy as the copy is, it is still quite useful. <strong>core.async channels and conveyor belts have many properties in common.</strong></p>
+<h4 id="things-can-be-put-onto-and-taken-off-of-a-conveyor-belt">Things can be put onto and taken off of a conveyor belt</h4>
+<p>The similarity here is uncanny. It is almost as if the inventor of the conveyor belt <strong>had some knowledge of the core.async operations</strong>.</p>
+<h4 id="the-conveyor-belt-serves-as-a-buffer">The conveyor belt serves as a buffer</h4>
+<p>Again, it is striking that the conveyor belt can serve nearly the same purpose as a core.async channel. On long conveyor belts, the people taking things off and putting things on <strong>might not even know each other</strong>. And for things that take an unknown amount of time, you can just point to the conveyor belt and say &quot;Wait here for the thing you need.&quot; <strong>They don't have to know when or from where it is coming.</strong></p>
+<h4 id="things-can-be-taken-off-in-the-same-order-they-are-put-on">Things can be taken off in the same order they are put on</h4>
+<p>This is something that perhaps the conveyor belt has lost. While <strong>core.async channels always maintain their own semantics</strong> for choosing which thing is taken next, conveyor belts are basically dumb and expose all of their contents. However, it is clear that you could enforce the common &quot;first-in-first-out&quot; queue behavior by always taking the last item from a conveyor belt.</p>
+<h4 id="when-the-conveyor-belt-is-full-the-putter-has-to-wait">When the conveyor belt is full, the &quot;putter&quot; has to wait</h4>
+<p>What happens when the conveyor belt fills up? Well, you <strong>wait for some room</strong>. Everyone has had this experience where you're at the supermarket and the cashier is taking too long to ring up your food so the conveyor belt fills up. You just have to wait with a dumb look while they look up the code for celery.</p>
+<h4 id="when-the-conveyor-belt-is-empty-the-taker-waits">When the conveyor belt is empty, the &quot;taker&quot; waits</h4>
+<p>Conversely to the full belt situation, when the belt is empty the taker must wait. This is what happens when the cashier is faster than the shopper at the supermarket. <strong>There's nothing to do but wait</strong> for some groceries to reach the end of the belt.</p>
+<h3 id="differences-between-conveyor-belts-and-core.async-channels">Differences between conveyor belts and core.async channels</h3>
+<p>Though the evidence that core.async influenced the development of the conveyor belt is overwhelming, there are some differences due to the <strong>physical limitations of time and space</strong>.</p>
+<h4 id="non-instantaneous-transfer">Non-instantaneous transfer</h4>
+<p>Though not truly instantaneous, core.async channels do operate at the speed of light. When a value is put onto a channel, <strong>it is immediately available to be taken</strong>. Contrast this with conveyor belts, which slowly move objects along a physical belt.</p>
+<h4 id="limited-in-length">Limited in length</h4>
+<p>Conveyor belts have finite length. But core.async channels can be passed around just like any other object. They, in fact, are not limited by space at all. Also, the length of a conveyor belt is equivalent to its size as a buffer. But core.async channels have <strong>properly decomplected buffer size from &quot;distance&quot; of travel</strong>.</p>
+<h4 id="no-droppingsliding-semantics">No dropping/sliding semantics</h4>
+<p>It is quite curious that this important feature of core.async channels has not been copied to conveyor belts. <strong>core.async channels can be set up to drop either the newest value added or the oldest value added.</strong> Conveyor belts that do that are considered defective. The best explanation is that physical goods are so expensive compared to computing ephemeral values that it is uneconomical to trow away any items after they are made.</p>
+<p>The jury is still out as to whether core.async influenced the development of conveyor belts. Was Tony Hoare, who invented Communicating Sequential Processes (on which core.async is based) given the secret to CSP by this same man? This hypothesis becomes more convincing when we see the immense similarities between conveyor belts and core.async channels.</p>
+<p>Here is a picture of Rich Hickey being picked up by a friend after Strange Loop 2014.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/delorian.jpg" alt="Rich Hickey being picked up by his friend after Strange Loop" /><p class="caption">Rich Hickey being picked up by his friend after Strange Loop</p>
+</div>
+<p>If you would like to explore the mysteries of the strange and tangled similarities between conveyor belts and core.async, you might want to try <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a>. It's a video series that introduces the concepts using animations, code, and exercises.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/token-buckets-in-core-async">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/elm-frp-clojure-core-async">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

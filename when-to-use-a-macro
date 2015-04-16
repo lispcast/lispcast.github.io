@@ -1,0 +1,234 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>When To Use a Macro in Clojure | LispCast</title>
+    <meta name="description" content="Macros should be avoided to the extent possible. There are three circumstances where they are required.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/when-to-use-a-macro">
+              When To Use a Macro in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 07, 2014
+          </div>
+
+          
+<p>Summary: <em>Macros should be avoided to the extent possible. There are three circumstances where they are required.</em></p>
+<p>There's a common theme in Lisp that you should only use macros when you need them. <strong>It is very common to see a new lisper overuse macros.</strong> I did it myself when I first learned Lisp. They are very powerful and make you the king of syntax.</p>
+<p>Clojure macros do have their uses, but why should you avoid them if possible? The principle reason is that <strong>macros are not first-class in Clojure</strong>. You cannot access them at runtime. You cannot pass them as an argument to a function, nor do any of the other powerful stuff you've come to love from functional programming. In short, <strong>macros are not functional programming</strong> (though they can make use of it).</p>
+<p>A function, on the other hand, is a first-class value, and so is available for awesome functional programming constructs. <strong>You should prefer functions to macros.</strong></p>
+<p>That said, macros are still useful because there are things macros can do that functions cannot. <strong>What are the powers of a macro that are unavailable to any other construct in Clojure?</strong> If you <em>need</em> any of these abilities, write a macro.</p>
+<h3 id="the-code-has-to-run-at-compile-time">1. The code has to run at compile time</h3>
+<p>There are just some things that need to happen at compile time. I recently wrote a macro that returns the hash of the current git commit so that the hash can be embedded in the ClojureScript compilation. This needs to be done at compile time because the script will be run somewhere else, where it cannot get the commit hash. Another example is <strong>performing expensive calculations at compile time as an optimization</strong>.</p>
+<p>Example:</p>
+<pre><code>(defmacro build-time []
+  (str (java.util.Date.)))</code></pre>
+<p>The <code>build-time</code> macro returns a String representation of the time it is run.</p>
+<p><strong>Running code at compile time is not possible in anything other than macros.</strong></p>
+<h3 id="you-need-access-to-unevaled-arguments">2. You need access to unevaled arguments</h3>
+<p>Macros are useful for writing <strong>new, convenient syntactic constructs</strong>. And when we talk about syntax, we are typically talking about raw, <strong>unevaluated sexpressions</strong>.</p>
+<p>Example:</p>
+<pre><code>(defmacro when
+  &quot;Evaluates test. If logical true, evaluates body in an implicit do.&quot;
+  {:added &quot;1.0&quot;}
+  [test &amp; body]
+  (list &#39;if test (cons &#39;do body)))</code></pre>
+<p><code>clojure.core/when</code> is a syntactic sugar macro which transforms into an <code>if</code> with a <code>do</code> for a <em>then</em> and no <em>else</em>. The <code>body</code> should not be evaled before the <code>test</code> is checked.</p>
+<p>Getting access to the unevaluated arguments is available by quoting (<code>'</code> or <code>(quote ...)</code>), but that is <strong>often unacceptable for syntactic constructs</strong>. Macros are the only way to do that.</p>
+<h3 id="you-need-to-emit-inline-code">3. You need to emit inline code</h3>
+<p>Sometimes calling a function is unacceptable. That call is either too expensive or is otherwise not the behavior you want.</p>
+<p>For instance, in Javascript in the browser, you can call <code>console.log('msg')</code> to print out a message and the line number to the console. In ClojureScript, this becomes something like this: <code>(.log js/console &quot;msg&quot;)</code>. Not convenient at all. <strong>My first thought was to create a function.</strong><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<pre><code>(defn log [msg]
+  (.log js/console msg))</code></pre>
+<p>This worked alright for printing the message, but the line numbers were all pointing to the same line: the body of the function! <code>console.log</code> records the line exactly where it is called, so <strong>it needs to be inline</strong>. I replaced it with a macro, which highlights its purpose as syntactic sugar.</p>
+<p>Example:</p>
+<pre><code>(defmacro log [msg]
+  `(.log js/console ~msg))</code></pre>
+<p>The body replaces the call to log, so <strong>it is located where it is needed for the proper behavior.</strong></p>
+<p>If you need <strong>inline code</strong>, a macro is the only way.</p>
+<h3 id="other-considerations">Other considerations</h3>
+<p>Of course, <strong>any combination of these is also acceptable</strong>. And don't forget that although you might need a macro, macros are only available at compile time. So you should consider <strong>providing a function that does the same thing</strong> and then wrap it with a macro.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Macros are very powerful. Their power comes with a price: they are only available at compile time. Because of that, functions should be preferred to macros. The use of macros should be reserved for those special occasions when their power is needed.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/exponential-backoff">Exponential Backoff</a></li>
+<li><a href="http://www.lispcast.com/lisp-with-macros-language-stack">Lisp with Macros is Two Languages</a></li>
+<li><a href="http://www.lispcast.com/try-three-times">Try Three Times</a></li>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>As it should be :)<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/less-abstraction-combination">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/what-web-framework-should-i-use">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

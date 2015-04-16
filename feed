@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-West Interview: Christopher Small</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-christopher-small</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-christopher-small</link>
+                  <pubDate>Thu 16 Apr 2015 09:09:46 AM CDT</pubDate>
+                  <description>
+                    Christopher Small will talk about automating chicken coops with Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-christopher-small"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Nathan Sorenson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-nathan-sorenson</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-nathan-sorenson</link>
+                  <pubDate>Wed 15 Apr 2015 11:43:27 PM CDT</pubDate>
+                  <description>
+                    Nathan Sorenson interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-nathan-sorenson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: James MacAulay</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-james-macaulay</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-james-macaulay</link>
+                  <pubDate>Wed 15 Apr 2015 11:43:16 PM CDT</pubDate>
+                  <description>
+                    James MacAulay interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-james-macaulay"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Zach Tellman</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-zach-tellman</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-zach-tellman</link>
+                  <pubDate>Wed 15 Apr 2015 11:43:01 PM CDT</pubDate>
+                  <description>
+                    Zach Tellman interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-zach-tellman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Nathan Sorenson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-nathan-sorenson</guid>
+                  <link>http://www.lispcast.com/pre-west-nathan-sorenson</link>
+                  <pubDate>Wed 15 Apr 2015 11:10:22 PM CDT</pubDate>
+                  <description>
+                    Nathan Sorenson will talk about type systems and macros.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-nathan-sorenson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: James MacAulay</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-james-macaulay</guid>
+                  <link>http://www.lispcast.com/pre-west-james-macaulay</link>
+                  <pubDate>Wed 15 Apr 2015 10:45:56 PM CDT</pubDate>
+                  <description>
+                    James MacAulay will talk about Zelkova and FRP.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-james-macaulay"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Zach Tellman</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-zach-tellman</guid>
+                  <link>http://www.lispcast.com/pre-west-zach-tellman</link>
+                  <pubDate>Wed 15 Apr 2015 10:31:34 PM CDT</pubDate>
+                  <description>
+                    Zach Tellman will talk about Queueing Theory.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-zach-tellman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Fumiko Hanreich</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-fumiko-hanreich</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-fumiko-hanreich</link>
+                  <pubDate>Wed 15 Apr 2015 09:30:06 PM CDT</pubDate>
+                  <description>
+                    Fumiko Hanreich interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-fumiko-hanreich"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Morgan Mullaney</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-morgan-mullaney</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-morgan-mullaney</link>
+                  <pubDate>Wed 15 Apr 2015 01:35:01 PM CDT</pubDate>
+                  <description>
+                    Morgan Mullaney interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-morgan-mullaney"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Elena Machkasova</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-elena-machkasova</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-elena-machkasova</link>
+                  <pubDate>Wed 15 Apr 2015 01:17:55 PM CDT</pubDate>
+                  <description>
+                    Elena Machkasova interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-elena-machkasova"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

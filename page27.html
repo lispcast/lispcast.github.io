@@ -1,0 +1,610 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://boingboing.net/2011/12/27/the-coming-war-on-general-purp.html">
+              The Coming War on General Purpose Computation
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/the-coming-war-on-general-purpose-computation">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 28, 2011
+          </div>
+
+          
+<p>An insightful talk from Internet activist Cory Doctorow about the future of the freedom of computation.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.infoq.com/presentations/The-Mapping-Dilemma">
+              The Mapping Dilemma
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/the-mapping-dilemma">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 17, 2011
+          </div>
+
+          
+<p>David Nolen speaking at Strange Loop:</p>
+<blockquote>
+<p>How much of Computer Science is sitting around when I'm sitting and working on a problem?</p>
+</blockquote>
+<p>David draws on some of the giants of Computer Science in recent years. Alan Kay, Gregor Kiczales, Peter Norvig, and more. I love to see the products of great minds folded into Clojure and ready at my fingertips.</p>
+<p><a href="https://github.com/clojure/core.match">core.match</a> and <a href="https://github.com/clojure/core.logic">core.logic</a> are now on my reading list.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://krisjordan.com/multimethod-js">
+              multimethod.js
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/multimethod-js">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 16, 2011
+          </div>
+
+          
+<p>Kris Jordan:</p>
+<blockquote>
+<p>Inspired by Clojure's multimethods, multimethod.js provides a functional alternative to classical, prototype based polymorphism.</p>
+</blockquote>
+<p><a href="https://github.com/KrisJordan/multimethod-js">multimethod.js</a> builds functions which dispatch on arbitrary predicates in Javascript using a <a href="http://martinfowler.com/bliki/FluentInterface.html">fluent style</a>.</p>
+<blockquote>
+<p>Multimethod iterates through each 'method' registered with <code>when</code> and performs an equality test on the <code>dispatchValue</code> and each method's match value.</p>
+</blockquote>
+<p>I wonder whether a linear search for the dispatch value will scale. I prefer to see some kind of hash-map based solution. Is it possible to serialize the object to JSON and use the resulting String as a key?</p>
+<p>Still, I enjoy seeing inter-language cross-pollination. It is also a nice translation from a functional language to a prototype language. The fluent interface does the job extremely well.</p>
+<p>Kris Jordan deserves a follow on <a href="https://github.com/KrisJordan">GitHub</a>.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://groups.google.com/group/ring-clojure/browse_thread/thread/f18338ffda7e38f5">
+              Ring 1.0.0 Released
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/ring-1.0-release">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 13, 2011
+          </div>
+
+          
+<p>Congratulations to the Ring developers on finishing the 1.0.0 Release.</p>
+<p>James Reeves:</p>
+<blockquote>
+<p>Ring 1.0.0 has now been released, almost three years since Mark pushed the first commit. In that time, Ring has become the de facto standard for building web applications in Clojure.</p>
+</blockquote>
+<p>Ring deserves its place as the &quot;de facto standard&quot;. It is the perfect example of what makes Clojure great. It encourages composition and simplicity and creates an abstraction that allows an entire ecosystem to flourish.</p>
+<p>Read the <a href="https://github.com/mmcgrana/ring/blob/master/SPEC">Ring Spec</a> and the <a href="https://github.com/mmcgrana/ring">Ring source</a>. They both short and well-written.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://java.dzone.com/articles/clojure-dummies-kata-0">
+              Clojure for dummies: a kata
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/clojure-for-dummies-a-kata">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 10, 2011
+          </div>
+
+          
+<p>It's good to see someone trying Clojure and sharing his experiences. Congratulations are due for getting it up and running and finishing a kata.</p>
+<p>Giorgio Sironi:</p>
+<blockquote>
+<p>Clojure is a LISP dialect; if you have ever been forced to use LISP in a computer science class, I understand your resistance towards this class of totally functional languages.</p>
+</blockquote>
+<p>I appreciate his honesty here. Universities have traditionally used Lisp to teach functional programming. They often neglect to mention that mosts Lisps are <em>not</em> purely functional. In fact, they lie to the students in the name of pedagogy. People leave Programming Languages class with many false notions about Lisp.</p>
+<blockquote>
+<p>In fact, LISP for many of us means lots of Reverse Polish Notation where (+ 1 2) evaluates to three; absence of for cycles <em>[loops]</em> and other commodities to privilege tail recursion; and absolute lack of state in the form of variables (the state isn't really absent: I've seen it on the stack.)</p>
+</blockquote>
+<p>In <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish notation</a>, the same expression would be <code>(2 1 +)</code>. Lisp uses <a href="http://en.wikipedia.org/wiki/Polish_notation">Polish notation</a>, otherwise known as Prefix notation.</p>
+<p>Common Lisp, in fact, has <em>more loops than Java</em>. Java has <code>for</code>, <code>while</code>, and the sadder <code>do..while</code> loops. Common Lisp's <code>loop</code> macro alone trumps any other language I know for <em>imperative</em> and <em>stateful</em> iteration. In addition to <code>loop</code>, Common Lisp defines <a href="http://clhs.lisp.se/Body/m_dotime.htm"><code>dotimes</code></a>, <a href="http://clhs.lisp.se/Body/m_dolist.htm"><code>dolist</code></a>, <a href="http://clhs.lisp.se/Body/m_do_do.htm"><code>do</code></a>, <a href="http://clhs.lisp.se/Body/m_do_do.htm"><code>do*</code></a> (a variation on <code>do</code>), and the loops for symbols in a package <a href="http://clhs.lisp.se/Body/m_do_sym.htm"><code>do-symbols</code></a>, <a href="http://clhs.lisp.se/Body/m_do_sym.htm"><code>do-external-symbols</code></a>, and <a href="http://clhs.lisp.se/Body/m_do_sym.htm"><code>do-all-symbols</code></a>.</p>
+<p>The fact that a non-lisper believes something about Lisp so false yet so common hints that something is very wrong. The misconception &quot;absolute lack of state in the form of variables&quot; will be familiar to many Lisp programmers who talk to non-lispers.</p>
+<blockquote>
+<p>Download and unzip the last release of Clojure. Start up a class by specifying clojure-1.3.0.jar in the classpath :</p>
+</blockquote>
+<pre><code>    java -cp clojure-1.3.0.jar clojure.main</code></pre>
+<p>It's nice that Clojure is so easy to run.</p>
+<p>Again, thumbs up to Giorgio for finishing a kata in a new language. Keep up with the Clojure!</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://cognitivecomputing.wordpress.com/1986/01/28/a-short-ballad-dedicated-to-the-growth-of-programs/">
+              A Short Ballad Dedicated to the Growth of Programs
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/growth-ballad">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 10, 2011
+          </div>
+
+          
+<p>This is a cautionary tale set in a dystopian Lisp where <code>nil</code> is not false and false is not <code>nil</code>.</p>
+<blockquote>
+<p>So I went back to the master and appealed once again<br /> I said, pardon me, but now I’m really insane<br /> He said, no you’re not really going out of your head<br /> Instead of just <code>VAL</code>, you must use <code>NOT NULL</code> instead</p>
+</blockquote>
+<p><code>nil</code> means (traditionally) false, the empty list, and also &quot;no value&quot;. In my opinion, Lisp has hit a sweet spot. Somehow, <code>nil</code> overloading makes for succinct programs.</p>
+<p>It's possible to go overboard and do this wrong. Case in point: <a href="http://www.mapbender.org/JavaScript_pitfalls:_null,_false,_undefined,_NaN">the problems with boolean values and comparison in Javascript</a>.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/the-heart-of-unix">
+              The Heart of Unix
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 10, 2011
+          </div>
+
+          
+<p>Despite all of its warts, I like working in Linux. I've used it for 15 years and I've never been as productive in another environment. Most people claim that it's the configurability of Linux that keep the users coming. That may have attracted me at first, but <strong>what attracts me now is its programmability.</strong></p>
+<p>Let me be very clear. I'm not saying that Linux is great because I can patch the source code to grep and recompile it. In all my years of Unix, I've never done anything like that. And I'm not saying that Linux is a great workstation for programmers because it helps you program better. Those are topics for another essay.</p>
+<h3 id="unix-is-a-programmable-environment">Unix is a programmable environment</h3>
+<p>I <em>am</em> saying that Unix is a programmable environment. When you interact with the shell, <strong>you are writing programs to be interpreted</strong>. You can easily extend the Unix system by writing a shell script, copying it to a directory in your <code>PATH</code>, and making it executable. Boom. You've got a new program.</p>
+<p>What's more, that program, if it follows certain simple conventions, is now able to work with other programs. Those conventions are simple, and they are summed up well by Doug McIlroy, the inventor of Unix pipes:</p>
+<blockquote>
+<p>This is the Unix philosophy: Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface.</p>
+</blockquote>
+<p>If your program <em>reads text lines from standard in and writes text lines on standard out</em>, it is likely to do well on Unix.</p>
+<h3 id="programs-on-your-path-are-like-pure-functions-in-the-higher-level-language-called-the-shell">Programs on your path are like pure functions in the higher-level language called the shell</h3>
+<p>Not all programs are so pure. But the vast majority of the programs that are so typically Unixy are. <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>wc</code>, <code>pr</code>, etc.</p>
+<h3 id="unix-is-a-multi-lingual-environment">Unix is a multi-lingual environment</h3>
+<p>I must have compilers or interpreters for 30 languages on my machine. Maybe more. All of these languages are invited to the party. They can all call each other (through the shell). And of course their <code>stdin</code>/<code>stdouts</code> can be piped together.</p>
+<p>You really can use the best tool for the job. I've got Bash scripts, awk scripts, Python scripts, some Perl scripts. What I program in at the moment depends on my mood and practical considerations. It is a little crazy that <strong>I don't have to think about what language something is written in when I'm at the terminal</strong>.</p>
+<h3 id="unix-provides-a-universal-interface-with-a-universal-data-structure">Unix provides a universal interface with a universal data structure</h3>
+<p>It needs to be stated that there is a reason all of these languages can work together. There is a standard data structure that programs are invited to use: text streams. That means sequences of characters. Text streams are cool because they're simple and flexible. <strong>You can impose a structure on top of the flat sequence.</strong> For instance, you can break it into a sequence of sequences of characters by splitting it on a certain character (like new-line). Then you can split those sequences into columns. In short, text is flexible.</p>
+<h3 id="unix-is-homoiconic">Unix is homoiconic</h3>
+<p>There's another property that I think is rarely talked about in the context of Unix. In Lisp, we often are proud that code is data. You can manipulate code with the same functions that you manipulate other data structures. This meta-circularity gives you a lot of power.</p>
+<p>But this is the same in Unix. <strong>Your programs are text files</strong> and so can be <code>grep</code>'d and <code>wc</code>'d and anything else if you want to. You can open up a pipe to Perl and feed it commands, if you like. And this feeds right back into Unix being programmable.</p>
+<h3 id="functional-universal-data-structure-homoiconic-power">Functional + universal data structure + homoiconic = power</h3>
+<p>All of this adds up to synergy. When you write a program that follows the Unix conventions of <code>stdin</code>/<code>stdout</code> with text streams, <strong>it can work with thousands of programs that are already on your computer</strong>. What's more, your program has to do less work itself, because so much of the hard work can be done better by other programs.</p>
+<h3 id="on-the-file-system-hierarchical-names-point-to-data-objects">On the file system, hierarchical names point to data objects</h3>
+<p>And this synergy extends well beyond just using text streams. I have this tendency to look to databases as storage solutions for my personal projects. They have some nice properties, like ACID and SQL.But by using a database, I'm missing out on joining the Unix ecosystem. <strong>If I use the file system to store my data--meaning text files in directories--I can use all of Unix to help me out.</strong> I can use <code>find</code>, <code>grep</code>, <code>head</code>, <code>tail</code>, etc., just because I chose to use the measly file system instead of some fancy database.</p>
+<h3 id="blog-example">Blog example</h3>
+<p>A good example of the synergy I'm talking about is the blog you are reading now. Here's how my blog works:</p>
+<p>I store everything on the file system. I have an <code>src/</code> directory with <code>drafts/</code> <code>posts/</code> <code>pages/</code> and <code>links/</code>. I wrote a Python script (currently at 183 well-commented lines) that reads <code>src/</code> and spits out the final product to <code>build/</code>. The Python uses a few libraries, but the meat of it is done by calling other programs. The rendering of Markdown to HTML is done by <a href="http://johnmacfarlane.net/pandoc/"><code>pandoc</code></a>, which happens to be written in Haskell. I also do a call out to the shell to copy a directory (<code>cp -rp</code>) because I was too lazy to figure out how to do it in pure Python.</p>
+<p>I sync <code>build/</code> to Amazon S3 with a Ruby program called <code>s3sync</code>. I edit my entries in Emacs. If I need to delete a post, I run <code>rm</code>. If I need to list my posts, I run <code>ls</code>. If I'd like to change the name of a post, I use <code>mv</code>.</p>
+<p>It may not be the best interface for writing a blog. But notice all of the stuff I didn't have to write to get started. I'm already writing posts and publishing them. <strong>Compare that to the reams of PHP and Javascript it takes to get the same functionality in Wordpress.</strong> That's the power of small tools working together.</p>
+<h3 id="unix-is-old">Unix is old</h3>
+<p>Now that I've expressed how great Unix is, allow me to speak about its numerous shortcomings. I can't say for sure, but I would guess that most of the shortcomings are due to the long history of <strong>Unix starting on underpowered machines</strong>.</p>
+<p>For instance, the fact that your programs have to be manually stored to disk using file system operations so that your dynamic shell language can have access to them seems awfully quaint. But when Unix was developed, disk space, RAM, and computation were expensive. Everything was expensive. So the strategy was to <strong>cache your compiler output to disk</strong> so you wouldn't have to do a costly compile step each time you ran a program.</p>
+<p>If I want to write a new program, even a short one, I have to open up a text file in Emacs (make sure it's in the path!), write the program, save it, switch to the terminal, and <code>chmod +x</code> it. Compare that to Clojure, where you constantly define and redefine functions at the REPL. Or, if you like, a Smalltalk system where you can open up the editing menu of <em>anything you can see</em> and change the code which will then be paged out to disk at a convenient time. Unix clearly has room to grow in that respect.</p>
+<h3 id="the-file-system">The file system</h3>
+<p>The file system is archaic, too. It's reliable, but a little feature-poor. It's one of the reasons I think first about a database before remembering the synergy available with the file system. It doesn't provide any kind of ACID properties. The metadata available is laughable (permissions, owner/group, date, and filesize?). <strong>A more modern file system would give a little more oomph</strong> to compete with other forms of storage.</p>
+<h3 id="the-terminal">The terminal</h3>
+<p><strong>The terminal is just old.</strong> It's all text. The editing is sub-primitive. The help it gives you is the bare minimum. One of its biggest shortcomings is how opaque it is. It doesn't do much to help you learn commands. It's not very good with huge dumps on <code>stdout</code>. Multiline commands? Supported with <code>\</code>. I think we can do better.</p>
+<h3 id="text-streams">Text streams</h3>
+<p>The world of computers has grown up a lot since the early days of Unix. There has been a Cambrian explosion in the number of file formats. Lots of them are binary formats. Lots are structured text, like XML or JSON. Unix can handle those kinds of files, but <strong>it has failed to find a lever to help the Unix user master them with the same synergy you see with flat text files</strong>.</p>
+<h3 id="wrong-turns">Wrong turns</h3>
+<p>Unix has a long history. Some of that history was kind, some was unkind. Most of the development of Unix was just practical people doing their best with the tools they had.</p>
+<p>What's unfortunate is that we now have better tools and we see what could be done, but to do it would break backwards compatibility. And so we continue with sub-optimal tools.</p>
+<h3 id="layering-instead-of-evolving">Layering instead of evolving</h3>
+<p>One thing I think is unfortunate in the world of Unix today is layering. <strong>Modern Linux distributions are midden piles of configuration daemons to manage permissions daemons to give your configuration GUI access to the configuration daemons.</strong> Or we find ourselves installing a database to manage a few kilobytes of metadata.</p>
+<p>The problem is Unix has not evolved in those areas. The permission system has changed very little. Modern distributions want to provide a modern and unintrusive interface to protected resources, so they add a layer of indirection onto the primitive permissions model instead of evolving the permission system itself. The Unix permissions system is solid and has worked for years. Maybe it should stay. But instead of giving us small programs that do one thing well to let us become masters of the permissions system, <strong>we get obtuse, opaque daemons</strong> that also need to be learned.</p>
+<p>The file system, though much improved in terms of capacity, stability, and reliability, still has the same basic features: hierarchical directories containing files, accessed by name. If you want something more, you have to add a layer like BerkeleyDB or SQLite. These tools are great, but I'd like to see a more Unixy solution that allows for the synergy you get from existing programs made to run with files on the disk.</p>
+<h3 id="megacommands">Megacommands</h3>
+<p><a href="https://gist.github.com/1091803">Command bloat</a> <a href="https://gist.github.com/665971">is terrible</a>. Rob Pike and Brian Kernighan have <a href="http://harmful.cat-v.org/cat-v/">written about this</a>. I'll merely refer you to their <a href="/files/papers/unix_prog_design.pdf">excellent paper</a>. The gist is that having n commands gives you O(n<sup>2</sup>) ways of combining them. <strong>Having fewer, bigger, &quot;more powerful&quot; programs does not give you this exponential and synergistic advantage.</strong></p>
+<p>If you look at it the right way, all of these little programs that do one thing are like functions in the higher-level language that is Unix. We see that languages like Perl and Python have huge numbers of libraries for doing all sorts of tasks. Those libraries are only accessible through the programming language they were developed for. This is a missed opportunity for the languages to interoperate synergistically with the rest of the Unix ecosystem.</p>
+<h3 id="the-road-ahead">The road ahead</h3>
+<p>I've given a bit of a taste of some of the non-Unixy directions we're going in. Now I'd like to end with some right directions.</p>
+<p>I mentioned before that saving a compiled binary to disk is done to cache what used to be an expensive operation. With modern hardware, a short utility C program could be read in, parsed, compiled, and run very quickly. Probably with no noticeable delay. It's something to consider when thinking about the division between static programs and dynamic scripting languages and the role of the compiler.</p>
+<h3 id="talking-to-unix">Talking to Unix</h3>
+<p>Foreign Function Interfaces between programming languages are considered very difficult to work with because of the semantics mismatch between any two languages. But Unix provides a universal interface for programs to <strong>interoperate without the need for FFI</strong>. I hope to see more &quot;sugar&quot; in languages to take advantage of calling out to other programs for help. <a href="http://stackoverflow.com/questions/799968/whats-the-difference-between-perls-backticks-system-and-exec">Perl's backticks</a> comes to mind.</p>
+<p>You might say that this is expensive. Well, yes and no. Yes, there is much more overhead in reading in who-knows-how-many files to execute some script on disk than in just calling some library function. I argue, though, that <strong>the time difference is becoming small enough not to matter</strong>; and the operating system should evolve to make it more practical.</p>
+<h3 id="evolving-stdinstdout">Evolving <code>stdin</code>/<code>stdout</code></h3>
+<p>Stdin/stdout with text streams is the closest thing we have to a universal, language-agnostic interface. It defines a minimal &quot;constitution&quot; with which programs can interact. <strong>Can this interface be improved on without destroying it?</strong> I wouldn't doubt it. There are lots of &quot;data flow&quot; patterns besides input and output. Pub/sub, broadcast, dispatch, etc., should be explored.</p>
+<h3 id="text-streams-evolved">Text streams, evolved</h3>
+<p>Unix was designed for flat text and the existing Unix tools operate on text. We need new tools to <strong>bring structured text and binary into the Unix world</strong> to join the party. I don't think this would be hard. I've written programs that read in JSON and write it out with one JSON object per line. That lets you grep it to find the one you want, or <code>wc -l</code> it to count the objects.</p>
+<p>Another thing I've been working on is defining a dispatch mechanism for common operations on files of different types. Take, for instance, metadata that is stored in a file. An HTML file has a title, sometimes it has an author (in a meta tag), etc. A JPEG file has metadata in the EXIF data. <strong>Is there some way we can unify the access of that metadata?</strong> I think there is and I'm working on it. The same command would dispatch differently based on mime-type.</p>
+<h3 id="st-century-terminal">21st Century Terminal</h3>
+<p>How can we improve the terminal? I think it's a hard problem but not impossible. Part of the issue with the terminal is that as X Windows developed, people started using menus to run monolithic programs instead of piping things with the shell. So the usefulness of the terminal will be improved, without changing the terminal itself, by <strong>breaking those monolithic programs up into composable programs</strong>. For instance, a program which displays all of the thumbnails of the files listed on <code>stdin</code> would be much more useful to me than a mouse-oriented file browser.</p>
+<p>The terminal is about text. I don't think that could or should change. But does it have to be only about text? <a href="http://acko.net/blog/on-termkit">Explorations</a> are underway.</p>
+<h3 id="the-shell">The Shell</h3>
+<p>The last improvement I want to touch on is the shell language itself. Bash is ugly. There. I said it. A lot of good work has been done in programming language design and I'd like to see some of it make its way to the shell. <strong>What if we take the idea of Unix programs as pure functions over streams of data a little further?</strong> What about higher-order functions? Or function transformations? Combinators? <strong>What if we borrow from object-oriented languages?</strong> Can we have message passing? What about type-based dispatching?</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Unix has always been practical and it has proven itself over the years. It's 40 years old and it's still being used. Furthermore, Unix is the closest thing to a personal computing experience<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> that is practical today.</p>
+<p>People tend to <a href="/files/papers/LispGoodNewsBadNews.pdf">contrast Unix</a> with systems like the Lisp Machine and Smalltalk. But I see <strong>more similarities than differences</strong>: <em>Code as data.</em> <em>Everything is programmable.</em> <em>Dynamic language prompt.</em> <em>Universal data structure.</em> <em>A propensity for &quot;dialects&quot; or &quot;distributions&quot;.</em> <em>Garbage collection.</em><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> Unix just made a lot of compromises to make it practical on the limited hardware that was available.</p>
+<p>Unfortunately, those compromises have stuck. A lot of work went into workarounds and a lot of software has been built on top of those design decisions. The question is: <strong>where to go from here?</strong></p>
+<p>My own personal choice is to go <strong>back to the roots</strong>. Often, when we want to make a change, we must look to what has worked in the past. What has brought us this far? What were the things that made Unix special? Unix was built by individuals all adding their own practical knowledge and hard work into one cohesive system. Their individual work was multiplied by the synergy of a common interface. If we want to evolve Unix (and I do), that common interface--the heart of Unix--is the place to start.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>When I say &quot;personal computer&quot;, I'm referring to <a href="http://www.mprove.de/diplom/gui/kay72.html">Alan Kay's vision</a>:</p>
+<blockquote>
+<p>What then is a personal computer? One would hope that it would be both a medium for containing and expressing arbitrary symbolic notions, and also a collection of useful tools for manipulating these structures, with ways to add new tools to the repertoire.</p>
+</blockquote>
+<a href="#fnref1">↩</a></li>
+<li id="fn2"><p>Unix has a limited form of garbage collection. Short-running programs (like those executed at the terminal) need not concern themselves with freeing allocated memory since the OS will free everything when they exit.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/tips-for-marginalia">
+              Tips for using marginalia
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 08, 2011
+          </div>
+
+          
+<p>I've used <a href="https://github.com/fogus/marginalia">Marginalia</a> a tiny bit for a few of the libraries I've developed that actually have comments and doc strings.</p>
+<p>Marginalia did help me refine my doc strings and comments. From the <a href="http://fogus.me/fun/marginalia/">Marginalia docs</a>:</p>
+<blockquote>
+<p>Following the guidelines will work to make your code not only easier to follow – it will make it better. The very process of using Marginalia will help to crystalize your understanding of problem and its solution(s).</p>
+</blockquote>
+<p>In general, this is true. Marginalia follows some strict rules, like a compiler. Even if your comments seem to make sense to you reading the source, Marginalia might produce something that makes no sense. However, it generates attractive and useful documentation. So I decided to use it.</p>
+<p>What this meant was figuring out some of the quirks of Marginalia. Here is what I've learned:</p>
+<h3 id="dont-use--comments-when-a-doc-string-is-more-appropriate">Don't use ;-comments when a doc string is more appropriate</h3>
+<p>This is good advice in general and Marginalia makes the comments look wrong. In Marginalia, comments seem to follow the docstring for the function they apply to when both are defined.</p>
+<h3 id="blank-lines-are-important">Blank lines are important</h3>
+<p>From what I can tell, a blank line will cause the top-level comment to be placed above the following form. No blank line will put them at the same level. That sounds very sensible.</p>
+<p>However, if you have a comment with no blank line immediately before a function, the docstring for that function will come first, followed by the comment. This is weird. You should follow the advice above and choose docstring or comments, but not both.</p>
+<h3 id="namespace-ordering">Namespace ordering</h3>
+<p>There is a convention in Clojure to use project.core as the main namespace of a library. Marginalia sorts the namespaces alphabetically. This means that in the documentation, project.anunimportantmodule comes before project.core.</p>
+<p>I have renamed my namespaces once to avoid this problem. But in general, my projects are very small and don't have many namespaces. It's not a practical problem.</p>
+<p>Marginalia is great. It produces beautiful documentation. And it has helped me clarify my code.</p>
+<p>Nice job.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.jackkinsella.ie/2011/12/05/janki-method.html">
+              Janki Method
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/janki-method">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 08, 2011
+          </div>
+
+          
+<p>Jack Kinsella describes an excellent method for learning <em>any</em> skill, disguised as a method for learning programming.</p>
+<p>He draws on his own personal experiences using <a href="http://ankisrs.net/">Anki</a> (a nice learning tool which I recommend, too; I've used it to learn foreign languages) to help him learn the huge number of commands, functions, and other arcana that we all either grep from memory or Google constantly as we work. He sums everything up in eight rules which define the Janki Method.</p>
+<p>Here's an example:</p>
+<blockquote>
+<p>The eighth rule of Janki encourages you to use your readings of other people’s code as a source of learning:</p>
+<p>&quot;Read code regularly. If you come across something interesting – be that an algorithm, a hack, or an architectural decision – create a card detailing the technique and showing the code.&quot;</p>
+</blockquote>
+<p>In the article, you'll find solid examples of flashcards chunked down to the right bite-size.</p>
+<p>The hardest part of the Method is to stick to it. He suggests rule 2:</p>
+<blockquote>
+<p>The second rule of Janki encourages a commitment to daily learning:</p>
+<p>&quot;You must use Anki every single day- including weekends and holidays – and commit to doing so indefinitely.&quot;</p>
+</blockquote>
+<p>I can't say this seems realistic, even with the five- to eight-minute daily commitment he claims. I have used Anki for long stretches. Two months was my longest. It is true that it doesn't take long each time. The trouble is the same trouble you have starting any new habit. It's just hard.</p>
+<p>I have had luck using Anki in an opposite way: one hour per day for a week. For some reason, it's easier for me to commit to than an indefinite commitment. You don't get the same benefits. The benefits are different.</p>
+<p>And, finally, the great thing about Anki is that it is very forgiving if you do stop using it regularly. If you take a two-week break, you can start up again with very little fuss.</p>
+<p>Some ideas:</p>
+<ul>
+<li>Use Anki to remember Emacs keystrokes/commands</li>
+<li>Use Anki to learn the Vars in clojure.core</li>
+</ul>
+<p>Jack manages to bring together the ideas of spaced repetition, learning by doing, and continuous self-improvement to give practical advice to make us better at what we do.</p>
+<p>Nice job.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://blog.raynes.me/blog/2011/12/02/waving-our-tentacles/">
+              Waving Our Tentacles
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/waving-our-tentacles">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 08, 2011
+          </div>
+
+          
+<p>Anthony Grimes shows off his Clojure interface to the Github API.</p>
+<p>I'm definitely going to check this out. There are some people I'd like to stalk . . .</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="page28.html">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="page26.html">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

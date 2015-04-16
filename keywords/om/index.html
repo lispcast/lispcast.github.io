@@ -1,0 +1,681 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: om | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-anna-pawlicka">
+              Pre-conj Prep: Anna Pawlicka
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 25, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-om-nom-nom-nomanna">Talk: <a href="http://clojure-conj.org/speakers#anna-pawlicka">Om nom nom nom</a></h3>
+<h4 id="background">Background</h4>
+<p><a href="http://clojure-conj.org/speakers#anna-pawlicka">Anna Pawlicka's talk</a> at the <em>conj</em> is about <a href="https://github.com/swannodette/om">Om</a>, <a href="https://twitter.com/swannodette">David Nolen</a>'s project, started in December of 2013. It's essentially a wrapper around Facebook's <a href="http://facebook.github.io/react/">React</a>. It's a way to define HTML components functionally and has been making quite a splash.</p>
+<p><a href="https://www.youtube.com/watch?v=DMtwq3QtddY">David Nolen's talk at Clojure/West</a> relates Om and React to the history of the GUI. It's the best high-level introduction I can imagine and discusses the ideas that motivated its design. If you watch one video to prepare for this talk, this should be it.</p>
+<p>For a good talk about React itself, check out Pete Hunt's talk <a href="https://www.youtube.com/watch?v=h3KksH8gfcQ">Be Predictable, Not Correct</a>. He's one of the main contributors to React and has been evangelizing it.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p>React is significant because it is very different from other Javascript MVC frameworks. It takes a very functional approach instead of object oriented. React makes much easier to reason about the UI. Om has also made waves because <a href="http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/">David Nolen has shown</a> that using <strong>ClojureScript's immutable data structures with React can be faster than Backbone.js</strong> (a very popular library) even though immutable data is commonly considered slower than mutable data.</p>
+<h3 id="about-anna-pawlickaanna">About <a href="http://clojure-conj.org/speakers#anna-pawlicka">Anna Pawlicka</a></h3>
+<p><a href="https://twitter.com/AnnaPawlicka">Twitter</a> - <a href="https://github.com/annapawlicka">Github</a> - <a href="http://annapawlicka.com/">Blog</a></p>
+<p><a href="http://clojure-conj.org/speakers#anna-pawlicka"><img src="http://www.lispcast.com/img/pre-conj/anna-pawlicka.jpeg" /></a></p>
+<p>Anna Pawlicka recently gave a talk at EuroClojure about <a href="https://vimeo.com/100976697">Reactive data visualisations with Om</a>. <a href="http://www.slideshare.net/annapawlicka/reactive-data-visualisations-with-om">The slides</a> are available (they're not visible in the video).</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-brian-goetz">Pre-conj Prep: Brian Goetz</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-interview-anna-pawlicka">
+              Pre-Conj Interview: Anna Pawlicka
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 24, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#anna-pawlicka"><img src="http://www.lispcast.com/img/pre-conj/anna-pawlicka.jpeg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>Anna Pawlicka generously agreed to do an interview about her <a href="http://clojure-conj.org/speakers#anna-pawlicka">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a>. The <a href="http://www.lispcast.com/pre-conj-anna-pawlicka">background to her talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Anna Pawlicka</strong>: During my final year at university I was looking for a contract work or a summer internship and my recruiter suggested a big data startup. Description mentioned Clojure so I solved some 4clojure problems and they sparked my interest. Computer Science course I studied was mostly based on Java so it was refreshing if not challenging to try functional programming. I got a Clojure in Action book, applied for the internship and luckily was offered the job. It was a fun summer: lots of Cascalog queries, friendly Clojure Dojos and interesting talks organised by London Clojure Community. It felt like home and you don’t walk away from that feeling. I stayed for both the language and community.</p>
+<p><strong>LC</strong>: You've been presenting and blogging a lot about Om. What are you using Om for and why?</p>
+<p><strong>AP</strong>: We’ve been recently working on a building performance platform at Mastodon C (project is open sourced). It’s built around high volumes of data and big part of it was UI programming. We were looking for something that performs well but isn’t t too complex and Om came out just in time for us to solve this problem. We’ve built the entire UI using Om and we combined it with d3.js and core.async for nice data visualisations and user interaction. I don’t think we’d be able to achieve that using vanilla JavaScript. Sure, there were some bumps along the way but the overall reusability makes it worth a while. Outside of my day job I’m working on a in-browser genetic algorithm testing tool, using Om and Quil, but with all the presenting and other activities I had to pause the development for a while.</p>
+<p><strong>LC</strong>: I've used React or Om for a few things and it quite simply enables me to develop UI interaction that would be too intricate otherwise. How has your experience with Om been relative to other frameworks?</p>
+<p><strong>AP</strong>: I haven’t used any frameworks as it’s just easier to mix and match various Clojure/ClojureScript libraries depending on one’s needs. Om was the first library we’ve tried for interacting with React and it suited our needs well enough that we haven’t had the need to try anything else. If you choose a framework, like let’s say Hoplon, you have to go with its programming model and you lose the ability to control every part of your stack.</p>
+<p><strong>LC</strong>: You say you're using Om with d3.js. Om is a very functional style, while d3 uses mutation pervasively. How does the integration work? How well do they work together?</p>
+<p><strong>AP</strong>: Fortunately both are driven by data so having d3 visualisations render on your application state change makes perfect sense. I use interop a lot, and although it doesn’t look as nice as pure ClojureScript, it does the job. We can easily replace iteration methods like map and reduce with their ClojureScript alternatives. The only problem is the type coercion between Clojure’s data structures and JavaScript’s Object. It’s not always immediately clear which one should be used where. The perfect option would be to control SVG via Om (or similar library) and use C2’s functions to calculate path data. But I haven’t tried that myself yet. Charts I’ve been working on are quite complex and d3 comes with this gold mine of resources that none of the other visualisation libraries has. I’m not yet done experimenting though.</p>
+<p><strong>LC</strong>: Can you explain the basic models of Om and d3?</p>
+<p><strong>AP</strong>: D3 performs data-driven DOM manipulation, e.g. you can build a bar chart out of an array of numbers and when your data changes so will your chart. D3 can manipulate any part of DOM and has lots of helper functions to compute our visualisations. React/Om works on DOM as well - we write functions that translate our data into a DOM, but the difference is that the DOM is virtual. Each time the data changes, React/Om compares the old and new state and computes the minimal set of transformations that will be applied to the real DOM. DOM operations are slow so naturally this virtual representation speeds things up by skipping unnecessary transformations. This means that both Om and d3 want to be in control of the DOM inside our component. To make use of both libraries, you can either have Om take care of everything (but this means we need to write functions to compute paths, scales, etc.), or you could use d3’s scales, projection helpers and path generation while having Om generate and manage SVG, or you can have an empty div rendered by Om and allow d3 to generate and manipulate the SVG inside. The latter is the most common approach, probably because we leave the decision whether to re-render to Om (skipping any insignificant data changes), and when Om decides to render the component, d3 takes care of the rest. We combine the best of both.</p>
+<p>My talk will include some of that, with examples, since you can’t have a dashboard without a nice chart :)</p>
+<p><strong>LC</strong>: I see. It sounds like they work well together. I wouldn't have guessed that.</p>
+<p>In the talk you mention live data. How does your system handle that?</p>
+<p><strong>AP</strong>: I don’t have an actual system that I plan to demo - the talk is based around various ways to create, reuse and combine Om components to display data. Long polling and HTTP streaming are available through <a href="http://http-kit.org/">HTTP Kit</a>, but I also like how <a href="https://github.com/ptaoussanis/sente">Sente</a> combines that with core.async. But the focus is mainly on the components themselves - how you can mix and match them.</p>
+<p><strong>LC</strong>: Really cool.</p>
+<p>Talks are always limited in time, and there's lots of context that you assume people have (or wish they have). What is something people can learn more about to help them get ready for your talk?</p>
+<p><strong>AP</strong>: I will try to keep the talk as self contained as possible, but I won’t be able to cover things like the basics of web development with ClojureScript - this would be material for a separate talk. However, more and more people are using ClojureScript so I hope most of the attendees shouldn’t have a problem with that. Those who feel that they need to prepare more will find lots of resources online.</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>AP</strong>: The usual: <a href="http://twitter.com/AnnaPawlicka">Twitter</a>, my <a href="http://www.annapawlicka.com/">blog</a> and GitHub <a href="https://github.com/annapawlicka">account</a>. I’m also often on #clojure and #clojurescript IRC channels if someone wants to chat.</p>
+<p><strong>LC</strong>: Ok. One last question: when they make a movie about programming languages, who will play Clojure?</p>
+<p><strong>AP</strong>: That's a tricky one! I'd say Leonardo DiCaprio since he's one of the best actors yet still without an Oscar (read: very good but underappreciated) :-)</p>
+<p><strong>LC</strong>: Thanks for a great, informative interview.</p>
+<p><strong>AP</strong>: Thanks for putting this together. It was my first interview and it was fun :)</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-nathan-herzing-chris-shea">
+              Pre-conj Prep: Nathan Herzing and Chris Shea
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 07, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-helping-voters-with-pedestal-datomic-om-and-core.asynctalk">Talk: <a href="http://clojure-conj.org/speakers#nathan-herzing">Helping voters with Pedestal, Datomic, Om and core.async</a></h3>
+<p><a href="http://clojure-conj.org/speakers#nathan-herzing">Nathan Herzing and Chris Shea's talk</a> at the <em>conj</em> is about using Pedestal, Om, Datomic, and core.async together. They promise to code systems live.</p>
+<h4 id="background">Background</h4>
+<p>Pedestal was the name for a frontend framework create by Cognitect. They deprecated that framework and used the name for a small piece of it that was libraries for backend web servers, which is now under development. So <a href="https://github.com/pedestal/pedestal">Pedestal</a> now is a set of libraries for web development. Watch this <a href="https://www.youtube.com/watch?v=sFT_0v-iKVQ">Webcast</a> for background.</p>
+<p><a href="http://www.datomic.com/">Datomic</a> is Cognitect's append-only database with Datalog queries. A nice introduction is <a href="https://www.youtube.com/watch?v=4iaIwiemqfo">this talk by Rich Hickey</a>.</p>
+<p><a href="https://github.com/swannodette/om">Om</a> is a library in ClojureScript created by <a href="https://twitter.com/swannodette">David Nolen</a>. It is a wrapper around <a href="http://facebook.github.io/react/">React</a>, which is Facebook's library for manipulating the DOM in a functional way. Watch <a href="https://www.youtube.com/watch?v=DMtwq3QtddY">David Nolen's talk</a> for a good introduction.</p>
+<p><a href="https://github.com/clojure/core.async">core.async</a> is a library that brings Communicating Sequential Processes to Clojure and ClojureScript. A great talk on it is <a href="http://www.infoq.com/presentations/clojure-core-async">one by Rich Hickey</a>.</p>
+<h4 id="why-it-matters">Why it matters</h4>
+<p>I've said before that I like experience reports. This one will also combine it with live coding, which is exciting. Live coding is always a risk. This talk will combine four of the major components Clojure brings to the table, which are all very powerful in their own right. What will happen when their powers combine?</p>
+<h3 id="about-nathan-herzingtalk">About <a href="http://clojure-conj.org/speakers#nathan-herzing">Nathan Herzing</a></h3>
+<p><a href="https://github.com/nherzing">Github</a></p>
+<p><a href="http://clojure-conj.org/speakers#nathan-herzing"><img src="http://www.lispcast.com/img/pre-conj/nathan-herzing.jpeg" /></a></p>
+<h3 id="about-chris-sheat2">About <a href="http://clojure-conj.org/speakers#chris-shea">Chris Shea</a></h3>
+<p><a href="https://github.com/tie-rack">Github</a></p>
+<p><a href="http://clojure-conj.org/speakers#nathan-herzing"><img src="http://www.lispcast.com/img/pre-conj/chris-shea.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-brandon-bloom">
+              Pre-West Prep: Brandon Bloom
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 20, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-building-circlecis-frontend-with-omtalk">Talk: <a href="http://clojurewest.org/speakers#bbloom">Building CircleCI's Frontend With Om</a></h3>
+<p><a href="http://clojurewest.org/speakers#bbloom">Brandon Bloom's talk</a> at <em>Clojure/West</em> is about Om in production.</p>
+<h4 id="background">Background</h4>
+<p>It's hard to believe, but Om was actually started in December 2013. That's just 16 months ago. There hasn't been a lot of time for companies to explore it in production. Brandon Bloom helped build <a href="http://circleci.com">CircleCI</a>'s <a href="https://github.com/circleci/frontend">ClojureScript and Om frontend</a>, which is now open source. This will be a wonderful glimpse into the challenges and advantages of Om in a production system.</p>
+<p>At last year's Clojure/West, <a href="https://www.youtube.com/watch?v=DMtwq3QtddY">David Nolen introduced Om and the design decisions behind it</a>. And more recently at React.js Conf 2015, <a href="https://www.youtube.com/watch?v=5hGHdETNteE">David Nolen went a bit deeper</a>.</p>
+<h3 id="about-brandon-bloomtalk">About <a href="http://clojurewest.org/speakers#bbloom">Brandon Bloom</a></h3>
+<p><a href="http://www.brandonbloom.name/">Homepage</a> - <a href="https://github.com/brandonbloom">GitHub</a> - <a href="https://twitter.com/brandonbloom">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#bbloom"><img src="http://www.lispcast.com/img/pre-west/brandon%20bloom.jpeg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-brandon-bloom">
+              Pre-West Interview: Brandon Bloom
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 09, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#bbloom"><img src="http://www.lispcast.com/img/pre-west/brandon bloom.jpeg"
+      style="height:150px;float:right"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Brandon Bloom generously agreed to do an interview about his <a href="http://clojurewest.org/speakers#bbloom">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. The <a href="http://www.lispcast.com/pre-west-brandon-bloom">background to the talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Brandon Bloom</strong>: From 2009 to 2011, I encountered a couple of Rich's talks and writings. Each time I would look at Clojure briefly, but it never really clicked. When ClojureScript was released, my startup was heavily using CoffeeScript, so I decided to take a more serious peek at this new alternative. I immediately fell in love with Clojure and started contributing to ClojureScript. My startup never did get a chance to use ClojureScript, but Clojure on the JVM quickly became one of my favorite tools for prototypes and experiments, and I've lately, I've used it for <em>serious business</em> with some frequency.</p>
+<p><strong>LC</strong>: You will be talking about the CircleCI frontend, written in ClojureScript and Om. Om is less than 18 months old, and yet it is used in production systems and I assume replaced their previous frontend system. Can you speak to this decision? How was it evaluated?</p>
+<p><strong>BB</strong>: I honestly can't speak to the decision to use Om. That was made before I got involved. What I can say is that CircleCI was already a big Clojure user and their front end used to be CoffeeScript based. Daniel Woelfel deserves all the credit for choosing Om and delivering a production system with it. I got involved much later.</p>
+<p><strong>LC</strong>: What were some of the challenges that you faced when developing with such a new library as Om?</p>
+<p><strong>BB</strong>: Om is/was still evolving. It's got bugs, misfeatures, and other problems. Luckily, I've had the luxury of regular face time with David Nolen, Om's author, out at the Kitchen Table Coders studio in Brooklyn. I think that it's important for new library producers/consumers to interact regularly. Beyond that, the design patterns aren't established yet. It's difficult to simultaneously think deep thoughts about a challenging design space such as UI code, while also building a useful UI for your product. Sometimes, you just need to hack it and you can't be afraid to dig in to the library code while you're hacking it. After that, you need to reflect on whether your solution actually makes sense: Often it doesn't!</p>
+<p><strong>LC</strong>: What are some improvements to Om you would like to see?</p>
+<p><strong>BB</strong>: That's a tough question to answer constructively, since David has already picked all of the low hanging fruit that I've pointed out to him. Overall, Om is an absolute delight. That said, it's clearly a first real attempt at the React style of UI development in Clojure. Some parts of Om, like cursors, just never made much sense. Other parts feel like missed opportunities to truly capitalize on ClojureScript's strengths. At this point, my feedback could be rolled in to notes for a second attempt at this style of UI framework in Clojure.</p>
+<p>David has made the very pragmatic decision to assume React.js as a long term dependency. However, once you really get in to the weeds hacking on a UI, it becomes clear, at least it did to me, that less layers is always a good thing. Overall, a virtual DOM implementation is pretty easy, although getting it to perform well is tricky. I'd really like to see a ClojureScript library that drops the React.js dependency in favor of a more direct mapping to Clojure idioms.</p>
+<p>The dichotomy between primitive elements and Om components (created via om/build) has got to go. It hurts modularity and refactorability. But I also don't particularly like some users' insistence on hiccup forms for a variety of reasons.</p>
+<p>The <a href="http://blog.circleci.com/local-state-global-concerns/">&quot;no local state&quot; descriptors</a> thing should definitely be <em>the only way</em> Om operate.</p>
+<p>The &quot;world in an atom&quot; model isn't quite structured enough. We need something more database-like to manage client/server synchronization. Facebook's Relay is impressive and, if you squint right, their GraphQL looks a lot like Datomic's Pull API. I know that Sean Grove has been experimenting with a DataScript-backed UI. I think that somebody needs to ship a prescriptive framework here that integrates a client-side database with the view layer.</p>
+<p>I've also got extensive notes for an alternative events system.</p>
+<p>Beyond that, toolability is critical. The framework needs a way to design and test an individual component in the browser. You should have to go out of your way to break that, not go out of your way to enable it.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>BB</strong>:</p>
+<ul>
+<li>https://twitter.com/BrandonBloom</li>
+<li>http://www.brandonbloom.name/</li>
+</ul>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>BB</strong>: Certainly not a burrito.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

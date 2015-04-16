@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Exponential Backoff</title>
+                  <guid isPermalink="false">http://www.lispcast.com/exponential-backoff</guid>
+                  <link>http://www.lispcast.com/exponential-backoff</link>
+                  <pubDate>Fri 13 Mar 2015 02:01:59 PM CDT</pubDate>
+                  <description>
+                    A common failure in distributed systems is a server with a rate limit or with no limit but begins failing due to load. A standard solution is to retry after waiting a small time, increasing that time after each failure. We create a macro to handle this waiting and retrying.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/exponential-backoff"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Lisp with Macros is Two Languages</title>
+                  <guid isPermalink="false">http://www.lispcast.com/lisp-with-macros-language-stack</guid>
+                  <link>http://www.lispcast.com/lisp-with-macros-language-stack</link>
+                  <pubDate>Tue 08 Oct 2013 10:47:27 AM CDT</pubDate>
+                  <description>
+                    Lisp with macros can be seen as two languages, each with different semantics. The base language can be interpreted directly, whereas the result of interpreting the macro language is to produce a new program in the base language.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/lisp-with-macros-language-stack"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Try Three Times</title>
+                  <guid isPermalink="false">http://www.lispcast.com/try-three-times</guid>
+                  <link>http://www.lispcast.com/try-three-times</link>
+                  <pubDate>Thu 05 Mar 2015 03:44:38 PM CST</pubDate>
+                  <description>
+                    Distributed systems fail in indistinguishable ways. Often, retrying is a good solution to intermittent errors. We create a retry macro to handle the retries in a generic way.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/try-three-times"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>When To Use a Macro in Clojure</title>
+                  <guid isPermalink="false">http://www.lispcast.com/when-to-use-a-macro</guid>
+                  <link>http://www.lispcast.com/when-to-use-a-macro</link>
+                  <pubDate>Fri 07 Mar 2014 03:45:07 PM CST</pubDate>
+                  <description>
+                    Macros should be avoided to the extent possible. There are three circumstances where they are required.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/when-to-use-a-macro"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

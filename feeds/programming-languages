@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Just Hack Something Together</title>
+                  <guid isPermalink="false">http://www.lispcast.com/just-hack-something-together</guid>
+                  <link>http://www.lispcast.com/just-hack-something-together</link>
+                  <pubDate>Thu 04 Sep 2014 10:54:53 PM CDT</pubDate>
+                  <description>
+                    Lisp is viewed as difficult and academic but it is a great language for hacking a solution together.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/just-hack-something-together"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Jeanine Adkisson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-jeanine-adkisson</guid>
+                  <link>http://www.lispcast.com/pre-west-jeanine-adkisson</link>
+                  <pubDate>Fri 03 Apr 2015 11:49:08 PM CDT</pubDate>
+                  <description>
+                    Jeanine Adkisson will talk about prototyping a language in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-jeanine-adkisson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

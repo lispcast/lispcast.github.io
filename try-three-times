@@ -1,0 +1,245 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Try Three Times | LispCast</title>
+    <meta name="description" content="Distributed systems fail in indistinguishable ways. Often, retrying is a good solution to intermittent errors. We create a retry macro to handle the retries in a generic way.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/try-three-times">
+              Try Three Times
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 05, 2015
+          </div>
+
+          
+<p>Summary: <em>Distributed systems fail in indistinguishable ways. Often, retrying is a good solution to intermittent errors. We create a retry macro to handle the retries in a generic way.</em></p>
+<p>Let's face it: your system is probably a distributed system. All web apps are by definition distributed. They have at least one server, probably a separate database server, and many browser clients. And now microservices are getting popular. Distributed is the current and future normal. While Clojure solves the problems of multiple cores sharing memory at the language level, <strong>distributed systems problems are left to be addressed at the application level</strong>.</p>
+<h2 id="the-problem">The problem</h2>
+<p>One big problem that comes up all the time in distributed systems is dealing with failure. Failure happens everywhere. The problem in a distributed system is that <strong>you don't know where the failure happened</strong>. For example, let's say you make an HTTP GET request and 20 seconds later, you're still waiting for the response. Is it:</p>
+<ul>
+<li>A network failure?
+<ul>
+<li>Did the message not get to the server?</li>
+<li>Did the message get there, but the response didn't make it back?</li>
+</ul></li>
+<li>The server is down?</li>
+<li>The server is still working?</li>
+<li>The response is still coming?</li>
+<li>An intermediate computer (proxy) has filtered the request/response?</li>
+</ul>
+<p>It is literally impossible to know what the problem is. And that's ok. There's a lot of machinery between one machine and the next. Even if you could diagnose the problem, <strong>are you really going to program each error case?</strong></p>
+<h3 id="metaphor">Metaphor</h3>
+<p>Let's say you call your friend and they don't pick up. Are they asleep? Is their phone off? Did the call not go through? The phone won't tell you. And you really want to talk to them. So what do you do? <strong>You call back.</strong> You might even call back a couple of times. If they pick up when you call back, great! If not, then you get tired and give up.</p>
+<p>That's a common approach in distributed systems as well: retry your distributed message a few times before you give up. It's easy and <strong>fixes a surprising number of problems</strong>. What's more, there's a good solution that's <em>simple</em> in the Hickeyan sense.</p>
+<h2 id="the-solution">The solution</h2>
+<p><strong>Failure in Clojure typically means an Exception.</strong> So we'll need to catch exceptions and run code multiple times.</p>
+<pre><code>(defn try-n-times [f n]
+  (if (zero? n)
+    (f)
+    (try
+      (f)
+      (catch Throwable _
+        (try-n-times f (dec n))))))</code></pre>
+<p>You pass it a function and a number of times to retry it. The base case is when <code>n</code> is 0. In that case, it will just try it (not <em>re</em>try). If it's greater than 0, it will wrap the function call in a <code>try/catch</code>, catch everything, and recurse. If after n retries, is still throws an exception, <code>try-n-times</code> will fail and some other code will have to deal with it. <strong>The concern of retrying is separated from what is being retried.</strong></p>
+<h3 id="how-do-you-use-it">How do you use it?</h3>
+<p>Wrap your distributed calls in this bad boy and you're good to go.</p>
+<p>Instead of this:</p>
+<pre><code>(http/get &quot;http://somewhat-reliable.com/resource&quot;
+          {:socket-timeout 1000
+           :conn-timeout   1000})</code></pre>
+<p>You do this:</p>
+<pre><code>(try-n-times #(http/get &quot;http://somewhat-reliable.com/resource&quot;
+                        {:socket-timeout 1000
+                         :conn-timeout 1000}) 2)</code></pre>
+<p>Remember, <code>n</code> is the number of <em>re</em>tries. So that's 1 <em>try</em> + 2 <em>re</em>tries.</p>
+<h3 id="macro-anyone">Macro, anyone?</h3>
+<p><strong>Alright, yes, I made a macro for that.</strong> It does come in handy to have a macro that you can put code in instead of passing in a function.</p>
+<pre><code>(defmacro try3 [&amp; body]
+  `(try-n-times (fn [] ~@body) 2))</code></pre>
+<p>This one is used like this:</p>
+<pre><code>(try3
+  (println &quot;trying!&quot;)
+  (do-some-stuff))</code></pre>
+<h3 id="warning">Warning</h3>
+<p>Now, a little care needs to be taken when you use this. Remember, when you get a failure, it could be a timeout. The server could be processing your request. Or it could have failed halfway through a multi-step process. What that means practically is that <strong>your distributed message has to be idempotent</strong>. HTTP GET <em>is</em> idempotent, so it's ok. POST generally is not, but sometimes it is. Use your judgment! Also, you should make your call timeout, to turn long waits into errors.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This pattern is just one piece of a larger distributed system puzzle. The network and servers are unreliable. They might work the whole time during development, but in the fullness of time, <strong>an always-on distributed system <em>will</em> have some kind of failure eventually</strong>. Sometimes the failures are temporary, and in those cases, a quick retry can fix it right away.</p>
+<p>Though Clojure does not have specific solutions to distributed systems problems, coding them up is short and straightforward. If you're interested in learning Clojure, I suggest you check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course that uses animation, storytelling, and exercises to install Clojure into your brain.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/exponential-backoff">Exponential Backoff</a></li>
+<li><a href="http://www.lispcast.com/lisp-with-macros-language-stack">Lisp with Macros is Two Languages</a></li>
+<li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-david-pick">Pre-conj Prep: David Pick</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/data-first-programming">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/task-analysis">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

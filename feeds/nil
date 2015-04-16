@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Nil Punning (Or Null Pointers Considered Not So Bad)</title>
+                  <guid isPermalink="false">http://www.lispcast.com/nil-punning</guid>
+                  <link>http://www.lispcast.com/nil-punning</link>
+                  <pubDate>Thu 12 Sep 2013 04:44:34 PM CDT</pubDate>
+                  <description>
+                    Null pointers are still a problem in Clojure, but several design decisions have made them less problematic than other languages.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/nil-punning"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

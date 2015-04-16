@@ -1,0 +1,313 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Clojure Compendium | LispCast</title>
+    <meta name="description" content="">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-resources">
+              Clojure Compendium
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 06, 2011
+          </div>
+
+          
+<h3 id="people">People</h3>
+<ul>
+<li><a href="http://clojure.org">Rick Hickey</a> Creator of Clojure
+<ul>
+<li><a href="http://twitter.com/richhickey">On Twitter</a></li>
+<li><a href="http://www.infoq.com/author/Rich-Hickey">On InfoQ</a></li>
+<li><a href="https://github.com/richhickey/">On Github</a><br /></li>
+<li>NY</li>
+</ul></li>
+<li><a href="http://technomancy.us/">Phil Hagelberg (Technomancy)</a> Creator of Leiningen and Emacs Starter Kit
+<ul>
+<li><script type="text/javascript">
+<!--
+h='&#104;&#x61;&#x67;&#x65;&#108;&#98;&#46;&#x6f;&#114;&#x67;';a='&#64;';n='&#112;&#104;&#x69;&#108;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'Email'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#112;&#104;&#x69;&#108;&#32;&#x61;&#116;&#32;&#104;&#x61;&#x67;&#x65;&#108;&#98;&#32;&#100;&#x6f;&#116;&#32;&#x6f;&#114;&#x67;&#x29;</noscript></li>
+<li><a href="http://technomancy.us/">Technomancy</a></li>
+<li><a href="https://github.com/technomancy/">On Github</a></li>
+<li><a href="http://twitter.com/technomancy">On Twitter</a></li>
+<li>Works at <a href="http://heroku.com">Heroku</a></li>
+<li>Seattle, WA, USA</li>
+</ul></li>
+<li><a href="http://blog.thinkrelevance.com">Stuart Halloway</a> CEO of <a href="http://thinkrelevance.com/">Relevance</a>, Author of <a href="http://pragprog.com/titles/shcloj/programming-clojure">Programming Clojure</a>
+<ul>
+<li>Works at <a href="http://thinkrelevance.com/">Relevance</a></li>
+<li><a href="http://twitter.com/stuarthalloway">On Twitter</a></li>
+<li><a href="http://www.infoq.com/author/Stuart-Halloway">On InfoQ</a></li>
+<li>Chapel Hill, NC</li>
+</ul></li>
+<li><a href="http://stuartsierra.com/">Stuart Sierra</a> Author of <a href="http://apress.com/book/view/1430272317">Practical Clojure</a>
+<ul>
+<li><a href="http://twitter.com/stuartsierra">On Twitter</a></li>
+</ul></li>
+<li>[Mark McGranaghan] Creator of <a href="https://github.com/mmcgrana/ring">Ring</a>
+<ul>
+<li><script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x6d;&#x63;&#x67;&#114;&#x61;&#110;&#x61;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'Email'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x6d;&#x6d;&#x63;&#x67;&#114;&#x61;&#110;&#x61;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="http://github.com/mmcgrana">On Github</a></li>
+<li>Works at <a href="http://heroku.com">Heroku</a></li>
+</ul></li>
+<li><a href="http://weavejester.com/">James Reeves</a>
+<ul>
+<li><a href="http://weavejester.com/">weavejester</a></li>
+<li><script type="text/javascript">
+<!--
+h='&#x77;&#x65;&#x61;&#118;&#x65;&#106;&#x65;&#x73;&#116;&#x65;&#114;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#106;&#114;&#x65;&#x65;&#118;&#x65;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'Email'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#106;&#114;&#x65;&#x65;&#118;&#x65;&#x73;&#32;&#x61;&#116;&#32;&#x77;&#x65;&#x61;&#118;&#x65;&#106;&#x65;&#x73;&#116;&#x65;&#114;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="https://github.com/weavejester">On Github</a></li>
+<li>London</li>
+</ul></li>
+<li><a href="http://www.ociweb.com/mark">R. Mark Volkmann</a>
+<ul>
+<li><a href="http://twitter.com/mark_volkmann">On Twitter</a></li>
+<li>St. Charles, Missouri</li>
+</ul></li>
+<li><a href="http://kotka.de/">Meikel Brandmeyer</a>
+<ul>
+<li><a href="http://twitter.com/kotarak">On Twitter</a></li>
+<li><a href="http://kotka.de/blog/index.html">Blog</a></li>
+<li>Frankfurt, Germany</li>
+</ul></li>
+<li><a href="http://about.me/conikee">Chetan Conikee</a>
+<ul>
+<li><a href="http://twitter.com/conikeec">On Twitter</a></li>
+</ul></li>
+<li><a href="http://liebke.me/">David Edgar Liebke</a> Creator of Incanter
+<ul>
+<li><a href="http://twitter.com/liebke">On Twitter</a></li>
+<li><a href="http://github.com/liebke">On Github</a></li>
+<li><a href="http://data-sorcery.org/">Incanter Blog</a></li>
+<li>Works at <a href="http://thinkrelevance.com/">Relevance</a></li>
+<li>Silver Spring, Maryland</li>
+</ul></li>
+<li>Michael Fogus Co-author of The Joy of Clojure</li>
+<li><a href="http://darevay.com/">Dave Ray</a> Creator of <a href="https://github.com/daveray/seesaw">Seesaw</a></li>
+<li><a href="http://github.com/daveray">On Github</a></li>
+<li><a href="http://blog.darevay.com/">Blog</a></li>
+<li><script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#100;&#x61;&#118;&#x65;&#114;&#x61;&#x79;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'Email'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#100;&#x61;&#118;&#x65;&#114;&#x61;&#x79;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="http://stackoverflow.com/users/40310/dave-ray">On StackOverflow</a></li>
+<li><a href="http://twitter.com/darevay">On Twitter</a></li>
+<li>Works at <a href="http://www.novodynamics.com/">NovoDynamics, Inc</a></li>
+<li>Ann Arbor, MI</li>
+<li>[Laurent Petit]
+<ul>
+<li><a href="http://twitter.com/petitlaurent">On Twitter</a></li>
+</ul></li>
+<li>David Nolen</li>
+<li>Chris Houser</li>
+<li>Alex Miller
+<ul>
+<li><a href="http://twitter.com/puredanger">On Twitter</a></li>
+<li>St. Louis</li>
+<li>Works at <a href="http://revelytix.com/">Revelytix</a></li>
+</ul></li>
+<li>Stephen C. Gilardi
+<ul>
+<li><a href="http://twitter.com/scgilardi">On Twitter</a></li>
+</ul></li>
+<li><a href="http://blog.nirav.name/">Nirav Thaker</a>
+<ul>
+<li><a href="http://twitter.com/niravn1">On Twitter</a></li>
+<li><a href="http://github.com/niravthaker">On Github</a></li>
+<li><a href="http://news.ycombinator.com/user?id=nirav">On Hacker News</a></li>
+<li><script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x69;&#114;&#x61;&#118;&#46;&#116;&#104;&#x61;&#x6b;&#x65;&#114;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'Email'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x69;&#114;&#x61;&#118;&#46;&#116;&#104;&#x61;&#x6b;&#x65;&#114;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li>Toronto, Canada</li>
+</ul></li>
+<li><a href="http://postposttechnical.com/">Jo Cranford</a>
+<ul>
+<li><a href="http://twitter.com/#!/jocranford">On Twitter</a></li>
+<li>Works at ThoughtWorks</li>
+</ul></li>
+<li><a href="http://www.deepbluelambda.org/">Daniel Solano Gómez</a>
+<ul>
+<li><a href="http://twitter.com/deepbluelambda">On Twitter</a></li>
+<li><script type="text/javascript">
+<!--
+h='&#x73;&#x6f;&#108;&#x61;&#110;&#x6f;&#x67;&#x6f;&#x6d;&#x65;&#122;&#46;&#x6f;&#114;&#x67;';a='&#64;';n='&#100;&#x61;&#110;&#x69;&#x65;&#108;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'Email'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#100;&#x61;&#110;&#x69;&#x65;&#108;&#32;&#x61;&#116;&#32;&#x73;&#x6f;&#108;&#x61;&#110;&#x6f;&#x67;&#x6f;&#x6d;&#x65;&#122;&#32;&#100;&#x6f;&#116;&#32;&#x6f;&#114;&#x67;&#x29;</noscript></li>
+<li>Phone: 281.224.8940</li>
+<li>Houston, TX</li>
+</ul></li>
+<li><a href="http://blogs.foognostic.net/">Seth Schroeder</a>
+<ul>
+<li><a href="http://twitter.com/foogoof">On Twitter</a></li>
+</ul></li>
+</ul>
+<h3 id="companies">Companies</h3>
+<ul>
+<li><a href="http://www.sonian.com/">Sonian</a> Cloud-Powered Archiving and Search
+<ul>
+<li><a href="https://github.com/sonian">On Github</a></li>
+</ul></li>
+<li><a href="http://heroku.com">Heroku</a> Cloud Application Platform</li>
+<li><a href="http://thinkrelevance.com/">Relevance</a></li>
+<li><a href="http://clojure.com/">Clojure/core</a></li>
+<li><a href="http://revelytix.com/">Revelytix</a> Semantic Web</li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

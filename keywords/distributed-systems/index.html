@@ -1,0 +1,580 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: distributed-systems | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/exponential-backoff">
+              Exponential Backoff
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 13, 2015
+          </div>
+
+          
+<p>Summary: <em>A common failure in distributed systems is a server with a rate limit or with no limit but begins failing due to load. A standard solution is to retry after waiting a small time, increasing that time after each failure. We create a macro to handle this waiting and retrying.</em></p>
+<p>A few days ago I wrote about <a href="http://www.lispcast.com/try-three-times">a high-level way of handing intermittent errors</a>, particularly in a distributed system. The way was simplistic: when you get an error, try again, up to a few errors. A slightly more nuanced approach is to <em>back off</em> before you try again. <strong>Each time there's an error, you wait longer, until some maximum time is reached.</strong></p>
+<h2 id="the-problem">The problem</h2>
+<p>Let's say you're hitting a service with a rate limit. That rate limit could be enforced or implicit<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. You've got lots of computers hitting it, and it's impossible to coordinate. No matter how hard you try to keep under that rate limit (and you <em>should try</em>), <strong>you will eventually break the limit</strong>. Retrying immediately when the server is too busy will actually make the problem worse. You will give it yet another request to deny. At the same time, it might be hard to distinguish &quot;I'm too busy <em>right now</em>&quot; from &quot;I'm never going to recover&quot;.</p>
+<h2 id="the-solution">The solution</h2>
+<p>I don't know what it's really called. I call it <em>Exponential Backoff</em>. It's also easy to turn into a separate routine:</p>
+<pre><code>(defn exponential-backoff [time rate max f]
+  (if (&gt;= time max) ;; we&#39;re over budget, just call f
+    (f)
+    (try
+      (f)
+      (catch Throwable t
+        (Thread/sleep time)
+        (exponential-backoff f (* time rate) rate max)))))</code></pre>
+<p>This one has <strong>the same structure as <a href="http://www.lispcast.com/try-three-times"><code>try-n-times</code></a></strong> but will sleep before recursing. When it recurses, the time is multiplied by the rate. And when the last wait is more than the max, it will try one more time. Failures from that last try will propagate.</p>
+<h3 id="how-to-use-it">How to use it</h3>
+<p>Same as with <code>try-n-times</code>:</p>
+<pre><code>(exponential-backoff 1000 2 10000
+  #(http/get &quot;http://rate-limited.com/resource&quot;
+             {:socket-timeout 1000
+              :conn-timeout   1000}))</code></pre>
+<p>This will retry after waiting 1 second (1000 ms) the first time, then double it (the <code>2</code>) each time. When it waits 10 seconds, it won't retry any more.</p>
+<h3 id="slightly-more-useful">Slightly more useful</h3>
+<p>Ok, so I don't use this exactly. What I use is slightly more complicated. I've found that <strong>I often can tell if it's a rate limiting problem if I look at the exception</strong>. So, let's pass it a predicate to check.</p>
+<pre><code>(defn exponential-backoff [time rate max p? f]
+  (if (&gt;= time max) ;; we&#39;re over budget, just call f
+    (f)
+    (try
+      (f)
+      (catch Throwable t
+        (if (p? t)
+          (do
+            (Thread/sleep time)
+            (exponential-backoff f (* time rate) rate max))
+          (throw t))))))</code></pre>
+<p>This one only recurses if the predicate returns true on the exception. Let's service mentions &quot;queue capacity&quot; in the body of the HTTP response when it's too busy:</p>
+<pre><code>(exponential-backoff 1000 2 10000
+  (fn [t] ;; the predicate
+    (and (instance? clojure.lang.ExceptionInfo t)
+         (re-find #&quot;queue capacity&quot; (:error (ex-data t)))))
+  #(http/get &quot;http://rate-limited.com/resource&quot;
+             {:socket-timeout 1000
+              :conn-timeout   1000}))</code></pre>
+<p><strong>You can be more selective about your backoff.</strong></p>
+<h3 id="a-macro">A Macro</h3>
+<p>Well, here's an example macro. It's got a bunch of defaults.</p>
+<pre><code>(defmacro try-backoff [[time rate max p?] &amp; body]
+  `(exponential-backoff (or ~time 1000) ;; defaults!
+                        (or ~rate 2)
+                        (or ~max 10000)
+                        (or ~p? (constantly true))
+                        (fn [] ~@body)))</code></pre>
+<p>Here's how you use it:</p>
+<pre><code>(try-backoff []
+  (println &quot;trying!&quot;)
+  (do-some-stuff))</code></pre>
+<p>Also, add it to your Clojure Emacs config for better formatting, because this one wants the args on the first line:</p>
+<pre><code>(put-clojure-indent &#39;try-backoff 1)</code></pre>
+<p>This tells Emacs to make the second argument (<code>(println &quot;trying!&quot;)</code>) one indentation in, instead of directly under the first (<code>[]</code>).</p>
+<h3 id="warning">Warning</h3>
+<p>All of the <a href="http://www.lispcast.com/try-three-times#warning"><code>try3</code> warnings</a> apply. The stuff you're doing inside needs to be idempotent!</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This pattern is another cool, reusable component to help build reliability into a distributed system. Small, intermittent failures are pervasive. <strong>And a common form of error is a server being too busy.</strong> Being able to handle this type of error <strong>quickly and systematically</strong> is going to make your life easier.</p>
+<p>Though Clojure does not have specific solutions to distributed systems problems, <strong>coding them up is short and straightforward</strong>. If you're interested in learning Clojure, I suggest you check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course that uses animation, storytelling, and exercises to install Clojure into your brain.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/lisp-with-macros-language-stack">Lisp with Macros is Two Languages</a></li>
+<li><a href="http://www.lispcast.com/try-three-times">Try Three Times</a></li>
+<li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-david-pick">Pre-conj Prep: David Pick</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>meaning the server can only handle so many jobs at once, and the behavior is undefined at that point<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-david-pick">
+              Pre-conj Prep: David Pick
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 30, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-building-a-data-pipeline-with-clojure-and-kafkatalk">Talk: <a href="http://clojure-conj.org/speakers#david-pick">Building a Data Pipeline with Clojure and Kafka</a></h3>
+<h4 id="background">Background</h4>
+<p><a href="http://clojure-conj.org/speakers#david-pick">David Pick's talk</a> at the <em>conj</em> is about <a href="http://kafka.apache.org/">Kafka</a>, which is a distributed messaging system. It implements a publish/subscribe model and runs in a cluster. Its documentation claims that Kafka has very high throughput.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p><a href="https://www.braintreepayments.com/">Braintree</a>, where David Pick works, is a huge payment processor, now owned by PayPal. They must have very strict availability and consistency requirements in addition to the scale. The talk description hints that Clojure was helpful to their success. Some of the best talks I've seen are this kind of experience report.</p>
+<h3 id="about-david-picktalk">About <a href="http://clojure-conj.org/speakers#david-pick">David Pick</a></h3>
+<p><a href="http://twitter.com/davidpick">Twitter</a> - <a href="https://github.com/dpick">Github</a></p>
+<p><a href="http://clojure-conj.org/speakers#david-pick"><img src="http://www.lispcast.com/img/pre-conj/david-pick.jpeg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-interview-david-pick">
+              Pre-Conj Interview: David Pick
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 15, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#david-pick"><img src="http://www.lispcast.com/img/pre-conj/david-pick.jpeg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>David Pick was kind enough to answer a few questions about himself and his upcoming <a href="http://www.clojure-conj.org/">Clojure/conj</a> talk. You may want to <a href="http://www.lispcast.com/pre-conj-david-pick">read the background</a> before you begin.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>David Pick</strong>: A friend of my mine suggested I read <a href="http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504">Purely Functional Data Structures</a> and told me the work in the book was the basis for Clojure's persistent data structures. I really enjoyed it and decided to give Clojure a try.</p>
+<p><strong>LC</strong>: Braintree must process a lot of very important data, since it's a payments service. What were you using before you developed the Clojure and Kafka system?</p>
+<p><strong>DP</strong>: I'd say for 98% of our systems we still use Ruby and Postgres, we're simply using Clojure and Kafka as a messaging platform to move data between systems.</p>
+<p><strong>LC</strong>: What is Kafka?</p>
+<p><strong>DP</strong>: Kafka is a system for doing publish subscribe messaging, that was built by LinkedIn to have extremely high throughput and replay ability of messages. It stores all messages sent through the system for a rolling window. So consumers simply say give me messages starting with offset n or whatever your most recent message is. This way if a receiving system goes down the consumer can just rewind the stream and replay messages that were missed.</p>
+<p><strong>LC</strong>: Could you describe the problem you were trying to solve? What were the requirements?</p>
+<p><strong>DP</strong>: There were actually two problems we were trying to solve. The first was to pull our search tool into a separate system that was more scalable than our current one (the current one just runs sql queries on main database). The second was to improve the accuracy and speed that our data warehouse is updated.</p>
+<p>For the infrastructure part of the solution we ended up using Kafka, Zookeeper, and Elasticsearch which are all JVM based so that ended up heavily influencing our decision to use Clojure.</p>
+<p><strong>LC</strong>: You mentioned in the talk description that Clojure had certain advantages. What tradeoffs did Clojure, or your choice of technologies, bring about?</p>
+<p><strong>DP</strong>: The biggest tradeoff I think we made with Clojure is familiarity, I was the only one on the team who knew Clojure prior to starting this project. So that has certainly slowed us down. Other than that things have gone surprisingly well.</p>
+<p><strong>LC</strong>: I'm really fascinated by the engineering efforts to build very reliable and robust systems. Are you going to talk about that?</p>
+<p><strong>DP</strong>: Yep, that's the plan!</p>
+<p><strong>LC</strong>: Awesome.</p>
+<p>Do you have any resources that would help someone new to Clojure or new to Kafka so that they can make the most of your talk? Some pre-reading or pre-watching materials?</p>
+<p><strong>DP</strong>: For Clojure I definitely recommend both the <a href="http://clojurekoans.com/">Clojure Koans</a> and <a href="http://4clojure.com/">4Clojure</a>. For Kafka I'd recommend the <a href="http://kafka.apache.org/documentation.html#introduction">introduction on their site</a>.</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>DP</strong>: Twitter is probably the best place <a href="http://twitter.com/davidpick">@davidpick</a>.</p>
+<p><strong>LC</strong>: Who would win in a no-holds-barred fight to the finish, Clojure with an Arduino-controlled laser or a T-Rex?</p>
+<p><strong>DP</strong>: If Rich is writing the Clojure I give it a fighting chance, otherwise it's the T-Rex for sure.</p>
+<p><strong>LC</strong>: Awesome! Thanks for a great interview. I look forward to seeing you at the Conj.</p>
+<p><strong>DP</strong>: Awesome, thanks Eric!</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/try-three-times">
+              Try Three Times
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 05, 2015
+          </div>
+
+          
+<p>Summary: <em>Distributed systems fail in indistinguishable ways. Often, retrying is a good solution to intermittent errors. We create a retry macro to handle the retries in a generic way.</em></p>
+<p>Let's face it: your system is probably a distributed system. All web apps are by definition distributed. They have at least one server, probably a separate database server, and many browser clients. And now microservices are getting popular. Distributed is the current and future normal. While Clojure solves the problems of multiple cores sharing memory at the language level, <strong>distributed systems problems are left to be addressed at the application level</strong>.</p>
+<h2 id="the-problem">The problem</h2>
+<p>One big problem that comes up all the time in distributed systems is dealing with failure. Failure happens everywhere. The problem in a distributed system is that <strong>you don't know where the failure happened</strong>. For example, let's say you make an HTTP GET request and 20 seconds later, you're still waiting for the response. Is it:</p>
+<ul>
+<li>A network failure?
+<ul>
+<li>Did the message not get to the server?</li>
+<li>Did the message get there, but the response didn't make it back?</li>
+</ul></li>
+<li>The server is down?</li>
+<li>The server is still working?</li>
+<li>The response is still coming?</li>
+<li>An intermediate computer (proxy) has filtered the request/response?</li>
+</ul>
+<p>It is literally impossible to know what the problem is. And that's ok. There's a lot of machinery between one machine and the next. Even if you could diagnose the problem, <strong>are you really going to program each error case?</strong></p>
+<h3 id="metaphor">Metaphor</h3>
+<p>Let's say you call your friend and they don't pick up. Are they asleep? Is their phone off? Did the call not go through? The phone won't tell you. And you really want to talk to them. So what do you do? <strong>You call back.</strong> You might even call back a couple of times. If they pick up when you call back, great! If not, then you get tired and give up.</p>
+<p>That's a common approach in distributed systems as well: retry your distributed message a few times before you give up. It's easy and <strong>fixes a surprising number of problems</strong>. What's more, there's a good solution that's <em>simple</em> in the Hickeyan sense.</p>
+<h2 id="the-solution">The solution</h2>
+<p><strong>Failure in Clojure typically means an Exception.</strong> So we'll need to catch exceptions and run code multiple times.</p>
+<pre><code>(defn try-n-times [f n]
+  (if (zero? n)
+    (f)
+    (try
+      (f)
+      (catch Throwable _
+        (try-n-times f (dec n))))))</code></pre>
+<p>You pass it a function and a number of times to retry it. The base case is when <code>n</code> is 0. In that case, it will just try it (not <em>re</em>try). If it's greater than 0, it will wrap the function call in a <code>try/catch</code>, catch everything, and recurse. If after n retries, is still throws an exception, <code>try-n-times</code> will fail and some other code will have to deal with it. <strong>The concern of retrying is separated from what is being retried.</strong></p>
+<h3 id="how-do-you-use-it">How do you use it?</h3>
+<p>Wrap your distributed calls in this bad boy and you're good to go.</p>
+<p>Instead of this:</p>
+<pre><code>(http/get &quot;http://somewhat-reliable.com/resource&quot;
+          {:socket-timeout 1000
+           :conn-timeout   1000})</code></pre>
+<p>You do this:</p>
+<pre><code>(try-n-times #(http/get &quot;http://somewhat-reliable.com/resource&quot;
+                        {:socket-timeout 1000
+                         :conn-timeout 1000}) 2)</code></pre>
+<p>Remember, <code>n</code> is the number of <em>re</em>tries. So that's 1 <em>try</em> + 2 <em>re</em>tries.</p>
+<h3 id="macro-anyone">Macro, anyone?</h3>
+<p><strong>Alright, yes, I made a macro for that.</strong> It does come in handy to have a macro that you can put code in instead of passing in a function.</p>
+<pre><code>(defmacro try3 [&amp; body]
+  `(try-n-times (fn [] ~@body) 2))</code></pre>
+<p>This one is used like this:</p>
+<pre><code>(try3
+  (println &quot;trying!&quot;)
+  (do-some-stuff))</code></pre>
+<h3 id="warning">Warning</h3>
+<p>Now, a little care needs to be taken when you use this. Remember, when you get a failure, it could be a timeout. The server could be processing your request. Or it could have failed halfway through a multi-step process. What that means practically is that <strong>your distributed message has to be idempotent</strong>. HTTP GET <em>is</em> idempotent, so it's ok. POST generally is not, but sometimes it is. Use your judgment! Also, you should make your call timeout, to turn long waits into errors.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This pattern is just one piece of a larger distributed system puzzle. The network and servers are unreliable. They might work the whole time during development, but in the fullness of time, <strong>an always-on distributed system <em>will</em> have some kind of failure eventually</strong>. Sometimes the failures are temporary, and in those cases, a quick retry can fix it right away.</p>
+<p>Though Clojure does not have specific solutions to distributed systems problems, coding them up is short and straightforward. If you're interested in learning Clojure, I suggest you check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course that uses animation, storytelling, and exercises to install Clojure into your brain.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/exponential-backoff">Exponential Backoff</a></li>
+<li><a href="http://www.lispcast.com/lisp-with-macros-language-stack">Lisp with Macros is Two Languages</a></li>
+<li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-david-pick">Pre-conj Prep: David Pick</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

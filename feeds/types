@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Church vs Curry Types</title>
+                  <guid isPermalink="false">http://www.lispcast.com/church-vs-curry-types</guid>
+                  <link>http://www.lispcast.com/church-vs-curry-types</link>
+                  <pubDate>Tue 15 Jul 2014 10:26:15 PM CDT</pubDate>
+                  <description>
+                    Static vs dynamic typing debates often flounder because the debators see from two different perspectives without knowing it. Learning to identify the two perspectives can calm the discussion. The tension between the two perspectives has led to Gradual Typing and other technologies.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/church-vs-curry-types"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Hindley-Milner in Clojure</title>
+                  <guid isPermalink="false">http://www.lispcast.com/Hindley-Milner-in-Clojure</guid>
+                  <link>http://www.lispcast.com/Hindley-Milner-in-Clojure</link>
+                  <pubDate>Mon 13 Jan 2014 08:48:37 AM CST</pubDate>
+                  <description>
+                    I wrote a lambda-calculus interpreter and an implementation of Hindley-Milner to type check it.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/Hindley-Milner-in-Clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>On Type Unity</title>
+                  <guid isPermalink="false">http://www.lispcast.com/on-type-unity</guid>
+                  <link>http://www.lispcast.com/on-type-unity</link>
+                  <pubDate>Sat 02 Nov 2013 04:52:12 PM CDT</pubDate>
+                  <description>
+                    Languages with strong, dynamic types (like Scheme) are actually single-typed languages, not untyped languages. Some would say this is restrictive, but this unity of type is a source of their strength.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/on-type-unity"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Nathan Sorenson</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-nathan-sorenson</guid>
+                  <link>http://www.lispcast.com/pre-west-nathan-sorenson</link>
+                  <pubDate>Wed 15 Apr 2015 11:10:22 PM CDT</pubDate>
+                  <description>
+                    Nathan Sorenson will talk about type systems and macros.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-nathan-sorenson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</title>
+                  <guid isPermalink="false">http://www.lispcast.com/ambrose-interview-typed-clojure</guid>
+                  <link>http://us4.campaign-archive2.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=c43c157edd</link>
+                  <pubDate>Tue 08 Oct 2013 03:34:23 PM CDT</pubDate>
+                  <description>
+                    
+&lt;p&gt;Way back in May 2012, Ambrose was beginning work on Typed Clojure for Google Summer of Code. I interviewed him to get an idea of what kind of type system we could expect. Since he's now running a very successful &lt;a href=&quot;http://www.indiegogo.com/projects/typed-clojure&quot;&gt;crowd funding campaign&lt;/a&gt;, I thought I'd bring up this blast from the past.&lt;/p&gt;
+&lt;h3 id=&quot;you-might-also-like&quot;&gt;You might also like&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/3-things-java-can-steal-from-clojure&quot;&gt;3 Things Java Programmers Can Steal from Clojure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/atom-problem&quot;&gt;Atom code explanation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/clojure-gazette-looking-forward-2015&quot;&gt;Clojure Gazette Looking Forward&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/clojure-is-imperative&quot;&gt;Clojure is Imperative&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/ambrose-interview-typed-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Scala: sharp and gets things cut</title>
+                  <guid isPermalink="false">http://www.lispcast.com/sharp-and-gets-things-cut</guid>
+                  <link>http://blog.fogus.me/2013/10/07/scala-sharp-and-gets-things-cut/</link>
+                  <pubDate>Tue 08 Oct 2013 11:47:58 PM CDT</pubDate>
+                  <description>
+                    
+&lt;p&gt;Michael Fogus is right (as usual) about this one. Someone with Odersky's stature should not fear lack of humilty but instead lack of confidence.&lt;/p&gt;
+&lt;h3 id=&quot;you-might-also-like&quot;&gt;You might also like&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/church-vs-curry-types&quot;&gt;Church vs Curry Types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/Hindley-Milner-in-Clojure&quot;&gt;Hindley-Milner in Clojure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/on-type-unity&quot;&gt;On Type Unity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/pre-west-nathan-sorenson&quot;&gt;Pre-West Prep: Nathan Sorenson&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/sharp-and-gets-things-cut"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

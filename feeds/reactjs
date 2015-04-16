@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-West Interview: Luke Vanderhart</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-luke-vanderhart</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-luke-vanderhart</link>
+                  <pubDate>Wed 15 Apr 2015 12:57:28 PM CDT</pubDate>
+                  <description>
+                    Luke Vanderhart interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-luke-vanderhart"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Luke Vanderhart</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-luke-vanderhart</guid>
+                  <link>http://www.lispcast.com/pre-west-luke-vanderhart</link>
+                  <pubDate>Thu 09 Apr 2015 04:15:58 PM CDT</pubDate>
+                  <description>
+                    Luke Vanderhart will talk about ReactJS.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-luke-vanderhart"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

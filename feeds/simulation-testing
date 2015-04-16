@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-West Interview: Ryan Neufeld</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-ryan-neufeld</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-ryan-neufeld</link>
+                  <pubDate>Tue 14 Apr 2015 11:33:53 PM CDT</pubDate>
+                  <description>
+                    Ryan Neufeld interview by Nola.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-ryan-neufeld"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

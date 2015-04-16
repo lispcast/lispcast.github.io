@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>What is Functional Programming?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/what-is-functional-programming</guid>
+                  <link>http://www.lispcast.com/what-is-functional-programming</link>
+                  <pubDate>Tue 01 Jul 2014 10:47:20 AM CDT</pubDate>
+                  <description>
+                    I prefer to define Functional Programming as making a distinction between pure and impure code. With this definition, you can program functionally in any language. What differentiates the functional languages is how much help they give you to make the distinction.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-is-functional-programming"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

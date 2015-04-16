@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Maciej Cegłowski, Pinboard - XOXO Festival (2013)</title>
+                  <guid isPermalink="false">http://www.lispcast.com/maciej-ceglowski-pinboard-xoxo-2013</guid>
+                  <link>http://www.youtube.com/watch?v=eky5uKILXtM</link>
+                  <pubDate>Fri 18 Oct 2013 05:52:16 PM CDT</pubDate>
+                  <description>
+                    
+&lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/eky5uKILXtM&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Henry David Thoreau was a content creator active in the 1850s.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Classic.&lt;/p&gt;
+&lt;h3 id=&quot;you-might-also-like&quot;&gt;You might also like&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/deconstructing-functional-programming&quot;&gt;Deconstructing Functional Programming&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/maciej-ceglowski-pinboard-xoxo-2013"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

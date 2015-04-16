@@ -1,0 +1,275 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Pre-Conj Interview: Steve Miner | LispCast</title>
+    <meta name="description" content="Steve Miner talk about generating test.check generators.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-interview-steve-miner">
+              Pre-Conj Interview: Steve Miner
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 19, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#steve-miner"><img src="http://www.lispcast.com/img/pre-conj/steve-miner.jpeg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>I had a conversation about generating test.check generators with Steve Miner. He's giving a <a href="http://clojure-conj.org/speakers#steve-miner">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> about that. Read the <a href="http://www.lispcast.com/pre-conj-steve-miner">background to his talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Steve Miner</strong>: I think it was around 2008 when Paul Graham announced his new programming language, Arc. I was reading about Arc, when I came across a comment about Clojure and decided to take a look. I was very impressed with Rich Hickey's intro video. The immutability and concurrency features really resonated with what I was hoping to find in a new language. The Java integration made Clojure a practical language with a huge eco-system of tools and libraries. I was using Java at work and I managed to do a bit of Clojure for a side project, but mostly I was just dabbling. A couple of years later, I decided to work on my own with Clojure full-time.</p>
+<p><strong>LC</strong>: Can you describe Herbert for those who have never used it? Why would someone be interested?</p>
+<p><strong>SM</strong>: Herbert is a schema language for edn. The goal is to have a convenient language for describing the shape of Clojure data. I started out with an informal notation that I used for my internal documentation. For example, describing a map with certain required keys and the corresponding value types. I think you can guess what <code>{:name str :num int}</code> means as a schema. It turned out that with a little work, that informal notation could be used as a pattern language with a simple API for testing conformance. A Herbert schema is itself just edn data, open to all your Clojure tools. More recently, I added the ability to generate test.check generators from Herbert schemas, which makes it easy to generate test data.</p>
+<p><strong>LC</strong>: That sounds nice. Would you mind explaining test.check generators a bit for those who don't know?</p>
+<p><strong>SM</strong>: Reid Draper ported QuickCheck from Haskell to Clojure, and it became a contrib library called test.check.</p>
+<p>Test.check is a property-based testing tool. A property is basically an invariant that should hold true over a range of input values. The test.check library gives you combinators that allow you to define generator functions which create data of specified types with optional constraints. The idea is to think about the whole range of possible inputs that your system should handle. Test.check then automatically tests across a random sample of generated data, probably generating example data that you might not have considered in your typical unit testing. If it finds a failure case where the desired property does not hold, test.check is smart enough to regenerate test cases so as to shrink the failure example to a reasonable size. That helps you isolate the cause of the failure.</p>
+<p>Clojure/West had two excellent talks about property-based testing last year. <a href="https://www.youtube.com/watch?v=JMhNINPo__g">Reid Draper covered test.check</a>, and <a href="https://www.youtube.com/watch?v=zi0rHwfiX1Q">John Hughes talked about QuickCheck</a>.</p>
+<p><strong>LC</strong>: So you're able to automatically create generators from your schemas, which can also be used as contracts on your function arguments. Has having both improved your bug rate?</p>
+<p><strong>SM</strong>: I don't have any numbers, but subjectively I think it's helped. For me, Herbert schemas are primarily documentation tools, which help me to keep track of my data. That being said, I often test schema conformance in preconditions or asserts, especially with new code or when I'm trying to debug a problem.</p>
+<p>Of course, I still make errors in specifying schemas and sometimes my properties aren't exactly correct the first time. Particularly with new property-based tests, I have to look carefully at failures in case the bug is actually in the test. My hope is that schema-based generators will make property-based testing easier to use.</p>
+<p>Using test.check definitely improves my confidence that I'm finding bugs in testing and avoiding regression errors. It's been a great way to catch bugs in my own Herbert library.</p>
+<p><strong>LC</strong>: So you have runtime check to make sure the function arguments conform to certain schemas. And you have a generative test that exercises a large space of that schema. Sounds pretty good to me!</p>
+<p>But it sounds like you're saying the primary benefit is more for you or other readers of your code. Can you elaborate on that?</p>
+<p><strong>SM</strong>: My approach started with a notation designed to help me keep Clojure data structures straight in my mind. I wanted something simple and terse, what I called a &quot;whiteboard compatible&quot; notation. My goal was that the notation should look something like the data it was supposed to represent as opposed to code or a type system.</p>
+<p>So I began with documentation in mind, and I still think of that as the primary benefit. Once I got the idea of implementing conformance testing against formal schemas, the project became more about the code.</p>
+<p><strong>LC</strong>: In what other areas do you see schemas playing a part? The first thing that comes to mind is writing core.typed type annotations. Anything else?</p>
+<p><strong>SM</strong>: There's some conceptual overlap between schemas and type systems, but I see core.typed as a much more ambitious project. Herbert schemas only cover edn data and don't deal with function types, for example. The Datomic database naturally has a schema language, so it would be interesting to see if Herbert could useful for data modeling. In the near term, I plan to extend Herbert so that it supports the Transit datatypes.</p>
+<p><strong>LC</strong>: What resources would you recommend to a beginner who wanted to make the most of your talk?</p>
+<p><strong>SM</strong>:</p>
+<ul>
+<li><a href="https://github.com/miner/herbert">Herbert project</a></li>
+<li><a href="https://github.com/clojure/test.check">Test.check project</a></li>
+<li><a href="http://www.youtube.com/watch?v=bmHTFo2Rf2w&amp;t=19m55s">&quot;The Way to Eden&quot; lightning talk at Clojure/Conj 2013 (video)</a></li>
+<li><a href="https://www.youtube.com/watch?v=JMhNINPo__g">&quot;Powerful Testing with test.check&quot; by Reid Draper at Clojure/West 2014 (video)</a></li>
+<li><a href="https://www.youtube.com/watch?v=zi0rHwfiX1Q">&quot;Testing the Hard Stuff and Staying Sane&quot; by John Hughes at Clojure/West 2014 (video)</a></li>
+</ul>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>SM</strong>:</p>
+<ul>
+<li><a href="https://twitter.com/miner">Twitter</a></li>
+<li><a href="https://github.com/miner/">Github</a></li>
+<li><a href="http://velisco.com/steve-miner.html">Work</a></li>
+<li><a href="http://www.linkedin.com/in/miner49r/">LinkedIn</a></li>
+</ul>
+<p><strong>LC</strong>: One last question: If Clojure were a food, what would it be?</p>
+<p><strong>SM</strong>: I'll say &quot;pizza&quot; because it's a food that is made by composing fancy toppings on a classic crust. And hackers like it while coding.</p>
+<p><strong>LC</strong>: Thanks, Steve, for a great interview.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/pre-conj-interview-jeanine-adkisson">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/pre-conj-interview-ashton-kemerling">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

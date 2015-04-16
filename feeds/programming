@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Stop Refactoring and Start Factoring</title>
+                  <guid isPermalink="false">http://www.lispcast.com/stop-refactoring-and-start-factoring</guid>
+                  <link>http://www.lispcast.com/stop-refactoring-and-start-factoring</link>
+                  <pubDate>Thu 24 Jul 2014 04:12:16 PM CDT</pubDate>
+                  <description>
+                    Refactoring is focused on the quality of code, while factoring aims to uncover the underlying beauty of the problem domain, as expressed in code. Instead of cleaning up your code, try factoring.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/stop-refactoring-and-start-factoring"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

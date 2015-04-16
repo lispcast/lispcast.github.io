@@ -1,0 +1,251 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>JSON Serialization for APIs in Clojure | LispCast</title>
+    <meta name="description" content="Clojure is well-suited for processing JSON, but there are some decisions you have to make to suit your application. The major decisions are actually easy, though they took me a while to figure out.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/json-serialization-api-clojure">
+              JSON Serialization for APIs in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 10, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure is well-suited for processing JSON, but there are some decisions you have to make to suit your application. The major decisions are actually easy, though they took me a while to figure out.</em></p>
+<p>I tend to use JSON instead of <a href="https://github.com/edn-format/edn"><code>edn</code></a> for an API serialization format, if only because JSON is more readily readable from other languages. I could do both, but it's good to <strong>eat your own dogfood and test those JSON code paths</strong>.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p><code>edn</code> is better, but JSON is generally pretty good. However, JSON's expressibility is decidedly a subset of the Clojure data structures, so there is <strong>considerable loss of information</strong> when going from Clojure to JSON. That information is not recovered in a round-trip, at least not automatically. There are lots of decisions that have to go into how to, at least partially, recover this.</p>
+<p>One bit of information that is lost is the type of keys to a map. JSON only allows strings as keys. Clojure allows anything. But most of the time, <strong>I find myself using <em>keywords</em> for keys</strong>. I say most, but really, it's the vast majority. Maps are bundles of named values pretty much all the time.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> So the optimal decision, after trying lots of combinations, is to convert keywords to strings (the default in JSON libraries I've seen) when emitting JSON; and to convert map keys (always strings in JSON) to keywords (also known as <code>keywordize-keys</code>) when parsing JSON. That covers nearly all cases, and pinpointed special cases can cover the rest.</p>
+<p>But that's not the end of the keyword/string story. What about namespaces? Surprisingly, the two major JSON libraries, <code>clojure.data.json</code> and <code>cheshire</code> handle things differently. <strong>How do you parse a JSON key that has a slash in it, indicating a namespace?</strong> If we're keywordizing (as I suggest above), they both give namespaced keywords (<code>keyword</code> will parse around the <code>/</code>). But when emitting JSON, they act differently. <code>clojure.data.json</code> will emit the <code>name</code> of the keyword (and ignore the <code>namespace</code>) while <code>cheshire</code> emits a string with <code>&quot;namespace/name&quot;</code>.</p>
+<p>I like to keep the namespace, or, put another way, I like to drop as little information as possible. So I prefer the namespace approach. I'm not sure how to get <code>clojure.data.json</code> to do that. <strong>I just use <code>cheshire</code></strong>.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup> The other gotcha for namespaces is that ClojureScript's <code>clj-&gt;js</code> and <code>js-&gt;clj</code> are similarly asymetrical.<sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup></p>
+<p>Keywords in other places besides the keys of maps will just get turned into strings, but they don't get converted back to keywords. That sucks, but it's minor. You'll just have to <strong>convert them back some other way</strong>. At work, we use <a href="https://github.com/prismatic/schema">Prismatic Schema</a>'s coercions. They do the trick nicely, in a declarative way.</p>
+<p>So, back to other JSON issues. The other issue is other data types. Dates, URI's, and UUID's are in our data as well. Dates, well, it's up to you how to encode them. I've always been a fan of the Unix timestamp. It's not exactly human readable, but it's universally parseable. There's also <strong>the ISO datetime format, which is probably a better bet</strong>--it's human readable and agreed upon among API designers. You could emit that as a string and coerce back to a Date object later.</p>
+<p>URI's and UUID's are by definition strings, so that's easy. How do you set up <code>cheshire</code> to handle the encoders? It's pretty simple, really.</p>
+<pre><code>(cheshire.generate/add-encoder java.net.URI cheshire.generate/encode-str)</code></pre>
+<p>That means add the encoder for the <code>java.net.URI</code> type to be encoded as a JSON string. <code>str</code> will be called on the value. You can figure out the other types you need. There are <strong>some JSON emission settings built-in, including Date (the ISO string format) and UUID</strong>. Weirdly URI is not in there, so you have to add it.</p>
+<p>What's next? Oh, pretty-printing. Yeah, I pretty-print my JSON to go over the wire. It's nice for debugging. I mean, who wants to <code>curl</code> one long, 1000-character line of JSON? <strong>Put some whitespace</strong>, please! How to do that?</p>
+<pre><code>(cheshire.core/generate-string mp {:pretty true})</code></pre>
+<p>That's right, it's basically built in, but you have to specify it. But, oh man, <strong>that's long</strong>. I don't want to type that, especially because my lazy fingers are going to not do it one time, then I'm going to look at the JSON in my browser and see a one-line JSON mess. So, what do I do? I put all my JSON stuff for each project in <code>json.clj</code>. It's got all my <code>add-encoder</code> stuff, and it's got two extra functions, just for laziness<sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup>:</p>
+<pre><code>(defn parse [s]
+  (cheshire.core/parse-string s true))
+
+(defn gen [o]
+  (cheshire.core/generate-string o {:pretty true}))</code></pre>
+<p>Or of course whatever options you want to pass those functions. This one is my choice--you make your choice. But <strong>these two functions are all I use most of the time</strong>. Parsing strings and generating strings. Woohoo! Much shorter and less to keep in my little head.</p>
+<p>Well, that just about wraps up my JSON API story. There's the slight detail of <strong>outputting JSON from <code>liberator</code></strong>, which is its own blog post. And there's a bit of <strong>generative testing I do to really challenge my assumptions</strong> about how I set up the round-tripping. But that, too, is another blog post for another day. Oh, and what about <strong>all that JSON middleware</strong>? Again, another post.</p>
+<p>If you like peanut butter and you like jelly, you will probably like peanut butter and jelly sandwiches. If you like web and you like Clojure, you will most definitely like <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure</a>, which is a <strong>gentle, soothing, visually rich video course ushering in the fundamentals of Clojure web development</strong> through your eyes and ears and down through your fingertips and into your very own Heroku-hosted web server. At least <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#preview">watch the preview</a>!</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It may be hubristic to think anyone else will use my API.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>There are exceptions, but these typically are not communicated to the outside. Those that are need special-casing. C'est la vie!<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p><code>:key-fn</code> in <code>clojure.data.json</code> only works for keys, not all keywords. Emitting a keyword in any other place emits the <code>str</code> of it, which includes the <code>:</code> in the string. Ick.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><code>clj-&gt;js</code> uses <code>name</code> for keywords and <code>str</code> for symbols, so keywords lose their namespace when emitting JSON, but retain their namespace when parsing key strings as keywords.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>also known as ease, peace of mind, DRY, and cleanliness<a href="#fnref5">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/what-is-functional-programming">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/church-vs-curry-types">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Clojure Test Directory | LispCast</title>
+    <meta name="description" content="Where to put your tests is a common question. You could put them anywhere, but you want to pick a place that makes it easy to find, easy to exclude from production, and work well with your tools. My recommendation is to follow what most projects do, which takes care of all of these requirements.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-test-directory">
+              Clojure Test Directory
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 30, 2015
+          </div>
+
+          
+<p>Summary: <em>Where to put your tests is a common question. You could put them anywhere, but you want to pick a place that makes it easy to find, easy to exclude from production, and work well with your tools. My recommendation is to follow what most projects do, which takes care of all of these requirements.</em></p>
+<p>You want to write some tests in Clojure. Maybe they're unit tests. Maybe they're integration tests. The first question you must answer is <strong>where do you put your tests?</strong></p>
+<p>And you don't want them just anywhere. You actually have some important requirements dealing with where they are:</p>
+<ul>
+<li>They should not be compiled/run on production.</li>
+<li>They need to be easily findable.</li>
+<li>They should be runnable from the command line.</li>
+<li>They should be runnable from the REPL.</li>
+</ul>
+<p>Here's my recommendation, which is the <em>de facto</em> standard of organizing your tests. It works with Leiningen, CIDER, and vim-fireplace.</p>
+<p>First, you make a new namespace structure in a <code>test/</code> directory. It should mirror the <code>src/</code> directory.</p>
+<p>If you have:</p>
+<pre><code>src/
+  lispcast/
+    core.clj
+    init.clj
+    util.clj</code></pre>
+<p>Then your test directory should look like:</p>
+<pre><code>test/
+  lispcast/
+    core_test.clj
+    init_test.clj
+    util_test.clj</code></pre>
+<p>But also notice the second point: that the structure is the same, but the names are slightly different, but it a systematic way. It's really easy: you just add <code>-test</code> to the namespace name, which becomes <code>_test</code> in the file name.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Then, you put all the tests that test <code>lispcast.core</code> into <code>lispcast.core-test</code>. Now they're easy to find!</p>
+<p>If you need to write a test that crosses two different namespaces (like an integration test might), then you can just make a new test namespace that doesn't correspond to one or the other.</p>
+<p>Leiningen will load the <code>test/</code> directory selectively, depending on if you're deploying to production (it won't load <code>test/</code>) or running the tests (it <em>will</em> load <code>test/</code>).</p>
+<p>So, it's that easy. <strong>You are free, of course, to put the tests wherever you like.</strong> But this is my recommendation!</p>
+<p>If you're getting into testing in Clojure, you should check out <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>. It's an interactive course. It has animations, screencasts, exercises, code samples, and text.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>
+</h3>
+    
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test"> <img class="subscribe-form-image"
+           src="http://www.purelyfunctional.tv/img/clojure-test-shot.jpg"> </a>
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Learn how to use <code>clojure.test</code>, the built-in Clojure testing library. It's used for all sorts of tests, from unit to integration. This course will teach you the fundamentals of the library and the common conventions that will help you make the most of your tests. Subscribe now and be the first to know when the course is published. Also, get lots of free Clojure resources when you sign up. <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">Learn more.</a>
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-interview-ashton-kemerling">Pre-Conj Interview: Ashton Kemerling</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Clojure file names have to replace <code>-</code> (hyphens) with <code>_</code> (underscores) to be compatible with Java.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/pre-west-john-hume">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/pre-west-fumiko-hanreich">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

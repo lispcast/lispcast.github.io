@@ -1,0 +1,1120 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: pre-west | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-yoko-harada">
+              Pre-West Interview: Yoko Harada
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 10, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<p><a href="http://clojurewest.org/speakers#yharada"><img src="http://www.lispcast.com/img/pre-west/yoko-harada.jpg"
+      style="float:right;height:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Yoko Harada is the next interview participant. She is <a href="http://clojurewest.org/speakers#yharada">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about developing the ClojureBridge curriculum. The <a href="http://www.lispcast.com/pre-west-yoko-harada">background to her talk</a> is available, if you like.</p>
+<h3 id="interview-with-yoko-harada">Interview with Yoko Harada</h3>
+<p><strong>Nola</strong>: How long have you been doing Clojure and how did you get into it?</p>
+<p><strong>Yoko</strong>: My experience is quite sparse, but I've been using Clojure for about 4 years. Since I'm a JVM language lover, I had a great interest in Clojure, which was very different from other JVM languages. I started ClojureScript integrating Ruby gem at first.</p>
+<p><strong>Nola</strong>: What languages did you do before Clojure?</p>
+<p><strong>Yoko</strong>: Mostly, Java and Ruby.</p>
+<p><strong>Nola</strong>: What are your thoughts on Clojure being a first language or do you think its more suited to someone who has some experience in programming?</p>
+<p><strong>Yoko</strong>: It depends. Thinking of the time I was a student, for some folks, lisp was the first language and did well using Lisp. For many people, Clojure coding is not similar to how they think. For example, in OOP, &quot;I have a cup of soup. let's add some spice&quot;, in Lisp, &quot;Let's add something and other stuff, what about soup and spice.&quot; Sometime, the latter is productive in coding while sometime, the former is. I admit OOP is natural for vast majority. But, at the same time, I don't think programming experience will help to think like Lisp.</p>
+<p><strong>Nola</strong>: What kinds of help do you need for ClojureBridge?</p>
+<p><strong>Yoko</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>spread the word</li>
+<li>plan to organize ClojureBridge</li>
+<li>have experiences of organizing, TAing, and others of ClojureBridge</li>
+<li>involve yourself in ClojureBridge curriculum improvements based on the experience</li>
+<li>become a ClojureBridge board member</li>
+<li>become a ClojureBridge mentor and help people who firstly organize ClojureBridge</li>
+<li>donate and support ClojureBridge financially. The workshop needs venue, some food and. sometime, coaches/TAs' travel expense</li>
+</ol>
+<p><strong>Nola</strong>: What is your favorite clojure library?</p>
+<p><strong>Yoko</strong>: Hoplon</p>
+<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-james-macaulay">
+              Pre-West Prep: James MacAulay
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 15, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-composing-interactive-applications-with-zelkovatalk">Talk: <a href="http://clojurewest.org/speakers#jmacaulay">Composing interactive applications with Zelkova</a></h3>
+<p><a href="http://clojurewest.org/speakers#jmacaulay">James MacAulay's talk</a> at <em>Clojure/West</em> is about Zelkova, his Functional Reactive Programming library.</p>
+<h4 id="background">Background</h4>
+<p>Zelkova is a Functional Reactive Programming (FRP) library inspired by the <a href="http://elm-lang.org">Elm</a> FRP model. FRP is a model for building composable &quot;signals&quot; that maintain the state of the system over time. The talk promises to show us how to use it with Om to create interactive applications.</p>
+<p>There are many resources out there, but I recommend <a href="https://www.youtube.com/watch?v=F-nTU3Wy26I">this talk about Functional Reactive Programming in Elm</a> by Elm's creator Evan Czaplicki. It shows the possibilities of FRP. <a href="https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf">His thesis</a>, which describes the basic constructs of Elm, is <em>surprisingly</em> approachable. I recommend that highly. Also, James MacAulay himself did a <a href="https://www.youtube.com/watch?v=gH3M2nweKJ0">Papers We Love presentation</a> about it, which is worth watching.</p>
+<h3 id="about-james-macaulaytalk">About <a href="http://clojurewest.org/speakers#jmacaulay">James MacAulay</a></h3>
+<p><a href="https://github.com/jamesmacaulay">GitHub</a> - <a href="https://twitter.com/jamesmacaulay">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#jmacaulay"><img src="http://www.lispcast.com/img/pre-west/jmacaulay.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-jeanine-adkisson">
+              Pre-West Prep: Jeanine Adkisson
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 03, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-design-and-prototype-a-language-in-clojuretalk">Talk: <a href="http://clojurewest.org/speakers#jadkisson">Design and Prototype a Language in Clojure</a></h3>
+<p><a href="http://clojurewest.org/speakers#jadkisson">Jeanine Adkisson's talk</a> at <em>Clojure/West</em> is about designing and prototyping a language using Clojure.</p>
+<h4 id="background">Background</h4>
+<p>Lisps have been used for a long time to prototype other languages. Scheme was designed and used for just that purpose. The most popular books on compiler design often start with Lex and Yacc, which are just really old tools built when memory was so restricted you had to do your parsing in stages. <a href="https://github.com/Engelberg/instaparse">Instaparse</a> is way better for quickly exploring syntax. And since lambda calculus (which Clojure is based on) is computationally complete, you're in good hands exploring the entire range of computational semantics.</p>
+<p>However, these are just generalities. Jeanine Adkisson will likely bring wit and depth to the talk, as she did in <a href="https://www.youtube.com/watch?v=ZQkIWWTygio">her Clojure/conj talk</a>. She's a language designer, so she's got plenty of experience to draw from.</p>
+<p>As an interesting background to language prototyping in Clojure, check out <a href="https://www.youtube.com/watch?v=DHubfS8E--o">Bodil Stokke talking about her language Bodol</a>.</p>
+<h3 id="about-jeanine-adkissontalk">About <a href="http://clojurewest.org/speakers#jadkisson">Jeanine Adkisson</a></h3>
+<p><a href="http://www.jneen.net/">Homepage</a> - <a href="https://github.com/jneen">GitHub</a> - <a href="https://twitter.com/jneen_">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#jadkisson"><img src="http://www.lispcast.com/img/pre-west/jneen.jpeg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-john-hume">
+              Pre-West Prep: John Hume
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 29, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This summary was graciously written by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<h3 id="talk-life-of-a-clojure-expression-a-quick-tour-of-clojure-internalstalk">Talk: <a href="http://clojurewest.org/speakers#jhume">Life of a clojure expression: a quick tour of clojure internals</a></h3>
+<p><a href="http://clojurewest.org/speakers#jhume">John Hume's talk</a> at Clojure/West is about Clojure internals.</p>
+<h4 id="background">Background</h4>
+<p>You can get a lot done in Clojure without understanding much about its internals. But when your code doesn't do what you expect, whether in terms of behavior or performance, it can be extremely useful to dig into the underlying Java code.</p>
+<p>John's presentation will walk the audience through some of that code by following a simple map-literal expression through Clojure's reader and analyzer, particularly focusing on code generation in <code>clojure.lang.Compiler</code>, and then onto runtime evaluation. The hope is that you'll come out of the talk better able to analyze what's really happening in your own Clojure code.</p>
+<h3 id="about-john-humetalk">About <a href="http://clojurewest.org/speakers#jhume">John Hume</a></h3>
+<p><a href="https://github.com/duelinmarkers">Github</a> - <a href="http://twitter.com/duelinmarkers">Twitter</a> - <a href="http://duelinmarkers.com">Website</a></p>
+<p><a href="http://clojurewest.org/speakers#jhume"><img src="http://www.lispcast.com/img/pre-west/john-hume.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-leon-barrett">
+              Pre-West Prep: Leon Barrett
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 04, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-clojure-parallelism-beyond-futurestalk">Talk: <a href="http://clojurewest.org/speakers#lbarrett">Clojure Parallelism: Beyond Futures</a></h3>
+<p><a href="http://clojurewest.org/speakers#lbarrett">Leon Barrett's talk</a> at <em>Clojure/West</em> is about parallelism in Clojure.</p>
+<h4 id="background">Background</h4>
+<p>Clojure is well known for its parallel programming super powers. Immutable data structures, concurrency primitives, and a few convenient constructs like <code>future</code> and <code>pmap</code> have been there since the beginning. But what's even cooler is how people have been able to build on the strong foundation Clojure established to create new parallel abstractions. Leon Barrett will talk about some of these. The description mentions reducers, tesser, and claypoole.</p>
+<p><a href="https://vimeo.com/45561411">Rich Hickey gave a talk about reducers</a> back in 2012, focusing on the ideas and abstractions they are based on. A more practical <a href="http://www.infoq.com/presentations/clojure-reducers">talk was given by Renzo Borgatti</a> at Strange Loop 2013. Kyle Kingsbury <a href="https://skillsmatter.com/skillscasts/5738-keynote-by-kyle-kingsbury">gave a talk about <em>tesser</em></a>, a library which extends Clojure's parallel abstractions to execute in a <em>distributed</em> manner. And Leon Barrett himself wrote a recent <a href="http://eng.climate.com/2014/02/25/claypoole-threadpool-tools-for-clojure/">blog post about Claypoole</a>.</p>
+<h3 id="about-leon-barretttalk">About <a href="http://clojurewest.org/speakers#lbarrett">Leon Barrett</a></h3>
+<p><a href="http://leon.barrettnexus.com/">Homepage</a> - <a href="https://github.com/leon-barrett">GitHub</a> - <a href="https://plus.google.com/+LeonBarrett/posts">Google+</a></p>
+<p><a href="http://clojurewest.org/speakers#lbarrett"><img src="http://www.lispcast.com/img/pre-west/lbarrett.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-luke-vanderhart">
+              Pre-West Prep: Luke Vanderhart
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 09, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This summary was graciously written by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<h3 id="talk-the-reactjs-landscapetalk">Talk: <a href="http://clojurewest.org/speakers#lvanderhart">The ReactJS Landscape</a></h3>
+<p><a href="http://clojurewest.org/speakers#lvanderhart">Luke Vanderhart's talk</a> at <em>Clojure/West</em> is about the ReactJS Landscape.</p>
+<h4 id="background">Background</h4>
+<p>ReactJS appeared from <a href="http://facebook.github.io/react/blog/2013/06/05/why-react.html">Facebook</a> last year in silence and without fanfare (from my view anyways!) but recent months has had an explosion on the web frameworks space, in particular in Clojure because of the common thread of immutablility running through the core concepts.</p>
+<p>Since Facebook announced it in June, we have seen several incarnations of React in Clojure: <a href="https://github.com/omcljs/om">Om</a>, <a href="https://github.com/levand/quiescent">Quiescent</a>, and <a href="https://github.com/reagent-project/reagent">Reagent</a>.</p>
+<h4 id="why-it-matters">Why it matters</h4>
+<p>ReactJS is the View in MVC apps and is a declarative library for describing a user interface, it can figure out what parts of the application to redraw on an update. With the popularity of single page applciations this is key to making a fast and responsive user interface.</p>
+<h3 id="about-luke-vanderharttalk">About <a href="http://clojurewest.org/speakers#lvanderhart">Luke Vanderhart</a></h3>
+<p><a href="https://github.com/levand">Github</a> - <a href="https://twitter.com/levanderhart">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#lvanderhart"><img src="http://www.lispcast.com/img/pre-west/lvanderhart.jpg" /></a></p>
+<p>Luke is the co-author of two books: <a href="http://shop.oreilly.com/product/0636920029786.do">Clojure Cookbook</a> and <a href="http://shop.oreilly.com/product/0636920039525.do">ClojureScript Up And Running</a>.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-melanie-mitchell">
+              Pre-West Prep: Melanie Mitchell
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 17, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-visual-situation-recognition-an-integration-of-deep-networks-and-analogy-makingtalk">Talk: <a href="http://clojurewest.org/speakers">Visual Situation Recognition: An Integration of Deep Networks and Analogy-Making</a></h3>
+<p><a href="http://clojurewest.org/speakers">Melanie Mitchell's keynote</a> at <em>Clojure/West</em> is about building computer systems that recognize visual situations.</p>
+<h4 id="background">Background</h4>
+<p>Melanie Mitchell is a researcher in Artificial Intelligence, complex systems, and machine learning. She did her PhD with Douglas Hofstadter, which resulted in Copycat, which was featured prominently in Hofstadter's book <a href="http://www.amazon.com/Fluid-Concepts-And-Creative-Analogies/dp/0465024750?tag=lisp0b-20">Fluid Concepts and Creative Analogies</a>. Perhaps coincidentally, Copycat was <a href="http://web.cecs.pdx.edu/~mm/how-to-get-copycat.html">written in Lisp</a>. The branch of Artificial Intelligence that she works in is probably different from what you would read in most texbooks or learn in college courses.</p>
+<p>As an introduction to her work, I would recommend <a href="https://www.youtube.com/watch?v=GYChwJq0310">Complexity a Guided Tour</a> (Youtube) for a good introduction to Complexity in general. And <a href="https://www.youtube.com/watch?v=6wRltq_qWDg">Using analogy to discover the meaning of images</a> (Youtube) as an introduction to her work with analogies.</p>
+<h4 id="why-it-matters">Why it matters</h4>
+<p>Alex Miller (the conference organizer) is a fan of Hofstadter's. He invited Hofstadter to keynote at Strange Loop in 2013. He also had <a href="http://www.infoq.com/presentations/Brain-Computing">Jeff Hawkins talk about modeling the neocortex at Strange Loop 2012</a>.</p>
+<h3 id="about-melanie-mitchelltalk">About <a href="http://clojurewest.org/speakers">Melanie Mitchell</a></h3>
+<p><a href="http://web.cecs.pdx.edu/~mm/">Homepage</a> - <a href="https://twitter.com/MelMitchell1">Twitter</a> - <a href="http://www.amazon.com/Melanie-Mitchell/e/B001H6OO62?tag=lisp0b-20">Author page on Amazon</a></p>
+<p><a href="http://clojurewest.org/speakers"><img src="http://www.lispcast.com/img/pre-west/melanie%20mitchell.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-morgan-mullaney">
+              Pre-West Prep: Morgan Mullaney
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 04, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-well-i-wouldnt-want-to-make-a-dysfunctional-gametalk">Talk: <a href="http://clojurewest.org/speakers#mmullaney">Well I wouldn't want to make a <em>dys</em>functional game</a></h3>
+<p><a href="http://clojurewest.org/speakers#mmullaney">Morgan Mullaney's talk</a> at <em>Clojure/West</em> is about writing games using Lisp and functional programming.</p>
+<h4 id="background">Background</h4>
+<p>I agree with the <a href="http://clojurewest.org/speakers#mmullaney">talk description</a>; Lisp in games has a long and storied history. The biggest success I know of is Crash Bandicoot, which used a Lisp that allowed the game to get closer to the hardware. There's a nice series of articles <a href="http://all-things-andy-gavin.com/2011/02/02/making-crash-bandicoot-part-1/">about the creation of Crash Bandicoot</a>. The creators wrote their own version of Lisp. <a href="http://all-things-andy-gavin.com/2011/03/12/making-crash-bandicoot-gool-part-9/">Part 9</a> of the series has a nice, detailed description of the language. There's also an article I like about <a href="http://prog21.dadgum.com/23.html">writing games in a functional style</a>. John Carmack (of id Software fame) has also been <a href="https://www.youtube.com/watch?v=1PhArSujR_A&amp;feature=youtu.be&amp;t=2m5s">talking about Lisp and Haskell recently</a>.</p>
+<h3 id="about-morgan-mullaneytalk">About <a href="http://clojurewest.org/speakers#mmullaney">Morgan Mullaney</a></h3>
+<p><a href="http://morganastra.me/">Homepage</a> - <a href="https://github.com/morganastra">GitHub</a> - <a href="https://twitter.com/morganastra">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#mmullaney"><img src="http://www.lispcast.com/img/pre-west/morgan.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-nathan-sorenson">
+              Pre-West Prep: Nathan Sorenson
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 15, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-domain-specific-type-systemstalk">Talk: <a href="http://clojurewest.org/speakers#nsorenson">Domain Specific Type Systems</a></h3>
+<p><a href="http://clojurewest.org/speakers#nsorenson">Nathan Sorenson's talk</a> at <em>Clojure/West</em> is about type systems for DSLs.</p>
+<h4 id="background">Background</h4>
+<p>Clojure is a dynamically typed language. The types are encoded in the classes of objects. However, when we develop a DSL, we are designing a new language and are free to build in a static type system for that DSL. Nathan Sorenson's talk addresses some of the hardest but most important work in developing a type system: the error messages and interoperability. And it seems practical: he'll be developing a query DSL for Datomic.</p>
+<p>If you're new to macros, you may want to read the <a href="http://www.braveclojure.com/writing-macros/">macro chapter from Clojure for the Brave and True</a>. If you're really interested in Type Theory, you're in for a treat with <a href="https://www.youtube.com/watch?v=ev7AYsLljxk">this recording of Robert Harper</a>.</p>
+<h3 id="about-nathan-sorensontalk">About <a href="http://clojurewest.org/speakers#nsorenson">Nathan Sorenson</a></h3>
+<p><a href="https://github.com/takeoutweight">GitHub</a> - <a href="https://twitter.com/takeoutweight">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#nsorenson"><img src="http://www.lispcast.com/img/pre-west/nsorenson.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-nathaniel-smith-ruth-linehan">
+              Pre-West Prep: Nathaniel Smith and Ruth Linehan
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 04, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-one-binder-to-rule-them-all-introduction-to-trapperkeepertalk">Talk: <a href="http://clojurewest.org/speakers#nsmith">One Binder to Rule Them All: Introduction to Trapperkeeper</a></h3>
+<p><a href="http://clojurewest.org/speakers#nsmith">Nathaniel Smith and Ruth Linehan's talk</a> at <em>Clojure/West</em> is about Trapperkeeper, a Clojure services framework.</p>
+<h4 id="background">Background</h4>
+<p><a href="https://github.com/puppetlabs/trapperkeeper">Trapperkeeper</a> is PuppetLabs' application services framework for Clojure and other JVM languages. It provides a coherent set of core services and a means for you to define new services. Those services can depend on each other and can be configured through standard config files. As applications become bigger and more complex, standardizing on a configuration mechanism and communication medium is a must.</p>
+<p>As background, I suggest you read the <a href="https://puppetlabs.com/blog/new-era-application-services-puppet-labs">intro article</a> and the more technical <a href="https://puppetlabs.com/blog/clojure-nerds-puppet-labs-application-services">follow-up article</a>.</p>
+<h3 id="about-nathaniel-smithtalk">About <a href="http://clojurewest.org/speakers#nsmith">Nathaniel Smith</a></h3>
+<p><a href="http://chiptheglasses.com/">Homepage</a> - <a href="https://github.com/nathanielksmith">GitHub</a> - <a href="https://twitter.com/nate_smith">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/nsmith.jpg" /></a></p>
+<h3 id="about-ruth-linehantalk">About <a href="http://clojurewest.org/speakers#nsmith">Ruth Linehan</a></h3>
+<p><a href="https://github.com/rlinehan">GitHub</a> - <a href="https://twitter.com/ruthlinehan">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/rlinehan.png" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="page4.html">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="page2.html">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

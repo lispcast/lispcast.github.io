@@ -1,0 +1,1445 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: web | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/cascading-separation-abstraction">
+              Separation, Abstraction, and Cascading in CSS
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 29, 2012
+          </div>
+
+          
+<p><em>Summary:</em> <a href="http://lesscss.org/">LESS</a> and <a href="http://sass-lang.com/">Sass</a> (and similar solutions) have saved CSS for three reasons: separation, abstraction, and cascading. While I welcome them, CSS still has other problems which I believe can be solved. I propose some solutions.</p>
+<h3 id="introduction">Introduction</h3>
+<p>A lot is said about LESS and Sass, and for good reason. CSS is hell to get right and even harder to maintain. LESS and Sass (and similar tools) make CSS into a much more useful language.</p>
+<p>But when people talk about why they are so great, they miss the main point. It is true that your style files are now shorter and more readable. However, there is something deeper going on than mere saving of keystrokes and being able to name things.</p>
+<p>In this essay, I will try to put into words (and some pictures) what my intuition tells me as a developer and programming language enthusiast to clarify why CSS is innately unmaintainable, does not satisfy its own design goals, and why LESS and Sass make a bad language more bearable. I also will propose solutions which would raise the bar past the high level where LESS and Sass have taken it.</p>
+<h3 id="zero-degrees-of-separation">Zero Degrees of Separation</h3>
+<p>Way back when, people used HTML tables to style their pages. Documents looked like this:</p>
+<center>
+<img src="/img/html_content_style.svg" alt="HTML containing content + style" />
+</center>
+
+<p>Those were the days of font tags and tables.</p>
+<p>Then CSS came along, and people talked a lot about separation of content from presentation. CSS did help you move styling concerns outside of the HTML file, but that is about it.</p>
+<center>
+<img src="/img/html_css.svg" alt="HTML containing content and CSS containing style" />
+</center>
+
+<p>Your styles were still tied to the structure of the document they were styling. They had no grouping of their own. If you wanted to repeat a style, you either had to copy and paste or use a selector with a comma. Both were bad solutions.</p>
+<p>An even worse solution, which is, unfortunately the most common, is to build CSS classes which name a style. We see this in the numerous and all equally bad &quot;CSS frameworks&quot; which litter your HTML with style information. Grid systems do this to a fault.</p>
+<p>But it is not the fault of the authors of those frameworks, nor of the poor web developers who are in search of some solutions to their problems. No, the blame lies with the authors of CSS itself. With CSS, separation of content from presentation is possible but extremely difficult and time-consuming.</p>
+<p>HTML and CSS are separate but not equal. HTML can exist without CSS. But what is CSS without HTML? Nothing.</p>
+<p>If you truly want to be able to separate content from presentation, you have to set them both on equal footing, like this:</p>
+<center>
+<img src="/img/html_css_3.svg" alt="HTML, CSS, plus some third language to tie them together" />
+</center>
+
+<p>Content in the HTML, style in the CSS, and you tie them together in some third language.</p>
+<p>This is possible in LESS (LESS being the question mark), evidenced by the existence of frameworks such as <a href="http://lesselements.com/">LESS Elements</a>. People talk about LESS reducing boilerplate and repetition. Or about hiding browser-specific CSS properties. But that is not the essence of the matter. What all of that talk is trying to get at is that they can finally define a style, in the form of a mixin, which exists independently of any HTML structure. It can then be tied into zero, one, or more HTML elements merely by mentioning its name.</p>
+<p>With LESS, I can define a mixin called Dorothy:</p>
+<pre><code>.dorothy() {
+  background-color: green;
+  text-color: yellow;
+  border: 1px solid red;
+}</code></pre>
+<p>Yes, it is probably an ugly style. But it is just a style. It does not depend on any HTML structure for its existence, not even one <code>&lt;p&gt;</code> tag. Now, if I want to use it, I can use it wherever I want by relating, in a separate way, the style with some HTML.</p>
+<pre><code>div.main {
+  .dorothy;
+}
+
+blockquote {
+  .dorothy;
+}</code></pre>
+<p>This is one of the reasons LESS makes styling HTML bearable. In addition to mixins, you can also define variables which contain sizes and colors, which is just another way to name styles (or elements of styles) to be tied to HTML later.</p>
+<center>
+<img src="/img/html_css_less.svg" alt="HTML, LESS mixins, and LESS rules" />
+</center>
+
+<h3 id="abstraction">Abstraction</h3>
+<p>If you take the idea of mixins and variables even further, you will notice that they compose. I can define a mixin and use it in another mixin. I could define <code>dorothy</code> as the composition of three styles, <code>red-border</code>, <code>yellow-text</code>, and <code>green-background</code>. This type of composition suggests that there is some amount of abstraction going on.</p>
+<p>This was not possible in HTML + CSS.</p>
+<p>Well, I say not possible, but there <em>were</em> ways, they were just terrible. You could copy-paste, which is just not a solution at all, but it would get you your style. Or you could reuse non-semantic class names like in grid frameworks (blech!). Or, finally, you could do what I call &quot;inverted-style&quot;, where the styles take precedence and the selectors take a subordinate role. That will take some explaining.</p>
+<p>Let us say we want <code>div.main</code> and <code>blockquote</code> to be styled like <code>dorothy</code>. Also, <code>div.main</code> and <code>p</code> should have a top margin.</p>
+<p>Normally, we would write this in CSS:</p>
+<pre><code>div.main {
+  background-color: green;
+  text-color: yellow;
+  border: 1px solid red;
+  margin-top: 10px;
+}
+
+blockquote {
+  background-color: green;
+  text-color: yellow;
+  border: 1px solid red;
+}
+
+p {
+  margin-top: 10px;
+}</code></pre>
+<p>This does not look bad, but there is a lot of repetition and the intent is not clear. We could instead write it in inverted-style.</p>
+<pre><code>/* Dorothy style */
+div.main, blockquote {
+  background-color: green;
+  text-color: yellow;
+  border: 1px solid red;
+}
+
+/* Top margin */
+div.main, p {
+  margin-top: 10px;
+}</code></pre>
+<p>If we discover that <code>div.footer</code> also needs a top margin, we add it to the selector instead of making a new rule. I bet someone else has come up with this style (and probably a better name for it), but I am unaware of it. I also guess that this was one of the original intentions of the CSS authors. In practice, in my experience, this is hard to keep up. Somehow, I do not have the discipline to keep the styles separated into their own rules. CSS properties that are related to <code>div.main</code> and <code>blockquote</code>, but not to <code>dorothy</code> slip into that first rule, and then all is lost. Maybe a professional could do better, but I have never met one.</p>
+<p>I do not have that problem with LESS. It is simple to define a mixin once I identify a consistent set of properties. I can then reuse it wherever I want.</p>
+<h3 id="cascading">Cascading</h3>
+<p>LESS and Sass provide a pretty good, but partial, solution to the cascading problem. The cascading problem is basically one of complexity. There are too many places for the value of a particular property for a particular element to be set. And the rules for determining the precedence of all of those places are too complex.</p>
+<p>The value of a CSS property is determined by these factors:</p>
+<ul>
+<li>The order of CSS imports</li>
+<li>The number of classes mentioned in the CSS rule</li>
+<li>The order of rules in a particular file</li>
+<li>Any <code>inherits</code> settings</li>
+<li>The tag name of the element</li>
+<li>The class of the element</li>
+<li>The id of the element</li>
+<li>All of the element's ancestors in the HTML tree</li>
+<li>The default styles for the browser</li>
+</ul>
+<p>It is just too many factors. Yes, the wisdom is to keep everything clean and simple. That works for small projects but at some point, cascading rules will bite you.</p>
+<p>Jason Zimdars shows <a href="http://37signals.com/svn/posts/3003-css-taking-control-of-the-cascade">the solution to cascading</a> they came up with at 37 Signals. He shares a good analysis of the problem and how LESS can alleviate some of the pain.</p>
+<blockquote>
+<p>For the first time we could write CSS that we knew wouldn’t cause problems later on because they couldn’t cascade out of control. This opened us up to create elements with self contained styles that could be dropped onto most any page and they’d just work.</p>
+</blockquote>
+<p>Sounds like the holy grail of separation of presentation from content!</p>
+<p>By using nested LESS rules and child selectors, we can avoid much of the pain of cascading rules. Combining with everything else, we define our styles as mixins (and mixins of mixins) and tie the styles to the HTML with nested rules which mimic the structure of the HTML.</p>
+<p>Perfect, final solution? Not quite.</p>
+<h3 id="further">Further</h3>
+<p>There are a few more issues to deal with. LESS and Sass were defined as supersets of CSS. That means that your valid CSS files are automatically LESS files as well, which means you can just start using the LESS compiler.</p>
+<p>But it also means that LESS has inherited all of the problems it has no solution for. What I will suggest is that we need a subset of CSS to move further, and I will attempt to choose that subset. I would love to hear your suggestions, as well.</p>
+<p>Yes, nested rules help you deal with cascading, but there are other issues with cascading. Mixins cannot really help you with the box model. No amount of variables and arithmetic can make two divs have the same width.</p>
+<p>I will go through the problems one by one.</p>
+<h4 id="cascading-again">Cascading, again</h4>
+<p>Let me put it bluntly, cascading was a mistake on the part of the authors of CSS. It has a nice abstract purity to it, but it does not work well in practice.</p>
+<p>With hindsight, we see that we really only want one level of cascading. The <a href="http://meyerweb.com/eric/tools/css/reset/">CSS reset</a> was a beautiful invention which neutralized differences between browsers. The CSS reset cut off cascading from the default browser styles and gave you a fresh base to start with. That is really all of the cascading that you want: cascading to a sane default. Other than that, it turns into a mess of spaghetti.</p>
+<p>Sometimes it seems that you want some cascading. For instance, you want to set the font family of the entire document. So you declare <code>body { font-family: 'Comic Sans'; }</code> and call your job done. In such a declaration, you are implicitly relying on the inheritance of the font-family property down through the document tree. In fact, if you want every element to have a certain font, you should just say it: <code>* { font-family: 'Comic Sans'; }</code> This has the same effect as a CSS reset: set the default styles for everything in one place.</p>
+<p>This implies a rule: Reset once, then avoid cascading. We now just have to systematically apply it. Here is what our setup looks like now:</p>
+<center>
+<img src="/img/html_less2.svg" alt="HTML, reset, mixins, and style" />
+</center>
+
+<p>No cascading means we must restrict ourselves to never select the same elements with different rules. I cannot say how we can do this strictly. But we can define some guidelines.</p>
+<ol style="list-style-type: decimal">
+<li>Only bare (classless + non-nested) selectors may occur in the reset.</li>
+<li>No bare selectors may occur in the LESS rules.</li>
+<li>No selector may be repeated in the LESS rules.</li>
+</ol>
+<p>These guidelines will limit the amount of cascading even further when combined with Zimdars' solution.</p>
+<h4 id="common-mistakes">Common mistakes</h4>
+<p>I call them mistakes for lack of a better word, but really the blame lies on CSS.</p>
+<h5 id="box-model">Box model</h5>
+<p>The box model sucks. But we can avoid some of the easy errors to make.</p>
+<p>One mistake is what happens when you define the <code>left-margin</code> but not the <code>right-margin</code>. In such a situation, where does the <code>right-margin</code> get determined? Cascading.</p>
+<p>And what happens when I set the width to 100%? What if a padding is cascaded in? Oops.</p>
+<p>How to deal with this? Do not use individual CSS properties where a compound property exists.</p>
+<p>I propose to boycott the following properties:</p>
+<ul>
+<li><code>left-margin</code>, <code>right-margin</code>, <code>top-margin</code>, <code>bottom-margin</code>; use <code>margin</code> instead</li>
+<li><code>left-border</code>, <code>right-border</code>, <code>top-border</code>, <code>bottom-border</code>; use <code>border</code> instead</li>
+<li><code>left-padding</code>, <code>right-padding</code>, <code>top-padding</code>, <code>bottom-padding</code>; use <code>padding</code> instead</li>
+<li><code>width</code>, <code>height</code>; use the .dimension mixin instead</li>
+</ul>
+<p>To get more sane behavior, we define this mixin:</p>
+<pre><code>.dimension(@w,@h) {
+  width       : @w;
+  height      : @h;
+
+  margin      : 0;
+  padding     : 0;
+  border-width: 0;
+}</code></pre>
+<p>This forces you to set width and height at once, and it resets the margin, padding, and border (which affect actual width, thanks to the box model). You can still override them, you just have to do it explicitly. This does not solve the entire problem of the box model, but it helps cut out a lot of surprising behavior.</p>
+<p>My argument for using this mixin is that any time you are setting the dimensions of an element, you should also be explicit about the margin, padding, and border at that point, since they affect the box model.</p>
+<h5 id="font-color">Font color</h5>
+<p>Now I will pick some nits.</p>
+<p>How many times have you seen this code?</p>
+<pre><code>body {
+  color: black;
+  a:link    {color: blue;   }
+  a:hover   {color: red;    }
+  a:active  {color: blue;   }
+  a:visited {color: purple; }
+}</code></pre>
+<p>Too much! And I always forget one of them. Time for a mixin.</p>
+<pre><code>.font-color(@f,@a:blue,@h:red,@c:blue,@v:purple) {
+  color: @f;
+  a:link    {color: @a};
+  a:hover   {color: @h};
+  a:active  {color: @c};
+  a:visited {color: @v};
+}</code></pre>
+<p>Again, the pattern is clear: what you do not set explicitly gets reset to a default.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Separating style from content was never fully achieved with CSS. LESS (and Sass) finally allowed the separation to occur. And, using LESS, we can begin to round off the sharp edges of CSS. But instead of adopting a superset of CSS, we should be looking to subset CSS and replace problematic CSS properties with mixins. The subset could be enforced with a linter.</p>
+<p>These recommendations are a good start, but there is still a long way to go.</p>
+<h3 id="post-script">Post script</h3>
+<p>There is one final reflection into CSS cascading that I wanted to mention but could not find a place for it above, mainly because it is not a problem so much as an inconvenience. I have often wondered why in CSS, element styles (styles defined in the <code>style</code> attribute of an HTML tag) take precedence over all other styles. Similarly, why do styles defined in the HTML (in a <code>style</code> tag) take precedence over those that are linked to externally? It has always made more sense to me that it should be the exact opposite. An HTML page could define default styles for its elements, which would be carried in the page, and overriden with an external stylesheet.</p>
+<p>However, the actual rules dictate that I must edit the HTML file if I want to change the style of an element with an element style. In this not the exact opposite of the intention of CSS?</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
+<li><a href="http://www.lispcast.com/less-abstraction-combination">LESS has Better Forms of Abstraction than CSS</a></li>
+<li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
+<li><a href="http://www.lispcast.com/separation-of-presentation-and-content">Separation of Presentation and Content</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-web-security">
+              Clojure Web Security
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 05, 2014
+          </div>
+
+          
+<p>Summary: <em>Use the OWASP Top Ten Project to minimize security vulnerabilities in your Clojure web application.</em></p>
+<p>Aaron Bedra gave a very damning talk about <a href="https://www.youtube.com/watch?v=CBL59w7fXw4">the security of Clojure web applications</a>. He went so far as to say that Clojure web apps are some of the worst he has seen. You should <a href="https://www.youtube.com/watch?v=CBL59w7fXw4">watch the talk</a>. He has some good recommendations.</p>
+<p>One of the jobs of web frameworks is to handle security concerns inherent in the web itself. Because most Clojure programmers build their own web stack, they often <strong>fail to look at the security implications of their application</strong>. They do not protect their site from even the easiest and most common forms of vulnerabilities. These vulnerabilities are problems with the way the web works, not with the particular server technology, yet it has become the server's responsibility to mitigate the vulnerabilities. Luckily, <strong>the vulnerabilities are well-studied and there are known fixes</strong>.</p>
+<p>The <a href="https://www.owasp.org/index.php/Main_Page">Open Web Application Security Project (OWASP)</a> does a very good job of documenting common web vulnerabilities and providing good fixes for them. They have a project called the <a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project#tab=OWASP_Top_10_for_2013">Top Ten Project</a> which every web developer should refer to regularly and use to improve the security of their app. You should also run through the <a href="https://code.google.com/p/owasp-asvs/wiki/ASVS">Application Security Verification Standard</a> checklists to audit your code. <strong>But the Top Ten should get you to understand the basics.</strong></p>
+<p>Warning: <em>I am not a security expert. You should do your own research. The code I present here is my own interpretation of the OWASP recommendations. It has not been audited by experts. Do your own research!</em></p>
+<p>Also, security is an ongoing concern. <strong>If you have any comments, suggestions, or questions, please bring them up!</strong></p>
+<p>Here is the Top Ten 2013 with a small breakdown and a Clojure solution, if applicable.</p>
+<h3 id="a1.-injectiona1"><a href="https://www.owasp.org/index.php/Top_10_2013-A1-Injection">A1. Injection</a></h3>
+<p>If a server accepts input from the outside and then <strong>parses and interprets that input as a scripting or query language, it is open to attack</strong>. The most common form is SQL Injection, where an input form is posted to the server, the value of that form is concatenated into a string to make a SQL statement, and then the SQL statement is sent to the database to be executed. What happens if a malicious user types in <code>&quot;'; DELETE FROM USERS;&quot;</code>?</p>
+<p>My preferred solution to SQL Injection in Clojure is to <strong>always use parameterized SQL statements</strong>. <code>clojure.java.jdbc</code>, supports these directly. <strong>The parameters will be escaped, making injection impossible.</strong></p>
+<p>Another problem is if you want to read in some Clojure data from the client, and you call <code>clojure.core/read-string</code> on it. <strong><code>read-string</code> will execute arbitrary Java constructors.</strong> For instance:</p>
+<pre><code>#java.io.FileWriter[&quot;myfile.txt&quot;]</code></pre>
+<p>This will create the file <code>myfile.txt</code> or overwrite if it already exists. Also, there is a form (called read-eval form) to execute code at read-time:</p>
+<pre><code>#=(println &quot;Hello, vulnerability!&quot;)</code></pre>
+<p><strong>Read in that string, and it will print. Any code could be in there.</strong></p>
+<p>The solution is to <strong>never use <code>clojure.core/read-string</code></strong>. Use <code>clojure.edn/read-string</code>, which is a well-documented format. It does not run arbitrary constructors. It has no read-eval forms.</p>
+<p>Summary: <em>Always use parameterized SQL and use <code>clojure.edn/read-string</code> instead of <code>clojure.core/read-string</code> on edn input.</em></p>
+<h3 id="a2-broken-authentication-and-session-managementa2"><a href="https://www.owasp.org/index.php/Top_10_2013-A2-Broken_Authentication_and_Session_Management">A2 Broken Authentication and Session Management</a></h3>
+<h4 id="authentication">Authentication</h4>
+<p>This is a big topic and I can't address it all here. Clojure has the <a href="https://github.com/cemerick/friend">Friend library</a>, which is the closest thing we have to a de facto standard. My suggestion is simply to <strong>read the entire Friend README</strong> and evaluate whether you should use it. This is serious stuff. Read it.</p>
+<h4 id="session-management">Session Management</h4>
+<p><strong>Ring provides a session system which is fairly good.</strong> It meets many of the <a href="https://code.google.com/p/owasp-asvs/wiki/Verification_V3">OWASP Application Security Verification Standard V3</a> requirements. But it does not handle all of them automatically. <strong>You still need code audits.</strong> For instance, if you are logging requests, OWASP recommends against logging the session key. You must ensure that the session key is added after the request is logged.</p>
+<p>The ASVS also recommends expiring your sessions after inactivity and also after a fixed period, regardless of activity. Ring sessions do not do this automatically (the builtin mechanism has no notion of expiration) and the <strong>default implementations of session stores will store and accept sessions indefinitely</strong>. A simple middleware will do the trick of expiring them in both cases:</p>
+<pre><code>(defn wrap-expire-sessions [hdlr &amp; [{:keys [inactive-timeout
+                                            hard-timeout]
+                                     :or {:inactive-timeout (* 1000 60 15)
+                                          :hard-timeout (* 1000 60 60 2)}}]]
+  (fn [req]
+    (let [now (System/currentTimeMillis)
+          session (:session req)
+          session-key (:session/key req)]
+      (if session-key ;; there is a session
+        (let [{:keys [last-activity session-created]} session]
+          (if (and last-activity
+                   (&lt; (- now last-activity) inactive-timeout)
+                   session-created
+                   (&lt; (- now session-created) hard-timeout))
+            (let [resp (hdlr req)]
+              (if (:session resp)
+                (-&gt; resp
+                    (assoc-in [:session :last-activity] now)
+                    (assoc-in [:session :session-created] session-created))
+                resp))
+            ;; expired session
+            ;; block request and delete session
+            {:body &quot;Your session has expired.&quot;
+             :status 401
+             :headers {}
+             :session nil}))
+        ;; no session, just call the handler
+        ;; assume friend or other system will handle it
+        (hdlr req)))))</code></pre>
+<p>Set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#HttpOnly_Attribute">HttpOnly attribute</a> on the session cookie. Very important for preventing stealing of session ids from XSS attacks.</p>
+<p><em>Do not</em> set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Domain_and_Path_Attributes">Domain attribute</a>, and <em>do</em> set the Path if you want something more restrictive than <code>/</code> (the Ring session default).</p>
+<p><em>Do not</em> set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Expire_and_Max-Age_Attributes">Expire and Max-Age</a> attributes. Setting them makes the browser store the session id on disk, which simply expands the number of ways an attacker can get ahold of it.</p>
+<p><a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Session_ID_Name_Fingerprinting">Change the session cookie name to something utterly generic</a>, like &quot;id&quot;. You don't want to leak more information than necessary about how your sessions work.</p>
+<p>Use HTTPS if you can and set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Secure_Attribute">Secure</a> attribute of the cookie.</p>
+<p>Do not use in-cookie sessions. In-memory are good but they can't scale past one machine. <a href="https://github.com/ptaoussanis/carmine"><code>carmine</code></a> has a redis-based session implementation.</p>
+<p>Summary: <em>Here's how I use Ring sessions (with <code>carmine</code>) based on these OWASP recommendations.</em></p>
+<pre><code>(session/wrap-session
+   (wrap-expire-sessions
+    handler
+    {:inactive-timeout 500
+     :hard-timeout 3000})
+   {:cookie-name &quot;id&quot;
+    :store (taoensso.carmine.ring/carmine-store redis-db
+             {:expiration-secs (* 60 60 15)
+             :key-prefix &quot;&quot;}) ;; leak nothing!
+    :cookie-attrs {:secure true :httponly true}})</code></pre>
+<h3 id="a3-cross-site-scripting-xssa3"><a href="https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS)">A3 Cross-Site Scripting (XSS)</a></h3>
+<p>Whenever text from one user is shown to another user, there is the potential for injecting code (HTML, JS, or CSS) that is run in the victim's browser. Imagine if Facebook allowed any HTML in the post submission form. A malicious user could add a <code>&lt;script&gt;</code> tag with some keystroke logging code. <strong>Anybody who viewed that post in their feed would also get the key logger installed.</strong> That would be bad.</p>
+<p>XSS is common because of how easy it is to make an app that stores user input (from a form post) in a database, then constructs the page out of stuff from the database. If you're not extremely careful, <strong>you could create a place where people can exploit each other</strong>.</p>
+<p>The solution is to <strong>only use scrubbed or escaped values to build HTML pages</strong>. Because HTML pages can include different languages (HTML, CSS, JS), text needs to be scrubbed differently in each context. OWASP has a <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">set of rules to follow which will guarantee XSS prevention</a>.</p>
+<p><code>hiccup.util/escape-html</code> (also aliased as <code>hiccup.core/h</code>) will escape all dangerous HTML characters into HTML entities. JS and CSS still need to be handled, and rules for HTML attributes need to be followed.</p>
+<p>If you want to allow some HTML elements, you will need to do a complex scrub. Luckily, <strong>Google has a <a href="https://code.google.com/p/owasp-java-html-sanitizer/wiki/GettingStarted">nice Java library that sanitizes HTML</a></strong>. Use it.</p>
+<p>Summary: <em>Validate and scrub input from the user and scrub/escape text on output.</em></p>
+<h3 id="a4-insecure-direct-object-referencesa4"><a href="https://www.owasp.org/index.php/Top_10_2013-A4-Insecure_Direct_Object_References">A4 Insecure Direct Object References</a></h3>
+<p>This one is a biggie: <strong>each handler has to do authentication</strong>. Does the particular logged in user have access to the resources requested? There's no way to automate this with a middleware. But having <em>some</em> system is better than doing it ad hoc each time. Remember: an attacker can construct any URL, including URLs with a database key in it. Don't assume that just because a request contains a key, the user must have the rights to it.</p>
+<p>Summary: <em>Always check the authority of the requesting session before performing an action.</em></p>
+<h3 id="a5-security-misconfigurationa5"><a href="https://www.owasp.org/index.php/Top_10_2013-A5-Security_Misconfiguration">A5 Security Misconfiguration</a></h3>
+<p>This is about keeping your software up to date and making sure the settings of all software makes sense.</p>
+<h3 id="a6-sensitive-data-exposurea6"><a href="https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure">A6 Sensitive Data Exposure</a></h3>
+<p>Having data is risky. Don't let it leak out.</p>
+<h3 id="a7-missing-function-level-access-controla7"><a href="https://www.owasp.org/index.php/Top_10_2013-A7-Missing_Function_Level_Access_Control">A7 Missing Function Level Access Control</a></h3>
+<p>Use an authorization system (<a href="https://github.com/cemerick/friend">Friend</a>) and audit the roles used for access control.</p>
+<h3 id="a8-cross-site-request-forgery-csrfa8"><a href="https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)">A8 Cross-Site Request Forgery (CSRF)</a></h3>
+<p>Let's imagine you have a bank account at Bank of Merica. You just checked your balance and didn't log out. Then you go to some public forum, where someone has posted a cool file. There's a big download button. You click it, and the next thing you know, you're on your bank page and all of your money has been transfered out of your account.</p>
+<p>What happened?</p>
+<p>The download button said &quot;Download&quot; but <strong>it was really a form submit button</strong>. The form had hidden fields &quot;to-account&quot;, and &quot;amount&quot;. The action of the form was &quot;http://www.bankofmerica.com/transfer-money&quot;. By clicking that button, <strong>the form was posted to the bank, and because you were just logged in, oops, it transfered all your money away</strong>.</p>
+<p>The solution is that you only want to <strong>accept form posts that come directly from your site</strong>, which you control. You don't want some random person to convince people to click on other sites to be able to transfer people's money like that.</p>
+<p>There are several possible solutions. One approach is to add a secret to the session and also insert that secret into every form. That is the approach taken by the <a href="https://github.com/weavejester/ring-anti-forgery">ring-anti-forgery</a> library.</p>
+<p>The solution that I like is to do a <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet#Double_Submit_Cookies">double-submit</a>. This means you submit a secret token in the cookie (sent with each web request) and in a hidden field in the form. The server confirms that the cookie and the hidden field match. But the hidden field in the form is added by a small Javascript script which reads it from the cookie. <strong>Browsers don't allow Javascript to read cookies from other sites, so you guarantee that they form was posted from your site.</strong></p>
+<p>There are three parts to the solution.</p>
+<ol style="list-style-type: decimal">
+<li>Install a secret token as a cookie.</li>
+<li>Install a script to add the hidden field to all forms.</li>
+<li>Check that the field matches the cookie on POSTs.</li>
+</ol>
+<p>Here is some code to do 1 and 3.</p>
+<pre><code>(defn is-form-post? [req]
+  (and (= :post (:request-method req))
+       (let [ct (get-in req [:headers &quot;content-type&quot;])]
+         (or (= &quot;application/x-www-form-urlencoded&quot; ct)
+             (= &quot;multipart/form-data&quot; ct)))))
+
+(defn csrf-tokens-match? [req]
+  (let [cookie-token (get-in req [:cookies &quot;csrf&quot;])
+        post-token   (get-in req [:form-params &quot;csrf&quot;])]
+    (= cookie-token post-token)))
+
+(defn wrap-csrf-cookie [hdlr]
+  (fn [req]
+    (let [cookie (get-in req [:cookies &quot;csrf&quot;]
+                         (str (java.util.UUID/randomUUID)))]
+      (assoc-in (hdlr req) [:cookies &quot;csrf&quot;] cookie))))
+
+(defn wrap-check-csrf [hdlr]
+  (fn [req]
+    (if (is-form-post? req)
+      (if (csrf-tokens-match? req)
+        ;; we&#39;re safe
+        (hdlr req)
+        ;; possible attack
+        {:body &quot;CSRF tokens don&#39;t match.&quot;
+         :status 400
+         :headers {}})
+      ;; we don&#39;t check other requests
+      (hdlr req))))</code></pre>
+<p>The Javascript should be something like this:</p>
+<pre><code>(def csrf-script &quot;(function() {
+  var cookies = document.cookie;
+  var matches = cookies.match(/csrf=([^;]*);/);
+  var token   = matches[1];
+  $(&#39;form&#39;).each(function(i, form) {
+    if(form.attr(&#39;method&#39;).toLowerCase() === &#39;post&#39;) {
+      var hidden = $(&#39;&lt;input /&gt;&#39;);
+      hidden.attr(&#39;type&#39;, &#39;hidden&#39;);
+      hidden.attr(&#39;name&#39;, &#39;csrf&#39;);
+      hidden.attr(&#39;value&#39;, token);
+      form.append(hidden);
+    }
+  })
+}());&quot;)</code></pre>
+<p>You should add it to all HTML pages. Note that this example script requires jQuery. Put it right before the <code>&lt;/body&gt;</code>.</p>
+<pre><code>[:script csrf-script]</code></pre>
+<p>The nice thing about this solution is that it is <strong>strict by default</strong>. If you don't include the script, form posts won't work (assuming <code>wrap-check-csrf</code> is in your middleware stack).</p>
+<p>Summary: <em>CSRF attacks take advantage of properties of the browser (instead of properties of your server), so their defense can largely be automated.</em></p>
+<h3 id="a9-using-components-with-known-vulnerabilitiesa9"><a href="https://www.owasp.org/index.php/Top_10_2013-A9-Using_Components_with_Known_Vulnerabilities">A9 Using Components with Known Vulnerabilities</a></h3>
+<p>Software with known vulnerabilities is easily attacked using scripts. You should ensure that all of your software is up-to-date.</p>
+<h3 id="a10-unvalidated-redirects-and-forwardsa10"><a href="https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards">A10 Unvalidated Redirects and Forwards</a></h3>
+<p>One common pattern for login workflow is to have a query parameter that contains the url to redirect to. Since it's a user parameter, <strong>it's open to the world and could be a doorway for attackers</strong>.</p>
+<p>For example, let's say someone sends an email to someone asking them to log in to their bank account. In it, there's this link:</p>
+<pre><code>http://www.bankofmerica.com/login?redirect=http://attackersite.com</code></pre>
+<p>What happens when they click? They see the legitimate site of their bank, which they trust. But it redirects them to the attacker's site, which has been designed to look like the bank site. <strong>The user might miss this change of domains and unwittingly reveal private information.</strong></p>
+<p>What can you do?</p>
+<p>OWASP recommends never performing redirects, which is impractical. The next best thing is to never base the redirect on a user parameter. This would work, but puts a lot of trust in the developers and security auditors to check that the policy is enforced. <strong>My preferred solution allows redirects that conform to a whitelist of patterns.</strong></p>
+<pre><code>(def redirect-whitelist
+  [#&quot;https://www.bankofmerica.com/&quot; ;; homepage
+   #&quot;https://www.bankofmerica.com/account&quot; ;; account page
+   ...
+  ])
+
+(defn wrap-authorized-redirects [hdlr]
+  (fn [req]
+    (let [resp (hdlr req)
+          loc (get-in resp [:headers &quot;Location&quot;])]
+      (if loc
+        (if (some #(re-matches % loc) redirect-whitelist)
+          ;; redirect on our whitelist, it&#39;s ok!
+          resp
+          ;; possible attack
+          (do
+            ;; log it
+            (warning &quot;Possible redirect attack: &quot; loc)
+            ;; change redirect back to home page
+            (assoc-in resp [:headers &quot;Location&quot;] &quot;https://www.bankofmerica.com/&quot;)))
+        resp))))</code></pre>
+<p>Summary: <em>Redirect attacks can largely be avoided by checking the redirect URL against a whitelist.</em></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Web security is hard. It takes education and vigilance to keep our servers secure. Luckily, the main security flaws of the web are well-understood and well-documented. However, this is only half of the work. These need to be translated into Clojure either as libraries and simply as &quot;best practices&quot;. Further, these libraries and practices need to be discussed and kept top-of-mind.</p>
+<p>If programming the web in Clojure interests you, you might be interested in my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure</a> video series. It covers all of the basics of web development, building a foundation to understand the entire Clojure web stack.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/hiccup-tips">
+              Hiccup Tips
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 24, 2015
+          </div>
+
+          
+<p>Summary: <em>Hiccup is a Clojure DSL for generating HTML. If you're using it, you might like these tips.</em></p>
+<p><a href="https://github.com/weavejester/hiccup">Hiccup</a> is a Clojure Domain Specific Language (DSL) for programmatically generating HTML. <strong>It's one of the three tools I recommend in <a href="http://www.lispcast.com/what-web-framework-should-i-use">my Clojure Web stack</a>.</strong> It's a thin layer over HTML, but oh, how I welcome that layer! The biggest win is that since it's an <em>internal</em> DSL, you can begin abstracting with functions in a way that you will never be able to, even in templating engines.</p>
+<p>Hiccup is an example of a great Clojure DSL. It uses literal data structures pretty well, it's as or more readable than what it translates into, and, as a layer of indirection, solves a few sticky problems of HTML. If you don't know it, go check out the <a href="http://www.rkn.io/2014/03/13/clojure-cookbook-hiccup/">Clojure Cookbook recipe for Hiccup</a>. <strong>Hiccup might take some getting used to, but once you do, you'll appreciate it.</strong></p>
+<p>This article will assume you are familiar with the syntax and want to up your game.</p>
+<h3 id="cross-site-scripting-vulnerability">Cross-site Scripting Vulnerability</h3>
+<p>Ok, <a href="http://www.lispcast.com/clojure-web-security#a3-cross-site-scripting-xssa3">this one is a pretty bad problem</a>. Hiccup generates Strings, just plain old Java strings. If you put a String in the body of a Hiccup tag, it will just concatenate it right in there, no questions asked. That's <strong>just asking to be exploited</strong>, because that String is going to be shipped off to the browser and rendered, scripts and all.</p>
+<p><strong>Most templating libraries will default to escaping any String you pass them.</strong> The non-default, usually obviously marked alternative is to pass in a String unescaped. Hiccup got this backwards and it just sucks. It means you have to do extra work to be secure, and if you forget just once, your site is vulnerable.</p>
+<p><strong>The fix:</strong> This is the work you have to do every time you're getting a String that could be from the &quot;outside&quot; (a form submission, API request, etc.). Normally, you'd do this:</p>
+<pre><code>[:div content-of-div]</code></pre>
+<p>That will work but it's unsafe. You should do this:</p>
+<pre><code>[:div (h content-of-div)]</code></pre>
+<p>That little <code>h</code> (<code>hiccup.core/h</code> to be exact) there means escape the String. It sucks, but that's how you do it in Hiccup. One day I want to write a secure fork of Hiccup.</p>
+<h3 id="overloading-vectors">Overloading vectors</h3>
+<p>One downside to Hiccup and any DSL that overloads the meaning of vectors is that <strong>vectors are no longer useful as sequences within Hiccup</strong>. They now mean &quot;start a new HTML tag&quot;. It's not a huge deal, but I've spent a lot of time debugging my code, only to realize that I was using a vector to represent a sequence. I use literal vectors everywhere else (because they're convenient and readable), but in Hiccup land they're wrong.</p>
+<p><strong>The fix:</strong> You can't use a literal vector, but you can call <code>list</code> to create a list. Not as beautiful, but it is correct. Sometimes I will call <code>seq</code> on a return value to ensure that it's never a vector.</p>
+<h3 id="multiple-tags">Multiple tags</h3>
+<p>I don't know why this still happens, but it's common, so I'll mention it. Sometimes I'll be looking at the HTML output in a browser and I just can't find an element. It's gone. Reload, still not there. When I look through the code, the hiccup to generate the tag is <em>right there</em>! Why won't it render?</p>
+<p>Well, long story short, it's because in Clojure, <strong>only the <em>last value</em> of a <code>let</code> or <code>fn</code> is returned</strong>. Doh! My missing element was being rendered then discarded.</p>
+<pre><code>(defn list-with-header [header items]
+  [:h3 header] ;; this header is missing
+  [:ul
+    (for [i items]
+      [:li i])])</code></pre>
+<p><strong>The fix:</strong> Wrap the two (or more) things in a list (not a vector!).</p>
+<pre><code>(defn list-with-header [header items]
+  (list ;; wrap in a list, not a vector
+    [:h3 header] ;; now it&#39;s there
+    [:ul
+      (for [i items]
+        [:li i])]))</code></pre>
+<h3 id="hiccup-plays-nice-with-nil">Hiccup plays nice with <code>nil</code></h3>
+<p>This one is just a little design touch with some perks, not a problem that it's solving. In Hiccup, the empty list renders nothing. This is extended to <code>nil</code> as well. A common thing in HTML is that you want to render a bunch of children in a parent tag, but <strong>you don't want the parent tag if the list is empty</strong>.</p>
+<p>Standard constructs will render the parent tag:</p>
+<pre><code>[:ul
+  (for [i items]
+    [:li i])]</code></pre>
+<p>When <code>items</code> is empty, you still get <code>&lt;ul&gt;&lt;/ul&gt;</code>. This is a problem with lots of templating libraries.</p>
+<p><strong>The fix:</strong> The fix in Hiccup is due to it playing nice with <code>nil</code>. Wrap the parent in a <code>when</code>:</p>
+<pre><code>(when (seq items)
+  [:ul
+    (for [i items]
+      [:li i])])</code></pre>
+<p>It's not beautiful, but then again, you could be using HTML with Moustache.</p>
+<h3 id="use-defn-for-snippet-abstraction">Use <code>defn</code> for snippet abstraction</h3>
+<p><strong>HTML has no way to abstract.</strong> The crap you see is the crap you get. Many templating libraries have some kind of snippet concept, often referring to different files. Well, because Hiccup is just code inside of Clojure, you've got a better designed way of making reusable pieces of Hiccup.</p>
+<p>Let's say I'm repeating something a lot:</p>
+<pre><code>[:div
+  [:ul
+    (for [i list1]
+      [:li i])]
+  [:ul
+    (for [i list2]
+      [:li i])]
+  [:ul
+    (for [i list2]
+      [:li i])]]</code></pre>
+<p>That <code>ul</code> is basically the same three times.</p>
+<p><strong>The fix:</strong> Standard functional abstraction. Pull out the repeated bit into a new, named function.</p>
+<pre><code>(defn make-list [items]
+  [:ul
+    (for [i items]
+      [:li i])])</code></pre>
+<p>Now you can call it from inside of Hiccup:</p>
+<pre><code>[:div
+  (make-list list1)
+  (make-list list2)
+  (make-list list3)]</code></pre>
+<h3 id="compiling-your-snippets">Compiling your snippets</h3>
+<p>You may know this, but Hiccup is a <em>compiling</em> macro. That means it takes your literal vectors, maps, etc, and at <em>compile time</em>, generates code that will generate your HTML. All this means is that <strong>Hiccup is really fast</strong>, about as fast as concatenating strings can be.</p>
+<p>But, because the Hiccup compiler doesn't do a full examination of your code, it can't compile everything. It inserts run time fallbacks for stuff it can't handle at compile time which will interpret it at run time. So, for instance, <strong>if you're calling a function that returns some Hiccup, it can't compile that automatically</strong>. It has to wait till the function returns to know what it is. That is, unless . . .</p>
+<p>**The fix: ** The way to get Hiccup to compile something is with the <a href="http://weavejester.github.io/hiccup/hiccup.core.html#var-html"><code>hiccup.core/html</code></a> macro. That's the macro that does the compilation and it will do it anywhere. So if you've got code like this:</p>
+<pre><code>(defn make-list [items]
+  [:ul
+    (for [i items]
+      [:li i])])
+
+(defn my-three-lists []
+  [:div
+    (make-list list1)
+    (make-list list2)
+    (make-list list3)])</code></pre>
+<p>You should wrap the Hiccup form in its own compiler, like this:</p>
+<pre><code>(defn make-list [items]
+  (html
+    [:ul
+      (for [i items]
+        [:li i])]))</code></pre>
+<p>For this little example, it probably won't make a noticeable difference. But it can be significant for larger documents.</p>
+<p>Just to note: the Hiccup compiler can understand <code>if</code> and <code>for</code> forms, so there's no need to wrap them in the compiler. No hard either.</p>
+<h3 id="autoterminating">Autoterminating</h3>
+<p>Just a good thing to know about HTML.</p>
+<p>Did you know that this is not legal HTML?</p>
+<pre><code>&lt;script /&gt;</code></pre>
+<p>It's true. A <code>script</code> tag can't be self-closing.</p>
+<p>There's all sort of silly rules in HTML like this. And then there's XML mode versus HTML mode. We are lucky: <strong>Hiccup does all of this for you</strong>, so you don't have to wade through the HTML spec(s!) looking for why something won't render in IE7.</p>
+<p><strong>The fix:</strong> <code>hiccup.core/html</code> takes a map of options as the first argument (it's optional). If you pass in a <code>:mode</code> option, it will set the correct HTML mode, which unfortunately are incompatible. There are three modes, <code>:xml</code>, <code>:html</code>, and <code>:xhtml</code>. The default is <code>:xhtml</code>.</p>
+<h3 id="idclass-dsl">Id/class DSL</h3>
+<p>Hiccup is a DSL. And it has its own <strong>sub DSL for HTML ids and classes</strong>. It's similar to CSS selectors.</p>
+<p>Let's say you have a <code>div</code> like this:</p>
+<pre><code>[:div
+  {:id &quot;main-content&quot;
+   :class &quot;blue-background green-border&quot;}
+  (h &quot;Here&#39;s some content.&quot;)]</code></pre>
+<p>Well, Hiccup lets you make that shorter and easier to read.</p>
+<p><strong>The fix:</strong> Use the id/class DSL:</p>
+<pre><code>[:div#main-content.blue-background.green-border
+  (h &quot;Here&#39;s some content&quot;)]</code></pre>
+<p>Here's how it works. Every element has an optional id and zero or more classes. After the tag name (<code>div</code> here), you can put the id after a <code>#</code>. Then list your classes starting with a <code>.</code> each. Omit the <code>#</code> if there's no id. Ditto for the <code>.</code> if there's no class. Oh, and the id must come first. That will get converted to the id and class attributes you want. Also, these will conflict with attributes in the map, so <strong>choose one or the other, not both</strong>.</p>
+<h3 id="generating-hiccup-from-html">Generating Hiccup from HTML</h3>
+<p>Last thing, I promise!! Sometimes you have some HTML that someone gave you and <strong>you want to Hiccupify it so you can just stick it into your code</strong>. Manually doing that is kind of tedious. Luckily, there's a solution our there for you.</p>
+<p><strong>The fix:</strong> <a href="https://github.com/weavejester/hiccup/wiki/Converting-html-to-hiccup">This page</a> lists three options for outputting HTML from Hiccup. I have personally used <a href="https://github.com/hozumi/hiccup-bridge">Hiccup-bridge</a>. It does a good job (and it even goes both ways). You call it like this:</p>
+<pre><code>lein hicv 2clj hello.html</code></pre>
+<p>That will output <code>hicv/hello.clj</code> in hiccup format. Pretty rocking when you need it.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Well, there you go. My Hiccup tips. <strong>Hiccup is pretty nice for templating.</strong> I recommend using it (or my future secure fork) in your web projects. If you'd like to learn more Hiccup and how to build web apps in Clojure, please check out [Lispcast Web Development in Clojure][webdev]. It's a video course teaching just that. All you need to know is Clojure and HTML.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/json-serialization-api-clojure">
+              JSON Serialization for APIs in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 10, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure is well-suited for processing JSON, but there are some decisions you have to make to suit your application. The major decisions are actually easy, though they took me a while to figure out.</em></p>
+<p>I tend to use JSON instead of <a href="https://github.com/edn-format/edn"><code>edn</code></a> for an API serialization format, if only because JSON is more readily readable from other languages. I could do both, but it's good to <strong>eat your own dogfood and test those JSON code paths</strong>.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p><code>edn</code> is better, but JSON is generally pretty good. However, JSON's expressibility is decidedly a subset of the Clojure data structures, so there is <strong>considerable loss of information</strong> when going from Clojure to JSON. That information is not recovered in a round-trip, at least not automatically. There are lots of decisions that have to go into how to, at least partially, recover this.</p>
+<p>One bit of information that is lost is the type of keys to a map. JSON only allows strings as keys. Clojure allows anything. But most of the time, <strong>I find myself using <em>keywords</em> for keys</strong>. I say most, but really, it's the vast majority. Maps are bundles of named values pretty much all the time.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> So the optimal decision, after trying lots of combinations, is to convert keywords to strings (the default in JSON libraries I've seen) when emitting JSON; and to convert map keys (always strings in JSON) to keywords (also known as <code>keywordize-keys</code>) when parsing JSON. That covers nearly all cases, and pinpointed special cases can cover the rest.</p>
+<p>But that's not the end of the keyword/string story. What about namespaces? Surprisingly, the two major JSON libraries, <code>clojure.data.json</code> and <code>cheshire</code> handle things differently. <strong>How do you parse a JSON key that has a slash in it, indicating a namespace?</strong> If we're keywordizing (as I suggest above), they both give namespaced keywords (<code>keyword</code> will parse around the <code>/</code>). But when emitting JSON, they act differently. <code>clojure.data.json</code> will emit the <code>name</code> of the keyword (and ignore the <code>namespace</code>) while <code>cheshire</code> emits a string with <code>&quot;namespace/name&quot;</code>.</p>
+<p>I like to keep the namespace, or, put another way, I like to drop as little information as possible. So I prefer the namespace approach. I'm not sure how to get <code>clojure.data.json</code> to do that. <strong>I just use <code>cheshire</code></strong>.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup> The other gotcha for namespaces is that ClojureScript's <code>clj-&gt;js</code> and <code>js-&gt;clj</code> are similarly asymetrical.<sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup></p>
+<p>Keywords in other places besides the keys of maps will just get turned into strings, but they don't get converted back to keywords. That sucks, but it's minor. You'll just have to <strong>convert them back some other way</strong>. At work, we use <a href="https://github.com/prismatic/schema">Prismatic Schema</a>'s coercions. They do the trick nicely, in a declarative way.</p>
+<p>So, back to other JSON issues. The other issue is other data types. Dates, URI's, and UUID's are in our data as well. Dates, well, it's up to you how to encode them. I've always been a fan of the Unix timestamp. It's not exactly human readable, but it's universally parseable. There's also <strong>the ISO datetime format, which is probably a better bet</strong>--it's human readable and agreed upon among API designers. You could emit that as a string and coerce back to a Date object later.</p>
+<p>URI's and UUID's are by definition strings, so that's easy. How do you set up <code>cheshire</code> to handle the encoders? It's pretty simple, really.</p>
+<pre><code>(cheshire.generate/add-encoder java.net.URI cheshire.generate/encode-str)</code></pre>
+<p>That means add the encoder for the <code>java.net.URI</code> type to be encoded as a JSON string. <code>str</code> will be called on the value. You can figure out the other types you need. There are <strong>some JSON emission settings built-in, including Date (the ISO string format) and UUID</strong>. Weirdly URI is not in there, so you have to add it.</p>
+<p>What's next? Oh, pretty-printing. Yeah, I pretty-print my JSON to go over the wire. It's nice for debugging. I mean, who wants to <code>curl</code> one long, 1000-character line of JSON? <strong>Put some whitespace</strong>, please! How to do that?</p>
+<pre><code>(cheshire.core/generate-string mp {:pretty true})</code></pre>
+<p>That's right, it's basically built in, but you have to specify it. But, oh man, <strong>that's long</strong>. I don't want to type that, especially because my lazy fingers are going to not do it one time, then I'm going to look at the JSON in my browser and see a one-line JSON mess. So, what do I do? I put all my JSON stuff for each project in <code>json.clj</code>. It's got all my <code>add-encoder</code> stuff, and it's got two extra functions, just for laziness<sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup>:</p>
+<pre><code>(defn parse [s]
+  (cheshire.core/parse-string s true))
+
+(defn gen [o]
+  (cheshire.core/generate-string o {:pretty true}))</code></pre>
+<p>Or of course whatever options you want to pass those functions. This one is my choice--you make your choice. But <strong>these two functions are all I use most of the time</strong>. Parsing strings and generating strings. Woohoo! Much shorter and less to keep in my little head.</p>
+<p>Well, that just about wraps up my JSON API story. There's the slight detail of <strong>outputting JSON from <code>liberator</code></strong>, which is its own blog post. And there's a bit of <strong>generative testing I do to really challenge my assumptions</strong> about how I set up the round-tripping. But that, too, is another blog post for another day. Oh, and what about <strong>all that JSON middleware</strong>? Again, another post.</p>
+<p>If you like peanut butter and you like jelly, you will probably like peanut butter and jelly sandwiches. If you like web and you like Clojure, you will most definitely like <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure</a>, which is a <strong>gentle, soothing, visually rich video course ushering in the fundamentals of Clojure web development</strong> through your eyes and ears and down through your fingertips and into your very own Heroku-hosted web server. At least <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#preview">watch the preview</a>!</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It may be hubristic to think anyone else will use my API.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>There are exceptions, but these typically are not communicated to the outside. Those that are need special-casing. C'est la vie!<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p><code>:key-fn</code> in <code>clojure.data.json</code> only works for keys, not all keywords. Emitting a keyword in any other place emits the <code>str</code> of it, which includes the <code>:</code> in the string. Ick.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><code>clj-&gt;js</code> uses <code>name</code> for keywords and <code>str</code> for symbols, so keywords lose their namespace when emitting JSON, but retain their namespace when parsing key strings as keywords.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>also known as ease, peace of mind, DRY, and cleanliness<a href="#fnref5">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/parts-of-ring">
+              The Parts of Ring
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 18, 2015
+          </div>
+
+          
+<p>Summary: <em>Ring, the Clojure Web library, defines three main concepts that you use to construct web applications.</em></p>
+<p>Ring is the center of the Clojure web universe. It's not the only option in town, but the other options refer to Ring to say how they are different. <strong>Understanding Ring will help you learn any other web system in Clojure.</strong></p>
+<p>Ring has three main concepts that work together to build a web application.</p>
+<ol style="list-style-type: decimal">
+<li>Adapters</li>
+<li>Handlers</li>
+<li>Middleware</li>
+</ol>
+<h3 id="adapters">Adapters</h3>
+<center>
+<img src="http://www.lispcast.com/img/adapters.jpg" />
+</center>
+
+<p>I like to think of Ring Adapters as plug adapters. When you go to a different continent, you often have to adapt the holes in the electical outlet to fit your cords. Ring Adapters let you convert different web server implementations into a standard Ring Request/Response format. That way, all of your code is standardized to the Ring format. <strong>Your code can travel into any kind of server as long as an adapter exists.</strong></p>
+<p>There are Ring Adapters for many existing servers.</p>
+<ul>
+<li><a href="https://github.com/ring-clojure/ring/tree/master/ring-jetty-adapter">Jetty</a></li>
+<li><a href="https://github.com/datskos/ring-netty-adapter">Netty</a></li>
+<li><a href="https://github.com/mikejs/ring-mongrel2-adapter">Mongrel 2</a></li>
+<li><a href="https://github.com/mmcgrana/ring-httpcore-adapter">Apache HttpCore</a></li>
+</ul>
+<p>And more.</p>
+<h3 id="handlers">Handlers</h3>
+<center>
+<img src="http://www.lispcast.com/img/handler.png" />
+</center>
+
+<p>Handlers do the work of your application. They are like the computer. They are just Clojure functions. HTTP is basically a request/response protocol that maps well to functions, which are just a protocol from argument to return value. <strong>Handlers take a Ring Request and return a Ring Response.</strong> They should do whatever logic is necessary for your application.</p>
+<h3 id="middleware">Middleware</h3>
+<center>
+<img src="http://www.lispcast.com/img/middleware.jpg" />
+</center>
+
+<p>Middleware are the voltage converters. Here in North America, wall sockets run at 120 volts, which is different from almost everywhere. In order to run an appliance from elsewhere, you not only need to adapt the socket, you also need to transform the current to a compatible voltage. <strong>Middleware are often used to convert the incoming request in some standard way.</strong> For instance, there is middleware to parse a JSON body into a Clojure map and store it away in the request.</p>
+<p>The transformer also &quot;cleans up&quot; the current. Voltage spikes are evened out so they never get to the computer. <strong>Middleware can similarly protect a handler by making sure the browser is logged in.</strong></p>
+<p>The analogy kind of breaks down, because middleware can do work (like the computer). Middleware are the hardest part of the Ring idea. They're not hard because the concept is hard. They're hard because <strong>they require design decisions</strong>. If all you had were Adapters and Handlers, you wouldn't have to think about where to put your logic. It would all go in the Handlers.</p>
+<p>But there would be a lot of duplicated logic in your handlers. <strong>Authentication, routing, content-type switching, all of these things are done the same way over and over.</strong> It's the perfect problem for a little higher order programming. That's essentially what Middleware is.</p>
+<p>Ring Middleware are functions that take a Handler and return a new Handler. Since Handlers are functions, <strong>Middleware are higher-order functions</strong>. The transformer on your computer's power cord takes a machine that requires a certain current and turns it into a machine that takes a different current. Middleware are used to do all sorts of things.</p>
+<p>So, for instance, there's a Middleware called <a href="https://github.com/magnars/prone">Prone</a> that captures exceptions in the Handler and displays them in a nice format. Prone is a function that takes a Handler and returns a new Handler that catches exceptions and returns a different Ring Response in that case. Or you have Middleware that handle session cookies. <strong>The Middleware take a Handler and return a new Handler that understands sessions.</strong></p>
+<p>My recommendation for what to put in Middleware versus what to put in Handlers is simplest to explain with a graph.</p>
+<center>
+<img src="http://www.lispcast.com/img/handler-middleware.png" />
+</center>
+
+<p>Along the x-axis, we have logic that ranges from HTTP logic (handling header values, query params, etc.) to business logic (which bank account to withdraw from). Along the y-axis, we have how unique the logic is, ranging from highly duplicated to custom. <strong>These are the two axes I use to figure out whether it should be in the Handler or the Middleware.</strong></p>
+<p>The clear cases are easy. In the upper right corner (red dot), where it's custom business logic, <strong>it's definitely in the Handler</strong>. In the lower left (blue dot), where it's duplicated HTTP logic, I prefer Middleware. <strong>The hard part is in the middle.</strong> Somewhere between those two, there's a fine line where a <strong>case-by-case decision is required</strong>.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Ring is great because it requires so few concepts to capture so much of HTTP. But it's not everything. Standard Ring does not support WebSockets, for instance. Small adaptations are necessary. In general, I think this is a great abstraction. <strong>And Ring is so central to Clojure on the Web, it's important to know.</strong></p>
+<p>If you want to learn more about Ring and how to construct web applications in Clojure, you should check out <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">LispCast Web Development in Clojure</a>. It's a video course designed to guide you through the major libraries used for web development. <strong>You'll learn how to build Clojure web applications from existing and custom parts.</strong> You build Middleware to make your application adapt to browser limitations. And if you sign up below, you'll get a handy Ring Spec reference sheet, which specifies the Request and Response formats.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/ring-1-3">
+              Ring 1.3
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 22, 2014
+          </div>
+
+          
+<p>Summary: <em>Ring is great because it closely models the HTTP message format using native Clojure data structures. It strictly defines a message format that any software can use and rely on. With Ring 1.3, the specification has gotten even closer to the HTTP spec.</em></p>
+<p>A couple of months ago, Ring 1.3 was released without much fanfare. It included a few improvements and updates, but in general, not much had changed.</p>
+<p>One change, though, is very significant: the specification is <em>shorter</em>. It's simpler. Three keys were deprecated in the Ring request map (<code>:content-type</code>, <code>:content-length</code>, and <code>:character-encoding</code>). <strong>These keys were unnecessary because their values were in the headers</strong>, which are also in the Ring request. Equivalent utility functions have been added for pulling the data out of the headers.</p>
+<p>Why is this important? While many libraries get more complex and overburdened, <strong>it is refreshing to see a library going in the correct direction of <em>shedding complexity</em></strong>. It does not significantly impact application development. Nor does it reduce the already low barrier to entry. Still, I welcome this kind of change.</p>
+<p><strong>Ring is the central specification that ties most of the Clojure web ecosystem together.</strong> The spec <em>should</em> be minimal. <strong>And a mark of good software is that it models the problem very closely without unnecessary abstraction.</strong> Ring merely defines a common format (using Clojure data structures) that mirrors the text-based HTTP message format. That's why Ring has worked so well thus far and why it is appreciated in Clojure.</p>
+<p>Because I was so happy about the change, I decided to update my <a href="http://www.lispcast.com/ring-spec-hang-on-wall">Ring Spec to Hang on the Wall PDF</a>. The newly deprecated keys are gone. It used to be two pages long. The Ring Request took up an entire page, and the Response took up about half of one. But now, with three keys removed and a little tweaking of the font sizes, <strong>everything fits on one page</strong>.</p>
+<center> 
+<a
+    href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe"><img
+    src="http://www.purelyfunctional.tv/img/ring_spec_1_3.png"
+    style="box-shadow: 2px 2px 5px #888888; max-width: 200px" /></a>
+</center>
+
+<p>One page in big, readable fonts, with just the information you need for quick reference. I like it. <strong>I'm printing one out right now to tack on the wall.</strong> You can <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">get a free copy</a> for yourself by getting on the PurelyFunctional.tv mailing list <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">here</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/ring-spec-hang-on-wall">
+              A Ring Spec to Hang on the Wall
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 28, 2014
+          </div>
+
+          
+<p>Summary: <em>The Ring SPEC is the core of the Clojure web ecosystem. The standard is small and <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">a reference</a> is handy.</em></p>
+<p>If you program the web in Clojure, you probably use Ring. Even if you don't, your server is likely <a href="http://http-kit.org/">Ring compatible</a>.</p>
+<p>Ring has a small SPEC. It's centered around defining the keys one can expect in the request and response maps. And the exact names for keywords are easy to forget.</p>
+<p>I don't want to forget. I use Ring often enough that I want a quick reference. A while ago, I printed out a quick summary of the keys for the request and response maps and hung it on the wall behind my monitor. I refer to it frequently.</p>
+<p>If you program the web in Clojure, you might appreciate this printout. If you're learning, it could be an invaluable reference. <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">Please download the PDF.</a></p>
+<p>And if you like it, you might also like my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure video series</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/separation-of-presentation-and-content">
+              Separation of Presentation and Content
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 17, 2014
+          </div>
+
+          
+<p>Summary: <em>One reason to separate style from content is to reuse HTML or CSS. Ultimately, we would like a solution where we can reuse both.</em></p>
+<h3 id="reusable-content">Reusable Content</h3>
+<p>There is an economic reason to separate presentation from content. Publishers have thousands of pages of HTML on their site, yet they want to enhance the style of their pages over time. It would <strong>cost a lot of money to change every single page to match their new style</strong>. So they invest a little more time writing each page so that the HTML markup does not refer to styles but to the semantics of the content (referred to as <em>semantic HTML</em>). Then they hire a designer to write CSS to make their existing content look new. The HTML is permanent and reusable, and the CSS is temporary and not-reusable. <strong>The separation is only one way: the HTML doesn't know the CSS, but the CSS does know the HTML.</strong></p>
+<p><strong>Examples:</strong> <a href="http://www.csszengarden.com/">CSS Zen Garden</a>, newspaper websites, blogs</p>
+<p><strong>Characteristics:</strong> Semantic markup, CSS tailored to classes/structure of HTML</p>
+<h3 id="reusable-styles">Reusable Styles</h3>
+<p>Yet another economic reason is a relatively newer phenomenon. It has become very easy to create a new web site/application. Writing (or generating) lots of HTML is cheap, and it changes often during iterative development. What is <strong>relatively expensive is to <em>design</em> each of those pages each time the pages change</strong>. CSS is not good at adapting to page structure changes. So people have built CSS frameworks where the CSS is (relatively) permanent and the HTML is temporary. In these cases, <strong>the HTML knows the CSS, but the CSS doesn't know the HTML</strong>. The separation is again one way--this time the other way.</p>
+<p><strong>Examples:</strong> <a href="https://github.com/stubbornella/oocss/tree/master/oocss">Open Source CSS</a>, <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://foundation.zurb.com/">Foundation</a>, <a href="http://purecss.io/">Pure</a></p>
+<p><strong>Characteristics:</strong> HTML tailored to classes/structure of CSS, Reusable CSS</p>
+<h3 id="reusable-content-and-styles">Reusable Content and Styles</h3>
+<p>What if a newspaper site, with millions of existing HTML pages, could cheaply take advantage of the reusable styles of frameworks like Bootstrap? That is the Holy Grail of separation of concerns. What would be required to do that?</p>
+<p><strong>What we really want is a two-way separation.</strong> We want HTML written in total isolation and CSS written in total isolation. We want permanent HTML and permanent CSS. How can the style and content, each developed separately, finally be brought together? The answer is simple: <strong>a third document to relate the two</strong>.</p>
+<p>We have already seen that <a href="http://www.lispcast.com/css-abstraction-combination">CSS is not good at <em>abstraction</em></a>. CSS cannot name a style to use it later. However, <a href="http://www.lispcast.com/less-abstraction-combination">LESS does have powerful forms of abstraction</a>. LESS has the ability to <strong>define reusable styles and apply them to HTML</strong> that did not have those styles in mind. If you put the <em>definition of reusable styles</em> in one document and the <em>application of those styles</em> in another document, you achieve true separation. And it is already happening a little bit. <strong>You can do it in your own code.</strong></p>
+<p>It is a bit like a software library. We put the reusable bits in the library, and their specific use in the app.</p>
+<p><strong>Examples:</strong> <a href="http://compass-style.org/">Compass</a>, <a href="http://semantic.gs/">Semantic Grid System</a></p>
+<p><strong>Characteristics:</strong> Semantic markup, Reuseable Styles, Tie-in document to relate Style to Content</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>CSS preprocessors, which began as convenience tools, are actually <strong>powerful enough to solve fundamental problems with HTML and CSS</strong>. While it is still early, LESS and other CSS preprocessors, if harnessed correctly, could dramatically transform how we build and design web sites. Typography, grids and layout, and other design concerns can be used as plugable libraries. And other languages that are specifically designed to do that may emerge. <strong>What would a systematic, analytical approach to such an approach look like?</strong></p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
+<li><a href="http://www.lispcast.com/less-abstraction-combination">LESS has Better Forms of Abstraction than CSS</a></li>
+<li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/what-web-framework-should-i-use">
+              What Web Framework Should I Use in Clojure?
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 23, 2014
+          </div>
+
+          
+<p>Summary: <em>There are a number of web frameworks in Clojure, but beginners should roll their own server stack themselves to tap into the Ring ecosystem.</em></p>
+<p>One question that I am asked a lot by beginners in Clojure is <strong>&quot;What web framework should I use?&quot;</strong> This is a good question. In Python, there's Django. In PHP, Drupal. And of course in Ruby, there's the king of all web frameworks, Ruby on Rails.</p>
+<p>What framework should you use in Clojure? The question is actually kind of hard to answer. There are a number of web frameworks out there. Some people call <a href="https://github.com/weavejester/compojure">Compojure</a> a framework, though it is really a library. <a href="https://github.com/noir-clojure/lib-noir">lib-noir</a> does a lot of work for you. Then there's your true frameworks, like <a href="https://github.com/pedestal/pedestal">Pedestal</a> or <a href="http://hoplon.io/">Hoplon</a>, which provide infrastructure and abstractions for tackling web development. All of these projects are great, but for a beginner, <strong>I have to recommend building your own web stack starting with Ring</strong>.</p>
+<p>Compojure is really just a routing library, not a framework. You can use it for your routing needs, though there are alternatives, such as <a href="https://github.com/ericnormand/playnice">playnice</a>, <a href="https://github.com/juxt/bidi">bidi</a>, <a href="https://github.com/clojurewerkz/route-one">Route One</a>, and <a href="https://github.com/thatismatt/gudu">gudu</a>. <strong>If you don't want to decide, use Compojure. It's widely used and works great.</strong> If you want to go in depth, read the docs for the others. They are each good for different cases.</p>
+<p><a href="https://github.com/noir-clojure/lib-noir">lib-noir</a> comes from <a href="http://www.webnoir.org/">Noir</a>, which was a web framework (now deprecated). It was easy and provided a bit of plumbing already built for you, so you could just start a project with a lot of the infrastructure built in. lib-noir is that infrastructure in library form. I haven't used it, but a lot of people like it. However, when I look at it, I see that <strong>most of what it provides I either won't use or it is trivial to add myself</strong>. That would normally be ok if there was huge adoption for it (like with Rails) so you get an ecosystem effect, but there isn't. <strong>lib-noir is used but certainly not dominant.</strong></p>
+<p><a href="https://github.com/pedestal/pedestal">Pedestal</a> has a lot of backing. It aims to tackle single-page apps by providing a sane front-end environment using ClojureScript in the form of a message queue. If you're into &quot;real-time apps&quot;, this may be for you. Though, I would caution you that it's not for a Clojure beginner. <strong>Pedestal introduces a lot of new concepts that even experienced Clojure programmers have to learn.</strong> The <a href="https://github.com/pedestal/app-tutorial/wiki">tutorial</a> is long and arduous. You will have problems learning Pedestal without knowing Clojure.</p>
+<p><strong>Update:</strong> <em><a href="https://groups.google.com/forum/#!topic/pedestal-users/jODwmJUIUcg">Pedestal has changed dramatically</a> since I last looked at it. It is no longer a frontend framework. It is now a high-performance backend server for high performance asynchronous processing. It's worth looking at if you need that. Otherwise, I stick with my recommendation to use basic Ring.</em></p>
+<p><a href="http://hoplon.io/">Hoplon</a> is also designed for web apps. It gives you a DOM written in ClojureScript (including custom components), dataflow programming (like a spreadsheet), and client-server communication. It's a bold step, but again, <strong>requires you to buy into programming models that will take a long time to understand</strong>. If you are not already familiar with Clojure, you are asking for trouble.</p>
+<p>There are other frameworks out there. But I recommend rolling your own stack. If you're learning Clojure, <strong>the best way to grasp how web apps work is to get a <a href="https://github.com/ring-clojure/ring">Ring</a> Jetty adapter set up with some basic handlers</strong>. Add existing middleware as you need it. Write some middleware of your own. Use Compojure to route. Use <a href="https://github.com/weavejester/hiccup">Hiccup</a> to generate HTML. <strong>That setup will get you a long way.</strong></p>
+<p>Ring is just functions. With a few basic concepts and a copy of the Ring SPEC handy, you can build a web server very quickly that does exactly what you want and <strong>you can understand every aspect of it</strong>. The experience of building one yourself can teach you a lot about how the other frameworks are put together.</p>
+<p>What's more, Ring <em>is</em> dominant. Most people write functionality (in the form of middleware and handlers) assuming Ring and no more. So by staying close to the metal, you are <strong>tapping into a huge resevoir of pre-written libraries that are all compatible with each other</strong>. Ring is the locus for the Clojure web ecosystem.</p>
+<p>Wiring up your own middleware stack is not that daunting. If you want guidance, <strong>my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure video series</a> is now for sale</strong>. It starts with a brand new Clojure project and ends with a fully functional app, backed by a database, and hosted on Heroku (for free!). In one hour, <strong>it explains all the concepts and shows you lots of examples</strong>. There's lots of exercises to get your brain whirring.</p>
+<p>Recommended stack:</p>
+<ul>
+<li><a href="https://github.com/ring-clojure/ring">Ring</a> (with Jetty adapter)
+<ul>
+<li><a href="http://ring-clojure.github.io/ring/ring.middleware.params.html#var-wrap-params">wrap-params</a> (parsing params)</li>
+<li><a href="https://github.com/ring-clojure/ring/blob/master/ring-devel/src/ring/middleware/reload.clj">wrap-reload</a> (for development)</li>
+<li><a href="http://ring-clojure.github.io/ring/ring.middleware.resource.html#var-wrap-resource">wrap-resource</a> and <a href="http://ring-clojure.github.io/ring/ring.middleware.file-info.html#var-wrap-file-info">wrap-file-info</a> (static files)</li>
+</ul></li>
+<li><a href="https://github.com/weavejester/compojure">Compojure</a></li>
+<li><a href="https://github.com/weavejester/hiccup">Hiccup</a></li>
+</ul>
+<p>Then keep adding and customizing.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://www.shirky.com/weblog/2013/11/healthcare-gov-and-the-gulf-between-planning-and-reality/">
+              Healthcare.gov and the Gulf Between Planning and Reality
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/healthcare-gov-gulf-between-planning-and-reality">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 24, 2013
+          </div>
+
+          
+<p>Clay Shirky nails it with nice, narrative style.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

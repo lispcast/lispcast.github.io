@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Announcing: LispCast Intro to clojure.test</title>
+                  <guid isPermalink="false">http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test</guid>
+                  <link>http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test</link>
+                  <pubDate>Mon 23 Feb 2015 09:37:54 PM CST</pubDate>
+                  <description>
+                    The next course will be about clojure.test. Sign up to be notified when it is published.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Clojure Test Directory</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-test-directory</guid>
+                  <link>http://www.lispcast.com/clojure-test-directory</link>
+                  <pubDate>Mon 30 Mar 2015 10:55:57 PM EDT</pubDate>
+                  <description>
+                    Where to put your tests is a common question. You could put them anywhere, but you want to pick a place that makes it easy to find, easy to exclude from production, and work well with your tools. My recommendation is to follow what most projects do, which takes care of all of these requirements.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-test-directory"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>LispCast Intro to clojure.test</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-test-launch</guid>
+                  <link>http://www.lispcast.com/clojure-test-launch</link>
+                  <pubDate>Sat 28 Mar 2015 01:36:41 PM CDT</pubDate>
+                  <description>
+                    LispCast Intro to clojure.test will launch this week.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-test-launch"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Ashton Kemerling</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-ashton-kemerling</guid>
+                  <link>http://www.lispcast.com/pre-conj-ashton-kemerling</link>
+                  <pubDate>Fri 26 Sep 2014 07:20:33 AM CDT</pubDate>
+                  <description>
+                    Ashton Kemerling will talk about Generative Integration Tests.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-ashton-kemerling"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Ashton Kemerling</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-ashton-kemerling</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-ashton-kemerling</link>
+                  <pubDate>Mon 20 Oct 2014 09:36:09 AM CDT</pubDate>
+                  <description>
+                    Ashton Kemerling interview about generative testing.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-ashton-kemerling"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Ryan Neufeld</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-ryan-neufeld</guid>
+                  <link>http://www.lispcast.com/pre-west-ryan-neufeld</link>
+                  <pubDate>Sun 05 Apr 2015 11:44:16 AM CDT</pubDate>
+                  <description>
+                    Ryan Neufeld will talk about simulation testing.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-ryan-neufeld"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Example-based Unit Testing in Clojure</title>
+                  <guid isPermalink="false">http://www.lispcast.com/unit-testing-in-functional-languages</guid>
+                  <link>http://www.lispcast.com/unit-testing-in-functional-languages</link>
+                  <pubDate>Thu 26 Mar 2015 11:36:28 AM CDT</pubDate>
+                  <description>
+                    Unit testing in Clojure is straightforward. Here are a few testing ideas as they apply to Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/unit-testing-in-functional-languages"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

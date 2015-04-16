@@ -1,0 +1,19 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  Eric Normand
+  Email: ericwnormand@gmail.com
+  Site: http://renegadeyogi.com/
+  Twitter: @ericnormand
+  Location: Buenos Aires, Argentina
+
+/* THANKS */
+  Names (& URL): http://html5boilerplate.com/
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: Modernizr, jQuery
+  Software:
+  

@@ -1,0 +1,223 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Clojure is Imperative | LispCast</title>
+    <meta name="description" content="Clojure is an imperative language. Its operations are defined in terms of concrete actions. But those actions are often the same actions available to the programmer at runtime. This makes it easy to bootstrap.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-is-imperative">
+              Clojure is Imperative
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 22, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure is an imperative language. Its operations are defined in terms of concrete actions. But those actions are often the same actions available to the programmer at runtime. This makes it easy to bootstrap.</em></p>
+<p>Update: <em><a href="http://twitter.com/bitemyapp">أخلاق الخيميائي</a> pointed out that I was wrong about the size of GHC. Luckily it was not salient to my point so I just removed that part of the article.</em></p>
+<p>Update: <em>After talking with several people, I've decided that my writing was really unclear. I've done some major editing to make it as clear as I can. Thanks to everyone who commented and helped me clarify my thinking and writing.</em></p>
+<p>I was recently <a href="http://blog.cognitect.com/cognicast/062-eric-normand">on the Cognicast</a> and I mentioned something really important to me, but I did not go that deep into it.</p>
+<p>Clojure, and Lisps in general, are <em>imperative languages</em>. Yes, they are good for doing <a href="http://www.lispcast.com/what-is-functional-programming"><em>functional programming</em></a>, but their <strong>main paradigm is executing lists of commands in order</strong>.</p>
+<p>On the podcast I mentioned the first imperative example that came to mind, which was the <code>do</code> form, which executes each expression in the body and returns the value of the last expression. <strong>You would only want to execute an expression and throw away its value for its <em>side effects</em>.</strong></p>
+<p>But why is that important to me? It got me thinking about a deeper but related idea.</p>
+<p>Clojure is a <em>relatively</em> transparent layer above the JVM. I say &quot;relatively&quot; because languages do get quite a bit more opaque<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. But it manages to be powerful through well-chosen abstractions.</p>
+<p>I should be a little more specific about what I mean by &quot;transparent&quot; and &quot;opaque&quot;. This should be the most controversial part of this post, so I want to get this right. These are not formal definitions. <strong>Transparency/opaqueness measures abstractions.</strong> Opaque abstractions show less of the underlying machinery. Transparent abstractions show their machinery. This is a spectrum.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<p>Clojure's functions are rather opaque. Defining a function (with <code>fn</code>) in Clojure creates a class and instantiates it with the values from its lexical environment. This happens without having to think about classes. You're not thinking about the machinery. The machinery leaks out sometimes, like when you're looking at stack traces. But in general, an illusion is maintained.</p>
+<p>But Clojure's <code>def</code> form is pretty transparent. You do have to think about what it's doing, about the current namespace, the order of the <code>defs</code> in a namespace, etc. There is not much of an illusion to maintain.</p>
+<p>Haskell has a well-defined execution semantics. It's formally defined and you can step through the execution of a Haskell program by hand if you want. In that sense, it's imperative. But the execution order is obscured by the somewhat opaque abstraction of <em>lazy evaluation</em>. <strong>Clojure's execution order is more or less directly the execution order of the JVM it runs on--hence more transparent.</strong></p>
+<p>The reason this is important is that <strong>Clojure's strategy is to be transparent</strong> unless there is significant gain. This is part of what is meant by &quot;embracing the host&quot;. Haskell's strategy is orthogonal to the transparency/opaqueness axis. Haskell aims to be formally well-defined. Formal semantics allows deep static analysis and program transformation.</p>
+<p>Besides the strategy of being transparent, what I like even more about Clojure is that the <strong>many abstractions are <em>defined in the same abstractions</em> that you have available as a programmer</strong>.</p>
+<p>This is from the <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/def/">docstring of def</a>:</p>
+<blockquote>
+<p>Creates and interns a global var with the name of symbol in the current namespace (*ns*) or locates such a var if it already exists. If init is supplied, it is evaluated, and the root binding of the var is set to the resulting value. If init is not supplied, the root binding of the var is unaffected.</p>
+</blockquote>
+<p>Creating a var? I can do that. Interning it? I can do that, too. Setting the root binding? Easy! The core can be kept minimal because abstractions can build on each other. If you get the abstractions right, the amount of code you have to write in your implementation language is small.</p>
+<p>And this gets to the heart of it: <em>you</em> can write a Lisp yourself. Many people have. You can <strong>write an easy Lisp compiler in a weekend</strong> and build features on top of it, almost <strong>never having to change the original compiler</strong>.</p>
+<p>This is the magic of <a href="http://www.lispcast.com/two-kinds-of-bootstrapping">bootstrapped languages</a> like Lisps. They have a <strong>small core that you need to get right, then everything else can be written in that core</strong>. It's the ultimate minimal virtual machine.</p>
+<p>What's the relationship between bootstrapping and transparency? <strong>The more opaque the abstractions, the more the language must do to maintain the illusion.</strong> Lisps are easy to bootstrap because the abstractions chosen are either transparent and trivial to implement (like <code>def</code> or <code>if</code>) or opaque and powerful (like <code>fn</code>).</p>
+<p>I like Lisps (and Clojure) because <strong>I feel that I can understand them and build them myself</strong>. I don't <em>actually</em> understand everything, but I <em>could</em> if I tried. Somewhere along the way I developed a deep interest in bootstrapping. <strong>Bootstrapping is compounded leverage.</strong> You build small abstractions on top of the previous ones, and use those to build yet grander ones.</p>
+<p>If you like this attitude toward programming languages, <strong>you should learn a Lisp</strong>. I suggest Clojure, and I recommend the <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure video series</a>. You'll learn about building up powerful abstractions, one layer at a time, in a small amount of code.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-regex">Regexes in Clojure</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>There are more transparent languages as well, but they tend to be obscure.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>As an aside to those who read previous versions of this post, what I meant by imperative/declarative was transparent/opaque. I botched it and I'm trying to get this idea right.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/complex-syntax">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/two-kinds-of-bootstrapping">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

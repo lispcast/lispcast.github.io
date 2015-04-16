@@ -1,0 +1,195 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: dynamic-languages | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/reification">
+              Reification
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 05, 2014
+          </div>
+
+          
+<p>Summary: <em>Reification means making an abstraction into a concrete value that can be manipulated at runtime. Reification is the core of what makes a language dynamic. Three types of reification in Clojure are discussed.</em></p>
+<p>What made Object Oriented programming (in the Smalltalk sense) so powerful? So powerful, in fact, that the GUI, WYSIWYG editing, overlapping windows, MVC, and more, were invented using it, <strong>not to mention an entire programming paradigm</strong>.</p>
+<p>What made Lisp so powerful? So powerful that we still see new Lisps popping up and its <strong>legend looms</strong> over every serious programmer's mind.</p>
+<p>Now, I don't want to boil it down to <em>one</em> thing. But one thing that was important, that you see in both of these languages, was the idea of <em>reification</em>. In fact, <strong>reification is possibly the essence of what makes a language &quot;dynamic&quot;</strong>.</p>
+<p>Reification, as I define it here in this article, means <strong>to make an abstraction available at runtime</strong>. Many languages have a text-based syntax that is read in by a compiler and compiled to machine code. But Smalltalk made each line of code into an object that you could manipulate, either with the input devices or with other code. And it let programmers bootstrap an IDE that was unparalleled at the time.</p>
+<p>But Smalltalk's <em>coup de grace</em> reification was the class, which is an object which represents the behavior of another object. Instead of some static switch statement that dispatched the methods, the methods were <strong>stored in a data structure that could be inspected and added to at runtime</strong>. Dynamic dispatch! You see this in multimethods in Clojure.</p>
+<p>Clojure's namespaces are reified. Some languages have a linking step in the compiler where modules are brought together to form a binary. But in Clojure, <strong>the namespace is accessible at runtime</strong>. Does your code want to know what Vars are defined? Easy. How about add a new Var. Done. These serve to support interactive programming--a hallmark of dynamic languages.</p>
+<p>Lisps have always, from the very beginning, supported <em>homoiconicity</em>, which is a silly way of saying that programs are reified into the language as data. This means you can write functions that write code--also known as <em>macros</em>. Macros serve a very useful bootstrapping function because you can <strong>gradually add to the language instead of having to design it up front</strong>. And sometimes you get a huge win, like <a href="http://clojure.github.io/core.async/">core.async</a>, which adds a totally new semantic.</p>
+<p>The next level of reification in Lisps is the higher-order function. Functions are not just things to call, but things to pass as arguments, save in collections, etc. They are real values, just like numbers and strings. There was a time in the history of programming when you could not refer to a function except to call it. Now, we take it for granted. <strong>Being able to reify an abstraction into a thing to pass around is amazing</strong>, and we should all just take a moment to ponder just how awesome it is.</p>
+<p>Lisps have traditionally gone to the next level, which is to reify a problem into a <em>data-driven</em> solution. Nowadays, people call this type of programming &quot;DSL&quot;. But it's just a type of reification. Instead of writing code to solve the problem, <strong>let's encode the solution as data</strong>. The problem domain is encoded in the interpreter for that data. Now it's accessible at runtime in a way simple code never could be.</p>
+<p>Prismatic's Schema is a great example of this. You define a validator for a piece of data using existing data types: maps, vectors, strings, classes, regexes, etc. Then the library can interpret that data structure and tell you if a piece of data is described by that validator. <strong>If schemas were merely a static construct, this would not be possible.</strong> You would have to wait for the language to &quot;support&quot; it, which is a terrible form of tyranny.</p>
+<p>Here's the secret to compounding the power: that data structure can be interpreted in many ways. Take Prismatic's Schema again. You can generate schemas at runtime. You can print them out. You can use them to <a href="https://www.youtube.com/watch?v=4-sPhFtGwZk&amp;feature=youtu.be">build test.check generators</a>. When things are reified and use the same interface as everything else, you can see synergy between libraries. <strong>You use one reification to enhance another.</strong></p>
+<p>Data-driven solutions are superior to macro-driven ones or even higher-order function solutions. Data can be stored. It can go over the wire. It can be meaningful in different contexts. A macro is useful at compile time, which happens once. Functions are black boxes and can really only do one thing (apply to arguments). <strong>But data is just data, ready to be interpreted.</strong></p>
+<p>Many Clojure libraries are considered &quot;language features&quot; in other languages. <strong>You don't have to mess with the internals of the language.</strong> Dynamic languages can do this, but Clojure (and most Lisps) has it at enough levels that interesting things happen.</p>
+<p>Here's another reification: Haskell reifies side effects into values that can be composed. That's cool.</p>
+<p>If you're into this whole reification thing, where language features that require major releases in other languages are just libraries; if you think you should learn functional programming; if you are curious about what everyone is talking about, check out the <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video series.</p>
+<p>The series is 1.5 hours taking you <strong>from zero Clojure knowledge through data-driven programming</strong>, one of the coolest types of reification. You'll help a robot who always wanted to be a baker learn to make bread :) Help him learn the recipes and convert them from static code to dynamic data.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,334 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Hiccup Tips | LispCast</title>
+    <meta name="description" content="Hiccup is a Clojure DSL for generating HTML. If you're using it, you might like these tips.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/hiccup-tips">
+              Hiccup Tips
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 24, 2015
+          </div>
+
+          
+<p>Summary: <em>Hiccup is a Clojure DSL for generating HTML. If you're using it, you might like these tips.</em></p>
+<p><a href="https://github.com/weavejester/hiccup">Hiccup</a> is a Clojure Domain Specific Language (DSL) for programmatically generating HTML. <strong>It's one of the three tools I recommend in <a href="http://www.lispcast.com/what-web-framework-should-i-use">my Clojure Web stack</a>.</strong> It's a thin layer over HTML, but oh, how I welcome that layer! The biggest win is that since it's an <em>internal</em> DSL, you can begin abstracting with functions in a way that you will never be able to, even in templating engines.</p>
+<p>Hiccup is an example of a great Clojure DSL. It uses literal data structures pretty well, it's as or more readable than what it translates into, and, as a layer of indirection, solves a few sticky problems of HTML. If you don't know it, go check out the <a href="http://www.rkn.io/2014/03/13/clojure-cookbook-hiccup/">Clojure Cookbook recipe for Hiccup</a>. <strong>Hiccup might take some getting used to, but once you do, you'll appreciate it.</strong></p>
+<p>This article will assume you are familiar with the syntax and want to up your game.</p>
+<h3 id="cross-site-scripting-vulnerability">Cross-site Scripting Vulnerability</h3>
+<p>Ok, <a href="http://www.lispcast.com/clojure-web-security#a3-cross-site-scripting-xssa3">this one is a pretty bad problem</a>. Hiccup generates Strings, just plain old Java strings. If you put a String in the body of a Hiccup tag, it will just concatenate it right in there, no questions asked. That's <strong>just asking to be exploited</strong>, because that String is going to be shipped off to the browser and rendered, scripts and all.</p>
+<p><strong>Most templating libraries will default to escaping any String you pass them.</strong> The non-default, usually obviously marked alternative is to pass in a String unescaped. Hiccup got this backwards and it just sucks. It means you have to do extra work to be secure, and if you forget just once, your site is vulnerable.</p>
+<p><strong>The fix:</strong> This is the work you have to do every time you're getting a String that could be from the &quot;outside&quot; (a form submission, API request, etc.). Normally, you'd do this:</p>
+<pre><code>[:div content-of-div]</code></pre>
+<p>That will work but it's unsafe. You should do this:</p>
+<pre><code>[:div (h content-of-div)]</code></pre>
+<p>That little <code>h</code> (<code>hiccup.core/h</code> to be exact) there means escape the String. It sucks, but that's how you do it in Hiccup. One day I want to write a secure fork of Hiccup.</p>
+<h3 id="overloading-vectors">Overloading vectors</h3>
+<p>One downside to Hiccup and any DSL that overloads the meaning of vectors is that <strong>vectors are no longer useful as sequences within Hiccup</strong>. They now mean &quot;start a new HTML tag&quot;. It's not a huge deal, but I've spent a lot of time debugging my code, only to realize that I was using a vector to represent a sequence. I use literal vectors everywhere else (because they're convenient and readable), but in Hiccup land they're wrong.</p>
+<p><strong>The fix:</strong> You can't use a literal vector, but you can call <code>list</code> to create a list. Not as beautiful, but it is correct. Sometimes I will call <code>seq</code> on a return value to ensure that it's never a vector.</p>
+<h3 id="multiple-tags">Multiple tags</h3>
+<p>I don't know why this still happens, but it's common, so I'll mention it. Sometimes I'll be looking at the HTML output in a browser and I just can't find an element. It's gone. Reload, still not there. When I look through the code, the hiccup to generate the tag is <em>right there</em>! Why won't it render?</p>
+<p>Well, long story short, it's because in Clojure, <strong>only the <em>last value</em> of a <code>let</code> or <code>fn</code> is returned</strong>. Doh! My missing element was being rendered then discarded.</p>
+<pre><code>(defn list-with-header [header items]
+  [:h3 header] ;; this header is missing
+  [:ul
+    (for [i items]
+      [:li i])])</code></pre>
+<p><strong>The fix:</strong> Wrap the two (or more) things in a list (not a vector!).</p>
+<pre><code>(defn list-with-header [header items]
+  (list ;; wrap in a list, not a vector
+    [:h3 header] ;; now it&#39;s there
+    [:ul
+      (for [i items]
+        [:li i])]))</code></pre>
+<h3 id="hiccup-plays-nice-with-nil">Hiccup plays nice with <code>nil</code></h3>
+<p>This one is just a little design touch with some perks, not a problem that it's solving. In Hiccup, the empty list renders nothing. This is extended to <code>nil</code> as well. A common thing in HTML is that you want to render a bunch of children in a parent tag, but <strong>you don't want the parent tag if the list is empty</strong>.</p>
+<p>Standard constructs will render the parent tag:</p>
+<pre><code>[:ul
+  (for [i items]
+    [:li i])]</code></pre>
+<p>When <code>items</code> is empty, you still get <code>&lt;ul&gt;&lt;/ul&gt;</code>. This is a problem with lots of templating libraries.</p>
+<p><strong>The fix:</strong> The fix in Hiccup is due to it playing nice with <code>nil</code>. Wrap the parent in a <code>when</code>:</p>
+<pre><code>(when (seq items)
+  [:ul
+    (for [i items]
+      [:li i])])</code></pre>
+<p>It's not beautiful, but then again, you could be using HTML with Moustache.</p>
+<h3 id="use-defn-for-snippet-abstraction">Use <code>defn</code> for snippet abstraction</h3>
+<p><strong>HTML has no way to abstract.</strong> The crap you see is the crap you get. Many templating libraries have some kind of snippet concept, often referring to different files. Well, because Hiccup is just code inside of Clojure, you've got a better designed way of making reusable pieces of Hiccup.</p>
+<p>Let's say I'm repeating something a lot:</p>
+<pre><code>[:div
+  [:ul
+    (for [i list1]
+      [:li i])]
+  [:ul
+    (for [i list2]
+      [:li i])]
+  [:ul
+    (for [i list2]
+      [:li i])]]</code></pre>
+<p>That <code>ul</code> is basically the same three times.</p>
+<p><strong>The fix:</strong> Standard functional abstraction. Pull out the repeated bit into a new, named function.</p>
+<pre><code>(defn make-list [items]
+  [:ul
+    (for [i items]
+      [:li i])])</code></pre>
+<p>Now you can call it from inside of Hiccup:</p>
+<pre><code>[:div
+  (make-list list1)
+  (make-list list2)
+  (make-list list3)]</code></pre>
+<h3 id="compiling-your-snippets">Compiling your snippets</h3>
+<p>You may know this, but Hiccup is a <em>compiling</em> macro. That means it takes your literal vectors, maps, etc, and at <em>compile time</em>, generates code that will generate your HTML. All this means is that <strong>Hiccup is really fast</strong>, about as fast as concatenating strings can be.</p>
+<p>But, because the Hiccup compiler doesn't do a full examination of your code, it can't compile everything. It inserts run time fallbacks for stuff it can't handle at compile time which will interpret it at run time. So, for instance, <strong>if you're calling a function that returns some Hiccup, it can't compile that automatically</strong>. It has to wait till the function returns to know what it is. That is, unless . . .</p>
+<p>**The fix: ** The way to get Hiccup to compile something is with the <a href="http://weavejester.github.io/hiccup/hiccup.core.html#var-html"><code>hiccup.core/html</code></a> macro. That's the macro that does the compilation and it will do it anywhere. So if you've got code like this:</p>
+<pre><code>(defn make-list [items]
+  [:ul
+    (for [i items]
+      [:li i])])
+
+(defn my-three-lists []
+  [:div
+    (make-list list1)
+    (make-list list2)
+    (make-list list3)])</code></pre>
+<p>You should wrap the Hiccup form in its own compiler, like this:</p>
+<pre><code>(defn make-list [items]
+  (html
+    [:ul
+      (for [i items]
+        [:li i])]))</code></pre>
+<p>For this little example, it probably won't make a noticeable difference. But it can be significant for larger documents.</p>
+<p>Just to note: the Hiccup compiler can understand <code>if</code> and <code>for</code> forms, so there's no need to wrap them in the compiler. No hard either.</p>
+<h3 id="autoterminating">Autoterminating</h3>
+<p>Just a good thing to know about HTML.</p>
+<p>Did you know that this is not legal HTML?</p>
+<pre><code>&lt;script /&gt;</code></pre>
+<p>It's true. A <code>script</code> tag can't be self-closing.</p>
+<p>There's all sort of silly rules in HTML like this. And then there's XML mode versus HTML mode. We are lucky: <strong>Hiccup does all of this for you</strong>, so you don't have to wade through the HTML spec(s!) looking for why something won't render in IE7.</p>
+<p><strong>The fix:</strong> <code>hiccup.core/html</code> takes a map of options as the first argument (it's optional). If you pass in a <code>:mode</code> option, it will set the correct HTML mode, which unfortunately are incompatible. There are three modes, <code>:xml</code>, <code>:html</code>, and <code>:xhtml</code>. The default is <code>:xhtml</code>.</p>
+<h3 id="idclass-dsl">Id/class DSL</h3>
+<p>Hiccup is a DSL. And it has its own <strong>sub DSL for HTML ids and classes</strong>. It's similar to CSS selectors.</p>
+<p>Let's say you have a <code>div</code> like this:</p>
+<pre><code>[:div
+  {:id &quot;main-content&quot;
+   :class &quot;blue-background green-border&quot;}
+  (h &quot;Here&#39;s some content.&quot;)]</code></pre>
+<p>Well, Hiccup lets you make that shorter and easier to read.</p>
+<p><strong>The fix:</strong> Use the id/class DSL:</p>
+<pre><code>[:div#main-content.blue-background.green-border
+  (h &quot;Here&#39;s some content&quot;)]</code></pre>
+<p>Here's how it works. Every element has an optional id and zero or more classes. After the tag name (<code>div</code> here), you can put the id after a <code>#</code>. Then list your classes starting with a <code>.</code> each. Omit the <code>#</code> if there's no id. Ditto for the <code>.</code> if there's no class. Oh, and the id must come first. That will get converted to the id and class attributes you want. Also, these will conflict with attributes in the map, so <strong>choose one or the other, not both</strong>.</p>
+<h3 id="generating-hiccup-from-html">Generating Hiccup from HTML</h3>
+<p>Last thing, I promise!! Sometimes you have some HTML that someone gave you and <strong>you want to Hiccupify it so you can just stick it into your code</strong>. Manually doing that is kind of tedious. Luckily, there's a solution our there for you.</p>
+<p><strong>The fix:</strong> <a href="https://github.com/weavejester/hiccup/wiki/Converting-html-to-hiccup">This page</a> lists three options for outputting HTML from Hiccup. I have personally used <a href="https://github.com/hozumi/hiccup-bridge">Hiccup-bridge</a>. It does a good job (and it even goes both ways). You call it like this:</p>
+<pre><code>lein hicv 2clj hello.html</code></pre>
+<p>That will output <code>hicv/hello.clj</code> in hiccup format. Pretty rocking when you need it.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Well, there you go. My Hiccup tips. <strong>Hiccup is pretty nice for templating.</strong> I recommend using it (or my future secure fork) in your web projects. If you'd like to learn more Hiccup and how to build web apps in Clojure, please check out [Lispcast Web Development in Clojure][webdev]. It's a video course teaching just that. All you need to know is Clojure and HTML.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/purelyfunctional-tv-early-access-program">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

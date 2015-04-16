@@ -1,0 +1,204 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>LESS has Better Forms of Abstraction than CSS | LispCast</title>
+    <meta name="description" content="LESS has obviously better forms of abstraction and combination than CSS. It has recursive style definitions, which is enough to consider it a &quot;powerful language&quot;.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/less-abstraction-combination">
+              LESS has Better Forms of Abstraction than CSS
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 12, 2014
+          </div>
+
+          
+<p>Summary: <em>LESS has obviously better forms of abstraction and combination than CSS. It has recursive style definitions, which is enough to consider it a &quot;powerful language&quot;.</em></p>
+<p>Ok, it's obvious that <a href="http://www.lispcast.com/css-abstraction-combination">CSS has weak forms of combination and abstraction</a>. But now we have a good framework for understanding <em>why</em>. &quot;CSS Preprocessors&quot;, as they are called, are getting really popular now. We would be smart to <strong>analyze LESS in the same way that we analyzed CSS</strong>, if only to temper the glamor of trendiness that surrounds it. <a href="http://twitter.com/ericnormand">Comments are welcome.</a></p>
+<p>Because LESS aims to be a superset of CSS, it has all of <a href="http://www.lispcast.com/css-abstraction-combination">the primitive expressions, means of combination, and means of abstraction that come baked into CSS</a>. I already went over those last time, so I will not go over them again. <strong>So what things are added by LESS?</strong></p>
+<h3 id="primitive-expressions">Primitive Expressions</h3>
+<p>Besides existing CSS properties, <strong>LESS adds two new primitive expressions.</strong> <em>Mixin application</em> (<code>.rounded-corners(10px);</code>) in a rule <strong>recursively applies the primitive expressions defined in the body of the mixin to the current rule</strong>. Mixin applications can be parameterized with value expressions, or they can have no parameters. <em>Extension</em> (<code>&amp;:extend(.blue-button);</code>) is similar, but instead of applying the primitive expressions to a rule body, it adds the selector of the rule to the rule selector of the extension. <strong>Extension is recursive as well.</strong></p>
+<p>Variables and mathematical expressions change the way primitive properties work. In CSS, primitive properties were comprised of a property name and a literal property value. In LESS, variables and math expressions, as well as literal values, can be in the value place (right hand side) of a property.</p>
+<p>Variables can also be used in selectors.</p>
+<h3 id="means-of-combination">Means of Combination</h3>
+<p><strong>The principle means of combination are still the rule</strong>, but add to it the <strong>ability to nest rules</strong>, and things are more interesting. Nesting two rules is shorthand for writing out two rules (unnested) with a nested selector. While in the simple case it is simply a shorthand, <strong>when nested rules are applied as mixins, you gain a lot more than better syntax</strong>. Mixins with nested subrules allows you to <em>name</em> a nesting and refer to it later.</p>
+<h3 id="means-of-abstraction">Means of Abstraction</h3>
+<p>CSS did not contain much in the way of abstraction. <strong>LESS focuses primarily in the realm of abstraction</strong>, probably to appease the will to power of front-end designers. <em>Variables</em> allow property values to be named, and naming is a form of abstraction. <strong>Variables are a good way to name values that all have the same meaning and would therefore change at the same time.</strong> For instance, a shade of green that is used throughout the styles is a perfect use for variables. Variables can be used in a similar way to name selectors.</p>
+<p>A more powerful form of abstraction comes from the ability to define mixins, apply mixins, and use of <code>:extend()</code>. In LESS, any rule using a single class or id selector can be used as a mixin. This is essentially <strong>a way to name a rule</strong>--our principle form of combination. In addition, if you put empty parentheses after the class selector in the rule, the rule is not outputted into the generated CSS, which can save bytes. Mixins can also have parameters (scoped variables), so they can be <strong>abstracted over a variety of values</strong>. Extend allows a similar kind of abstraction which promises to be more efficient.</p>
+<p>Mixins are very powerful. In fact, <strong>this is the kind of abstraction that is needed for LESS to be powerful</strong>, as defined by Abelson and Sussman. Because you can now name a group of styles (mixin) and then use that name in another group of styles (mixin application), <strong>LESS has full-on recursive style definitions</strong>. With extension, it also has recursive selector definitions. In LESS, we can talk of &quot;levels of abstraction&quot; whereas in CSS there was only one.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p><strong>LESS has recursion</strong>. It lets you define and name groups of properties, then refer to those groups by name in other groups of properties. We can consider LESS powerful enough to express useful abstractions. Yet though it is more powerful than CSS, it still has many of the problems of CSS (especially complex rules governing the combination of multiple rules to a single element). How can LESS be leveraged to gain its power but tame its weakness? <strong>Is there a subset of LESS that can gerrymander the good parts away from the bad parts?</strong></p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
+<li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
+<li><a href="http://www.lispcast.com/separation-of-presentation-and-content">Separation of Presentation and Content</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/css-abstraction-combination">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/when-to-use-a-macro">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

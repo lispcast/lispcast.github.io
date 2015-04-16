@@ -1,0 +1,243 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>What Web Framework Should I Use in Clojure? | LispCast</title>
+    <meta name="description" content="There are a number of web frameworks in Clojure, but beginners should roll their own server stack themselves to tap into the Ring ecosystem.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/what-web-framework-should-i-use">
+              What Web Framework Should I Use in Clojure?
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 23, 2014
+          </div>
+
+          
+<p>Summary: <em>There are a number of web frameworks in Clojure, but beginners should roll their own server stack themselves to tap into the Ring ecosystem.</em></p>
+<p>One question that I am asked a lot by beginners in Clojure is <strong>&quot;What web framework should I use?&quot;</strong> This is a good question. In Python, there's Django. In PHP, Drupal. And of course in Ruby, there's the king of all web frameworks, Ruby on Rails.</p>
+<p>What framework should you use in Clojure? The question is actually kind of hard to answer. There are a number of web frameworks out there. Some people call <a href="https://github.com/weavejester/compojure">Compojure</a> a framework, though it is really a library. <a href="https://github.com/noir-clojure/lib-noir">lib-noir</a> does a lot of work for you. Then there's your true frameworks, like <a href="https://github.com/pedestal/pedestal">Pedestal</a> or <a href="http://hoplon.io/">Hoplon</a>, which provide infrastructure and abstractions for tackling web development. All of these projects are great, but for a beginner, <strong>I have to recommend building your own web stack starting with Ring</strong>.</p>
+<p>Compojure is really just a routing library, not a framework. You can use it for your routing needs, though there are alternatives, such as <a href="https://github.com/ericnormand/playnice">playnice</a>, <a href="https://github.com/juxt/bidi">bidi</a>, <a href="https://github.com/clojurewerkz/route-one">Route One</a>, and <a href="https://github.com/thatismatt/gudu">gudu</a>. <strong>If you don't want to decide, use Compojure. It's widely used and works great.</strong> If you want to go in depth, read the docs for the others. They are each good for different cases.</p>
+<p><a href="https://github.com/noir-clojure/lib-noir">lib-noir</a> comes from <a href="http://www.webnoir.org/">Noir</a>, which was a web framework (now deprecated). It was easy and provided a bit of plumbing already built for you, so you could just start a project with a lot of the infrastructure built in. lib-noir is that infrastructure in library form. I haven't used it, but a lot of people like it. However, when I look at it, I see that <strong>most of what it provides I either won't use or it is trivial to add myself</strong>. That would normally be ok if there was huge adoption for it (like with Rails) so you get an ecosystem effect, but there isn't. <strong>lib-noir is used but certainly not dominant.</strong></p>
+<p><a href="https://github.com/pedestal/pedestal">Pedestal</a> has a lot of backing. It aims to tackle single-page apps by providing a sane front-end environment using ClojureScript in the form of a message queue. If you're into &quot;real-time apps&quot;, this may be for you. Though, I would caution you that it's not for a Clojure beginner. <strong>Pedestal introduces a lot of new concepts that even experienced Clojure programmers have to learn.</strong> The <a href="https://github.com/pedestal/app-tutorial/wiki">tutorial</a> is long and arduous. You will have problems learning Pedestal without knowing Clojure.</p>
+<p><strong>Update:</strong> <em><a href="https://groups.google.com/forum/#!topic/pedestal-users/jODwmJUIUcg">Pedestal has changed dramatically</a> since I last looked at it. It is no longer a frontend framework. It is now a high-performance backend server for high performance asynchronous processing. It's worth looking at if you need that. Otherwise, I stick with my recommendation to use basic Ring.</em></p>
+<p><a href="http://hoplon.io/">Hoplon</a> is also designed for web apps. It gives you a DOM written in ClojureScript (including custom components), dataflow programming (like a spreadsheet), and client-server communication. It's a bold step, but again, <strong>requires you to buy into programming models that will take a long time to understand</strong>. If you are not already familiar with Clojure, you are asking for trouble.</p>
+<p>There are other frameworks out there. But I recommend rolling your own stack. If you're learning Clojure, <strong>the best way to grasp how web apps work is to get a <a href="https://github.com/ring-clojure/ring">Ring</a> Jetty adapter set up with some basic handlers</strong>. Add existing middleware as you need it. Write some middleware of your own. Use Compojure to route. Use <a href="https://github.com/weavejester/hiccup">Hiccup</a> to generate HTML. <strong>That setup will get you a long way.</strong></p>
+<p>Ring is just functions. With a few basic concepts and a copy of the Ring SPEC handy, you can build a web server very quickly that does exactly what you want and <strong>you can understand every aspect of it</strong>. The experience of building one yourself can teach you a lot about how the other frameworks are put together.</p>
+<p>What's more, Ring <em>is</em> dominant. Most people write functionality (in the form of middleware and handlers) assuming Ring and no more. So by staying close to the metal, you are <strong>tapping into a huge resevoir of pre-written libraries that are all compatible with each other</strong>. Ring is the locus for the Clojure web ecosystem.</p>
+<p>Wiring up your own middleware stack is not that daunting. If you want guidance, <strong>my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure video series</a> is now for sale</strong>. It starts with a brand new Clojure project and ends with a fully functional app, backed by a database, and hosted on Heroku (for free!). In one hour, <strong>it explains all the concepts and shows you lots of examples</strong>. There's lots of exercises to get your brain whirring.</p>
+<p>Recommended stack:</p>
+<ul>
+<li><a href="https://github.com/ring-clojure/ring">Ring</a> (with Jetty adapter)
+<ul>
+<li><a href="http://ring-clojure.github.io/ring/ring.middleware.params.html#var-wrap-params">wrap-params</a> (parsing params)</li>
+<li><a href="https://github.com/ring-clojure/ring/blob/master/ring-devel/src/ring/middleware/reload.clj">wrap-reload</a> (for development)</li>
+<li><a href="http://ring-clojure.github.io/ring/ring.middleware.resource.html#var-wrap-resource">wrap-resource</a> and <a href="http://ring-clojure.github.io/ring/ring.middleware.file-info.html#var-wrap-file-info">wrap-file-info</a> (static files)</li>
+</ul></li>
+<li><a href="https://github.com/weavejester/compojure">Compojure</a></li>
+<li><a href="https://github.com/weavejester/hiccup">Hiccup</a></li>
+</ul>
+<p>Then keep adding and customizing.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/when-to-use-a-macro">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/ring-spec-hang-on-wall">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,468 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: pre-conj | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-melanie-mitchell">
+              Pre-West Interview: Melanie Mitchell
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 05, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers"><img src="http://www.lispcast.com/img/pre-west/melanie mitchell.jpg"
+      style="height:150px;float:right"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Melanie Mitchell generously agreed to do an interview about her <a href="http://clojurewest.org/speakers">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. The <a href="http://www.lispcast.com/pre-west-melanie-mitchell">background to the talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: Do you program in Clojure? If not, have you heard of it? If so, how did you get into it?</p>
+<p><strong>Melanie Mitchell</strong>: No, I don’t program in Clojure, though I did write the code for my Ph.D. dissertation project in Common Lisp. I have heard of Clojure, since I’m interested in functional languages, and also some of my students have been programming in it.</p>
+<p><strong>LC</strong>: I'm no expert in AI, but I've always seen three big approaches. There are the two Peter Norvig approaches, namely the rule-based approach and the statistical approach. And then there was the approach laid out in <em>Fluid Concepts and Creative Analogies</em>, which was much more about building a system that was unpredictable but whose emergent behavior was reminiscent of human intelligence. The rule-based approach has been dismissed as too brittle. And the statistical approach has had broad impact. I have to admit that I haven't heard much about the third approach in a while. Could you talk about it briefly and some of the recent advances?</p>
+<p><strong>MM</strong>: You’re right -- statistical machine-learning approaches have recently seen some huge successes in applications such as object-recognition, image captioning, speech-recognition, and language translation. The major ideas behind statistical machine-learning approaches, including so-called &quot;deep networks&quot;, have been around for a while. Let's use the example of visual object-recognition. The idea is that a system is presented with many images of the concept it is supposed to learn, e.g., &quot;dog&quot;, along with many &quot;non-dog&quot; images as well, and the system essentially learns how to map images into a high-dimensional &quot;feature&quot; space in which dog images are close to one another and non-dog images are far from dog images. The &quot;statistical&quot; aspect comes in because the visual features used can be statistical in nature, and also statistical methods are used to find the best mapping.</p>
+<p>So why have these methods only been so successful recently? It seems that the success is due to the fact that we now have access to huge amounts of data to train these systems, as well as very fast parallel computing methods to perform the training. These kinds of methods have become very successful in tasks such recognizing faces and specific objects (e.g., &quot;dog&quot;) in images.</p>
+<p>The problem with these kinds of purely statistical methods is that, it’s hard -- maybe impossible -- to learn to recognize more abstract visual situations, such as &quot;taking a dog for a walk&quot; or &quot;training a dog&quot; or &quot;a dog show&quot;. Such situations consist of multiple objects that are related to one another in specific ways -- e.g., &quot;taking a dog for a walk&quot; typically consists of a person, a dog, and a leash, which have specific kinds of spatial and action relationships to one another. Moreover, there are lots of &quot;dog-walking&quot; situations that do not fit the prototype -- e.g., a person walking multiple dogs, a person &quot;walking a dog while riding a bike&quot;, a person running rather than walking, etc. etc. Humans are of course very good at learning to recognize abstract situations in a flexible way -- to allow &quot;slippages&quot; from a prototypical situation.</p>
+<p>The general architecture described in Fluid Concepts and Creative Analogies has been termed the &quot;active symbol&quot; architecture. The idea is that statistical methods interact with a network of symbolic-level structured activatable concepts. The activity of concepts in the network controls, and is controlled by, stochastic agents that bridge the gap between symbolic knowledge and statistical features. The various chapters in <em>Fluid Concepts and Creative Analogies</em> describe how this architecture was developed for &quot;micro-domains&quot;, such as letter-string analogies. I'm now extending this architecture to interface with deep network approaches for the task of visual situation recognition. This is what I will describe in my talk.</p>
+<p><strong>LC</strong>: Is there any background material you would suggest people read/watch before the talk?</p>
+<p><strong>MM</strong>: I’ll try to make the talk as self-contained as possible, but if people are interested, they might want to read a (somewhat long) chapter from Fluid Concepts and Creative Analogies, which <a href="http://web.cecs.pdx.edu/~mm/CopycatChapter.html">I’ve put online</a>. This describes the Copycat analogy-making project in some detail.</p>
+<p><strong>LC</strong>: Where can people follow your work online?</p>
+<p><strong>MM</strong>: I have a <a href="http://web.cecs.pdx.edu/~mm/Situate.html">web page on this project</a>. This is where I will be posting papers and updates on the project.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>MM</strong>: Cream. (Because you put it on top of Java...).</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-ryan-neufeld">
+              Pre-West Interview: Ryan Neufeld
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 14, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<p><a href="http://clojurewest.org/speakers#rneufeld"><img src="http://www.lispcast.com/img/pre-west/rneufeld.jpg"
+      style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Ryan Neufeld is the next interview participant. He is <a href="http://clojurewest.org/speakers#rneufeld">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about Simulation Testing. The <a href="http://www.lispcast.com/pre-west-ryan-neufeld">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-ryan-neufeld">Interview with Ryan Neufeld</h3>
+<p><strong>Nola</strong>: How long have you been doing clojure and how did you get into it?</p>
+<p><strong>Ryan</strong>: By my reckoning, I've been using Clojure professionally for about 2.5 years now.</p>
+<p>How I got started is actually pretty interesting; I was hired by Cognitect (née Relevance) in early 2012 as a Ruby on Rails developer. Once the business shifted <em>hard</em> towards Clojure, I jumped at the first opportunity to get on with a Clojure client. My first Clojure project was with the most excellent Paul deGrandis, so it was a just a matter of letting osmosis take it's course. I haven't looked back since.</p>
+<p><strong>Nola</strong>: What suggestions do you have for someone getting started with clojure?</p>
+<p><strong>Ryan</strong>: Experiment liberally, and don't be afraid to make mistakes or &quot;do it wrong.&quot; A breadth of experience with the language and its libraries is crucial for knowing what tool to reach for when it is finally time to get down to business.</p>
+<p>For those seeking to make the jump to full-time Clojure, a word of career advice: Never pass over a job opportunity because you lack on-paper experience. Every company wants to hire a Rich Hickey to work with them, but in most cases, they'd be more than happy with a bright, passionate developer such as yourself. Just give it a shot–at worst, you'll get a no, at best, you could change your life!</p>
+<p><strong>Nola</strong>: Your talk is about Simulation Testing, is there anything like this in other languages? If yes, what advantage does the implementation in clojure have over other languages?</p>
+<p><strong>Ryan</strong>: Indeed there is. While Simulation Testing is novel to the Clojure community, it's been around for a number of years under various names; it's sometimes called model or agent-based testing, or just plain &quot;simulation.&quot; I heard from a little bird that organizations like DARPA use the technique on nearly all of their projects.</p>
+<p>There are a couple of big benefits to doing Simulation Testing in Clojure, however. First and foremost is Simulant. In addition to being a useful framework for running Simulation Tests, the way it segregates tests into phases makes tests both reproducible and amenable to new validations that you can bring to bare against old sim runs.</p>
+<p>The second superpower Clojure brings to the table is Datomic. Given Datomic is a time-based fact-store, it is a nearly perfect fit for long-term, continuous-integration style simulation testing. With Datomic, very few of the validations I write involve procedural code; generally a simple Datomic query will suffice to detect abnormalities. Even better, it is trivial to query how test results have change over time.</p>
+<p><strong>Nola</strong>: What is the average airspeed velocity of an unladen Clojure REPL?</p>
+<p><strong>Ryan</strong>: Well, the bird is a little slow to get off the ground (Clojure start times, and all), but once she's airborne you're looking at about 2-4 Rubies (that's 10 Javas, in the imperial system).</p>
+<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-zach-tellman">
+              Pre-West Interview: Zach Tellman
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 15, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<p><a href="http://clojurewest.org/speakers#ztellman"><img src="http://www.lispcast.com/img/pre-west/ztellman.jpg"
+      style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Zach Tellman is the next interview participant. He is <a href="http://clojurewest.org/speakers#ztellman">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about queueing theory and its applications. The <a href="http://www.lispcast.com/pre-west-zach-tellman">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-zach-tellman">Interview with Zach Tellman</h3>
+<p><strong>Nola</strong>: How long have you been doing Clojure and how did you get into it?</p>
+<p><strong>Zach</strong>: About six years, four years professionally. I started looking at Clojure around the time Tom Faulhaber (author of clojure.pprint, and some other stuff), who I worked with at the time, invited Rich Hickey to give a talk at our office. It was on chunked seqs, if I recall correctly, and way over my head. But it got me interested, and here I am.</p>
+<p><strong>Nola</strong>: Any suggestions for someone wanting to dive into Clojure?</p>
+<p><strong>Zach</strong>: I've always learned by doing. I'll come up with a project, and learn what I need to know on the way. The more it forces you to learn, the better. My first project in Clojure, which I started the same week I read Stu Halloway's Clojure book, was way over-ambitious, but I learned a ton doing it.</p>
+<p><strong>Nola</strong>: What languages did you do before Clojure?</p>
+<p><strong>Zach</strong>: In school, C++ and Java. For work, C# and Java. In my own time I've poked at Erlang, OCaml, Ruby, and a few others.</p>
+<p><strong>Nola</strong>: Can you describe a good use-case for Clojure that you see has an advantage over another language?</p>
+<p><strong>Zach</strong>: Clojure's a data-oriented language, it excels at taking data in one shape and transforming it into another. While this isn't all we do in our day-to-day software, it's an awful lot of it. Lately, though, I've been interested in the problems that fall outside of that category, which is in part what my talk is about.</p>
+<p><strong>Nola</strong>: Emacs or Vim or ?? Can you describe your typical workflow?</p>
+<p><strong>Zach</strong>: I use Emacs, where I know about five commands, plus paredit. I don't particularly like it, but I don't dislike it enough to switch to something else.</p>
+<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-next"
+         href="page4.html">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

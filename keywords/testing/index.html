@@ -1,0 +1,814 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Keyword: testing | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/announcing-lispcast-intro-to-clojure-test">
+              Announcing: LispCast Intro to clojure.test
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 23, 2015
+          </div>
+
+          
+<p>Summary: <em>The next course will be about clojure.test. Sign up to be notified when it is published.</em></p>
+<p>Last week I mentioned my new course format, and I also teased at more announcements. Well, <strong>it's a course on <code>clojure.test</code></strong>, the Clojure testing library that comes built in with Clojure.</p>
+<p>I chose <code>clojure.test</code> as my next topic for a number of reasons. The main reason is that I think it's a good idea to <strong>begin with the fundamentals</strong>. I have a long list of topics, and testing was as good as any. It's also a video that <strong>opens doors to other topics</strong>, including testing using <a href="https://github.com/marick/Midje">Midje</a>, <a href="https://github.com/clojure/test.check">test.check</a>, and <a href="http://www.infoq.com/presentations/Simulation-Testing">simulation testing</a>.</p>
+<p>The course is called <em>LispCast Intro to clojure.test</em>. <code>clojure.test</code> is not a big library, but it's important to know. This course will teach you how to use the library and conventions around testing that might not be so obvious. For instance, how to name your testing namespace.</p>
+<p>The course is built in the new format, and it's shorter than my previous courses. It's common for someone to tell me how much they like my courses. My first question is always &quot;Did you finish them?&quot;. And it disturbs me how many people say &quot;no&quot;. <strong>They like the course but they don't finish.</strong> So <strong>I'm doing smaller courses</strong> that are easier to fit into your day and finish. I expect to make more, smaller courses from now on. And <em>Intro to clojure.test</em> will be the first.</p>
+<p>And now that that announcement is done, I must tease you with just <strong>one more announcement coming later this week</strong>. If you don't want to miss it, <strong>sign up for the mailing list below</strong>. You'll be the first one to know when <code>clojure.test</code> is coming out and what that cliffhanger announcement is.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    
+<img class="subscribe-form-image"
+         src="http://www.purelyfunctional.tv/img/ring_spec_1_3.png" />
+<div class="subscribe-form-text">
+      <h3 class="subscribe-form-title">
+        
+Get free Clojure stuff and news on LispCast courses
+</h3>
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive free Clojure materials, including a Ring Spec to hang on your wall and more as they come out. This is also the list where I announce launches of LispCast courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][2]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/new-course-format">New Course Format</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-test-directory">
+              Clojure Test Directory
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 30, 2015
+          </div>
+
+          
+<p>Summary: <em>Where to put your tests is a common question. You could put them anywhere, but you want to pick a place that makes it easy to find, easy to exclude from production, and work well with your tools. My recommendation is to follow what most projects do, which takes care of all of these requirements.</em></p>
+<p>You want to write some tests in Clojure. Maybe they're unit tests. Maybe they're integration tests. The first question you must answer is <strong>where do you put your tests?</strong></p>
+<p>And you don't want them just anywhere. You actually have some important requirements dealing with where they are:</p>
+<ul>
+<li>They should not be compiled/run on production.</li>
+<li>They need to be easily findable.</li>
+<li>They should be runnable from the command line.</li>
+<li>They should be runnable from the REPL.</li>
+</ul>
+<p>Here's my recommendation, which is the <em>de facto</em> standard of organizing your tests. It works with Leiningen, CIDER, and vim-fireplace.</p>
+<p>First, you make a new namespace structure in a <code>test/</code> directory. It should mirror the <code>src/</code> directory.</p>
+<p>If you have:</p>
+<pre><code>src/
+  lispcast/
+    core.clj
+    init.clj
+    util.clj</code></pre>
+<p>Then your test directory should look like:</p>
+<pre><code>test/
+  lispcast/
+    core_test.clj
+    init_test.clj
+    util_test.clj</code></pre>
+<p>But also notice the second point: that the structure is the same, but the names are slightly different, but it a systematic way. It's really easy: you just add <code>-test</code> to the namespace name, which becomes <code>_test</code> in the file name.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Then, you put all the tests that test <code>lispcast.core</code> into <code>lispcast.core-test</code>. Now they're easy to find!</p>
+<p>If you need to write a test that crosses two different namespaces (like an integration test might), then you can just make a new test namespace that doesn't correspond to one or the other.</p>
+<p>Leiningen will load the <code>test/</code> directory selectively, depending on if you're deploying to production (it won't load <code>test/</code>) or running the tests (it <em>will</em> load <code>test/</code>).</p>
+<p>So, it's that easy. <strong>You are free, of course, to put the tests wherever you like.</strong> But this is my recommendation!</p>
+<p>If you're getting into testing in Clojure, you should check out <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>. It's an interactive course. It has animations, screencasts, exercises, code samples, and text.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>
+</h3>
+    
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test"> <img class="subscribe-form-image"
+           src="http://www.purelyfunctional.tv/img/clojure-test-shot.jpg"> </a>
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Learn how to use <code>clojure.test</code>, the built-in Clojure testing library. It's used for all sorts of tests, from unit to integration. This course will teach you the fundamentals of the library and the common conventions that will help you make the most of your tests. Subscribe now and be the first to know when the course is published. Also, get lots of free Clojure resources when you sign up. <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">Learn more.</a>
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-interview-ashton-kemerling">Pre-Conj Interview: Ashton Kemerling</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Clojure file names have to replace <code>-</code> (hyphens) with <code>_</code> (underscores) to be compatible with Java.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-test-launch">
+              LispCast Intro to clojure.test
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 28, 2015
+          </div>
+
+          
+<p>Summary: <em>LispCast Intro to clojure.test will launch this week.</em></p>
+<p><a href="http://www.purelyfunctional.tv/intro-to-clojure-test"><em>LispCast Intro to clojure.test</em></a> is ready for launch! It's been incubating in the <em>PurelyFunctional.tv Early Access Program</em> (PEAP) for a month. People who opted in to the PEAP got an early version of the course, have been asking questions on the forum, learning a ton, and having a direct impact on the quality of the course. I'm so glad I did it this way. It let me test out the new course format and work out the kinks with the help of my customers.</p>
+<p>And now it is clear the new course format has performed really well. It's very interactive. It contains exercises, animations, screencasts, code samples, and narration. All directed at getting <code>clojure.test</code> installed in your brain, best practices, conventions, and all.</p>
+<p>It's suitable for beginners to Clojure and for anyone who wants to learn how to properly use <code>clojure.test</code>. <code>clojure.test</code> is the main testing library that comes with Clojure and works well with Leiningen, CIDER, vim fireplace, midje, <code>test.check</code>, and more!</p>
+<p>The course will launch this week. Sign up to learn when it comes out.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>
+</h3>
+    
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test"> <img class="subscribe-form-image"
+           src="http://www.purelyfunctional.tv/img/clojure-test-shot.jpg"> </a>
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Learn how to use <code>clojure.test</code>, the built-in Clojure testing library. It's used for all sorts of tests, from unit to integration. This course will teach you the fundamentals of the library and the common conventions that will help you make the most of your tests. Subscribe now and be the first to know when the course is published. Also, get lots of free Clojure resources when you sign up. <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">Learn more.</a>
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/new-course-format">New Course Format</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-ashton-kemerling">
+              Pre-conj Prep: Ashton Kemerling
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 26, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-generative-integration-teststalk">Talk: <a href="http://clojure-conj.org/speakers#ashton-kemerling">Generative Integration Tests</a></h3>
+<h4 id="background">Background</h4>
+<p><a href="http://clojure-conj.org/speakers#ashton-kemerling">Ashton Kemerling's talk</a> at the <em>conj</em> is about Generative Testing (also known as Property-based Testing) as applied to integration tests. Generative Testing is a methodology for generating many tests randomly to find failing cases (as opposed to writing each test by hand). It often <strong>finds difficult bugs</strong> and can present a very <strong>small, reproducible failing case</strong>.</p>
+<p>The best talk I have seen about Generative Testing is <a href="https://www.youtube.com/watch?v=zi0rHwfiX1Q">John Hughes' talk at Clojure/West</a>. John Hughes wrote Quickcheck for <a href="http://www.haskell.org/haskellwiki/Introduction_to_QuickCheck1">Haskell</a> and <a href="http://www.quviq.com/">Erlang</a>. <a href="https://twitter.com/reiddraper">Reid Draper</a> has recently ported it to Clojure in the form of <a href="https://github.com/clojure/test.check">test.check</a>. He also gave <a href="https://www.youtube.com/watch?v=JMhNINPo__g">a talk at Clojure/West about test.check</a>.</p>
+<h5 id="why-it-matters">Why it matters</h5>
+<p>Generative testing is great for unit testing. It has already found bugs in Clojure itself. What's not obvious is how to apply the technique to integration tests to test the interaction of different systems. This talk appears to be an <strong>experience report</strong> from a company that has actually used Generative Integration Tests.</p>
+<h3 id="about-ashton-kemerlingtalk">About <a href="http://clojure-conj.org/speakers#ashton-kemerling">Ashton Kemerling</a></h3>
+<p><a href="https://twitter.com/ashton">Twitter</a> - <a href="https://github.com/AshtonKem">Github</a> - <a href="http://ashtonkemerling.com/">Blog</a></p>
+<p><a href="http://clojure-conj.org/speakers#ashton-kemerling"><img src="http://www.lispcast.com/img/pre-conj/ashton-kemerling.jpeg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-brian-goetz">Pre-conj Prep: Brian Goetz</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-conj-interview-ashton-kemerling">
+              Pre-Conj Interview: Ashton Kemerling
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 20, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#ashton-kemerling"><img src="http://www.lispcast.com/img/pre-conj/ashton-kemerling.jpeg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>I asked Ashton Kemerling some questions about his <a href="http://clojure-conj.org/speakers#ashton-kemerling">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> about using generative testing in Clojure. Read the <a href="http://www.lispcast.com/pre-conj-ashton-kemerling">background to his talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Ashton Kemerling</strong>: The path I took to Clojure is fairly roundabout. During my College years I was very interested in function programming, although ML &amp; Haskell were my favorites back then. I think a large amount of my fascination with them stemmed from the fact that I had more experience than my classmates, my high school had a very rich set of programming courses, and I needed something interesting to play with while taking introduction to OOP courses.</p>
+<p>Fast forward a few years and I ended up working at a job using Common Lisp professionally in a legacy web application. The application had a lot of problems due to the condition of CL libraries at the time and we were looking for something to switch to. Clojure was an obvious choice to look at. It's still a lisp, so a lot of our habits would still work, but it fixes the deployment &amp; library issue that CL has while adding a much richer set of data structures. Unfortunately our application relied extensively on mutation (CL doesn't really encourage or discourage any coding style) and OOP, so a conversion was deemed too costly to attempt.</p>
+<p>Over the course of the following years I continued to tinker with Clojure on the side. I was convinced it was a great way to do things, but I could never convince anyone to consider using it in their code base. Most places were either too invested emotionally in OOP, or had well tested and working codebases that made a rewrite unwise. So I mostly just hacked on side projects using Clojure over the intervening years without using it professionally. But in the last year or so I realized that Clojure makes a great secondary language for odd-tasks in non-Clojure codebases, which brings me to the current state of using Clojure to test a very large Ruby on Rails and Javascript application.</p>
+<p><strong>LC</strong>: Can you give a basic outline of how your Clojure program tested the web front end?</p>
+<p><strong>AK</strong>: We've basically tested in two ways. The first was to simply compile our JS file along with Clojurescript tests and run them in a PhantomJS process similarly to how you'd run Clojurescript or Javascript tests normally. We're still working on this approach, but it's slower to work on that I would have hoped.</p>
+<p>The second way was to leverage the fact that Clojure's on the JVM. This involves mixing JDBC, HTTP libraries, and Selenium in novel and exciting ways. This has been the most fruitful way of testing, and what I'll be focusing the most on during my talk. We've used the code I've written as both a tool to hunt down API mistakes, and as a means of narrowing down the reproduction steps on complicated bugs reported by the user.</p>
+<p><strong>LC</strong>: Can you explain a little more about that? What do you mean by &quot;narrowing down reproduction steps&quot;?</p>
+<p><strong>AK</strong>: Sure. I'm testing Pivotal Tracker, a very large (~24kloc) Javascript &quot;single page app&quot;. With large apps like this there are ways for the application to subtly fall out of sync with the server or process data in a degenerate way.</p>
+<p>In particular a lot of times you'll get a report from a user that says something along the lines of &quot;I reloaded and it crashed&quot;. You can dig up the logs from that session, but you'll get the last 20 or 30 steps they did before the crash, which doesn't really help you out a whole lot. So we occasionally turn the generative tests towards a type of action (in this case, do things and then refresh) in the hopes that it will help us narrow down to the minimal reproduction steps required to trigger a problem.</p>
+<p>In the case that happened last week, we were able to find 2 distinct actions that would provoke the issue reliably after about 20 minutes of test modification and running. Obviously this took hours off of the process required to find the actual root of the bug, since 2 is orders of magnitude easier to work with than 7 or 10 when debugging.</p>
+<p><strong>LC</strong>: I see. So how is test.check able to reduce the reproduction steps?</p>
+<p><strong>AK</strong>: Test.Check provides &quot;shrinking&quot;. Just as the generators used to create randomized data have the ability to produce more complicated data, they also have the ability to produce less complicated data. Test.Check records all of the failures it finds and attempts to simplify them and find the smallest failing case it can.</p>
+<p><strong>LC</strong>: A lot of the Clojure/conj participants will be new to Clojure. What resources would you recommend them to make the most of your talk?</p>
+<p><strong>AK</strong>: They can't go wrong with the test.check <a href="https://github.com/clojure/test.check">README</a> or any of the blog posts mentioned therein. I recommend reading the source directly because it's heavily commented, in particular I recommend the <a href="https://github.com/clojure/test.check/blob/master/src/main/clojure/clojure/test/check/generators.clj">generator source</a>, because the generators represent 90%+ of the test.check API a user will interact with.</p>
+<p>Beyond that I have blog posts on <a href="http://www.pivotaltracker.com/community/tracker-blog/generative-testing">my work blog</a> and on <a href="http://ashtonkemerling.com/blog/2014/09/25/integrating-test-dot-check-and-javascript/">my personal blog</a>. Also <a href="http://thinkrelevance.com/blog/2013/11/11/reid-draper-cognicast-episode-045">Reid Draper</a> and <a href="http://blog.cognitect.com/cognicast/ashton-kemerling-064">I were both on the Cognicast</a>, both of which are based around this subject.</p>
+<p><strong>LC</strong>: Are there any resources on Selenium and other methods for running frontend tests?</p>
+<p><strong>AK</strong>: The <a href="https://github.com/semperos/clj-webdriver">Clj-Webdriver docs</a> are all I can recommend.</p>
+<p><strong>LC</strong>: Where can people reach you?</p>
+<p><strong>AK</strong>: Twitter: <a href="https://twitter.com/ashton">@ashton</a></p>
+<p>My blog: <a href="http://ashtonkemerling.com">ashtonkemerling.com</a></p>
+<p><strong>LC</strong>: If Clojure were stranded on a desert island, what one book would it bring?</p>
+<p><strong>AK</strong>: A boat building book, clearly.</p>
+<p><strong>LC</strong>: Awesome! Thanks for the interview, it was a pleasure.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-ryan-neufeld">
+              Pre-West Prep: Ryan Neufeld
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 05, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This summary was graciously written by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<h3 id="talk-simulant-in-anger-an-experience-reporttalk">Talk: <a href="http://clojurewest.org/speakers#rneufeld">Simulant in Anger; an Experience Report</a></h3>
+<p><a href="http://clojurewest.org/speakers#rneufeld">Ryan Neufeld's talk</a> at <em>Clojure/West</em> is about Simulation Testing using Simulant.</p>
+<h4 id="background">Background</h4>
+<p>Simulation Testing is a systems based testing methodology where a series of actions are randomized but repeatable and then the outcomes are recorded and observed. The actions can simulate realistic load on the system. The library for that in Clojure is <a href="https://github.com/Datomic/simulant">Simulant</a>.</p>
+<p>Hear more information on <a href="http://blog.cognitect.com/cognicast/059-michael-nygard">episode 59 of the Cognicast</a> where Michael Nygard talks about using Simulant. When researching this topic I found what looks to be a <a href="http://martintrojer.github.io/clojure/2013/09/29/testing-an-api-with-simulant/">simple example</a> testing an API with simulant.</p>
+<h3 id="about-ryan-neufeldtalk">About <a href="http://clojurewest.org/speakers#rneufeld">Ryan Neufeld</a></h3>
+<p><a href="http://www.rkn.io/">Homepage</a> - <a href="https://github.com/rkneufeld">Github</a> - <a href="https://twitter.com/rkneufeld">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#rneufeld"><img src="http://www.lispcast.com/img/pre-west/rneufeld.jpg" /></a></p>
+<p>Ryan is the co-author of: <a href="http://shop.oreilly.com/product/0636920029786.do">Clojure Cookbook</a></p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/unit-testing-in-functional-languages">
+              Example-based Unit Testing in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 26, 2015
+          </div>
+
+          
+<p>Summary: <em>Unit testing in Clojure is straightforward. Here are a few testing ideas as they apply to Clojure.</em></p>
+<p>Most of the Unit Testing literature discusses how to unit test Object Oriented code. However, Unit Testing is very useful for functional code, including Clojure. <strong>I'd like to document a few unit testing ideas as they relate to Clojure.</strong></p>
+<h3 id="the-unit-youre-testing-is-the-function">The Unit you're testing is the function</h3>
+<p>Unit testing is about testing the smallest unit of code. In Object Oriented languages, the unit is the class. In functional languages, <strong>the unit is typically the function</strong>. This is true in Clojure. If you're testing individual functions, you're unit testing Clojure.</p>
+<h3 id="example-based-tests">Example-based tests</h3>
+<p>The easiest kind of tests to do is example-based, which means you test that <strong>for a given argument, you get a known return value</strong>. Let's look at a simple example:</p>
+<pre><code>(deftest addition-tests
+  (is (= 5 (+ 3 2)))
+  (is (= 10 (+ 5 5))))</code></pre>
+<p>You're testing that <code>+</code> works on two different inputs! Notice: 2 lines and 2 inputs, it looks like we'll get <strong>linear growth in tests as our coverage increases</strong>.</p>
+<h3 id="round-trip-testing">Round-trip testing</h3>
+<p>Ok, it's not exactly unit testing, if you are strictly going by the definition of &quot;unit&quot;, because you're actually testing <em>two</em> functions. But who's really being so strict? A really <em>useful</em> kind of test is the <strong>round-trip test</strong>.</p>
+<p>In Clojure, <code>pr-str</code> prints a value readably, meaning if the value <em>can</em> be read back in, this will make a string that could be read in using <code>clojure.edn/read-string</code>. You can do a round-trip from value to string back to value, and the two values should be equal. <strong>You're testing the property that these two functions are inverses of each other.</strong></p>
+<p>Example:</p>
+<pre><code>(deftest pr-str-read-string-round-trip
+  (is (= [1 2 3] (read-string (pr-str [1 2 3]))))
+  (is (= {:a :b :c :d} (read-string (pr-str {:a :b :c :d})))))</code></pre>
+<p>Again, we're getting <strong>linear test growth</strong>.</p>
+<p>Here's another example where I test that addition is the opposite of subtraction:</p>
+<pre><code>(deftest +---round-trip
+  (is (= 5 (-&gt; 5 (+ 10) (- 10))))
+  (is (= 10 (-&gt; 10 (+ 100) (- 100)))))</code></pre>
+<h3 id="what-examples-to-test">What examples to test</h3>
+<p>If you're writing example-based tests one-by-one, and you're getting linear benefit for your examples, you've really <strong>got to maximize what you test</strong>, because linear growth is actually quite bad. In that case, what do you test? The best thing to test are the corner cases. Corner cases are mostly domain-dependent, but there are some domain-independent ones.</p>
+<h4 id="empty-collections">Empty collections</h4>
+<p>It's good to test what happens when you call a function on an empty collection. It could be that you didn't handle that, or didn't handle it correctly. The biggest gotcha is stuff like dividing by the size of the collection. If it's empty, the size is zero, and that's undefined.</p>
+<h4 id="empty-strings">Empty strings</h4>
+<p>The bane of the web programmer's existence, empty strings are usually not valid input, but of course that doesn't stop someone from passing one in. Are you testing that it's valid?</p>
+<h4 id="zero">Zero</h4>
+<p>Zero is actually a typical corner case. Try it out.</p>
+<h4 id="one">One</h4>
+<p>One is also a typical corner case.</p>
+<h4 id="normal-cases">Normal cases</h4>
+<p>You should have at least one normal case to test the expected behavior. A normal case is a list with 5 elements, or a small integer (7, 12, 34).</p>
+<h4 id="bugs">Bugs</h4>
+<p>Now, here's the thing that makes having a test system set up totally worth it: <strong>having a place to put test for known and fixed bugs</strong>. If someone reports a bug, it's really nice to reproduce it in code in a failing test <em>before</em> you fix it. If the bug happened once, it could happen again, so make it part of your anti-regression suite.</p>
+<h3 id="multiple-assertions-on-the-return-value">Multiple assertions on the return value</h3>
+<p>One last thing that happens in Clojure is you want to assert a few things about the same return value. Instead of calling the function several times, why not save the value and assert a few things about it?</p>
+<pre><code>(deftest map-test
+  (let [return (map - [1 2 3 4 5 6 7])]
+    (is (= 7 (count return)))
+    (is (every? neg? return))))</code></pre>
+<h3 id="one-step-further">One step further</h3>
+<p>Ok, I've mentioned a few times that example-based testing does not scale. Code coverage grows linearly as the number of examples grows. How do you get better than linear? One way is to use <a href="https://github.com/clojure/test.check">property-based testing</a> (also known as generative testing). Instead of the programmer giving examples, the program generates examples! Here's a preview:</p>
+<pre><code>(defspec edn-roundtrips 50
+  (prop/for-all [a gen/any]
+    (= a (-&gt; a prn-str edn/read-string))))</code></pre>
+<p>This tests that any value (<code>gen/any</code>) can be printed to a string and read back in, and you get an equivalent value. Three lines. You can run this with as many randomly generated values as you'd like. Thousands. Millions. With three lines. That's leverage.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Ok, those are just a few ideas that could <strong>get you started with example-based unit testing in Clojure</strong>. If you'd like to start automated testing in Clojure, I suggest you check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Intro to clojure.test</a>. <code>clojure.test</code> is the built-in, standard Clojure testing library that most systems use (or are compatible with). The LispCast course is an interactive course with animation, examples, screencasts, text, code samples, and more!</p>
+<p>Now, if you'd like to up your game at testing, and want to get more than linear bang for your buck, you've got to get into <a href="https://github.com/clojure/test.check">generative testing</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>
+</h3>
+    
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test"> <img class="subscribe-form-image"
+           src="http://www.purelyfunctional.tv/img/clojure-test-shot.jpg"> </a>
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Learn how to use <code>clojure.test</code>, the built-in Clojure testing library. It's used for all sorts of tests, from unit to integration. This course will teach you the fundamentals of the library and the common conventions that will help you make the most of your tests. Subscribe now and be the first to know when the course is published. Also, get lots of free Clojure resources when you sign up. <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">Learn more.</a>
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

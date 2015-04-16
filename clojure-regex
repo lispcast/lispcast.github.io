@@ -1,0 +1,259 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Regexes in Clojure | LispCast</title>
+    <meta name="description" content="With a few functions from the standard library, Clojure lets you do most of what you want with regular expressions with no muss.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/clojure-regex">
+              Regexes in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 03, 2014
+          </div>
+
+          
+<p>Summary: <em>With a few functions from the standard library, Clojure lets you do most of what you want with regular expressions with no muss.</em></p>
+<p><strong>Clojure is designed to be hosted.</strong> Instead of defining a standard Regular Expression semantics that works on all platforms, Clojure defers to the host's semantics. On the JVM, you're using Java regexes. In ClojureScript, it's Javascript regexes. That's the first thing to know.</p>
+<p>Other than the semantics of the regexes themselves, <strong>the API is standardized across all platforms in the core library</strong>. And the syntax is convenient because you don't need to double escape your special characters.</p>
+<h3 id="literal-representation">Literal representation</h3>
+<p>Regexes can be constructed in Clojure using a <strong>literal syntax</strong>. Strings with a hash in front are interpreted as regexes.</p>
+<pre><code>#&quot;regex&quot;</code></pre>
+<p>On the JVM, the above line will create an instance of <a href="http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html"><code>java.util.regex.Pattern</code></a>. In ClojureScript, it will create a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"><code>RegExp</code></a>. Remember, the two regular expression languages are <strong>similar but different</strong>.</p>
+<h3 id="matching-with-groups">Matching (with groups)</h3>
+<p>There is a nice <strong>function that matches the whole string</strong>. It is called <a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-matches"><code>re-matches</code></a>. The return is a little complex. If the whole string does not match, it returns <code>nil</code>, which is nice because <code>nil</code> is falsey.</p>
+<pre><code>=&gt; (re-matches #&quot;abc&quot; &quot;zzzabcxxx&quot;)
+   nil</code></pre>
+<p>If the string does match, and there are no groups (parens) in the regex, then it returns the matched string.</p>
+<pre><code>=&gt; (re-matches #&quot;abc&quot; &quot;abc&quot;)
+   &quot;abc&quot;</code></pre>
+<p>If it matches but there are groups, then it returns a vector. The first element in the vector is the entire match. The remaining elements are the group matches.</p>
+<pre><code>=&gt; (re-matches #&quot;abc(.*)&quot; &quot;abcxyz&quot;)
+   [&quot;abcxyz&quot; &quot;xyz&quot;]</code></pre>
+<p>The three different return types can get tricky, but in general I do have groups, so it's either a vector or <code>nil</code>, which is easy to handle. You can even <strong>destructure it before you test it</strong>.</p>
+<pre><code>(let [[_ fn ln] (re-matches #&quot;(\w+)\s(\w+)&quot; full-name)]
+  (if fn ;; successful match
+    (println fn ln)
+    (println &quot;Unparsable name&quot;)))</code></pre>
+<h3 id="matching-substrings">Matching substrings</h3>
+<p><code>re-matches</code> matches the whole string. But often, we want to find a match within a string. <strong><a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-find"><code>re-find</code></a> returns the first match within the string.</strong> The return values are similar to <code>re-matches</code>.</p>
+<h4 id="no-match-returns-nil">No match returns <code>nil</code></h4>
+<pre><code>=&gt; (re-find #&quot;sss&quot; &quot;Loch Ness&quot;)
+nil</code></pre>
+<h4 id="match-without-groups-returns-matched-string">Match without groups returns matched string</h4>
+<pre><code>=&gt; (re-find #&quot;s+&quot; &quot;dress&quot;)
+&quot;ss&quot;</code></pre>
+<h4 id="match-with-groups-returns-a-vector">Match with groups returns a vector</h4>
+<pre><code>=&gt; (re-find #&quot;s+(.*)(s+)&quot; &quot;success&quot;)
+   [&quot;success&quot; &quot;ucces&quot; &quot;s&quot;]</code></pre>
+<h3 id="finding-all-substrings-that-match">Finding all substrings that match</h3>
+<p>The last function from <code>clojure.core</code> I use a lot is <a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-seq"><code>re-seq</code></a>, which returns a <strong>lazy seq of all of the matches</strong>, not just the first. The elements of the seq are whatever type <code>re-find</code> would have returned.</p>
+<pre><code>=&gt; (re-seq #&quot;s+&quot; &quot;mississippi&quot;)
+   (&quot;ss&quot; &quot;ss&quot;)</code></pre>
+<h3 id="replacing-regex-matches-within-a-string">Replacing regex matches within a string</h3>
+<p>Well, matching strings is cool, but often you'd like to <strong>replace a substring that matches with some other string</strong>. <a href="https://clojure.github.io/clojure/clojure.string-api.html#clojure.string/replace"><code>clojure.string/replace</code></a> will replace all substring matches with a new string. Let's take a look:</p>
+<pre><code>=&gt; (clojure.string/replace &quot;mississippi&quot; #&quot;i..&quot; &quot;obb&quot;)
+   &quot;mobbobbobbi&quot;</code></pre>
+<p>This function is actually <strong>quite versatile</strong>. You can <strong>refer directly to the groups</strong> in the replacement string:</p>
+<pre><code>=&gt; (clojure.string/replace &quot;mississippi&quot; #&quot;(i)&quot; &quot;$1$1&quot;)
+   &quot;miissiissiippii&quot;</code></pre>
+<p>You can also replace with the <strong>value of a function</strong> applied to the match:</p>
+<pre><code>=&gt; (clojure.string/replace &quot;mississippi&quot; #&quot;(.)i(.)&quot;
+     (fn [[_ b a]]
+       (str (clojure.string/upper-case b)
+            &quot;--&quot;
+            (clojure.string/upper-case a))))
+   &quot;M--SS--SS--Ppi&quot;</code></pre>
+<p>You can <strong>replace just the first occurence</strong> with <code>clojure.string/replace-first</code>.</p>
+<h3 id="splitting-a-string-on-a-regex">Splitting a string on a regex</h3>
+<p>Let's say you want to <strong>split a string on some character pattern</strong>, like one or more whitespace. You can use <a href="https://clojure.github.io/clojure/clojure.string-api.html#clojure.string/split"><code>clojure.string/split</code></a>:</p>
+<pre><code>=&gt; (clojure.string/split &quot;This is a string    that I am splitting.&quot; #&quot;\s+&quot;)
+   [&quot;This&quot; &quot;is&quot; &quot;a&quot; &quot;string&quot; &quot;that&quot; &quot;I&quot; &quot;am&quot; &quot;splitting.&quot;]</code></pre>
+<p>Nice!</p>
+<h3 id="other-functions">Other functions</h3>
+<p>Those are all of the functions I use routinely. There are some more, which are useful when you need them.</p>
+<h4 id="re-patternre-pattern"><a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-pattern"><code>re-pattern</code></a></h4>
+<p>Construct a regex from a <code>String</code>.</p>
+<h4 id="re-matcherre-matcher"><a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-matcher"><code>re-matcher</code></a></h4>
+<p>This one is not available in ClojureScript. On the JVM, it creates a <a href="http://docs.oracle.com/javase/7/docs/api/java/util/regex/Matcher.html"><code>java.util.regex.Matcher</code></a>, which is used for iterating over subsequent matches. This is not so useful since <code>re-seq</code> exists.</p>
+<p>If you find yourself with a <code>Matcher</code>, you can call <code>re-find</code> on it to get the next match (instead of the first). You can also call <a href="http://richhickey.github.io/clojure/clojure.core-api.html#clojure.core/re-groups"><code>re-groups</code></a> from the most recent match. Unless you need a <code>Matcher</code> for some Java API, just stick to <code>re-seq</code>.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Well, that's regexes as I use them. They're super useful and easy to use in Clojure once you get the hang of them.</p>
+<p>If you're interested in learning the fundamentals of Clojure, may I suggest my own <a href="http://purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video series. It guides you through a deep experience of the language. You'll learn REPL skills, how to set up a project, and how to develop a DSL, all in a fun, interactive way.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/lists-in-clojure">
+        <i class="fa fa-chevron-left footer-arrow"></i>
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/core-async-code-style">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

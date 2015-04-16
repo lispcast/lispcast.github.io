@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Convince your boss to use Clojure</title>
+                  <guid isPermalink="false">http://www.lispcast.com/convince-your-boss-to-use-clojure</guid>
+                  <link>http://www.lispcast.com/convince-your-boss-to-use-clojure</link>
+                  <pubDate>Tue 16 Sep 2014 04:29:06 PM CDT</pubDate>
+                  <description>
+                    Clojure has been successfully adopted by many companies. There are many resources available by people who did the hard work of introducing Clojure to their team.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/convince-your-boss-to-use-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Prep: Anthony Marcar</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-anthony-marcar</guid>
+                  <link>http://www.lispcast.com/pre-west-anthony-marcar</link>
+                  <pubDate>Wed 18 Mar 2015 09:21:45 PM CDT</pubDate>
+                  <description>
+                    Anthony Marcar will talk about Clojure in the enterprise.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-anthony-marcar"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

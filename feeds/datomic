@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Pre-Conj Interview: Lucas Cavalcanti</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-interview-lucas-cavalcanti</guid>
+                  <link>http://www.lispcast.com/pre-conj-interview-lucas-cavalcanti</link>
+                  <pubDate>Fri 17 Oct 2014 10:59:24 AM CDT</pubDate>
+                  <description>
+                    Lucas Cavalcanti interview about Datomic superpowers.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-interview-lucas-cavalcanti"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-conj Prep: Lucas Cavalcanti and Edward Wible</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-conj-lucas-cavalcanti-edward-wible</guid>
+                  <link>http://www.lispcast.com/pre-conj-lucas-cavalcanti-edward-wible</link>
+                  <pubDate>Wed 01 Oct 2014 02:25:56 PM CDT</pubDate>
+                  <description>
+                    Lucas Cavalcanti and Edward Wible will talk about Datomic.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-conj-lucas-cavalcanti-edward-wible"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

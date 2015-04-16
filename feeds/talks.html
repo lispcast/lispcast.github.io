@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0">
+	<channel>
+		<title>LispCast</title>
+		<link>http://www.lispcast.com/</link>
+		<description>A blog about the simple joys of functional programming.</description>
+		<language>en</language>
+
+
+                <item>
+                  <title>Deconstructing Functional Programming</title>
+                  <guid isPermalink="false">http://www.lispcast.com/deconstructing-functional-programming</guid>
+                  <link>http://www.infoq.com/presentations/functional-pros-cons</link>
+                  <pubDate>Sun 22 Dec 2013 04:33:32 PM CST</pubDate>
+                  <description>
+                    
+&lt;blockquote&gt;
+&lt;p&gt;Because if you think about it, the stack itself is just an optimization. Right? There are these frames which contain information about each invocation. Each stack frame. Each activation record. And that's what they are--they're activation records. They're sort of objects. If you really have objects on the brain, like I do, then you realize that they're all just objects.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And they should be treated uniformly. You can even build a language that works this way--as I have. If that's the case, this is really a garbage collection problem. Right? Your stack traces might go away if you don't need them. You do need them when it's not a tail call because you need to go back there and use that information. But if it's a tail call, you don't need them, you don't need a tail call back to that frame. You need a pointer back to the last frame that wasn't a tail call. And they might get collected.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Which doesn't mean you actually have to implement it that way. Erlang sort of does. And there are many implementations that do that. They are not noted for their speed. If you can have real stacks, what happens when you run out of space? If you don't run out of space, it didn't really matter if you optimized the tail calls or not.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When you run out of space, you should GC the damned stack. You shouldn't just throw up your hands and say you're dead. And for all the normal programs that people write where it didn't matter, they won't care. And for your tail recursive programs, well, they might be a bit slower, but they will work. And then it's a matter of flags to the garbage collector if in production you don't want to debug it if you're sure it's all going to be fine--then go ahead and tell it to don't bother and just slam it and overwrite those frames directly.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Why is this so hard for implementers to do? Optimization is an optimization and should be optional.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It's a cool algorithm, but there's nothing nice that I'm prepared to say about Hindley-Milner.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;He nails a lot of things I didn't like about Haskell.&lt;/p&gt;
+&lt;p&gt;All in all, this talk gets a lot of things right.&lt;/p&gt;
+&lt;h3 id=&quot;you-might-also-like&quot;&gt;You might also like&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/object-function-duals-dispatch&quot;&gt;Object-Oriented Dispatch is the Dual of Functional Dispatch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/object-oriented-vs-functional-duals&quot;&gt;Object-Oriented Programming is the Dual of Functional Programming&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/paper-metaphor&quot;&gt;The Paper Metaphor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/the-content-of-your-code&quot;&gt;The Content of Your Code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/deconstructing-functional-programming"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Maciej Cegłowski, Pinboard - XOXO Festival (2013)</title>
+                  <guid isPermalink="false">http://www.lispcast.com/maciej-ceglowski-pinboard-xoxo-2013</guid>
+                  <link>http://www.youtube.com/watch?v=eky5uKILXtM</link>
+                  <pubDate>Fri 18 Oct 2013 05:52:16 PM CDT</pubDate>
+                  <description>
+                    
+&lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/eky5uKILXtM&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Henry David Thoreau was a content creator active in the 1850s.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Classic.&lt;/p&gt;
+&lt;h3 id=&quot;you-might-also-like&quot;&gt;You might also like&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.lispcast.com/deconstructing-functional-programming&quot;&gt;Deconstructing Functional Programming&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/maciej-ceglowski-pinboard-xoxo-2013"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+	</channel>
+</rss>

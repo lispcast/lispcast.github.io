@@ -73,6 +73,132 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/core-async-code-style">
+              core.async Code Style
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 10, 2014
+          </div>
+
+          
+<p>Summary: <em>If your functions return <code>core.async</code> channels instead of taking callbacks, you encourage them to be called within <code>go</code> blocks. Unchecked, this encouragement could proliferate your use of <code>go</code> blocks unnecessarily. There are some coding conventions that can minimize this problem.</em></p>
+<p>I've been using (and enjoying!) <code>core.async</code> for about a year now (mostly in ClojureScript). It has been a huge help for <strong>easily building concurrency patterns</strong> that would be incredibly difficult to engineer (and maintain and change) without it.</p>
+<p>Over that year, I've developed <strong>some practices for writing code with <code>core.async</code></strong>. I'm putting them here as an <a href="http://discuss.purelyfunctional.tv/t/core-async-code-styles/46">invitation for discussion</a>.</p>
+<h3 id="use-callback-style-if-possible">Use callback style, if possible</h3>
+<p>A style develops when using <code>core.async</code> where you convert what would in regular ClojureScript be a callback style with <em>return-a-channel</em> style. The channel will contain the result of the call when it is ready.</p>
+<p>Using this style to keep you out of &quot;callback hell&quot; is overkill. &quot;Callback hell&quot; is not caused by a single callback. It is caused by the <strong>eternal damnation of coordinating multiple callbacks</strong> when they could be called in any order at any time. <strong>Callbacks invert control.</strong></p>
+<p><code>core.async</code> quenches the hellfire because coordinating channels within a <code>go</code> block is easy. The <code>go</code> block decides which values to read in which order. <strong>Control is restored to the code in a procedural style.</strong></p>
+<p>But return-a-channel style is not exactly free of sin. If you return a channel too much, <strong>the code that calls those functions will likely end up in a <code>go</code> block</strong>.</p>
+<p><code>go</code> blocks will proliferate. <code>go</code> blocks incur extra cost, especially in ClojureScript where they happen asynchronously, meaning at the next iteration of the event loop, <strong>which is indeterminately far away</strong>.</p>
+<p>Furthermore, <code>go</code> blocks might begin nesting (a function whose body is a <code>go</code> block is called by another function whose body is a <code>go</code> block, etc), which is correct semantically but <strong>probably won't give you the performance you're looking for</strong>. It's best to avoid it.</p>
+<p>&quot;How?&quot; you say? The most important rule is to only use <code>core.async</code> in a particular function when necessary. If you can get by with just a callback, don't use <code>core.async</code>. <strong>Just use a callback.</strong> For instance, let's say you have an <code>ajax</code> function that takes a callback and you're trying to make a small API wrapper for convenience. You could make it return a channel like this:</p>
+<pre><code>(defn search-google [query]
+  (let [c (chan)]
+    (ajax (str &quot;http://google.com/?q=&quot; query) #(put! c %))
+    c))</code></pre>
+<p>The interesting thing to note is that <code>core.async</code> is not being used very well above. Yes, you get rid of a callback, but <strong>there isn't much coordination happening</strong>, so it's not needed. It's best to keep it straightforward, like this:</p>
+<pre><code>(defn search-google [query cb]
+   (ajax (str &quot;http://gooogle.com/?q=&quot; query) cb))</code></pre>
+<p>You're <strong>just doing one bit of work here</strong> (basically constructing a URL), which is a good sign. But how do you &quot;lift&quot; this into <code>core.async</code>?</p>
+<h3 id="section"><code>&lt;&lt;&lt;</code></h3>
+<p>There's a common pattern in Javascript (not ubiquitous, but very common) to put the callback at the end of the parameter list. Since the callback is last, <strong>you can easily write something to add it automatically</strong>.</p>
+<pre><code>(defn &lt;&lt;&lt; [f &amp; args]
+  (let [c (chan)]
+    (apply f (concat args [(fn [x]
+                             (if (or (nil? x)
+                                     (undefined? x))
+                                   (close! c)
+                                   (put! c x)))]))
+    c))</code></pre>
+<p>This little function is very handy. It automatically <strong>adds a callback to a parameter list</strong>. You call it like this:</p>
+<pre><code>(go
+  (js/console.log (&lt;! (&lt;&lt;&lt; search-google &quot;unicorn droppings&quot;))))</code></pre>
+<p>This function lifts <code>search-google</code>, a regular asynchronous function written with callback style, into <code>core.async</code> return-a-channel style. With this function, <strong>if I always put the callback at the end, I can use my functions from within regular ClojureScript code and also from <code>core.async</code> code</strong>. I can also use any function (and there are many) that happen to have the callback last. This convention has two parts: <strong>always put the callback last and use <code>&lt;&lt;&lt;</code> when you need it</strong>. With this function, I can reserve <code>core.async</code> for coordination (what it's good at), not merely simple asynchrony.</p>
+<h3 id="convention"><code>&lt;convention</code></h3>
+<p>There are times when writing a function using <code>go</code> blocks and returning channels <em>is</em> the best way. In those cases, I've adopted a naming convention. I <strong>put a <code>&lt;</code> prefix in front of functions that return channels</strong>. I tried it at the end of the name, but I like how it looks at the beginning.</p>
+<pre><code>(go
+  (js/console.log (&lt;! (&lt;do-something 1 2 3))))</code></pre>
+<p>The left-arrow of <code>&lt;do-something</code> fits right into the <code>&lt;!</code>. It also visually matches <code>(&lt;&lt;&lt; do-something 1 2 3)</code>, so it <strong>makes correct code look correct and <a href="http://www.joelonsoftware.com/articles/Wrong.html">wrong code look wrong</a></strong>. The naming convention extends to named values as well:</p>
+<pre><code>(def &lt;values (chan))
+
+(go
+  (while true
+    (js/console.log (inc (&lt;! &lt;values)))))</code></pre>
+<h3 id="conclusion">Conclusion</h3>
+<p>These conventions are a great compromise between ease of using <code>core.async</code> (<code>&lt;&lt;&lt;</code>) and universality (callbacks being universal in JS). The naming convention (<code>&lt;</code> prefix) visually marks code that should be used with <code>core.async</code>. These practices have taken me a long way. I'd love to discuss them with you <a href="http://discuss.purelyfunctional.tv/t/core-async-code-styles/46">here</a>.</p>
+<p>If you know Clojure and you are interested in learning <code>core.async</code> in a fun, interactive style, check out the <a href="http://purelyfunctional.tv/core-async">LispCast Clojure core.async videos</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/clojure-regex">
               Regexes in Clojure
             </a>
@@ -1116,83 +1242,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <ul>
 <li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
 <li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
-<li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
-<li><a href="http://www.lispcast.com/separation-of-presentation-and-content">Separation of Presentation and Content</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/css-abstraction-combination">
-              CSS has Weak Forms of Abstraction and Combination
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            February 08, 2014
-          </div>
-
-          
-<p>Summary: <em>According to the requirements proposed by Abelson and Sussman, CSS does not provide adequate means of combination and abstraction to be considered a powerful language.</em></p>
-<p>I am trying to improve the maintainability and reusability of my CSS over the longterm. I've written about <a href="http://www.lispcast.com/cascading-separation-abstraction">how to organize CSS</a> before. I've learned a lot since I wrote that. I've tried lots of things and talked to lots of people, I finally seem to have found a conceptual framework to capture my new understanding. I'm trying to explore it here. <a href="http://twitter.com/ericnormand">Comments are welcome.</a></p>
-<p>I'm going to take a cue from the first page of <a href="http://mitpress.mit.edu/sicp/">SICP</a> and analyze CSS as a language.</p>
-<p>Abelson and Sussman in <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1">SICP 1.1</a> (<em>italics</em> mine):</p>
-<blockquote>
-<p>A powerful programming language is more than just a means for instructing a computer to perform tasks. The language also serves as <em>a framework within which we organize our ideas</em> about processes. Thus, when we describe a language, we should pay particular attention to <em>the means that the language provides for combining simple ideas to form more complex ideas</em>. <em>Every powerful language has three mechanisms</em> for accomplishing this:</p>
-<p><strong>primitive expressions</strong>, which represent the simplest entities the language is concerned with,</p>
-<p><strong>means of combination</strong>, by which compound elements are built from simpler ones, and</p>
-<p><strong>means of abstraction</strong>, by which compound elements can be named and manipulated as units.</p>
-</blockquote>
-<p>Let's analyze CSS in terms of these three mechanisms.</p>
-<h3 id="primitive-expressions">Primitive Expressions</h3>
-<p>The <em>simplest entities the language is concerned with</em> are <em>properties</em> and <em>primitive selectors</em>. CSS properties, though they have a property name and property value part, are meaningless if split up. Primitive selectors include element name selectors (<code>body</code>, <code>a</code>, <code>div</code>), class name selectors (<code>.main-wrapper</code>), id selectors (<code>#login-form</code>), and pseudo-class selectors (<code>:hover</code>), among others. Properties appear inside the rule body (<code>{}</code>), while selectors appear before the rule body. <strong>The two are semantically and syntactically separated.</strong></p>
-<h3 id="means-of-combination">Means of Combination</h3>
-<p><em>Properties</em> can be combined in two ways. First, <strong>multiple properties can be put inside the same rule body</strong>. This is the most obvious and most readable form of property combination. The second form is harder to reason about. It occurs automatically within the browser during rendering. That form of combination, involving the application of multiple rule bodies to the same HTML element, uses a <strong>complex ordering of properties from all bits of CSS and element styles on the page</strong>.</p>
-<p>Tomes have been written about how difficult it is to reason about this automatic form of combination. Usually, the answer is <strong>limiting it (or avoiding it altogether) through programmer discipline</strong>, with varying degrees of success.</p>
-<p><em>Primitive selectors</em> can be combined in several ways. Without spaces between them, multiple selectors will <em>intersect</em>, meaning they target elements more specifically. <code>div.main-container</code> will target <code>div</code> elements that ALSO have the class <code>main-container</code>.</p>
-<p>With spaces, multiple selectors indicate <em>nesting</em>. <code>div .main-container</code> matches any element of class <code>main-container</code> within any <code>div</code>. There are several operators which combine them in different ways (<code>&gt;</code> indicates direct nesting, etc.). Nested selectors are associated with CSS that is <strong>strongly coupled with the structure of the HTML</strong> it is styling and therefore <strong>less reusable</strong>.</p>
-<p>Selectors that are combined with commas create a <em>group</em>. These compound selectors will match any element that matches at least one of the component selectors. <code>header, .header</code> will match all <code>header</code> elements and all elements with class <code>header</code>.</p>
-<p>There are more types of selector combintation operators, but they are more specialized and less frequently used.</p>
-<p>The locus of combination, for both properties and selectors, is the <em>rule</em>. The rule has one compound selector and zero or more properties. Rules with zero properties have no effect.</p>
-<h3 id="means-of-abstraction">Means of Abstraction</h3>
-<p>The means of abstraction in CSS are quite limited. There is no way to name <em>anything</em>. People lament the lack of named values (often refered to as <em>variables</em>) or named styles (sometimes called <em>mixins</em>). <strong>Naming is out in CSS.</strong></p>
-<p>The only means of abstraction is the class and id, which are labels that can be applied to HTML elements. With an id or class (or combinations), you can target precisely the elements you need to and achieve some reuse. For instance, I can &quot;reuse&quot; the <code>#login-form</code> id selector in two different rules. I can also <strong>add the class <code>rounded-corner</code> to two different HTML elements, effectively &quot;reusing&quot; the same rule twice</strong>. By a <em>very disciplined</em> use of class selectors by combining them with commas, one can apply &quot;rule bodies&quot; as a unit in a <em>very limited way</em>, though it is <strong>impracticable in practice</strong>.</p>
-<p>The disadvantage to this technique of using id and class selectors is that the HTML must be modified when styles change, defeating the purpose of using CSS for content/style separation. There is a lot of discussion about using semantically named classes. For instance, call the button <code>login-button</code> instead of <code>green-shiny-button</code>. This is thought to be more robust in the face of style changes, but <strong>requires existing CSS to be thrown away</strong> in order for the page to be redesigned. <strong>CSS offers no good way to modify HTML and CSS independently.</strong></p>
-<h3 id="conclusion">Conclusion</h3>
-<p><strong>CSS does not meet the criteria for a &quot;powerful language&quot; as used in SICP.</strong> This is no surprise. The reasonable means of combination are limited to the rule. The means of abstraction are almost non-existent. There is no way to name anything. And the other form of abstraction (ids and classes) provides no way of reusing both the HTML and the CSS. <strong>It is obvious why CSS is typically unmaintainable.</strong> With the current crop of compile-to-CSS languages (commonly known as &quot;CSS Preprocessors&quot;), there is hope that better means of abstraction are possible. <strong><a href="http://www.lispcast.com/less-abstraction-combination">How will compile-to-CSS languages fare in this same analysis?</a></strong></p>
-<div class="article-cg-box">
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/less-abstraction-combination">LESS has Better Forms of Abstraction than CSS</a></li>
 <li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
 <li><a href="http://www.lispcast.com/separation-of-presentation-and-content">Separation of Presentation and Content</a></li>
 </ul>

@@ -73,6 +73,90 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/clojure-is-imperative">
+              Clojure is Imperative
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 22, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure is an imperative language. Its operations are defined in terms of concrete actions. But those actions are often the same actions available to the programmer at runtime. This makes it easy to bootstrap.</em></p>
+<p>Update: <em><a href="http://twitter.com/bitemyapp">أخلاق الخيميائي</a> pointed out that I was wrong about the size of GHC. Luckily it was not salient to my point so I just removed that part of the article.</em></p>
+<p>Update: <em>After talking with several people, I've decided that my writing was really unclear. I've done some major editing to make it as clear as I can. Thanks to everyone who commented and helped me clarify my thinking and writing.</em></p>
+<p>I was recently <a href="http://blog.cognitect.com/cognicast/062-eric-normand">on the Cognicast</a> and I mentioned something really important to me, but I did not go that deep into it.</p>
+<p>Clojure, and Lisps in general, are <em>imperative languages</em>. Yes, they are good for doing <a href="http://www.lispcast.com/what-is-functional-programming"><em>functional programming</em></a>, but their <strong>main paradigm is executing lists of commands in order</strong>.</p>
+<p>On the podcast I mentioned the first imperative example that came to mind, which was the <code>do</code> form, which executes each expression in the body and returns the value of the last expression. <strong>You would only want to execute an expression and throw away its value for its <em>side effects</em>.</strong></p>
+<p>But why is that important to me? It got me thinking about a deeper but related idea.</p>
+<p>Clojure is a <em>relatively</em> transparent layer above the JVM. I say &quot;relatively&quot; because languages do get quite a bit more opaque<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. But it manages to be powerful through well-chosen abstractions.</p>
+<p>I should be a little more specific about what I mean by &quot;transparent&quot; and &quot;opaque&quot;. This should be the most controversial part of this post, so I want to get this right. These are not formal definitions. <strong>Transparency/opaqueness measures abstractions.</strong> Opaque abstractions show less of the underlying machinery. Transparent abstractions show their machinery. This is a spectrum.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<p>Clojure's functions are rather opaque. Defining a function (with <code>fn</code>) in Clojure creates a class and instantiates it with the values from its lexical environment. This happens without having to think about classes. You're not thinking about the machinery. The machinery leaks out sometimes, like when you're looking at stack traces. But in general, an illusion is maintained.</p>
+<p>But Clojure's <code>def</code> form is pretty transparent. You do have to think about what it's doing, about the current namespace, the order of the <code>defs</code> in a namespace, etc. There is not much of an illusion to maintain.</p>
+<p>Haskell has a well-defined execution semantics. It's formally defined and you can step through the execution of a Haskell program by hand if you want. In that sense, it's imperative. But the execution order is obscured by the somewhat opaque abstraction of <em>lazy evaluation</em>. <strong>Clojure's execution order is more or less directly the execution order of the JVM it runs on--hence more transparent.</strong></p>
+<p>The reason this is important is that <strong>Clojure's strategy is to be transparent</strong> unless there is significant gain. This is part of what is meant by &quot;embracing the host&quot;. Haskell's strategy is orthogonal to the transparency/opaqueness axis. Haskell aims to be formally well-defined. Formal semantics allows deep static analysis and program transformation.</p>
+<p>Besides the strategy of being transparent, what I like even more about Clojure is that the <strong>many abstractions are <em>defined in the same abstractions</em> that you have available as a programmer</strong>.</p>
+<p>This is from the <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/def/">docstring of def</a>:</p>
+<blockquote>
+<p>Creates and interns a global var with the name of symbol in the current namespace (*ns*) or locates such a var if it already exists. If init is supplied, it is evaluated, and the root binding of the var is set to the resulting value. If init is not supplied, the root binding of the var is unaffected.</p>
+</blockquote>
+<p>Creating a var? I can do that. Interning it? I can do that, too. Setting the root binding? Easy! The core can be kept minimal because abstractions can build on each other. If you get the abstractions right, the amount of code you have to write in your implementation language is small.</p>
+<p>And this gets to the heart of it: <em>you</em> can write a Lisp yourself. Many people have. You can <strong>write an easy Lisp compiler in a weekend</strong> and build features on top of it, almost <strong>never having to change the original compiler</strong>.</p>
+<p>This is the magic of <a href="http://www.lispcast.com/two-kinds-of-bootstrapping">bootstrapped languages</a> like Lisps. They have a <strong>small core that you need to get right, then everything else can be written in that core</strong>. It's the ultimate minimal virtual machine.</p>
+<p>What's the relationship between bootstrapping and transparency? <strong>The more opaque the abstractions, the more the language must do to maintain the illusion.</strong> Lisps are easy to bootstrap because the abstractions chosen are either transparent and trivial to implement (like <code>def</code> or <code>if</code>) or opaque and powerful (like <code>fn</code>).</p>
+<p>I like Lisps (and Clojure) because <strong>I feel that I can understand them and build them myself</strong>. I don't <em>actually</em> understand everything, but I <em>could</em> if I tried. Somewhere along the way I developed a deep interest in bootstrapping. <strong>Bootstrapping is compounded leverage.</strong> You build small abstractions on top of the previous ones, and use those to build yet grander ones.</p>
+<p>If you like this attitude toward programming languages, <strong>you should learn a Lisp</strong>. I suggest Clojure, and I recommend the <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure video series</a>. You'll learn about building up powerful abstractions, one layer at a time, in a small amount of code.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-regex">Regexes in Clojure</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>There are more transparent languages as well, but they tend to be obscure.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>As an aside to those who read previous versions of this post, what I meant by imperative/declarative was transparent/opaque. I botched it and I'm trying to get this idea right.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/complex-syntax">
               Complex Syntax
             </a>
@@ -871,132 +955,6 @@ Learn more
 <li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
 <li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
 <li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/core-async-code-style">
-              core.async Code Style
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            June 10, 2014
-          </div>
-
-          
-<p>Summary: <em>If your functions return <code>core.async</code> channels instead of taking callbacks, you encourage them to be called within <code>go</code> blocks. Unchecked, this encouragement could proliferate your use of <code>go</code> blocks unnecessarily. There are some coding conventions that can minimize this problem.</em></p>
-<p>I've been using (and enjoying!) <code>core.async</code> for about a year now (mostly in ClojureScript). It has been a huge help for <strong>easily building concurrency patterns</strong> that would be incredibly difficult to engineer (and maintain and change) without it.</p>
-<p>Over that year, I've developed <strong>some practices for writing code with <code>core.async</code></strong>. I'm putting them here as an <a href="http://discuss.purelyfunctional.tv/t/core-async-code-styles/46">invitation for discussion</a>.</p>
-<h3 id="use-callback-style-if-possible">Use callback style, if possible</h3>
-<p>A style develops when using <code>core.async</code> where you convert what would in regular ClojureScript be a callback style with <em>return-a-channel</em> style. The channel will contain the result of the call when it is ready.</p>
-<p>Using this style to keep you out of &quot;callback hell&quot; is overkill. &quot;Callback hell&quot; is not caused by a single callback. It is caused by the <strong>eternal damnation of coordinating multiple callbacks</strong> when they could be called in any order at any time. <strong>Callbacks invert control.</strong></p>
-<p><code>core.async</code> quenches the hellfire because coordinating channels within a <code>go</code> block is easy. The <code>go</code> block decides which values to read in which order. <strong>Control is restored to the code in a procedural style.</strong></p>
-<p>But return-a-channel style is not exactly free of sin. If you return a channel too much, <strong>the code that calls those functions will likely end up in a <code>go</code> block</strong>.</p>
-<p><code>go</code> blocks will proliferate. <code>go</code> blocks incur extra cost, especially in ClojureScript where they happen asynchronously, meaning at the next iteration of the event loop, <strong>which is indeterminately far away</strong>.</p>
-<p>Furthermore, <code>go</code> blocks might begin nesting (a function whose body is a <code>go</code> block is called by another function whose body is a <code>go</code> block, etc), which is correct semantically but <strong>probably won't give you the performance you're looking for</strong>. It's best to avoid it.</p>
-<p>&quot;How?&quot; you say? The most important rule is to only use <code>core.async</code> in a particular function when necessary. If you can get by with just a callback, don't use <code>core.async</code>. <strong>Just use a callback.</strong> For instance, let's say you have an <code>ajax</code> function that takes a callback and you're trying to make a small API wrapper for convenience. You could make it return a channel like this:</p>
-<pre><code>(defn search-google [query]
-  (let [c (chan)]
-    (ajax (str &quot;http://google.com/?q=&quot; query) #(put! c %))
-    c))</code></pre>
-<p>The interesting thing to note is that <code>core.async</code> is not being used very well above. Yes, you get rid of a callback, but <strong>there isn't much coordination happening</strong>, so it's not needed. It's best to keep it straightforward, like this:</p>
-<pre><code>(defn search-google [query cb]
-   (ajax (str &quot;http://gooogle.com/?q=&quot; query) cb))</code></pre>
-<p>You're <strong>just doing one bit of work here</strong> (basically constructing a URL), which is a good sign. But how do you &quot;lift&quot; this into <code>core.async</code>?</p>
-<h3 id="section"><code>&lt;&lt;&lt;</code></h3>
-<p>There's a common pattern in Javascript (not ubiquitous, but very common) to put the callback at the end of the parameter list. Since the callback is last, <strong>you can easily write something to add it automatically</strong>.</p>
-<pre><code>(defn &lt;&lt;&lt; [f &amp; args]
-  (let [c (chan)]
-    (apply f (concat args [(fn [x]
-                             (if (or (nil? x)
-                                     (undefined? x))
-                                   (close! c)
-                                   (put! c x)))]))
-    c))</code></pre>
-<p>This little function is very handy. It automatically <strong>adds a callback to a parameter list</strong>. You call it like this:</p>
-<pre><code>(go
-  (js/console.log (&lt;! (&lt;&lt;&lt; search-google &quot;unicorn droppings&quot;))))</code></pre>
-<p>This function lifts <code>search-google</code>, a regular asynchronous function written with callback style, into <code>core.async</code> return-a-channel style. With this function, <strong>if I always put the callback at the end, I can use my functions from within regular ClojureScript code and also from <code>core.async</code> code</strong>. I can also use any function (and there are many) that happen to have the callback last. This convention has two parts: <strong>always put the callback last and use <code>&lt;&lt;&lt;</code> when you need it</strong>. With this function, I can reserve <code>core.async</code> for coordination (what it's good at), not merely simple asynchrony.</p>
-<h3 id="convention"><code>&lt;convention</code></h3>
-<p>There are times when writing a function using <code>go</code> blocks and returning channels <em>is</em> the best way. In those cases, I've adopted a naming convention. I <strong>put a <code>&lt;</code> prefix in front of functions that return channels</strong>. I tried it at the end of the name, but I like how it looks at the beginning.</p>
-<pre><code>(go
-  (js/console.log (&lt;! (&lt;do-something 1 2 3))))</code></pre>
-<p>The left-arrow of <code>&lt;do-something</code> fits right into the <code>&lt;!</code>. It also visually matches <code>(&lt;&lt;&lt; do-something 1 2 3)</code>, so it <strong>makes correct code look correct and <a href="http://www.joelonsoftware.com/articles/Wrong.html">wrong code look wrong</a></strong>. The naming convention extends to named values as well:</p>
-<pre><code>(def &lt;values (chan))
-
-(go
-  (while true
-    (js/console.log (inc (&lt;! &lt;values)))))</code></pre>
-<h3 id="conclusion">Conclusion</h3>
-<p>These conventions are a great compromise between ease of using <code>core.async</code> (<code>&lt;&lt;&lt;</code>) and universality (callbacks being universal in JS). The naming convention (<code>&lt;</code> prefix) visually marks code that should be used with <code>core.async</code>. These practices have taken me a long way. I'd love to discuss them with you <a href="http://discuss.purelyfunctional.tv/t/core-async-code-styles/46">here</a>.</p>
-<p>If you know Clojure and you are interested in learning <code>core.async</code> in a fun, interactive style, check out the <a href="http://purelyfunctional.tv/core-async">LispCast Clojure core.async videos</a>.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free core.async Reference Sheet
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
-</p>
-      
-<input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][8]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
-<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
-<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
-<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
 </ul>
 
 

@@ -73,6 +73,119 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/clojure-test-directory">
+              Clojure Test Directory
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 30, 2015
+          </div>
+
+          
+<p>Summary: <em>Where to put your tests is a common question. You could put them anywhere, but you want to pick a place that makes it easy to find, easy to exclude from production, and work well with your tools. My recommendation is to follow what most projects do, which takes care of all of these requirements.</em></p>
+<p>You want to write some tests in Clojure. Maybe they're unit tests. Maybe they're integration tests. The first question you must answer is <strong>where do you put your tests?</strong></p>
+<p>And you don't want them just anywhere. You actually have some important requirements dealing with where they are:</p>
+<ul>
+<li>They should not be compiled/run on production.</li>
+<li>They need to be easily findable.</li>
+<li>They should be runnable from the command line.</li>
+<li>They should be runnable from the REPL.</li>
+</ul>
+<p>Here's my recommendation, which is the <em>de facto</em> standard of organizing your tests. It works with Leiningen, CIDER, and vim-fireplace.</p>
+<p>First, you make a new namespace structure in a <code>test/</code> directory. It should mirror the <code>src/</code> directory.</p>
+<p>If you have:</p>
+<pre><code>src/
+  lispcast/
+    core.clj
+    init.clj
+    util.clj</code></pre>
+<p>Then your test directory should look like:</p>
+<pre><code>test/
+  lispcast/
+    core_test.clj
+    init_test.clj
+    util_test.clj</code></pre>
+<p>But also notice the second point: that the structure is the same, but the names are slightly different, but it a systematic way. It's really easy: you just add <code>-test</code> to the namespace name, which becomes <code>_test</code> in the file name.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Then, you put all the tests that test <code>lispcast.core</code> into <code>lispcast.core-test</code>. Now they're easy to find!</p>
+<p>If you need to write a test that crosses two different namespaces (like an integration test might), then you can just make a new test namespace that doesn't correspond to one or the other.</p>
+<p>Leiningen will load the <code>test/</code> directory selectively, depending on if you're deploying to production (it won't load <code>test/</code>) or running the tests (it <em>will</em> load <code>test/</code>).</p>
+<p>So, it's that easy. <strong>You are free, of course, to put the tests wherever you like.</strong> But this is my recommendation!</p>
+<p>If you're getting into testing in Clojure, you should check out <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>. It's an interactive course. It has animations, screencasts, exercises, code samples, and text.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>
+</h3>
+    
+<a href="http://www.purelyfunctional.tv/intro-to-clojure-test"> <img class="subscribe-form-image"
+           src="http://www.purelyfunctional.tv/img/clojure-test-shot.jpg"> </a>
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Learn how to use <code>clojure.test</code>, the built-in Clojure testing library. It's used for all sorts of tests, from unit to integration. This course will teach you the fundamentals of the library and the common conventions that will help you make the most of your tests. Subscribe now and be the first to know when the course is published. Also, get lots of free Clojure resources when you sign up. <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">Learn more.</a>
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-interview-ashton-kemerling">Pre-Conj Interview: Ashton Kemerling</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Clojure file names have to replace <code>-</code> (hyphens) with <code>_</code> (underscores) to be compatible with Java.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-john-hume">
               Pre-West Prep: John Hume
             </a>
@@ -922,109 +1035,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <h3 id="about-christopher-smalltalk">About <a href="http://clojurewest.org/speakers#csmall">Christopher Small</a></h3>
 <p><a href="http://www.metasoarous.com/">Homepage</a> - <a href="https://github.com/metasoarous">GitHub</a> - <a href="https://twitter.com/metasoarous">Twitter</a></p>
 <p><a href="http://clojurewest.org/speakers#csmall"><img src="http://www.lispcast.com/img/pre-west/small.jpeg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
-</p>
-
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-West Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-  </p>
-  
-</div>
-
-<p>
-  
-<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-bruce-hauman">
-              Pre-West Prep: Bruce Hauman
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            March 20, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-developing-clojurescript-with-figwheeltalk">Talk: <a href="http://clojurewest.org/speakers#bhauman">Developing ClojureScript with Figwheel</a></h3>
-<p><a href="http://clojurewest.org/speakers#bhauman">Bruce Haumans's talk</a> at <em>Clojure/West</em> is about Figwheel, his tool for compiling and auto-reloading ClojureScript in the browser.</p>
-<h4 id="background">Background</h4>
-<p>One of the characteristics of web development is that it is highly dependent on visual feedback. The various languages are loose enough in their semantics that it is hard to verify their correctness past how they look. Typically, you write some code then reload the browser to see the changes.</p>
-<p>This can work, but each time you reload, you lose all of the Javascript state in the browser, which can make each change take a long time. Each time you reload, you have to reinstatiate the state, either manually or automatically. Figwheel solves this problem in a different way: whenever your ClojureScript file changes, recompile it and push it to the browser (over WebSockets). If you set the ClojureScript up right, your state will be preserved.</p>
-<p>I have used Figwheel and it absolutely changes ClojureScript development. It's one of the first things I set up in a new ClojureScript project. This talk will explain how to work it into your workflow.</p>
-<p>Read this <a href="http://rigsomelight.com/2014/05/01/interactive-programming-flappy-bird-clojurescript.html">introductory blogpost about Figwheel</a> with a demo video.</p>
-<h3 id="about-bruce-haumantalk">About <a href="http://clojurewest.org/speakers#bhauman">Bruce Hauman</a></h3>
-<p><a href="http://rigsomelight.com/">Homepage</a> - <a href="https://github.com/bhauman">GitHub</a> - <a href="https://twitter.com/bhauman">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#bhauman"><img src="http://www.lispcast.com/img/pre-west/hauman.jpeg" /></a></p>
 <hr />
 
 <div class="article-cg-box">

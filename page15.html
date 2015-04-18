@@ -73,6 +73,85 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/Hindley-Milner-in-Clojure">
+              Hindley-Milner in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 13, 2014
+          </div>
+
+          
+<p>
+<center>
+  
+<a href="http://ro-che.info/ccc/17" title="Why static vs dynamic typing battles are rarely interesting."><img src="/img/typing.png" alt="Typing Comic from Cartesian Closed Comics" /></a>
+</center>
+</p>
+<p>All sarcasm aside, the above diagram has a kernel of truth. The important thing to note is that the intersection between &quot;Proponents of dynamic typing&quot; and &quot;People familiar with type theory&quot; is very small.</p>
+<p>In an effort to increase the size of that intersection, I decided to familiarize myself with a little more type theory. I developed an implementation of Hindley-Milner which operates on a simple Lisp-like λ-calculus with let polymorphism. Everything you need for Hindley-Milner Algorithm W.</p>
+<h3 id="background">Background</h3>
+<p>Hindley-Milner is a type system that is used by ML and Haskell. Algorithm W is a fast algorithm for inferencing Hindley-Milner which is syntax-directed (meaning it is based on the type of expression) and recursively defined. In this way, it is similar to <a href="http://www.paulgraham.com/rootsoflisp.html">Lisp's <code>eval</code></a>.</p>
+<h3 id="implementation">Implementation</h3>
+<p>I based my implementation on a paper called <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.65.7733&amp;rep=rep1&amp;type=pdf"><em>Algorithm W Step by Step</em></a> which implemented it in Haskell. My implementation started very similar to that implementation and diverged as I refactored it into a more Clojure-esque style.</p>
+<p>This implementation uses no in-place mutation, instead using a &quot;substitution style&quot; which is slightly harder to read. It is, however, easier to write and prove correct.</p>
+<p>In addition to the type inferencer, I wrote an interpreter for the same language, just because. My original intent was to expose (to myself) the similarities between syntax-driven type inference and <code>eval</code>. There might be some, but the full clarity I desire is yet many refactorings away. Note that the interpreter and type inferencer are completely independent, except that both apply to the same set of expressions.</p>
+<p>I added a couple of minor luxuries to the language having to do with currying. Writing fully parentheisized function applications for curried functions is a pain, as is writing a hand-curried function with multiple arguments. I added two syntax transformations which transform them into a more Lispy style. For example:</p>
+<pre><code>(fn [a b c d e f] 1) =&gt; (fn a (fn b (fn c (fn d (fn e (fn f 1))))))</code></pre>
+<p>and</p>
+<pre><code>(+ 1 2) =&gt; ((+ 1) 2)</code></pre>
+<p>I'm pretty sure the syntactic transformation is completely safe. All of my tests still type check.</p>
+<p>The final luxury is that it is a lazily-evaluated language. That's not strictly necessary, but it is strictly cool. It builds up thunks (Clojure delays and promises) and a trampoline is used to get the values out. This lets me define <code>if</code> as a function. The only special forms are <code>let</code> and <code>fn</code>.</p>
+<h3 id="where-to-find-it">Where to find it</h3>
+<p>You can find the code in the <a href="https://github.com/ericnormand/hindley-milner">ericnormand/hindley-milner</a> Github repo. I don't promise that it has no bugs. But it does have a small and growing test suite. Pull requests are welcome and I will continue to expand and refactor it.</p>
+<h3 id="what-i-learned">What I learned</h3>
+<p>Type unification is why the error messages of most type inferencers are so bad. Unification by default only has local knowledge and is commutative (<code>unify a b == unify b a</code>). No preference is given to either argument. A lot of work must have gone into making the error messages of Haskell as good as they are.</p>
+<p>Let polymorphism is useful and I'm glad that Haskell has it.</p>
+<p>Hindley-Milner is powerful, but it does not by itself work magic on a languageq. A language still requires a lot of good design and a well-chosen set of types.</p>
+<h3 id="your-turn">Your turn</h3>
+<p>I think you should implement Hindley-Milner in the language of your choice for a small toy λ-calculus. There is a lot to learn from it, even if you never program using a Hindley-Milner language. At the very least, you'll know what the fuss is about.</p>
+<p>If you think it would be helpful, have a look at <a href="https://github.com/ericnormand/hindley-milner">my implementation</a>. Like I said, pull requests are welcome.</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
+<li><a href="http://www.lispcast.com/on-type-unity">On Type Unity</a></li>
+<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
+<li><a href="http://www.lispcast.com/ambrose-interview-typed-clojure">Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/react-another-level-of-indirection">
               React: Another Level of Indirection
             </a>
@@ -562,52 +641,6 @@ No spam. Ever.
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 <li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/lisp-with-macros-language-stack">
-              Lisp with Macros is Two Languages
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 08, 2013
-          </div>
-
-          
-<p>A Lisp with a macro system is actually two languages in a stack. The bottom language is the macro-less target language (which I'll call the Lambda language). It includes everything that can be interpreted or compiled directly.</p>
-<p>The Macro language is a superset of the Lambda language. It has its own semantics, which is that Macro language code is recursively expanded into code of the Lambda language.</p>
-<p>Why isn't this obvious at first glance? My take on it is that because the syntax of both languages is the same and the output of the Macro language is Lambda language code (instead of machine code), it is easy to see the Macro language as a feature of the Lisp. Macros in Lisp are stored in the dynamic environment (in a way similar to functions), are compiled just like functions in the Lisp language (also written in the Macro language) which makes it even easier to confuse the layers. It seems like a phase in some greater language which is the amalgam of the two.</p>
-<p>However, it is very useful to see these as two languages in a stack. For one, realizing that macroexpansion is an interpreter (called <code>macroexpand</code>) means that we can apply all of our experience of programming language design to this language. What useful additions can be added? Also, it makes clear why macros typically are not first-class values in Lisps: they are not part of the Lambda language, which is the one in which values are defined.</p>
-<p>
-  <center>
-  
-<img src="http://www.lispcast.com/img/macro-stack.png" alt="Lisp stack showing both interpretation and compilation" />
-</center>
-</p>
-
-<p>The separation of these two languages reveals another subtlety: that the macro language is at once an interpreter and a compiler. The semantics of the Macro language are defined to always output Lambda language, whereas the Lambda language is defined as an interpreter (as in <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.91.4527&amp;rep=rep1&amp;type=pdf">McCarthy's original Lisp paper</a>) and the compiler is an optimization. We can say that the Macro language has translation semantics.</p>
-<p>But what if we define a stack that only allows languages whose semantics are simply translation semantics? That is, at the bottom there is a language whose semantics define what machine code it translates to. We would never need to explicitly write a compiler for that language (it would be equivalent to the interpreter). This is what I am exploring now.</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/exponential-backoff">Exponential Backoff</a></li>
-<li><a href="http://www.lispcast.com/try-three-times">Try Three Times</a></li>
-<li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
-<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
 </ul>
 
 

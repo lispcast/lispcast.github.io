@@ -73,6 +73,138 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-conj-interview-lucas-cavalcanti">
+              Pre-Conj Interview: Lucas Cavalcanti
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 17, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#lucas-cavalcanti"><img src="http://www.lispcast.com/img/pre-conj/lucas-cavalcanti.png" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>I got in touch with Lucas Cavalcanti. He is giving a <a href="http://clojure-conj.org/speakers#lucas-cavalcanti">talk</a> together at <a href="http://www.clojure-conj.org/">Clojure/conj</a> with Edward Wible, who was unavailable. The <a href="http://www.lispcast.com/pre-conj-lucas-cavalcanti-edward-wible">background to their talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Lucas Cavalcanti</strong>: I've got into Clojure at Nubank, the company I currently work for, about a year ago. Nubank was already using Clojure, so I learnt it as we evolved the project. I was already familiar with Lisp syntax and knew functional programming very well, so the move to Clojure was not too hard.</p>
+<p><strong>LispCast</strong>: Can you explain a little about Nubank? And how do you use Datomic?</p>
+<p><strong>LC</strong>: Nubank is a tech company for financial services that just went public:</p>
+<ul>
+<li><a href="http://techcrunch.com/2014/09/25/finance-startup-nubank-nabs-14-3m-in-sequoias-first-brazil-investment/">http://techcrunch.com/2014/09/25/finance-startup-nubank-nabs-14-3m-in-sequoias-first-brazil-investment/</a></li>
+<li><a href="http://mobile.nytimes.com/blogs/dealbook/2014/09/25/sequoia-capital-returns-to-investing-in-brazil/">http://mobile.nytimes.com/blogs/dealbook/2014/09/25/sequoia-capital-returns-to-investing-in-brazil/</a></li>
+</ul>
+<p>We use datomic as our primary database system, taking advantage of the free datomic transaction logs for auditing, and adding more data to improve auditing. We also use the datomic query language (based on datalog) to analyze data, often joining multiple databases, since we have a SOA with each service having its own database.</p>
+<p>We also use some datomic capabilities to do database sync with mobile clients and cache management.</p>
+<p><strong>LispCast</strong>: Your talk's description mentions some &quot;hidden superpowers of Datomic&quot;. You mention that the solutions to these problems are generic. Does that mean they can work for any problem?</p>
+<p><strong>LC</strong>: The solutions we'll provide will have some small assumptions to work, but these assumptions don't depend on the entities types we're saving, just something about the database structure. Thus we said the solutions are generic, and could work for any problem that matches these assumptions.</p>
+<p>Also means that we can write just one function that will serve to implement one of that &quot;superpowers&quot; for all entities/endpoints of your system.</p>
+<p><strong>LispCast</strong>: So a lot of people are new to Clojure, and certainly to Datomic. Can you explain Datomic briefly for those of us who have never used it?</p>
+<p><strong>LC</strong>: If you know Git or any version control system, Datomic brings to a database many powers you have with Git: Think of each database transaction as a commit that generates another version of the database. So you can get the database value at any point in time, check the changes made by a specific transaction, all the history of a certain entity or even create &quot;branches&quot; of the database.</p>
+<p>It works by collecting facts like &quot;the entity 123 has the attribute :speaker/name with value &quot;Lucas Cavalcanti&quot;&quot; and gives a query language based on datalog that, once you get the basic concepts, makes much more sense than any other query language I've worked with.</p>
+<p><strong>LispCast</strong>: So, is there anything else you think people should read up on to make the most of your talk?</p>
+<p><strong>LC</strong>: Read the docs: <a href="http://docs.datomic.com/index.html">http://docs.datomic.com/index.html</a></p>
+<p>Specially:</p>
+<ul>
+<li><a href="http://docs.datomic.com/architecture.html">http://docs.datomic.com/architecture.html</a></li>
+<li><a href="http://docs.datomic.com/getting-started.html">http://docs.datomic.com/getting-started.html</a></li>
+<li><a href="http://docs.datomic.com/tutorial.html">http://docs.datomic.com/tutorial.html</a></li>
+<li><a href="http://docs.datomic.com/entities.html">http://docs.datomic.com/entities.html</a></li>
+<li><a href="http://docs.datomic.com/query.html">http://docs.datomic.com/query.html</a></li>
+<li><a href="http://docs.datomic.com/transactions.html">http://docs.datomic.com/transactions.html</a></li>
+</ul>
+<p><strong>LispCast</strong>: Where can people follow your adventures online? Where do you socialize?</p>
+<p><strong>LC</strong>: I guess twitter <a href="http://twitter.com/lucascs">@lucascs</a></p>
+<p><strong>LispCast</strong>: Ok. Last question: If Clojure and Ruby got together, what would they name their baby?</p>
+<p><strong>LC</strong>: <a href="http://en.wikipedia.org/wiki/Platypus">http://en.wikipedia.org/wiki/Platypus</a></p>
+<p>;)</p>
+<p>&quot;the (dis)functional duck typing&quot; ;)</p>
+<p><strong>LispCast</strong>: Awesome! Thanks for a great interview. It was informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-conj-interview-david-pick">
               Pre-Conj Interview: David Pick
             </a>
@@ -1001,107 +1133,6 @@ Learn more
 <li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
 <li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
 <li><a href="http://www.lispcast.com/what-is-functional-programming">What is Functional Programming?</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-michal-marczyk">
-              Pre-conj Prep: Michał Marczyk
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 06, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-persistent-data-structures-for-special-occasionstalk">Talk: <a href="http://clojure-conj.org/speakers#michał-marczyk">Persistent Data Structures for Special Occasions</a></h3>
-<p><a href="http://clojure-conj.org/speakers#michał-marczyk">Michał Marczyk's talk</a> at the <em>conj</em> is about Persistent Data Structures that are available as libraries to Clojure. Given Michał Marczyk's contributions, this should be a great talk.</p>
-<h4 id="background">Background</h4>
-<p>Clojure comes with several Persistent Data Structures built-in. There is no need to copy them to share them, since they are immutable. And they are efficient at making modified copies as well, since they share structure. A great introduction to Clojure's Persistent Data Structures is <a href="http://www.infoq.com/presentations/Value-Identity-State-Rich-Hickey">this talk by Rich Hickey</a>. For a deeper dive into how they work, check out <a href="https://vimeo.com/28760673">Daniel Spiewak's talk</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Although the built-in data structures are great, there's no reason not to have more! Other data structures might be more appropriate at different times, given that they have different performance characteristics. It's great that there is development in these areas.</p>
-<h3 id="about-michał-marczyktalk">About <a href="http://clojure-conj.org/speakers#michał-marczyk">Michał Marczyk</a></h3>
-<p><a href="https://github.com/michalmarczyk">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#michał-marczyk"><img src="http://www.lispcast.com/img/pre-conj/michal-marczyk.jpg" /></a></p>
-<p>Michał Marczyk has written several persistent data structures in use by lots of us every day. He wrote the map and set types for ClojureScript, along with transients.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
-</p>
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-conj Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-</p>
-</div>
-
-<p>
-  
-<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
 </ul>
 
 

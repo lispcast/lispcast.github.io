@@ -73,6 +73,156 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/token-buckets-in-core-async">
+              Token Buckets with core.async
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 10, 2014
+          </div>
+
+          
+<p>Summary: <em>Token Bucket is a simple algorithm for rate limiting a resource. It's easy to understand because you can reason about it in terms of real-world objects. core.async makes this algorithm very clear and easy.</em></p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/token%20bucket.png" alt="Token + BucketImage credits: token and bucket." /><p class="caption">Token + Bucket<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+</div>
+<p>You know you've got a good abstraction when you find lots of algorithms that are easy and clear to write using them. One algorithm that I really like because it's <strong>practical and simple</strong> is called the <a href="http://en.wikipedia.org/wiki/Token_bucket">Token Bucket</a>. It's used for <strong>rate limiting a resource</strong>. And it's very easy to write in core.async.</p>
+<p>Let me digress a little. Here in the US, we have a complicated voting system. Not only do your presidential votes count only indirectly, but the counting is done with machines that vary from state to state. Some of those systems are so complicated. It's a little scary because it's hard to know how those machines work.</p>
+<p>I mean, relatively hard. It's obviously possible to know, if you study enough. But <strong>compare it to papers in a box</strong>. I know there's all sorts of room for corruption in the papers in a box system. But it's understandable by children. Well, as long as they can count.</p>
+<p>The token bucket is similarly simple. There's a bucket. You put tokens in it at a certain rate (for instance, once per hour). If you have a token, you can take an action (ride the subway, send a packet, read a file), then you lose the token (it's good for one ride). If you don't have a token, you can wait. <strong>Everything slows down to the rate of tokens falling into the bucket.</strong></p>
+<p>It's so simple. It so easily <strong>corresponds to a real-world situation</strong> you can imagine. I love that type of algorithm.</p>
+<h3 id="an-implementation">An implementation</h3>
+<p>Let's build Token Bucket in core.async.</p>
+<p>First, we need a bucket. For that, we'll use a core.async channel with a buffer. Let's just start with size 10.</p>
+<pre><code>(def bucket (chan 10))</code></pre>
+<p>Bucket is done. Now, we need something to <strong>add tokens to the bucket at a given rate</strong>.</p>
+<pre><code>(go
+  (while true
+    (&gt;! bucket :token)
+    (&lt;! (timeout 1000))))</code></pre>
+<p>That will add one token to the bucket every second.</p>
+<p>We can rate limit an existing channel by <strong>forcing it to take a token before values get through</strong>.</p>
+<pre><code>(defn limit-rate [c]
+  (let [out (chan)]
+    (go
+      (loop []
+        (let [v (&lt;! c)]
+          (if (nil? v) ;; c is closed
+            (close! out)
+            (do
+              (&lt;! bucket) ;; wait for a token
+              (&gt;! out v)
+              (recur))))))
+    out))</code></pre>
+<h3 id="corner-cases">Corner cases</h3>
+<p>Ok, it's not that simple. There are two corner cases.</p>
+<ol style="list-style-type: decimal">
+<li>What happens when nobody takes a token out of the bucket? Do you keep putting coins in?</li>
+</ol>
+<p>The answer is yes. In the next hour, there are two tokens, so two can come through. But then . . .</p>
+<ol start="2" style="list-style-type: decimal">
+<li>What do you do when the bucket gets really full and a whole bunch of people take tokens out at the same time?</li>
+</ol>
+<p>Well, you let them all through. One token, one ride. There's no other coordination. And that means it's really important to choose the size of your bucket.</p>
+<p>The number of tokens your bucket can hold is called the <em>burstiness</em>. It's because when the bucket is full, you could get a rampage of people trying to get on the subway. How many people should be allowed through at that point? <strong>The burstiness is the maximum that should come through at a time.</strong></p>
+<p>We have our two parameters: the <em>rate</em> and the <em>burstiness</em>. Let's incorporate all of that.</p>
+<pre><code>(defn limit-rate [c r b]
+  (let [bucket (chan b) ;; burstiness
+        out (chan)]
+    (go
+      (while true
+        (&gt;! bucket :token)
+        (&lt;! (timeout (int (/ 1000 r)))))) ;; rate
+    (go
+      (loop []
+        (let [v (&lt;! c)]
+          (if (nil? v) ;; channel is closed
+            (close! out)
+            (do
+              (&lt;! bucket) ;; wait for a token
+              (&gt;! out v)
+              (recur))))))
+    out))</code></pre>
+<p>The burstiness is taken care of in the size of the buffer. The buffer will fill up if no one takes a token. Since we're using blocking buffers, <strong>putting tokens into a full bucket will block</strong> until something takes a token--exactly as the algorithm describes.</p>
+<p>Well, that's it. It's easy. And now <strong>we have a way to limit the rate of a channel</strong>. We can use it to limit the rates of other things, too, like a function call or access to a database. I use it to rate limit an API.</p>
+<p>core.async makes this algorithm nice and easy to use. There's a library that does this for you in a very convenient package. It's called <a href="https://github.com/brunoV/throttler">Throttler</a>. Bruno Vecchi has done the work of making this work well as a library. If you'd like to learn core.async, I recommend my <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async videos</a>. It's a gentle and fun introduction to a great topic. You will learn everything you need to write Token Bucket and more!</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Image credits: <a href="http://www.flickr.com/photos/coldfire/2605474584">token</a> and <a href="http://www.flickr.com/photos/rubyblossom/4227534087">bucket</a>.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-conj-interview-steven-yi">
               Pre-Conj Interview: Steven Yi
             </a>
@@ -1063,142 +1213,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <p><strong>LC</strong>: If Clojure were stranded on a desert island, what one book would it bring?</p>
 <p><strong>AK</strong>: A boat building book, clearly.</p>
 <p><strong>LC</strong>: Awesome! Thanks for the interview, it was a pleasure.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
-</p>
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-conj Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-</p>
-</div>
-
-<p>
-  
-<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-interview-steve-miner">
-              Pre-Conj Interview: Steve Miner
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 19, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#steve-miner"><img src="http://www.lispcast.com/img/pre-conj/steve-miner.jpeg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>I had a conversation about generating test.check generators with Steve Miner. He's giving a <a href="http://clojure-conj.org/speakers#steve-miner">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> about that. Read the <a href="http://www.lispcast.com/pre-conj-steve-miner">background to his talk</a>.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Steve Miner</strong>: I think it was around 2008 when Paul Graham announced his new programming language, Arc. I was reading about Arc, when I came across a comment about Clojure and decided to take a look. I was very impressed with Rich Hickey's intro video. The immutability and concurrency features really resonated with what I was hoping to find in a new language. The Java integration made Clojure a practical language with a huge eco-system of tools and libraries. I was using Java at work and I managed to do a bit of Clojure for a side project, but mostly I was just dabbling. A couple of years later, I decided to work on my own with Clojure full-time.</p>
-<p><strong>LC</strong>: Can you describe Herbert for those who have never used it? Why would someone be interested?</p>
-<p><strong>SM</strong>: Herbert is a schema language for edn. The goal is to have a convenient language for describing the shape of Clojure data. I started out with an informal notation that I used for my internal documentation. For example, describing a map with certain required keys and the corresponding value types. I think you can guess what <code>{:name str :num int}</code> means as a schema. It turned out that with a little work, that informal notation could be used as a pattern language with a simple API for testing conformance. A Herbert schema is itself just edn data, open to all your Clojure tools. More recently, I added the ability to generate test.check generators from Herbert schemas, which makes it easy to generate test data.</p>
-<p><strong>LC</strong>: That sounds nice. Would you mind explaining test.check generators a bit for those who don't know?</p>
-<p><strong>SM</strong>: Reid Draper ported QuickCheck from Haskell to Clojure, and it became a contrib library called test.check.</p>
-<p>Test.check is a property-based testing tool. A property is basically an invariant that should hold true over a range of input values. The test.check library gives you combinators that allow you to define generator functions which create data of specified types with optional constraints. The idea is to think about the whole range of possible inputs that your system should handle. Test.check then automatically tests across a random sample of generated data, probably generating example data that you might not have considered in your typical unit testing. If it finds a failure case where the desired property does not hold, test.check is smart enough to regenerate test cases so as to shrink the failure example to a reasonable size. That helps you isolate the cause of the failure.</p>
-<p>Clojure/West had two excellent talks about property-based testing last year. <a href="https://www.youtube.com/watch?v=JMhNINPo__g">Reid Draper covered test.check</a>, and <a href="https://www.youtube.com/watch?v=zi0rHwfiX1Q">John Hughes talked about QuickCheck</a>.</p>
-<p><strong>LC</strong>: So you're able to automatically create generators from your schemas, which can also be used as contracts on your function arguments. Has having both improved your bug rate?</p>
-<p><strong>SM</strong>: I don't have any numbers, but subjectively I think it's helped. For me, Herbert schemas are primarily documentation tools, which help me to keep track of my data. That being said, I often test schema conformance in preconditions or asserts, especially with new code or when I'm trying to debug a problem.</p>
-<p>Of course, I still make errors in specifying schemas and sometimes my properties aren't exactly correct the first time. Particularly with new property-based tests, I have to look carefully at failures in case the bug is actually in the test. My hope is that schema-based generators will make property-based testing easier to use.</p>
-<p>Using test.check definitely improves my confidence that I'm finding bugs in testing and avoiding regression errors. It's been a great way to catch bugs in my own Herbert library.</p>
-<p><strong>LC</strong>: So you have runtime check to make sure the function arguments conform to certain schemas. And you have a generative test that exercises a large space of that schema. Sounds pretty good to me!</p>
-<p>But it sounds like you're saying the primary benefit is more for you or other readers of your code. Can you elaborate on that?</p>
-<p><strong>SM</strong>: My approach started with a notation designed to help me keep Clojure data structures straight in my mind. I wanted something simple and terse, what I called a &quot;whiteboard compatible&quot; notation. My goal was that the notation should look something like the data it was supposed to represent as opposed to code or a type system.</p>
-<p>So I began with documentation in mind, and I still think of that as the primary benefit. Once I got the idea of implementing conformance testing against formal schemas, the project became more about the code.</p>
-<p><strong>LC</strong>: In what other areas do you see schemas playing a part? The first thing that comes to mind is writing core.typed type annotations. Anything else?</p>
-<p><strong>SM</strong>: There's some conceptual overlap between schemas and type systems, but I see core.typed as a much more ambitious project. Herbert schemas only cover edn data and don't deal with function types, for example. The Datomic database naturally has a schema language, so it would be interesting to see if Herbert could useful for data modeling. In the near term, I plan to extend Herbert so that it supports the Transit datatypes.</p>
-<p><strong>LC</strong>: What resources would you recommend to a beginner who wanted to make the most of your talk?</p>
-<p><strong>SM</strong>:</p>
-<ul>
-<li><a href="https://github.com/miner/herbert">Herbert project</a></li>
-<li><a href="https://github.com/clojure/test.check">Test.check project</a></li>
-<li><a href="http://www.youtube.com/watch?v=bmHTFo2Rf2w&amp;t=19m55s">&quot;The Way to Eden&quot; lightning talk at Clojure/Conj 2013 (video)</a></li>
-<li><a href="https://www.youtube.com/watch?v=JMhNINPo__g">&quot;Powerful Testing with test.check&quot; by Reid Draper at Clojure/West 2014 (video)</a></li>
-<li><a href="https://www.youtube.com/watch?v=zi0rHwfiX1Q">&quot;Testing the Hard Stuff and Staying Sane&quot; by John Hughes at Clojure/West 2014 (video)</a></li>
-</ul>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>SM</strong>:</p>
-<ul>
-<li><a href="https://twitter.com/miner">Twitter</a></li>
-<li><a href="https://github.com/miner/">Github</a></li>
-<li><a href="http://velisco.com/steve-miner.html">Work</a></li>
-<li><a href="http://www.linkedin.com/in/miner49r/">LinkedIn</a></li>
-</ul>
-<p><strong>LC</strong>: One last question: If Clojure were a food, what would it be?</p>
-<p><strong>SM</strong>: I'll say &quot;pizza&quot; because it's a food that is made by composing fancy toppings on a classic crust. And hackers like it while coding.</p>
-<p><strong>LC</strong>: Thanks, Steve, for a great interview.</p>
 <hr />
 
 <div class="article-cg-box">

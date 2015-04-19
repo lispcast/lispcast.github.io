@@ -12,7 +12,7 @@
                   <title>Pre-West Interview: Priyatam Mudivarti</title>
                   <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-priyatam-mudivarti</guid>
                   <link>http://www.lispcast.com/pre-west-interview-priyatam-mudivarti</link>
-                  <pubDate>Sun 19 Apr 2015 12:49:30 AM CDT</pubDate>
+                  <pubDate>Sun 19 Apr 2015 10:32:22 AM CDT</pubDate>
                   <description>
                     Priyatam Mudivarti is giving a talk about grid systems in Garden.
 
@@ -26,11 +26,25 @@
                   <title>Pre-West Interview: Elango Cheran</title>
                   <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-elango-cheran</guid>
                   <link>http://www.lispcast.com/pre-west-interview-elango-cheran</link>
-                  <pubDate>Sat 18 Apr 2015 02:41:34 PM CDT</pubDate>
+                  <pubDate>Sun 19 Apr 2015 10:32:10 AM CDT</pubDate>
                   <description>
                     Elango Cheran will talk about translating Clojure to other human languages.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-elango-cheran"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Robert Krahn</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-robert-krahn</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-robert-krahn</link>
+                  <pubDate>Sun 19 Apr 2015 10:32:00 AM CDT</pubDate>
+                  <description>
+                    Robert Krahn will talk about bringin Smalltalk features to Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-robert-krahn"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>
@@ -129,20 +143,6 @@
                     Zach Tellman interview by Nola.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-zach-tellman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Pre-West Prep: Nathan Sorenson</title>
-                  <guid isPermalink="false">http://www.lispcast.com/pre-west-nathan-sorenson</guid>
-                  <link>http://www.lispcast.com/pre-west-nathan-sorenson</link>
-                  <pubDate>Wed 15 Apr 2015 11:10:22 PM CDT</pubDate>
-                  <description>
-                    Nathan Sorenson will talk about type systems and macros.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-nathan-sorenson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

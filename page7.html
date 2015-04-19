@@ -73,6 +73,140 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/learning-is-about-skills">
+              How to avoid "Makes sense if you already understand it."
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 13, 2015
+          </div>
+
+          
+<p>Summary: <em>Most technical writing is obtuse unless you already know the topic. Focus on the learner and their skills and it will clarify your writing.</em></p>
+<p><strong>Why is most technical material completely undecipherable unless you already understand it?</strong></p>
+<p>Oh, the joys of learning about monads:</p>
+<blockquote>
+<p>All told, a monad in X is just a monoid in the category of endofunctors of X, with product × replaced by composition of endofunctors and unit set by the identity endofunctor.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+</blockquote>
+<p>All jokes aside, <strong>this is typical of technical writing</strong>. Why is it so obtuse? I'm sure there are some people who could read this and confidently nod their heads. But to the rest of us, it's completely obtuse.</p>
+<p>But obtuse language is <strong>not limited to mathematical texts</strong>. Here is an excerpt from a section of a Clojure book introducing integers in Clojure:</p>
+<blockquote>
+<p>Integers comprise the entire number set, both positive and negative. Any number starting with an optional sign or digit followed exclusively by digits is considered and stored as some form of integer, although several different concrete types are used depending on the circumstance. Integers in Clojure can theoretically take an infinitely large value, but in practice the size is limited by the memory available.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+</blockquote>
+<p>I program in Clojure every day. I probably write integers in Clojure every day. Yet <strong>I still have to reread this paragraph</strong> to make sure I understand it. Yes, it makes sense to me, since I already know the material. But this paragraph <em>does not teach</em>. <strong>It simply records technical facts.</strong> A new Clojure programmer would gain just as much from this as from the monad explanation above.</p>
+<p>I don't mean to pick on any books in particular. This is <em>pervasive</em> in technical books <em>from all fields</em>. It's why <strong>most learners consider themselves self-learners</strong>. They did the hard work of reading and rereading this dense, obtuse, and unhelpful material, and rightfully feel that <strong>the bulk of the effort was on their end</strong>, not the author's. When they finally get it, they don't credit the author. <strong>They credit their own perseverance.</strong></p>
+<p>Is this fair? You do all the work of writing the book. <strong>How can you get the credit?</strong></p>
+<p>The answer is surprisingly simple. You should focus on <em>skills</em>, not technical knowledge. Reread the integer paragraph above. Notice that it's all about facts. <strong>Where does the reader fit in?</strong> What does the reader do with this knowledge? Why should the reader care? All of that is absent.</p>
+<p>Without answering these questions, <strong>the paragraph is most generously described as <em>reference</em> material</strong>. It might contain knowledge you will one day need. It will sit on your shelf until you have an actual question to answer, then you'll look it up. And you'll feel like a self-learner. But <strong>it's not teaching you</strong>.</p>
+<p>It's like a clock. When you need to know the time, you can read it. But <strong>it can't tell you why you should care</strong> that it's 11:14pm.</p>
+<p>How do you focus on skills? Think of the poor reader! Ask yourself: what do they <strong>do in their real life</strong>? Let's go through the integer paragraph and convert it into skills. We're trying to convert the fact into something they might want to do with it.</p>
+<p>Before I do that, though, let me say this: these are my interpretations of <em>possible</em> skills. Not all of these are totally relevant. <strong>I didn't write the paragraph</strong>, I'm just interpreting it. So a lot of it might seem pedantic or unimportant.</p>
+<ul>
+<li>Skill: If you want to make a positive integer, type only digits.</li>
+<li>Skill: If you want to make a negative integer, put a <code>-</code> in front of digits.</li>
+<li>Skill: If you want to emphasize that an integer is positive, put a <code>+</code> in front of digits.</li>
+<li>Skill: When you're at a party and you want to impress your Clojure friends, you can mention that Clojure represents integers with several concrete types.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup></li>
+<li>Skill: If you want to make really big integers, you can.</li>
+<li>Skill: If you see an OutOfMemory error, check that you are not making an integer that is too big.<sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup></li>
+</ul>
+<p>It's good to break text down like this. Often it shows what skills are important and what should be saved for later (so late, sometimes, that they fall off the end of the book!). As the teacher, your job is to <strong>choose what they skills they need to learn</strong>.</p>
+<p>Notice that this begins to look like a <a href="http://www.lispcast.com/task-analysis">task analysis</a>. Each of these skills should be <strong>broken down as far as they need to go for your audience</strong>. These <em>raw skills</em> that I wrote above are useful like this as part of the process, but they need to be refined a lot. That's the goal of making a curriculum, which is another post.<sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Here's the hard truth: writing down facts is the easy part. It's what lazy authors do. There are thousands of technical books out there written by people that do no more than document someone's (sometimes impressive) knowledge. <strong>Teaching is hard</strong>, but not impossible. <strong>It will set you apart.</strong></p>
+<p><strong>Learning is about skills.</strong> Even what seem like plain facts have a reason for existing. People want to <em>do something</em> with them. The difference between writing and <em>teaching</em> is that teaching focuses on the learner and their skills, whereas <strong>mere writing is just about the topic</strong>.</p>
+<p>If you like the idea of teaching technical material (not just writing about it), please sign up for my <em>Technical Teaching</em> mailing list, where I'll occasionally share skills for making material that <strong>helps people learn</strong>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=98acb725b1"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <div class="subscribe-form-text">
+      <h3 class="subscribe-form-title">
+        
+Technical Teaching
+</h3>
+      <p class="subscribe-form-description">
+        
+I want to help people teach better. Sign up for this list and I'll occasionally send out some useful tips and skills that I've learned over the years.
+</p>
+      <div class="mc-field-group">
+        
+<label for="mce-FNAME">Name</label><br> <input id="mce-FNAME"
+               class="fname-field"
+               type="text"
+               value=""
+               placeholder="Name">
+</div>
+      <div>
+        
+<br> <label for="mce-EMAIL">Email</label><br> <input id="mce-EMAIL"
+               class="email-field"
+               type="email"
+               value=""
+               placeholder="Email"
+               name="EMAIL">
+</div>
+      <div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_98acb725b1">
+</div>
+      
+<br>
+<div>
+        
+<input class="subscribe-button"
+               type="submit"
+               value="Go!"
+               name="subscribe">
+</div>
+      
+<br>
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/making-true-false-easy">Making True/False Questions Easy</a></li>
+<li><a href="http://www.lispcast.com/pre-west-elena-machkasova">Pre-West Prep: Elena Machkasova</a></li>
+<li><a href="http://www.lispcast.com/pre-west-interview-elena-machkasova">Pre-West Interview: Elena Machkasova</a></li>
+<li><a href="http://www.lispcast.com/tap-into-your-social-brain">Tap Into Your Social Brain</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>From <a href="https://books.google.com/books?id=MXboNPdTv7QC&amp;pg=PA138&amp;dq=%22category+of+endofunctors%22+mac+lane&amp;hl=en&amp;sa=X&amp;ei=QKsDVd3hHK3HsQSG-4CgCw&amp;ved=0CCcQ6AEwAA#v=onepage&amp;q=%22category%20of%20endofunctors%22%20mac%20lane&amp;f=false"><em>Categories for the Working Mathematician</em> by Saunders Mac Lane, page 138</a>.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>From <em>The Joy of Clojure</em>, Second Edition, by Michael Fogus and Chris Houser, page 27.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Can you think of a better reason for mentioning this? Who needs this knowledge, and for what? It becomes clear in subsequent paragraphs.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Can you come up with a better reason to mention this?<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>Just for reference, I think this paragraph touches on the following skills: * Write positive and negative integers. * Read positive and negative integers. * List the concrete types that may represent an integer. * Recall that larger integers may take more space than smaller integers.<a href="#fnref5">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/exponential-backoff">
               Exponential Backoff
             </a>
@@ -857,201 +991,6 @@ No spam. Ever.
 <ul>
 <li><a href="http://www.lispcast.com/intro-clojure-test-peap">On sale now: Intro to clojure.test Early Access</a></li>
 <li><a href="http://www.lispcast.com/task-analysis">Use Task Analysis to Break a Skill Into Steps</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/hiccup-tips">
-              Hiccup Tips
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            February 24, 2015
-          </div>
-
-          
-<p>Summary: <em>Hiccup is a Clojure DSL for generating HTML. If you're using it, you might like these tips.</em></p>
-<p><a href="https://github.com/weavejester/hiccup">Hiccup</a> is a Clojure Domain Specific Language (DSL) for programmatically generating HTML. <strong>It's one of the three tools I recommend in <a href="http://www.lispcast.com/what-web-framework-should-i-use">my Clojure Web stack</a>.</strong> It's a thin layer over HTML, but oh, how I welcome that layer! The biggest win is that since it's an <em>internal</em> DSL, you can begin abstracting with functions in a way that you will never be able to, even in templating engines.</p>
-<p>Hiccup is an example of a great Clojure DSL. It uses literal data structures pretty well, it's as or more readable than what it translates into, and, as a layer of indirection, solves a few sticky problems of HTML. If you don't know it, go check out the <a href="http://www.rkn.io/2014/03/13/clojure-cookbook-hiccup/">Clojure Cookbook recipe for Hiccup</a>. <strong>Hiccup might take some getting used to, but once you do, you'll appreciate it.</strong></p>
-<p>This article will assume you are familiar with the syntax and want to up your game.</p>
-<h3 id="cross-site-scripting-vulnerability">Cross-site Scripting Vulnerability</h3>
-<p>Ok, <a href="http://www.lispcast.com/clojure-web-security#a3-cross-site-scripting-xssa3">this one is a pretty bad problem</a>. Hiccup generates Strings, just plain old Java strings. If you put a String in the body of a Hiccup tag, it will just concatenate it right in there, no questions asked. That's <strong>just asking to be exploited</strong>, because that String is going to be shipped off to the browser and rendered, scripts and all.</p>
-<p><strong>Most templating libraries will default to escaping any String you pass them.</strong> The non-default, usually obviously marked alternative is to pass in a String unescaped. Hiccup got this backwards and it just sucks. It means you have to do extra work to be secure, and if you forget just once, your site is vulnerable.</p>
-<p><strong>The fix:</strong> This is the work you have to do every time you're getting a String that could be from the &quot;outside&quot; (a form submission, API request, etc.). Normally, you'd do this:</p>
-<pre><code>[:div content-of-div]</code></pre>
-<p>That will work but it's unsafe. You should do this:</p>
-<pre><code>[:div (h content-of-div)]</code></pre>
-<p>That little <code>h</code> (<code>hiccup.core/h</code> to be exact) there means escape the String. It sucks, but that's how you do it in Hiccup. One day I want to write a secure fork of Hiccup.</p>
-<h3 id="overloading-vectors">Overloading vectors</h3>
-<p>One downside to Hiccup and any DSL that overloads the meaning of vectors is that <strong>vectors are no longer useful as sequences within Hiccup</strong>. They now mean &quot;start a new HTML tag&quot;. It's not a huge deal, but I've spent a lot of time debugging my code, only to realize that I was using a vector to represent a sequence. I use literal vectors everywhere else (because they're convenient and readable), but in Hiccup land they're wrong.</p>
-<p><strong>The fix:</strong> You can't use a literal vector, but you can call <code>list</code> to create a list. Not as beautiful, but it is correct. Sometimes I will call <code>seq</code> on a return value to ensure that it's never a vector.</p>
-<h3 id="multiple-tags">Multiple tags</h3>
-<p>I don't know why this still happens, but it's common, so I'll mention it. Sometimes I'll be looking at the HTML output in a browser and I just can't find an element. It's gone. Reload, still not there. When I look through the code, the hiccup to generate the tag is <em>right there</em>! Why won't it render?</p>
-<p>Well, long story short, it's because in Clojure, <strong>only the <em>last value</em> of a <code>let</code> or <code>fn</code> is returned</strong>. Doh! My missing element was being rendered then discarded.</p>
-<pre><code>(defn list-with-header [header items]
-  [:h3 header] ;; this header is missing
-  [:ul
-    (for [i items]
-      [:li i])])</code></pre>
-<p><strong>The fix:</strong> Wrap the two (or more) things in a list (not a vector!).</p>
-<pre><code>(defn list-with-header [header items]
-  (list ;; wrap in a list, not a vector
-    [:h3 header] ;; now it&#39;s there
-    [:ul
-      (for [i items]
-        [:li i])]))</code></pre>
-<h3 id="hiccup-plays-nice-with-nil">Hiccup plays nice with <code>nil</code></h3>
-<p>This one is just a little design touch with some perks, not a problem that it's solving. In Hiccup, the empty list renders nothing. This is extended to <code>nil</code> as well. A common thing in HTML is that you want to render a bunch of children in a parent tag, but <strong>you don't want the parent tag if the list is empty</strong>.</p>
-<p>Standard constructs will render the parent tag:</p>
-<pre><code>[:ul
-  (for [i items]
-    [:li i])]</code></pre>
-<p>When <code>items</code> is empty, you still get <code>&lt;ul&gt;&lt;/ul&gt;</code>. This is a problem with lots of templating libraries.</p>
-<p><strong>The fix:</strong> The fix in Hiccup is due to it playing nice with <code>nil</code>. Wrap the parent in a <code>when</code>:</p>
-<pre><code>(when (seq items)
-  [:ul
-    (for [i items]
-      [:li i])])</code></pre>
-<p>It's not beautiful, but then again, you could be using HTML with Moustache.</p>
-<h3 id="use-defn-for-snippet-abstraction">Use <code>defn</code> for snippet abstraction</h3>
-<p><strong>HTML has no way to abstract.</strong> The crap you see is the crap you get. Many templating libraries have some kind of snippet concept, often referring to different files. Well, because Hiccup is just code inside of Clojure, you've got a better designed way of making reusable pieces of Hiccup.</p>
-<p>Let's say I'm repeating something a lot:</p>
-<pre><code>[:div
-  [:ul
-    (for [i list1]
-      [:li i])]
-  [:ul
-    (for [i list2]
-      [:li i])]
-  [:ul
-    (for [i list2]
-      [:li i])]]</code></pre>
-<p>That <code>ul</code> is basically the same three times.</p>
-<p><strong>The fix:</strong> Standard functional abstraction. Pull out the repeated bit into a new, named function.</p>
-<pre><code>(defn make-list [items]
-  [:ul
-    (for [i items]
-      [:li i])])</code></pre>
-<p>Now you can call it from inside of Hiccup:</p>
-<pre><code>[:div
-  (make-list list1)
-  (make-list list2)
-  (make-list list3)]</code></pre>
-<h3 id="compiling-your-snippets">Compiling your snippets</h3>
-<p>You may know this, but Hiccup is a <em>compiling</em> macro. That means it takes your literal vectors, maps, etc, and at <em>compile time</em>, generates code that will generate your HTML. All this means is that <strong>Hiccup is really fast</strong>, about as fast as concatenating strings can be.</p>
-<p>But, because the Hiccup compiler doesn't do a full examination of your code, it can't compile everything. It inserts run time fallbacks for stuff it can't handle at compile time which will interpret it at run time. So, for instance, <strong>if you're calling a function that returns some Hiccup, it can't compile that automatically</strong>. It has to wait till the function returns to know what it is. That is, unless . . .</p>
-<p>**The fix: ** The way to get Hiccup to compile something is with the <a href="http://weavejester.github.io/hiccup/hiccup.core.html#var-html"><code>hiccup.core/html</code></a> macro. That's the macro that does the compilation and it will do it anywhere. So if you've got code like this:</p>
-<pre><code>(defn make-list [items]
-  [:ul
-    (for [i items]
-      [:li i])])
-
-(defn my-three-lists []
-  [:div
-    (make-list list1)
-    (make-list list2)
-    (make-list list3)])</code></pre>
-<p>You should wrap the Hiccup form in its own compiler, like this:</p>
-<pre><code>(defn make-list [items]
-  (html
-    [:ul
-      (for [i items]
-        [:li i])]))</code></pre>
-<p>For this little example, it probably won't make a noticeable difference. But it can be significant for larger documents.</p>
-<p>Just to note: the Hiccup compiler can understand <code>if</code> and <code>for</code> forms, so there's no need to wrap them in the compiler. No hard either.</p>
-<h3 id="autoterminating">Autoterminating</h3>
-<p>Just a good thing to know about HTML.</p>
-<p>Did you know that this is not legal HTML?</p>
-<pre><code>&lt;script /&gt;</code></pre>
-<p>It's true. A <code>script</code> tag can't be self-closing.</p>
-<p>There's all sort of silly rules in HTML like this. And then there's XML mode versus HTML mode. We are lucky: <strong>Hiccup does all of this for you</strong>, so you don't have to wade through the HTML spec(s!) looking for why something won't render in IE7.</p>
-<p><strong>The fix:</strong> <code>hiccup.core/html</code> takes a map of options as the first argument (it's optional). If you pass in a <code>:mode</code> option, it will set the correct HTML mode, which unfortunately are incompatible. There are three modes, <code>:xml</code>, <code>:html</code>, and <code>:xhtml</code>. The default is <code>:xhtml</code>.</p>
-<h3 id="idclass-dsl">Id/class DSL</h3>
-<p>Hiccup is a DSL. And it has its own <strong>sub DSL for HTML ids and classes</strong>. It's similar to CSS selectors.</p>
-<p>Let's say you have a <code>div</code> like this:</p>
-<pre><code>[:div
-  {:id &quot;main-content&quot;
-   :class &quot;blue-background green-border&quot;}
-  (h &quot;Here&#39;s some content.&quot;)]</code></pre>
-<p>Well, Hiccup lets you make that shorter and easier to read.</p>
-<p><strong>The fix:</strong> Use the id/class DSL:</p>
-<pre><code>[:div#main-content.blue-background.green-border
-  (h &quot;Here&#39;s some content&quot;)]</code></pre>
-<p>Here's how it works. Every element has an optional id and zero or more classes. After the tag name (<code>div</code> here), you can put the id after a <code>#</code>. Then list your classes starting with a <code>.</code> each. Omit the <code>#</code> if there's no id. Ditto for the <code>.</code> if there's no class. Oh, and the id must come first. That will get converted to the id and class attributes you want. Also, these will conflict with attributes in the map, so <strong>choose one or the other, not both</strong>.</p>
-<h3 id="generating-hiccup-from-html">Generating Hiccup from HTML</h3>
-<p>Last thing, I promise!! Sometimes you have some HTML that someone gave you and <strong>you want to Hiccupify it so you can just stick it into your code</strong>. Manually doing that is kind of tedious. Luckily, there's a solution our there for you.</p>
-<p><strong>The fix:</strong> <a href="https://github.com/weavejester/hiccup/wiki/Converting-html-to-hiccup">This page</a> lists three options for outputting HTML from Hiccup. I have personally used <a href="https://github.com/hozumi/hiccup-bridge">Hiccup-bridge</a>. It does a good job (and it even goes both ways). You call it like this:</p>
-<pre><code>lein hicv 2clj hello.html</code></pre>
-<p>That will output <code>hicv/hello.clj</code> in hiccup format. Pretty rocking when you need it.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Well, there you go. My Hiccup tips. <strong>Hiccup is pretty nice for templating.</strong> I recommend using it (or my future secure fork) in your web projects. If you'd like to learn more Hiccup and how to build web apps in Clojure, please check out [Lispcast Web Development in Clojure][webdev]. It's a video course teaching just that. All you need to know is Clojure and HTML.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free Ring Spec to hang on your wall
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/ring_spec_1_3.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
-</p>
-      
-<input id="mce-EMAIL"
-             class="email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][4]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
-<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
-<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
 </ul>
 
 

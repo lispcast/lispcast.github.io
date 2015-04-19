@@ -73,6 +73,134 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-conj-interview-colin-fleming">
+              Pre-Conj Interview: Colin Fleming
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 21, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#colin-fleming"><img src="http://www.lispcast.com/img/pre-conj/colin-fleming.jpg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>The next interview is with Colin Fleming. He is the developer of Cursive Clojure. His <a href="http://clojure-conj.org/speakers#colin-fleming">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> will be about that. Read the <a href="http://www.lispcast.com/pre-conj-colin-fleming">background to his talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Colin Fleming</strong>: I got into Clojure bit by bit, starting about four years ago. I was working in Java on highly concurrent transaction processing systems and the promise of a language that would make that easier was very appealing. I was also playing with Scheme at the time so it seemed like a good fit since I already knew the JVM really well.</p>
+<p>I’ve used IntelliJ for Java for years now and I wanted to use it for Clojure too, so I installed La Clojure, which was the only option at the time. But I quickly got frustrated with its limitations and started fixing it up, porting the parts I worked on to Clojure as I went. That was really my first real Clojure project, which in retrospect wasn’t a great choice - it was a tough project to get started on. But it evolved into Cursive, which I’m very happy with, so it worked out well in the end.</p>
+<p><strong>LC</strong>: Developing an IDE is quite a big task. And the web site indicates that you will charge for it. What has the response been? How many users do you have in the Early Access Program?</p>
+<p><strong>CF</strong>: Right, it’s definitely a big task. Initially Cursive started as a hobby, just scratching my own itch. But I quickly realised that if I was going to develop all the functionality I wanted to add it was at least a full-time job, probably more. I had just taken some time off after leaving my previous job at Google and I thought I would see if there was appetite in the Clojure community for a professionally-supported development environment, and the initial response on the Clojure mailing list was pretty positive.</p>
+<p>I released the first public beta version almost a year ago now, and the response has really been fantastic. Quite a few people have asked me when they’ll be able to pay for it so they can continue to support development, which is really nice to hear - I’m really happy people like Cursive so much. It’s hard to tell exactly how many people are using it, but each version tends to get around 10,000 downloads. There’s quite a long tail so it depends how long each version is out for, but generally there are around 2,000 downloads within 24 hours of making a release so I guess that’s roughly the number of people using it daily, or at least have it installed in the copy of IntelliJ that they use daily.</p>
+<p><strong>LC</strong>: I use Emacs but I can't really recommend it to someone who just wants to try Clojure. Does Cursive fit that bill and if so, how?</p>
+<p><strong>CF</strong>: Sure, I think Cursive is definitely easier to get started with than Emacs. In general IntelliJ’s interface is more like a standard application than Emacs, that familiarity helps a lot. And I try to make sure that Cursive is easy to get started with and to minimise the yak shaving required to open a Leiningen project and a REPL. There are still some outstanding things to do there, a big one has been that Cursive didn’t ship with default keybindings assigned - that’s fixed in the next release which should be out shortly. Cursive also has paredit turned on by default for Clojure which can confuse newbies, but it’s easy to toggle. And Cursive still doesn’t have a great story for a Clojurescript REPL, which is always a big pain point for people getting started - I’m hoping to fix this soon. Light Table really did a great job on that one.</p>
+<p>Cursive has a user guide with a lot of screenshots that should hopefully make it easier for people to get started. It’s not 100% up to date with all the latest features, but it should help people to get going. I think having one definitive source of friendly documentation really helps at the beginning. I’d actually like to have an interactive tutorial in the IDE that people could run that would show them how to use the editor and possibly the basics of Clojure too, but that’s looking like a v2 feature at this point.</p>
+<p><strong>LC</strong>: I've always liked IDE's for their ability to smooth over the rough parts of a language. And tooling often trumps terseness in a language with less tooling. What are some of the trouble-spots you see in Clojure, from a beginner's perspective, that haven't been addressed with tools?</p>
+<p><strong>CF</strong>: The classic one that a lot of people seem to struggle with is the stack traces - I’ve never found them to be too difficult, but I worked with Java for years so I know what they look like. It’s easy to forget how difficult things like that are for people new to the JVM. Leiningen has done a great job of hiding things like the class path and dependency management as well, which can be really tough.</p>
+<p>The other thing that I’d really love to see improved is the error messages. Since Clojure macro forms are essentially parsed by hand some of the error messages are really impenetrable. For example, something that might be a common newbie error like putting an <code>(:import)</code> clause ahead of the docstring in an ns form will give you a &quot;java.lang.Character cannot be cast to clojure.lang.Named” error, and will also frequently attribute it to the wrong namespace - these sorts of errors can be really discouraging for someone trying to get started. Cursive internally uses something similar to the seqex library (from Chris Houser and Jonathan Clagget’s great Illuminated Macros talk) for its parsing, I’d love to see libraries like that being used in Clojure core.</p>
+<p>Cursive doesn’t actually mark a lot of these errors in the editor yet, but I’d like to mark as many as possible. In particular, I’ll be able to mark things like function invocations with the wrong number of args, non-gensym’ed variables inside syntax-quote and many of the problems detected by tools like Kibit and Eastwood. I hope that’ll make Clojure less frustrating for newbies and more experienced folk alike.</p>
+<p><strong>LC</strong>: There's a bunch of stuff I'd like to ask you about. Let's talk about the practical side of developing an IDE. You say it's a plugin for IntelliJ. How much of the IntelliJ system are you able to leverage, how much is custom, and how much is a hack to fit the Clojure peg in the Java hole?</p>
+<p><strong>CF</strong>: Right, it’s currently only available as a plugin to IntelliJ. JetBrains actually put a lot of work into making their base platform reusable so I’ll be able to create a standalone IDE as well, as JetBrains have done with Redmine for Ruby, or PyCharm for Python. But it’s a reasonable amount of work and probably adds some support load with cross-platform issues so it hasn’t been a focus for me yet.</p>
+<p>The IntelliJ infrastructure is really great - it’s certainly saved me a huge amount of work being able to build on top of it. It’s very impressive how well abstracted it is, I’ve encountered very few places where I’ve had serious roadblocks from IntelliJ itself due to the nature of Clojure. Most of the real difficulties are just intrinsic to how flexible the syntax of Clojure is, they’re not problems with IntelliJ. Obviously all the base IDE functionality comes for free (project management, VCS support, indexing infrastructure, debugger and so forth) and the Java support is very easy to hook into which is important for Clojure. The biggest part that’s totally custom is the symbol resolution, which generally has to be written for each language anyway.</p>
+<p>Cursive also supports Clojurescript, and that’s been more challenging since the Javascript support in IntelliJ is only available in the paid Ultimate Edition and is closed source. Cursive currently implements fairly primitive Javascript support itself which is just enough for Clojurescript, but it would be nice to be able to integrate that better with the existing support - I’m hoping to in the future.</p>
+<p>The part that is very different in Cursive from a more standard IntelliJ language plugin is that it all has to be extensible since everything in Clojure is based on macros, even core language features. People will eventually have to be able to add support for the libraries they use or for the forms they define in internal projects so Cursive is internally based around an extension API that I’ll open up at some point soon. More conventional languages generally have a fixed syntax, even if it’s very flexible like Ruby for example, so this isn’t an issue for them but it’s essential for Clojure.</p>
+<p><strong>LC</strong>: In the talk description, you mention Rename Refactoring. It's not something I can say I miss in Emacs, but perhaps I don't know what I'm missing. Do people make use of that and other refactorings?</p>
+<p><strong>CF</strong>: Oh yes, I’d definitely argue that you don’t know what you’re missing out on! The two operations I use a lot are rename and find usages - I’d struggle to live without them now, especially find usages. I also recently added refactorings to extract and inline let bindings, which are really useful - people definitely use them a lot. I’m planning to add support soon for extracting and inlining functions, as well as introducing parameters which I use a lot in Java. Refactoring in Clojure will never be as accurate as in Java, but it’s still very useful. Things like marking unused local variables is also something which sounds trivial but really catches a lot of bugs while you’re editing.</p>
+<p>I think this is the main difference between something like IntelliJ and something like Emacs, actually. When I’m working on Java code in IntelliJ the refactorings and all the small operations they provide as intentions are so good that I really feel like I’m working directly on my program, not on text. We’ve all experienced that flow state when programming when you’re totally absorbed in what you’re doing and you lose track of time, whether you’ve eaten or need to go to the bathroom or whatever. IntelliJ makes it much easier for me to achieve that state because it provides a huge number of code manipulations that directly reflect what I want to do to my program, without me then having to muck around with text. I’ve seen comments online along the lines of “IntelliJ is great but I type so much faster in Emacs/vi/whatever”. I’d argue that approach is totally wrong - I don’t want to avoid typing because I’m lazy, I want to avoid typing because text manipulation is the wrong level of abstraction. Cursive is a long way from providing that experience, partly because of Clojure’s language characteristics and partly because it took teams of dozens of smart people at JetBrains years to achieve it for Java, but that’s always my ultimate aim whether or not I ever actually get there.</p>
+<p><strong>LC</strong>: What resources would you recommend people make use of before your talk in order to get the most out of it? Anything useful about refactorings or IntelliJ?</p>
+<p><strong>CF</strong>: I don’t think so, no - hopefully it’ll be pretty self-contained. I’ll be showing the features I’m talking about and explaining some of the implementation, so hopefully it’ll be understandable to everyone. And hopefully it’ll be interesting for everyone too!</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>CF</strong>: There’s a twitter feed for <a href="https://twitter.com/CursiveClojure">Cursive</a> and there are also some <a href="https://cursiveclojure.com/mailinglist.html">mailing lists for general Cursive discussion</a>. I’ve also been hanging out more in the #clojure channel on IRC as <em>cfleming</em> in case anyone has questions. I’ve been meaning to blog more about Cursive but so far that’s just one to-do item among many!</p>
+<p><strong>LC</strong>: Nice. One more question: what is Clojure's favorite breakfast?</p>
+<p><strong>CF</strong>: Cursive is most frequently powered by <a href="http://www.puredelish.co.nz/tropical-mango-nut-crunch-breakfast/">Tropical Mango and Nut Crunch</a>, but the true breakfast of the gods is scrambled eggs with little chunks of <a href="http://www.blackballsalami.co.nz/salami.php">Venison Pepperoni salami</a> cooked through it.</p>
+<p><strong>LC</strong>: Cool.</p>
+<p>Thanks for the great interview. It was fun.</p>
+<p><strong>CF</strong>: Thanks Eric, that was fun! I’m looking forward to seeing it, and to catching up at the conj too!</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-conj-interview-ashton-kemerling">
               Pre-Conj Interview: Ashton Kemerling
             </a>
@@ -1093,133 +1221,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
 <li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
 <li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/willy-wonka-core-async">
-              Willy Wonka and the core.async Guidelines
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 10, 2014
-          </div>
-
-          
-<p>Summary: <em>There are a few conventions in core.async that are not hard to use once you've learned them. But learning them without help can be tedious. This article presents three guidelines that will get you through the learning curve.</em></p>
-<div class="figure">
-<img src="http://www.lispcast.com/img/willy-wonka.jpg" alt="Willy Wonka, inventor of CSP." /><p class="caption">Willy Wonka, inventor of CSP.</p>
-</div>
-<h3 id="introduction">Introduction</h3>
-<p>The more you use core.async, <strong>the more you feel like Willy Wonka</strong>. He knew how to maximize the effectiveness of the Oomploompa. And while core.async comes with a lot of functions built in, he knew exactly which ones to use at which time.</p>
-<p>In this extremely rare glimpse into the functioning of his mysterious factory, we take a look at the guidelines Wonka himself follows when orchestrating the work of the Oompaloompas.</p>
-<h3 id="when-to-use-go-versus-thread">When to use <code>go</code> versus <code>thread</code>?</h3>
-<div class="figure">
-<img src="http://www.lispcast.com/img/oompa.jpeg" alt="Willy Wonka with his Thread Pool." /><p class="caption">Willy Wonka with his Thread Pool.</p>
-</div>
-<h4 id="background">Background</h4>
-<p>Each Oompaloompa is a thread. Willy Wonka has a special group of Oompaloompas he calls a <em>thread pool</em>. Their assigment is simple: they manage a group of tasks that Wonka calls <code>go</code> blocks. Whenever Wonka has an appropriate task, he writes a <code>go</code> block and hands it to the Oompaloompas to work on.</p>
-<p>As the Oompaloompas work, they take one task and do it until the task <em>parks</em>. When it parks, they put it down and pick up another task that isn't parked. <strong>Tasks become unparked when they get new input</strong> from the chocolate pipes. Then the Oompaloompas can continue working on them.</p>
-<p>At one time, Wonka used to give the thread pool all sorts of tasks. He would give them very long calculation tasks, like weighing each chocolate bean in his chocolate bean mountain. He noticed that when they did this, <strong>lots of tasks were left undone, even though they were not parked</strong>, because all of the Ooompaloompas were busy doing something else.</p>
-<p>So he came up with a guideline.</p>
-<h4 id="avoid-long-calculations-and-blocking-inside-go-blocks">Avoid long calculations and blocking inside <code>go</code> blocks</h4>
-<p>Does your code do significant I/O, like downloading a file or writing to the network? Are you doing a very long calculation?</p>
-<p>Then use a <code>thread</code>. <strong>If it will take a long time or block, you want a dedicated thread.</strong> It can work as long as it wants, and even block. That way it doesn't slow down the work of the thread pool.</p>
-<p>Otherwise, you can use a <code>go</code> block.</p>
-<h3 id="when-to-use-single--versus-double-bang">When to use single- versus double-bang (!)</h3>
-<div class="figure">
-<img src="http://www.lispcast.com/img/oompa-loompa-2.jpg" alt="A couple of blocked Oompaloompas." /><p class="caption">A couple of blocked Oompaloompas.</p>
-</div>
-<h4 id="background-1">Background</h4>
-<p>Wonka also noticed that he needed to <strong>write different instructions</strong> for his two types of Oompaloompa. When he wrote a <code>go</code> block, he needed to say &quot;park while you wait for input&quot;. But for the other Oompaloompas created with <code>thread</code> (or for his own work), he needed an instruction that said &quot;block while you wait for input&quot;.</p>
-<p>So he came up with a little notation convention. If you're just parking, so you're in a <code>go</code> block, use one bang. If you're outside of a <code>go</code> block, meaning you need to block, use two bangs.</p>
-<p>These were his versions of his basic instructions:</p>
-<p><code>&gt;!</code>, <code>&lt;!</code>, and <code>alts!</code> versus <code>&gt;!!</code>, <code>&lt;!!</code>, and <code>alts!!</code>. The convention is easy.</p>
-<h4 id="use-single-bang-versions-in-go-blocks-and-double-bang-versions-outside.">Use single-bang versions in <code>go</code> blocks and double-bang versions outside.</h4>
-<p>The single-bang versions of these functions are meant to park a <code>go</code> block. Although they are defined as functions, they have special meaning to the <code>go</code> macro. In fact, if you actually run the functions (outside of a <code>go</code> block), they will throw an exception unconditionally, telling you <strong>they are meant to be inside a go block</strong>.</p>
-<p>The double-bang versions are blocking. That means that the thread they are running on will block if the channel is not ready. They can be used outside of a <code>go</code> block (anywhere) or inside of a <code>thread</code> block. <strong>It's safe to block inside a <code>thread</code> block since it's a dedicated thread.</strong></p>
-<h3 id="put"><code>put!</code></h3>
-<div class="figure">
-<img src="http://www.lispcast.com/img/wonka-angry.jpg" alt="Willy Wonka writing instructions for his mailman." /><p class="caption">Willy Wonka writing instructions for his mailman.</p>
-</div>
-<h4 id="background-2">Background</h4>
-<p>Like all factories, Willy Wonka's needs deliveries. When the UPS truck comes, there's plenty of boxes to unload. But Wonka is busy. So he leaves a note outside for the delivery guy.</p>
-<p>The note tells the guy where to put everything so the Oompaloompas know where to find it. When he says where to put a box, he spells it <code>put!</code>. That is, it has a bang.</p>
-<p>It's unfortunate because <strong>the other functions with a bang mean they park</strong>. But <code>put!</code> does not park. Wonka was just angry one day, and the convention stuck.</p>
-<p>But the delivery guy knows that Wonka is eccentric, so he doesn't take it personally and does his job. He puts stuff in its places, without blocking.</p>
-<h4 id="use-put-to-get-stuff-into-your-channels-from-outside.">Use <code>put!</code> to get stuff into your channels from outside.</h4>
-<p><code>put!</code> is a way to <strong>get values from outside of core.async</strong> into core.async without blocking. For instance, if you're using a callback-style, which is very common in Javascript, you will want to make your callback call <code>put!</code> to get the value onto a channel.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>That's it! Now to eat some chocolate!</p>
-<p>core.async is really cool, but it has a learning curve. Once you learn these conventions, you will begin to feel the power they give you, whether you're making chocolate or building cars. If you'd like to learn core.async and <strong>feel like Willy Wonka</strong>, I recommend the <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a> videos. They build up a deep understanding of the fundamental concepts in a fun and gradual way.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free core.async Reference Sheet
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
-</p>
-      
-<input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][8]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
-<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
-<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
-<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
 </ul>
 
 

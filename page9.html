@@ -73,6 +73,120 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/elm-frp-clojure-core-async">
+              Elm FRP in Clojure core.async
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            November 14, 2014
+          </div>
+
+          
+<p>Summary: <em>Elm is an exciting FRP language. I implemented the FRP part in Clojure using core.async.</em></p>
+<p>I like to read research papers. I have ever since I was in high school. <strong>I've always wanted it to be pretty easy to just translate the pseudocode for an algorithm for a paper and then have it working without any trouble.</strong></p>
+<p>Of course, this rarely happens. Either the pseudo-code leaves out important details, or it's expressed in terms that are not available abstractions in any language I know. So then <strong>I am left to puzzle it all out</strong>, and who has the time?</p>
+<p>A few months ago I read the <a href="https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf">fantastic thesis</a> by <a href="https://twitter.com/czaplic">Evan Czaplicki</a><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> where he introduces <a href="http://elm-lang.org/">Elm</a>. It includes a novel way to express <strong>asynchronous Functional Reactive Programming</strong> (which he calls <em>Concurrent FRP</em>) and a way to express GUI layouts functionally.</p>
+<p><strong>I highly recommend the <a href="https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf">thesis</a>.</strong> It is very clear and readable, and points you to valuable resources.</p>
+<p>The reason I was reading it was because I think <strong>FRP has a bright future</strong>. It's definitely got potential for simplifying the way we write interactive applications. I wanted to learn how it works so that I could build bigger castles in the sky.</p>
+<p>Elm FRP is pretty cool. It is, first of all, very few parts. <strong>You build bigger abstractions from those small parts.</strong> It is built so that events trickle through the graph in order. In other words, they're synchronized.</p>
+<p>But the other interesting thing is that sometimes you don't want things to be synchronized. What if one of the calculations takes a long time? You don't want the GUI to stop responding to mouse events while that slow thing is happening. Elm lets you segment the graph into different <strong>subgraphs that can propagate concurrently</strong>.</p>
+<p>Seriously, just read the thesis.</p>
+<p>While I was reading it, I got to <strong>this page where he lays out all of the FRP functions in Concurrent ML</strong>. It's not uncommon for entire Computer Science theses to be written, passed, and published without a line of runnable code. But here it was, in <em>real code</em> (no pseudocode). I don't know ML, but I do know Haskell, which is related. And I started puzzling through it, trying to understand it.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/elm-frp.png" alt="Elm FRP in Concurrent ML" /><p class="caption">Elm FRP in Concurrent ML</p>
+</div>
+<p>By flipping between the text and the code, I got it. And then I realized: <strong>everything I needed to write this was in Clojure with core.async</strong>. So I got to work.</p>
+<p>It took a while of playing with different representations, but I got something I can use and that is pretty much a direct translation of the Concurrent ML code from the thesis. I toyed with some deeper factorizations, but I think they only muddy what's going on. And <strong>it runs in both Clojure and ClojureScript</strong>. It's <a href="https://github.com/ericnormand/elm-frp">available on Github</a>.</p>
+<p>And, of course, I needed to test my creation, so <strong>I ported the <a href="http://elm-lang.org/edit/examples/Intermediate/Mario.elm">Mario example from the Elm website</a></strong>. You have to click on it to start it. Use the arrow keys to walk left/right and up to jump. It captures your keystrokes. Click outside of the box to get your scrolling keys back.</p>
+<div id="mario" style="width: 100%; height: 200px" tabindex="100"></div>
+
+<script src="http://www.lispcast.com/files/mario.js"></script>
+
+<p><a href="https://github.com/ericnormand/elm-frp/blob/master/src/cljs/elm/examples/mario.cljs">The code for Mario.</a></p>
+<p>Now, <strong>I didn't write all of the cool GUI stuff</strong> from the second part of the thesis. I was learning Om so I decided to use that. That's why that part is so long. Writing Om components is basically as long as writing HTML + CSS.</p>
+<p>And Elm is a language built around these FRP abstractions, so a lot of the signals are built in. I had to write <strong>event handlers to capture the mouse clicks and keyboard events</strong>. But right in the <a href="https://github.com/ericnormand/elm-frp/blob/e8a5d222e5f7cb2efd90393a6ff1a55e797a8dd2/src/cljs/elm/examples/mario.cljs#L74">middle of mario.cljs</a>, you'll see a very straightforward translation of the Mario example from Elm.</p>
+<p>There are a few differences between the Elm version and the Clojure version. Clojure is untyped, so I was able to <strong>eliminate a channel</strong> used only to carry an input node id. That instead is passed along with the message on a single channel.</p>
+<p>Also, I added a node type called &quot;pulse&quot; which I use for emitting time deltas for calculating physics. I'm not sure if Elm internally does something similar for its timers but it seems like the correct solution. The trick is you want to <strong>emit a zero time delta</strong> while other events are firing, and an actual time delta when the timer ticks.</p>
+<p>Finally, instead of the graph being global as in the thesis, it's all tied to an &quot;event stream&quot;, which is where you send the events which get channeled to the correct input signal. You can have <strong>multiple event streams and hence multiple graphs</strong>.</p>
+<p>The implementation is very straightforward. You have to know the basics of Clojure core.async, plus <a href="http://rupsshankar.tumblr.com/post/66648884392/demystifying-core-asyncs-tap-and-mult"><code>mult</code> and <code>tap</code></a>. core.async brings Clojure a new set of abstractions that let us <strong>tap into more research and learn from more languages</strong>. And that makes me happy :)</p>
+<p>If you'd like to learn core.async, I have to recommend my own video course <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a>. It teaches the <strong>most important concepts from core.async</strong> using story, animation, and exercises. It is no exaggeration to say that it was the most anticipated Clojure video when it came out. Go check out a <a href="http://www.purelyfunctional.tv/core-async#preview">preview</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Go say Hi to him!<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/core-async-conveyor-belts-true-history">
               Conveyor Belts: Nature's core.async Channels
             </a>
@@ -1136,134 +1250,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <p><strong>ZO</strong>: I suppose Clojure would be all the redshirts collectively. It sounds like a bad thing, but when they died they were always replaced, so I guess that means Clojure will live forever.</p>
 <p><strong>LC</strong>: Thanks for the informative interview. It was a pleasure.</p>
 <p>*include: templates/pre-conj.html</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-interview-colin-fleming">
-              Pre-Conj Interview: Colin Fleming
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 21, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#colin-fleming"><img src="http://www.lispcast.com/img/pre-conj/colin-fleming.jpg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>The next interview is with Colin Fleming. He is the developer of Cursive Clojure. His <a href="http://clojure-conj.org/speakers#colin-fleming">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> will be about that. Read the <a href="http://www.lispcast.com/pre-conj-colin-fleming">background to his talk</a>.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Colin Fleming</strong>: I got into Clojure bit by bit, starting about four years ago. I was working in Java on highly concurrent transaction processing systems and the promise of a language that would make that easier was very appealing. I was also playing with Scheme at the time so it seemed like a good fit since I already knew the JVM really well.</p>
-<p>I’ve used IntelliJ for Java for years now and I wanted to use it for Clojure too, so I installed La Clojure, which was the only option at the time. But I quickly got frustrated with its limitations and started fixing it up, porting the parts I worked on to Clojure as I went. That was really my first real Clojure project, which in retrospect wasn’t a great choice - it was a tough project to get started on. But it evolved into Cursive, which I’m very happy with, so it worked out well in the end.</p>
-<p><strong>LC</strong>: Developing an IDE is quite a big task. And the web site indicates that you will charge for it. What has the response been? How many users do you have in the Early Access Program?</p>
-<p><strong>CF</strong>: Right, it’s definitely a big task. Initially Cursive started as a hobby, just scratching my own itch. But I quickly realised that if I was going to develop all the functionality I wanted to add it was at least a full-time job, probably more. I had just taken some time off after leaving my previous job at Google and I thought I would see if there was appetite in the Clojure community for a professionally-supported development environment, and the initial response on the Clojure mailing list was pretty positive.</p>
-<p>I released the first public beta version almost a year ago now, and the response has really been fantastic. Quite a few people have asked me when they’ll be able to pay for it so they can continue to support development, which is really nice to hear - I’m really happy people like Cursive so much. It’s hard to tell exactly how many people are using it, but each version tends to get around 10,000 downloads. There’s quite a long tail so it depends how long each version is out for, but generally there are around 2,000 downloads within 24 hours of making a release so I guess that’s roughly the number of people using it daily, or at least have it installed in the copy of IntelliJ that they use daily.</p>
-<p><strong>LC</strong>: I use Emacs but I can't really recommend it to someone who just wants to try Clojure. Does Cursive fit that bill and if so, how?</p>
-<p><strong>CF</strong>: Sure, I think Cursive is definitely easier to get started with than Emacs. In general IntelliJ’s interface is more like a standard application than Emacs, that familiarity helps a lot. And I try to make sure that Cursive is easy to get started with and to minimise the yak shaving required to open a Leiningen project and a REPL. There are still some outstanding things to do there, a big one has been that Cursive didn’t ship with default keybindings assigned - that’s fixed in the next release which should be out shortly. Cursive also has paredit turned on by default for Clojure which can confuse newbies, but it’s easy to toggle. And Cursive still doesn’t have a great story for a Clojurescript REPL, which is always a big pain point for people getting started - I’m hoping to fix this soon. Light Table really did a great job on that one.</p>
-<p>Cursive has a user guide with a lot of screenshots that should hopefully make it easier for people to get started. It’s not 100% up to date with all the latest features, but it should help people to get going. I think having one definitive source of friendly documentation really helps at the beginning. I’d actually like to have an interactive tutorial in the IDE that people could run that would show them how to use the editor and possibly the basics of Clojure too, but that’s looking like a v2 feature at this point.</p>
-<p><strong>LC</strong>: I've always liked IDE's for their ability to smooth over the rough parts of a language. And tooling often trumps terseness in a language with less tooling. What are some of the trouble-spots you see in Clojure, from a beginner's perspective, that haven't been addressed with tools?</p>
-<p><strong>CF</strong>: The classic one that a lot of people seem to struggle with is the stack traces - I’ve never found them to be too difficult, but I worked with Java for years so I know what they look like. It’s easy to forget how difficult things like that are for people new to the JVM. Leiningen has done a great job of hiding things like the class path and dependency management as well, which can be really tough.</p>
-<p>The other thing that I’d really love to see improved is the error messages. Since Clojure macro forms are essentially parsed by hand some of the error messages are really impenetrable. For example, something that might be a common newbie error like putting an <code>(:import)</code> clause ahead of the docstring in an ns form will give you a &quot;java.lang.Character cannot be cast to clojure.lang.Named” error, and will also frequently attribute it to the wrong namespace - these sorts of errors can be really discouraging for someone trying to get started. Cursive internally uses something similar to the seqex library (from Chris Houser and Jonathan Clagget’s great Illuminated Macros talk) for its parsing, I’d love to see libraries like that being used in Clojure core.</p>
-<p>Cursive doesn’t actually mark a lot of these errors in the editor yet, but I’d like to mark as many as possible. In particular, I’ll be able to mark things like function invocations with the wrong number of args, non-gensym’ed variables inside syntax-quote and many of the problems detected by tools like Kibit and Eastwood. I hope that’ll make Clojure less frustrating for newbies and more experienced folk alike.</p>
-<p><strong>LC</strong>: There's a bunch of stuff I'd like to ask you about. Let's talk about the practical side of developing an IDE. You say it's a plugin for IntelliJ. How much of the IntelliJ system are you able to leverage, how much is custom, and how much is a hack to fit the Clojure peg in the Java hole?</p>
-<p><strong>CF</strong>: Right, it’s currently only available as a plugin to IntelliJ. JetBrains actually put a lot of work into making their base platform reusable so I’ll be able to create a standalone IDE as well, as JetBrains have done with Redmine for Ruby, or PyCharm for Python. But it’s a reasonable amount of work and probably adds some support load with cross-platform issues so it hasn’t been a focus for me yet.</p>
-<p>The IntelliJ infrastructure is really great - it’s certainly saved me a huge amount of work being able to build on top of it. It’s very impressive how well abstracted it is, I’ve encountered very few places where I’ve had serious roadblocks from IntelliJ itself due to the nature of Clojure. Most of the real difficulties are just intrinsic to how flexible the syntax of Clojure is, they’re not problems with IntelliJ. Obviously all the base IDE functionality comes for free (project management, VCS support, indexing infrastructure, debugger and so forth) and the Java support is very easy to hook into which is important for Clojure. The biggest part that’s totally custom is the symbol resolution, which generally has to be written for each language anyway.</p>
-<p>Cursive also supports Clojurescript, and that’s been more challenging since the Javascript support in IntelliJ is only available in the paid Ultimate Edition and is closed source. Cursive currently implements fairly primitive Javascript support itself which is just enough for Clojurescript, but it would be nice to be able to integrate that better with the existing support - I’m hoping to in the future.</p>
-<p>The part that is very different in Cursive from a more standard IntelliJ language plugin is that it all has to be extensible since everything in Clojure is based on macros, even core language features. People will eventually have to be able to add support for the libraries they use or for the forms they define in internal projects so Cursive is internally based around an extension API that I’ll open up at some point soon. More conventional languages generally have a fixed syntax, even if it’s very flexible like Ruby for example, so this isn’t an issue for them but it’s essential for Clojure.</p>
-<p><strong>LC</strong>: In the talk description, you mention Rename Refactoring. It's not something I can say I miss in Emacs, but perhaps I don't know what I'm missing. Do people make use of that and other refactorings?</p>
-<p><strong>CF</strong>: Oh yes, I’d definitely argue that you don’t know what you’re missing out on! The two operations I use a lot are rename and find usages - I’d struggle to live without them now, especially find usages. I also recently added refactorings to extract and inline let bindings, which are really useful - people definitely use them a lot. I’m planning to add support soon for extracting and inlining functions, as well as introducing parameters which I use a lot in Java. Refactoring in Clojure will never be as accurate as in Java, but it’s still very useful. Things like marking unused local variables is also something which sounds trivial but really catches a lot of bugs while you’re editing.</p>
-<p>I think this is the main difference between something like IntelliJ and something like Emacs, actually. When I’m working on Java code in IntelliJ the refactorings and all the small operations they provide as intentions are so good that I really feel like I’m working directly on my program, not on text. We’ve all experienced that flow state when programming when you’re totally absorbed in what you’re doing and you lose track of time, whether you’ve eaten or need to go to the bathroom or whatever. IntelliJ makes it much easier for me to achieve that state because it provides a huge number of code manipulations that directly reflect what I want to do to my program, without me then having to muck around with text. I’ve seen comments online along the lines of “IntelliJ is great but I type so much faster in Emacs/vi/whatever”. I’d argue that approach is totally wrong - I don’t want to avoid typing because I’m lazy, I want to avoid typing because text manipulation is the wrong level of abstraction. Cursive is a long way from providing that experience, partly because of Clojure’s language characteristics and partly because it took teams of dozens of smart people at JetBrains years to achieve it for Java, but that’s always my ultimate aim whether or not I ever actually get there.</p>
-<p><strong>LC</strong>: What resources would you recommend people make use of before your talk in order to get the most out of it? Anything useful about refactorings or IntelliJ?</p>
-<p><strong>CF</strong>: I don’t think so, no - hopefully it’ll be pretty self-contained. I’ll be showing the features I’m talking about and explaining some of the implementation, so hopefully it’ll be understandable to everyone. And hopefully it’ll be interesting for everyone too!</p>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>CF</strong>: There’s a twitter feed for <a href="https://twitter.com/CursiveClojure">Cursive</a> and there are also some <a href="https://cursiveclojure.com/mailinglist.html">mailing lists for general Cursive discussion</a>. I’ve also been hanging out more in the #clojure channel on IRC as <em>cfleming</em> in case anyone has questions. I’ve been meaning to blog more about Cursive but so far that’s just one to-do item among many!</p>
-<p><strong>LC</strong>: Nice. One more question: what is Clojure's favorite breakfast?</p>
-<p><strong>CF</strong>: Cursive is most frequently powered by <a href="http://www.puredelish.co.nz/tropical-mango-nut-crunch-breakfast/">Tropical Mango and Nut Crunch</a>, but the true breakfast of the gods is scrambled eggs with little chunks of <a href="http://www.blackballsalami.co.nz/salami.php">Venison Pepperoni salami</a> cooked through it.</p>
-<p><strong>LC</strong>: Cool.</p>
-<p>Thanks for the great interview. It was fun.</p>
-<p><strong>CF</strong>: Thanks Eric, that was fun! I’m looking forward to seeing it, and to catching up at the conj too!</p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
-</p>
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-conj Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-</p>
-</div>
-
-<p>
-  
-<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
-</p>
-
-
-
-
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>

@@ -1,0 +1,245 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Pre-West Interview: Leon Barrett | LispCast</title>
+    <meta name="description" content="Leon Barrett will talk about parallel programming in Clojure.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-leon-barrett">
+              Pre-West Interview: Leon Barrett
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 19, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#lbarrett"><img src="http://www.lispcast.com/img/pre-west/lbarrett.jpg"
+style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Leon Barrett was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#lbarrett">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about parallel programming in Clojure. The <a href="http://www.lispcast.com/pre-west-leon-barrett">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-leon-barrett">Interview with Leon Barrett</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Leon Barrett</strong>: Actually, I wasn't aware of Clojure until I started at The Climate Corporation 2.5 years ago. I had used Lisp a number of times in school, so it wasn't too foreign, but I'd never imagined that I'd write Lisp for a living.</p>
+<p><strong>LC</strong>: Clojure is great for shared-memory parallelism. Is it good for distributed programming?</p>
+<p><strong>LB</strong>: It can be; the same set of abstractions that are helpful locally can be helpful when distributed. For instance, there are some nice Hadoop MapReduce tools (though I happen to dislike Cascalog--it doesn't mesh with my mental model of mapreduce). Of course, you have to do some extra work to support distributed computing, but all in all it's relatively pleasant.</p>
+<p><strong>LC</strong>: What are your preferred distributed Clojure abstractions?</p>
+<p><strong>LB</strong>: You know, I don't feel qualified to opine on this too much. I mostly end up working on tasks that are fairly embarrassingly parallel, so I spend more of my time worrying about single-machine parallelism (hence my need for Claypoole). The core idea in the better Clojure distribution work I've done was, for both Storm and Hadoop, to just write simple, functional data transformations and then let the distribution framework worry about everything else.</p>
+<p><strong>LC</strong>: Where should someone get started with distributed programming in Clojure?</p>
+<p><strong>LB</strong>: I think both Parkour and Storm are very nice, though I had some issues using Parkour on Amazon's EMR. Just working with those, it's pretty easy to write distributed tools without worrying about the hard distributed parts (data movement, reliability, etc) yourself.</p>
+<p><strong>LC</strong>: What makes Clojure great for parallel programming?</p>
+<p><strong>LB</strong>: Clojure is great for parallel programming because of three things: Immutability, good core libraries, and macros.</p>
+<p>First, the bane of parallel programming is mutable state; state makes parallel programs much harder to reason about. While it's possible to avoid shared state by writing functional programs with immutable data even in other languages, it's much easier in Clojure because all the standard libraries support it, so Clojure is easier to do parallelism with from the very beginning. Also, Clojure's parallelism features, such as future and deref, are well-designed and easy to use, making it very easy to get started with parallelism. Finally, macros make it possible to write parallel things without so much fuss; for instance, Clojure's futures (built with macros) are easier to use than Java's futures because they don't require any boilerplate. Similarly, the library core.async uses macros to add amazing parallel and asynchronous features as a library, whereas in other languages such features would need to be designed into the core language.</p>
+<p><strong>LC</strong>: Can you briefly explain Claypoole? What does it do? Why did you write it?</p>
+<p><strong>LB</strong>: I wrote Claypoole because I was dissatisfied with Clojure's built-in pmap for several reasons, including 2 in particular: First, I wanted to control the degree of parallelism, but core pmap's parallelism is determined by the number of CPUs. Second, I wanted my pmaps to get things done as fast as possible, but core pmap is lazy and may be inefficient when the individual tasks have a high variance in duration.</p>
+<p>Claypoole's core feature is a pmap that meets my demands--it's eager, and I can control the degree of parallelism, even across multiple simultaenous pmaps. As a bonus, it turns out that once one has good control over sharing threadpools in pmaps, it's easy to add other such features, so Claypoole also does a number of related, handy things, such as parallel for (pfor), unordered pmaps that return results in the order they're completed (upmap), and so on. I see Claypoole as a tool to provide an advanced degree of control over parallelism.</p>
+<p><strong>LC</strong>: Those sound really handy! Do you use reducers in your work? Where have you found them most helpful?</p>
+<p><strong>LB</strong>: I don't actually use reducers a lot. I used them while working with Parkour, and they were very cute there. However, in my own work I've tended to prefer Claypoole. Reducers is good because it has much less overhead than chained maps, which is great for functionally combining small tasks. However, I find that I tend map bigger tasks, so I benefit more from fine-grained control of parallelism in Claypoole than I would from the efficiency of reducers.</p>
+<p><strong>LC</strong>: Do you have any good background materials for people who want to do a little pre-reading/watching?</p>
+<p><strong>LB</strong>: Nope. My talk will start with some basics to make sure that everyone's on the same page, and my initial test audiences seemed to indicate that my intro works well for both beginners and more advanced programmers.</p>
+<p><strong>LC</strong>: How can people help with Claypoole?</p>
+<p><strong>LB</strong>: I love pull requests, and I appreciate bug reports (obviously, repeatable test cases make my life easier). But mostly, my goal with open-sourcing Claypoole was to have the community do this stuff right once, rather than having lots of people making partial reimplementations that work on just their case. So, just use it! I want people to use Claypoole rather than reimplementing it.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>LB</strong>: I'm not terribly vocal online. I guess I post to the <a href="http://eng.climate.com/">Climate Corp engineering blog</a> every so often.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>LB</strong>: One could claim that it'd be Cajun blackened catfish, because it's lean and full of flavor.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

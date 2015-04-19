@@ -1,0 +1,240 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Pre-West Interview: Robert Krahn | LispCast</title>
+    <meta name="description" content="Robert Krahn will talk about bringin Smalltalk features to Clojure.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-robert-krahn">
+              Pre-West Interview: Robert Krahn
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 18, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#rkrahn"><img src="http://www.lispcast.com/img/pre-west/rkrahn.jpg"
+      style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Robert Krahn was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#rkrahn">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about building Smalltalk-like features into Clojure. The <a href="http://www.lispcast.com/pre-west-robert-krahn">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-robert-krahn">Interview with Robert Krahn</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Elango Cheran</strong>: I got into Clojure on the suggestion of a friend. At that point, I had been writing scripts in Python and some Ruby. I was setting off to create a cross-platform GUI desktop program using SWT, a Java UI framework. I had recently read press about Clojure, read a few Paul Graham essays, and had seen initial Clojure attempts at work, but after that, I was more skeptical about Clojure / Lisp than interested. I was thinking of using JRuby since Ruby was the most high-level language I had used by then, and I enjoyed it, entirely outside of Rails. A good friend suggested that I try Clojure instead for its elegant memory usage (via persistent data structures) and design for concurrency. As I started writing more Clojure code, the old fears faded, and I started surpassing my own expectations. I attribute the success to Clojure gently nudging me by design towards simpler, better code. It's been great fun and learning ever since.</p>
+<p><strong>LC</strong>: Your talk is about adapting Clojure to work in foreign languages with different scripts. I can imagine it's very important to someone who doesn't speak English, but you probably have more insights into it. Can you speak to the difficulties someone might have with programming if they don't read/write English?</p>
+<p><strong>EC</strong>: Certainly, a lot of the tech world operates and communicates in English. I can explain the difficulties in 2 ways. First, if you can't read/write English, and want to learn programming, then you're limited to whatever resources exist in your mother tongue. From what I've seen for the Tamil language in my visits to India, even non-English resources rely on English eventually. Coining new words in another language to translate new English terms, in a fast-changing field like technology, is challenging enough. But if you want to teach coding, you have to revert to English for the source code examples regardless.</p>
+<p>The other way of looking at it is from a native English speaker perspective: how old were we when we learned programming for the first time, and how hard was that? How old were we by the time we were fluent in a second language -- and fluent enough to use a computer and write code in it? I would bet that for many English speakers, programming fluency came first, and that would make sense to me. Computers and programming are tricky enough without the overhead of filtering the ideas through a second human language.</p>
+<p>Currently, non-native speakers of English who learn technology are eventually bottlenecked by their ability to learn English, and learning English isn't uniformly accessible, either. Being able to write code in their first language could open up new doors, and I also think that Clojure currently would make for the easiest path to getting there.</p>
+<p><strong>LC</strong>: You mention that Clojure is well-suited to adapting to another human language. Why is that so?</p>
+<p><strong>EC</strong>: The things that make Clojure great for adapting to another human language are some of what make Clojure great as a programming language to begin with. Specific to another human language, the simplicity in the syntax is helpful in that there are less terms to translate, and the regularity of the syntax makes it easier as a beginner to wrap your head around. And more importantly, being able to extend the language without having to edit and re-compile the compiler is empowering. However, I wouldn't make any linguistic arguments in this regard -- 80+% of languages' sentence word order are either Subject-Verb-Object (e.g. English, Chinese) or Subject-Object-Verb (e.g. Tamil, Japanese), but Lisp puts the function (verb) at the beginning. Clojure targets popular runtimes (especially JVM and JavaScript), and the Clojure compiler and its target runtimes all support Unicode, which is the universal character set to represent the text of any language.</p>
+<p><strong>LC</strong>: What is the most interesting thing you have done with clj-thamil?</p>
+<p><strong>EC</strong>: I've written functions to implement various, basic Thamil language processing steps, like splitting a string into a seq of Thamil letters or phonemes, alphabetical sorting of strings, basic suffix-adding rules, and transliteration/character set conversions. Among other things, I've used clj-thamil along with Enlive to convert the Thamil text in an XHTML doc from a pre-Unicode character set to Unicode. I have ideas for wider-appeal applied uses in the future.</p>
+<p><strong>LC</strong>: Are people writing Clojure in Thamil?</p>
+<p><strong>EC</strong>: It's just me at the moment, but I hope that improves! The simplicity of Clojure has made something that has been viewed up until now as tricky and largely unimplemented, like lexicographic Thamil text sorting, into 30 lines of Clojure. And Clojure targets Java (JVM) and JavaScript. Clojure's benefits are tremendous and speak for themselves.</p>
+<p><strong>LC</strong>: How can people help? What would be most helpful for you?</p>
+<p><strong>EC</strong>: The biggest help in terms of translating Clojure would be to figure out how to iron out a few details: how to get the reader to understand the translation for ns (or require, use, etc.), how to support translated literals (e.g. true, false, :else, numerals), and get the underlying JavaScript compiler to successfully run optimizations when identifiers are non-English. In terms of education, if we could modify clojail (used in tryclj.com) to use a JavaScript console widget that supports Unicode characters, it would provide an immediate way to experience Clojure in the language of your choice. After that, if we could translate turtle-based teaching languages, we can provide a platform for kids to learn programming in their own language.</p>
+<p>But at the same time, it would be great to get help in refactoring and extending this project for other languages. Although each language has its own unique characteristics, many languages will share solutions, even in ways we don't necessarily expect.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>EC</strong>: I'm <a href="https://github.com/echeran">@echeran</a> on Github, <a href="http://google.com/+ElangoCheran">+ElangoCheran</a> on Google Plus, and my blog is at <a href="http://www.elangocheran.com/blog">www.elangocheran.com/blog</a>.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>EC</strong>: If Clojure were a food, it would be Sambar, a South Indian curry. It's tasty, has a lot of different good-for-you ingredients, it goes well with a lot of things, and I can eat it all day.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -73,6 +73,138 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-interview-priyatam-mudivarti">
+              Pre-West Interview: Priyatam Mudivarti
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 19, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#pmudivarti"><img src="http://www.lispcast.com/img/pre-west/priyatam.jpeg"
+style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Priyatam Mudivarti was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#pmudivarti">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about building layout grid systems using Garden in Clojure. The <a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-priyatam-mudivarti">Interview with Priyatam Mudivarti</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Priyatam Mudivarti</strong>: I read Chris Granger’s essay on LightTable in the fall of 2012. I remember that day: I got a new gig in Boston and my first task was to re-architect the ui stack using “Java” and “Responsive Design”. Rewriting apps in big companies meant migrating enterprise libraries and tag soups from the server to client, and most of that failed flat on your face. I had little control over the frontend, let alone design. While I was going through this—a block of no creativity—Granger’s prototypes showed an open canvas filled with code, floating around, their results shown inline, blurring the difference between an editor and a browser.</p>
+<p>I was blown away.</p>
+<p>What followed were his blogs, Paul Graham’s essays, Rich Hickey’s videos and other lispers blogging about enlightenment and such, but none of that made any sense. How can programming give you enlightenment? I believed in literature! Keep reading, I told myself, learn this language and it will change the way you think. The best writers, I believe, change the way you think of the world. Naturally, I am seduced by the same possibility with a programming language.</p>
+<p>So I quit my job in the summer of 2013 to write my novel and teach myself Clojure and Clojurescript. I went to Clojureconj the same year and met Chris, and heard Alan Dipert, Stu, David Nolen, Rich Hickey and some of the best clojure hackers speak. After the talks I felt like one of the dumbest programmers in the room. And the more I learned about Clojure the less I knew about programming. It was an odd, beautiful feeling, something that made me a twelve-year old again.</p>
+<p>I knew right away it was time to go into the rabbit hole.</p>
+<p><strong>LC</strong>: Where does your interest in grids come from?</p>
+<p><strong>PM</strong>: Typography and Typesetting found in Fiction &amp; Literary Magazines (print). Often I found their layouts and typography superior to that on the web, and I always wondered why their websites suck.</p>
+<p>When I spoke at ClojureWest 2014, I did a demo of a poetry app written in five languages. It was a great learning experience, but I also knew that the app wouldn’t scale and was a ticking bomb. Worse, my css was entangled in two DOMs: a virtual Dom and a real Dom, and events to change styles were bound and mounted on some lifecycle protocols of Om. One of my goals was to typeset poems and pages declaratively based on the content, and dynamically change their styles when their related ‘components' mounted. I didn’t know how to separate these concerns.</p>
+<p>That led to me take a break from coding to deep dive into learning Typography. Typesetting has been around for centuries, after all. Now, design is not my core skill—I have worked in agencies and interacted with designers to understand their process. I went to TypoConf in SF and was surprised to see three hundred typographers—who don’t code css—talk about Kerning and typeface design. Met a typographer (who is now a good friend) and collaborated with him on several hobby projects to understand his process. At Sumner Stone’s workshop in SF, I saw one of the world’s oldest and most respected Typographer speak about Typography.</p>
+<p>What followed was a natural discovery of Grids: a visual communication framework for graphic designers and typographers. I bought half a dozen books, downloaded and worked through a <a href="https://github.com/priyatam/thinking-grids">several grid libraries</a> in Sass and Less and began to get a sense of how web designers think. Most confirmed to the traditional Grid theory within the limited syntax available in CSS.</p>
+<p>I was convinced that Garden and Clojurescript had more power to express grids (and beyond) more fluidly, and dynamically, over CSS.</p>
+<p><strong>LC</strong>: What is Garden?</p>
+<p><strong>PM</strong>: Garden expresses CSS as associative data structures, the same way Hiccup expresses HTML. Vectors are used for selectors, and maps are used for declarations. They can be nested. CSS rules are simply vectors wrapping the nested vectors and maps.</p>
+<p>Vectors can be passed around as data, composed through functions, and have the full power of Clojure/Clojurescript to express and organize stylesheets.</p>
+<p><strong>LC</strong>: If Garden compiles to CSS, how does it have more power?</p>
+<p><strong>PM</strong>: Joel Holdbrooks wrote Garden in Clojurescript, a real programming language, and in order to understand the power of Garden let us revisit the notion of abstractions in CSS.</p>
+<p>Abstraction is at the center of most work in Computer Science and User Interface Design. It encompasses finding the right interface for a system as well as finding an effective design for implementing a system. CSS is arguably a simple language. It packs power by abstracting the entire stylesheet in concise, declarative syntax of rules.</p>
+<p>However, over the years websites and apps have grown in complexity and pre-processors have proven that programming constructs like variables, mixins, and ‘pseudo’ functions can help designers organize code and structure their patterns. In order to facilitate a two-way communication with Dom, designers have also started using jQuery—a good example of what happens when you provide new abstractions to interact with a page. The proliferation of frontend frameworks have paralyzed even the best designers because it’s impossible to work within the same abstraction in isolation with the frontend team.</p>
+<p>What remains is a spaghetti of Sass, client and serverside Markup, jQuery, and a dozen Javascript libraries and build tools. Designers are no longer in control of the page, and that’s a shame.</p>
+<p>It is time we bring back that control with new abstractions. Garden is just Clojurescript— you don’t even need to learn the whole language. It provides a uniform syntax to express HTML, CSS, and Javascript from a designer’s point of view. It has namespaces to modularize styles, first-class functions, and sound data structures to organize them. It works on the server and client and can generate static css files. It has the potential to go beyond pre-processors and express designs in new creative ways. I’m more excited of this possibility than anything else, because if done right, it is possible to talk to print designers and graphic designers—in a language they understand.</p>
+<p>I’m currently working on a <a href="https://github.com/facjure/mesh">Garden library</a> and plan to show a few examples in my talk at ClojureWest. I have a long way to go, but it’s a start.</p>
+<p><strong>LC</strong>: What is the most common mistake programmers can fix with their typography?</p>
+<p><strong>PM</strong>: Vary contrast on the page by using the CSS font-xx and text-xx properties. For instance, take a plain html of your blog and practice typesetting header, body copy, certain subheadings, blockquotes, menu, and code blocks using different font weights and sizes and variants. See what happens. And please—don’t stick a default Helvetica into your body. Use a professional font, preferably in pairs. If in doubt, buy a print magazine. Steal.</p>
+<p><strong>LC</strong>: What resources would you point someone to to learn typography, grid layouts, and CSS?</p>
+<p><strong>PM</strong>: There are many resources.</p>
+<p>My favorite typography book is Mathew Butterick’s <a href="http://practicaltypography.com/">Practical Typography</a>; he’s a typeface designer and a lisp hacker. Ellen Lupton’s <a href="http://www.thinkingwithtype.com/">Thinking with Type</a> is an excellent book that covers both the history and an in-depth discussion on designing with Type. <a href="http://www.amazon.com/Grid-Systems-Graphic-Design-Communication/dp/3721201450">Grid Systems in Graphic Design</a> is considered a classic.</p>
+<p>There are plenty of CSS books: <a href="http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118008189.html">HTML5 &amp; CSS</a>, <a href="http://abookapart.com/products/css3-for-web-designers">CSS3 for web designers</a>, and anything written by Chris Coyler at <a href="http://csstricks.com/">csstricks.com</a>.</p>
+<p>When I spoke at Clojure/West last year I did <a href="https://www.youtube.com/watch?v=78akckfpvnQ">a demo</a>.</p>
+<p>Shameless plug—I’m writing a book on UI Design from a self-taught designer and programmer's perspective, and plan to publish it this summer.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>PM</strong>: My <a href="http://www.priyatam.com/">website</a> and <a href="https://twitter.com/priyatam">twitter</a>.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>PM</strong>: Clojure would be an Herb you would combine with others and drink, like good Oolong tea.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-interview-tom-faulhaber">
               Pre-West Interview: Tom Faulhaber
             </a>
@@ -1011,107 +1143,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <h3 id="about-james-macaulaytalk">About <a href="http://clojurewest.org/speakers#jmacaulay">James MacAulay</a></h3>
 <p><a href="https://github.com/jamesmacaulay">GitHub</a> - <a href="https://twitter.com/jamesmacaulay">Twitter</a></p>
 <p><a href="http://clojurewest.org/speakers#jmacaulay"><img src="http://www.lispcast.com/img/pre-west/jmacaulay.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
-</p>
-
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-West Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-  </p>
-  
-</div>
-
-<p>
-  
-<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-zach-tellman">
-              Pre-West Prep: Zach Tellman
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 15, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-everything-will-flowtalk">Talk: <a href="http://clojurewest.org/speakers#ztellman">Everything Will Flow</a></h3>
-<p><a href="http://clojurewest.org/speakers#ztellman">Zach Tellman's talk</a> at <em>Clojure/West</em> is about applying Queueing Theory to Clojure code.</p>
-<h4 id="background">Background</h4>
-<p>Zach Tellman is known for his philosophical talks. They connect a broad range of ideas. This talk is about Queueing Theory, which has its roots in telephone network analysis. Since core.async channels are essentially queues, knowledge of how queues behave is fundamental to using the library well.</p>
-<p>The <a href="http://en.wikipedia.org/wiki/Queueing_theory">Wikipedia page on Queueing Theory</a> is informative. There is kind of <a href="https://www.youtube.com/watch?v=rSZWig173xM">a longer lecture</a> if you're interested in going for an hour on the topic. Finally, I recommend <a href="https://www.youtube.com/watch?v=4dfk3ucthN8">this talk from the React conference</a>, which touches on queueing theory in computer systems.</p>
-<h3 id="about-zach-tellmantalk">About <a href="http://clojurewest.org/speakers#ztellman">Zach Tellman</a></h3>
-<p><a href="http://ideolalia.com/">Homepage</a> - <a href="https://github.com/ztellman">GitHub</a> - <a href="https://twitter.com/ztellman">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#ztellman"><img src="http://www.lispcast.com/img/pre-west/ztellman.jpg" /></a></p>
 <hr />
 
 <div class="article-cg-box">

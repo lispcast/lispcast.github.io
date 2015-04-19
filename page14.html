@@ -73,6 +73,118 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/json-serialization-api-clojure">
+              JSON Serialization for APIs in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 10, 2014
+          </div>
+
+          
+<p>Summary: <em>Clojure is well-suited for processing JSON, but there are some decisions you have to make to suit your application. The major decisions are actually easy, though they took me a while to figure out.</em></p>
+<p>I tend to use JSON instead of <a href="https://github.com/edn-format/edn"><code>edn</code></a> for an API serialization format, if only because JSON is more readily readable from other languages. I could do both, but it's good to <strong>eat your own dogfood and test those JSON code paths</strong>.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p><code>edn</code> is better, but JSON is generally pretty good. However, JSON's expressibility is decidedly a subset of the Clojure data structures, so there is <strong>considerable loss of information</strong> when going from Clojure to JSON. That information is not recovered in a round-trip, at least not automatically. There are lots of decisions that have to go into how to, at least partially, recover this.</p>
+<p>One bit of information that is lost is the type of keys to a map. JSON only allows strings as keys. Clojure allows anything. But most of the time, <strong>I find myself using <em>keywords</em> for keys</strong>. I say most, but really, it's the vast majority. Maps are bundles of named values pretty much all the time.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> So the optimal decision, after trying lots of combinations, is to convert keywords to strings (the default in JSON libraries I've seen) when emitting JSON; and to convert map keys (always strings in JSON) to keywords (also known as <code>keywordize-keys</code>) when parsing JSON. That covers nearly all cases, and pinpointed special cases can cover the rest.</p>
+<p>But that's not the end of the keyword/string story. What about namespaces? Surprisingly, the two major JSON libraries, <code>clojure.data.json</code> and <code>cheshire</code> handle things differently. <strong>How do you parse a JSON key that has a slash in it, indicating a namespace?</strong> If we're keywordizing (as I suggest above), they both give namespaced keywords (<code>keyword</code> will parse around the <code>/</code>). But when emitting JSON, they act differently. <code>clojure.data.json</code> will emit the <code>name</code> of the keyword (and ignore the <code>namespace</code>) while <code>cheshire</code> emits a string with <code>&quot;namespace/name&quot;</code>.</p>
+<p>I like to keep the namespace, or, put another way, I like to drop as little information as possible. So I prefer the namespace approach. I'm not sure how to get <code>clojure.data.json</code> to do that. <strong>I just use <code>cheshire</code></strong>.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup> The other gotcha for namespaces is that ClojureScript's <code>clj-&gt;js</code> and <code>js-&gt;clj</code> are similarly asymetrical.<sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup></p>
+<p>Keywords in other places besides the keys of maps will just get turned into strings, but they don't get converted back to keywords. That sucks, but it's minor. You'll just have to <strong>convert them back some other way</strong>. At work, we use <a href="https://github.com/prismatic/schema">Prismatic Schema</a>'s coercions. They do the trick nicely, in a declarative way.</p>
+<p>So, back to other JSON issues. The other issue is other data types. Dates, URI's, and UUID's are in our data as well. Dates, well, it's up to you how to encode them. I've always been a fan of the Unix timestamp. It's not exactly human readable, but it's universally parseable. There's also <strong>the ISO datetime format, which is probably a better bet</strong>--it's human readable and agreed upon among API designers. You could emit that as a string and coerce back to a Date object later.</p>
+<p>URI's and UUID's are by definition strings, so that's easy. How do you set up <code>cheshire</code> to handle the encoders? It's pretty simple, really.</p>
+<pre><code>(cheshire.generate/add-encoder java.net.URI cheshire.generate/encode-str)</code></pre>
+<p>That means add the encoder for the <code>java.net.URI</code> type to be encoded as a JSON string. <code>str</code> will be called on the value. You can figure out the other types you need. There are <strong>some JSON emission settings built-in, including Date (the ISO string format) and UUID</strong>. Weirdly URI is not in there, so you have to add it.</p>
+<p>What's next? Oh, pretty-printing. Yeah, I pretty-print my JSON to go over the wire. It's nice for debugging. I mean, who wants to <code>curl</code> one long, 1000-character line of JSON? <strong>Put some whitespace</strong>, please! How to do that?</p>
+<pre><code>(cheshire.core/generate-string mp {:pretty true})</code></pre>
+<p>That's right, it's basically built in, but you have to specify it. But, oh man, <strong>that's long</strong>. I don't want to type that, especially because my lazy fingers are going to not do it one time, then I'm going to look at the JSON in my browser and see a one-line JSON mess. So, what do I do? I put all my JSON stuff for each project in <code>json.clj</code>. It's got all my <code>add-encoder</code> stuff, and it's got two extra functions, just for laziness<sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup>:</p>
+<pre><code>(defn parse [s]
+  (cheshire.core/parse-string s true))
+
+(defn gen [o]
+  (cheshire.core/generate-string o {:pretty true}))</code></pre>
+<p>Or of course whatever options you want to pass those functions. This one is my choice--you make your choice. But <strong>these two functions are all I use most of the time</strong>. Parsing strings and generating strings. Woohoo! Much shorter and less to keep in my little head.</p>
+<p>Well, that just about wraps up my JSON API story. There's the slight detail of <strong>outputting JSON from <code>liberator</code></strong>, which is its own blog post. And there's a bit of <strong>generative testing I do to really challenge my assumptions</strong> about how I set up the round-tripping. But that, too, is another blog post for another day. Oh, and what about <strong>all that JSON middleware</strong>? Again, another post.</p>
+<p>If you like peanut butter and you like jelly, you will probably like peanut butter and jelly sandwiches. If you like web and you like Clojure, you will most definitely like <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure</a>, which is a <strong>gentle, soothing, visually rich video course ushering in the fundamentals of Clojure web development</strong> through your eyes and ears and down through your fingertips and into your very own Heroku-hosted web server. At least <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#preview">watch the preview</a>!</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It may be hubristic to think anyone else will use my API.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>There are exceptions, but these typically are not communicated to the outside. Those that are need special-casing. C'est la vie!<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p><code>:key-fn</code> in <code>clojure.data.json</code> only works for keys, not all keywords. Emitting a keyword in any other place emits the <code>str</code> of it, which includes the <code>:</code> in the string. Ick.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><code>clj-&gt;js</code> uses <code>name</code> for keywords and <code>str</code> for symbols, so keywords lose their namespace when emitting JSON, but retain their namespace when parsing key strings as keywords.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>also known as ease, peace of mind, DRY, and cleanliness<a href="#fnref5">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/what-is-functional-programming">
               What is Functional Programming?
             </a>
@@ -694,7 +806,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
 <li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
 <li><a href="http://www.lispcast.com/less-abstraction-combination">LESS has Better Forms of Abstraction than CSS</a></li>
-<li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
+<li><a href="http://www.lispcast.com/pre-west-interview-priyatam-mudivarti">Pre-West Interview: Priyatam Mudivarti</a></li>
 </ul>
 
 
@@ -1147,101 +1259,6 @@ No spam. Ever.
 <li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
 <li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
 </ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/when-to-use-a-macro">
-              When To Use a Macro in Clojure
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            March 07, 2014
-          </div>
-
-          
-<p>Summary: <em>Macros should be avoided to the extent possible. There are three circumstances where they are required.</em></p>
-<p>There's a common theme in Lisp that you should only use macros when you need them. <strong>It is very common to see a new lisper overuse macros.</strong> I did it myself when I first learned Lisp. They are very powerful and make you the king of syntax.</p>
-<p>Clojure macros do have their uses, but why should you avoid them if possible? The principle reason is that <strong>macros are not first-class in Clojure</strong>. You cannot access them at runtime. You cannot pass them as an argument to a function, nor do any of the other powerful stuff you've come to love from functional programming. In short, <strong>macros are not functional programming</strong> (though they can make use of it).</p>
-<p>A function, on the other hand, is a first-class value, and so is available for awesome functional programming constructs. <strong>You should prefer functions to macros.</strong></p>
-<p>That said, macros are still useful because there are things macros can do that functions cannot. <strong>What are the powers of a macro that are unavailable to any other construct in Clojure?</strong> If you <em>need</em> any of these abilities, write a macro.</p>
-<h3 id="the-code-has-to-run-at-compile-time">1. The code has to run at compile time</h3>
-<p>There are just some things that need to happen at compile time. I recently wrote a macro that returns the hash of the current git commit so that the hash can be embedded in the ClojureScript compilation. This needs to be done at compile time because the script will be run somewhere else, where it cannot get the commit hash. Another example is <strong>performing expensive calculations at compile time as an optimization</strong>.</p>
-<p>Example:</p>
-<pre><code>(defmacro build-time []
-  (str (java.util.Date.)))</code></pre>
-<p>The <code>build-time</code> macro returns a String representation of the time it is run.</p>
-<p><strong>Running code at compile time is not possible in anything other than macros.</strong></p>
-<h3 id="you-need-access-to-unevaled-arguments">2. You need access to unevaled arguments</h3>
-<p>Macros are useful for writing <strong>new, convenient syntactic constructs</strong>. And when we talk about syntax, we are typically talking about raw, <strong>unevaluated sexpressions</strong>.</p>
-<p>Example:</p>
-<pre><code>(defmacro when
-  &quot;Evaluates test. If logical true, evaluates body in an implicit do.&quot;
-  {:added &quot;1.0&quot;}
-  [test &amp; body]
-  (list &#39;if test (cons &#39;do body)))</code></pre>
-<p><code>clojure.core/when</code> is a syntactic sugar macro which transforms into an <code>if</code> with a <code>do</code> for a <em>then</em> and no <em>else</em>. The <code>body</code> should not be evaled before the <code>test</code> is checked.</p>
-<p>Getting access to the unevaluated arguments is available by quoting (<code>'</code> or <code>(quote ...)</code>), but that is <strong>often unacceptable for syntactic constructs</strong>. Macros are the only way to do that.</p>
-<h3 id="you-need-to-emit-inline-code">3. You need to emit inline code</h3>
-<p>Sometimes calling a function is unacceptable. That call is either too expensive or is otherwise not the behavior you want.</p>
-<p>For instance, in Javascript in the browser, you can call <code>console.log('msg')</code> to print out a message and the line number to the console. In ClojureScript, this becomes something like this: <code>(.log js/console &quot;msg&quot;)</code>. Not convenient at all. <strong>My first thought was to create a function.</strong><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
-<pre><code>(defn log [msg]
-  (.log js/console msg))</code></pre>
-<p>This worked alright for printing the message, but the line numbers were all pointing to the same line: the body of the function! <code>console.log</code> records the line exactly where it is called, so <strong>it needs to be inline</strong>. I replaced it with a macro, which highlights its purpose as syntactic sugar.</p>
-<p>Example:</p>
-<pre><code>(defmacro log [msg]
-  `(.log js/console ~msg))</code></pre>
-<p>The body replaces the call to log, so <strong>it is located where it is needed for the proper behavior.</strong></p>
-<p>If you need <strong>inline code</strong>, a macro is the only way.</p>
-<h3 id="other-considerations">Other considerations</h3>
-<p>Of course, <strong>any combination of these is also acceptable</strong>. And don't forget that although you might need a macro, macros are only available at compile time. So you should consider <strong>providing a function that does the same thing</strong> and then wrap it with a macro.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Macros are very powerful. Their power comes with a price: they are only available at compile time. Because of that, functions should be preferred to macros. The use of macros should be reserved for those special occasions when their power is needed.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/exponential-backoff">Exponential Backoff</a></li>
-<li><a href="http://www.lispcast.com/lisp-with-macros-language-stack">Lisp with Macros is Two Languages</a></li>
-<li><a href="http://www.lispcast.com/try-three-times">Try Three Times</a></li>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>As it should be :)<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
 
 
           <div class="endmark">

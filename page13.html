@@ -73,6 +73,84 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/four-features-javascript-can-steal-from-clojure">
+              4 Features Javascript can steal from Clojure(Script)
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            September 17, 2014
+          </div>
+
+          
+<p>Summary: <em>ClojureScript adds a lot of value on top of the Javascript platform. But some of that value can be had directly in Javascript without using a new language.</em></p>
+<p><strong>ClojureScript is a dialect of Clojure that compiles to Javascript.</strong> It lets you run Clojure in a browser or on Node. Just like Clojure, it has immutable data structures, literals for those data structures, macros, and core.async support.</p>
+<p>These features are very powerful and they give ClojureScript a lot of power above Javascript. But a lot of that power can be had in Javascript through libraries, tools, and now some ES6 features. If you can't make the switch to ClojureScript, these tools might help you out. If you've heard of all the cool stuff that ClojureScript can do, well, this might be <strong>a good way to dip your toes in</strong> before you jump in.</p>
+<h3 id="use-clojurescripts-awesome-data-structures-in-javascriptmori">1. <a href="http://swannodette.github.io/mori/">Use ClojureScript's awesome data structures in Javascript</a></h3>
+<p>David Nolen, the maintainer of ClojureScript, has wrapped up the <strong>ClojureScript immutable data structures to be used as a Javascript library</strong> which he calls <a href="http://swannodette.github.io/mori/">mori</a>. He's put in a lot of work to make it convenient to use from Javascript. It's not just the datastructures. It also has all of the functional goodness that makes them powerful to use.</p>
+<h3 id="write-csp-like-core.async-without-core.asynccsp">2. <a href="https://github.com/ubolonton/js-csp">Write CSP like core.async without core.async</a></h3>
+<p>CSP stands for Communicating Sequential Processes. It's a model of concurrency that is <strong>used in Go and in Clojure core.async</strong>. It's a powerful tool, especially in Javascript, where you don't have threads. Once you use it, you'll never go back.</p>
+<p>Well, thanks to Generators in EcmaScript 6, <strong>you can write CSP code in Javascript</strong>. There's a library called <a href="https://github.com/ubolonton/js-csp">js-csp</a> that does just that.</p>
+<h3 id="better-data-formats-than-jsontransit">3. <a href="https://github.com/cognitect/transit-format">Better data formats than JSON</a></h3>
+<p>JSON is a great format for data exchange, but <strong>it has limitations</strong>. One of the biggest limitations is that it is not extensible. You cannot define new types. Wouldn't it be nice to have values that get parsed as Javascript Date objects? Another limitation is that map keys can only be strings.</p>
+<p>The <a href="https://github.com/edn-format/edn">edn format</a> is <strong>Clojure's literal syntax made into a data format</strong>. It includes many data structures, including symbols, keywords, sets, maps, lists, and vectors. It is also extensible with tagged literals, meaning a small tag can be placed in front of a value to indicate the semantic meaning of that value. There are a couple of built-in tags, such as #instant for Dates and #uuid for, yes, UUIDs. But the important thing is <strong>you can define your own and define how they get parsed</strong>.</p>
+<p>There's a <a href="https://github.com/shaunxcode/jsedn">Javascript library</a> for parsing and generating edn.</p>
+<p>edn is a great format, but parsing it in Javascript is never going to be as fast as parsing JSON. The JSON parser is written in C and highly optimized. Because of that limitation, the folks who build Clojure wrote <a href="https://github.com/cognitect/transit-format">Transit</a>, which is <strong>a data format that serializes to JSON</strong>. It's semantically equivalent to edn, so it's extensible, but it's also JSON, so it's fast to parse. There's a <a href="https://github.com/cognitect/transit-js">Javascript implementation</a>.</p>
+<h3 id="write-your-own-syntax-with-macrossweet">4. <a href="http://sweetjs.org/">Write your own syntax with macros</a></h3>
+<p>Macros are one of those legendary things Lisps are known for. They let you write code that writes code. Well, that's kind of a meaningless statement. Think of it more like extensible syntax. You can <strong>write a new type of syntax</strong> which will be <strong>translated to plain Javascript</strong>.</p>
+<p>There's a macro system for Javascript called <a href="http://sweetjs.org/">Sweet.js</a>. The macro system is similar to the one found in Scheme systems. This isn't directly from Clojure, but you get the same power. <strong>Macros are a great way to extend a language.</strong> You no longer have to wait for a new language feature to be implemented. You can do it yourself.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>The Javascript community is active and growing. There are plenty of smart people making cool libraries that can revolutionize your programs. One of Clojure's philosophies is to have <strong>a small core language and extend</strong>, to the extent possible, using libraries<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. So, those libraries can often be leveraged outside of Clojure, which is true in the case of mori. Or they are simply standardized to work cross-platform, like edn and Transit. CSP and macros are simply powerful tools that can be added to many languages.</p>
+<p><strong>Go give these tools a try.</strong> If you like them, you might like Clojure/ClojureScript. They will be here when you're ready. And when you <em>are</em> ready, I must recommend <a href="www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course designed and produced to take you from zero to Clojure.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Those libraries often contain macros which extend the base language.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/convince-your-boss-to-use-clojure">
               Convince your boss to use Clojure
             </a>
@@ -930,76 +1008,6 @@ No spam. Ever.
 <li id="fn1"><p>Don't say &quot;the browser&quot; because there are many and they are different.<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>Let's imagine these functions exist and work as expected.<a href="#fnref2">↩</a></p></li>
 <li id="fn3"><p>And thank Clojure for the <code>atom</code>, which is like a cross or holy water when you find yourself <em>down there</em>.<a href="#fnref3">↩</a></p></li>
-</ol>
-</div>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/stop-refactoring-and-start-factoring">
-              Stop Refactoring and Start Factoring
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            July 24, 2014
-          </div>
-
-          
-<p>Summary: <em>Refactoring is focused on the quality of code, while factoring aims to uncover the underlying beauty of the problem domain, as expressed in code. Instead of cleaning up your code, try factoring.</em></p>
-<p>You have some code. You notice that it's not too readable. Maybe it's a little messy. There are some obvious code smells: some repeated code and large functions.</p>
-<p>You start refactoring. After a while, it's a clean, neat bit of code. It's very understandable and will be cheaper to modify next time.</p>
-<p><strong>But is it correct?</strong></p>
-<p>I don't mean in the &quot;all-the-tests-pass&quot; kind of way, because refactoring takes care of that. I mean: <strong>does the code do what it should?</strong> Refactoring only says that it does not modify the outward behavior of the code, not make it more correct. And although it's clear what the code <em>does</em> (thanks to all that cleanup), it's not clear that the code <em>does what it should</em>.</p>
-<p>I am a big fan of the book <a href="http://www.amazon.com/gp/product/0201485672/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0201485672&amp;linkCode=as2&amp;tag=lisp0b-20&amp;linkId=XFG25IMDVIX7JQY7">Refactoring</a> by Martin Fowler. It's an edifice of analytical thinking and presentation. Go read it now. <strong>It will make you a better thinker and programmer.</strong> However, I have a slight, semantic beef with refactoring. Here's Fowler's definition from the book:</p>
-<blockquote>
-<p><em>noun:</em> a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior</p>
-<p><em>verb:</em> to restructure software by applying a series of refactorings without changing its observable behavior</p>
-</blockquote>
-<p>That's a great definition of refactoring. My beef is not with the definition. <strong>My beef is with its purpose</strong>, which is to &quot;make it easier to understand and cheaper to modify&quot;. Again, it's a great thing to make your code easier to understand and cheaper to modify. But that's not what I'm after, most of the time.</p>
-<p>What I'm after is <em>code that models the problem</em>. This is the <strong>only reliable way to make software that works</strong>. Code that inadequately models the problem is littered with nested conditionals for special cases, is unnecessarily bound in time and context, and is generally obtuse. You might be able to understand what the code is doing, but it's unclear whether it should be doing it.</p>
-<p>The only known way to write code that models the problem is to <em>factor</em>. Let's get a definition:</p>
-<blockquote>
-<p><em>verb:</em> to decompose code to reveal the structure of the problem</p>
-</blockquote>
-<p><strong>Factoring is inherently about decomposition.</strong> It means splitting functions into smaller functions (along the structural lines of the problem). It means finding those functions which are fundamental to the problem (you can tell they are fundamental because they are used in multiple places). It means revealing symmetries. It means separating concerns. Factoring is about uncovering structural beauty in problem domains.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Symmetry, proportion, and harmony.</p>
-<p>The problem with factoring is that it takes a long time. And you actually <strong>have to understand the domain</strong>. You have to explore the problem a lot longer, perhaps trying different variations in the code, before you can be satisfied that the code models the problem. Time is not something we have in our &quot;Just ship it!&quot; modern world.</p>
-<p>The feeling of refactoring is like bringing order to a room: you put things away, you label things clearly, you might even throw out some old junk. But the feeling of factoring is like rebuilding a room for a specific purpose. Refactoring is cleaning up the kitchen. <strong>Factoring is taking the kitchen apart and building a new kitchen better suited to the styles of the individual chef.</strong> It's not practical to rebuild your kitchen all the time, though it is practical to tidy up. But when you do it, it makes all the difference.</p>
-<p>That metaphor gets at the other fundamental difference between factoring and refactoring: refactoring does not change the behavior of the code, while factoring might. It might because the code might turn out to be incorrect for the problem. Refactoring can reveal bugs. But if you're going to fix the bug, you've stopped refactoring and gone to something else. In factoring, changing the behavior is just part of the process. <strong>From the factoring perspective, you're not fixing a bug. You're correcting the expression of your problem.</strong></p>
-<p>Refactoring by design and definition is focused on the code itself. Factoring is more of a process. It's a journey the programmer takes into the heart of the problem. In its wake, the hills and valleys of the problem are mapped out in the code. <strong>And the programmer ends, like in most journeys, a different person.</strong></p>
-<div class="article-cg-box">
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>I suggest you choose a good notation.<a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
 

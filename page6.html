@@ -73,6 +73,111 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/conj-mental-bump">
+              The conj Mental Bump
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 23, 2015
+          </div>
+
+          
+<p>Summary: <em><code>conj</code> can be confusing if you're used to other languages. It is not a commonly defined operation. Most languages define common positional adding operations. <code>conj</code>, however, has more useful semantics. How do you use <code>conj</code> usefully if you can't guarantee the position?</em></p>
+<p>When I was at university, we were taught object-oriented programming as it exists in Java. We learned about interfaces, inheritance, and the <a href="http://en.wikipedia.org/wiki/Liskov_substitution_principle"><em>Liskov Substitution Principle</em></a>. It makes sense. If you're claiming that you've got a (sub)type of car, <strong>it still has to do everything a car can do</strong>. Otherwise it's not really a subtype of car.</p>
+<h3 id="the-point-of-confusion">The point of confusion</h3>
+<p>Whenever I'm teaching someone Clojure, there's <strong>a point in the journey where everyone gets at least curious</strong>, if not outright confused.</p>
+<pre><code>(conj &#39;(1 2 3) 4) ;;=&gt; &#39;(4 1 2 3)</code></pre>
+<p>vs</p>
+<pre><code>(conj [1 2 3] 4) ;;=&gt; [1 2 3 4]</code></pre>
+<p>What's the deal? <strong>Does <code>conj</code> add to the beginning or the end?</strong> What possible contract could allow both of these behaviors?</p>
+<p>Then I show them that the confusion goes even deeper:</p>
+<pre><code>(conj #{1 2 3} 4) ;;=&gt; #{1 4 2 3} ;; or some other random order</code></pre>
+<p>and</p>
+<pre><code>(conj {1 2 3 4} [5 6]) ;;=&gt; {1 2 3 4 5 6}</code></pre>
+<p>What gives? How is this even possible? <strong>Do hashmaps and linked lists even share a common class ancestor?</strong></p>
+<p>The answer is, <em>sure, if you want them to</em>. The student must get over a tiny conceptual bump. And once that bump is surmounted, poof, a new way of seeing is discovered.</p>
+<h3 id="the-bump">The bump</h3>
+<p>Let's get over that bump right here, right now.</p>
+<p>Let's imagine a traditional collection interface, let's call it <code>List</code>. It has two methods, <code>addFirst</code> and <code>addLast</code> that add new elements. So you write an algorithm that adds a bunch of items to the end with <code>addLast</code>. It takes a <code>List</code> as argument, because that's <strong>the least subtype you need to perform the algorithm</strong>.</p>
+<p>You call that algorithm with an <code>ArrayList</code>, which has the nice property that <code>addLast</code> is constant time. Woohoo! <strong>Your algorithm is fast and great.</strong></p>
+<p>A few months later, you get a phone call from another developer. He's complaining that he used your routine and can't figure out why it's so slow. It was working fine for a while, but <strong>as the users generated more records in the database</strong>, the routine was grinding to a hault.</p>
+<p>You check out the code and immediately see the problem: the database query was returning not an <code>ArrayList</code> but a <code>LinkedList</code>. The implementation of <code>addLast</code> on <code>LinkedList</code>s is actually linear. <strong>Adding a bunch of stuff to the end was turning into a quadratic operation.</strong></p>
+<p>Let's say that again: even though the location semantics of the operation were the same, <code>addLast</code> on one had constant time and on the other had linear time. They both gave equivalent lists, but one of them was too slow. <strong>Does this satisfy the Liskov Substitution Principle?</strong> In practice, can you <em>really</em> substitute one for the other? <strong>Algorithmic complexity matters.</strong></p>
+<p>Clojure avoids that mess (while swapping it for another, which I'll get to shortly). It defines <code>conj</code>, which means not &quot;put this at the beginning&quot; or &quot;put this at the end&quot;, but &quot;hey, collection, you know yourself better than I ever can. Please add this wherever it makes sense for you as long as you <strong>do it in constant time</strong>. Thanks.&quot;<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p>Practically, that means that <code>conj</code> on <code>LinkedList</code> adds to the front, because that's constant time. And <code>conj</code> on <code>ArrayList</code> adds to the end. But, because the operation doesn't talk about order, like <code>addFirst</code> and <code>addLast</code> do, you can now extend <code>conj</code> to <code>Set</code> and even <code>Map</code> if you consider key/value pairs as single items. And that means that linear algorithms using <code>conj</code> will <strong>remain linear regardless of which collection you use</strong>.</p>
+<h3 id="the-mess-that-clojure-chooses-over-the-other-mess">The mess that Clojure chooses over the other mess</h3>
+<p>Does this satisfy the Liskov Substitution Principle? Well, that depends on how you look at it. You certainly <strong>don't guarantee that you get the same or even equivalent answers out</strong>. Consider this:</p>
+<pre><code>(def a [1 2 3])
+(def b &#39;(1 2 3))
+
+(= a b) ;;=&gt; true
+(= (conj a 4) (conj b 4)) ;;=&gt; false</code></pre>
+<p>So, here, performing the same operation on two equal values does not give equal results. That's kind of hard to reason about. <strong>But it's a similar tradeoff that you see with other operations that don't guarantee order.</strong> For instance, imagine two sets <code>a</code> and <code>b</code>.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<pre><code>(= a b) ;;=&gt; true
+
+(= (seq a) (seq b)) ;;=&gt; could be false!</code></pre>
+<p>The order of most sets is not guaranteed! This means that Clojure has some operations that do not maintain equality. <code>conj</code> just happens to be one of them.</p>
+<h3 id="whats-the-point">What's the point?</h3>
+<p>So Clojure does not provide <code>add</code> operations that guarantee order regardless of collection type. Fine. What's the point?</p>
+<p>The point is that, in practice, <code>conj</code> is more useful than <code>addFirst</code> and <code>addLast</code> combined. By defining a function using <code>conj</code>, <strong>it will work on a broader number of collections</strong>. It might give different answers for each, but it won't explode on one and do fine on the rest. And often <strong>the answers it gives are just fine</strong>. A basic version of <code>into</code> can be defined very easily. It works on all collections (for both <code>to</code> and <code>from</code>).</p>
+<pre><code>(defn into [to from]
+  (reduce conj to from))</code></pre>
+<h3 id="common-usage">Common usage</h3>
+<p>One last thing before I wrap up: because the <em>collection itself</em> defines where the item will be added, I often find myself choosing the collection based on where I need it. A common idiom in Common Lisp was to make a new list by <code>cons</code>ing onto the front, then reversing it at the end because you really wanted them in the other order. In Clojure, there's no need, because you can just use a vector (and use <code>conj</code>). <strong>As long as the vector is local to the algorithm, it's not part of the contract, so it's your choice.</strong></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Java was wrong. <code>addFirst</code> and <code>addLast</code> cannot be substituted in <code>LinkedList</code> and <code>ArrayList</code>. They have <strong>different algorithmic complexities</strong> and at some point one's performance will be totally unacceptable. The operation that <em>does</em> allow for substitutibility in algorithm complexity is <code>conj</code>, which is always constant time. But then it doesn't maintain equality. However, I find that <code>conj</code> is way more natural and helps algorithmic reasoning more than guaranteeing <em>where</em> the item is placed.</p>
+<p>If you'd like to learn Clojure, I recommend my video course <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a>. It's a great introduction to the language using animations, exercises, and screencasts. It's designed to give a deep dive straight to what makes Clojure interesting. It begins with syntax, goes through functional programming, and ends with data-driven programming.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It's even polite!<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><code>(def a (set (range 100))) (def b (apply sorted-set (range 100)))</code><a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-elango-cheran">
               Pre-West Prep: Elango Cheran
             </a>
@@ -980,109 +1085,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
 <li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
 <li><a href="http://www.lispcast.com/pre-west-brandon-bloom">Pre-West Prep: Brandon Bloom</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-melanie-mitchell">
-              Pre-West Prep: Melanie Mitchell
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            March 17, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-visual-situation-recognition-an-integration-of-deep-networks-and-analogy-makingtalk">Talk: <a href="http://clojurewest.org/speakers">Visual Situation Recognition: An Integration of Deep Networks and Analogy-Making</a></h3>
-<p><a href="http://clojurewest.org/speakers">Melanie Mitchell's keynote</a> at <em>Clojure/West</em> is about building computer systems that recognize visual situations.</p>
-<h4 id="background">Background</h4>
-<p>Melanie Mitchell is a researcher in Artificial Intelligence, complex systems, and machine learning. She did her PhD with Douglas Hofstadter, which resulted in Copycat, which was featured prominently in Hofstadter's book <a href="http://www.amazon.com/Fluid-Concepts-And-Creative-Analogies/dp/0465024750?tag=lisp0b-20">Fluid Concepts and Creative Analogies</a>. Perhaps coincidentally, Copycat was <a href="http://web.cecs.pdx.edu/~mm/how-to-get-copycat.html">written in Lisp</a>. The branch of Artificial Intelligence that she works in is probably different from what you would read in most texbooks or learn in college courses.</p>
-<p>As an introduction to her work, I would recommend <a href="https://www.youtube.com/watch?v=GYChwJq0310">Complexity a Guided Tour</a> (Youtube) for a good introduction to Complexity in general. And <a href="https://www.youtube.com/watch?v=6wRltq_qWDg">Using analogy to discover the meaning of images</a> (Youtube) as an introduction to her work with analogies.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Alex Miller (the conference organizer) is a fan of Hofstadter's. He invited Hofstadter to keynote at Strange Loop in 2013. He also had <a href="http://www.infoq.com/presentations/Brain-Computing">Jeff Hawkins talk about modeling the neocortex at Strange Loop 2012</a>.</p>
-<h3 id="about-melanie-mitchelltalk">About <a href="http://clojurewest.org/speakers">Melanie Mitchell</a></h3>
-<p><a href="http://web.cecs.pdx.edu/~mm/">Homepage</a> - <a href="https://twitter.com/MelMitchell1">Twitter</a> - <a href="http://www.amazon.com/Melanie-Mitchell/e/B001H6OO62?tag=lisp0b-20">Author page on Amazon</a></p>
-<p><a href="http://clojurewest.org/speakers"><img src="http://www.lispcast.com/img/pre-west/melanie%20mitchell.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
-</p>
-
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-West Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-  </p>
-  
-</div>
-
-<p>
-  
-<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
 </ul>
 
 

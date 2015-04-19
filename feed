@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Pre-West Interview: Leon Barrett</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-leon-barrett</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-leon-barrett</link>
+                  <pubDate>Sun 19 Apr 2015 10:38:47 AM CDT</pubDate>
+                  <description>
+                    Leon Barrett will talk about parallel programming in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-leon-barrett"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Pre-West Interview: Priyatam Mudivarti</title>
                   <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-priyatam-mudivarti</guid>
                   <link>http://www.lispcast.com/pre-west-interview-priyatam-mudivarti</link>
@@ -129,20 +143,6 @@
                     James MacAulay interview by Nola.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-james-macaulay"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Pre-West Interview: Zach Tellman</title>
-                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-zach-tellman</guid>
-                  <link>http://www.lispcast.com/pre-west-interview-zach-tellman</link>
-                  <pubDate>Wed 15 Apr 2015 11:43:01 PM CDT</pubDate>
-                  <description>
-                    Zach Tellman interview by Nola.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-zach-tellman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

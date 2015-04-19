@@ -73,6 +73,76 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/stop-refactoring-and-start-factoring">
+              Stop Refactoring and Start Factoring
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 24, 2014
+          </div>
+
+          
+<p>Summary: <em>Refactoring is focused on the quality of code, while factoring aims to uncover the underlying beauty of the problem domain, as expressed in code. Instead of cleaning up your code, try factoring.</em></p>
+<p>You have some code. You notice that it's not too readable. Maybe it's a little messy. There are some obvious code smells: some repeated code and large functions.</p>
+<p>You start refactoring. After a while, it's a clean, neat bit of code. It's very understandable and will be cheaper to modify next time.</p>
+<p><strong>But is it correct?</strong></p>
+<p>I don't mean in the &quot;all-the-tests-pass&quot; kind of way, because refactoring takes care of that. I mean: <strong>does the code do what it should?</strong> Refactoring only says that it does not modify the outward behavior of the code, not make it more correct. And although it's clear what the code <em>does</em> (thanks to all that cleanup), it's not clear that the code <em>does what it should</em>.</p>
+<p>I am a big fan of the book <a href="http://www.amazon.com/gp/product/0201485672/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0201485672&amp;linkCode=as2&amp;tag=lisp0b-20&amp;linkId=XFG25IMDVIX7JQY7">Refactoring</a> by Martin Fowler. It's an edifice of analytical thinking and presentation. Go read it now. <strong>It will make you a better thinker and programmer.</strong> However, I have a slight, semantic beef with refactoring. Here's Fowler's definition from the book:</p>
+<blockquote>
+<p><em>noun:</em> a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior</p>
+<p><em>verb:</em> to restructure software by applying a series of refactorings without changing its observable behavior</p>
+</blockquote>
+<p>That's a great definition of refactoring. My beef is not with the definition. <strong>My beef is with its purpose</strong>, which is to &quot;make it easier to understand and cheaper to modify&quot;. Again, it's a great thing to make your code easier to understand and cheaper to modify. But that's not what I'm after, most of the time.</p>
+<p>What I'm after is <em>code that models the problem</em>. This is the <strong>only reliable way to make software that works</strong>. Code that inadequately models the problem is littered with nested conditionals for special cases, is unnecessarily bound in time and context, and is generally obtuse. You might be able to understand what the code is doing, but it's unclear whether it should be doing it.</p>
+<p>The only known way to write code that models the problem is to <em>factor</em>. Let's get a definition:</p>
+<blockquote>
+<p><em>verb:</em> to decompose code to reveal the structure of the problem</p>
+</blockquote>
+<p><strong>Factoring is inherently about decomposition.</strong> It means splitting functions into smaller functions (along the structural lines of the problem). It means finding those functions which are fundamental to the problem (you can tell they are fundamental because they are used in multiple places). It means revealing symmetries. It means separating concerns. Factoring is about uncovering structural beauty in problem domains.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Symmetry, proportion, and harmony.</p>
+<p>The problem with factoring is that it takes a long time. And you actually <strong>have to understand the domain</strong>. You have to explore the problem a lot longer, perhaps trying different variations in the code, before you can be satisfied that the code models the problem. Time is not something we have in our &quot;Just ship it!&quot; modern world.</p>
+<p>The feeling of refactoring is like bringing order to a room: you put things away, you label things clearly, you might even throw out some old junk. But the feeling of factoring is like rebuilding a room for a specific purpose. Refactoring is cleaning up the kitchen. <strong>Factoring is taking the kitchen apart and building a new kitchen better suited to the styles of the individual chef.</strong> It's not practical to rebuild your kitchen all the time, though it is practical to tidy up. But when you do it, it makes all the difference.</p>
+<p>That metaphor gets at the other fundamental difference between factoring and refactoring: refactoring does not change the behavior of the code, while factoring might. It might because the code might turn out to be incorrect for the problem. Refactoring can reveal bugs. But if you're going to fix the bug, you've stopped refactoring and gone to something else. In factoring, changing the behavior is just part of the process. <strong>From the factoring perspective, you're not fixing a bug. You're correcting the expression of your problem.</strong></p>
+<p>Refactoring by design and definition is focused on the code itself. Factoring is more of a process. It's a journey the programmer takes into the heart of the problem. In its wake, the hills and valleys of the problem are mapped out in the code. <strong>And the programmer ends, like in most journeys, a different person.</strong></p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>I suggest you choose a good notation.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/ring-1-3">
               Ring 1.3
             </a>
@@ -973,267 +1043,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
 <li><a href="http://www.lispcast.com/less-abstraction-combination">LESS has Better Forms of Abstraction than CSS</a></li>
 <li><a href="http://www.lispcast.com/pre-west-interview-priyatam-mudivarti">Pre-West Interview: Priyatam Mudivarti</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/clojure-web-security">
-              Clojure Web Security
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 05, 2014
-          </div>
-
-          
-<p>Summary: <em>Use the OWASP Top Ten Project to minimize security vulnerabilities in your Clojure web application.</em></p>
-<p>Aaron Bedra gave a very damning talk about <a href="https://www.youtube.com/watch?v=CBL59w7fXw4">the security of Clojure web applications</a>. He went so far as to say that Clojure web apps are some of the worst he has seen. You should <a href="https://www.youtube.com/watch?v=CBL59w7fXw4">watch the talk</a>. He has some good recommendations.</p>
-<p>One of the jobs of web frameworks is to handle security concerns inherent in the web itself. Because most Clojure programmers build their own web stack, they often <strong>fail to look at the security implications of their application</strong>. They do not protect their site from even the easiest and most common forms of vulnerabilities. These vulnerabilities are problems with the way the web works, not with the particular server technology, yet it has become the server's responsibility to mitigate the vulnerabilities. Luckily, <strong>the vulnerabilities are well-studied and there are known fixes</strong>.</p>
-<p>The <a href="https://www.owasp.org/index.php/Main_Page">Open Web Application Security Project (OWASP)</a> does a very good job of documenting common web vulnerabilities and providing good fixes for them. They have a project called the <a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project#tab=OWASP_Top_10_for_2013">Top Ten Project</a> which every web developer should refer to regularly and use to improve the security of their app. You should also run through the <a href="https://code.google.com/p/owasp-asvs/wiki/ASVS">Application Security Verification Standard</a> checklists to audit your code. <strong>But the Top Ten should get you to understand the basics.</strong></p>
-<p>Warning: <em>I am not a security expert. You should do your own research. The code I present here is my own interpretation of the OWASP recommendations. It has not been audited by experts. Do your own research!</em></p>
-<p>Also, security is an ongoing concern. <strong>If you have any comments, suggestions, or questions, please bring them up!</strong></p>
-<p>Here is the Top Ten 2013 with a small breakdown and a Clojure solution, if applicable.</p>
-<h3 id="a1.-injectiona1"><a href="https://www.owasp.org/index.php/Top_10_2013-A1-Injection">A1. Injection</a></h3>
-<p>If a server accepts input from the outside and then <strong>parses and interprets that input as a scripting or query language, it is open to attack</strong>. The most common form is SQL Injection, where an input form is posted to the server, the value of that form is concatenated into a string to make a SQL statement, and then the SQL statement is sent to the database to be executed. What happens if a malicious user types in <code>&quot;'; DELETE FROM USERS;&quot;</code>?</p>
-<p>My preferred solution to SQL Injection in Clojure is to <strong>always use parameterized SQL statements</strong>. <code>clojure.java.jdbc</code>, supports these directly. <strong>The parameters will be escaped, making injection impossible.</strong></p>
-<p>Another problem is if you want to read in some Clojure data from the client, and you call <code>clojure.core/read-string</code> on it. <strong><code>read-string</code> will execute arbitrary Java constructors.</strong> For instance:</p>
-<pre><code>#java.io.FileWriter[&quot;myfile.txt&quot;]</code></pre>
-<p>This will create the file <code>myfile.txt</code> or overwrite if it already exists. Also, there is a form (called read-eval form) to execute code at read-time:</p>
-<pre><code>#=(println &quot;Hello, vulnerability!&quot;)</code></pre>
-<p><strong>Read in that string, and it will print. Any code could be in there.</strong></p>
-<p>The solution is to <strong>never use <code>clojure.core/read-string</code></strong>. Use <code>clojure.edn/read-string</code>, which is a well-documented format. It does not run arbitrary constructors. It has no read-eval forms.</p>
-<p>Summary: <em>Always use parameterized SQL and use <code>clojure.edn/read-string</code> instead of <code>clojure.core/read-string</code> on edn input.</em></p>
-<h3 id="a2-broken-authentication-and-session-managementa2"><a href="https://www.owasp.org/index.php/Top_10_2013-A2-Broken_Authentication_and_Session_Management">A2 Broken Authentication and Session Management</a></h3>
-<h4 id="authentication">Authentication</h4>
-<p>This is a big topic and I can't address it all here. Clojure has the <a href="https://github.com/cemerick/friend">Friend library</a>, which is the closest thing we have to a de facto standard. My suggestion is simply to <strong>read the entire Friend README</strong> and evaluate whether you should use it. This is serious stuff. Read it.</p>
-<h4 id="session-management">Session Management</h4>
-<p><strong>Ring provides a session system which is fairly good.</strong> It meets many of the <a href="https://code.google.com/p/owasp-asvs/wiki/Verification_V3">OWASP Application Security Verification Standard V3</a> requirements. But it does not handle all of them automatically. <strong>You still need code audits.</strong> For instance, if you are logging requests, OWASP recommends against logging the session key. You must ensure that the session key is added after the request is logged.</p>
-<p>The ASVS also recommends expiring your sessions after inactivity and also after a fixed period, regardless of activity. Ring sessions do not do this automatically (the builtin mechanism has no notion of expiration) and the <strong>default implementations of session stores will store and accept sessions indefinitely</strong>. A simple middleware will do the trick of expiring them in both cases:</p>
-<pre><code>(defn wrap-expire-sessions [hdlr &amp; [{:keys [inactive-timeout
-                                            hard-timeout]
-                                     :or {:inactive-timeout (* 1000 60 15)
-                                          :hard-timeout (* 1000 60 60 2)}}]]
-  (fn [req]
-    (let [now (System/currentTimeMillis)
-          session (:session req)
-          session-key (:session/key req)]
-      (if session-key ;; there is a session
-        (let [{:keys [last-activity session-created]} session]
-          (if (and last-activity
-                   (&lt; (- now last-activity) inactive-timeout)
-                   session-created
-                   (&lt; (- now session-created) hard-timeout))
-            (let [resp (hdlr req)]
-              (if (:session resp)
-                (-&gt; resp
-                    (assoc-in [:session :last-activity] now)
-                    (assoc-in [:session :session-created] session-created))
-                resp))
-            ;; expired session
-            ;; block request and delete session
-            {:body &quot;Your session has expired.&quot;
-             :status 401
-             :headers {}
-             :session nil}))
-        ;; no session, just call the handler
-        ;; assume friend or other system will handle it
-        (hdlr req)))))</code></pre>
-<p>Set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#HttpOnly_Attribute">HttpOnly attribute</a> on the session cookie. Very important for preventing stealing of session ids from XSS attacks.</p>
-<p><em>Do not</em> set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Domain_and_Path_Attributes">Domain attribute</a>, and <em>do</em> set the Path if you want something more restrictive than <code>/</code> (the Ring session default).</p>
-<p><em>Do not</em> set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Expire_and_Max-Age_Attributes">Expire and Max-Age</a> attributes. Setting them makes the browser store the session id on disk, which simply expands the number of ways an attacker can get ahold of it.</p>
-<p><a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Session_ID_Name_Fingerprinting">Change the session cookie name to something utterly generic</a>, like &quot;id&quot;. You don't want to leak more information than necessary about how your sessions work.</p>
-<p>Use HTTPS if you can and set the <a href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Secure_Attribute">Secure</a> attribute of the cookie.</p>
-<p>Do not use in-cookie sessions. In-memory are good but they can't scale past one machine. <a href="https://github.com/ptaoussanis/carmine"><code>carmine</code></a> has a redis-based session implementation.</p>
-<p>Summary: <em>Here's how I use Ring sessions (with <code>carmine</code>) based on these OWASP recommendations.</em></p>
-<pre><code>(session/wrap-session
-   (wrap-expire-sessions
-    handler
-    {:inactive-timeout 500
-     :hard-timeout 3000})
-   {:cookie-name &quot;id&quot;
-    :store (taoensso.carmine.ring/carmine-store redis-db
-             {:expiration-secs (* 60 60 15)
-             :key-prefix &quot;&quot;}) ;; leak nothing!
-    :cookie-attrs {:secure true :httponly true}})</code></pre>
-<h3 id="a3-cross-site-scripting-xssa3"><a href="https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS)">A3 Cross-Site Scripting (XSS)</a></h3>
-<p>Whenever text from one user is shown to another user, there is the potential for injecting code (HTML, JS, or CSS) that is run in the victim's browser. Imagine if Facebook allowed any HTML in the post submission form. A malicious user could add a <code>&lt;script&gt;</code> tag with some keystroke logging code. <strong>Anybody who viewed that post in their feed would also get the key logger installed.</strong> That would be bad.</p>
-<p>XSS is common because of how easy it is to make an app that stores user input (from a form post) in a database, then constructs the page out of stuff from the database. If you're not extremely careful, <strong>you could create a place where people can exploit each other</strong>.</p>
-<p>The solution is to <strong>only use scrubbed or escaped values to build HTML pages</strong>. Because HTML pages can include different languages (HTML, CSS, JS), text needs to be scrubbed differently in each context. OWASP has a <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">set of rules to follow which will guarantee XSS prevention</a>.</p>
-<p><code>hiccup.util/escape-html</code> (also aliased as <code>hiccup.core/h</code>) will escape all dangerous HTML characters into HTML entities. JS and CSS still need to be handled, and rules for HTML attributes need to be followed.</p>
-<p>If you want to allow some HTML elements, you will need to do a complex scrub. Luckily, <strong>Google has a <a href="https://code.google.com/p/owasp-java-html-sanitizer/wiki/GettingStarted">nice Java library that sanitizes HTML</a></strong>. Use it.</p>
-<p>Summary: <em>Validate and scrub input from the user and scrub/escape text on output.</em></p>
-<h3 id="a4-insecure-direct-object-referencesa4"><a href="https://www.owasp.org/index.php/Top_10_2013-A4-Insecure_Direct_Object_References">A4 Insecure Direct Object References</a></h3>
-<p>This one is a biggie: <strong>each handler has to do authentication</strong>. Does the particular logged in user have access to the resources requested? There's no way to automate this with a middleware. But having <em>some</em> system is better than doing it ad hoc each time. Remember: an attacker can construct any URL, including URLs with a database key in it. Don't assume that just because a request contains a key, the user must have the rights to it.</p>
-<p>Summary: <em>Always check the authority of the requesting session before performing an action.</em></p>
-<h3 id="a5-security-misconfigurationa5"><a href="https://www.owasp.org/index.php/Top_10_2013-A5-Security_Misconfiguration">A5 Security Misconfiguration</a></h3>
-<p>This is about keeping your software up to date and making sure the settings of all software makes sense.</p>
-<h3 id="a6-sensitive-data-exposurea6"><a href="https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure">A6 Sensitive Data Exposure</a></h3>
-<p>Having data is risky. Don't let it leak out.</p>
-<h3 id="a7-missing-function-level-access-controla7"><a href="https://www.owasp.org/index.php/Top_10_2013-A7-Missing_Function_Level_Access_Control">A7 Missing Function Level Access Control</a></h3>
-<p>Use an authorization system (<a href="https://github.com/cemerick/friend">Friend</a>) and audit the roles used for access control.</p>
-<h3 id="a8-cross-site-request-forgery-csrfa8"><a href="https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)">A8 Cross-Site Request Forgery (CSRF)</a></h3>
-<p>Let's imagine you have a bank account at Bank of Merica. You just checked your balance and didn't log out. Then you go to some public forum, where someone has posted a cool file. There's a big download button. You click it, and the next thing you know, you're on your bank page and all of your money has been transfered out of your account.</p>
-<p>What happened?</p>
-<p>The download button said &quot;Download&quot; but <strong>it was really a form submit button</strong>. The form had hidden fields &quot;to-account&quot;, and &quot;amount&quot;. The action of the form was &quot;http://www.bankofmerica.com/transfer-money&quot;. By clicking that button, <strong>the form was posted to the bank, and because you were just logged in, oops, it transfered all your money away</strong>.</p>
-<p>The solution is that you only want to <strong>accept form posts that come directly from your site</strong>, which you control. You don't want some random person to convince people to click on other sites to be able to transfer people's money like that.</p>
-<p>There are several possible solutions. One approach is to add a secret to the session and also insert that secret into every form. That is the approach taken by the <a href="https://github.com/weavejester/ring-anti-forgery">ring-anti-forgery</a> library.</p>
-<p>The solution that I like is to do a <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet#Double_Submit_Cookies">double-submit</a>. This means you submit a secret token in the cookie (sent with each web request) and in a hidden field in the form. The server confirms that the cookie and the hidden field match. But the hidden field in the form is added by a small Javascript script which reads it from the cookie. <strong>Browsers don't allow Javascript to read cookies from other sites, so you guarantee that they form was posted from your site.</strong></p>
-<p>There are three parts to the solution.</p>
-<ol style="list-style-type: decimal">
-<li>Install a secret token as a cookie.</li>
-<li>Install a script to add the hidden field to all forms.</li>
-<li>Check that the field matches the cookie on POSTs.</li>
-</ol>
-<p>Here is some code to do 1 and 3.</p>
-<pre><code>(defn is-form-post? [req]
-  (and (= :post (:request-method req))
-       (let [ct (get-in req [:headers &quot;content-type&quot;])]
-         (or (= &quot;application/x-www-form-urlencoded&quot; ct)
-             (= &quot;multipart/form-data&quot; ct)))))
-
-(defn csrf-tokens-match? [req]
-  (let [cookie-token (get-in req [:cookies &quot;csrf&quot;])
-        post-token   (get-in req [:form-params &quot;csrf&quot;])]
-    (= cookie-token post-token)))
-
-(defn wrap-csrf-cookie [hdlr]
-  (fn [req]
-    (let [cookie (get-in req [:cookies &quot;csrf&quot;]
-                         (str (java.util.UUID/randomUUID)))]
-      (assoc-in (hdlr req) [:cookies &quot;csrf&quot;] cookie))))
-
-(defn wrap-check-csrf [hdlr]
-  (fn [req]
-    (if (is-form-post? req)
-      (if (csrf-tokens-match? req)
-        ;; we&#39;re safe
-        (hdlr req)
-        ;; possible attack
-        {:body &quot;CSRF tokens don&#39;t match.&quot;
-         :status 400
-         :headers {}})
-      ;; we don&#39;t check other requests
-      (hdlr req))))</code></pre>
-<p>The Javascript should be something like this:</p>
-<pre><code>(def csrf-script &quot;(function() {
-  var cookies = document.cookie;
-  var matches = cookies.match(/csrf=([^;]*);/);
-  var token   = matches[1];
-  $(&#39;form&#39;).each(function(i, form) {
-    if(form.attr(&#39;method&#39;).toLowerCase() === &#39;post&#39;) {
-      var hidden = $(&#39;&lt;input /&gt;&#39;);
-      hidden.attr(&#39;type&#39;, &#39;hidden&#39;);
-      hidden.attr(&#39;name&#39;, &#39;csrf&#39;);
-      hidden.attr(&#39;value&#39;, token);
-      form.append(hidden);
-    }
-  })
-}());&quot;)</code></pre>
-<p>You should add it to all HTML pages. Note that this example script requires jQuery. Put it right before the <code>&lt;/body&gt;</code>.</p>
-<pre><code>[:script csrf-script]</code></pre>
-<p>The nice thing about this solution is that it is <strong>strict by default</strong>. If you don't include the script, form posts won't work (assuming <code>wrap-check-csrf</code> is in your middleware stack).</p>
-<p>Summary: <em>CSRF attacks take advantage of properties of the browser (instead of properties of your server), so their defense can largely be automated.</em></p>
-<h3 id="a9-using-components-with-known-vulnerabilitiesa9"><a href="https://www.owasp.org/index.php/Top_10_2013-A9-Using_Components_with_Known_Vulnerabilities">A9 Using Components with Known Vulnerabilities</a></h3>
-<p>Software with known vulnerabilities is easily attacked using scripts. You should ensure that all of your software is up-to-date.</p>
-<h3 id="a10-unvalidated-redirects-and-forwardsa10"><a href="https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards">A10 Unvalidated Redirects and Forwards</a></h3>
-<p>One common pattern for login workflow is to have a query parameter that contains the url to redirect to. Since it's a user parameter, <strong>it's open to the world and could be a doorway for attackers</strong>.</p>
-<p>For example, let's say someone sends an email to someone asking them to log in to their bank account. In it, there's this link:</p>
-<pre><code>http://www.bankofmerica.com/login?redirect=http://attackersite.com</code></pre>
-<p>What happens when they click? They see the legitimate site of their bank, which they trust. But it redirects them to the attacker's site, which has been designed to look like the bank site. <strong>The user might miss this change of domains and unwittingly reveal private information.</strong></p>
-<p>What can you do?</p>
-<p>OWASP recommends never performing redirects, which is impractical. The next best thing is to never base the redirect on a user parameter. This would work, but puts a lot of trust in the developers and security auditors to check that the policy is enforced. <strong>My preferred solution allows redirects that conform to a whitelist of patterns.</strong></p>
-<pre><code>(def redirect-whitelist
-  [#&quot;https://www.bankofmerica.com/&quot; ;; homepage
-   #&quot;https://www.bankofmerica.com/account&quot; ;; account page
-   ...
-  ])
-
-(defn wrap-authorized-redirects [hdlr]
-  (fn [req]
-    (let [resp (hdlr req)
-          loc (get-in resp [:headers &quot;Location&quot;])]
-      (if loc
-        (if (some #(re-matches % loc) redirect-whitelist)
-          ;; redirect on our whitelist, it&#39;s ok!
-          resp
-          ;; possible attack
-          (do
-            ;; log it
-            (warning &quot;Possible redirect attack: &quot; loc)
-            ;; change redirect back to home page
-            (assoc-in resp [:headers &quot;Location&quot;] &quot;https://www.bankofmerica.com/&quot;)))
-        resp))))</code></pre>
-<p>Summary: <em>Redirect attacks can largely be avoided by checking the redirect URL against a whitelist.</em></p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Web security is hard. It takes education and vigilance to keep our servers secure. Luckily, the main security flaws of the web are well-understood and well-documented. However, this is only half of the work. These need to be translated into Clojure either as libraries and simply as &quot;best practices&quot;. Further, these libraries and practices need to be discussed and kept top-of-mind.</p>
-<p>If programming the web in Clojure interests you, you might be interested in my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure</a> video series. It covers all of the basics of web development, building a foundation to understand the entire Clojure web stack.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free Ring Spec to hang on your wall
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/ring_spec_1_3.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
-</p>
-      
-<input id="mce-EMAIL"
-             class="email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][4]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
-<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
-<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
 </ul>
 
 

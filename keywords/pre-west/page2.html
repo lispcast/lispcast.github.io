@@ -1074,34 +1074,48 @@ Completely free. No spam, easy unsubscribe, and your info is private.
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
-               href="/pre-west-interview-luke-vanderhart">
-              Pre-West Interview: Luke Vanderhart
+               href="/pre-west-interview-leon-barrett">
+              Pre-West Interview: Leon Barrett
             </a>
           </h2>
 
           <div class="timestamp">
-            April 15, 2015
+            April 19, 2015
           </div>
 
           
 <div class="figure">
 <img src="http://www.lispcast.com/img/pre-west-prep.png" />
 </div>
-<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
-<p><a href="http://clojurewest.org/speakers#lvanderhart"><img src="http://www.lispcast.com/img/pre-west/lvanderhart.jpg"
-      style="float:right;width:150px"></a></p>
+<p><a href="http://clojurewest.org/speakers#lbarrett"><img src="http://www.lispcast.com/img/pre-west/lbarrett.jpg"
+style="float:right;width:150px"></a></p>
 <h3 id="introduction">Introduction</h3>
-<p>Luke Vanderhart is the next interview participant. He is <a href="http://clojurewest.org/speakers#lvanderhart">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about the ReactJS Landscape. The <a href="http://www.lispcast.com/pre-west-luke-vanderhart">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-luke-vanderhart">Interview with Luke Vanderhart</h3>
-<p><strong>Nola</strong>: How long have you been doing Clojure and how did you get into it?</p>
-<p><strong>Luke</strong>: I started using Clojure in 2008, shortly after its release. I had become interested in learning a Lisp, and since I was a Java programmer up to that point I was looking for one hosted on the JVM. Fortuitously, Clojure had just been released and so I found it and started playing with it.</p>
-<p><strong>Nola</strong>: What suggestions do you have for someone getting started with Clojure?</p>
-<p><strong>Luke</strong>: Find the simplest editor that works for you, don't try to learn a new editor at the same time you're learning a new language. Don't worry about the more complex language features or libraries - just geting a good grasp of the basics (namespaces, data structures, functions, let-blocks, higher-order-functions) will give you 95% of the power of Clojure. The rest will come easily.</p>
-<p><strong>Nola</strong>: Your talk is about the different incarnations of reactjs in clojure, what attracted you to it? Were you big into javascript before?</p>
-<p><strong>Luke</strong>: I am a long-time UI programmer and have worked with all kinds of user interfaces, from 3D games to Swing to HTML to various JS libraries. It's always been a frustrating experience. I am excited about React and its associated libraries because it's the first approach to UI development that strikes me as elegant and usable.</p>
-<p><strong>Nola</strong>: What is the average airspeed velocity of an unladen Clojure REPL?</p>
-<p><strong>Luke</strong>: About 11000 miles per second. Based on my latency to the REPL I'm running in a remote data center right now :)</p>
-<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<p>Leon Barrett was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#lbarrett">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about parallel programming in Clojure. The <a href="http://www.lispcast.com/pre-west-leon-barrett">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-leon-barrett">Interview with Leon Barrett</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Leon Barrett</strong>: Actually, I wasn't even aware of Clojure until I started at The Climate Corporation 2.5 years ago. I had used Lisp a number of times in school, so it wasn't too foreign, but I'd never imagined that I'd write Lisp for a living.</p>
+<p><strong>LC</strong>: Clojure is great for shared-memory parallelism. Is it good for distributed programming?</p>
+<p><strong>LB</strong>: It can be; the same set of abstractions that are helpful locally can be helpful when distributed. For instance, there are some nice Hadoop MapReduce tools (though I happen to dislike Cascalog--it doesn't mesh with my mental model of mapreduce). Of course, you have to do some extra work to support distributed computing, but all in all it's relatively pleasant.</p>
+<p><strong>LC</strong>: What are your preferred distributed Clojure abstractions?</p>
+<p><strong>LB</strong>: You know, I don't feel qualified to opine on this too much. I mostly end up working on tasks that are fairly embarrassingly parallel, and I spend more of my time worrying about single-machine parallelism (hence my need for Claypoole). The core idea in the better Clojure distribution work I've done was, for both Storm and Hadoop, to just write simple, functional data transformations and then let the distribution framework worry about everything else.</p>
+<p><strong>LC</strong>: Where should someone get started with distributed programming in Clojure?</p>
+<p><strong>LB</strong>: I think both Parkour and Storm are very nice, though I had some issues using Parkour on Amazon's EMR. Just working with those, it's pretty easy to write distributed tools without worrying about the hard distributed parts (data movement, reliability, etc) yourself.</p>
+<p><strong>LC</strong>: What makes Clojure great for parallel programming?</p>
+<p><strong>LB</strong>: Clojure is great for parallel programming because of three things: Immutability, good core libraries, and macros.</p>
+<p>First, the bane of parallel programming is mutable state; state makes parallel programs much harder to reason about. While it's possible to avoid shared state by writing functional programs with immutable data even in other languages, it's much easier in Clojure because all the standard libraries support it, so Clojure is easier to do parallelism with from the very beginning. Also, Clojure's parallelism features, such as future and deref, are well-designed and easy to use, making it very easy to get started with parallelism. Finally, macros make it possible to write parallel things without so much fuss; for instance, Clojure's futures (built with macros) are easier to use than Java's futures because they don't require any boilerplate. Similarly, the library core.async uses macros to add amazing parallel and asynchronous features as a library, whereas in other languages such features would need to be designed into the core language.</p>
+<p><strong>LC</strong>: Can you briefly explain Claypoole? What does it do? Why did you write it?</p>
+<p><strong>LB</strong>: I wrote Claypoole because I was dissatisfied with Clojure's built-in pmap for several reasons, including 2 in particular: First, I wanted to control the degree of parallelism, but core pmap's parallelism is determined only by the number of CPUs. Second, I wanted my pmaps to get things done as fast as possible, but core pmap is lazy and may be inefficient when the individual tasks have a high variance in duration.</p>
+<p>Claypoole's core feature is a pmap that meets my demands--it's eager, and I can control the degree of parallelism, even across multiple simultaenous pmaps. As a bonus, it turns out that once one has good control over sharing threadpools in pmaps, it's easy to add other such features, so Claypoole also does a number of related, handy things, such as parallel for (pfor), unordered pmaps that return results in the order they're completed (upmap), and so on. I see Claypoole as a tool to provide an advanced degree of control over parallelism.</p>
+<p><strong>LC</strong>: Those sound really handy! Do you use reducers in your work? Where have you found them most helpful?</p>
+<p><strong>LB</strong>: I don't actually use reducers a lot. I used them while working with Parkour, and they were very cute there. However, in my own work I've tended to prefer Claypoole. Reducers is good because it has much less overhead than chained maps, which is great for functionally combining small tasks. However, I find that I tend map bigger tasks, so I benefit more from fine-grained control of parallelism in Claypoole than I would from the efficiency of reducers.</p>
+<p><strong>LC</strong>: Do you have any good background materials for people who want to do a little pre-reading/watching?</p>
+<p><strong>LB</strong>: Nope. My talk will start with some basics to make sure that everyone's on the same page, and my initial test audiences seemed to indicate that my intro works well for both beginners and more advanced programmers.</p>
+<p><strong>LC</strong>: How can people help with Claypoole?</p>
+<p><strong>LB</strong>: I love pull requests, and I appreciate bug reports (obviously, repeatable test cases make my life easier). But mostly, my goal with open-sourcing Claypoole was to have the community do this stuff right once, rather than having lots of people making partial reimplementations that work on just their case. So, just use it! I want people to use Claypoole rather than reimplementing it.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>LB</strong>: I'm not terribly vocal online. I guess I post to the <a href="http://eng.climate.com/">Climate Corp engineering blog</a> every so often.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>LB</strong>: One could claim that it'd be Cajun blackened catfish, because it's lean and full of flavor.</p>
 <hr />
 
 <div class="article-cg-box">

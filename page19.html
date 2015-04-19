@@ -73,6 +73,38 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="https://oracleus.activeevents.com/connect/sessionDetail.ww?SESSION_ID=3242">
+              Clojure/ClojureScript: One Language to Rule the Web
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/clojure-clojurescript-one-language-to-rule-the-web">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 11, 2012
+          </div>
+
+          
+<p>Nice intro to Clojurescript.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/static-vs-dynamic-typing">
               Static vs. Dynamic Typing
             </a>
@@ -430,46 +462,6 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 </ol>
 <p>If you can modify the account class(es) to implement the interfaces, you should be ok with those files. But if you can't, you'll have to use the &quot;Bridge&quot; pattern that I learned in school. Basically, you make a new class for each combination of class and interface. So you would have SavingsAccountMoneySource, SavingsAccountMoneyDestination, CheckingAccountMoneySource, and CheckingAccountMoneyDestination. And OOP was supposed to need less code!</p>
 <p>This video tells me that object-oriented programming as it is taught today has been going way down the wrong track. The lessons the static object-oriented languages have learned from the dynamic ones are the wrong lessons. Duck typing allowed programmers to elegantly implement these ideas without restrictions from the compiler. And inheritance was about reuse more than subtyping. Modern OO style takes and does not give back.</p>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.haskell.org/ghc/docs/7.6.1/html/users_guide/defer-type-errors.html">
-              Deferring Type Errors to Runtime
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/deferring-type-errors-to-runtime">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            September 07, 2012
-          </div>
-
-          
-<p>Haskell just got a whole lot more useful for prototyping. One of my biggest gripes with Haskell was how much code had to be changed if a single type was altered<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, since the compiler was always looking for consistent types. There were ways to work around it<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>, but they were always tedious and unsatisfactory.</p>
-<p>This new development in 7.6 lets you compile and run the code, changing type signatures many times, before you have to propagate the change through the rest of the code.</p>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>This is the classical definition of tight coupling. That's right: static typing introduces coupling.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>How to do it? Never change a type signature. Instead, create a new name with the same value, and modify that. Then, when it has settled into its permanent type signature, rename it to the old name, recompile, and let the error messages guide you.<a href="#fnref2">↩</a></p></li>
-</ol>
-</div>
 
 
           <div class="endmark">

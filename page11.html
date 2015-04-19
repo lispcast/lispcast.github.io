@@ -73,6 +73,108 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-conj-paul-degrandis">
+              Pre-conj Prep: Paul deGrandis
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 12, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<h3 id="talk-unlocking-data-driven-systemstalk">Talk: <a href="http://clojure-conj.org/speakers#paul-degrandis">Unlocking Data-Driven Systems</a></h3>
+<p><a href="http://clojure-conj.org/speakers#paul-degrandis">Paul deGrandis' talk</a> at the <em>conj</em> is about the design tradeoffs when building your system in a Data-Driven way.</p>
+<h4 id="background">Background</h4>
+<p>The recommended priority for choosing an implementation strategy is Data &gt; Function &gt; Macro. <strong>Macros are made for humans</strong>, not machines, so they are the least composable. <strong>Functions are composable</strong>, but opaque. Their only meaning is their side-effects and their return value. <strong>Data, however, can be interpreted</strong> in different ways, depending on the context. If one can design it right, a data-driven system can be both <strong>easy for a person</strong> to read and write and <strong>reusable for many problems</strong>.</p>
+<p>This talk is part of an ongoing discussion about data-driven systems in Clojure. Data-driven design has been around far longer than Clojure has. <a href="http://www.amazon.com/Paradigms-Artificial-Intelligence-Programming-Studies/dp/1558601910/">Paradigms of Artificial Intelligence Programming</a> is <em>the</em> book on the subject, showing its use in Common Lisp. <a href="https://www.youtube.com/watch?v=3yvrs9S0RIw">Christophe Grand gave a talk</a> at the Clojure/conj in 2010 that explained in depth why macros should not be the first choice when building DSLs.</p>
+<p>Many systems use data as their primary interface. Datalog queries in Datomic are just Clojure data. Prismatic Schemas are data. Leiningen project files are data (with a small macro for human convenience). Data-driven system is related to code-as-data, that all Lisps share. If code is data, why can't data be code? Clojure makes data-driven solutions easy with its variety of literal data structures.</p>
+<h4 id="why-it-matters">Why it matters</h4>
+<p>The conversation about how best to design data-driven systems is not over. Active Clojure developers are still experimenting and testing the approach. This talk will show data-driven systems taken to an extreme, where an entire ClojureScript application is represented as data. Many people already agree with the approach and are eagerly awaiting the deeper analysis this talk promises.</p>
+<h3 id="about-paul-degrandistalk">About <a href="http://clojure-conj.org/speakers#paul-degrandis">Paul deGrandis</a></h3>
+<p><a href="https://github.com/ohpauleez">Github</a> - <a href="http://twitter.com/ohpauleez">Twitter</a></p>
+<p><a href="http://clojure-conj.org/speakers#paul-degrandis"><img src="http://www.lispcast.com/img/pre-conj/paul-degrandis.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
+</p>
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-conj Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+</p>
+</div>
+
+<p>
+  
+<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-conj-steven-yi">
               Pre-conj Prep: Steven Yi
             </a>
@@ -917,107 +1019,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <h3 id="about-jeanine-adkissontalk">About <a href="http://clojure-conj.org/speakers#jeanine-adkisson">Jeanine Adkisson</a></h3>
 <p><a href="http://twitter.com/jneen_">Twitter</a> - <a href="https://github.com/jneen">Github</a> - <a href="http://jneen.net/">Blog</a></p>
 <p><a href="http://clojure-conj.org/speakers#jeanine-adkisson"><img src="http://www.lispcast.com/img/pre-conj/jeanine-adkisson.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
-</p>
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-conj Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-</p>
-</div>
-
-<p>
-  
-<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-glenn-vanderburg">
-              Pre-conj Prep: Glenn Vanderburg
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 02, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-cló-the-algorithms-of-tex-in-clojuretalk">Talk: <a href="http://clojure-conj.org/speakers#glenn-vanderburg">Cló: The Algorithms of TeX in Clojure</a></h3>
-<p><a href="http://clojure-conj.org/speakers#glenn-vanderburg">Glenn Vanderburg's talk</a> at the <em>conj</em> is about implementing the TeX algorithms in Clojure. TeX is a typesetting engine, often used through LaTeX. TeX was written by Donald Knuth in order to typeset his opus <em>The Art of Computer Programming</em>.</p>
-<h4 id="background">Background</h4>
-<p>If you're interested in a good understanding of typesetting using TeX, you can't do better than the <a href="http://web.mit.edu/jgross/www/LaTeX/texbook.pdf">TeXbook</a>, written by Knuth himself. It's an excellent guide to the TeX language and the underlying semantics. If you'd like to hear an interview with Knuth about why he decided to pause his life's work to solve digital typesetting, watch <a href="http://www.webofstories.com/play/donald.knuth/51">this</a> (and the following segments).</p>
-<h5 id="why-it-matters">Why it matters</h5>
-<p>TeX is written in an imperative style with mutation and is difficult to understand. <a href="http://rw4.cs.uni-sb.de/~heckmann/abstracts/neuform.html">Other attempts</a> have been made to re-implement the algorithms in a functional style. The work to re-implement typesetting in Clojure in a functional style can be instructive both of the specific algorithms and for imperative legacy systems in general.</p>
-<h3 id="about-glenn-vanderburgtalk">About <a href="http://clojure-conj.org/speakers#glenn-vanderburg">Glenn Vanderburg</a></h3>
-<p><a href="http://twitter.com/glv">Twitter</a> - <a href="https://github.com/glv">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#glenn-vanderburg"><img src="http://www.lispcast.com/img/pre-conj/glenn-vanderburg.jpg" /></a></p>
-<p>Glenn Vanderburg gave one of my favorite talks about software engineering. It's called <a href="https://www.youtube.com/watch?v=NP9AIUT9nos">Real Software Engineering</a>.</p>
 <hr />
 
 <div class="article-cg-box">

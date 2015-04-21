@@ -73,6 +73,229 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-interview-nathan-sorenson">
+              Pre-West Interview: Nathan Sorenson
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 15, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<p><a href="http://clojurewest.org/speakers#nsorenson"><img src="http://www.lispcast.com/img/pre-west/nsorenson.jpg"
+      style="float:right;height:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Nathan Sorenson is the next interview participant. He is <a href="http://clojurewest.org/speakers#nsorenson">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about DSLs. The <a href="http://www.lispcast.com/pre-west-nathan-sorenson">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-nathan-sorenson">Interview with Nathan Sorenson</h3>
+<p><strong>Nola</strong>: How long have you been doing clojure and how did you get into it?</p>
+<p><strong>Nathan</strong>: I've been using Clojure for 6 years. I got into the language during grad school: the libraries I needed to use for my master's research were all on the JVM, but I was becoming frustrated with the time it took to turn my ideas into experiments in code. I found Clojure and Incanter, and the REPL-based interactive workflow I experienced was incredible. There's no way I'd have been able to spend so much time exploring my problem space without Clojure.</p>
+<p><strong>Nola</strong>: What languages did you do before Clojure?</p>
+<p><strong>Nathan</strong>: Mostly Java and C++.</p>
+<p><strong>Nola</strong>: Your talk is about DSLs, what other language have you used in the past if any to write DSLs?</p>
+<p><strong>Nathan</strong>: It's often nice to write DSLs in typed FP languages. A DSL's syntax is a quintessential example of an &quot;algebraic data type,&quot; and ADTs combined with pattern matching will make it easy to interpret your syntax correctly. Haskell has some particularly useful features: the &quot;deriving&quot; mechanism, for example, gives you traversal operations for your syntax for free. Haskell also has type classes that enable an interesting style of specification called &quot;tagless final.&quot; This approach lets you sidestep the typical interpretation overhead and compile your DSL as though it were a first-class member of the host language.</p>
+<p><strong>Nola</strong>: What advice would you give a new programmer to Clojure?</p>
+<p><strong>Nathan</strong>: I came from an imperative, object-oriented mindset and had to do a great deal of un-learning before I could grok the basics of functional programming. I personally found classic Scheme books like The Little Schemer and SICP helpful in this journey. However, everyone learns differently based on where they are coming from, so it's important not to get frustrated if you don't find someone's advice, book recommendations, or metaphors useful!</p>
+<p><strong>Nola</strong>: What is the average airspeed velocity of an unladen Clojure REPL?</p>
+<p><strong>Nathan</strong>: Lots of people get distracted quibbling about the difference between European REPLs and African REPLs but that's the wrong idea. The trick is to decomplect the question into three simpler ones: what are the average airspeeds of the Starling, the Kestrel, and the Identity bird?</p>
+<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-james-macaulay">
+              Pre-West Interview: James MacAulay
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 15, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#jmacaulay"><img src="http://www.lispcast.com/img/james-macaulay"
+      style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>James MacAulay is the next interview participant. He is <a href="http://clojurewest.org/speakers#jmacaulay">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about Functional Reactive Programming with the clojure library Zelkova. The <a href="http://www.lispcast.com/pre-west-james-macaulay">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-james-macaulay">Interview with James MacAulay</h3>
+<p><strong>Nola</strong>: How long have you been doing clojure and how did you get into it?</p>
+<p><strong>James</strong>: I've been writing Clojure in my spare time on-and-off for about three years.</p>
+<p>In late 2011 I was on a small team developing a JavaScript MVC framework, and we had this problem of managing state in the browser over long periods of time. Our response was to let mutation happen all over the place and keep track of it all with a network of observed properties. It felt fun and empowering at first, but unfortunately it resulted in systems that were very difficult to reason about.</p>
+<p>At some point I looked at the system and realized that all it needed to do was handle external events one at a time, and render some views based on those events. It was all starting to look like one big function to me...so I figured I should give a serious look at what functional programming was all about. Clojure had some really compelling answers to the questions I had, and soon I was hooked.</p>
+<p><strong>Nola</strong>: Any suggestions for someone wanting to dive into clojure?</p>
+<p><strong>James</strong>: If you're coming from an Object-Oriented background, take your time just getting used to writing different kinds of functions without relying on mutable state. The more you do it, the more fun it is, and it ends up being a really valuable habit to have when writing software in any language.</p>
+<p><strong>Nola</strong>: What languages did you do before clojure?</p>
+<p><strong>James</strong>: Mainly Ruby and JavaScript. In university it was Java more than anything else, but we were exposed to a number of other languages in smaller doses: Scheme, Prolog, C, x86 Assembly are the ones I'm most thankful for. When I first got interested in functional programming I dug into Haskell for a bit before Clojure really grabbed me.</p>
+<p><strong>Nola</strong>: Your talk is about Zelkova which is heavily inspired by Elm. Have you done much with Elm or implemented Functional Reactive Programming in other languages?</p>
+<p><strong>James</strong>: I first really got the Elm bug at Strange Loop 2013, where I saw Evan Czaplicki live code the Mario demo first-hand. I started playing with both Elm and Bacon.js, a JavaScript FRP library. Last summer I decided to try my hand at implementing FRP in Clojure, and figured I should read Evan's thesis to see how Elm works. I hadn't implemented any kind of FRP before, but Clojure seemed like a great language to do it in.</p>
+<p>My experience with the Elm thesis was very similar to the one Eric Normand described having at around the same time – the code in the paper was just begging for a core.async implementation. I started hacking away, and learned a ton about both Elm and core.async in the process.</p>
+<p>At Strange Loop 2014, I got to meet Evan and we had a really great chat about Elm and my work on porting its FRP system to Clojure and ClojureScript. He encouraged me to share my work and clarified a lot of things for me, and I've been poking away at Zelkova ever since.</p>
+<p><strong>Nola</strong>: What is the average airspeed velocity of an unladed Clojure REPL?</p>
+<p><strong>James</strong>: I try not to throw my laptop across the room when I get frustrated :)</p>
+<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-interview-zach-tellman">
               Pre-West Interview: Zach Tellman
             </a>
@@ -913,232 +1136,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
 <li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
 <li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-ryan-neufeld">
-              Pre-West Interview: Ryan Neufeld
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 14, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
-<p><a href="http://clojurewest.org/speakers#rneufeld"><img src="http://www.lispcast.com/img/pre-west/rneufeld.jpg"
-      style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Ryan Neufeld is the next interview participant. He is <a href="http://clojurewest.org/speakers#rneufeld">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about Simulation Testing. The <a href="http://www.lispcast.com/pre-west-ryan-neufeld">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-ryan-neufeld">Interview with Ryan Neufeld</h3>
-<p><strong>Nola</strong>: How long have you been doing clojure and how did you get into it?</p>
-<p><strong>Ryan</strong>: By my reckoning, I've been using Clojure professionally for about 2.5 years now.</p>
-<p>How I got started is actually pretty interesting; I was hired by Cognitect (née Relevance) in early 2012 as a Ruby on Rails developer. Once the business shifted <em>hard</em> towards Clojure, I jumped at the first opportunity to get on with a Clojure client. My first Clojure project was with the most excellent Paul deGrandis, so it was a just a matter of letting osmosis take it's course. I haven't looked back since.</p>
-<p><strong>Nola</strong>: What suggestions do you have for someone getting started with clojure?</p>
-<p><strong>Ryan</strong>: Experiment liberally, and don't be afraid to make mistakes or &quot;do it wrong.&quot; A breadth of experience with the language and its libraries is crucial for knowing what tool to reach for when it is finally time to get down to business.</p>
-<p>For those seeking to make the jump to full-time Clojure, a word of career advice: Never pass over a job opportunity because you lack on-paper experience. Every company wants to hire a Rich Hickey to work with them, but in most cases, they'd be more than happy with a bright, passionate developer such as yourself. Just give it a shot–at worst, you'll get a no, at best, you could change your life!</p>
-<p><strong>Nola</strong>: Your talk is about Simulation Testing, is there anything like this in other languages? If yes, what advantage does the implementation in clojure have over other languages?</p>
-<p><strong>Ryan</strong>: Indeed there is. While Simulation Testing is novel to the Clojure community, it's been around for a number of years under various names; it's sometimes called model or agent-based testing, or just plain &quot;simulation.&quot; I heard from a little bird that organizations like DARPA use the technique on nearly all of their projects.</p>
-<p>There are a couple of big benefits to doing Simulation Testing in Clojure, however. First and foremost is Simulant. In addition to being a useful framework for running Simulation Tests, the way it segregates tests into phases makes tests both reproducible and amenable to new validations that you can bring to bare against old sim runs.</p>
-<p>The second superpower Clojure brings to the table is Datomic. Given Datomic is a time-based fact-store, it is a nearly perfect fit for long-term, continuous-integration style simulation testing. With Datomic, very few of the validations I write involve procedural code; generally a simple Datomic query will suffice to detect abnormalities. Even better, it is trivial to query how test results have change over time.</p>
-<p><strong>Nola</strong>: What is the average airspeed velocity of an unladen Clojure REPL?</p>
-<p><strong>Ryan</strong>: Well, the bird is a little slow to get off the ground (Clojure start times, and all), but once she's airborne you're looking at about 2-4 Rubies (that's 10 Javas, in the imperial system).</p>
-<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
-</p>
-
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-West Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-  </p>
-  
-</div>
-
-<p>
-  
-<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-john-hume">
-              Pre-West Interview: John Hume
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 14, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
-<p><a href="http://clojurewest.org/speakers#jhume"><img src="http://www.lispcast.com/img/pre-west/john-hume.jpg"
-      style="width:150px;float:right"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>John Hume is the next interview participant. He is <a href="http://clojurewest.org/speakers#jhume">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about Clojure internals. The <a href="http://www.lispcast.com/pre-west-john-hume">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-john-hume">Interview with John Hume</h3>
-<p><strong>Nola</strong>: How long have you been doing Clojure and how did you get into it?</p>
-<p><strong>John</strong>: I started playing with Clojure in late 2008—the fairly early days. It was interesting to me because I'd always heard that Lisp was amazing, but I'd never spent any time with one. Since Clojure runs on the JVM and has simple Java interop, it was far more accessible to me than any other Lisp. Since it was a new language and community, there seemed to be a lot of other people going through the same learning process I was, so the mailing list was very helpful. And back then it was low-traffic enough that I could actually keep up, which hasn't been the case for a long time.</p>
-<p><strong>Nola</strong>: What languages did you do before Clojure?</p>
-<p><strong>John</strong>: I'd been doing Ruby full-time for a few years before getting interested in Clojure—and continued to spend most of my time working in Ruby until 2012. Previous to that I'd done Java for about 5 years. Ruby really opened my eyes to how much power and expressiveness Java had been keeping from me. But after an exciting learning period with Ruby, I'd gotten a bit bored. Clojure came into my life at just the right time!</p>
-<p><strong>Nola</strong>: Any suggestions for someone wanting to dive into Clojure?</p>
-<p><strong>John</strong>: That's a tough one. A background in Java and Ruby made it easy for me to deal with some of what can make Clojure difficult for newcomers: Java helped with the JVM, the API, and the ecosystem, while Ruby had already made me comfortable with strong but dynamic typing and some functional concepts. For someone with a similar background, I'd definitely recommend giving Clojure a try.</p>
-<p>My advice:</p>
-<ul>
-<li><p>Start with tools you're comfortable with, rather than learning a tool you don't find intuitive while also learning a new language.</p></li>
-<li><p>Start with a problem space you're familiar with, whether that's web, graphics, or data analysis, and find libraries that don't hide away too much magic.</p></li>
-<li><p>Read the code! Lots of clojure.core and most other standard and contrib libraries are implemented in straightforward, idiomatic Clojure. Hopefully your tool of choice makes it seemless to jump into that code from your own. The only caveat with that advice is that sometimes—and it's not always obvious when this will happen—a library fn will be implemented in an unidiomatic way for reasons that aren't clear.</p></li>
-<li><p>When in doubt, lean on the mailing list or IRC to find out from more experienced Clojurists whether what you're reading or writing is idiomatic or idiosyncratic code.</p></li>
-<li><p>For someone with a different background, that advice might all be good, but there are probably aspects of the learning curve that I underestimate, so I'd recommend trying to find Clojurists with a similar background and getting their advice.</p></li>
-</ul>
-<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
-</p>
-
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-West Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-  </p>
-  
-</div>
-
-<p>
-  
-<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
 </ul>
 
 

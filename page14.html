@@ -73,6 +73,246 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/reification">
+              Reification
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 05, 2014
+          </div>
+
+          
+<p>Summary: <em>Reification means making an abstraction into a concrete value that can be manipulated at runtime. Reification is the core of what makes a language dynamic. Three types of reification in Clojure are discussed.</em></p>
+<p>What made Object Oriented programming (in the Smalltalk sense) so powerful? So powerful, in fact, that the GUI, WYSIWYG editing, overlapping windows, MVC, and more, were invented using it, <strong>not to mention an entire programming paradigm</strong>.</p>
+<p>What made Lisp so powerful? So powerful that we still see new Lisps popping up and its <strong>legend looms</strong> over every serious programmer's mind.</p>
+<p>Now, I don't want to boil it down to <em>one</em> thing. But one thing that was important, that you see in both of these languages, was the idea of <em>reification</em>. In fact, <strong>reification is possibly the essence of what makes a language &quot;dynamic&quot;</strong>.</p>
+<p>Reification, as I define it here in this article, means <strong>to make an abstraction available at runtime</strong>. Many languages have a text-based syntax that is read in by a compiler and compiled to machine code. But Smalltalk made each line of code into an object that you could manipulate, either with the input devices or with other code. And it let programmers bootstrap an IDE that was unparalleled at the time.</p>
+<p>But Smalltalk's <em>coup de grace</em> reification was the class, which is an object which represents the behavior of another object. Instead of some static switch statement that dispatched the methods, the methods were <strong>stored in a data structure that could be inspected and added to at runtime</strong>. Dynamic dispatch! You see this in multimethods in Clojure.</p>
+<p>Clojure's namespaces are reified. Some languages have a linking step in the compiler where modules are brought together to form a binary. But in Clojure, <strong>the namespace is accessible at runtime</strong>. Does your code want to know what Vars are defined? Easy. How about add a new Var. Done. These serve to support interactive programming--a hallmark of dynamic languages.</p>
+<p>Lisps have always, from the very beginning, supported <em>homoiconicity</em>, which is a silly way of saying that programs are reified into the language as data. This means you can write functions that write code--also known as <em>macros</em>. Macros serve a very useful bootstrapping function because you can <strong>gradually add to the language instead of having to design it up front</strong>. And sometimes you get a huge win, like <a href="http://clojure.github.io/core.async/">core.async</a>, which adds a totally new semantic.</p>
+<p>The next level of reification in Lisps is the higher-order function. Functions are not just things to call, but things to pass as arguments, save in collections, etc. They are real values, just like numbers and strings. There was a time in the history of programming when you could not refer to a function except to call it. Now, we take it for granted. <strong>Being able to reify an abstraction into a thing to pass around is amazing</strong>, and we should all just take a moment to ponder just how awesome it is.</p>
+<p>Lisps have traditionally gone to the next level, which is to reify a problem into a <em>data-driven</em> solution. Nowadays, people call this type of programming &quot;DSL&quot;. But it's just a type of reification. Instead of writing code to solve the problem, <strong>let's encode the solution as data</strong>. The problem domain is encoded in the interpreter for that data. Now it's accessible at runtime in a way simple code never could be.</p>
+<p>Prismatic's Schema is a great example of this. You define a validator for a piece of data using existing data types: maps, vectors, strings, classes, regexes, etc. Then the library can interpret that data structure and tell you if a piece of data is described by that validator. <strong>If schemas were merely a static construct, this would not be possible.</strong> You would have to wait for the language to &quot;support&quot; it, which is a terrible form of tyranny.</p>
+<p>Here's the secret to compounding the power: that data structure can be interpreted in many ways. Take Prismatic's Schema again. You can generate schemas at runtime. You can print them out. You can use them to <a href="https://www.youtube.com/watch?v=4-sPhFtGwZk&amp;feature=youtu.be">build test.check generators</a>. When things are reified and use the same interface as everything else, you can see synergy between libraries. <strong>You use one reification to enhance another.</strong></p>
+<p>Data-driven solutions are superior to macro-driven ones or even higher-order function solutions. Data can be stored. It can go over the wire. It can be meaningful in different contexts. A macro is useful at compile time, which happens once. Functions are black boxes and can really only do one thing (apply to arguments). <strong>But data is just data, ready to be interpreted.</strong></p>
+<p>Many Clojure libraries are considered &quot;language features&quot; in other languages. <strong>You don't have to mess with the internals of the language.</strong> Dynamic languages can do this, but Clojure (and most Lisps) has it at enough levels that interesting things happen.</p>
+<p>Here's another reification: Haskell reifies side effects into values that can be composed. That's cool.</p>
+<p>If you're into this whole reification thing, where language features that require major releases in other languages are just libraries; if you think you should learn functional programming; if you are curious about what everyone is talking about, check out the <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video series.</p>
+<p>The series is 1.5 hours taking you <strong>from zero Clojure knowledge through data-driven programming</strong>, one of the coolest types of reification. You'll help a robot who always wanted to be a baker learn to make bread :) Help him learn the recipes and convert them from static code to dynamic data.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/core-async-browser-motivation">
+              core.async in Browsers
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 29, 2014
+          </div>
+
+          
+<p>Summary: <em>Javascript's concurrency model forces code to give up control of when a callback will be called. <code>core.async</code> gives you back that control and hence lets you code in a more natural style.</em></p>
+<p>Well, there comes a time in every programmer's life when they take a look at the <a href="http://www.thoughtworks.com/radar/#/languages-and-frameworks/core-async">ThoughtWorks Technology Radar</a> and they realize that <code>core.async</code> is in the Trial circle, meaning <strong>you should see if you might want to use it</strong>.</p>
+<p>And if you're there, right there in that phase of your programming trajectory, eyeballing <code>core.async</code> for your next (or current) project, Welcome. This post is for you. Here it goes.</p>
+<p><strong>Why <code>core.async</code>?</strong> Well, the short answer is that it makes concurrency much, much, much, very much easier. I mean, let's face it: <strong>concurrency is so hard by itself</strong>, it has plenty of muches to spare. Now, I haven't used <code>core.async</code> a lot on the JVM. I wrote some, but it wasn't really the right thing for it. I plan on writing more later, I just haven't had the right project for it.</p>
+<p>But I have used it a lot in ClojureScript in browsers. <sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> And it is nice. It lets you do things that you could write yourself, given enough time. But you're more likely to solve the 16-ring Tower of Hanoi before you get all the kinks out. It's much better to <strong>let a machine do the hard work</strong>. That's what the 20th Century was all about: machines instead of muscle. And the 21st Century will be about computers instead of brains. Best get ahead of the curve.</p>
+<p>I say you should let the machine do the work, but maybe that's too vague. Let's look at a concrete example. First, <strong>how do you do an ajax request then do something with the value?</strong> Easy:</p>
+<pre><code>(ajax &quot;http://example.com/json-api&quot;
+      #(js/console.log %))</code></pre>
+<p><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<p>We're in Javascript, so we have to pass a callback which will get the result. That was easy. A little harder is <strong>making two API calls and doing something with both results</strong>.</p>
+<pre><code>(ajax &quot;http://example.com/random-number&quot;
+      (fn [r1]
+        (ajax &quot;http://example.com/non-random-number&quot;
+              (fn [r2]
+                (js/console.log (/ (:n r1) (:n r2)))))))</code></pre>
+<p>Alright, that wasn't too bad. <strong>A little indentation never hurt anyone.</strong> But, wait a second! <strong>We don't do the second request until the first request is already done.</strong> I've got a browser the size of a minivan and a 20 Megabit internet connection, and I'm doing one request at a time? That sucks!</p>
+<p>We could start them both at the same time. But what order will they come back in? Welcome to the world of concurrency!!!! Things happening (maybe) at the same time, or at least <strong>you don't know what order they will happen in!</strong></p>
+<p>Well, let's try something. What if <strong>the first one to finish wrote its result down, then the second one to finish would know that it was second</strong> and it could do the final calculation? What would that look like?</p>
+<pre><code>(def r1 (atom nil))
+(def r2 (atom nil))
+
+(defn final-calculation []
+  (js/console.log (/ @r1 @r2)))
+
+(defn try-final-calculation []
+  (when (and @r1 @r2)
+    (final-calculation)))
+
+(ajax &quot;http://example.com/random-number&quot;
+  #(do
+    (reset! r1 %)
+    (try-final-calculation)))
+
+(ajax &quot;http://example.com/non-random-number&quot;
+  #(do
+    (reset! r2 %)
+    (try-final-calculation)))</code></pre>
+<p>Ok, well, that should work. What happens if you have to do 3 AJAX requests? Not so bad, either. What about 17? Oh, man, that sucks. We could do something like make a super-promise, where <strong>you can promise many values and only call a function at the end</strong> when they're all there. Yes, you can do that. It really wouldn't be hard, even.</p>
+<pre><code>(defn super-promise
+  &quot;Create a promise for many values. Use `deliver`
+  to add values.
+
+  keys: all of these keys must be present before calling f
+  f: the function to call. Will be passed a map.&quot;
+  [keys f]
+  (let [r (atom {})]
+    (add-watch r :promise
+               (fn [_ _ _ s]
+                 (when (every? #(contains? s %) keys)
+                   (f s))))
+    r))
+
+(defn deliver [promise key value]
+  (swap! promise assoc key value))
+
+(def rs (super-promise [:r1 :r2]
+                       (fn [{:keys [r1 r2]}]
+                         (js/console.log (/ (:n r1) (:n r2))))))
+
+(ajax &quot;http://example.com/random-number&quot;
+  #(deliver rs :r1 %))
+
+(ajax &quot;http://example.com/non-random-number&quot;
+  #(deliver rs :r2 %))</code></pre>
+<p>Fhew! That's done. It works. It scales to many simultaneous AJAX calls. It's generic. Well, generic for <em>this</em> particular pattern. If we have a different pattern, we'd have to <strong>come up with a different solution</strong>.</p>
+<p>We're looking through a small porthole into <em>callback hell</em>. The identifying characteristic of callback hell is that you give over control from your code, which was all nice and procedural and easy to follow, you give the control over to whatever demon is going to call that callback. You sell your virtual soul for a bit of asynchrony. But you can't cheat the Devil. When all is said and done, all of your work gets done but <strong>you need some savior angel to help you coordinate all of the pieces back together again</strong>. In this case, it's the super-promise, which works in the first circle of hell, but even Dante can't help you if you go further.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup></p>
+<p>Now that we've got a decent solution <em>to this particular problem</em> established pre-<code>core.async</code>, let's look at what it would be using <code>core.async</code>. We'll assume that our <code>ajax-channel</code> function returns a <code>core.async</code> channel.</p>
+<pre><code>(let [r1-channel (ajax-channel &quot;http://example.com/random-number&quot;)
+      r2-channel (ajax-channel &quot;http://example.com/non-random-number&quot;)]
+  (go
+    (js/console.log (/ (:n (&lt;! r1-channel)) (:n (&lt;! r2-channel))))))</code></pre>
+<p>Let me just get it out of the way and never mention it again: <em>it's shorter</em>. It's shorter even than the naive solution using two atoms. And it's shorter than the <code>super-promise</code> solution even if you don't include the <code>super-promise</code> code. I'm done talking about the size, because <strong>it's only a little important</strong>.</p>
+<p>Now that that's out there, on to the more significant stuff. First and foremost is that <strong>you never lose control</strong>. The code even reads procedurally. Start two ajax requests and remember the channels. Start a <code>go</code> block (which means run the code asynchronously) and log the result of dividing the first result by the second result.</p>
+<p>Does it scale? You betcha! Imagine we need to make 192 imaginary AJAX calls before the Devil takes his due. The <em>only</em> way to do that is to <strong>do them all as fast as the browser fairies let you</strong>.</p>
+<pre><code>(let [numbers (range 192)
+      urls (map #(str &quot;http://example.com/choir?angelid=&quot; %) numbers)
+      channels (map ajax-channel urls)]
+  (go
+    (doseq [c channels]
+      (js/console.log &quot;Got: &quot; (&lt;! c)))))</code></pre>
+<p>The AJAX requests come back as fast as they can (meaning arbitrary order), and the results are logged in their original (numeric) order. <strong>You could do them in any order you want. That's because you're not giving up control.</strong></p>
+<p>How does this work? How can you have asynchrony and not give up control?</p>
+<p>I alluded to it before: <strong>you're making the machine do the work</strong>. That <code>go</code> block up there is actually a powerful macro that transforms your procedural code into a mess of callbacks (like in our <code>super-promise</code> example) that you would never want to write yourself. I mean, maybe you want to, but maybe you're nuts. <strong>And you'll get it wrong.</strong></p>
+<p>The transformation in the <code>go</code> block is pretty easy, as things go. It's mechanical. It's easy like lifting a car with your hands. Put enough leverage (by using a jack) and you can do it. It converts an easy motion (pushing down on the lever or turning the screw) into a powerful force. The <code>go</code> macro converts your easy code into a bunch of callbacks and coordinates them with a powerful state machine which will <strong>angelically reassemble them without ever losing control</strong>.</p>
+<p>It's all good-ol' callbacks and mutable state underground. But above ground, you've got code that's easy to reason about. No Devil's bargain. You've got an angel negotiating for you. That's the key thing! Channels are amazingly easy to reason about because <strong>each channel is so simple</strong>. But that's a story for another day!</p>
+<p>I should just mention that, yes, <code>core.async</code> is about procedural programming. Channels are mutable state. <code>core.async</code> is made for the small <strong>part of your code that is procedural and side-effecting</strong>. Every program has got such a part. If you're doing concurrent things (and in Javascript, you always are), <code>core.async</code> might be able to help provide a first-class mechanism for communication and coordination.</p>
+<p>That's what you might call the &quot;core&quot; of <code>core.async</code> in ClojureScript. <strong>It's about regaining control of your asynchronous calls and not smearing your logic across your code in little bits contained in callbacks.</strong> You keep your code's semantic integrity and you keep your sanity.</p>
+<p>If <strong>staying out of callback hell is to your liking</strong>, you just might like the divine help of a LispCast video course dedicated to teaching <code>core.async</code> in a gentle, graceful way. Presented in a unique visual format and at just the right pace, LispCast <a href="http://www.purelyfunctional.tv/core-async#channel-preview">Clojure core.async</a> will guide you to a deep understanding of the fundamentals of <code>core.async</code> so you can clean up your code, get more concurrency, and get back control.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+<li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Don't say &quot;the browser&quot; because there are many and they are different.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Let's imagine these functions exist and work as expected.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>And thank Clojure for the <code>atom</code>, which is like a cross or holy water when you find yourself <em>down there</em>.<a href="#fnref3">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/stop-refactoring-and-start-factoring">
               Stop Refactoring and Start Factoring
             </a>
@@ -864,185 +1104,6 @@ Learn more
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 <li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/css-and-the-lambda-calculus">
-              CSS and the Lambda Calculus
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            May 09, 2014
-          </div>
-
-          
-<p>Summary: <em>Using LESS, we can almost achieve the expressive power of the Lambda Calculus as applied to styling. The expressive power is enough to create reusable styles applied to reusable HTML components.</em></p>
-<p>Let's continue our exploration and analysis of <a href="http://www.lispcast.com/css-abstraction-combination">CSS</a> and <a href="http://www.lispcast.com/less-abstraction-combination">LESS</a>. This <a href="http://www.lispcast.com/keywords/functional-css/">series is about Functional CSS</a>. Our aim is to <strong>determine a good way to use HTML and CSS so that <a href="http://www.lispcast.com/separation-of-presentation-and-content">we can reuse both</a></strong>. We can't talk about &quot;Functional&quot; without talking about the Lambda Calculus.</p>
-<p>The Lambda Calculus includes three things: <em>variables</em>, <em>abstractions</em>, and <em>applications</em>. Let's look at some Javascript.</p>
-<pre><code>(function(x) { return x + x; })(10);</code></pre>
-<p>In the above code, <code>x</code> is a variable, the function definition is a lambda abstraction, and calling the function (with the parens at the end) is called application. Luckily, <strong>Javascript gives us an additional kind of abstraction where we can name an expression</strong> to be reused:</p>
-<pre><code>var f = function(x) { return x + x; };
-f(10);</code></pre>
-<p>We can name the function <code>f</code>, then apply it by referring to the name. What's more, we can <strong>compose them pretty well</strong>.</p>
-<pre><code>var g = function(x) { return x * x; };
-var h = function(x, y) { return g(x) + g(y); };
-h(10, 20);</code></pre>
-<p>We're composing function <code>g</code> by <em>applying</em> it inside of the definition of <code>h</code>. You're probably saying &quot;duh!&quot;--and rightly so. It's so common to do.</p>
-<p>Which is why it's hard to understand why CSS does not include all of these parts. Let's at least <em>try</em> to <strong>decompose CSS into some parts</strong>.</p>
-<pre><code>.some-class { width: 10px; height: 20px; }</code></pre>
-<p>Here, we're <em>applying</em> the rule which contains two properties (<code>width</code> and <code>height</code>) to all of the elements that have the class <code>.some-class</code>. <code>.some-class</code> is the <em>argument</em> to the rule's application. In fake Javascript, it would look something like this<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>:</p>
-<!-- -->
-
-<pre><code>function(element) {
-  element.width  = 10;
-  element.height = 20;
-}(document.getElementsByClassName(&#39;some-class&#39;));</code></pre>
-<p>That is, we are <em>immediately</em> applying the abstraction to the argument. CSS has no way, as Javascript does, of <em>naming</em> the abstraction for use later. We definitely <em>want</em> that. What's more, <strong>there's no way to compose two rules together</strong>. In Javascript, we could refer to <code>g</code> within <code>h</code>. But in CSS, there's no way to do that.</p>
-<p>LESS does have this ability. Since LESS is a superset of CSS, we can start with the above CSS code. Let's repeat it:</p>
-<pre><code>.some-class { width: 10px; height: 20px; }</code></pre>
-<p>Now we <em>abstract</em> it by naming it and then <em>apply</em> the name:</p>
-<pre><code>.small-box() { width: 10px; height: 20px; }
-.some-class { .small-box(); }</code></pre>
-<p>That's somewhat better. We've got a reusable component (<code>.small-box</code>) and we've also added <strong>a bit more meaning to our code because we have a meaningful name</strong>. What's more, LESS lets you compose:</p>
-<pre><code>.small-box() { width: 10px; height: 20px; }
-.my-button() { .small-box(); border: 1px solid black; }
-
-.some-class { .my-button(); }</code></pre>
-<p>Here we've made an abstraction called <code>.my-button</code> by using <code>.small-box</code> inside. That's composition. And that's on par with our Javascript examples above.</p>
-<p>There's one more thing that we might want that even Javascript doesn't have. Javascript has first-class functions. That's really nice. But there are many things in Javascript that are not first-class. For instance, the arithmetic operators (<code>+</code>, <code>*</code>, <code>-</code>, <code>/</code>) cannot be passed to a function or assigned to variables. <strong>They are treated differently by the language.</strong> They are a bit like properties in CSS: all you can do with them is refer to them directly in an expression.</p>
-<p>But what if Javascript did have first-class arithmetic functions? We can certainly fake them out.</p>
-<pre><code>var plus  = function(a, b) { return a + b; };
-var times = function(a, b) { return a * b; };
-var minus = function(a, b) { return a - b; };
-var over  = function(a, b) { return a / b; };</code></pre>
-<p>Now we have functions that act just like the operators--and they're first-class. It's also way more consistent: every operator is a function.</p>
-<p>We can do something similar in LESS. Imagine we took every property and did what I do to these:</p>
-<pre><code>.width(@w)  { width:  @w; }
-.height(@h) { height: @h; }
-. . .</code></pre>
-<p>Now we have the consistency that everything is at least referrable as a mixin. This is pretty good.</p>
-<p>We can now define our styles--and name them--in this subset of LESS. <strong>Styles may reference other styles.</strong> And rules with selectors may reference styles. You could import pure styles from an external library, then refer to them in your rules, where you apply them to selectors. <strong>The HTML does not have to change, and neither do the styles.</strong></p>
-<p><strong>Rules--where styles and selectors are tied together--will change the most.</strong> As common sets of styles are used together often, you might think about factoring them out into a new style, which would be added to your organization's standard style library. Also, as HTML components solidify, you could begin to firm up the class names and their structure, reusing them in a more permanent way. Yet, even though these two assets (the standard styles and the standard class names / HTML structures) are permanent, you can still change how they are styled by changing the rules. <strong>Both assets retain their value over time.</strong></p>
-<h3 id="a-fly-in-the-ointment">A fly in the ointment</h3>
-<p>Even though we have tremendous power over that given by CSS, <strong>we are not at the level of first-class styles</strong>. The following will NOT work in LESS, though we would expect it to.</p>
-<pre><code>/* refer to variable like a mixin */
-.apply(@style, @arg) { @style(@arg); }
-
-.width(@w) { width: @w; }
-
-/* pass in .width mixin */
-#xyz { .apply(.width, 10px); }</code></pre>
-<p>The problem is that <strong>you cannot use a mixin named with a variable</strong>. The same limitation exists in SCSS (SASS). The following is invalid.</p>
-<pre><code>@mixin apply($s, $a) { @include $s($a); }</code></pre>
-<p>Why can't a mixin be assigned to a variable? Mixins appear to be in a different namespace from variables, and only mixin syntax can appear in the mixin position. Though I don't think <code>apply</code> itself would be very useful, it would indicate a <strong>recursive abstraction power that could be used well</strong>.</p>
-<p>Not being able to write <code>apply</code> hints that the developers of these two languages are thinking at the syntax level. They have added some great features, but <strong>they have not truly modeled the problem semantically</strong>. Instead, it feels like a mix of special-cased syntax rules and string interpolation. <a href="http://lesscss.org/features/#detached-rulesets-feature">You can assign a ruleset to a variable, but not a mixin?</a></p>
-<h3 id="conclusion">Conclusion</h3>
-<p>LESS (and SASS, etc) have some very powerful features that are miles above CSS in terms of abstraction and composition. I hate using plain CSS after using LESS--LESS is just so much more expressive. You can do some impressive and useful things with them, and I continue to use them. I want to write about <strong>how I use a subset of LESS and a strict discipline in HTML to make styling easier and more maintainable</strong>. In addition, I'd like to <strong>explore what a better-designed style language might look like</strong>.</p>
-<div class="article-cg-box">
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Please ignore the fact that CSS does operate on sets of elements, not simple elements.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/separation-of-presentation-and-content">
-              Separation of Presentation and Content
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 17, 2014
-          </div>
-
-          
-<p>Summary: <em>One reason to separate style from content is to reuse HTML or CSS. Ultimately, we would like a solution where we can reuse both.</em></p>
-<h3 id="reusable-content">Reusable Content</h3>
-<p>There is an economic reason to separate presentation from content. Publishers have thousands of pages of HTML on their site, yet they want to enhance the style of their pages over time. It would <strong>cost a lot of money to change every single page to match their new style</strong>. So they invest a little more time writing each page so that the HTML markup does not refer to styles but to the semantics of the content (referred to as <em>semantic HTML</em>). Then they hire a designer to write CSS to make their existing content look new. The HTML is permanent and reusable, and the CSS is temporary and not-reusable. <strong>The separation is only one way: the HTML doesn't know the CSS, but the CSS does know the HTML.</strong></p>
-<p><strong>Examples:</strong> <a href="http://www.csszengarden.com/">CSS Zen Garden</a>, newspaper websites, blogs</p>
-<p><strong>Characteristics:</strong> Semantic markup, CSS tailored to classes/structure of HTML</p>
-<h3 id="reusable-styles">Reusable Styles</h3>
-<p>Yet another economic reason is a relatively newer phenomenon. It has become very easy to create a new web site/application. Writing (or generating) lots of HTML is cheap, and it changes often during iterative development. What is <strong>relatively expensive is to <em>design</em> each of those pages each time the pages change</strong>. CSS is not good at adapting to page structure changes. So people have built CSS frameworks where the CSS is (relatively) permanent and the HTML is temporary. In these cases, <strong>the HTML knows the CSS, but the CSS doesn't know the HTML</strong>. The separation is again one way--this time the other way.</p>
-<p><strong>Examples:</strong> <a href="https://github.com/stubbornella/oocss/tree/master/oocss">Open Source CSS</a>, <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://foundation.zurb.com/">Foundation</a>, <a href="http://purecss.io/">Pure</a></p>
-<p><strong>Characteristics:</strong> HTML tailored to classes/structure of CSS, Reusable CSS</p>
-<h3 id="reusable-content-and-styles">Reusable Content and Styles</h3>
-<p>What if a newspaper site, with millions of existing HTML pages, could cheaply take advantage of the reusable styles of frameworks like Bootstrap? That is the Holy Grail of separation of concerns. What would be required to do that?</p>
-<p><strong>What we really want is a two-way separation.</strong> We want HTML written in total isolation and CSS written in total isolation. We want permanent HTML and permanent CSS. How can the style and content, each developed separately, finally be brought together? The answer is simple: <strong>a third document to relate the two</strong>.</p>
-<p>We have already seen that <a href="http://www.lispcast.com/css-abstraction-combination">CSS is not good at <em>abstraction</em></a>. CSS cannot name a style to use it later. However, <a href="http://www.lispcast.com/less-abstraction-combination">LESS does have powerful forms of abstraction</a>. LESS has the ability to <strong>define reusable styles and apply them to HTML</strong> that did not have those styles in mind. If you put the <em>definition of reusable styles</em> in one document and the <em>application of those styles</em> in another document, you achieve true separation. And it is already happening a little bit. <strong>You can do it in your own code.</strong></p>
-<p>It is a bit like a software library. We put the reusable bits in the library, and their specific use in the app.</p>
-<p><strong>Examples:</strong> <a href="http://compass-style.org/">Compass</a>, <a href="http://semantic.gs/">Semantic Grid System</a></p>
-<p><strong>Characteristics:</strong> Semantic markup, Reuseable Styles, Tie-in document to relate Style to Content</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>CSS preprocessors, which began as convenience tools, are actually <strong>powerful enough to solve fundamental problems with HTML and CSS</strong>. While it is still early, LESS and other CSS preprocessors, if harnessed correctly, could dramatically transform how we build and design web sites. Typography, grids and layout, and other design concerns can be used as plugable libraries. And other languages that are specifically designed to do that may emerge. <strong>What would a systematic, analytical approach to such an approach look like?</strong></p>
-<div class="article-cg-box">
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
-<li><a href="http://www.lispcast.com/less-abstraction-combination">LESS has Better Forms of Abstraction than CSS</a></li>
-<li><a href="http://www.lispcast.com/pre-west-interview-priyatam-mudivarti">Pre-West Interview: Priyatam Mudivarti</a></li>
 </ul>
 
 

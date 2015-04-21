@@ -8,8 +8,8 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Pre-West Interview: Ron Toland | LispCast</title>
-    <meta name="description" content="Ront Toland will talk about developing large Clojure applications.">
+    <title>Keyword: pre-west | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -73,48 +73,127 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
-               href="/pre-west-interview-ron-toland">
-              Pre-West Interview: Ron Toland
+               href="/pre-west-zach-tellman">
+              Pre-West Prep: Zach Tellman
             </a>
           </h2>
 
           <div class="timestamp">
-            April 21, 2015
+            April 15, 2015
           </div>
 
           
 <div class="figure">
 <img src="http://www.lispcast.com/img/pre-west-prep.png" />
 </div>
-<p><a href="http://clojurewest.org/speakers#rtoland"><img src="http://www.lispcast.com/img/pre-west/rtoland.jpg"
-style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Ron Toland was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#rtoland">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about building large systems in Clojure. The <a href="http://www.lispcast.com/pre-west-ron-toland">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-ron-toland">Interview with Ron Toland</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Ron Toland</strong>: I got into Clojure through Scheme.</p>
-<p>There was a senior engineer at my first programming gig that kept raving about Scheme and the book Structure and Interpretation of Computer Programs (SICP). After several months of listening to him, I finally bought a copy and read through it. I was blown away by how very simple building blocks could be used to do very complicated things.</p>
-<p>In particular, it struck me that the authors covered the map-reduce paradigm in only chapter 2 of their book; given that at the time I was reading (2009-2010) hadoop was all the rage, and the book was written in the 1980s, I started wondering &quot;what else does lisp have that we're only now re-discovering&quot;?</p>
-<p>After doing some digging into currently used Lisps, I came across Clojure. Since I was already familiar with Java, it seemed like a perfectly pragmatic Lisp to me: stealing all the thunder of the JVM, but stacking on top of that the beauty and power of Lisp. It's been my favorite programming language ever since.</p>
-<p><strong>LC</strong>: You've been using Clojure at Sonian for 6 years. When you started, Clojure was very new. What made you choose Clojure at such an early point?</p>
-<p><strong>RT</strong>: I wasn't at Sonian when the decision was made to use Clojure, but I do know the background.</p>
-<p>Basically the first version of everything was written in Ruby, which worked fine until they needed to scale things out and up to handle a larger volume of email.</p>
-<p>They knew they needed to rebuild it in a different language, so they looked at several contenders: JRuby, Java, Clojure, Scala, even Erlang. They held a big meeting of all the devs to decide which one to go with, and it came down to Clojure or Erlang. Clojure, because several of the devs were familiar with Common Lisp or Scheme and liked it, and Erlang, because the architecture they were designing around is actually pretty close to the way you'd build it in Erlang.</p>
-<p>Clojure won because of the JVM. It turns out that email is terrible, with multiple standards used by different programs at different times over the decades, and so processing it into something searchable is a nightmare. Java has a lot of libraries for processing email that have been built up over the years to handle most of email's craziness. Erlang doesn't (or at least didn't at the time).</p>
-<p>Since with Clojure they could use those Java libraries directly, while if they used Erlang they'd have to write their own, they went with Clojure.</p>
-<p><strong>LC</strong>: What is the SAFE codebase?</p>
-<p><strong>RT</strong>: SAFE is the primary application we use at Sonian for email ingestion. archiving, and indexing into Elasticsearch.</p>
-<p><strong>LC</strong>: What is the most important thing to get right early when writing a large Clojure system?</p>
-<p><strong>RT</strong>: I wasn't part of the team that originally wrote SAFE, so I can't speak much about what to get right at the start of building a large system in Clojure.</p>
-<p>I can say that a lot of large systems don't start out that way; they begin as smaller applications that grow over time, as needs arise. The trick is to keep it from becoming a mess by constantly revisiting how it's put together and looking for better -- usually more abstract, but not always -- ways to express what it needs to do.</p>
-<p><strong>LC</strong>: What do you wish could be better in Clojure for large systems?</p>
-<p><strong>RT</strong>: I'm not sure there's anything in the language itself I wish was better about Clojure for building large systems. Getting logging configured correctly always seems to be a pain; it'd be nice to have a single logging library that could hide the ugliness of the underlying java libs from us.</p>
-<p><strong>LC</strong>: Is there anything else you'd think would be useful for people to know before they watch your talk?</p>
-<p><strong>RT</strong>: I think that pretty much covers it. I'd encourage people to attend the Trapper Keeper talk today, so they can compare the two approaches.</p>
-<p><strong>LC</strong>: Where can people follow you online?</p>
-<p><strong>RT</strong>: I blog at <a href="http://mindbat.com">mindbat.com</a>, and my twitter handle is <a href="http://twitter.com/mindbat">@mindbat</a>.</p>
-<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
-<p><strong>RT</strong>: If Clojure were a food, it'd be coffee. Once you use it long enough you can take it for granted, but when you don't have it you can't seem to get anything done.</p>
+<h3 id="talk-everything-will-flowtalk">Talk: <a href="http://clojurewest.org/speakers#ztellman">Everything Will Flow</a></h3>
+<p><a href="http://clojurewest.org/speakers#ztellman">Zach Tellman's talk</a> at <em>Clojure/West</em> is about applying Queueing Theory to Clojure code.</p>
+<h4 id="background">Background</h4>
+<p>Zach Tellman is known for his philosophical talks. They connect a broad range of ideas. This talk is about Queueing Theory, which has its roots in telephone network analysis. Since core.async channels are essentially queues, knowledge of how queues behave is fundamental to using the library well.</p>
+<p>The <a href="http://en.wikipedia.org/wiki/Queueing_theory">Wikipedia page on Queueing Theory</a> is informative. There is kind of <a href="https://www.youtube.com/watch?v=rSZWig173xM">a longer lecture</a> if you're interested in going for an hour on the topic. Finally, I recommend <a href="https://www.youtube.com/watch?v=4dfk3ucthN8">this talk from the React conference</a>, which touches on queueing theory in computer systems.</p>
+<h3 id="about-zach-tellmantalk">About <a href="http://clojurewest.org/speakers#ztellman">Zach Tellman</a></h3>
+<p><a href="http://ideolalia.com/">Homepage</a> - <a href="https://github.com/ztellman">GitHub</a> - <a href="https://twitter.com/ztellman">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#ztellman"><img src="http://www.lispcast.com/img/pre-west/ztellman.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-zachary-kim">
+              Pre-West Prep: Zachary Kim
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 09, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-no-strings-mobile-app-development-for-clojuretalk">Talk: <a href="http://clojurewest.org/speakers#zkim">No-strings mobile app development for Clojure</a></h3>
+<p><a href="http://clojurewest.org/speakers#zkim">Zachary Kim's talk</a> at <em>Clojure/West</em> is about writing native mobile applications in Clojure.</p>
+<h4 id="background">Background</h4>
+<p>Clojure on mobile is getting a lot of attention recently. ClojureScript has always allowed for WebKit development on the iPhone. Kevin Lynagh wrote <a href="http://theweathertron.com/">Weathertron</a>, released in June 2013, which used <a href="https://keminglabs.com/blog/angular-cljs-weather-app/">ClojureScript and Angular.js</a>. And more recently Mike Fikes has created an Objective-C/ClojureScript bridge called <a href="https://github.com/mfikes/goby">Goby</a>. And of course, there's a lot of excitement now about <a href="http://facebook.github.io/react-native/">React Native</a> and the ClojureScript workflow for using that. Mike Fikes is also working on a <a href="https://github.com/omcljs/ambly">ClojureScript REPL for iOS</a>. Zachary Kim does not give us any clues in the talk description, so we'll just have to make do with these.</p>
+<h3 id="about-zachary-kimtalk">About <a href="http://clojurewest.org/speakers#zkim">Zachary Kim</a></h3>
+<p><a href="http://www.zacharykim.com/">Homepage</a> - <a href="https://github.com/zk">GitHub</a> - <a href="https://twitter.com/heyzk">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#zkim"><img src="http://www.lispcast.com/img/pre-west/zkim.png" /></a></p>
 <hr />
 
 <div class="article-cg-box">
@@ -199,9 +278,9 @@ Completely free. No spam, easy unsubscribe, and your info is private.
     </div>
 
     <footer class="footer-banner">
-      <a class="footer-previous"
-         href="http://www.lispcast.com/pre-west-interview-nathaniel-smith-ruth-linehan">
-        <i class="fa fa-chevron-left footer-arrow"></i>
+      <a class="footer-next"
+         href="page5.html">
+        <i class="fa fa-chevron-right footer-arrow"></i>
       </a>
     </footer>
 

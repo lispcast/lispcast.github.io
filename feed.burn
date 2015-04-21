@@ -9,6 +9,34 @@
 
 
                 <item>
+                  <title>Pre-West Interview: Ron Toland</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-ron-toland</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-ron-toland</link>
+                  <pubDate>Tue 21 Apr 2015 10:10:26 AM CDT</pubDate>
+                  <description>
+                    Ront Toland will talk about developing large Clojure applications.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-ron-toland"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Pre-West Interview: Nathaniel Smith and Ruth Linehan</title>
+                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-nathaniel-smith-ruth-linehan</guid>
+                  <link>http://www.lispcast.com/pre-west-interview-nathaniel-smith-ruth-linehan</link>
+                  <pubDate>Tue 21 Apr 2015 10:10:14 AM CDT</pubDate>
+                  <description>
+                    Nathaniel Smith and Ruth Linehan will talk about developing large applications in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-nathaniel-smith-ruth-linehan"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Pre-West Interview: Leon Barrett</title>
                   <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-leon-barrett</guid>
                   <link>http://www.lispcast.com/pre-west-interview-leon-barrett</link>
@@ -115,34 +143,6 @@
                     Christopher Small will talk about automating chicken coops with Clojure.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-christopher-small"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Pre-West Interview: Nathan Sorenson</title>
-                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-nathan-sorenson</guid>
-                  <link>http://www.lispcast.com/pre-west-interview-nathan-sorenson</link>
-                  <pubDate>Wed 15 Apr 2015 11:43:27 PM CDT</pubDate>
-                  <description>
-                    Nathan Sorenson interview by Nola.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-nathan-sorenson"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Pre-West Interview: James MacAulay</title>
-                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-james-macaulay</guid>
-                  <link>http://www.lispcast.com/pre-west-interview-james-macaulay</link>
-                  <pubDate>Wed 15 Apr 2015 11:43:16 PM CDT</pubDate>
-                  <description>
-                    James MacAulay interview by Nola.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-james-macaulay"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

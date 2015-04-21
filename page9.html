@@ -73,6 +73,156 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/how-to-write-software">
+              How to Write Software
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 08, 2015
+          </div>
+
+          
+<p>Summary: <em>Writing software alone and in a long term sustainable manner requires a lot of discipline. Upfront planning and avoidance of feature creep can turn a stressful project into a pleasure.</em></p>
+<p><em>UPDATE: I originally wrote this piece back in 2010. I was recently reminded of it and thought it would be good to revive this article from my old blog.</em></p>
+<h3 id="a-guide-for-the-solo-programmer">A guide for the solo programmer</h3>
+<p>I have created a planning and organization process for developing software. The process works for me. I need to organize my work ahead of time or I get stuck working on unimportant details.</p>
+<p>I have built minimalism into the process. I tend to work alone. Solo programming imposes very real limitations on the scope and completeness of software. One man can only do so much.</p>
+<p>My process includes nothing that cannot be found in <a href="http://www.jwz.org/doc/worse-is-better.html">Worse is Better</a>, <a href="http://catb.org/esr/writings/homesteading/cathedral-bazaar/ar01s04.html">The Cathedral and the Bazaar</a>, <a href="http://www.paulgraham.com/startuplessons.html">Paul Graham’s writing</a>, and <a href="http://gettingreal.37signals.com/">Getting Real</a>. These are well-written and well-known works. I thought I understood them when I read them, but I was wrong. It wasn’t until recently, after projects stalled and failed due to feature creep, that I understood the essence of the <em>release early, release often</em> idea. I have attempted to formalize the idea to be more actionable instead of philosophical.</p>
+<p>Here is my hard-earned process for writing software. Note that this is not a strict algorithm. Sometimes I will apply filters from Step 2 when I am doing experiments in Step 3.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Choose a purpose.</strong></p>
+<p>The software must serve a single purpose. Clearly defining it will illuminate the entire software process.</p></li>
+<li><p>For each release:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>List features.</strong></p>
+<p>List out all of the features you want in the software. Not all of these will make it into the release, but if it is <em>not</em> on this list, it will <em>not</em> make it into the release.</p></li>
+<li><p>Apply the following filters and transformations, in any order, repeatedly, until there is nothing further to filter out from the list of features.</p>
+<ul>
+<li><p><strong>Break features into subfeatures.</strong></p>
+<p>If a feature can be broken into two features, do it. All features must be atomic. For instance, an easy one would be if I want to send messages by email and through a web API, that’s two features. Rule of thumb: if it can break, it’s a separate feature.</p></li>
+<li><p><strong>Eliminate unnecessary features.</strong></p>
+<p>Features that are not essential to the purpose are unnecessary. Features that can be put off until the next version are unnecessary. In the above example, maybe email can wait until the next release. If it can wait, it will wait. You are trying to make a B line to release.</p></li>
+<li><p><strong>Fill in “hidden features”.</strong></p>
+<p>Remember, if it can break, it’s a feature. Sometimes there are features that need to be listed because of the existence of other features. If you support two different communication channels, you need a way to choose between them. Whatever mechanism presents that choice is a feature, too. List it.</p></li>
+<li><p><strong>Simplify features.</strong></p>
+<p>If a feature can be done more simply or more easily than what you originally intended, replace it. The primary way to release quickly is to simplify the release. Do you really need it to be customizable?</p></li>
+</ul></li>
+<li><p><strong>Design and carry out experiments.</strong></p>
+<p>Within your minimal set of features, there are often questions as to the best means of implementation. The experiments determine the answers to those questions.</p></li>
+<li><p><strong>Order the features in order of dependency.</strong></p>
+<p>The first feature is the one that does not depend on any others. Dependency is a complex and sneaky issue. You might say that a function needs a button to activate it. But the button is useless without the function. Which depends on which? Personally, dependency means dependent on another feature for usefulness. If I can activate a function in a very simple way (like immediately when the program starts), then that function does not depend on the button. The button depends on the function for its usefulness.</p></li>
+<li><p><strong>Sketch out the <em>first</em> remaining feature on paper.</strong></p>
+<p>Sketch out the code. The experiments should have instructed you in how to implement the feature. Rewrite the code repeatedly, eliminating fluff and abstraction until the code is minimal and perfect.</p></li>
+<li><p><strong>Type the code in.</strong></p>
+<p>Build it and test it.</p></li>
+<li><p><strong>Make the code rock solid.</strong></p>
+<p>Clean it up. As a solo programmer, you are <em>never</em> going to come back to this code and clean it up. You won’t have time. You will never have the time to hunt for bugs in this code. Make sure it works in every possible case. The code must catch every exception. It must handle the null case. The feature is not done until it is unbreakable. If you are doubting whether it’s worth your time to work this much on one feature, maybe you should eliminate the feature.</p></li>
+<li><p><strong>Loop to Step 5 until you run out of features.</strong></p></li>
+<li><p><strong>Release.</strong></p></li>
+</ol></li>
+</ol>
+<p>The essence of this process is to follow the <em>release early, release often</em> philosophy by reducing the amount of development between releases. I mistakenly thought that release often meant “write code really fast” in the past. Now I understand that it means write less but more important code between releases but write it correctly.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/data-functions-macros-why">
+              Data > Functions > Macros. But why?
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 23, 2014
+          </div>
+
+          
+<p>Summary: <em>&quot;Prefer data over functions&quot; is a common adage in Clojure circles. It is poorly debated because it is a terse statement in generalities. A valuable perspective is that data is transparent at runtime, while functions are not. This perspective gives a firm ground for discussion and design.</em></p>
+<p>There's a design rule of thumb in Clojure that says that we should prefer functions to macros and to prefer data to functions. People talk about <em>why</em>, people react saying that functions <em>are</em> data, etc. It's all true, but it's all missing the point. It doesn't get at the fundamental, structural difference. And I think the discussion breaks down because people speak in generalities and not much is made measurable and concrete. But the pregression from macros to functions to data is, in my opinion, increasing in one important aspect, and that's the <a href="http://www.lispcast.com/reification"><strong>availability at runtime</strong></a>. Discussions should hinge on whether availability at runtime is desirable, which of course needs to be determined on a case-by-case basis.</p>
+<h3 id="macros">Macros</h3>
+<p>Macros in Clojure are simply not available at runtime. By definition, they are expanded at compile time. It would be hard to make sense to be passing around macros as runtime values. Try to pass a macro as an argument to a function. You can't.</p>
+<p>Further, once a macro has been expanded, it is no longer clear that it's expanded code even came from that macro. <strong>Macros are opaque at runtime.</strong></p>
+<h3 id="functions">Functions</h3>
+<p>Functions <em>are</em> first-class values. They can be passed around to functions, stored in maps, etc. They are totally available at runtime to be called.</p>
+<p>But, calling them is about all you can do with them (besides building new functions with them, like with composition). You can't even easily inspect the code that's inside them, nor get at the environment they have closed over. And that's kind of the point. The function is a useful unit of computation. <strong>It's not a unit of semantics.</strong></p>
+<p>A function, too, is opaque in its way. A function, at runtime, is a black box. What does it do? You can't tell. You can't even tell how the function got there. Was it a <code>fn</code> defined in code? Or was it the result of function composition using <code>comp</code>? <strong>That information is not available at runtime.</strong></p>
+<h3 id="data">Data</h3>
+<p>In Clojure, by <em>data</em>, people are really talking about the immutable data structures available in Clojure. Just to be concrete, let's narrow the definition of Clojure data down to edn.</p>
+<p>Edn data is available at runtime. It's first-class in the way that functions are and macros are not. But it is also transparent. <strong>The structure of the data is completely available at runtime</strong>, unlike the structure of the function. This is why data is preferable.</p>
+<p>Because data is available at runtime, you can do many things with it. Does the data describe a computation? Well, write an interpreter. <strong>Interpreters are much easier to write than compilers</strong> (macros) because the interpreter runs at runtime in the dynamic environment of the program. Compilers (and macros) separate out the two phases of compile-time and runtime. You have to keep track of the difference in your code. And Lisp is totally well-suited for writing interpreters. The first Lisp was defined in itself, for crying out loud.</p>
+<p>And since it's just edn, it can also be <strong>manipulated using all of the tools available in the language</strong>. Maps can be <code>assoc</code>ed to. Sequences can be iterated. Transfering it over the wire is easy. Storing it to disk in a way that can be read in is easy. Try pretty-printing a function. But pretty-printing a data structure? Easy.</p>
+<p>And, finally, the other thing about data is that it can be interpreted in different ways by different interpreters. I'm not trying to say that you might implement two algorithms for doing the same thing. What I'm getting at is that you can compute from it, or analyze it, or algebraically transform it, etc. <strong>It has become a semantic system in its own right.</strong></p>
+<h3 id="discussion">Discussion</h3>
+<p><em>Why not work with code, which is data in Clojure?</em></p>
+<p>You can argue that since code is data, why should I use data structures likes maps and vectors instead of actual code, represented as lists? This is actually a very valid point, and I think this is one of the better arguments. Lisp was defined in terms of an interpreter for data structures which together provide a powerful programming model. <strong>It would be foolish to discard this power and define our own for no reason.</strong></p>
+<p>The best reason I can think of is that our data is usually a very restricted form of code, many times not Turing complete. <strong>Turing complete code is proven to be impossible to analyze.</strong> But our restricted data model is powerful in exactly the way we need it (for our specific problem), but not <em>generally</em> powerful (as in Turing complete). So we can design it to be analyzable.</p>
+<p>If we can restrict the power to be less-than-Turing-complete, we can analyze it at runtime. <strong>If analyzing it at runtime is desirable, then it is desirable to represent it as data.</strong></p>
+<p><em>The semantics of data is vague, while code is well-defined. Why should we use data instead of code?</em></p>
+<p>Ok, this is also a good point. Clojure code, in theory, is well defined. At the very least, it is defined as whatever the compiler does. Most of the time, it is well-documented and well-understood. <strong>But your ad-hoc data structure, which represents some computation, has all sorts of assumptions baked in, like what keys are valid when, that are undocumented, have poor error messages, and maybe corner cases.</strong></p>
+<p>Wow, such a good point. When you're designing a DSL, this is always a challenge. But, just like restricting your power to below Turing complete can make your analysis way easier, <strong>keeping your semantic model simple and well-defined is the key to making it worthwhile.</strong> If the semantic model is simple, it could be beneficial to have it available at runtime. For instance, you could create a custom editor for it. If it's just functions, that's out.</p>
+<p><em>Hasn't this discussion happened many times before? I mean, Ant started off ok, but then it was its own programming language and it sucked.</em></p>
+<p>This is very true. People have talked before about the difference between internal and external DSLs, and how external DSLs eventually lose because they need all sorts of conditionals and loops, which the internal DSLs had by default. In my experience, this is true.</p>
+<p>My personal guideline is that I only prefer data after I have bound the problem to a well-understood domain. That means that I have to write the program first in code, using functions, before I realize that, yes, this could be described very succinctly and declaratively as data. This took a long time and lots of mistakes to understand. <strong>I essentially will only refactor to a data-driven approach after I already have it written and working.</strong></p>
+<h3 id="conclusions">Conclusions</h3>
+<p>I've been coding in Lisp for a long time, so <strong>I've internalized this idea of data-driven programming</strong>. It's the main idea of <a href="http://www.amazon.com/exec/obidos/ASIN/1558601910">Paradigms of Artificial Intelligence Programming</a>, one of the best Lisp books out there, and a big influence on me. What the guideline of &quot;Prefer data over functions&quot; means <em>to me</em> is that when it's beneficial, one should choose data, even if functions are easy to write. Data is more flexible and more available at runtime. It's one of those all-things-being-equal situations. But all things are rarely equal. <strong>Data is often more verbose and error-prone than straight code.</strong></p>
+<p>But there is a sweet spot where data is vastly superior. In those cases, it makes your code more readable. It is more amenable to analysis. It can be passed over the wire. <strong>When I find one of those cases, you bet I'll prefer data over functions.</strong></p>
+<p>I think that doing data-driven programming is one of the things Clojure excels at, even more than other Lisps, because of its literal data structure syntax. <strong>Data-driven programming is one of the deep experiences that I wish everyone could have.</strong> And it's the primary goal of <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>, my 1.5 hour video course filled with visuals, animations, exercises, and screencasts. Check out <a href="http://www.purelyfunctional.tv/intro-to-clojure#preview">the preview</a>.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/ultimate-guide-to-learning-clojure-for-free">
               The Ultimate Guide to Learning Clojure for Free
             </a>
@@ -1022,261 +1172,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <p><strong>PdG</strong>: A very serious pony.</p>
 <p><strong>LC</strong>: Thanks for a great interview. It was informative.</p>
 <p><strong>PdG</strong>: Thanks a ton! I really appreciate all of this!</p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
-</p>
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-conj Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-</p>
-</div>
-
-<p>
-  
-<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-interview-anna-pawlicka">
-              Pre-Conj Interview: Anna Pawlicka
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 24, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#anna-pawlicka"><img src="http://www.lispcast.com/img/pre-conj/anna-pawlicka.jpeg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>Anna Pawlicka generously agreed to do an interview about her <a href="http://clojure-conj.org/speakers#anna-pawlicka">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a>. The <a href="http://www.lispcast.com/pre-conj-anna-pawlicka">background to her talk</a> is available, if you like.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Anna Pawlicka</strong>: During my final year at university I was looking for a contract work or a summer internship and my recruiter suggested a big data startup. Description mentioned Clojure so I solved some 4clojure problems and they sparked my interest. Computer Science course I studied was mostly based on Java so it was refreshing if not challenging to try functional programming. I got a Clojure in Action book, applied for the internship and luckily was offered the job. It was a fun summer: lots of Cascalog queries, friendly Clojure Dojos and interesting talks organised by London Clojure Community. It felt like home and you don’t walk away from that feeling. I stayed for both the language and community.</p>
-<p><strong>LC</strong>: You've been presenting and blogging a lot about Om. What are you using Om for and why?</p>
-<p><strong>AP</strong>: We’ve been recently working on a building performance platform at Mastodon C (project is open sourced). It’s built around high volumes of data and big part of it was UI programming. We were looking for something that performs well but isn’t t too complex and Om came out just in time for us to solve this problem. We’ve built the entire UI using Om and we combined it with d3.js and core.async for nice data visualisations and user interaction. I don’t think we’d be able to achieve that using vanilla JavaScript. Sure, there were some bumps along the way but the overall reusability makes it worth a while. Outside of my day job I’m working on a in-browser genetic algorithm testing tool, using Om and Quil, but with all the presenting and other activities I had to pause the development for a while.</p>
-<p><strong>LC</strong>: I've used React or Om for a few things and it quite simply enables me to develop UI interaction that would be too intricate otherwise. How has your experience with Om been relative to other frameworks?</p>
-<p><strong>AP</strong>: I haven’t used any frameworks as it’s just easier to mix and match various Clojure/ClojureScript libraries depending on one’s needs. Om was the first library we’ve tried for interacting with React and it suited our needs well enough that we haven’t had the need to try anything else. If you choose a framework, like let’s say Hoplon, you have to go with its programming model and you lose the ability to control every part of your stack.</p>
-<p><strong>LC</strong>: You say you're using Om with d3.js. Om is a very functional style, while d3 uses mutation pervasively. How does the integration work? How well do they work together?</p>
-<p><strong>AP</strong>: Fortunately both are driven by data so having d3 visualisations render on your application state change makes perfect sense. I use interop a lot, and although it doesn’t look as nice as pure ClojureScript, it does the job. We can easily replace iteration methods like map and reduce with their ClojureScript alternatives. The only problem is the type coercion between Clojure’s data structures and JavaScript’s Object. It’s not always immediately clear which one should be used where. The perfect option would be to control SVG via Om (or similar library) and use C2’s functions to calculate path data. But I haven’t tried that myself yet. Charts I’ve been working on are quite complex and d3 comes with this gold mine of resources that none of the other visualisation libraries has. I’m not yet done experimenting though.</p>
-<p><strong>LC</strong>: Can you explain the basic models of Om and d3?</p>
-<p><strong>AP</strong>: D3 performs data-driven DOM manipulation, e.g. you can build a bar chart out of an array of numbers and when your data changes so will your chart. D3 can manipulate any part of DOM and has lots of helper functions to compute our visualisations. React/Om works on DOM as well - we write functions that translate our data into a DOM, but the difference is that the DOM is virtual. Each time the data changes, React/Om compares the old and new state and computes the minimal set of transformations that will be applied to the real DOM. DOM operations are slow so naturally this virtual representation speeds things up by skipping unnecessary transformations. This means that both Om and d3 want to be in control of the DOM inside our component. To make use of both libraries, you can either have Om take care of everything (but this means we need to write functions to compute paths, scales, etc.), or you could use d3’s scales, projection helpers and path generation while having Om generate and manage SVG, or you can have an empty div rendered by Om and allow d3 to generate and manipulate the SVG inside. The latter is the most common approach, probably because we leave the decision whether to re-render to Om (skipping any insignificant data changes), and when Om decides to render the component, d3 takes care of the rest. We combine the best of both.</p>
-<p>My talk will include some of that, with examples, since you can’t have a dashboard without a nice chart :)</p>
-<p><strong>LC</strong>: I see. It sounds like they work well together. I wouldn't have guessed that.</p>
-<p>In the talk you mention live data. How does your system handle that?</p>
-<p><strong>AP</strong>: I don’t have an actual system that I plan to demo - the talk is based around various ways to create, reuse and combine Om components to display data. Long polling and HTTP streaming are available through <a href="http://http-kit.org/">HTTP Kit</a>, but I also like how <a href="https://github.com/ptaoussanis/sente">Sente</a> combines that with core.async. But the focus is mainly on the components themselves - how you can mix and match them.</p>
-<p><strong>LC</strong>: Really cool.</p>
-<p>Talks are always limited in time, and there's lots of context that you assume people have (or wish they have). What is something people can learn more about to help them get ready for your talk?</p>
-<p><strong>AP</strong>: I will try to keep the talk as self contained as possible, but I won’t be able to cover things like the basics of web development with ClojureScript - this would be material for a separate talk. However, more and more people are using ClojureScript so I hope most of the attendees shouldn’t have a problem with that. Those who feel that they need to prepare more will find lots of resources online.</p>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>AP</strong>: The usual: <a href="http://twitter.com/AnnaPawlicka">Twitter</a>, my <a href="http://www.annapawlicka.com/">blog</a> and GitHub <a href="https://github.com/annapawlicka">account</a>. I’m also often on #clojure and #clojurescript IRC channels if someone wants to chat.</p>
-<p><strong>LC</strong>: Ok. One last question: when they make a movie about programming languages, who will play Clojure?</p>
-<p><strong>AP</strong>: That's a tricky one! I'd say Leonardo DiCaprio since he's one of the best actors yet still without an Oscar (read: very good but underappreciated) :-)</p>
-<p><strong>LC</strong>: Thanks for a great, informative interview.</p>
-<p><strong>AP</strong>: Thanks for putting this together. It was my first interview and it was fun :)</p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a>, which originally was published by email. It's all about getting ready for the upcoming <a href="http://clojure-conj.org">Clojure/conj</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep</a> is about. I want to enhance everyone's experience at the conj by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>, as well as the beautiful venue and city of Washington, DC.
-</p>
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&id=1916f1ed86"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-conj Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_1916f1ed86" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-</p>
-</div>
-
-<p>
-  
-<a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-interview-julian-gamble">
-              Pre-Conj Interview: Julian Gamble
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 24, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#julian-gamble"><img src="http://www.lispcast.com/img/pre-conj/julian-gamble.jpg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>The next interview is with Julian Gamble. His <a href="http://clojure-conj.org/speakers#julian-gamble">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> is about core.async and ClojureScript. Read the <a href="http://www.lispcast.com/pre-conj-julian-gamble">background to his talk</a>.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Julian Gamble</strong>: It was about 2007, I was a Java Programmer toying with Rails. I was reading Steve Yegge and his amazing but incendiary blog posts. These had a big theme on languages and expressiveness.</p>
-<p>I got curious enough to play with Common Lisp and Racket. I eventually worked through The Little Lisper - and found it hugely inspiring. I also read SICP and Paradigms of Artificial Intelligence Programming and was amazed (coming from Java) at what was possible with functional programming and homoiconicity.</p>
-<p>In 2008 I was looking for a way to combine the power of Lisp and my Java background. I had a look at ABCL and Kawa and found they didn't really have much of a community behind them.</p>
-<p>Then the Rich Hickey videos started coming out, &quot;Clojure for Java Programmers&quot; etc. Then lots of Java/Lisp people started coming out of the woodwork. I was fascinated by the design choices made and how opinionated the language was. I was delighted by the community that seemed to have come from thin air.</p>
-<p>In 2009 Stu Halloway's Programming Clojure book came out and I devoured it. Then I went back and worked through the Little Lisper chapters in Clojure - and found functional programming had a lot more to it than a first-year course for students in the 80s. This meant idiomatic functional programming didn't work like that anymore. (Although the idea of building a Lisp from a few primitives is still very elegant).</p>
-<p>In 2011 a Clojure User group started up in Sydney run out of Thoughtworks. This was a fantastic chance to meet up with people who programmed and developed their skills just for the joy of it - rather than just to pay a mortgage.</p>
-<p>In 2013 Dave Thomas started running LambdaJam in Australia, and it meant that the functional programming community because more social and more willing to look at each others ideas across languages. It also meant we developed a shared appreciation for the heritage of functional programming. We also developed a deeper appreciation of academic ideas and their linkage back to our practice.</p>
-<p>So now in 2014 when Rich Hickey gives a talk on Transducers, and explains that folds are fundamental - I go and read the linked papers from Hutton and Bird. Then I can go and talk about this with my local community of Clojure people. This is something that I wouldn't have done two years ago.</p>
-<p>Clojure has been a great ride!</p>
-<p><strong>LC</strong>: In your talk description, you mention that you will relate core.async to the concurrency semantics we already know. Can you explain this briefly?</p>
-<p><strong>JG</strong>: The assumption here is that most Clojure people have a Java or C# background. From this background they would have an understanding of how to put process on a thread, similar to how we might use a future in Clojure. Alternatively, Clojure people may have seen how we can pass a function to an agent in Clojure.</p>
-<p>Now it is true that core.async go blocks have some very specific queue sleep/wait semantics (CSP) that make it different to other concurrency models. In addition, core.async in JavaScript runs as part of the single-thread model of JavaScript, so it isn't semantically a thread, more of a 'process'.</p>
-<p>Given those assumptions, the primitives we find for doing concurrency in core.async are very similar to the concurrency models we have seen in the past in OO languages or in Clojure.</p>
-<p>In this talk we'll take a look at an example of taking a well known graphical example in Clojure, port it to ClojureScript and core.async. What we find is that many of the Clojure concurrency paradigms have a natural analogue in ClojureScript and core.async.</p>
-<p><strong>LC</strong>: Are there any topics to read up on or resources to look at that could help a beginner make the most of your talk?</p>
-<p><strong>JG</strong>: First thing to look at is David Nolen's <a href="http://swannodette.github.io/2013/08/02/100000-processes/">10,000 processes</a> and also <a href="http://swannodette.github.io/2013/08/02/100000-dom-updates/">this one</a>.</p>
-<p><a href="https://github.com/swannodette/swannodette.github.com/blob/master/code/blog/src/blog/processes/core.cljs">Take a look at the source code</a> and try and understand what it is doing.</p>
-<p>Also take a look at <a href="http://www.youtube.com/watch?v=enwIIGzhahw&amp;t=32m20s">Tim Baldridge's 2013 Conj talk at 32:20</a></p>
-<p>Also take a look at <a href="https://github.com/halgari/clojure-conj-2013-core.async-examples/blob/master/src/clojure_conj_talk/core.clj#L568-612">the code here</a>: (lines 568-612)</p>
-<p>Watch the 1969 version of The Italian Job.</p>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>JG</strong>: They can follow me on twitter with <a href="https://twitter.com/juliansgamble">@juliansgamble</a>.</p>
-<p>Or they can send me an email @ <script type="text/javascript">
-<!--
-h='&#106;&#x75;&#108;&#x69;&#x61;&#110;&#x67;&#x61;&#x6d;&#98;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#x69;&#108;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x6d;&#x61;&#x69;&#108;&#32;&#x61;&#116;&#32;&#106;&#x75;&#108;&#x69;&#x61;&#110;&#x67;&#x61;&#x6d;&#98;&#108;&#x65;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript> and ask me what I'm up to.</p>
-<p>(I've also been known to present at <a href="http://www.meetup.com/clj-syd/">clj-syd on meetup.com</a> - but that is probably only of interest to Sydney readers).</p>
-<p><strong>LC</strong>: One last question: If Clojure could eat, what would be its favorite food?</p>
-<p><strong>JG</strong>: Well I'm a huge fan of Dan Friedman's work on The Little Lisper/Schemer - which has frequent food references, such as a peanut butter and jelly sandwich. The book will at random reserve an empty page and state:</p>
-<p>THIS SPACE RESERVED FOR JELLY STAINS!</p>
-<p>So the answer would have to be PBJ sandwich!</p>
-<p>(But for all the British, European, Australian and New Zealand Readers - we all know it as peanut butter and strawberry jam - and some might be puzzled by the combination of these two condiments, but would still appreciate Friedman's book.)</p>
-<p><strong>LC</strong>: Thanks for a great interview!</p>
 <hr />
 
 <div class="article-cg-box">

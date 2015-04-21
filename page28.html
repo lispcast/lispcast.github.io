@@ -73,6 +73,85 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="http://www.infoq.com/presentations/The-Mapping-Dilemma">
+              The Mapping Dilemma
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/the-mapping-dilemma">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 17, 2011
+          </div>
+
+          
+<p>David Nolen speaking at Strange Loop:</p>
+<blockquote>
+<p>How much of Computer Science is sitting around when I'm sitting and working on a problem?</p>
+</blockquote>
+<p>David draws on some of the giants of Computer Science in recent years. Alan Kay, Gregor Kiczales, Peter Norvig, and more. I love to see the products of great minds folded into Clojure and ready at my fingertips.</p>
+<p><a href="https://github.com/clojure/core.match">core.match</a> and <a href="https://github.com/clojure/core.logic">core.logic</a> are now on my reading list.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="http://krisjordan.com/multimethod-js">
+              multimethod.js
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/multimethod-js">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 16, 2011
+          </div>
+
+          
+<p>Kris Jordan:</p>
+<blockquote>
+<p>Inspired by Clojure's multimethods, multimethod.js provides a functional alternative to classical, prototype based polymorphism.</p>
+</blockquote>
+<p><a href="https://github.com/KrisJordan/multimethod-js">multimethod.js</a> builds functions which dispatch on arbitrary predicates in Javascript using a <a href="http://martinfowler.com/bliki/FluentInterface.html">fluent style</a>.</p>
+<blockquote>
+<p>Multimethod iterates through each 'method' registered with <code>when</code> and performs an equality test on the <code>dispatchValue</code> and each method's match value.</p>
+</blockquote>
+<p>I wonder whether a linear search for the dispatch value will scale. I prefer to see some kind of hash-map based solution. Is it possible to serialize the object to JSON and use the resulting String as a key?</p>
+<p>Still, I enjoy seeing inter-language cross-pollination. It is also a nice translation from a functional language to a prototype language. The fluent interface does the job extremely well.</p>
+<p>Kris Jordan deserves a follow on <a href="https://github.com/KrisJordan">GitHub</a>.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://groups.google.com/group/ring-clojure/browse_thread/thread/f18338ffda7e38f5">
               Ring 1.0.0 Released
             </a>
@@ -457,92 +536,6 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <li><a href="http://www.regonline.com/clojurewest2012">For the conference</a></li>
 <li><a href="http://www.regonline.com/clojurewest2012training">For the training</a></li>
 </ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="https://gist.github.com/1441520">
-              Seesaw REPL Tutorial
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/seesaw-repl-tutorial">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            December 08, 2011
-          </div>
-
-          
-<p>Dave Ray has written a commented source listing which guides you through building a simple GUI with Seesaw.</p>
-<blockquote>
-<pre><code>; How can we get to the radio buttons without using the rbs var? How about
-; with a selector:
-(select f [:JRadioButton])
-;=&gt; (#&lt;JRadioButton ... &gt; #&lt;JRadioButton ... &gt;)</code></pre>
-</blockquote>
-<p>. . .</p>
-<blockquote>
-<pre><code>; and, of course, you can register a listener for group selection changes
-(listen group :selection 
-    (fn [e] 
-      (when-let [s (selection group)] 
-        (println &quot;Selection is &quot; (id-of s)))))</code></pre>
-</blockquote>
-<p>I have only done a bit of GUI programming with Java (mostly in college). But rather than giving me flashbacks to that nightmare, <a href="https://github.com/daveray/seesaw">Seesaw</a> makes me feel secure that I could face the Swing dragon again.</p>
-<p>From the Seesaw readme:</p>
-<blockquote>
-<p>It's an experiment to see what I can do to make user interface development funner in Clojure.</p>
-</blockquote>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/lisp-academy">
-              A Bizarre and Beautiful Lisp Learning Tool
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            December 07, 2011
-          </div>
-
-          
-<p><a href="http://whalliburton.github.com/academy/">⚡ ⚕ Welcome to the academy. ⚛ ♬</a></p>
-<p>This appears to be a way to learn Common Lisp. It intrigues me because of the esoteric flavor of it.</p>
-<p>From the top of the page:</p>
-<blockquote>
-<p>Genesis</p>
-<p>In the beginning Man created the computer. Now the computer was formless and empty, darkness was over the surface of the deep, and the Spirit of Man was hovering over the terminal.</p>
-<p>And Man said, &quot;Let there be lisp,&quot; and there was lisp. Man saw that the lisp was good.</p>
-</blockquote>
-<p>It is followed by a rendering of the <a href="http://en.wikipedia.org/wiki/I_Ching">I Ching</a>, an inline rendering of the game of life, and references to movies and music.</p>
 
 
           <div class="endmark">

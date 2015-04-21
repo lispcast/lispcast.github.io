@@ -73,6 +73,188 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="http://www.infoq.com/presentations/functional-pros-cons">
+              Deconstructing Functional Programming
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/deconstructing-functional-programming">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 22, 2013
+          </div>
+
+          
+<blockquote>
+<p>Because if you think about it, the stack itself is just an optimization. Right? There are these frames which contain information about each invocation. Each stack frame. Each activation record. And that's what they are--they're activation records. They're sort of objects. If you really have objects on the brain, like I do, then you realize that they're all just objects.</p>
+</blockquote>
+<blockquote>
+<p>And they should be treated uniformly. You can even build a language that works this way--as I have. If that's the case, this is really a garbage collection problem. Right? Your stack traces might go away if you don't need them. You do need them when it's not a tail call because you need to go back there and use that information. But if it's a tail call, you don't need them, you don't need a tail call back to that frame. You need a pointer back to the last frame that wasn't a tail call. And they might get collected.</p>
+</blockquote>
+<blockquote>
+<p>Which doesn't mean you actually have to implement it that way. Erlang sort of does. And there are many implementations that do that. They are not noted for their speed. If you can have real stacks, what happens when you run out of space? If you don't run out of space, it didn't really matter if you optimized the tail calls or not.</p>
+</blockquote>
+<blockquote>
+<p>When you run out of space, you should GC the damned stack. You shouldn't just throw up your hands and say you're dead. And for all the normal programs that people write where it didn't matter, they won't care. And for your tail recursive programs, well, they might be a bit slower, but they will work. And then it's a matter of flags to the garbage collector if in production you don't want to debug it if you're sure it's all going to be fine--then go ahead and tell it to don't bother and just slam it and overwrite those frames directly.</p>
+</blockquote>
+<p>Why is this so hard for implementers to do? Optimization is an optimization and should be optional.</p>
+<blockquote>
+<p>It's a cool algorithm, but there's nothing nice that I'm prepared to say about Hindley-Milner.</p>
+</blockquote>
+<p>He nails a lot of things I didn't like about Haskell.</p>
+<p>All in all, this talk gets a lot of things right.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
+<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
+<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
+<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/how-to-use-new-relic-with-clojure-on-heroku">
+              How to Use New Relic with Clojure on Heroku
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 03, 2013
+          </div>
+
+          
+<p><a href="https://www.heroku.com/">Heroku</a> is a great service, especially for the lone developer who wants free hosting for an app.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> The free hosting works just like the paid service except that your server will be &quot;spun down&quot;, meaning that after five minutes of no activity, <strong>your server is stopped</strong>. It will be &quot;spun up&quot; again when there is a request. This spin up process can take a while and certainly <strong>does not give a good user experience</strong>.</p>
+<p>Luckily there is a recommended way of avoiding this delay. The solution is to run <a href="http://newrelic.com/">New Relic</a> monitoring, which periodically polls your server, avoiding the five minutes of no activity and hence <strong>keeping your server running</strong>.</p>
+<p>In addition to keeping your server from falling asleep, it also gathers lots of profiling information that could help you understand your server as it runs in production. Luckily, <strong>both Heroku and New Relic offer free tiers</strong>. This brings us to my favorite financial formula:</p>
+<center>
+<strong>Free + Free = Free</strong>
+</center>
+
+
+<p>You can also use this process with the paid versions. Note also that <strong>Heroku itself recommends setting this up</strong>, so don't feel guilty!</p>
+<h2 id="instructions">Instructions</h2>
+<p>I am assuming you are already using Heroku and have a working app hosted there, using an uberjar deploy. You also have the <a href="https://toolbelt.heroku.com">Heroku Toolbelt</a> installed.</p>
+<h3 id="add-the-new-relic-add-on-to-your-app.">1. Add the New Relic add-on to your app.</h3>
+<pre><code>$ heroku addons:add newrelic:stark</code></pre>
+<p>I recommend the <code>stark</code> plan for free apps. You can choose any of the <a href="https://addons.heroku.com/newrelic#stark">New Relic tiers</a>.</p>
+<h3 id="find-and-download-the-latest-new-relic-java-api-release.">2. Find and download the latest New Relic Java API release.</h3>
+<p><a href="http://download.newrelic.com/newrelic/java-agent/newrelic-agent/">This download page</a> lists all of the versions. Find the latest one and download the ZIP file.</p>
+<h3 id="unzip-the-zip-file-into-the-base-of-your-app.">3. Unzip the ZIP file into the base of your app.</h3>
+<pre><code>$ cd projects/my-app
+$ unzip ~/Downloads/newrelic-java-3.2.0.zip</code></pre>
+<p>It should unzip into a <code>newrelic/</code> directory.</p>
+<h3 id="check-your-.gitignore-file-for-.jar">4. Check your <code>.gitignore</code> file for <code>*.jar</code></h3>
+<p>New Relic includes its own JAR file which needs to be deployed with your app in the git repo. My <code>.gitignore</code> included a line <code>*.jar</code> which would exclude all JAR files. Remove this line if you see it.</p>
+<h3 id="add-the-.gitignore-and-the-newrelic-directory-to-your-repo.">5. Add the .gitignore and the <code>newrelic/</code> directory to your repo.</h3>
+<pre><code>$ git add .gitignore
+$ git add newrelic
+$ git commit -m &quot;Add New Relic monitoring agent.&quot;</code></pre>
+<p>Make sure the file <code>newrelic/newrelic.jar</code> was added.</p>
+<h3 id="release-to-heroku.">6. Release to Heroku.</h3>
+<pre><code>$ git push heroku master</code></pre>
+<h3 id="configure-your-app-to-use-new-relic.">7. Configure your app to use New Relic.</h3>
+<p>We need to add a new JVM option. There is an environment variable called <code>JVM_OPTS</code> which is typically used to do this. Find out what value it has now.</p>
+<pre><code>$ heroku config</code></pre>
+<p>Find the line starting with <code>JVM_OPTS:</code>. Mine says &quot;<code>-Xmx400m</code>&quot;. Now we add this to the variable: &quot;<code>-javaagent:newrelic/newrelic.jar</code>&quot;.</p>
+<pre><code>$ heroku config:set JVM_OPTS=&quot;-Xmx400m -javaagent:newrelic/newrelic.jar&quot;</code></pre>
+<p>The app should restart with the new options. Visit your <a href="https://dashboard.heroku.com/apps">Heroku dashboard</a>, find your app, and click on the New Relic addon to see the New Relic Dashboard for your app. The first load might take some time, but subsequent loads will be at full speed and it won't spin down. load!</p>
+<p>References:</p>
+<ul>
+<li><a href="https://devcenter.heroku.com/articles/newrelic">New Relic guide on Heroku Dev Center</a></li>
+<li><a href="http://rafael-chacon.com/post/19069499949/new-relic-clojure-heroku-easy-steps-integration">New Relic + Clojure + Heroku: Easy Steps Integration</a></li>
+</ul>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>We use (and pay for) Heroku at work and we like the paid service, too!<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://logaan.github.io/clojure/validations/vlad/2013/11/25/what-to-look-for-in-validations.html">
               What to look for in validations
             </a>
@@ -410,140 +592,6 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <ol>
 <li id="fn1"><p>Looking indicates visual thinking. <a href="http://lispcast.com/why-technical-explanation-alone-is-not-enough">Use the right part of the brain.</a><a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>In my last post, I hinted at a better way to teach how to determine whether a function is a pure function. The better way is to imagine a robot in front of you. Can he run that function &quot;in his head&quot;? Or does he need to effect the outside world?<a href="#fnref2">↩</a></p></li>
-</ol>
-</div>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/use-your-imagination">
-              Use Your Imagination
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            September 17, 2013
-          </div>
-
-          
-<p><strong>I always hated in school when the teacher would instruct us to <em>use our imaginations</em> to solve problems.</strong> Well, hmm. Especially as a kid, my imagination was filled with magic. Not very useful. Not that you shouldn't use your imagination. You should. But as an instruction, I find it lacking. The teachers were just being lazy.</p>
-<p>See, the thing I learned through a lot of experiments and reading is that our imagination is very powerful if you use it correctly. <strong>But much as our computers can run any possible program, our minds can imagine any situation.</strong> The key to using our imagination effectively is to learn to harness the infinite potential and direct it to a purpose.</p>
-<p>One set of techniques I studied was called <em>Neuro Linguistic Programming</em>. It is thoroughly interesting, especially the earliest stuff, but avoid the cultish seminars. The early stuff was based on <a href="http://en.wikipedia.org/wiki/Cybernetics">Cybernetics</a> and linguistics (specifically Noam Chomsky's <a href="http://en.wikipedia.org/wiki/Transformational_grammar">transformational grammar</a>). It was quite rigorous as far as informal studies go. It has since become a new-age movement. Tread carefully if you wish to explore it.</p>
-<p>One of the most intriguing aspects of NLP is that it teaches you to discover the structure of a mental process through <strong>introspection in terms of the raw sensory experience</strong>. That is, what do you see, hear, feel, etc. You break it down into the smallest steps that can be measured. You can then understand your own process and give yourself more control over your own apparatus. It sounds like a structured use of imagination. By deconstructing your imagination and guiding another person through the steps, <strong>you can transfer the outline of a skill to someone else</strong>.</p>
-<p>I know this must sound like magic. But don't we expect teachers to pass skills on to others? <strong>Teachers routinely break down skills to teach them in a process known as <a href="http://classweb.gmu.edu/ndabbagh/Resources/Resources2/taskanalysis2.htm">task analysis</a>.</strong> You are simply doing it to your imagination. It's not magic. It's not instant knowledge transfer. Practice and experience still count for a lot. But it can get you pretty far.</p>
-<p>If it still sounds like magic, all I'm saying is that you switch from A to B:</p>
-<p><strong>A:</strong> Pure functions are functions that don't have any side-effects. Use your imagination.</p>
-<p><strong>B:</strong> To determine if a function is a pure function, look through the function line-by-line. On each line, imagine a green checkmark if the line has no side-effects. Imagine a red X if it has side-effects. When all lines have been marked, if you have any red X's, your function is not pure.</p>
-<p>While correct, the first explanation gives very little help to your imagination. In fact, my first response to explanations of type <strong>A</strong> is to think about what it might mean. But I <em>can</em> use my imagination with effort. When I do that, I realize that I am imagining <em>visually</em> scanning the function (in my mind's eye) and marking lines with side-effects.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> The second one asks you to imagine just that. <strong>Asking someone to go through a process makes it clearer.</strong><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
-<p>NLP does have a lot of merit, especially when it comes to teaching. Our mental processes can be introspected, analyzed, and described. <strong>And we can then guide a student through a process similar to what goes on in our heads when we solve the problem.</strong> This is the last piece I need to tell the story of one of the most successful things I have ever taught. Next time.</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/learning-is-about-skills">How to avoid &quot;Makes sense if you already understand it.&quot;</a></li>
-<li><a href="http://www.lispcast.com/making-true-false-easy">Making True/False Questions Easy</a></li>
-<li><a href="http://www.lispcast.com/pre-west-elena-machkasova">Pre-West Prep: Elena Machkasova</a></li>
-<li><a href="http://www.lispcast.com/pre-west-interview-elena-machkasova">Pre-West Interview: Elena Machkasova</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>This is a slight lie. I don't use visual checkmarks. I actually <em>feel</em> different when I see an expression with a side-effect. The feeling infects the whole function it is in once I feel it. <strong>My feelings have modeled the scoping rules of the language.</strong> This is the ultimate goal of imagination and skill development--when your simulation is accurate enough to be relied on.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>There is another improvement which I'll get to in the very next post. It will pull together the last few teaching posts.<a href="#fnref2">↩</a></p></li>
-</ol>
-</div>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/nil-punning">
-              Nil Punning (Or Null Pointers Considered Not So Bad)
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            September 12, 2013
-          </div>
-
-          
-<p>Null pointers are <a href="http://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">considered by their inventor</a> to be a huge mistake. Clojure inherits its null pointer, called <code>nil</code> in Clojure, from the JVM. In contrast to Java<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, Clojure seems to embrace the null pointer. In this post, I'd like to explore how Clojure uses the null pointer in what is often called <em>nil-punning</em>.</p>
-<p>Nil-punning has its roots in the very first Lisps, where <code>nil</code> was both false (the boolean value) and the end of a list (the empty list). It was also often used to represent &quot;no answer&quot;, as in what is the first element of an empty list. It is called <em>punning</em> because you can use it to mean different things in different contexts.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
-<p><em>In Clojure, <code>nil</code>, as a value, is nearly void of meaning. And it is all pervasive, because it can be returned from any Clojure function or Java method.</em></p>
-<p>Let's go through that last part bit by bit.</p>
-<ol style="list-style-type: decimal">
-<li><strong>It <em>is</em> a value.</strong> Java made the mistake of making <code>null</code> a lack of object even though it was pointed to by an object pointer. You can't call methods on it. It is not an object. It has a weird <em><a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/typesValues.html#4.1">nameless type</a></em>. Clojure did not make this mistake. It is a first-class value and type<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup>, meaning <em>it can be compared to other values</em>, <em>it can implement protocols</em>, and be used as <em>the key or value of a map</em>, etc. Using <code>nil</code> where it doesn't make sense in Clojure code is <em>usually</em> a type error, not a NullPointerException, just as using a number as a function is a type error.</li>
-</ol>
-<ol start="2" style="list-style-type: decimal">
-<li><strong>It is nearly void of meaning.</strong> It means &quot;no answer&quot;, but not much more. Because of this, <em>it can take whatever form fits the context</em>. With proper wisdom in choosing what form it takes, <code>nil</code> can become an asset instead of a liability. Clojure takes nil-punning to an extreme.</li>
-</ol>
-<p><code>nil</code> can be many things. To name but a few, <code>nil</code> plays <code>false</code> as a boolean. It plays the empty <code>seq</code> as a <code>seq</code><sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup>. It plays the empty map as a map. Because <code>nil</code> has a role to play in most of the major abstractions of core Clojure, it rarely leads you into an <em>error</em> situation. An unexpected nil can surprise a good programmer, just as much as an unexpected <code>Nothing</code> from a Haskell function can bewilder even the most experienced Haskeller. <sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup> Finding out where a <code>nil</code> came from is the hardest problem that <code>nil</code>s present.</p>
-<ol start="3" style="list-style-type: decimal">
-<li><strong>It is all-pervasive.</strong> <code>nil</code>s are normal parts of Clojure programs. They are not anomalous as in Java, where you often have to check it everywhere. This means it is always on the experienced programmer's mind. <code>nil</code>s flow like water through s-expressions.</li>
-</ol>
-<p><code>first</code> has nothing to return if the seq is empty, and so it returns <code>nil</code>. Because <code>nil</code> is a seq, <code>first</code> works on <code>nil</code>, and returns <code>nil</code>. <sup><a href="#fn6" class="footnoteRef" id="fnref6">6</a></sup>. <code>rest</code> works on <code>nil</code> as well, because <code>nil</code> is a seq.</p>
-<p>These examples show the best of nil-punning. <strong>When nil-punning works right, <code>nil</code>s are expected and they give the expected results.</strong></p>
-<p><code>nil</code> is everywhere, but it can be used mostly everywhere as well--without error and often with exactly the desired result. There are many abstractions that <code>nil</code> does not participate in (for instance IFn, which is Clojure's interface for things that can be called like functions). In these places, <code>nil</code> can present a problem--a problem of type, the same as if you tried to call a number as a function.</p>
-<p>The best thing to do, in my experience, is simply to wrap the expression in a <code>(when )</code> to catch the <code>nil</code> cases, if appropriate, while also preserving it. Otherwise, perhaps letting the Exception bubble up is the best answer. If you got a <code>nil</code> where you couldn't use one, the stack trace is probably your best clue to where it came from.</p>
-<p>After a bit of experience with Clojure, I rarely have <em>difficult</em> problems with out-of-place <code>nil</code>s in pure Clojure code. However, there is often some Java interop--namely, calling Java methods directly--that will cause a NullPointerException if the object of the method call is <code>nil</code>. In these cases, wrapping a Java method call in a <code>(when )</code> is often appropriate. But sometimes not, and the NullPointerException is welcome.</p>
-<p>There are some decisions in Clojure that I think make poor use of nil-punning. These places actually make working with Clojure more difficult than they need to be. For instance, <code>(str nil)</code> is the empty string. Printing this out prints nothing--a form of silence, which is rarely what you want so you have to check for <code>nil</code>s in these cases. But <code>nil</code> <em>is not</em> the empty string, like it is the empty <code>seq</code>. <code>(clojure.string/trim nil)</code> throws a NullPointerException. This is inconsistent behavior. <strong>When <code>nil</code> acts inconsistently, nil-punning does not work right. <code>nil</code>s need to be checked. In the worst cases, <code>nil</code>s fail silently.</strong> While I have learned to deal with these situations, they are a wart on the language. The fact that <code>nil</code>s are so common does help surface the bugs sooner. A small consolation.</p>
-<p>Let me make it clear: null pointers are still a costly problem in Clojure. But I can make a claim similar to what Haskellers claim about the type system: <em>nil-punning eliminates a certain class of errors</em>. A fortuitous set of decisions in Clojure has reduced the magnitude of the problem. And some decisions have made the problem worse by hiding it. In general, I find that by <a href="http://www.apl.jhu.edu/~hall/lisp/Scheme-Ballad.text">embracing nil-punning</a>, my code gets better.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>I don't mean to pick on Java alone. I just wanted to be specific.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>Note that this is very different from weak typing as you find in Javascript or Python. Nil-punning is more like polymorphism.<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>The type of <code>nil</code> is <code>nil</code><a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p>Clojure's core is built on several small, powerful abstractions. The most prominent abstraction is <em>seq</em>, which stands for <em>sequence</em>. <em>seq</em> basically has two operations, <code>first</code> and <code>rest</code>. The most obvious use for them is to iterate through items of a collection. There are built-in implementations for lists, vectors, sets, hashmaps, and even strings. But anything that has a notion of sequential values can implement <em>seq</em>, including Java Iterators. I would also like to posit that the most important and often overlooked implementation of <code>seq</code> is for <code>nil</code> itself.<a href="#fnref4">↩</a></p></li>
-<li id="fn5"><p>Even the best Haskellers complain about not knowing where a Nothing came from.<a href="#fnref5">↩</a></p></li>
-<li id="fn6"><p>You might look at this as nil-preserving behavior--much like the Nothing-preserving behavior of the Maybe Monad<a href="#fnref6">↩</a></p></li>
 </ol>
 </div>
 

@@ -377,6 +377,151 @@ Completely free. No spam, easy unsubscribe, and your info is private.
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-interview-alan-dipert-micha-niskin">
+              Pre-West Interview: Alan Dipert and Micha Niskin
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 03, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<div style="float:right">
+
+<p><a href="http://clojurewest.org/speakers#adipert"><img src="http://www.lispcast.com/img/pre-west/adipert.png"
+      style="height:150px"></a> <br> <a href="http://clojurewest.org/speakers#adipert"><img src="http://www.lispcast.com/img/pre-west/mniskin.png"
+      style="height:150px"></a></p>
+</div>
+
+<h3 id="introduction">Introduction</h3>
+<p>Alan Dipert and Micha Niskin generously agreed to do an interview about their <a href="http://clojurewest.org/speakers#adipert">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. The <a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">background to their talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Micha Niskin</strong>: I watched the <a href="https://www.youtube.com/playlist?list=PLB63C06FAF154F047">SICP lectures from MIT</a> and was blown away by the simplicity of Lisp. At the time I was programming in Perl, C, and Java, mostly (I was actually on a programming hiatus building boats in Maine, but you know, you never just stop programming). So I started doing some things in Scheme (Racket) and I really enjoyed it. I was learning awesome new things at a rate I'd never experienced before. Then Alan recommended I try Clojure. I was initially skeptical of the syntax, but persistent collections were a real revelation and I quickly joined the cult.</p>
+<p><strong>Alan Dipert</strong>: When I learned about arrays in Visual Basic 4, someone told me that some language &quot;LISP&quot; was somehow made out of arrays, which I giggled at because it sounded so silly. Later, in college, my coolest professor challenged my Java class to complete assignments in alternate JVM languages. I took the opportunity to learn some Scala, and for the final assignment, Clojure. Clojure blew my mind - what didn't immediately click was somehow very obviously something I would need to learn and would unlock more awesome things. The Clojure, and the learning, haven't stopped since then.</p>
+<p><strong>LC</strong>: Last year you all released Hoplon. Everyone else was zigging toward React, while you zagged to a completely different paradigm. I can't help but see a parallel with Boot. Nearly all Clojure projects use Leiningen, and here you are zagging again. I think you've explained why already. What I want to know is the thinking that leads to two very zaggy approaches. Were the existing libraries not scratching your itches? Or do you have a deep desire to develop your own tools from scratch?</p>
+<p><strong>AD</strong>: Hoplon is a packaging of a vision we have for how to write and maintain Single Page Applications (SPAs). We had been developing this vision for about two years before Hoplon's release, and were driven to see the vision through because we needed practical tools for professional use and found nothing that existed to be suitable.</p>
+<p>In the first year (2012) of pre-Hoplon exploration, it became clear we needed to either find or develop a model for state that could work in a browser. Of the technologies we evaluated, we explored FRP most thoroughly <a href="https://www.youtube.com/watch?v=xaxF5RDdVRE">1</a>. We built a series of applications in ClojureScript using Flapjax <a href="http://www.flapjax-lang.org/">2</a>.</p>
+<p>Our experience with Flapjax informed our opinion that of the units of composition in FRP - behaviors and event streams - only behaviors are necessary for driving browser UIs. This is because UIs are views into memory/data, not into processes. For anything to appear in a UI, it must first appear in memory somewhere. We think behaviors, which are conceptually similar to cells in a spreadsheet, are the ultimate tool for coordinating change in data (NOT process) over time. We think core.async is probably the ultimate tool for coordinating process (NOT data) over time. FRP in its various formulations tries to do both, and not in a way that we find especially helpful.</p>
+<p>We codified these opinions in early 2013 into Javelin <a href="http://www.infoq.com/presentations/ClojureScript-Javelin">3</a>, a ClojureScript library for modeling data in SPA UIs. What Javelin didn't solve -- or even imply -- was how to actually display the data being modeled.</p>
+<p>If a UI is really just a stylized view into the heap, then any data structure is a kind of UI. If Lisp is the ultimate way to compose and manipulate data structures, then it must also be the ultimate way to compose and manipulate UIs. This is the thinking behind the second big piece of Hoplon, &quot;the HLisp semantics&quot;, our answer to the question of display that Javelin leaves totally open. We worked on and around this concept in the 2nd year of pre-Hoplon (2013).</p>
+<p>Concretely, HLisp is a set of semantics <a href="https://github.com/tailrecursion/hlisp-starter/blob/master/PROJECT.md">5</a> that map HTML markup into the Lisp evaluation model. That is, the HTML expression <code>&lt;ul&gt;&lt;li&gt;one&lt;/li&gt;&lt;/ul&gt;</code> is identical to the ClojureScript expression <code>(ul (li &quot;one&quot;))</code>. Both evaluate to a live Node object in heap that can be passed to and returned from functions. Under HLisp, a list might be constructed like this: <code>(apply ul (map li [&quot;one&quot; &quot;two&quot; &quot;three&quot;]))</code>. Because these expressions evaluate to native browser objects, they can compose with a vast array of plugins and libraries available in the frontend ecosystem.</p>
+<p>A big positive of HLisp is that HTML becomes a syntax for a subset of ClojureScript. We find this especially beneficial because it means any designer or UX expert familiar with HTML can easily contribute. We've never worked on a team that didn't include at least one designer/UX expert, and we believe this demographic is totally underserved by existing tools. Part of our vision is to empower designers to experience the same level of &quot;flow&quot; that we Lispers know comes with simple, clear models that we can infinitely extend.</p>
+<p>Realizing fully HLisp pushed the limits of every build tool we tried to make it work in, because it was different than what anyone had ever wanted to do before. It was clear to us that the kind of transformation HLisp required needed to be accessible, and we began to imagine how a build system capable of these kinds of things could work. We dreamed of compiling Markdown, into HAML, into HTML, into ClojureScript, into JavaScript, reliably, simply, and accessibly.</p>
+<p>We developed Boot1 to serve these needs, and shipped Hoplon atop it last year. We haven't had much reason to change Javelin, HLisp, or Hoplon over the past couple years, but we have rolled the set of ideas for improvement accumulated over a year of Boot1 use into the nascent Boot2. Today, Boot2 is capable of the Markdown -&gt; JavaScript transformation and much more. We are really happy and excited that it is drawing enthusiasm from Clojure and ClojureScript users outside of Hoplon-world.</p>
+<p>To finally answer your question: It's not that we think being different or building our own tools are virtues; we're just lucky to have had a series of opportunities -- starting with our friendship -- to experience, study deeply, and attempt to solve as definitively as possible the big programming challenges we've faced.</p>
+<p><strong>LC</strong>: In terms of Boot, what were those challenges that Leiningen did not solve? And how does Boot solve them?</p>
+<p><strong>AD</strong>:</p>
+<ul>
+<li>Leiningen does not supply a general file system watcher; every plugin must provide its own</li>
+<li>Leiningen does not coordinate filesystem access between plugins; the user must be mindful of every plugin's file use and weary of filesystem contention</li>
+<li>Leiningen plugins cannot easily be composed or invoked from the REPL, which requires the user to start a new JVM for every experiment</li>
+</ul>
+<p>For these reasons I would say that Leiningen plugins must all duplicate essential functionality, don't compose well, and are cumbersome to develop and experiment with.</p>
+<p>Hoplon existed for a short time as a Leiningen plugin, but like all ambitious Leiningen plugins it became its own build tool and didn't compose especially well with other plugins. Once your Leiningen plugin becomes essentially its own build tool, it's not hard to imagine taking the last step.</p>
+<p>This is what we did and Boot was the result; Hoplon dissolved into a half-dozen Boot &quot;tasks&quot;. Boot solves the problems we encountered in Leiningen:</p>
+<ul>
+<li>Boot tasks are &quot;stateful middlewares&quot; composed in a pipeline, similar to Ring middleware. Tasks can decide whether the tasks after them should run, the same way a Ring middleware can decide whether or not to invoke the next handler. With a reference to the next task, a task can invoke the next task once, multiple times, or not at all. With this ability, &quot;watch&quot; is no longer special, and it becomes a regular task. Library authors are empowered to write other watch-like tasks that initiate or prohibit builds depending on any condition, not just filesystem state.</li>
+<li>The value passed through the pipeline of tasks represents the file system, and is called a FileSet. It is an immutable snapshot of a filesystem. If a task needs to effect a change, addition, or deletion to the filesystem, it performs an operation on the FileSet -- returning a new FileSet -- NOT directly on the filesystem as a mutation operation. After the last task returns the final FileSet, Boot synchronizes the FileSet to the target directory. Access to the value of a FileSet doesn't need to be synchronized because it is immutable and the actual filesystem is not in contention. FileSet operations are efficient because Boot uses a content-addressed, hard-link backed structural sharing scheme to minimize actual file operations.</li>
+<li>A Boot task is a function, nothing more. Boot tasks can be created, tested, and composed in the REPL or in any Clojure program just like any Clojure function can. Facilitating task composition is a &quot;unit of classpath isolation&quot;, the &quot;pod&quot;, which is a Clojure runtime that can have dependencies independent of the rest of the build. So, these task functions can have dependencies independent of the project they might operate on. For instance, a task might supply typechecking using core.typed in a pod, but this doesn't imply the user know or care to add core.typed to their project's dependencies. Because tasks are functions, and because we have a unit of classpath, most builds can be orchestrated in a single JVM. Builds are easier to develop, and more efficient to run.</li>
+</ul>
+<p><strong>LC</strong>: This sounds great! Is there an efficient path you would recommend for switching a project from Leiningen to Boot?</p>
+<p><strong>AD</strong>: The best place to go after installing is definitely <a href="https://github.com/boot-clj/boot/wiki">the wiki</a>.</p>
+<p>On the wiki there are many <a href="https://github.com/boot-clj/boot/wiki/Community-Tasks">community-contributed tasks</a> and <a href="https://github.com/boot-clj/boot/wiki/Community-Projects">projects</a> to look at for ideas and examples. There is an active and helpful community that you can connect with on IRC (in #hoplon on freenode) and at http://hoplon.discoursehosting.net/</p>
+<p>If you have an idea for a script or small program, <a href="https://lionfacelemonface.wordpress.com/2015/01/17/boot-getting-started-with-clojure-in-10-minutes/">this</a> is a very nice introductory tutorial that demonstrates making a standalone, boot-powered script that can be called from the command line.</p>
+<p><strong>LC</strong>: Does Boot have dependency management? Does it work with Clojars?</p>
+<p><strong>MN</strong>: Sure, Boot uses Pomegranate, the same Aether library that Leiningen uses. Boot can also use Leiningen style wagons (like the S3 private wagon, for instance). The built-in tasks include tasks to install jars in your local Maven repo and to push to remote repos like Clojars. Dependencies can be loaded dynamically at runtime, and Boot has &quot;pods&quot; in which you can load dependencies that conflict with something in the current runtime.</p>
+<p>Incidentally, I've been looking at Apache Ivy a bit, it looks really interesting. Maybe it's <a href="http://ant.apache.org/ivy/m2comparison.html">something we can use in the Clojure world</a>.</p>
+<p><strong>LC</strong>: Where can people follow you and Boot online? How can they help?</p>
+<p><strong>MN</strong>: The <a href="http://boot-clj.com">Boot website</a> is the main entry point into the weird world. We also hang out in the #hoplon channel on Freenode IRC where we provide support for all things tailrecursion but mostly just enjoy the interesting conversations that go on in there :) Help is always welcomed, people can <a href="https://github.com/boot-clj/boot/issues">check the open issues or create an issue here</a> or on the <a href="https://waffle.io/boot-clj/boot">associated kanban board here</a>. We try to schedule RC releases weekly every Monday.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>AD</strong>: We can be followed at <a href="https://twitter.com/alandipert">https://twitter.com/alandipert</a> and <a href="https://twitter.com/michaniskin">https://twitter.com/michaniskin</a>.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>AD</strong>: We both agree that Clojure is like anchovies: it's weird, relatively unpopular, but an essential ingredient in almost anything that's good. You should only ever need a small amount to make the dreariest meals magnificent. But never tell -- nobody needs to know exactly what they're so enjoying.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-interview-bruce-hauman">
               Pre-West Interview: Bruce Hauman
             </a>
@@ -994,128 +1139,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 Clojure 1.6.0 user=&gt;
 real 0m0.928s user 0m1.431s sys 0m0.053s</code></pre>
 <p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
-</p>
-
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-West Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-  </p>
-  
-</div>
-
-<p>
-  
-<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-leon-barrett">
-              Pre-West Interview: Leon Barrett
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 19, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><a href="http://clojurewest.org/speakers#lbarrett"><img src="http://www.lispcast.com/img/pre-west/lbarrett.jpg"
-style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Leon Barrett was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#lbarrett">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about parallel programming in Clojure. The <a href="http://www.lispcast.com/pre-west-leon-barrett">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-leon-barrett">Interview with Leon Barrett</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Leon Barrett</strong>: Actually, I wasn't even aware of Clojure until I started at The Climate Corporation 2.5 years ago. I had used Lisp a number of times in school, so it wasn't too foreign, but I'd never imagined that I'd write Lisp for a living.</p>
-<p><strong>LC</strong>: Clojure is great for shared-memory parallelism. Is it good for distributed programming?</p>
-<p><strong>LB</strong>: It can be; the same set of abstractions that are helpful locally can be helpful when distributed. For instance, there are some nice Hadoop MapReduce tools (though I happen to dislike Cascalog--it doesn't mesh with my mental model of mapreduce). Of course, you have to do some extra work to support distributed computing, but all in all it's relatively pleasant.</p>
-<p><strong>LC</strong>: What are your preferred distributed Clojure abstractions?</p>
-<p><strong>LB</strong>: You know, I don't feel qualified to opine on this too much. I mostly end up working on tasks that are fairly embarrassingly parallel, and I spend more of my time worrying about single-machine parallelism (hence my need for Claypoole). The core idea in the better Clojure distribution work I've done was, for both Storm and Hadoop, to just write simple, functional data transformations and then let the distribution framework worry about everything else.</p>
-<p><strong>LC</strong>: Where should someone get started with distributed programming in Clojure?</p>
-<p><strong>LB</strong>: I think both Parkour and Storm are very nice, though I had some issues using Parkour on Amazon's EMR. Just working with those, it's pretty easy to write distributed tools without worrying about the hard distributed parts (data movement, reliability, etc) yourself.</p>
-<p><strong>LC</strong>: What makes Clojure great for parallel programming?</p>
-<p><strong>LB</strong>: Clojure is great for parallel programming because of three things: Immutability, good core libraries, and macros.</p>
-<p>First, the bane of parallel programming is mutable state; state makes parallel programs much harder to reason about. While it's possible to avoid shared state by writing functional programs with immutable data even in other languages, it's much easier in Clojure because all the standard libraries support it, so Clojure is easier to do parallelism with from the very beginning. Also, Clojure's parallelism features, such as future and deref, are well-designed and easy to use, making it very easy to get started with parallelism. Finally, macros make it possible to write parallel things without so much fuss; for instance, Clojure's futures (built with macros) are easier to use than Java's futures because they don't require any boilerplate. Similarly, the library core.async uses macros to add amazing parallel and asynchronous features as a library, whereas in other languages such features would need to be designed into the core language.</p>
-<p><strong>LC</strong>: Can you briefly explain Claypoole? What does it do? Why did you write it?</p>
-<p><strong>LB</strong>: I wrote Claypoole because I was dissatisfied with Clojure's built-in pmap for several reasons, including 2 in particular: First, I wanted to control the degree of parallelism, but core pmap's parallelism is determined only by the number of CPUs. Second, I wanted my pmaps to get things done as fast as possible, but core pmap is lazy and may be inefficient when the individual tasks have a high variance in duration.</p>
-<p>Claypoole's core feature is a pmap that meets my demands--it's eager, and I can control the degree of parallelism, even across multiple simultaenous pmaps. As a bonus, it turns out that once one has good control over sharing threadpools in pmaps, it's easy to add other such features, so Claypoole also does a number of related, handy things, such as parallel for (pfor), unordered pmaps that return results in the order they're completed (upmap), and so on. I see Claypoole as a tool to provide an advanced degree of control over parallelism.</p>
-<p><strong>LC</strong>: Those sound really handy! Do you use reducers in your work? Where have you found them most helpful?</p>
-<p><strong>LB</strong>: I don't actually use reducers a lot. I used them while working with Parkour, and they were very cute there. However, in my own work I've tended to prefer Claypoole. Reducers is good because it has much less overhead than chained maps, which is great for functionally combining small tasks. However, I find that I tend map bigger tasks, so I benefit more from fine-grained control of parallelism in Claypoole than I would from the efficiency of reducers.</p>
-<p><strong>LC</strong>: Do you have any good background materials for people who want to do a little pre-reading/watching?</p>
-<p><strong>LB</strong>: Nope. My talk will start with some basics to make sure that everyone's on the same page, and my initial test audiences seemed to indicate that my intro works well for both beginners and more advanced programmers.</p>
-<p><strong>LC</strong>: How can people help with Claypoole?</p>
-<p><strong>LB</strong>: I love pull requests, and I appreciate bug reports (obviously, repeatable test cases make my life easier). But mostly, my goal with open-sourcing Claypoole was to have the community do this stuff right once, rather than having lots of people making partial reimplementations that work on just their case. So, just use it! I want people to use Claypoole rather than reimplementing it.</p>
-<p><strong>LC</strong>: Where can people follow you online?</p>
-<p><strong>LB</strong>: I'm not terribly vocal online. I guess I post to the <a href="http://eng.climate.com/">Climate Corp engineering blog</a> every so often.</p>
-<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
-<p><strong>LB</strong>: One could claim that it'd be Cajun blackened catfish, because it's lean and full of flavor.</p>
 <hr />
 
 <div class="article-cg-box">

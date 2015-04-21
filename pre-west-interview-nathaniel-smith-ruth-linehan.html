@@ -1,0 +1,244 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Pre-West Interview: Nathaniel Smith and Ruth Linehan | LispCast</title>
+    <meta name="description" content="Nathaniel Smith and Ruth Linehan will talk about developing large applications in Clojure.">
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
+               href="/pre-west-interview-nathaniel-smith-ruth-linehan">
+              Pre-West Interview: Nathaniel Smith and Ruth Linehan
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 21, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<div style="float:right">
+
+<p><a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/nsmith.png"
+style="height:150px"></a> <br> <a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/rlinehan.png"
+style="height:150px"></a></p>
+</div>
+
+<h3 id="introduction">Introduction</h3>
+<p>Nathaniel Smith and Ruth Linehan generously agreed to do an interview about their <a href="http://clojurewest.org/speakers#nsmith">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. They will be talking about Trapperkeeper. The <a href="http://www.lispcast.com/pre-west-nathaniel-smith-ruth-linehan">background to their talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Ruth Linehan</strong>: I started using Clojure about a year and a half ago, when my team at Puppet Labs started working on a new project in it. Previously I had mostly worked in Ruby and Javascript, and while switching to Clojure required a bit of a mind shift, I really enjoy it!</p>
+<p><strong>Nathaniel Smith</strong>: I had never used it, but was offered a job at Puppet Labs two years ago to write it full time. I thoroughly enjoyed learning it on the 5 hour flight to my first interview there and have loved writing it ever since (in other words, I got the job :) )</p>
+<p><strong>LC</strong>: What does Trapperkeeper offer the Clojure developer?</p>
+<p><strong>RL</strong>: Great question! Trapperkeeper is great for complicated Clojure applications. It allows you to easily break up your code into modular pieces (what we call &quot;services&quot;), and it serves as a binder for these pieces of code. Any state a service needs can be stored in a map in the service context, rather than kept globally. It provides a consistent way for expressing the lifecycle of these services - what happens at startup and shutdown - and for managing dependencies between services. It has built in config file parsing, and it initializes a logging system using logback for you, so that you don't have to worry about this. It also has some useful test helpers that allow you to start up a Trapperkeeper application in code and test the whole system.</p>
+<p><strong>NS</strong>: A better way to compose the various services (Database, job queue, web server, logging, configuration...) that one has in a large, long running Clojure application. Trapperkeeper leads to more maintanable and reusable code.</p>
+<p><strong>LC</strong>: How does breaking everything into small services help build a large application?</p>
+<p><strong>NS</strong>: You have well-defined, protocol-enforced APIs for you various services and get to leverage TK's dependency management to ensure clean statups/shutdowns of all of your JVM infrastructure bits.</p>
+<p><strong>RL</strong>: Frequently, some of the code that's necessary to build a large application is code you (or someone else) had to write to build a different application. Breaking it down into smaller, more modular services means that you can more easily reuse that code across multiple applications. Furthermore, each service manages the state that it needs, so you don't end up with a huge mess of global state. It also makes testing much easier - you can test a service on its own, rather than having to set up the entire system to test it.</p>
+<p><strong>LC</strong>: Are there any similar systems in Clojure or elsewhere?</p>
+<p><strong>NS</strong>: A few, but none of them met our needs at Puppet Labs. We think that Immutant and Components and other similar projects are great, but they weren't a good fit for our needs.</p>
+<p><strong>RL</strong>: Trapperkeeper was heavily influenced by Stuart Sierra's &quot;Clojure, Reloaded&quot; workflow, and it has a number of similarities with other frameworks motivated by this, such as Jig and Component. Our way of turning on and off services and managing service dependencies borrows a lot from OSGi's service registry.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>RL</strong>: Nathaniel and I are both on twitter: I'm <a href="https://twitter.com/ruthlinehan">@ruthlinehan</a>, he's <a href="https://twitter.com/nate_smith">@nate_smith</a>. If you want to follow Trapperkeeper, we (&quot;we&quot; meaning many of the folks at Puppet Labs who work on or with Trapperkeeper) hangout on IRC on freednode in #trapperkeeper. We'd love to see folks there!</p>
+<p><strong>NS</strong>: I publish poetry and other esoterica at <a href="http://chiptheglasses.com">http://chiptheglasses.com</a>.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>RL</strong>: Hm... maybe a melon? From the outside it seems hard and impenetrable, but once you get inside it's awesome and delicious! Also, a slice of melon looks like a parenthesis. :)</p>
+<p><strong>NS</strong>: Delicious whole wheat bread (ooh, or oat bread) used to make function sandwiches.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+            if(document.cookie.indexOf('oberon-id') < 0) {
+              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+              mixpanel.alias(window.oberon.id);
+              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+            }
+            mixpanel.identify(window.oberon.id);
+          }
+
+      mixpanel.register({URL: window.location.pathname,
+                         Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+      mixpanel.track_links('a.homepage-offer-box-link',
+                           'Click PurelyFunctional.tv',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      mixpanel.track_links('a.js-clojuregazette',
+                           'Click Clojure Gazette',
+                           function(e) {
+                             return {ToURL: $(e).prop('href')};
+                           });
+
+      $('input[name=EMAIL]').change(function() {
+                                                      var i = $(this);
+                                                      window.o_email = i.val();
+                                                      });
+
+      $('form').submit(function() {
+        if(window.o_email)
+          mixpanel.people.set({"$email": window.o_email});
+});
+
+    </script>
+
+  </body>
+</html>

@@ -73,6 +73,128 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-interview-leon-barrett">
+              Pre-West Interview: Leon Barrett
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 19, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#lbarrett"><img src="http://www.lispcast.com/img/pre-west/lbarrett.jpg"
+style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Leon Barrett was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#lbarrett">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about parallel programming in Clojure. The <a href="http://www.lispcast.com/pre-west-leon-barrett">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-leon-barrett">Interview with Leon Barrett</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Leon Barrett</strong>: Actually, I wasn't even aware of Clojure until I started at The Climate Corporation 2.5 years ago. I had used Lisp a number of times in school, so it wasn't too foreign, but I'd never imagined that I'd write Lisp for a living.</p>
+<p><strong>LC</strong>: Clojure is great for shared-memory parallelism. Is it good for distributed programming?</p>
+<p><strong>LB</strong>: It can be; the same set of abstractions that are helpful locally can be helpful when distributed. For instance, there are some nice Hadoop MapReduce tools (though I happen to dislike Cascalog--it doesn't mesh with my mental model of mapreduce). Of course, you have to do some extra work to support distributed computing, but all in all it's relatively pleasant.</p>
+<p><strong>LC</strong>: What are your preferred distributed Clojure abstractions?</p>
+<p><strong>LB</strong>: You know, I don't feel qualified to opine on this too much. I mostly end up working on tasks that are fairly embarrassingly parallel, and I spend more of my time worrying about single-machine parallelism (hence my need for Claypoole). The core idea in the better Clojure distribution work I've done was, for both Storm and Hadoop, to just write simple, functional data transformations and then let the distribution framework worry about everything else.</p>
+<p><strong>LC</strong>: Where should someone get started with distributed programming in Clojure?</p>
+<p><strong>LB</strong>: I think both Parkour and Storm are very nice, though I had some issues using Parkour on Amazon's EMR. Just working with those, it's pretty easy to write distributed tools without worrying about the hard distributed parts (data movement, reliability, etc) yourself.</p>
+<p><strong>LC</strong>: What makes Clojure great for parallel programming?</p>
+<p><strong>LB</strong>: Clojure is great for parallel programming because of three things: Immutability, good core libraries, and macros.</p>
+<p>First, the bane of parallel programming is mutable state; state makes parallel programs much harder to reason about. While it's possible to avoid shared state by writing functional programs with immutable data even in other languages, it's much easier in Clojure because all the standard libraries support it, so Clojure is easier to do parallelism with from the very beginning. Also, Clojure's parallelism features, such as future and deref, are well-designed and easy to use, making it very easy to get started with parallelism. Finally, macros make it possible to write parallel things without so much fuss; for instance, Clojure's futures (built with macros) are easier to use than Java's futures because they don't require any boilerplate. Similarly, the library core.async uses macros to add amazing parallel and asynchronous features as a library, whereas in other languages such features would need to be designed into the core language.</p>
+<p><strong>LC</strong>: Can you briefly explain Claypoole? What does it do? Why did you write it?</p>
+<p><strong>LB</strong>: I wrote Claypoole because I was dissatisfied with Clojure's built-in pmap for several reasons, including 2 in particular: First, I wanted to control the degree of parallelism, but core pmap's parallelism is determined only by the number of CPUs. Second, I wanted my pmaps to get things done as fast as possible, but core pmap is lazy and may be inefficient when the individual tasks have a high variance in duration.</p>
+<p>Claypoole's core feature is a pmap that meets my demands--it's eager, and I can control the degree of parallelism, even across multiple simultaenous pmaps. As a bonus, it turns out that once one has good control over sharing threadpools in pmaps, it's easy to add other such features, so Claypoole also does a number of related, handy things, such as parallel for (pfor), unordered pmaps that return results in the order they're completed (upmap), and so on. I see Claypoole as a tool to provide an advanced degree of control over parallelism.</p>
+<p><strong>LC</strong>: Those sound really handy! Do you use reducers in your work? Where have you found them most helpful?</p>
+<p><strong>LB</strong>: I don't actually use reducers a lot. I used them while working with Parkour, and they were very cute there. However, in my own work I've tended to prefer Claypoole. Reducers is good because it has much less overhead than chained maps, which is great for functionally combining small tasks. However, I find that I tend map bigger tasks, so I benefit more from fine-grained control of parallelism in Claypoole than I would from the efficiency of reducers.</p>
+<p><strong>LC</strong>: Do you have any good background materials for people who want to do a little pre-reading/watching?</p>
+<p><strong>LB</strong>: Nope. My talk will start with some basics to make sure that everyone's on the same page, and my initial test audiences seemed to indicate that my intro works well for both beginners and more advanced programmers.</p>
+<p><strong>LC</strong>: How can people help with Claypoole?</p>
+<p><strong>LB</strong>: I love pull requests, and I appreciate bug reports (obviously, repeatable test cases make my life easier). But mostly, my goal with open-sourcing Claypoole was to have the community do this stuff right once, rather than having lots of people making partial reimplementations that work on just their case. So, just use it! I want people to use Claypoole rather than reimplementing it.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>LB</strong>: I'm not terribly vocal online. I guess I post to the <a href="http://eng.climate.com/">Climate Corp engineering blog</a> every so often.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>LB</strong>: One could claim that it'd be Cajun blackened catfish, because it's lean and full of flavor.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p>
+    
+This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
+</p>
+
+
+<p>
+That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
+</p>
+
+
+<p>
+    <form class="subscribe-form"
+          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
+          method="POST"
+          name="mc-embedded-subscribe-form"
+          novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Pre-West Prep Email Signup
+</h3> 
+<br /><br /> <input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;">
+<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
+</div>             <div class="field-text-text2">
+        <p>
+          
+Completely free. No spam, easy unsubscribe, and your info is private.
+</p>
+      </div>
+    </form>
+  </p>
+  
+</div>
+
+<p>
+  
+<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-interview-luke-vanderhart">
               Pre-West Interview: Luke Vanderhart
             </a>
@@ -1043,108 +1165,6 @@ Completely free. No spam, easy unsubscribe, and your info is private.
 <h3 id="about-james-macaulaytalk">About <a href="http://clojurewest.org/speakers#jmacaulay">James MacAulay</a></h3>
 <p><a href="https://github.com/jamesmacaulay">GitHub</a> - <a href="https://twitter.com/jamesmacaulay">Twitter</a></p>
 <p><a href="http://clojurewest.org/speakers#jmacaulay"><img src="http://www.lispcast.com/img/pre-west/jmacaulay.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p>
-    
-This post is one of a series called <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a>, which is also published by email. It's all about getting ready for the upcoming <a href="http://clojurewest.org">Clojure/West</a>, organized by <a href="http://cognitect.com">Cognitect</a>. Conferences are ongoing conversations and explorations. Speakers discuss trends, best practices, and the future by drawing on the <b>rich context built up in past conferences and other media</b>.
-</p>
-
-
-<p>
-That rich context is what <a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep</a> is about. I want to enhance everyone's experience at the conference by surfacing that context. With just a little homework, we can be better prepared to <b>understand and enjoy the talks and the hallway conversations</b>.
-</p>
-
-
-<p>
-    <form class="subscribe-form"
-          action="//lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=4c36a22bd5"
-          method="POST"
-          name="mc-embedded-subscribe-form"
-          novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Pre-West Prep Email Signup
-</h3> 
-<br /><br /> <input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;">
-<input type="text" name="b_a33b5228d1b5bf2e0c68a83f4_4c36a22bd5" tabindex="-1" value="">
-</div>             <div class="field-text-text2">
-        <p>
-          
-Completely free. No spam, easy unsubscribe, and your info is private.
-</p>
-      </div>
-    </form>
-  </p>
-  
-</div>
-
-<p>
-  
-<a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference.
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-jeanine-adkisson">
-              Pre-West Prep: Jeanine Adkisson
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 03, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-design-and-prototype-a-language-in-clojuretalk">Talk: <a href="http://clojurewest.org/speakers#jadkisson">Design and Prototype a Language in Clojure</a></h3>
-<p><a href="http://clojurewest.org/speakers#jadkisson">Jeanine Adkisson's talk</a> at <em>Clojure/West</em> is about designing and prototyping a language using Clojure.</p>
-<h4 id="background">Background</h4>
-<p>Lisps have been used for a long time to prototype other languages. Scheme was designed and used for just that purpose. The most popular books on compiler design often start with Lex and Yacc, which are just really old tools built when memory was so restricted you had to do your parsing in stages. <a href="https://github.com/Engelberg/instaparse">Instaparse</a> is way better for quickly exploring syntax. And since lambda calculus (which Clojure is based on) is computationally complete, you're in good hands exploring the entire range of computational semantics.</p>
-<p>However, these are just generalities. Jeanine Adkisson will likely bring wit and depth to the talk, as she did in <a href="https://www.youtube.com/watch?v=ZQkIWWTygio">her Clojure/conj talk</a>. She's a language designer, so she's got plenty of experience to draw from.</p>
-<p>As an interesting background to language prototyping in Clojure, check out <a href="https://www.youtube.com/watch?v=DHubfS8E--o">Bodil Stokke talking about her language Bodol</a>.</p>
-<h3 id="about-jeanine-adkissontalk">About <a href="http://clojurewest.org/speakers#jadkisson">Jeanine Adkisson</a></h3>
-<p><a href="http://www.jneen.net/">Homepage</a> - <a href="https://github.com/jneen">GitHub</a> - <a href="https://twitter.com/jneen_">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#jadkisson"><img src="http://www.lispcast.com/img/pre-west/jneen.jpeg" /></a></p>
 <hr />
 
 <div class="article-cg-box">

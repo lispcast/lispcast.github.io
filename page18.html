@@ -73,6 +73,39 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/clojure-screencasts">
+              Existing Clojure Introductory Videos
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 03, 2013
+          </div>
+
+          
+<p>As you probably know, I am running a <a href="http://www.kickstarter.com/projects/376627045/lispcast-introduction-to-clojure-videos">Kickstarter project to create Introduction to Clojure videos</a>. The project is still going (it runs until March 14, 2013). Please support it if you want the videos.</p>
+<p>I know that there are many great videos out there that teach the basics of Clojure. Allow me to present my selection.</p>
+<p><a href="http://www.youtube.com/watch?v=P6S_1nCfjWA">Jim Slaterry is creating video walkthroughs</a> of the <a href="http://clojurekoans.com/">Clojure Koans</a>.</p>
+<p><a href="https://vimeo.com/channels/fulldisclojure">Full Disclojure was a long series of screencasts by Sean Devlin</a> that dives deep into Clojure. There are many lessons about Clojure and functional programming, screencasts explaining how to install editors, and a few explorations of katas. Most of the material should still be current.</p>
+<p><a href="http://www.youtube.com/watch?v=Aoeav_T1ARU&amp;list=PLAC43CFB134E85266">Brian Will created a series of videos introducing Clojure</a> back in 2009 which explains the basics of the language. The basics have changed somewhat, but this is still a good way to get into the language.</p>
+<p><a href="https://peepcode.com/products/functional-programming-with-clojure">PeepCode has a video for $12 for Clojure beginners.</a></p>
+<p><a href="http://www.youtube.com/watch?v=dGVqrGmwOAw">Rich Hickey</a> gave <a href="http://www.youtube.com/watch?v=P76Vbsk_3J0">some talks</a> a long time ago teaching Clojure. Again, a little old, but I learned a lot from them when they were new.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://www.clojuresphere.com/">
               ClojureSphere
             </a>
@@ -388,232 +421,6 @@ $(&#39;.x&#39;).filter_divs().addClass(&#39;hello&#39;);</code></pre>
 <p>One hour of video will cost $5 to the Kickstarter supporters. After that, the price will go up to $12. This is a very good value for one hour of instructional video. There is also a company sponsorship level. See the <a href="http://www.kickstarter.com/projects/376627045/lispcast-introduction-to-clojure-videos">Kickstarter page</a> for more details. The project ends March 14, 2013.</p>
 <p>Please support the project and let other people know.</p>
 <p>Thanks!</p>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/cascading-separation-abstraction">
-              Separation, Abstraction, and Cascading in CSS
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            December 29, 2012
-          </div>
-
-          
-<p><em>Summary:</em> <a href="http://lesscss.org/">LESS</a> and <a href="http://sass-lang.com/">Sass</a> (and similar solutions) have saved CSS for three reasons: separation, abstraction, and cascading. While I welcome them, CSS still has other problems which I believe can be solved. I propose some solutions.</p>
-<h3 id="introduction">Introduction</h3>
-<p>A lot is said about LESS and Sass, and for good reason. CSS is hell to get right and even harder to maintain. LESS and Sass (and similar tools) make CSS into a much more useful language.</p>
-<p>But when people talk about why they are so great, they miss the main point. It is true that your style files are now shorter and more readable. However, there is something deeper going on than mere saving of keystrokes and being able to name things.</p>
-<p>In this essay, I will try to put into words (and some pictures) what my intuition tells me as a developer and programming language enthusiast to clarify why CSS is innately unmaintainable, does not satisfy its own design goals, and why LESS and Sass make a bad language more bearable. I also will propose solutions which would raise the bar past the high level where LESS and Sass have taken it.</p>
-<h3 id="zero-degrees-of-separation">Zero Degrees of Separation</h3>
-<p>Way back when, people used HTML tables to style their pages. Documents looked like this:</p>
-<center>
-<img src="/img/html_content_style.svg" alt="HTML containing content + style" />
-</center>
-
-<p>Those were the days of font tags and tables.</p>
-<p>Then CSS came along, and people talked a lot about separation of content from presentation. CSS did help you move styling concerns outside of the HTML file, but that is about it.</p>
-<center>
-<img src="/img/html_css.svg" alt="HTML containing content and CSS containing style" />
-</center>
-
-<p>Your styles were still tied to the structure of the document they were styling. They had no grouping of their own. If you wanted to repeat a style, you either had to copy and paste or use a selector with a comma. Both were bad solutions.</p>
-<p>An even worse solution, which is, unfortunately the most common, is to build CSS classes which name a style. We see this in the numerous and all equally bad &quot;CSS frameworks&quot; which litter your HTML with style information. Grid systems do this to a fault.</p>
-<p>But it is not the fault of the authors of those frameworks, nor of the poor web developers who are in search of some solutions to their problems. No, the blame lies with the authors of CSS itself. With CSS, separation of content from presentation is possible but extremely difficult and time-consuming.</p>
-<p>HTML and CSS are separate but not equal. HTML can exist without CSS. But what is CSS without HTML? Nothing.</p>
-<p>If you truly want to be able to separate content from presentation, you have to set them both on equal footing, like this:</p>
-<center>
-<img src="/img/html_css_3.svg" alt="HTML, CSS, plus some third language to tie them together" />
-</center>
-
-<p>Content in the HTML, style in the CSS, and you tie them together in some third language.</p>
-<p>This is possible in LESS (LESS being the question mark), evidenced by the existence of frameworks such as <a href="http://lesselements.com/">LESS Elements</a>. People talk about LESS reducing boilerplate and repetition. Or about hiding browser-specific CSS properties. But that is not the essence of the matter. What all of that talk is trying to get at is that they can finally define a style, in the form of a mixin, which exists independently of any HTML structure. It can then be tied into zero, one, or more HTML elements merely by mentioning its name.</p>
-<p>With LESS, I can define a mixin called Dorothy:</p>
-<pre><code>.dorothy() {
-  background-color: green;
-  text-color: yellow;
-  border: 1px solid red;
-}</code></pre>
-<p>Yes, it is probably an ugly style. But it is just a style. It does not depend on any HTML structure for its existence, not even one <code>&lt;p&gt;</code> tag. Now, if I want to use it, I can use it wherever I want by relating, in a separate way, the style with some HTML.</p>
-<pre><code>div.main {
-  .dorothy;
-}
-
-blockquote {
-  .dorothy;
-}</code></pre>
-<p>This is one of the reasons LESS makes styling HTML bearable. In addition to mixins, you can also define variables which contain sizes and colors, which is just another way to name styles (or elements of styles) to be tied to HTML later.</p>
-<center>
-<img src="/img/html_css_less.svg" alt="HTML, LESS mixins, and LESS rules" />
-</center>
-
-<h3 id="abstraction">Abstraction</h3>
-<p>If you take the idea of mixins and variables even further, you will notice that they compose. I can define a mixin and use it in another mixin. I could define <code>dorothy</code> as the composition of three styles, <code>red-border</code>, <code>yellow-text</code>, and <code>green-background</code>. This type of composition suggests that there is some amount of abstraction going on.</p>
-<p>This was not possible in HTML + CSS.</p>
-<p>Well, I say not possible, but there <em>were</em> ways, they were just terrible. You could copy-paste, which is just not a solution at all, but it would get you your style. Or you could reuse non-semantic class names like in grid frameworks (blech!). Or, finally, you could do what I call &quot;inverted-style&quot;, where the styles take precedence and the selectors take a subordinate role. That will take some explaining.</p>
-<p>Let us say we want <code>div.main</code> and <code>blockquote</code> to be styled like <code>dorothy</code>. Also, <code>div.main</code> and <code>p</code> should have a top margin.</p>
-<p>Normally, we would write this in CSS:</p>
-<pre><code>div.main {
-  background-color: green;
-  text-color: yellow;
-  border: 1px solid red;
-  margin-top: 10px;
-}
-
-blockquote {
-  background-color: green;
-  text-color: yellow;
-  border: 1px solid red;
-}
-
-p {
-  margin-top: 10px;
-}</code></pre>
-<p>This does not look bad, but there is a lot of repetition and the intent is not clear. We could instead write it in inverted-style.</p>
-<pre><code>/* Dorothy style */
-div.main, blockquote {
-  background-color: green;
-  text-color: yellow;
-  border: 1px solid red;
-}
-
-/* Top margin */
-div.main, p {
-  margin-top: 10px;
-}</code></pre>
-<p>If we discover that <code>div.footer</code> also needs a top margin, we add it to the selector instead of making a new rule. I bet someone else has come up with this style (and probably a better name for it), but I am unaware of it. I also guess that this was one of the original intentions of the CSS authors. In practice, in my experience, this is hard to keep up. Somehow, I do not have the discipline to keep the styles separated into their own rules. CSS properties that are related to <code>div.main</code> and <code>blockquote</code>, but not to <code>dorothy</code> slip into that first rule, and then all is lost. Maybe a professional could do better, but I have never met one.</p>
-<p>I do not have that problem with LESS. It is simple to define a mixin once I identify a consistent set of properties. I can then reuse it wherever I want.</p>
-<h3 id="cascading">Cascading</h3>
-<p>LESS and Sass provide a pretty good, but partial, solution to the cascading problem. The cascading problem is basically one of complexity. There are too many places for the value of a particular property for a particular element to be set. And the rules for determining the precedence of all of those places are too complex.</p>
-<p>The value of a CSS property is determined by these factors:</p>
-<ul>
-<li>The order of CSS imports</li>
-<li>The number of classes mentioned in the CSS rule</li>
-<li>The order of rules in a particular file</li>
-<li>Any <code>inherits</code> settings</li>
-<li>The tag name of the element</li>
-<li>The class of the element</li>
-<li>The id of the element</li>
-<li>All of the element's ancestors in the HTML tree</li>
-<li>The default styles for the browser</li>
-</ul>
-<p>It is just too many factors. Yes, the wisdom is to keep everything clean and simple. That works for small projects but at some point, cascading rules will bite you.</p>
-<p>Jason Zimdars shows <a href="http://37signals.com/svn/posts/3003-css-taking-control-of-the-cascade">the solution to cascading</a> they came up with at 37 Signals. He shares a good analysis of the problem and how LESS can alleviate some of the pain.</p>
-<blockquote>
-<p>For the first time we could write CSS that we knew wouldn’t cause problems later on because they couldn’t cascade out of control. This opened us up to create elements with self contained styles that could be dropped onto most any page and they’d just work.</p>
-</blockquote>
-<p>Sounds like the holy grail of separation of presentation from content!</p>
-<p>By using nested LESS rules and child selectors, we can avoid much of the pain of cascading rules. Combining with everything else, we define our styles as mixins (and mixins of mixins) and tie the styles to the HTML with nested rules which mimic the structure of the HTML.</p>
-<p>Perfect, final solution? Not quite.</p>
-<h3 id="further">Further</h3>
-<p>There are a few more issues to deal with. LESS and Sass were defined as supersets of CSS. That means that your valid CSS files are automatically LESS files as well, which means you can just start using the LESS compiler.</p>
-<p>But it also means that LESS has inherited all of the problems it has no solution for. What I will suggest is that we need a subset of CSS to move further, and I will attempt to choose that subset. I would love to hear your suggestions, as well.</p>
-<p>Yes, nested rules help you deal with cascading, but there are other issues with cascading. Mixins cannot really help you with the box model. No amount of variables and arithmetic can make two divs have the same width.</p>
-<p>I will go through the problems one by one.</p>
-<h4 id="cascading-again">Cascading, again</h4>
-<p>Let me put it bluntly, cascading was a mistake on the part of the authors of CSS. It has a nice abstract purity to it, but it does not work well in practice.</p>
-<p>With hindsight, we see that we really only want one level of cascading. The <a href="http://meyerweb.com/eric/tools/css/reset/">CSS reset</a> was a beautiful invention which neutralized differences between browsers. The CSS reset cut off cascading from the default browser styles and gave you a fresh base to start with. That is really all of the cascading that you want: cascading to a sane default. Other than that, it turns into a mess of spaghetti.</p>
-<p>Sometimes it seems that you want some cascading. For instance, you want to set the font family of the entire document. So you declare <code>body { font-family: 'Comic Sans'; }</code> and call your job done. In such a declaration, you are implicitly relying on the inheritance of the font-family property down through the document tree. In fact, if you want every element to have a certain font, you should just say it: <code>* { font-family: 'Comic Sans'; }</code> This has the same effect as a CSS reset: set the default styles for everything in one place.</p>
-<p>This implies a rule: Reset once, then avoid cascading. We now just have to systematically apply it. Here is what our setup looks like now:</p>
-<center>
-<img src="/img/html_less2.svg" alt="HTML, reset, mixins, and style" />
-</center>
-
-<p>No cascading means we must restrict ourselves to never select the same elements with different rules. I cannot say how we can do this strictly. But we can define some guidelines.</p>
-<ol style="list-style-type: decimal">
-<li>Only bare (classless + non-nested) selectors may occur in the reset.</li>
-<li>No bare selectors may occur in the LESS rules.</li>
-<li>No selector may be repeated in the LESS rules.</li>
-</ol>
-<p>These guidelines will limit the amount of cascading even further when combined with Zimdars' solution.</p>
-<h4 id="common-mistakes">Common mistakes</h4>
-<p>I call them mistakes for lack of a better word, but really the blame lies on CSS.</p>
-<h5 id="box-model">Box model</h5>
-<p>The box model sucks. But we can avoid some of the easy errors to make.</p>
-<p>One mistake is what happens when you define the <code>left-margin</code> but not the <code>right-margin</code>. In such a situation, where does the <code>right-margin</code> get determined? Cascading.</p>
-<p>And what happens when I set the width to 100%? What if a padding is cascaded in? Oops.</p>
-<p>How to deal with this? Do not use individual CSS properties where a compound property exists.</p>
-<p>I propose to boycott the following properties:</p>
-<ul>
-<li><code>left-margin</code>, <code>right-margin</code>, <code>top-margin</code>, <code>bottom-margin</code>; use <code>margin</code> instead</li>
-<li><code>left-border</code>, <code>right-border</code>, <code>top-border</code>, <code>bottom-border</code>; use <code>border</code> instead</li>
-<li><code>left-padding</code>, <code>right-padding</code>, <code>top-padding</code>, <code>bottom-padding</code>; use <code>padding</code> instead</li>
-<li><code>width</code>, <code>height</code>; use the .dimension mixin instead</li>
-</ul>
-<p>To get more sane behavior, we define this mixin:</p>
-<pre><code>.dimension(@w,@h) {
-  width       : @w;
-  height      : @h;
-
-  margin      : 0;
-  padding     : 0;
-  border-width: 0;
-}</code></pre>
-<p>This forces you to set width and height at once, and it resets the margin, padding, and border (which affect actual width, thanks to the box model). You can still override them, you just have to do it explicitly. This does not solve the entire problem of the box model, but it helps cut out a lot of surprising behavior.</p>
-<p>My argument for using this mixin is that any time you are setting the dimensions of an element, you should also be explicit about the margin, padding, and border at that point, since they affect the box model.</p>
-<h5 id="font-color">Font color</h5>
-<p>Now I will pick some nits.</p>
-<p>How many times have you seen this code?</p>
-<pre><code>body {
-  color: black;
-  a:link    {color: blue;   }
-  a:hover   {color: red;    }
-  a:active  {color: blue;   }
-  a:visited {color: purple; }
-}</code></pre>
-<p>Too much! And I always forget one of them. Time for a mixin.</p>
-<pre><code>.font-color(@f,@a:blue,@h:red,@c:blue,@v:purple) {
-  color: @f;
-  a:link    {color: @a};
-  a:hover   {color: @h};
-  a:active  {color: @c};
-  a:visited {color: @v};
-}</code></pre>
-<p>Again, the pattern is clear: what you do not set explicitly gets reset to a default.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Separating style from content was never fully achieved with CSS. LESS (and Sass) finally allowed the separation to occur. And, using LESS, we can begin to round off the sharp edges of CSS. But instead of adopting a superset of CSS, we should be looking to subset CSS and replace problematic CSS properties with mixins. The subset could be enforced with a linter.</p>
-<p>These recommendations are a good start, but there is still a long way to go.</p>
-<h3 id="post-script">Post script</h3>
-<p>There is one final reflection into CSS cascading that I wanted to mention but could not find a place for it above, mainly because it is not a problem so much as an inconvenience. I have often wondered why in CSS, element styles (styles defined in the <code>style</code> attribute of an HTML tag) take precedence over all other styles. Similarly, why do styles defined in the HTML (in a <code>style</code> tag) take precedence over those that are linked to externally? It has always made more sense to me that it should be the exact opposite. An HTML page could define default styles for its elements, which would be carried in the page, and overriden with an external stylesheet.</p>
-<p>However, the actual rules dictate that I must edit the HTML file if I want to change the style of an element with an element style. In this not the exact opposite of the intention of CSS?</p>
-<div class="article-cg-box">
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
-<li><a href="http://www.lispcast.com/less-abstraction-combination">LESS has Better Forms of Abstraction than CSS</a></li>
-<li><a href="http://www.lispcast.com/pre-west-interview-priyatam-mudivarti">Pre-West Interview: Priyatam Mudivarti</a></li>
-<li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
-</ul>
 
 
           <div class="endmark">

@@ -73,6 +73,102 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-conj-interview-david-pick">
+              Pre-Conj Interview: David Pick
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 15, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#david-pick"><img src="http://www.lispcast.com/img/pre-conj/david-pick.jpeg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>David Pick was kind enough to answer a few questions about himself and his upcoming <a href="http://www.clojure-conj.org/">Clojure/conj</a> talk. You may want to <a href="http://www.lispcast.com/pre-conj-david-pick">read the background</a> before you begin.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>David Pick</strong>: A friend of my mine suggested I read <a href="http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504">Purely Functional Data Structures</a> and told me the work in the book was the basis for Clojure's persistent data structures. I really enjoyed it and decided to give Clojure a try.</p>
+<p><strong>LC</strong>: Braintree must process a lot of very important data, since it's a payments service. What were you using before you developed the Clojure and Kafka system?</p>
+<p><strong>DP</strong>: I'd say for 98% of our systems we still use Ruby and Postgres, we're simply using Clojure and Kafka as a messaging platform to move data between systems.</p>
+<p><strong>LC</strong>: What is Kafka?</p>
+<p><strong>DP</strong>: Kafka is a system for doing publish subscribe messaging, that was built by LinkedIn to have extremely high throughput and replay ability of messages. It stores all messages sent through the system for a rolling window. So consumers simply say give me messages starting with offset n or whatever your most recent message is. This way if a receiving system goes down the consumer can just rewind the stream and replay messages that were missed.</p>
+<p><strong>LC</strong>: Could you describe the problem you were trying to solve? What were the requirements?</p>
+<p><strong>DP</strong>: There were actually two problems we were trying to solve. The first was to pull our search tool into a separate system that was more scalable than our current one (the current one just runs sql queries on main database). The second was to improve the accuracy and speed that our data warehouse is updated.</p>
+<p>For the infrastructure part of the solution we ended up using Kafka, Zookeeper, and Elasticsearch which are all JVM based so that ended up heavily influencing our decision to use Clojure.</p>
+<p><strong>LC</strong>: You mentioned in the talk description that Clojure had certain advantages. What tradeoffs did Clojure, or your choice of technologies, bring about?</p>
+<p><strong>DP</strong>: The biggest tradeoff I think we made with Clojure is familiarity, I was the only one on the team who knew Clojure prior to starting this project. So that has certainly slowed us down. Other than that things have gone surprisingly well.</p>
+<p><strong>LC</strong>: I'm really fascinated by the engineering efforts to build very reliable and robust systems. Are you going to talk about that?</p>
+<p><strong>DP</strong>: Yep, that's the plan!</p>
+<p><strong>LC</strong>: Awesome.</p>
+<p>Do you have any resources that would help someone new to Clojure or new to Kafka so that they can make the most of your talk? Some pre-reading or pre-watching materials?</p>
+<p><strong>DP</strong>: For Clojure I definitely recommend both the <a href="http://clojurekoans.com/">Clojure Koans</a> and <a href="http://4clojure.com/">4Clojure</a>. For Kafka I'd recommend the <a href="http://kafka.apache.org/documentation.html#introduction">introduction on their site</a>.</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>DP</strong>: Twitter is probably the best place <a href="http://twitter.com/davidpick">@davidpick</a>.</p>
+<p><strong>LC</strong>: Who would win in a no-holds-barred fight to the finish, Clojure with an Arduino-controlled laser or a T-Rex?</p>
+<p><strong>DP</strong>: If Rich is writing the Clojure I give it a fighting chance, otherwise it's the T-Rex for sure.</p>
+<p><strong>LC</strong>: Awesome! Thanks for a great interview. I look forward to seeing you at the Conj.</p>
+<p><strong>DP</strong>: Awesome, thanks Eric!</p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
+</p>
+
+
+<p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-conj-zach-tellman">
               Pre-conj Prep: Zach Tellman
             </a>
@@ -777,82 +873,6 @@ Learn more
 <p><a href="https://github.com/michalmarczyk">Github</a></p>
 <p><a href="http://clojure-conj.org/speakers#michał-marczyk"><img src="http://www.lispcast.com/img/pre-conj/michal-marczyk.jpg" /></a></p>
 <p>Michał Marczyk has written several persistent data structures in use by lots of us every day. He wrote the map and set types for ClojureScript, along with transients.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-julian-gamble">
-              Pre-conj Prep: Julian Gamble
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 04, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-applying-the-paradigms-of-core.async-in-clojurescripttalk">Talk: <a href="http://clojure-conj.org/speakers#julian-gamble">Applying the paradigms of core.async in ClojureScript</a></h3>
-<p><a href="http://clojure-conj.org/speakers#julian-gamble">Julian Gamble's talk</a> at the <em>conj</em> is about <a href="https://github.com/clojure/core.async/">core.async</a> in ClojureScript. core.async is an implementation of CSP for Clojure and ClojureScript. It allows for concurrency, and communication using an abstraction called channels. It is similar to built-in facilities in the Go programming language.</p>
-<h4 id="background">Background</h4>
-<p>core.async provides two main abstractions: go blocks and channels. Go blocks are lightweight processes that give the basic type of independent concurrency. To coordinate and communicate between the go blocks, the go blocks take values from and put values to channels.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p><a href="https://github.com/clojure/core.async/">core.async</a> is important because it is a very powerful way to structure your code. Further, core.async is a library, not a core feature of the language, even though in many languages it is a fundamental part of the language. Finally, core.async gives Javascript (through ClojureScript) a much needed asynchrony model that is more expressive than callbacks.</p>
-<h3 id="about-julian-gambletalk">About <a href="http://clojure-conj.org/speakers#julian-gamble">Julian Gamble</a></h3>
-<p><a href="http://twitter.com/juliansgamble">Twitter</a> - <a href="https://github.com/juliangamble">Github</a> - <a href="http://juliangamble.com/blog/">Blog</a></p>
-<p><a href="http://clojure-conj.org/speakers#julian-gamble"><img src="http://www.lispcast.com/img/pre-conj/julian-gamble.jpg" /></a></p>
 <hr />
 
 <div class="article-cg-box">

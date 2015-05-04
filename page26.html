@@ -73,6 +73,43 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="http://www.youtube.com/watch?v=QhhFQ-3w5tE">
+              NeXT, OpenStep, and the Return of Steve Jobs to Apple
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/next-openstep-return-of-jobs">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 02, 2012
+          </div>
+
+          
+<p><a href="http://youtu.be/QhhFQ-3w5tE?t=16m26s">Steve Jobs, 1997</a>:</p>
+<blockquote>
+<p>When I went to Xerox PARC in 1979 and saw the original genesis of the Graphical User Interface, they actually showed me three things. And I was so blinded by the first that I didn't hang around to find out about the other two. It took me years to rediscover them. The first was of course the Graphical User Interface which Xerox PARC had pioneered and they had a lot of it right and a lot of it was left to be completed. But the other two things -- the second was Object Oriented Programming. They had ita ll running back in 1979. And the third was networking. They had several hundred Altos hooked up with networked printing, network file servers, email, all in 1979. If I had just stayed for another twenty minutes . . .</p>
+</blockquote>
+<p>Jobs also shows that until he left Apple, he was still commercializing his visits to Xerox PARC. With iCloud he completed the trifecta of GUI, OOP, and Networked Computing that was already available thirty years ago.</p>
+<p>Steve Jobs, though he was not a programmer, also understood Object Oriented programming better than most programmers. Cue it up to 23:00 for his explanation and demonstration. He of course borrowed his understanding right from the source: Alan Kay and Xerox PARC.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://blog.fogus.me/2012/03/27/compiling-clojure-to-javascript-pt-3-the-himera-model/">
               Compiling Clojure to JavaScript, pt. 3 – The Himera Model
             </a>
@@ -413,106 +450,6 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <p>How do people approach cross-project hacking at a small scale?</p>
 </blockquote>
 <p>It's still tough to do so in Clojure at the moment.</p>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/indirection">
-              Indirection Mechanisms and Expressive Power
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            February 04, 2012
-          </div>
-
-          
-<h3 id="what-defines-a-languages-expressive-power">What defines a language's expressive power?</h3>
-<p>Expressive power is hard to pin down in programming languages. In this post, I want to explore how <em>indirection mechanisms</em> lend expressiveness to a language. By indirection, I mean something that happens at compile time or run time which was not explicitly specified in the code. By mechanism, I mean something with well-defined, rule-governed semantics.</p>
-<p>Indirection mechanisms are typically what makes a program shorter, easier to write, and easier to reason about. Instead of writing machine code directly, you are relying on the compiler or runtime to do the heavy lifting.</p>
-<p>I posit that the development of indirection mechanisms closely follows the development of multiplicative expressive power. One line of Python is worth far more than 100 lines of C and more than 1000 lines of Assembly. And rather than debate about expressive power in different languages, I'd like to simply catalog some of the more obvious and important indirection mechanisms out there.</p>
-<p>While many languages might share a given indirection mechanism, I don't know all languages, so I am just going to go with my personal experience and <em>group them roughly by programming languages</em> I am familiar with. I would love to hear of more mechanisms, if you know of them.</p>
-<h3 id="assembly">Assembly</h3>
-<p>Depending on the features available, Assembly can be seen as simply a more convenient language to write in than machine language. But this convenience comes from a indirection.</p>
-<ul>
-<li><p>Named instructions</p>
-<p>The assembler looks up the name of an instruction in a table and converts it to the machine code. It is much more convenient to remember a mnemonic sequence of characters than an arbitrary number.</p></li>
-<li><p>Labeled statements</p>
-<p>Instead of calculating a jump offset from the current instruction, you just name a line of code and the assembler will calculate it for you. It is much less error prone and immune to changes in the program.</p></li>
-</ul>
-<h3 id="c">C</h3>
-<p>C has many indirection mechanisms. Most of them were not invented in C. However, from a historical and pedagogical perspective, C is a good contrast to Assembly. Both are relatively low-level and ubiquitous, yet C is a huge leap beyond Assembly in terms of indirection.</p>
-<ul>
-<li><p>Automatic number coercion</p>
-<p>Numbers in C are automatically coerced &quot;up&quot; when operated on, whereas in machine language, the values would have to be explicitly converted. You reduce mathematical errors because the machine can do a better job than you.</p></li>
-<li><p>Function call semantics</p>
-<p>Function calls compile to a lot of code, including copying the arguments to the stack. Function calling in C is more convenient.</p></li>
-<li><p>Recursive expressions</p>
-<p>In machine code and Assembly, instructions are written linearly in sequence. In C, however, expressions can be nested. The compiler will convert them to the appropriate sequence of instructions. Nested expressions are easier to understand.</p></li>
-<li><p>Structured programming</p>
-<p>Conditionals and loops provide a simpler, less error-prone way to code than machine code jumps.</p></li>
-</ul>
-<h3 id="lisp">Lisp</h3>
-<p>Lisp's main evaluation semantic is the source of much veneration and arguably is the <em>Ur</em> indirection mechanism. I am talking about the <code>eval</code> function as defined in the original Lisp paper by McCarthy. There are more mechanism, but they are too many to list here.</p>
-<ul>
-<li><p>Eval</p>
-<p>Most values (so-called atoms) evaluate to themselves, symbols are looked up in the current environment, and to evaluate a list (a function call), evaluate its elements, then apply the first element (hopefully it's a function!) to the rest of the elements.</p>
-<p>The indirection comes from the late-binding of the symbol to its value. The environment can change, so the function call can have different meanings at different points in the program. This greatly facilitates incremental development.</p></li>
-<li><p>CLOS</p>
-<p>The Common Lisp Object System defines many indirection mechanisms for doing object-oriented programming. They include method combinations (before and after methods), class-based polymorphism, and method dispatch. The most interesting indirection mechanism is that a class can define its own indirection mechanism.</p></li>
-<li><p>Garbage collection</p>
-<p>Instead of writing routines for managing the memory of your program, the runtime will take care of recouping memory when it is no longer needed. A great productivity boost.</p></li>
-<li><p>Macros</p>
-<p>Lisp macro calls look like function calls, but they are expanded into code at compile time. This indirection mechanism essentially allows you to extend the language within the language.</p></li>
-</ul>
-<h3 id="smalltalk">Smalltalk</h3>
-<p>Smalltalk defined object-oriented programming as we know it today, based on a simple indirection mechanism: message passing. It also was the first language (that I know of) to make significant use of development tools. Like Lisp, I cannot list all of the indirection mechanisms in Smalltalk. They are too numerous.</p>
-<ul>
-<li><p>Method passing</p>
-<p>The main semantic of Smalltalk is message passing. A message consists of the name and the arguments. The name is looked up in the vtable of the receiving object. If it is found, the associated method is returned and called on the objects. Otherwise, the name is looked up in the vtable's parent, and its parent, to the end of the vtable list. This vtable lookup is both dynamic (it allows for changes to the vtable at runtime) and provides polymorphism (different kinds of objects can respond to the same message).</p></li>
-<li><p>Semantic refactoring</p>
-<p>Development tools before Smalltalk were usually confined to enhanced text editors. Smalltalk let you refactor code, meaning changing code not at the textual level but at the structural-semantic level. For instance, performing a &quot;rename&quot; operation on a method would not only change the name of the method in that class, but also change the code for all of the callers. This is another indirection mechanism which is now taken for granted in the Java and .NET worlds.</p></li>
-</ul>
-<h3 id="self">Self</h3>
-<p>Self is a prototype based object-oriented language.</p>
-<ul>
-<li><p>Slot access</p>
-<p>In Self, to access a slot from an object, the name of the slot is looked up in the object. If it is found, the value is returned. Otherwise, the <code>parent</code> slot is accessed, and the slot name is looked up in the parent recursively. This allows one to build objects that are mostly identical to an existing object except in a small way.</p></li>
-</ul>
-<h3 id="haskell">Haskell</h3>
-<ul>
-<li><p>Typeclass polymorphism</p>
-<p>Haskell, unlike Smalltalk, keeps the values (objects) separate from the vtables. It is the job of the compiler to reunite these two elements when necessary. This allows data types to be defined separately (even in different files) from the code defining the type's inclusion in typeclasses. The Haskell compiler, following well-defined semantics, will convert calls to a typeclass method into a call to a function with the vtable as an implicit argument. This enables a limited form of polymorphism, where the same name refers to different functions depending on the types.</p></li>
-<li><p>Pattern matching</p>
-<p>Pattern matching in Haskell means destructuring a value into component values while optionally binding names to values. It lets you write in one concise statement the equivalent of several conditionals and <code>let</code> statements.</p></li>
-</ul>
-<h3 id="clojure">Clojure</h3>
-<p>Clojure also deserves a mention for its championing of various mechanisms for controlling concurrent state.</p>
-<ul>
-<li><p>Concurrent state (refs, agents, atoms, etc.)</p>
-<p>The Clojure runtime provides many indirection mechanisms to deal with state. Refs, for instance, provide transactional semantics over different values. This allows one to write parallel programs without explicitly using locks.</p></li>
-</ul>
-<p>Indirection mechanisms are semantic abstractions afforded by the language. Like all abstractions, they are <a href="http://www.joelonsoftware.com/articles/LeakyAbstractions.html">prone to leakage</a>. How a language deals with the leaks might be just as important a choice as which mechanisms the language supports. For instance, what happens when you pass an object a message it doesn't understand? Some common options include: compiler error, thrown exception, silent failure, magic, or undefined behavior. These are damage control at best.</p>
-<p>A lot of the leakiness of abstractions has to do with how mechanical the indirection is, and how simple the rules of the mechanism are. A complex mechanism is hard to understand, while a non-deterministic mechanism will sometimes give unwanted behavior. And when things go wrong, it is hard to distinguish between complexity and non-determinism. We should therefore strive for simple, deterministic abstractions. And we should also strive to bake the failure into the model, and build systems to deal with abstraction failures upfront.</p>
-<p>I want to complete this list and keep it updated. Please <script type="text/javascript">
-<!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;&#x77;&#110;&#x6f;&#114;&#x6d;&#x61;&#110;&#100;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'contact me'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x63;&#x6f;&#110;&#116;&#x61;&#x63;&#116;&#32;&#x6d;&#x65;&#32;&#40;&#x65;&#114;&#x69;&#x63;&#x77;&#110;&#x6f;&#114;&#x6d;&#x61;&#110;&#100;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript> if you have other ideas for indirection mechanisms and I'll add them here and credit them to you!</p>
-<p>To conclude: Different languages make different choices of which mechanisms to provide, and hence the endless variety of languages we see today. It is my hope that we will find more such abstractions which allow programmers to be even more productive in the future. Further, perhaps there are ways to make existing mechanisms more robust and which fail in more appropriate ways.</p>
 
 
           <div class="endmark">

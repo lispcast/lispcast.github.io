@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>clojure.test cheatsheet</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-test-cheatsheet</guid>
+                  <link>http://www.lispcast.com/clojure-test-cheatsheet</link>
+                  <pubDate>Sun 03 May 2015 10:59:22 PM CDT</pubDate>
+                  <description>
+                    I made a clojure.test cheatsheet that you can get for free.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-test-cheatsheet"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Pre-West Interview: Ron Toland</title>
                   <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-ron-toland</guid>
                   <link>http://www.lispcast.com/pre-west-interview-ron-toland</link>
@@ -129,20 +143,6 @@
                     Bruce Hauman will talk about Figwheel
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-bruce-hauman"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Pre-West Interview: Christopher Small</title>
-                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-christopher-small</guid>
-                  <link>http://www.lispcast.com/pre-west-interview-christopher-small</link>
-                  <pubDate>Thu 16 Apr 2015 09:09:46 AM CDT</pubDate>
-                  <description>
-                    Christopher Small will talk about automating chicken coops with Clojure.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-christopher-small"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

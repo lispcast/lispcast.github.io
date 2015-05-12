@@ -73,6 +73,42 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/screencasts">
+              Clojure Screencasts
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 12, 2013
+          </div>
+
+          
+<p>I would like to announce the launch of <a href="http://www.kickstarter.com/projects/376627045/lispcast-introduction-to-clojure-videos">my Kickstarter project</a>. It is a project to develop screencasts to introduce Clojure to programmers everywhere.</p>
+<p>Video is a great way to learn programming. For one, you get to watch the program being developed organically, not as a static artifact (as in a book). Also, a voiceover gives a direct stream into the thought process of the programmer as he types. Finally, you can stop and replay as much as you want to learn at your own pace. Those things, combined with video's ability to engage a large part of your brain make it a great learning tool.</p>
+<p>This blog was first created to host screencasts I made for Common Lisp, way back when. I transitioned to Clojure after watching a talk by Rich Hickey at <a href="http://lisp50.blogspot.com/">Lisp50</a> in 2008. I was very impressed and have not looked back.</p>
+<p>I have loved education ever since I taught math in the Peace Corps. I really enjoyed making those Common Lisp videos as well. I wanted to turn it into something like <a href="https://peepcode.com/">PeepCode</a>, but my day job interceded and I didn't have the comfort level with Clojure that I did with Common Lisp. The videos got put on hold.</p>
+<p>That was almost five years ago and I feel very confident with my ability to teach Clojure. Plus, video production has advanced a lot. I will be able to produce very high-quality videos much more easily than five years ago. And Kickstarter has provided a nearly risk-free way to test the market.</p>
+<p>If this project does well, I hope to make it into a profitable business and produce more and more videos, especially videos about deeper topics. But only if the project proves itself in the very large beginner's market. Let your friends know about this <a href="http://www.kickstarter.com/projects/376627045/lispcast-introduction-to-clojure-videos">great opportunity</a> to learn Clojure. You can find the Kickstarter project <a href="http://www.kickstarter.com/projects/376627045/lispcast-introduction-to-clojure-videos">here</a>.</p>
+<p>My ultimate goal, if the project proves out, is to provide exceptional educational materials to build a strong developer culture. <a href="http://clojuregazette.com/">Clojure Gazette</a> shares this same goal.</p>
+<p>One hour of video will cost $5 to the Kickstarter supporters. After that, the price will go up to $12. This is a very good value for one hour of instructional video. There is also a company sponsorship level. See the <a href="http://www.kickstarter.com/projects/376627045/lispcast-introduction-to-clojure-videos">Kickstarter page</a> for more details. The project ends March 14, 2013.</p>
+<p>Please support the project and let other people know.</p>
+<p>Thanks!</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/cascading-separation-abstraction">
               Separation, Abstraction, and Cascading in CSS
             </a>
@@ -568,43 +604,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 
           
 <p>These are amazing. I learned so much about the browser and Javascript that I want to weep for the web.</p>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/data-reusability">
-              On the configurations of data and functions
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            September 21, 2012
-          </div>
-
-          
-<p>Rich Hickey recently commented (I cannot remember where) that there are a limited number of useful configurations of data. He claimed that the Clojure literal syntax is just about right. The one thing to add to it is the extensibility that we now have with 1.4.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
-<p>Part of the context was that we as programmers should be separating data from process. The separation makes our data more reusable. A string is a string in any language. An array is an array. Data is data and should be regarded as such. This allows for much more reuse than object oriented programming ever has. We can see the tremendous success of JSON as a case in point: a well-defined, constrained data language that gets it mostly right.</p>
-<p>But Hickey's point goes a little farther, I think. It is not just data that is reusable, but functions as well. Look at the enormous savings in the amount of code required to get a Swing app running when you use <a href="https://github.com/daveray/seesaw">Seesaw</a>. I am not just talking only about the incessant boilerplate anonymous class declarations Swing forces you to write. I am talking also about the fact that I can use any function to handle an event. I do not need to figure out what class the thing is expecting. Defining a subclass of a single class is inherently non-reusable.</p>
-<p>And it is not just that I don't need to know the class. I can use a function written in a library that has no dependencies on Swing or Seesaw at all. A function is just a function. It is universal and reusable, not because of some well-modeled domain classes, but because it is abstract and applies to no domain in particular.</p>
-<p>While Hickey is working on a universal, extensible data format, who is working on the universal function format?</p>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>See also <a href="https://github.com/edn-format/edn">EDN</a><a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
 
 
           <div class="endmark">

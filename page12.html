@@ -73,6 +73,89 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/the-content-of-your-code">
+              The Content of Your Code
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 06, 2014
+          </div>
+
+          
+<p>Summary: <em>Code style is important, but way less important than content. Yet everyone talks about style because it's easier. Let's talk about content. I'll start with some bullet points.</em></p>
+<p>In fiction writing, there is a fine, but visible, line between style and content. Style is your <strong>choice of words and grammar</strong> while you're telling a story. Content is <strong>the parts of the story</strong> itself. It's the characters, the plot devices, the motivations, etc.</p>
+<p>Style is important. Classic works of literature usually have a good style. But content is more important. Good style can enhance a story. But a story can be retold many times, each with a different style, because a good character and story can stand on its own. <strong>No amount of style is going to save crappy storytelling</strong> with uninteresting characters. It didn't work for The Matrix 2 &amp; 3, and man, did not help at all in the Star Wars prequels.</p>
+<p>You can roughly divide programming decisions along a similar line. Coding style versus coding content. <strong>So much advice falls on the style side.</strong> It talks about variable naming, function length, what parts of a language not to use.</p>
+<p>Where is all the stuff about code content? How do we choose an algorithm? How do we pick a data structure? Basically, how do we translate a real-world problem into a computational model? How do we determine if a program correctly models the problem? How do we judge if one model is better than another? The answer is so simplistic. <strong>A model fits a problem if the structure of the model matches the structure of the problem.</strong></p>
+<p>Structure, structure, structure.</p>
+<p>Here are some bullet points:</p>
+<h3 id="choose-the-right-collection">1. Choose the right collection</h3>
+<p>Here's a good example that we should all be familiar with. How do you choose between an array and a map? Well, if your problem is to do things in order, an array is the better choice because it is naturally ordered. If your problem is &quot;I have an x and I need a y&quot;, a map is probably better, because maps associate one value with another. <strong>The data structure's properties mirror the properties of the problem.</strong></p>
+<h3 id="factor-your-code">2. Factor your code</h3>
+<p>Refactoring is improving the style of your code without changing the content. But <a href="http://www.lispcast.com/stop-refactoring-and-start-factoring">factoring</a> is changing the structure of your code to reveal the <strong>underlying structure of the problem</strong>. This is the only reliable way to get a one-to-one mapping between code and reality.</p>
+<h3 id="determine-the-essential-structure-of-the-problem">3. Determine the essential structure of the problem</h3>
+<p>I have <a href="http://www.lispcast.com/java-learn-from-clojure#represent-computation-not-the-world">written before</a> about finding the essential idea in a problem. Object Oriented Programming advice tends to recommend <strong>picking each of the objects in the real world and creating a class for each</strong>. So, if you're modeling students and courses, regardless of the problem you're solving, you should have a student class and a course class.</p>
+<p>This practice comes from the early days of OOP, when it was still used a lot in simulations. I can see the benefit of representing each thing in your simulation as an object. But we're not building a simulation. <strong>A university registration system is not a university simulator.</strong> We are not simulating students. We are not simulating courses. We need to be looking at the problem we're trying to solve.</p>
+<h4 id="how-is-it-already-done">How is it already done?</h4>
+<p>I really think the best way is to look at the process that is already being used. If you're hired to replace a manual, pen-and-paper system, you have a head start over a new system. Computerizing an existing process is easier because <strong>the problem is already well-understood</strong>. Go ask the registrar's office how they are doing it.</p>
+<p>Let's say that each department keeps a large list of all the courses they give each semester. For each semester, they start a new notebook and make a page for each course. As students register, they write down their name. If they unregister, they cross them out. They leave room for enough students between each course, sometimes skipping a page. They put post-it notes sticking out the top so they can quickly turn to the page for a course when a student comes in the office.</p>
+<p>Wow! Your job is now way easier. You just have to <strong>replicate that notebook in code</strong>. That is so much easier than modeling students and courses. And once it's done, you have a place for improvements that are only possible in a computer.</p>
+<h4 id="finding-the-essence">Finding the essence</h4>
+<p>But let's say it's a new university, trying to get a head start on old universities by organizing everything on a computer. So there's no existing process. You've got to make it up.</p>
+<p>What do you do if the structure is not obvious? How do you determine the structure of a poem? Reading. Re-reading. Underlining. Arrows. Notes. Clarifying definitions. Basically, look for structure. Dig it all up. Then use your judgment about what is important. There often is not one single kind of structure, but <strong>a constellation of structure</strong>.</p>
+<h3 id="factor-out-incidence-from-essence">4. Factor out incidence from essence</h3>
+<p>The incidental structure just happens because of the choice of solution instead of the structure of the problem. <strong>The structure inherent in the problem is essential structure.</strong></p>
+<p>In the notebook used for registering students, there are some incidental implementation details that you don't want to replicate. In the notebook, they left some blank space for more students after each page so that they wouldn't run out of room. But running out of room is not an issue in a computer (no university is that big). So <strong>you can leave that part out</strong>.</p>
+<p>But less obviously, the fact that there is a separate page for each course is also incidental. It's not important that the students in one class all be stored in a single place. What's important is that at any time, a student can register for the course (random access!) and that at any time, a teacher can list all students in a particular course (random access!). We need a way to <em>project</em> a list of students <em>quickly enough</em> in a course from however it is stored.</p>
+<p>But it turns out that, if you factor correctly and find the essence, <strong>your solution should be generic</strong>. Why? Because structure is generic. It is pure content. The correct solution to this problem is to make a system to manage many-to-many relationships. Relational databases can do this easily with one table. You could make a <code>ManyToMany&lt;A, B&gt;</code> class. Those are implementation details that are incidental. What's essential is the many-to-many part.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>We need more discussion about the content of programs. Style is important, but we need people to create acronyms and rules of thumb for choosing program constructs. The <em>Design Patterns</em> book (and movement) were important in this respect. It documented patterns of common structure. But <strong>it failed to do a good job teaching the how</strong>, and added an air of mystery.</p>
+<p>Although this process is language-agnostic, Clojure is great for finding essential structure. One thing I like about Clojure is that the <strong>data structures are described in terms of their usage structure</strong>. And Rich Hickey has expressed many times that to understand a problem, to design a solution, we must <strong>pull things apart</strong> into its essential parts.</p>
+<p>If you'd like to learn Clojure and see how it might help you think in terms of structure, I can recommend my <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video course. It builds up skills from complete beginner to decomposing a problem into a generic solution.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
+<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
+<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
+<li><a href="http://www.lispcast.com/the-world-is-mutable">But the World is Mutable</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-conj-michal-marczyk">
               Pre-conj Prep: Michał Marczyk
             </a>
@@ -711,90 +794,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <p><a href="https://twitter.com/CursiveClojure">Twitter</a></p>
 <p><a href="http://clojure-conj.org/speakers#colin-fleming"><img src="http://www.lispcast.com/img/pre-conj/colin-fleming.jpg" /></a></p>
 <p>You can install Cursive Clojure by following this <a href="https://cursiveclojure.com/userguide/">User Guide</a>.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-brian-goetz">
-              Pre-conj Prep: Brian Goetz
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            September 28, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-keynotetalk">Talk: <a href="http://clojure-conj.org/speakers#brian-goetz">Keynote</a></h3>
-<h4 id="background">Background</h4>
-<p><a href="http://clojure-conj.org/speakers#brian-goetz">Brian Goetz's talk</a> at the <em>conj</em> is the keynote, which doesn't have a description (which is common with keynotes). I would only be guessing if I said what the talk was about. But here are the things that I wouldn't be surprised to hear in a keynote by the Java Language Architect at a Clojure conference:</p>
-<ul>
-<li>Java Lambdas (their design and implementation)</li>
-<li>Future features of Java/JVM (that they're working on now)</li>
-<li>JVM and dynamic languages like Clojure</li>
-<li>How Java will approach concurrency</li>
-</ul>
-<p>Whatever he talks about, it will be important.</p>
-<h5 id="why-it-matters">Why it matters</h5>
-<p>Rich Hickey made the decision to design Clojure as a hosted language. Clojure is tied to the JVM. Also, <strong>JVM languages are gaining popularity</strong>, and they obviously must play a part in Oracle's strategy. This talk has the potential to set the tone for Java's interaction with Clojure in the future.</p>
-<h3 id="about-brian-goetztalk">About <a href="http://clojure-conj.org/speakers#brian-goetz">Brian Goetz</a></h3>
-<p><a href="https://twitter.com/BrianGoetz">Twitter</a></p>
-<p><a href="http://clojure-conj.org/speakers#brian-goetz"><img src="http://www.lispcast.com/img/pre-conj/brian-goetz.jpg" /></a></p>
-<p>Brian Goetz is quite an important figure in the Java world. He's the Java Language Architect at Oracle (the company that produces Java). He was instrumental in bringing lambdas to Java 8. The book he wrote, <a href="http://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601/ref=cm_lmf_tit_15?tag=lisp0b-20">Java Concurrency in Practice</a> is one of the books on <a href="http://www.amazon.com/Clojure-Bookshelf/lm/R3LG3ZBZS4GCTH">Rich Hickey's reading list</a>.</p>
-<p>He's been giving a talk recently called <a href="https://vimeo.com/100753521">Lambda: A Peek Under the Hood</a> about the design decisions and how they are finally implemented in Java Bytecode.</p>
 <hr />
 
 <div class="article-cg-box">

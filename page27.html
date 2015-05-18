@@ -73,6 +73,38 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="http://blip.tv/clojure/stuart-halloway-ousterhout-s-dichotomy-isn-t-part-2-of-the-simplicity-power-focus-series-5936308">
+              Osterhout's Dichotomy Isn't
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/ousterhouts-dichotomy">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 07, 2012
+          </div>
+
+          
+<p>An excellent and down-to-earth talk from Stuart Halloway explaining some of the decisions made in Clojure as they relate to power. Particularly, I like that Halloway deconflated the general power of a language from its expressive power.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://oblong-code.blogspot.com/2012/02/unpretty.html">
               Unpretty
             </a>
@@ -539,61 +571,6 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'contact me'+'<\/'+'a'+'>')
 <p>Is this behavior intentionally designed into Haskell or is it incidental behavior due to the choice of type system?</p>
 <p>Does this behavior make Haskell better or worse than a hypothetical Haskell that allowed the question to be asked?</p>
 <p>Deep questions.</p>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://pchiusano.blogspot.com/2011/12/future-of-programming.html">
-              The future of programming
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/the-future-of-programming-pchiusano">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            December 30, 2011
-          </div>
-
-          
-<p>Paul Chiusano:</p>
-<blockquote>
-<p>In the functional programming world, there is insane amounts of code reuse happening, but along with this comes a fair bit of plumbing.</p>
-</blockquote>
-<p>The <em>plumbing</em> Chiusano is referring to is incidental complexity imposed by current static type systems without a good set of &quot;universal&quot; types. Dynamically typed languages often do not have the same plumbing problem because of the extra information available at runtime to do dynamic dispatching and the use of overloading. This incidental complexity is a huge hurdle to languages like Haskell, where half of the code is about converting from one type to another.</p>
-<p>This could be the fault of the codebase/libraries I am working with. In my practical Haskell experience, I have failed to find the zen of type/domain fit that static-typing enthusiasts talk about. Chiusano, however, hints that this problem is universal.</p>
-<blockquote>
-<p>It makes it clear that types are effective not just at preventing many software errors, but also in <em>guiding development</em>.</p>
-</blockquote>
-<p>I would love to see the adoption of standard type classes recognized by the Haskell compiler that could automatically handle the most common coercions safely. For instance, the compiler could &quot;upgrade&quot; function application to Functor application when the types match. It is beyond me whether this can be done &quot;safely&quot;. I suspect that it cannot.</p>
-<blockquote>
-<p>The second is to have more normalized types and type systems so that there is no incidental structure for code to broker between in the first place. To support this we'll see things like row types, unordered tuples, type sets, and so on, and any related type system machinery needed to make all this feasible and convenient.</p>
-</blockquote>
-<p>If modules were programmed to a small, standard set of types (and type classes), they would be more universally applicable. The compiler could &quot;overload&quot; functions automatically. The trick is to keep it safe. At the very least, the &quot;universal&quot; types would help programmers do it manually. We may already be seeing such a convergence.</p>
-<p>Not coincidentally, the built in Clojure data structures are usually all I need. Others appear to think the same. The Clojure ecosystem thrives from the consensus on a small, universal set. There is a lot of reuse and little boilerplate.</p>
-<p>See <a href="https://github.com/mmcgrana/ring">Ring</a> as an example of a universal datatype facilitating a flourishing community. It allows the problem domain (web programming) to be broken up into subproblems with little-to-no coordination between the groups. Clojure has a number of web frameworks and libraries that are all inter-compatible. I think this is unique among languages.</p>
-<blockquote>
-<p>The editor will search for a program to make the types align, show me the program for confirmation if I request it, and then not show this subexpression in the main editor view . . .</p>
-</blockquote>
-<p>Please give me this editor. It is technically feasible. <a href="http://www.haskell.org/hoogle/">Hoogle</a> can already do a pretty decent search based on the types of functions. All you need is a planner to find a path from one type to another.</p>
-<p>You could even help the search by defining a type class <code>Convertible</code> like this:</p>
-<pre><code>class Convertible a b where
-    convert :: a -&gt; b</code></pre>
-<p>All of the instances of <code>Convertible</code> would form graphs which could be searched for all paths between any two types. The editor could show a list of those paths and let you choose one.</p>
 
 
           <div class="endmark">

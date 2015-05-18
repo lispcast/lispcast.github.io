@@ -73,6 +73,152 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/3-things-java-can-steal-from-clojure">
+              3 Things Java Programmers Can Steal from Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 09, 2013
+          </div>
+
+          
+<p>The other day I wrote about some <a href="http://www.lispcast.com/java-learn-from-clojure">principles that programming in Clojure</a> makes very clear. Those principles could be applied just as well in Java, and often are. However, there are some things that make Clojure distinct.</p>
+<p>Three of those distinctions are the way it deals with state change (using an <a href="http://en.wikipedia.org/wiki/Software_transactional_memory">STM</a>), the <a href="http://clojure.org/data_structures">Persistent Data Structures</a>, and the literal syntax for data with a reader (now called <a href="https://github.com/edn-format/edn">edn</a>). Diving into the <a href="https://github.com/clojure/clojure">source code for Clojure</a>, I realized that these three bits were written in Java. And that means that they can be used from Java. It is certainly not as easy as using them in Clojure, but they are all three powerful enough to warrant using them if you are using Java. <a href="http://mvnrepository.com/artifact/org.clojure/clojure/1.5.0">You simply need to add one more JAR to your project (or add a maven dependency).</a> I have constructed a few minimal examples of their use.</p>
+<h3 id="persistent-data-structures">1. Persistent Data Structures</h3>
+<p>Clojure comes with several powerful and fast collection classes. The interesting thing about them is that they are immutable. If you want to add an object to a list, you actually create a new list containing the old elements and the new element. Instead of using copy-on-write, it reuses most of the internal structure of the original list, so only a small number of objects need to be allocated. It turns out that this can be done very quickly, comparable to using an <code>ArrayList</code>.</p>
+<p>The following example illustrates three of the more useful data structures: Vector, HashMap, and HashSet.</p>
+<pre><code>package persistent;
+
+import clojure.lang.IPersistentMap;
+import clojure.lang.IPersistentSet;
+import clojure.lang.IPersistentVector;
+import clojure.lang.PersistentHashMap;
+import clojure.lang.PersistentHashSet;
+import clojure.lang.PersistentVector;
+
+public class PersistentTest {
+  public static void main(String[] args) {
+    IPersistentMap m = PersistentHashMap.create(&quot;abc&quot;, &quot;xyz&quot;);
+    m = m.assoc(1, 4); // add a new key/value pair
+    m = m.assoc(&quot;key&quot;, &quot;value&quot;);
+    m = m.without(&quot;abc&quot;); // remove key &quot;abc&quot; 
+    System.out.println(m);
+        
+    IPersistentVector v = PersistentVector.create(1, 2, 3);
+    v = v.assocN(0, &quot;a string&quot;); // change index 0
+    v = v.cons(&quot;should be last&quot;); // add a string at the end
+    System.out.println(v);
+            
+    IPersistentSet s = PersistentHashSet.create(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);
+    s = (IPersistentSet) s.cons(&quot;d&quot;); // add d to the set
+    s = (IPersistentSet) ((IPersistentMap) s).without(&quot;a&quot;); // remove an element
+    s.contains(&quot;g&quot;); // should return false
+    System.out.println(s);
+  }
+}</code></pre>
+<p>Now, it ain't pretty. But it's actually no worse than quite a few native Java libraries I've seen. There may be a better way to do this, but this one works.</p>
+<h3 id="software-transactional-memory">2. Software Transactional Memory</h3>
+<p>Clojure uses <a href="http://en.wikipedia.org/wiki/Multiversion_concurrency_control">Multiversion concurrency control</a> to provide a safe way to manage concurrent access to state shared between threads. In Clojure, they are called <a href="http://clojure.org/refs">refs</a>. I won't go very deep into how it works. Suffice it to say that <a href="http://clojure.org/refs">Clojure refs</a> gives you non-blocking reads and transactional updates without having to do locking yourself. There are two caveats: 1 is that the value you give to the ref has to be immutable. 2 is that you should not perform IO (or perform any mutation) inside of the transaction.</p>
+<pre><code>package stm;
+
+import java.util.concurrent.Callable;
+
+import clojure.lang.LockingTransaction;
+import clojure.lang.Ref;
+
+public class STMTest {
+  public static void main(String[] args) {
+    // final needed to be used in anonymous class
+    final Ref r = new Ref(1);
+    final Ref s = new Ref(5);
+
+    try {
+      // run this in a transaction
+      // don&#39;t do IO inside
+      LockingTransaction.runInTransaction(
+        new Callable&lt;Object&gt;() {
+          public Object call(){
+            s.set((Integer)r.deref() + 10);
+            r.set(2);
+            return null;
+          }
+        }
+      );
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+        
+    System.out.println(r.deref());
+    System.out.println(s.deref());
+  }
+}</code></pre>
+<h3 id="extensible-data-notation">3. Extensible Data Notation</h3>
+<p>With <a href="https://github.com/clojure/clojure/blob/master/changes.md">Clojure 1.5</a>, <a href="https://github.com/edn-format/edn">edn</a> has become a standard part of the language. Edn is like an extensible JSON where the keys of objects can be any value (not just strings). It is based on the Clojure literal syntax, much in the same way that JSON is based on Javascript literal syntax. It is a nice way to serialize data. And since you already have the JAR in your project, it's a no brainer to use it.</p>
+<pre><code>package edn;
+
+import java.io.PushbackReader;
+import java.io.StringReader;
+
+import clojure.lang.EdnReader;
+import clojure.lang.PersistentHashMap;
+
+public class EDNTest {
+  public static void main(String[] args) {
+    // reading from a string
+    System.out.println(
+      EdnReader.readString(&quot;{\&quot;x\&quot; 1 \&quot;y\&quot; 2}&quot;, PersistentHashMap.EMPTY));
+
+    // reading from a Reader
+    // really, you can use any Reader wrapped in a PushbackReader
+    System.out.println(
+      EdnReader.read(new PushbackReader(new StringReader(&quot;#{10 2 3}&quot;)),
+                     PersistentHashMap.EMPTY));
+  }
+}</code></pre>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-brian-goetz">Pre-conj Prep: Brian Goetz</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/java-learn-from-clojure">
               4 Things Java Programmers Can Learn from Clojure without learning Clojure
             </a>
@@ -451,33 +597,6 @@ $(&#39;.x&#39;).filter_divs().addClass(&#39;hello&#39;);</code></pre>
 <p>I've been talking to James Ladd about this project and it looks really cool. If you don't know, Smalltalk was the language for which the term <em>Object Oriented</em> was coined. It has a rich history and is one of the most powerful languages ever written.</p>
 <p>Redline is an implementation of Smalltalk for the JVM. James and his team have some big plans for Redline, but first they want to get to v1.0 with a robust, professional distribution. By running on the JVM, Redline will be able to tap into the amazing ecosystem that is growing around the JVM. That means that interop is incredibly easy between Smalltalk, Java, and Clojure.</p>
 <p><a href="http://www.indiegogo.com/projects/redline-smalltalk-v1-0?website_name=smalltalk">Please check it out.</a></p>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/refactor-your-tests">
-              Refactor your tests
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            February 21, 2013
-          </div>
-
-          
-<p>Just a reminder, guys. I always forget. I thought you might, too.</p>
 
 
           <div class="endmark">

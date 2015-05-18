@@ -73,6 +73,103 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-conj-interview-steven-yi">
+              Pre-Conj Interview: Steven Yi
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 27, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#steven-yi"><img src="http://www.lispcast.com/img/pre-conj/steven-yi.jpeg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>Steven Yi is next up on the interviews. He will <a href="http://clojure-conj.org/speakers#steven-yi">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> about music systems in Clojure. Read the <a href="http://www.lispcast.com/pre-conj-steven-yi">background to his talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Steven Yi</strong>: I think I came across it online about two years ago when it started to get a bit of a buzz. I had long wanted to learn a Lisp, but Common Lisp and Scheme never really clicked when I tried. Clojure was different though, and since I do a fair amount of Java programming, the possibility to integrate Clojure with my JVM music software Blue helped motivate me to get into it.</p>
+<p><strong>LC</strong>: Can you briefly describe Blue, Pink, and Score?</p>
+<p><strong>SY</strong>: Blue is a music composition environment, written in Java using the Netbeans RCP. It is a graphical environment with a score <a href="http://blue.kunstmusik.com/manual/html/scoreTimeline.html">timeline</a>, graphical instruments, mixer and effects, and more. It uses <a href="http://csound.github.io">Csound</a> as its audio engine and signal processing system. (Disclosure: I'm also one of the core developers of Csound.)</p>
+<p>Pink is a Clojure library for building music systems. It features a low-level audio engine, higher-order events, and includes signal generation and processing functions.</p>
+<p>Score is a Clojure library for higher-level music work, particularly for generating notes and scores using various strategies. It is designed to be generic and usable with multiple backends. Using Score and Pink together can be particularly effective and expressive, having one language for the full musical stack.</p>
+<p><strong>LC</strong>: Overtone has been getting a lot of attention lately. How do Pink and Score compare to Overtone?</p>
+<p><strong>SY</strong>:Ah yes, certainly the elephant in the room. :) I'll certainly address comparisons to Overtone in more detail during the talk. In a nutshell, Overtone builds upon SuperCollider. Of those two, Pink would compare more to SuperCollider than to Overtone, as it is concerned with low-level audio engine design. Score deals with higher-level abstractions in music, many of which are covered in Overtone. However, because of the full-stack Clojure design between Pink and Score, Score can interact with Pink in ways Overtone/SuperCollider can not. Pink/Score are currently not as mature nor as performant as Overtone/SuperCollider. There's a lot of overlaps between the various systems, and use cases and requirements for a user's project will guide them to one system or the other.</p>
+<p>Hopefully that's enough to get going! I think the breakdown of music systems design I'm planning for the talk should hopefully make things clear.</p>
+<p><strong>LC</strong>: Is there any resource that could help someone new to Clojure, or new to music systems, get the most out of your talk?</p>
+<p><strong>SY</strong>: think it's a tough question about music systems as I don't know of any resources out there that really introduce the subject. Having some experience with Overtone would certainly be useful. I can say I'll probably mention <a href="http://supercollider.github.io/">SuperCollider</a>, <a href="http://csound.github.io/">Csound</a>, <a href="https://ccrma.stanford.edu/software/clm/">Common Lisp Music</a>, <a href="http://www.cs.cmu.edu/~music/nyquist/">Nyquist</a>, and <a href="http://commonmusic.sourceforge.net/">Common Music</a> during the talk:</p>
+<p>and perhaps <a href="http://incudine.sourceforge.net/">Incudine</a> and <a href="http://opusmodus.com/">OpusModus</a>:</p>
+<p>But that's a long list. :P</p>
+<p>Actually, the <a href="http://en.wikipedia.org/wiki/MUSIC-N">Wikipedia link to Music-N</a> would probably be a good place to get going.</p>
+<p><strong>LC</strong>: Where can people follow you on your adventures?</p>
+<p><strong>SY</strong>:</p>
+<ul>
+<li><a href="http://www.kunstmusik.com">website</a></li>
+<li><a href="http://github.com/kunstmusik">github</a></li>
+<li><a href="http://twitter.com/kunstmusik">twitter</a></li>
+</ul>
+<p><strong>LC</strong>: Thanks, Steven, for a great interview! It was a pleasure.</p>
+<p><strong>SY</strong>: And thank you too!</p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
+</p>
+
+
+<p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-conj-interview-bozhidar-batsov">
               Pre-Conj Interview: Bozhidar Batsov
             </a>
@@ -910,101 +1007,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <p><strong>LC</strong>: One last question: If Clojure were a food, what would it be?</p>
 <p><strong>SM</strong>: I'll say &quot;pizza&quot; because it's a food that is made by composing fancy toppings on a classic crust. And hackers like it while coding.</p>
 <p><strong>LC</strong>: Thanks, Steve, for a great interview.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-interview-jeanine-adkisson">
-              Pre-Conj Interview: Jeanine Adkisson
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 18, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#jeanine-adkisson"><img src="http://www.lispcast.com/img/pre-conj/jeanine-adkisson.jpg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>Jeanine Adkisson was kind enough to answer some questions. Her <a href="http://clojure-conj.org/speakers#jeanine-adkisson">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> will be about variants in Clojure. Read the <a href="http://www.lispcast.com/pre-conj-jeanine-adkisson">background to her talk</a>.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Jeanine Adkisson</strong>: Through work, actually. I'd seen clojure around and studied some of its features from a language design perspective, but I've never really been a lisper, so it hadn't occurred to me to actually use it until we started a migration to datomic at GoodGuide. I admit to being a bit skeptical - I often find that lisps are a bit oversold - but a coworker of mine (<a href="https://twitter.com/bonkydog">@bonkydog</a>) started really gushing about generative testing, core.typed, and the awesomeness that is leiningen, so I decided to give it a closer look.</p>
-<p><strong>LC</strong>: Your talk is about Variants. Can you explain Variants and how they are useful?</p>
-<p><strong>JA</strong>: Sure! Variants are a functional design pattern that should be familiar to anyone who's worked in the Haskell/ML family of languages (and to a lesser extent, Erlang). Their main purpose is to provide a structured way to manage polymorphism. In lisps and other single-type languages, they're not that widespread because we don't have to convince a type-checker that our polymorphism works out in the end. But we still have to convice users of our libraries and our doc writers that our functions make sense!</p>
-<p>The method of representing variants I'll be talking about came out of some frustrations I was having at porting part of a language over to clojure, and finding it difficult to represent and destructure the trees I needed to process. But I was really impressed at how quickly David Nolen and Ambrose BS got back to me and shipped patches that made this approach possible (and typeable!).</p>
-<p><strong>LC</strong>: You mean David Nolen patched ClojureScript and Ambrose BS patched core.typed?</p>
-<p>I wonder what it means about dynamic languages like Clojure that you can add Variants as a library instead of making it an integral part like in Haskell. What do you think about that?</p>
-<p><strong>JA</strong>: Yeah, actually it was a bugfix the <code>match</code> macro and the way that core.typed handled vectors that were key. What's even more interesting about variants is that there is really no library to write - all the machinery is already there. The solution isn't even particularly clever or novel - it's already in use in, for example, instaparse. It's just not on people's radars, or they have misconceptions about the approach from their OO training.</p>
-<p>I love the fact that you can backport this pattern into a language that's not explicitly built for it. I wouldn't necessarily count that as a strength for dynamic languages in general though - I find a language's strengths often come from ways in which semantics are restricted. Clojure is already a great example of this because it explicitly rejects the use of willy-nilly mutable structures, to great benefit. Sure, you can program that way in Ruby, but the tools are already there in Clojure.</p>
-<p>What I find coolest about the Clojure case is the extent to which core.typed has been able to backport types onto a mostly untyped ecosystem. The general problems with dynamic languages are still there, but they have to be made explicit with union types. How many functions surprised you by outputting <code>(U &lt;thing&gt; (Value nil))</code>? But because it's powerful enough to support variants in a lightweight and usable way, I think we now have a tool to deal with one of the most common culprits of surprise nils.</p>
-<p><strong>LC</strong>: I think the approach is worthy of study. I flipflop between statically typed vs dynamically typed because there are obvious problems with both. How close does your core.match and core.typed solution come to a full-on ML/Haskell-style, integrated solution?</p>
-<p><strong>JA</strong>: It's pretty comparable, and actually has some advantages. Since it's just vectors and keywords, it's trivial to handle in a generic way, and as long as you're not putting functions or host objects in them it's trivial to serialize and send over the wire. (Haskell and ML can do most of this programming for you with various generic programming extensions, but it's not straightforward or obvious). But yeah, core.typed is capable of refining types based on the tag matching code generated by core.match - a little roundabout, but it gets the job done. The match macro can also match against more than one object at a time, something OO languages constantly struggle with. There's a <em>little</em> more macro work to be done in core.typed to make it really straightforward to do variants, but it's a relatively trivial syntactic transformation.</p>
-<p>In terms of typed vs. untyped, I think there's lessons to be learned from both. My instinct is to say that we just haven't really figured out how to make typed systems all that usable. Haskell and ML went a long way towards this, and I think they kind of hit a wall because of their restriction that compilation be decidable. In other words, the compiler is not allowed to infinite-loop - which sounds like a good idea until you line up all the restrictions required to make that happen. In dynamic languages, we don't have a semantic separation between &quot;compile-time&quot; and &quot;run-time&quot;, but we still talk about &quot;load-time&quot; vs &quot;run-time&quot;. And at load-time you can wield the full turing-complete power of the language. That's why I'm also excited about projects like Agda and Idris, which, while still statically typed and compiled, blur the lines between runtime and compile time - moving away from strict decidability guarantees in exchange for a more expressive system.</p>
-<p><strong>LC</strong>: A lot of the audience is going to be new to Clojure or they have never heard of variants. Is there a resource that you think would help make the most of their time? Just a little pre-reading or pre-watching so they feel confident with the material?</p>
-<p><strong>JA</strong>: Yeah, there's unfortunately not a whole lot targeting clojure or other lisps, which is one of the reasons I wanted to give this talk. There's a great section in the <a href="http://ocaml.org/learn/tutorials/data_types_and_matching.html#Variantsqualifiedunionsandenums">ocaml tutorial</a> about them, and <a href="http://learnyouahaskell.com/making-our-own-types-and-typeclasses#algebraic-data-types">Learn You a Haskell</a> covers them as well (although they call them ADTs). The approach I'll be talking about is most like what's used in Erlang, as in the <a href="http://learnyousomeerlang.com/syntax-in-functions#in-case-of">temperature example here</a>.</p>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>JA</strong>: Probably the best way to keep up with me is on twitter at <a href="https://twitter.com/jneen_">@jneen_</a> (note the final underscore), or on github as <a href="https://github.com/jneen">@jneen</a>.</p>
-<p><strong>LC</strong>: One last question: If Clojure were a comic book superhero, what would its superpower be?</p>
-<p><strong>JA</strong>: Hahaha, I'd probably say a shapeshifter, like most lisps I suppose.</p>
-<p><strong>LC</strong>: Thanks for an excellent interview. I had fun.</p>
-<p><strong>JA</strong>: Awesome, thanks!</p>
 <hr />
 
 <div class="article-cg-box">

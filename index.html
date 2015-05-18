@@ -73,6 +73,74 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/infinite-application">
+              Infinite Application
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            May 17, 2015
+          </div>
+
+          
+<p>Summary: <em>Function application is a key concept in lambda calculus. While it is commonly expressed using parentheses in Clojure, it is also reified into a function which itself can be applied to another function.</em></p>
+<p>Function application in Clojure is easily expressed with a couple of parentheses:</p>
+<pre><code>(foo 1 2 3)</code></pre>
+<p>That's the function <code>foo</code> applied to the arguments <code>1</code>, <code>2</code>, and <code>3</code>. But let's say we have those numbers in a vector somewhere, and we want to call <code>foo</code> on them.</p>
+<pre><code>(def some-numbers [1 2 3])</code></pre>
+<p>We could manually pull out the arguments from the vector like this:</p>
+<pre><code>(foo (some-numbers 0) (some-numbers 1) (some-numbers 2))</code></pre>
+<p>Great! That should work. But more commonly you see this:</p>
+<pre><code>(apply foo some-numbers)</code></pre>
+<p><code>apply</code> means take the function (the first argument) and apply it to the arguments which are in the list (the last argument). <code>apply</code> pulls out the values from the list internally so you don't have to.</p>
+<p><code>apply</code> is a function you'll see in many Lisps. It plays a key role in the <a href="http://en.wikipedia.org/wiki/Meta-circular_evaluator">meta-circular evaluator</a> as defined in <em>The Structure and Interpretation of Computer Programs</em> (SICP). In the meta-circular evaluator, <code>eval</code> and <code>apply</code> are defined in terms of each other.</p>
+<p>The way <code>eval</code> is defined classically, <code>(foo 1 2 3)</code> gets turned into <code>(apply foo [1 2 3])</code> internally. This means that you can replace <code>(foo 1 2 3)</code> with <code>(apply foo [1 2 3])</code> in the program without changing the meaning.</p>
+<p>But! Since <code>apply</code> is a function, <code>(apply foo [1 2 3])</code> is equivalent to <code>(apply apply [foo [1 2 3]])</code>, which is equivalent to <code>(apply apply [apply [foo [1 2 3]]])</code>. And you can expand that out forever. (Please don't!).</p>
+<p><code>apply</code> is something I really love about Lisp. It takes <strong>one of the main parts of lambda calculus (function application) and <a href="http://www.lispcast.com/reification">reifies</a> it</strong>. Function application is available as a function, which can be passed around, composed, etc, <strong>just like any other value</strong>. I love it!</p>
+<p>If you're in love with this idea, too, you might want to check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's my video course about, you guessed it, Clojure. It takes you from absolute parenthesis-phobe to I-never-knew-it-could-be-this-way lisper by using animations, exercises, and screencasts.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/just-hack-something-together">Just Hack Something Together</a></li>
+<li><a href="http://www.lispcast.com/a-personal-lisp-crisis">A Personal Lisp Crisis</a></li>
+<li><a href="http://www.lispcast.com/reification">Reification</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/the-world-is-mutable">
               But the World is Mutable
             </a>
@@ -856,91 +924,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
   (let [{:keys [kobayashi-maru]} neutral-zone]
     kobayashi-maru))</code></pre>
 <p>Back in the real world, I’ve found that Clojure’s capabilities to handle super-complex deeply nested data structures gets me out of scrapes that users of other languages thought were almost impossible to deal with.</p>
-<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-tyler-tallman">
-              Pre-West Interview: Tyler Tallman
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 18, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
-<p><a href="http://clojurewest.org/speakers#ttallman"><img src="http://www.lispcast.com/img/pre-west/ttallman.jpg"
-      style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Tyler Tallman is the next interview participant. He is <a href="http://clojurewest.org/speakers#ttallman">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about Clojure to do real-time communication in the healthcare industry. The <a href="http://www.lispcast.com/pre-west-tyler-tallman">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-tyler-tallman">Interview with Tyler Tallman</h3>
-<p><strong>Nola</strong>: How did you get into Clojure?</p>
-<p><strong>Tyler</strong>: I had read much about it before, but Stephan Richter's demonstration of Clojure on app engine led me to binge listen to every Rich Hickey talk I could find. He had me at &quot;epochal time model&quot;.</p>
-<p><strong>Nola</strong>: What languages did you do before Clojure?</p>
-<p><strong>Tyler</strong>: C++ python and a bit of php</p>
-<p><strong>Nola</strong>: What advice do you have for beginner Clojure programmers?</p>
-<p><strong>Tyler</strong>: Read lots of other peoples code and take the time to make at least one design as simple as you possibly can.</p>
-<p><strong>Nola</strong>: What is your tooling like? emacs or vim or ?</p>
-<p><strong>Tyler</strong>: I started on vim moved to emacs for it's clojure support and now mostly use Cursive.</p>
-<p><strong>Nola</strong>: You mention React in your talk description, are you using it in ClojureScript? What flavor of React are you using? (ie Om, Reagent, etc)</p>
-<p><strong>Tyler</strong>: We use a modified version of Quiescent. I think all the React from Clojure work will eventually grow together into a set of functions and a common macro used to generate the react class directly.</p>
-<p><strong>Nola</strong>: How would you use Clojure to defeat the kobayashi maru?</p>
-<p><strong>Tyler</strong>: Persistent data structures of course</p>
 <p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
 <hr />
 

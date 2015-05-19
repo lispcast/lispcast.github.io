@@ -73,6 +73,71 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/less-abstraction-combination">
+              LESS has Better Forms of Abstraction than CSS
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 12, 2014
+          </div>
+
+          
+<p>Summary: <em>LESS has obviously better forms of abstraction and combination than CSS. It has recursive style definitions, which is enough to consider it a &quot;powerful language&quot;.</em></p>
+<p>Ok, it's obvious that <a href="http://www.lispcast.com/css-abstraction-combination">CSS has weak forms of combination and abstraction</a>. But now we have a good framework for understanding <em>why</em>. &quot;CSS Preprocessors&quot;, as they are called, are getting really popular now. We would be smart to <strong>analyze LESS in the same way that we analyzed CSS</strong>, if only to temper the glamor of trendiness that surrounds it. <a href="http://twitter.com/ericnormand">Comments are welcome.</a></p>
+<p>Because LESS aims to be a superset of CSS, it has all of <a href="http://www.lispcast.com/css-abstraction-combination">the primitive expressions, means of combination, and means of abstraction that come baked into CSS</a>. I already went over those last time, so I will not go over them again. <strong>So what things are added by LESS?</strong></p>
+<h3 id="primitive-expressions">Primitive Expressions</h3>
+<p>Besides existing CSS properties, <strong>LESS adds two new primitive expressions.</strong> <em>Mixin application</em> (<code>.rounded-corners(10px);</code>) in a rule <strong>recursively applies the primitive expressions defined in the body of the mixin to the current rule</strong>. Mixin applications can be parameterized with value expressions, or they can have no parameters. <em>Extension</em> (<code>&amp;:extend(.blue-button);</code>) is similar, but instead of applying the primitive expressions to a rule body, it adds the selector of the rule to the rule selector of the extension. <strong>Extension is recursive as well.</strong></p>
+<p>Variables and mathematical expressions change the way primitive properties work. In CSS, primitive properties were comprised of a property name and a literal property value. In LESS, variables and math expressions, as well as literal values, can be in the value place (right hand side) of a property.</p>
+<p>Variables can also be used in selectors.</p>
+<h3 id="means-of-combination">Means of Combination</h3>
+<p><strong>The principle means of combination are still the rule</strong>, but add to it the <strong>ability to nest rules</strong>, and things are more interesting. Nesting two rules is shorthand for writing out two rules (unnested) with a nested selector. While in the simple case it is simply a shorthand, <strong>when nested rules are applied as mixins, you gain a lot more than better syntax</strong>. Mixins with nested subrules allows you to <em>name</em> a nesting and refer to it later.</p>
+<h3 id="means-of-abstraction">Means of Abstraction</h3>
+<p>CSS did not contain much in the way of abstraction. <strong>LESS focuses primarily in the realm of abstraction</strong>, probably to appease the will to power of front-end designers. <em>Variables</em> allow property values to be named, and naming is a form of abstraction. <strong>Variables are a good way to name values that all have the same meaning and would therefore change at the same time.</strong> For instance, a shade of green that is used throughout the styles is a perfect use for variables. Variables can be used in a similar way to name selectors.</p>
+<p>A more powerful form of abstraction comes from the ability to define mixins, apply mixins, and use of <code>:extend()</code>. In LESS, any rule using a single class or id selector can be used as a mixin. This is essentially <strong>a way to name a rule</strong>--our principle form of combination. In addition, if you put empty parentheses after the class selector in the rule, the rule is not outputted into the generated CSS, which can save bytes. Mixins can also have parameters (scoped variables), so they can be <strong>abstracted over a variety of values</strong>. Extend allows a similar kind of abstraction which promises to be more efficient.</p>
+<p>Mixins are very powerful. In fact, <strong>this is the kind of abstraction that is needed for LESS to be powerful</strong>, as defined by Abelson and Sussman. Because you can now name a group of styles (mixin) and then use that name in another group of styles (mixin application), <strong>LESS has full-on recursive style definitions</strong>. With extension, it also has recursive selector definitions. In LESS, we can talk of &quot;levels of abstraction&quot; whereas in CSS there was only one.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p><strong>LESS has recursion</strong>. It lets you define and name groups of properties, then refer to those groups by name in other groups of properties. We can consider LESS powerful enough to express useful abstractions. Yet though it is more powerful than CSS, it still has many of the problems of CSS (especially complex rules governing the combination of multiple rules to a single element). How can LESS be leveraged to gain its power but tame its weakness? <strong>Is there a subset of LESS that can gerrymander the good parts away from the bad parts?</strong></p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
+<li><a href="http://www.lispcast.com/pre-west-interview-priyatam-mudivarti">Pre-West Interview: Priyatam Mudivarti</a></li>
+<li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/css-abstraction-combination">
               CSS has Weak Forms of Abstraction and Combination
             </a>
@@ -640,45 +705,6 @@ No spam. Ever.
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/deconstructing-functional-programming">Deconstructing Functional Programming</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://blog.fogus.me/2013/10/07/scala-sharp-and-gets-things-cut/">
-              Scala: sharp and gets things cut
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/sharp-and-gets-things-cut">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 08, 2013
-          </div>
-
-          
-<p>Michael Fogus is right (as usual) about this one. Someone with Odersky's stature should not fear lack of humilty but instead lack of confidence.</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
-<li><a href="http://www.lispcast.com/Hindley-Milner-in-Clojure">Hindley-Milner in Clojure</a></li>
-<li><a href="http://www.lispcast.com/on-type-unity">On Type Unity</a></li>
-<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
 </ul>
 
 

@@ -73,6 +73,105 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-interview-tom-faulhaber">
+              Pre-West Interview: Tom Faulhaber
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 18, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<p><a href="http://clojurewest.org/speakers#tfaulhaber"><img src="http://www.lispcast.com/img/pre-west/tfaulhaber.jpg"
+      style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Tom Faulhaber is the next interview participant. He is <a href="http://clojurewest.org/speakers#tfaulhaber">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about using Clojure to create Excel spreadsheets. The <a href="http://www.lispcast.com/pre-west-tom-faulhaber">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-tom-faulhaber">Interview with Tom Faulhaber</h3>
+<p><strong>Nola</strong>: How did you get into Clojure?</p>
+<p><strong>Tom</strong>: Rich Hickey did a talk called “Clojure for Lisp Programmers.” I bookmarked that talk but avoided it because I was scared of it. The idea seemed too interesting and I was afraid I’d get sucked in.</p>
+<p>But over Thanksgiving weekend 2009, I had some time and I watched the video. I <em>was</em> sucked in and I’ve been an active member of the Clojure community ever since.</p>
+<p><strong>Nola</strong>: What other languages did you do before?</p>
+<p><strong>Tom</strong>: I’ve done them all. I’m a creature of the dark ages so I started with Basic, Cobol, Fortran and early Lisps. In the early part of my career, I worked on operating systems, data bases, and networking. This was all C and later C++. Nowadays, I do primarily Clojure and R along with some Python and Scala. One of the things I’ve learned is that there’s no silver bullet language: a clear understanding of of goals and good communication trump language choice every time.</p>
+<p><strong>Nola</strong>: What do you like best about Clojure?</p>
+<p><strong>Tom</strong>: I love Clojure, the language, but what I like even better is Clojure, the community. From the very beginning, Rich has worked hard to make sure it was a community of people that was positive towards each other.</p>
+<p>Since then, more people have taken up the mantle of making Clojure more inclusive with initiatives like ClojureBridge and diversity scholarships. In addition to the folks using their own energy to make this happen, I have been very happy with the overall supportive tone in the community with respect to these efforts.</p>
+<p>Like all tech communities, we clearly have a long way to go, but it’s hard not to be pleased that the community is receptive to these goals and always looking for ways to be better.</p>
+<p><strong>Nola</strong>: What advice do you give new clojure developers?</p>
+<p><strong>Tom</strong>: This would be my advice for anyone learning a new language: human or computer. Take the language on its own terms and don’t try to enforce your own previous assumptions on it. For example, in Spanish the adjective usually comes after the noun. This causes a reaction in English speakers, who often think that Spanish gets it “wrong.” That’s not a productive approach to embracing the language (and, in fact, one reason to learn foreign languages is to experience those differences and thereby gain perspective).</p>
+<p>In the case of Clojure, parenthesis, prefix notation, and lack of built-in typing come to the top of that list. When you’re learning Clojure, try really hard not to have negative opinions about these things. Accept what the experienced folks say is “best.” Later when you’re more familiar with the language, you’ll probably agree with the experts. But even if you don’t, it won’t be because you let yourself be blinded by where you came from.</p>
+<p>Having said all that: <em>Do</em> use paredit. It makes dealing with the parentheses fade into the background and is available in most dev environments now.</p>
+<p><strong>Nola</strong>: What does your tooling look like? emacs or vim or ?</p>
+<p><strong>Tom</strong>: I’m an emacs user from way back. I’ve been very thankful for the work that Bozhidar Batsov, Phil Hagelberg and others have done over the years to make the Emacs Clojure environment so nice.</p>
+<p><strong>Nola</strong>: Your talk is about creating spreadsheets in Excel, have you spent alot of time creating spreadsheets in other languages? what benefits do you get over using clojure?</p>
+<p><strong>Tom</strong>: Yeah, a friend told me recently that I’ve been obsessed with Excel for a long time. I have used Excel natively and Excel from .Net (mostly through IronPython) to create live dashboards of systems and businesses in action without the overhead of building a website or buying an expensive tool.</p>
+<p>I want to be able to use Excel for the things it’s good at and use Clojure for the things it’s good at. It turns out that they can go really well together.</p>
+<p>For more on that, you’ll have to come to my talk which will involve live coding in <em>both</em> Clojure and Excel!</p>
+<p><strong>Nola</strong>: How would you use clojure to defeat the Kobayashi Maru ?</p>
+<p><strong>Tom</strong>: That’s easy - use destructuring to get the Kobayashi Maru out of the neutral zone without entering it myself:</p>
+<pre><code>(defn rescue-kobayashi-maru
+  [neutral-zone]
+  (let [{:keys [kobayashi-maru]} neutral-zone]
+    kobayashi-maru))</code></pre>
+<p>Back in the real world, I’ve found that Clojure’s capabilities to handle super-complex deeply nested data structures gets me out of scrapes that users of other languages thought were almost impossible to deal with.</p>
+<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
+</p>
+
+
+<p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-interview-tyler-tallman">
               Pre-West Interview: Tyler Tallman
             </a>
@@ -770,89 +869,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <h3 id="about-zach-tellmantalk">About <a href="http://clojurewest.org/speakers#ztellman">Zach Tellman</a></h3>
 <p><a href="http://ideolalia.com/">Homepage</a> - <a href="https://github.com/ztellman">GitHub</a> - <a href="https://twitter.com/ztellman">Twitter</a></p>
 <p><a href="http://clojurewest.org/speakers#ztellman"><img src="http://www.lispcast.com/img/pre-west/ztellman.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-fumiko-hanreich">
-              Pre-West Interview: Fumiko Hanreich
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 15, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
-<p><a href="http://clojurewest.org/speakers#fhanreich"><img src="http://www.lispcast.com/img/pre-west/fhanreich.png"
-      style="float:right;height:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Fumiko Hanreich is the next interview participant. She is <a href="http://clojurewest.org/speakers#fhanreich">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about using the HoneySQL library for Clojure. The <a href="http://www.lispcast.com/pre-west-fumiko-hanreich">background to her talk</a> is available, if you like.</p>
-<h3 id="interview-with-fumiko-hanreich">Interview with Fumiko Hanreich</h3>
-<p><strong>Nola</strong>: How did you get into Clojure?</p>
-<p><strong>Fumiko</strong>: In January 2012, my then-former-company asked me to take an online Clojure course. They asked me to spend about 5 hours a week for the course (and my twins were barely 16 month olds then), and I thought it was doable and I said yes. The reality was that I spent way more than 5 hours a week. Just reading and “understanding” reading assignments took a lot of time before starting an assignment. Clojure was my first Functional Programming language. Then the company sent me to Cascalog training offered prior to 2012 Clojure/West, which was my very first Clojure conference. I rejoined the company in summer. A few months later, I started coding in Clojure (for production). Very steep learning curve, yet I fell in love with the language immediately. That’s how :)</p>
-<p><strong>Nola</strong>: What other languages have you done?</p>
-<p><strong>Fumiko</strong>: My very first language was C++ followed by Java at college. From the get-go, everything was OOP (and I believed that was the best thing). I have done quite a few other languages such as Visual Basic, groovy, Flex / ActionScript 3.0, php, ColdFusion, JavaScript, etc. To me, it was easy to adapt to a new language except for Clojure.</p>
-<p><strong>Nolq</strong>: Your talk is about SQL and Clojure, how did you decide on HoneySQL?</p>
-<p><strong>Fumiko</strong>: Very good question. I knew someone was going to ask thist :) To tell you the truth, I did not decide it myself. Our architect, Sean (<a href="http://twitter.com/seancorfield">@seancorfield</a>), and Justin (<a href="http://twitter.com/jkkramer">@jkkramer</a>), author of honeysql, spoke at 2012 Clojure conj. After that, it was recommended to me to use for the project I was assigned. I am extremely grateful that honeysql was already there when I needed it. It had everything I needed and made my life much easier.</p>
-<p><strong>Nola</strong>: What editor(s) do you use and what is your tooling like?</p>
-<p><strong>Fumiko</strong>: Emacs + paredit and Light Table. I still go back and forth.</p>
-<p><strong>Nola</strong>: If Clojure was a food, what do you think it would be?</p>
-<p><strong>Fumiko</strong>: This is an easy question. Quinoa and arugula or kale salad with lemon juice and splash of grounded ginger. Because that’s what I love and am excited to have every single day! It can also be any vegetables or fruits like mango, for example. Simply put, anything I love represents Clojure :)</p>
-<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
 <hr />
 
 <div class="article-cg-box">

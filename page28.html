@@ -73,6 +73,55 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/apple-equals-oranges">
+              apple == orange
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 30, 2011
+          </div>
+
+          
+<p>If you are reading this, you are probably a programmer. Let me ask you, for just a moment, to step out of your programmer shoes and answer these questions:</p>
+<ul>
+<li>Is this apple equal to that orange?</li>
+<li>Is that cloud equal to this house?</li>
+<li>Is my backpack equal to my television?</li>
+</ul>
+<p>The obvious answer is &quot;no&quot; to all of these. And so (please step back into your programmer shoes) we see in many languages I can ask a similar question:</p>
+<p>In Java:</p>
+<pre><code>apple.equals(orange)</code></pre>
+<p>Or in Clojure:</p>
+<pre><code>(= apple orange)</code></pre>
+<p>The answer to both questions is unsurprisingly <code>false</code>.</p>
+<p>And in Haskell?</p>
+<pre><code>apple == orange</code></pre>
+<p>Type error! The compiler is saying I cannot even ask the question.</p>
+<p>What model of reality is Haskell asserting?</p>
+<p>Is it telling me that I need to convert the apple and orange into values of the same type?</p>
+<pre><code>Fruit {name = &quot;apple&quot;} == Fruit {name = &quot;orange&quot;}</code></pre>
+<p>Is this question really different from <code>apple == orange</code>?</p>
+<p>Which model (Haskell's or Clojure's) more closely models reality?</p>
+<p>Is this behavior intentionally designed into Haskell or is it incidental behavior due to the choice of type system?</p>
+<p>Does this behavior make Haskell better or worse than a hypothetical Haskell that allowed the question to be asked?</p>
+<p>Deep questions.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://pchiusano.blogspot.com/2011/12/future-of-programming.html">
               The future of programming
             </a>
@@ -489,49 +538,6 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <li id="fn2"><p>Unix has a limited form of garbage collection. Short-running programs (like those executed at the terminal) need not concern themselves with freeing allocated memory since the OS will free everything when they exit.<a href="#fnref2">↩</a></p></li>
 </ol>
 </div>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/tips-for-marginalia">
-              Tips for using marginalia
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            December 08, 2011
-          </div>
-
-          
-<p>I've used <a href="https://github.com/fogus/marginalia">Marginalia</a> a tiny bit for a few of the libraries I've developed that actually have comments and doc strings.</p>
-<p>Marginalia did help me refine my doc strings and comments. From the <a href="http://fogus.me/fun/marginalia/">Marginalia docs</a>:</p>
-<blockquote>
-<p>Following the guidelines will work to make your code not only easier to follow – it will make it better. The very process of using Marginalia will help to crystalize your understanding of problem and its solution(s).</p>
-</blockquote>
-<p>In general, this is true. Marginalia follows some strict rules, like a compiler. Even if your comments seem to make sense to you reading the source, Marginalia might produce something that makes no sense. However, it generates attractive and useful documentation. So I decided to use it.</p>
-<p>What this meant was figuring out some of the quirks of Marginalia. Here is what I've learned:</p>
-<h3 id="dont-use--comments-when-a-doc-string-is-more-appropriate">Don't use ;-comments when a doc string is more appropriate</h3>
-<p>This is good advice in general and Marginalia makes the comments look wrong. In Marginalia, comments seem to follow the docstring for the function they apply to when both are defined.</p>
-<h3 id="blank-lines-are-important">Blank lines are important</h3>
-<p>From what I can tell, a blank line will cause the top-level comment to be placed above the following form. No blank line will put them at the same level. That sounds very sensible.</p>
-<p>However, if you have a comment with no blank line immediately before a function, the docstring for that function will come first, followed by the comment. This is weird. You should follow the advice above and choose docstring or comments, but not both.</p>
-<h3 id="namespace-ordering">Namespace ordering</h3>
-<p>There is a convention in Clojure to use project.core as the main namespace of a library. Marginalia sorts the namespaces alphabetically. This means that in the documentation, project.anunimportantmodule comes before project.core.</p>
-<p>I have renamed my namespaces once to avoid this problem. But in general, my projects are very small and don't have many namespaces. It's not a practical problem.</p>
-<p>Marginalia is great. It produces beautiful documentation. And it has helped me clarify my code.</p>
-<p>Nice job.</p>
 
 
           <div class="endmark">

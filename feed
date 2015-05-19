@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Lambda Abstraction</title>
+                  <guid isPermalink="false">http://www.lispcast.com/lambda-abstraction</guid>
+                  <link>http://www.lispcast.com/lambda-abstraction</link>
+                  <pubDate>Sun 17 May 2015 11:40:36 PM CDT</pubDate>
+                  <description>
+                    Lambda abstractions are always leaky, but some are leakier than others. Clojure programmers recommend keeping most of your functions pure and containing the leaks as much as possible.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/lambda-abstraction"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Infinite Application</title>
                   <guid isPermalink="false">http://www.lispcast.com/infinite-application</guid>
                   <link>http://www.lispcast.com/infinite-application</link>
@@ -129,20 +143,6 @@
                     Robert Krahn will talk about bringin Smalltalk features to Clojure.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-robert-krahn"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Pre-West Interview: Tom Faulhaber</title>
-                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-tom-faulhaber</guid>
-                  <link>http://www.lispcast.com/pre-west-interview-tom-faulhaber</link>
-                  <pubDate>Sat 18 Apr 2015 02:11:52 PM CDT</pubDate>
-                  <description>
-                    Tom Faulhaber interview by Nola.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-tom-faulhaber"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

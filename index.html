@@ -73,6 +73,64 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/lambda-abstraction">
+              Lambda Abstraction
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            May 17, 2015
+          </div>
+
+          
+<p>Summary: <em>Lambda abstractions are always leaky, but some are leakier than others. Clojure programmers recommend keeping most of your functions pure and containing the leaks as much as possible.</em></p>
+<p>Lambda abstraction refers to something we do all of the time. Let's say I have some code:</p>
+<pre><code>(+ 1 2)</code></pre>
+<p>I'm adding the number 2 to a number, in this case, 1. I could abstract that into a <em>lambda</em>:</p>
+<pre><code>(defn add2 [x] (+ x 2))</code></pre>
+<p>Now it's a function, which I can apply to 1. <code>(add2 1)</code>. I can apply it to any number I want. The actual thing I am adding 2 to is abstracted away and replaced by the variable <code>x</code>. <strong>Lambda abstractions are just functions.</strong></p>
+<p>Functional programming is at its best when lambda abstractions are referentially transparent. That means that given the same arguments, a function will always return the same value. Being referentially transparent makes a <strong>software function more like a mathematical function</strong>. And that lets you reason about your code.</p>
+<p>But there's a very real difference between software functions and mathematical functions: <strong>mathematical functions take no time or energy to &quot;compute&quot;</strong>. They are defined abstractly, with no notion of computation. In contrast, software functions always take some time to compute. Sometimes the clearest way to write a function takes enough time that the illusion of mathematical functions is shattered. <strong>The abstraction is leaky.</strong></p>
+<p>So software functions are already a leaky abstraction, even if they are referentially transparent. Clojure (like most programming languages) opens the leak even further: <strong>you can put stuff that's not referentially transparent right in your function</strong>. For instance, you can write a &quot;function&quot; that reads from the disk or makes a web request. Making the same request twice can obviously return different values.</p>
+<p>What most people programming Clojure recommend is to program <em>mostly</em> with pure functions (that means referentially transparent). You still have to deal with time, but that's way easier than dealing with the chaos of the world outside. That leaves a small bit of your code to deal with mutation, input/output, and the disk. It's still a lambda abstraction (function) but <strong>it's just leakier</strong>. Clojure simply leaves the decision up to you where to draw the line. Clojure tries to make pure functions easy, even when not everything fits into pure functions.</p>
+<p>The takeaway of functional programming is the same recommendation: <strong>write <em>most</em> of your code as referentially transparent functions</strong>. The degree to which a language helps you do that is how &quot;functional&quot; the language is.</p>
+<p>If you'd like to learn more about Clojure and pure functions, check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's 2.5 hours of high quality video. You probably haven't seen anything <a href="http://www.purelyfunctional.tv/intro-to-clojure#preview">like this</a>! There's animations, exercises, characters, and screencasts. It takes you from no knowledge to a deep experience, all while having fun!</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/infinite-application">
               Infinite Application
             </a>
@@ -826,105 +884,6 @@ style="float:right;width:150px"></a></p>
 <p><strong>RK</strong>: The cloxp site is at <a href="http://cloxp.github.io/">http://cloxp.github.io/</a>. I'm a bit behind with updates but there will be more content documenting cloxp and explaining the ideas behind it. Whenever I feel like boasting about the newest hack I've written I post it on twitter <a href="https://twitter.com/robertkrahn">@robertkrahn</a>.</p>
 <p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
 <p><strong>RK</strong>: That one is easy. Chocolate pudding of course. Once you get started you can't stop.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-tom-faulhaber">
-              Pre-West Interview: Tom Faulhaber
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 18, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
-<p><a href="http://clojurewest.org/speakers#tfaulhaber"><img src="http://www.lispcast.com/img/pre-west/tfaulhaber.jpg"
-      style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Tom Faulhaber is the next interview participant. He is <a href="http://clojurewest.org/speakers#tfaulhaber">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about using Clojure to create Excel spreadsheets. The <a href="http://www.lispcast.com/pre-west-tom-faulhaber">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-tom-faulhaber">Interview with Tom Faulhaber</h3>
-<p><strong>Nola</strong>: How did you get into Clojure?</p>
-<p><strong>Tom</strong>: Rich Hickey did a talk called “Clojure for Lisp Programmers.” I bookmarked that talk but avoided it because I was scared of it. The idea seemed too interesting and I was afraid I’d get sucked in.</p>
-<p>But over Thanksgiving weekend 2009, I had some time and I watched the video. I <em>was</em> sucked in and I’ve been an active member of the Clojure community ever since.</p>
-<p><strong>Nola</strong>: What other languages did you do before?</p>
-<p><strong>Tom</strong>: I’ve done them all. I’m a creature of the dark ages so I started with Basic, Cobol, Fortran and early Lisps. In the early part of my career, I worked on operating systems, data bases, and networking. This was all C and later C++. Nowadays, I do primarily Clojure and R along with some Python and Scala. One of the things I’ve learned is that there’s no silver bullet language: a clear understanding of of goals and good communication trump language choice every time.</p>
-<p><strong>Nola</strong>: What do you like best about Clojure?</p>
-<p><strong>Tom</strong>: I love Clojure, the language, but what I like even better is Clojure, the community. From the very beginning, Rich has worked hard to make sure it was a community of people that was positive towards each other.</p>
-<p>Since then, more people have taken up the mantle of making Clojure more inclusive with initiatives like ClojureBridge and diversity scholarships. In addition to the folks using their own energy to make this happen, I have been very happy with the overall supportive tone in the community with respect to these efforts.</p>
-<p>Like all tech communities, we clearly have a long way to go, but it’s hard not to be pleased that the community is receptive to these goals and always looking for ways to be better.</p>
-<p><strong>Nola</strong>: What advice do you give new clojure developers?</p>
-<p><strong>Tom</strong>: This would be my advice for anyone learning a new language: human or computer. Take the language on its own terms and don’t try to enforce your own previous assumptions on it. For example, in Spanish the adjective usually comes after the noun. This causes a reaction in English speakers, who often think that Spanish gets it “wrong.” That’s not a productive approach to embracing the language (and, in fact, one reason to learn foreign languages is to experience those differences and thereby gain perspective).</p>
-<p>In the case of Clojure, parenthesis, prefix notation, and lack of built-in typing come to the top of that list. When you’re learning Clojure, try really hard not to have negative opinions about these things. Accept what the experienced folks say is “best.” Later when you’re more familiar with the language, you’ll probably agree with the experts. But even if you don’t, it won’t be because you let yourself be blinded by where you came from.</p>
-<p>Having said all that: <em>Do</em> use paredit. It makes dealing with the parentheses fade into the background and is available in most dev environments now.</p>
-<p><strong>Nola</strong>: What does your tooling look like? emacs or vim or ?</p>
-<p><strong>Tom</strong>: I’m an emacs user from way back. I’ve been very thankful for the work that Bozhidar Batsov, Phil Hagelberg and others have done over the years to make the Emacs Clojure environment so nice.</p>
-<p><strong>Nola</strong>: Your talk is about creating spreadsheets in Excel, have you spent alot of time creating spreadsheets in other languages? what benefits do you get over using clojure?</p>
-<p><strong>Tom</strong>: Yeah, a friend told me recently that I’ve been obsessed with Excel for a long time. I have used Excel natively and Excel from .Net (mostly through IronPython) to create live dashboards of systems and businesses in action without the overhead of building a website or buying an expensive tool.</p>
-<p>I want to be able to use Excel for the things it’s good at and use Clojure for the things it’s good at. It turns out that they can go really well together.</p>
-<p>For more on that, you’ll have to come to my talk which will involve live coding in <em>both</em> Clojure and Excel!</p>
-<p><strong>Nola</strong>: How would you use clojure to defeat the Kobayashi Maru ?</p>
-<p><strong>Tom</strong>: That’s easy - use destructuring to get the Kobayashi Maru out of the neutral zone without entering it myself:</p>
-<pre><code>(defn rescue-kobayashi-maru
-  [neutral-zone]
-  (let [{:keys [kobayashi-maru]} neutral-zone]
-    kobayashi-maru))</code></pre>
-<p>Back in the real world, I’ve found that Clojure’s capabilities to handle super-complex deeply nested data structures gets me out of scrapes that users of other languages thought were almost impossible to deal with.</p>
-<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
 <hr />
 
 <div class="article-cg-box">

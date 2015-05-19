@@ -8,8 +8,8 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Infinite Application | LispCast</title>
-    <meta name="description" content="Function application is a key concept in lambda calculus. While it is commonly expressed using parentheses in Clojure, it is also reified into a function which itself can be applied to another function.">
+    <title>Keyword: abstraction | LispCast</title>
+    <meta name="description" content="A blog about the simple joys of functional programming.">
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -73,8 +73,8 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
-               href="/infinite-application">
-              Infinite Application
+               href="/lambda-abstraction">
+              Lambda Abstraction
             </a>
           </h2>
 
@@ -83,21 +83,18 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
           </div>
 
           
-<p>Summary: <em>Function application is a key concept in lambda calculus. While it is commonly expressed using parentheses in Clojure, it is also reified into a function which itself can be applied to another function.</em></p>
-<p>Function application in Clojure is easily expressed with a couple of parentheses:</p>
-<pre><code>(foo 1 2 3)</code></pre>
-<p>That's the function <code>foo</code> applied to the arguments <code>1</code>, <code>2</code>, and <code>3</code>. But let's say we have those numbers in a vector somewhere, and we want to call <code>foo</code> on them.</p>
-<pre><code>(def some-numbers [1 2 3])</code></pre>
-<p>We could manually pull out the arguments from the vector like this:</p>
-<pre><code>(foo (some-numbers 0) (some-numbers 1) (some-numbers 2))</code></pre>
-<p>Great! That should work. But more commonly you see this:</p>
-<pre><code>(apply foo some-numbers)</code></pre>
-<p><code>apply</code> means take the function (the first argument) and apply it to the arguments which are in the list (the last argument). <code>apply</code> pulls out the values from the list internally so you don't have to.</p>
-<p><code>apply</code> is a function you'll see in many Lisps. It plays a key role in the <a href="http://en.wikipedia.org/wiki/Meta-circular_evaluator">meta-circular evaluator</a> as defined in <em>The Structure and Interpretation of Computer Programs</em> (SICP). In the meta-circular evaluator, <code>eval</code> and <code>apply</code> are defined in terms of each other.</p>
-<p>The way <code>eval</code> is defined classically, <code>(foo 1 2 3)</code> gets turned into <code>(apply foo [1 2 3])</code> internally. This means that you can replace <code>(foo 1 2 3)</code> with <code>(apply foo [1 2 3])</code> in the program without changing the meaning.</p>
-<p>But! Since <code>apply</code> is a function, <code>(apply foo [1 2 3])</code> is equivalent to <code>(apply apply [foo [1 2 3]])</code>, which is equivalent to <code>(apply apply [apply [foo [1 2 3]]])</code>. And you can expand that out forever. (Please don't!).</p>
-<p><code>apply</code> is something I really love about Lisp. It takes <strong>one of the main parts of lambda calculus (function application) and <a href="http://www.lispcast.com/reification">reifies</a> it</strong>. Function application is available as a function, which can be passed around, composed, etc, <strong>just like any other value</strong>. I love it!</p>
-<p>If you're in love with this idea, too, you might want to check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's my video course about, you guessed it, Clojure. It takes you from absolute parenthesis-phobe to I-never-knew-it-could-be-this-way lisper by using animations, exercises, and screencasts.</p>
+<p>Summary: <em>Lambda abstractions are always leaky, but some are leakier than others. Clojure programmers recommend keeping most of your functions pure and containing the leaks as much as possible.</em></p>
+<p>Lambda abstraction refers to something we do all of the time. Let's say I have some code:</p>
+<pre><code>(+ 1 2)</code></pre>
+<p>I'm adding the number 2 to a number, in this case, 1. I could abstract that into a <em>lambda</em>:</p>
+<pre><code>(defn add2 [x] (+ x 2))</code></pre>
+<p>Now it's a function, which I can apply to 1. <code>(add2 1)</code>. I can apply it to any number I want. The actual thing I am adding 2 to is abstracted away and replaced by the variable <code>x</code>. <strong>Lambda abstractions are just functions.</strong></p>
+<p>Functional programming is at its best when lambda abstractions are referentially transparent. That means that given the same arguments, a function will always return the same value. Being referentially transparent makes a <strong>software function more like a mathematical function</strong>. And that lets you reason about your code.</p>
+<p>But there's a very real difference between software functions and mathematical functions: <strong>mathematical functions take no time or energy to &quot;compute&quot;</strong>. They are defined abstractly, with no notion of computation. In contrast, software functions always take some time to compute. Sometimes the clearest way to write a function takes enough time that the illusion of mathematical functions is shattered. <strong>The abstraction is leaky.</strong></p>
+<p>So software functions are already a leaky abstraction, even if they are referentially transparent. Clojure (like most programming languages) opens the leak even further: <strong>you can put stuff that's not referentially transparent right in your function</strong>. For instance, you can write a &quot;function&quot; that reads from the disk or makes a web request. Making the same request twice can obviously return different values.</p>
+<p>What most people programming Clojure recommend is to program <em>mostly</em> with pure functions (that means referentially transparent). You still have to deal with time, but that's way easier than dealing with the chaos of the world outside. That leaves a small bit of your code to deal with mutation, input/output, and the disk. It's still a lambda abstraction (function) but <strong>it's just leakier</strong>. Clojure simply leaves the decision up to you where to draw the line. Clojure tries to make pure functions easy, even when not everything fits into pure functions.</p>
+<p>The takeaway of functional programming is the same recommendation: <strong>write <em>most</em> of your code as referentially transparent functions</strong>. The degree to which a language helps you do that is how &quot;functional&quot; the language is.</p>
+<p>If you'd like to learn more about Clojure and pure functions, check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's 2.5 hours of high quality video. You probably haven't seen anything <a href="http://www.purelyfunctional.tv/intro-to-clojure#preview">like this</a>! There's animations, exercises, characters, and screencasts. It takes you from no knowledge to a deep experience, all while having fun!</p>
 <div class="article-offer-box">
   
 <a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
@@ -119,13 +116,6 @@ Learn more
 
 
 
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/just-hack-something-together">Just Hack Something Together</a></li>
-<li><a href="http://www.lispcast.com/a-personal-lisp-crisis">A Personal Lisp Crisis</a></li>
-<li><a href="http://www.lispcast.com/reification">Reification</a></li>
-</ul>
-
 
           <div class="endmark">
             <a class="endmark-link"
@@ -145,14 +135,6 @@ Learn more
     </div>
 
     <footer class="footer-banner">
-      <a class="footer-previous"
-         href="http://www.lispcast.com/the-world-is-mutable">
-        <i class="fa fa-chevron-left footer-arrow"></i>
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/lambda-abstraction">
-        <i class="fa fa-chevron-right footer-arrow"></i>
-      </a>
     </footer>
 
 

@@ -73,6 +73,97 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/new-course-format">
+              New Course Format
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            February 20, 2015
+          </div>
+
+          
+<p>Summary: <em>LispCast video courses have a new, interactive format. It's easier for me to make courses (read: more, faster) and it's a better experience for learners.</em></p>
+<p>I've released <a href="http://www.purelyfunctional.tv/">3 Clojure LispCast video courses</a>. They've been selling okay (many thanks to my beautiful buyers and other supporters!), but I need more videos to bring it to a full time wage. After it took 9 months to do the <code>core.async</code> videos<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, I decided to take a step back and <strong>optimize my process</strong>.</p>
+<p>The first thing I wanted to do was to be able to <strong>generate the videos programmatically</strong>. Editing video takes a long time, and I knew that most of what I did during editing was automatable. That would eliminate hours of work per hour of video.</p>
+<p>I began coding up some <strong>routines to compose videos functionally</strong> (inspired by the <a href="http://conal.net/papers/">functional animation work by Conal Elliott</a>). It worked really well. I could code up simple animations, concatenate videos, and rerender a preview very quickly. This combined with the Emacs Lisp scripts I have for automatically recording the &quot;typing&quot; portions of the videos, I was ready to code up the video.</p>
+<p>But I eventually scrapped the idea. <strong>Nothing wrong with the idea, but I found something better.</strong> <a href="https://twitter.com/rubygeek">Nola Stowe</a> suggested I make the video course viewable in a browser. That means I have HTML and Javascript. Not only does it let me have a bit of interactivity (such as pausing at the right place automatically), it also enhances the experience a lot. Table of contents, links, smaller download, etc. So I got to work on an in-browser course.</p>
+<p>I'm working on the next LispCast course, in the new format. It's already way faster to make, and the viewer experience is amazing. It combines video, interactive exercises, animations, and more into one package. I can't wait to show the world. I've got a lot of great things to announce soon, so <strong>sign up below</strong> to get updates as they come out.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    
+<img class="subscribe-form-image"
+         src="http://www.purelyfunctional.tv/img/ring_spec_1_3.png" />
+<div class="subscribe-form-text">
+      <h3 class="subscribe-form-title">
+        
+Get free Clojure stuff and news on LispCast courses
+</h3>
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive free Clojure materials, including a Ring Spec to hang on your wall and more as they come out. This is also the list where I announce launches of LispCast courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][2]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/intro-clojure-test-peap">On sale now: Intro to clojure.test Early Access</a></li>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It took 9 months calendar time. It's a part time endeavor to begin with, and I had a few false starts and a few breaks. But mostly it's just a labor-intensive process.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/parts-of-ring">
               The Parts of Ring
             </a>
@@ -989,156 +1080,6 @@ No spam. Ever.
 <li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
 <li><a href="http://www.lispcast.com/is-core-async-against-clojure-philosophy">Is core.async Against the Clojure Philosophy?</a></li>
 </ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/token-buckets-in-core-async">
-              Token Buckets with core.async
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            November 10, 2014
-          </div>
-
-          
-<p>Summary: <em>Token Bucket is a simple algorithm for rate limiting a resource. It's easy to understand because you can reason about it in terms of real-world objects. core.async makes this algorithm very clear and easy.</em></p>
-<div class="figure">
-<img src="http://www.lispcast.com/img/token%20bucket.png" alt="Token + BucketImage credits: token and bucket." /><p class="caption">Token + Bucket<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
-</div>
-<p>You know you've got a good abstraction when you find lots of algorithms that are easy and clear to write using them. One algorithm that I really like because it's <strong>practical and simple</strong> is called the <a href="http://en.wikipedia.org/wiki/Token_bucket">Token Bucket</a>. It's used for <strong>rate limiting a resource</strong>. And it's very easy to write in core.async.</p>
-<p>Let me digress a little. Here in the US, we have a complicated voting system. Not only do your presidential votes count only indirectly, but the counting is done with machines that vary from state to state. Some of those systems are so complicated. It's a little scary because it's hard to know how those machines work.</p>
-<p>I mean, relatively hard. It's obviously possible to know, if you study enough. But <strong>compare it to papers in a box</strong>. I know there's all sorts of room for corruption in the papers in a box system. But it's understandable by children. Well, as long as they can count.</p>
-<p>The token bucket is similarly simple. There's a bucket. You put tokens in it at a certain rate (for instance, once per hour). If you have a token, you can take an action (ride the subway, send a packet, read a file), then you lose the token (it's good for one ride). If you don't have a token, you can wait. <strong>Everything slows down to the rate of tokens falling into the bucket.</strong></p>
-<p>It's so simple. It so easily <strong>corresponds to a real-world situation</strong> you can imagine. I love that type of algorithm.</p>
-<h3 id="an-implementation">An implementation</h3>
-<p>Let's build Token Bucket in core.async.</p>
-<p>First, we need a bucket. For that, we'll use a core.async channel with a buffer. Let's just start with size 10.</p>
-<pre><code>(def bucket (chan 10))</code></pre>
-<p>Bucket is done. Now, we need something to <strong>add tokens to the bucket at a given rate</strong>.</p>
-<pre><code>(go
-  (while true
-    (&gt;! bucket :token)
-    (&lt;! (timeout 1000))))</code></pre>
-<p>That will add one token to the bucket every second.</p>
-<p>We can rate limit an existing channel by <strong>forcing it to take a token before values get through</strong>.</p>
-<pre><code>(defn limit-rate [c]
-  (let [out (chan)]
-    (go
-      (loop []
-        (let [v (&lt;! c)]
-          (if (nil? v) ;; c is closed
-            (close! out)
-            (do
-              (&lt;! bucket) ;; wait for a token
-              (&gt;! out v)
-              (recur))))))
-    out))</code></pre>
-<h3 id="corner-cases">Corner cases</h3>
-<p>Ok, it's not that simple. There are two corner cases.</p>
-<ol style="list-style-type: decimal">
-<li>What happens when nobody takes a token out of the bucket? Do you keep putting coins in?</li>
-</ol>
-<p>The answer is yes. In the next hour, there are two tokens, so two can come through. But then . . .</p>
-<ol start="2" style="list-style-type: decimal">
-<li>What do you do when the bucket gets really full and a whole bunch of people take tokens out at the same time?</li>
-</ol>
-<p>Well, you let them all through. One token, one ride. There's no other coordination. And that means it's really important to choose the size of your bucket.</p>
-<p>The number of tokens your bucket can hold is called the <em>burstiness</em>. It's because when the bucket is full, you could get a rampage of people trying to get on the subway. How many people should be allowed through at that point? <strong>The burstiness is the maximum that should come through at a time.</strong></p>
-<p>We have our two parameters: the <em>rate</em> and the <em>burstiness</em>. Let's incorporate all of that.</p>
-<pre><code>(defn limit-rate [c r b]
-  (let [bucket (chan b) ;; burstiness
-        out (chan)]
-    (go
-      (while true
-        (&gt;! bucket :token)
-        (&lt;! (timeout (int (/ 1000 r)))))) ;; rate
-    (go
-      (loop []
-        (let [v (&lt;! c)]
-          (if (nil? v) ;; channel is closed
-            (close! out)
-            (do
-              (&lt;! bucket) ;; wait for a token
-              (&gt;! out v)
-              (recur))))))
-    out))</code></pre>
-<p>The burstiness is taken care of in the size of the buffer. The buffer will fill up if no one takes a token. Since we're using blocking buffers, <strong>putting tokens into a full bucket will block</strong> until something takes a token--exactly as the algorithm describes.</p>
-<p>Well, that's it. It's easy. And now <strong>we have a way to limit the rate of a channel</strong>. We can use it to limit the rates of other things, too, like a function call or access to a database. I use it to rate limit an API.</p>
-<p>core.async makes this algorithm nice and easy to use. There's a library that does this for you in a very convenient package. It's called <a href="https://github.com/brunoV/throttler">Throttler</a>. Bruno Vecchi has done the work of making this work well as a library. If you'd like to learn core.async, I recommend my <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async videos</a>. It's a gentle and fun introduction to a great topic. You will learn everything you need to write Token Bucket and more!</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free core.async Reference Sheet
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
-</p>
-      
-<input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][8]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
-<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
-<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
-<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Image credits: <a href="http://www.flickr.com/photos/coldfire/2605474584">token</a> and <a href="http://www.flickr.com/photos/rubyblossom/4227534087">bucket</a>.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
 
 
           <div class="endmark">

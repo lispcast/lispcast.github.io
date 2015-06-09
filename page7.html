@@ -73,6 +73,80 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-colin-fleming">
+              Pre-West Prep: Colin Fleming
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 21, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-debugging-clojure-code-with-cursivetalk">Talk: <a href="http://clojurewest.org/speakers#cfleming">Debugging Clojure code with Cursive</a></h3>
+<p><a href="http://clojurewest.org/speakers#cfleming">Colin Fleming's talk</a> at <em>Clojure/West</em> is about debugging Clojure in Cursive.</p>
+<h4 id="background">Background</h4>
+<p>Colin Fleming is the developer behind <a href="https://cursiveclojure.com/">Cursive</a>. Cursive is the #2 most popular Clojure IDE (behind Emacs and just ahead of vim). It is based on IntelliJ, and so has a lot of useful JVM features. This talk will focus on debugging and also how the JVM debuggers fare with functional code.</p>
+<p>For a great introduction to Cursive, see <a href="https://www.youtube.com/watch?v=vt1y2FbWQMg">Colin Fleming's talk at Clojure/conj</a> last year.</p>
+<h3 id="about-colin-flemingtalk">About <a href="http://clojurewest.org/speakers#cfleming">Colin Fleming</a></h3>
+<p><a href="https://twitter.com/CursiveClojure">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#cfleming"><img src="http://www.lispcast.com/img/pre-west/colin-fleming.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
+</p>
+
+
+<p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-christopher-small">
               Pre-West Prep: Christopher Small
             </a>
@@ -805,130 +879,6 @@ No spam. Ever.
 <li id="fn3"><p>Can you think of a better reason for mentioning this? Who needs this knowledge, and for what? It becomes clear in subsequent paragraphs.<a href="#fnref3">↩</a></p></li>
 <li id="fn4"><p>Can you come up with a better reason to mention this?<a href="#fnref4">↩</a></p></li>
 <li id="fn5"><p>Just for reference, I think this paragraph touches on the following skills: * Write positive and negative integers. * Read positive and negative integers. * List the concrete types that may represent an integer. * Recall that larger integers may take more space than smaller integers.<a href="#fnref5">↩</a></p></li>
-</ol>
-</div>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/exponential-backoff">
-              Exponential Backoff
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            March 13, 2015
-          </div>
-
-          
-<p>Summary: <em>A common failure in distributed systems is a server with a rate limit or with no limit but begins failing due to load. A standard solution is to retry after waiting a small time, increasing that time after each failure. We create a macro to handle this waiting and retrying.</em></p>
-<p>A few days ago I wrote about <a href="http://www.lispcast.com/try-three-times">a high-level way of handing intermittent errors</a>, particularly in a distributed system. The way was simplistic: when you get an error, try again, up to a few errors. A slightly more nuanced approach is to <em>back off</em> before you try again. <strong>Each time there's an error, you wait longer, until some maximum time is reached.</strong></p>
-<h2 id="the-problem">The problem</h2>
-<p>Let's say you're hitting a service with a rate limit. That rate limit could be enforced or implicit<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. You've got lots of computers hitting it, and it's impossible to coordinate. No matter how hard you try to keep under that rate limit (and you <em>should try</em>), <strong>you will eventually break the limit</strong>. Retrying immediately when the server is too busy will actually make the problem worse. You will give it yet another request to deny. At the same time, it might be hard to distinguish &quot;I'm too busy <em>right now</em>&quot; from &quot;I'm never going to recover&quot;.</p>
-<h2 id="the-solution">The solution</h2>
-<p>I don't know what it's really called. I call it <em>Exponential Backoff</em>. It's also easy to turn into a separate routine:</p>
-<pre><code>(defn exponential-backoff [time rate max f]
-  (if (&gt;= time max) ;; we&#39;re over budget, just call f
-    (f)
-    (try
-      (f)
-      (catch Throwable t
-        (Thread/sleep time)
-        (exponential-backoff f (* time rate) rate max)))))</code></pre>
-<p>This one has <strong>the same structure as <a href="http://www.lispcast.com/try-three-times"><code>try-n-times</code></a></strong> but will sleep before recursing. When it recurses, the time is multiplied by the rate. And when the last wait is more than the max, it will try one more time. Failures from that last try will propagate.</p>
-<h3 id="how-to-use-it">How to use it</h3>
-<p>Same as with <code>try-n-times</code>:</p>
-<pre><code>(exponential-backoff 1000 2 10000
-  #(http/get &quot;http://rate-limited.com/resource&quot;
-             {:socket-timeout 1000
-              :conn-timeout   1000}))</code></pre>
-<p>This will retry after waiting 1 second (1000 ms) the first time, then double it (the <code>2</code>) each time. When it waits 10 seconds, it won't retry any more.</p>
-<h3 id="slightly-more-useful">Slightly more useful</h3>
-<p>Ok, so I don't use this exactly. What I use is slightly more complicated. I've found that <strong>I often can tell if it's a rate limiting problem if I look at the exception</strong>. So, let's pass it a predicate to check.</p>
-<pre><code>(defn exponential-backoff [time rate max p? f]
-  (if (&gt;= time max) ;; we&#39;re over budget, just call f
-    (f)
-    (try
-      (f)
-      (catch Throwable t
-        (if (p? t)
-          (do
-            (Thread/sleep time)
-            (exponential-backoff f (* time rate) rate max))
-          (throw t))))))</code></pre>
-<p>This one only recurses if the predicate returns true on the exception. Let's service mentions &quot;queue capacity&quot; in the body of the HTTP response when it's too busy:</p>
-<pre><code>(exponential-backoff 1000 2 10000
-  (fn [t] ;; the predicate
-    (and (instance? clojure.lang.ExceptionInfo t)
-         (re-find #&quot;queue capacity&quot; (:error (ex-data t)))))
-  #(http/get &quot;http://rate-limited.com/resource&quot;
-             {:socket-timeout 1000
-              :conn-timeout   1000}))</code></pre>
-<p><strong>You can be more selective about your backoff.</strong></p>
-<h3 id="a-macro">A Macro</h3>
-<p>Well, here's an example macro. It's got a bunch of defaults.</p>
-<pre><code>(defmacro try-backoff [[time rate max p?] &amp; body]
-  `(exponential-backoff (or ~time 1000) ;; defaults!
-                        (or ~rate 2)
-                        (or ~max 10000)
-                        (or ~p? (constantly true))
-                        (fn [] ~@body)))</code></pre>
-<p>Here's how you use it:</p>
-<pre><code>(try-backoff []
-  (println &quot;trying!&quot;)
-  (do-some-stuff))</code></pre>
-<p>Also, add it to your Clojure Emacs config for better formatting, because this one wants the args on the first line:</p>
-<pre><code>(put-clojure-indent &#39;try-backoff 1)</code></pre>
-<p>This tells Emacs to make the second argument (<code>(println &quot;trying!&quot;)</code>) one indentation in, instead of directly under the first (<code>[]</code>).</p>
-<h3 id="warning">Warning</h3>
-<p>All of the <a href="http://www.lispcast.com/try-three-times#warning"><code>try3</code> warnings</a> apply. The stuff you're doing inside needs to be idempotent!</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>This pattern is another cool, reusable component to help build reliability into a distributed system. Small, intermittent failures are pervasive. <strong>And a common form of error is a server being too busy.</strong> Being able to handle this type of error <strong>quickly and systematically</strong> is going to make your life easier.</p>
-<p>Though Clojure does not have specific solutions to distributed systems problems, <strong>coding them up is short and straightforward</strong>. If you're interested in learning Clojure, I suggest you check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course that uses animation, storytelling, and exercises to install Clojure into your brain.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/lisp-with-macros-language-stack">Lisp with Macros is Two Languages</a></li>
-<li><a href="http://www.lispcast.com/try-three-times">Try Three Times</a></li>
-<li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-david-pick">Pre-conj Prep: David Pick</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>meaning the server can only handle so many jobs at once, and the behavior is undefined at that point<a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
 

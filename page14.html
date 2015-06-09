@@ -73,6 +73,128 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/atom-problem">
+              Atom code explanation
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 28, 2014
+          </div>
+
+          
+<p>Summary: <em>I go over a real-world example of how atoms and immutable values allow you to compose constructs in ways that are easy to reason about and less prone to error.</em></p>
+<p>The other day I was in IRC #clojure and someone asked a good question. They had code like the following, and they couldn't understand why <strong>they couldn't modify a map</strong>.</p>
+<pre><code>(def state (atom {}))
+
+(doseq [x [1 2 3]]
+  (assoc @state :x x))
+
+(println @state)
+</code></pre>
+<p>What does this print? Well, the asker wanted it to print <code>{:x 3}</code>. But it printed <code>{}</code>. To understand what's happening, <strong>let's go step by step</strong>.</p>
+<p><code>{}</code> creates an empty map. It's literal syntax for a <em>constructor</em> for a map. This one happens to be empty.</p>
+<p><code>(atom {})</code> takes the empty map that was just created and passes it to the function <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/atom/"><code>atom</code></a>, which constructs a new <code>clojure.lang.Atom</code>. Atoms are objects, and its current state is the empty map we just passed in.</p>
+<p><code>(def state (atom {}))</code> defines a new var called <code>state</code> in the current namespace.</p>
+<p>At this point, we've got a variable called <code>state</code> whose value is an atom that holds an empty map.</p>
+<p><code>(doseq [x [1 2 3]]</code> loops over the numbers 1, 2, and 3. <code>x</code> will be bound to each of those numbers, in turn.</p>
+<p><code>@state</code> gets transformed into <code>(deref state)</code>, which returns the current value of <code>state</code>. <code>:x</code> is a literal keyword, and <code>x</code> is a reference to the <code>x</code> bound inside the loop.</p>
+<p><code>(assoc @state :x x)</code> creates a <em>new map</em> by taking the current value of <code>state</code> (which happens to be <code>{}</code>) and associating <code>:x</code> with <code>x</code> (which will be <code>1</code>, <code>2</code>, and <code>3</code> as the loop happens). The value is returned by <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/assoc"><code>assoc</code></a>, and then thrown away, since it isn't bound to anything.</p>
+<p>Then <code>(println @state)</code> will print the current value of <code>state</code>, which still is <code>{}</code>.</p>
+<p>This code shows a common problem that beginners face in Clojure: how do <strong>immutable data structures</strong> (like maps) and the <strong>concurrency primitives</strong> (like <code>atom</code>) work together to manage state?</p>
+<p>The answer is quite simple (<a href="http://www.infoq.com/presentations/Simple-Made-Easy">in the Rich Hickeyan sense</a>) and elegant. <strong>By separating the ideas of value and state, Clojure has made it easy to express precisely the behavior you want in concurrent systems.</strong></p>
+<p>The value is the map. It is immutable. It cannot change. It is a single value, and it will always be the same. That means <strong>threads can share the value with no worries that one of them will change it</strong>.</p>
+<p>The state is the atom. It's a mutable object. And being an object, it has methods that define its interface. In the code above, we saw that you can call <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/deref"><code>deref</code></a> on an atom to get its current value. <code>deref</code> is basically a getter.</p>
+<p>The main way to <em>change</em> the value of an atom is using <a href="http://grimoire.arrdem.com/1.6.0/clojure.core/swap!"><code>swap!</code></a>. <code>swap!</code> takes an atom and a function (plus optional arguments) and <strong>calls the function on the current value of the atom</strong>. It then sets the value of the atom to the return value of the function. So let's use that to fix the code.</p>
+<pre><code>
+(def state (atom {}))
+
+(doseq [x [1 2 3]]
+  (swap! state assoc :x x))
+
+(println @state)
+</code></pre>
+<p><code>swap!</code> takes the atom (<code>state</code>) and a function (<code>assoc</code>) and some arguments (<code>:x x</code>). It calls <code>assoc</code> on the current value of <code>state</code> with those extra arguments and sets the value of the atom to the return value of the function.</p>
+<p>The <code>swap!</code> expression is almost (but not) the same as this code:</p>
+<pre><code>
+(reset! state (assoc @state :x x)) ;; never do this
+</code></pre>
+<p><a href="http://grimoire.arrdem.com/1.6.0/clojure.core/reset!"><code>reset!</code></a> changes the state of the atom but without regard to the current value. This new code is bad because it's not thread-safe. <strong>Use <code>swap!</code> if you need to use the current value to determine the new value.</strong></p>
+<p>So what does an atom do? What does it represent?</p>
+<p>Atoms guarantee one very important thing: that <strong>each state is calculated from the last state</strong>. The <code>swap!</code> operation is <em>atomic</em>. No matter how many threads are trying to change the value, each change is calculated from the previous value and no previous values are lost. That's its contract as an object and it's one of the important ways that <strong>Clojure helps with concurrency</strong>.</p>
+<p>How can a value be lost?</p>
+<p>If we have two threads, each trying to change <code>state</code> in the same incorrect way (using <code>reset!</code>), the order of evaluation will have several steps:</p>
+<ol style="list-style-type: decimal">
+<li><code>(deref state)   ;; call this value *1</code></li>
+<li><code>(assoc *1 :x x) ;; call this value *2</code></li>
+<li><code>(reset! state *2)</code></li>
+</ol>
+<p>Because the threads are running concurrently, the operations have a chance of interleaving their steps in unwanted ways. For instance, threads A and B might interleave like this:</p>
+<ol style="list-style-type: decimal">
+<li>A: <code>(deref state)    ;; call this value *1A</code></li>
+<li>A: <code>(assoc *1A :x x) ;; call this value *2A</code></li>
+<li>B: <code>(deref state)    ;; call this value *1B</code></li>
+<li>B: <code>(assoc *1B :x x) ;; call this value *2B</code></li>
+<li>B: <code>(reset! state *2B)</code></li>
+<li>A: <code>(reset! state *1A)</code></li>
+</ol>
+<p>What happened? On line 6, A set the value of <code>state</code> to the value it calculated on line 2. So <strong>B's work is completely discarded</strong>. That's probably not what was intended. What's worse is that that is one of many possible interleavings, some of which work and some don't. Welcome to concurrency!</p>
+<p>What you probably wanted was to make sure that <em>no</em> work is discarded. You want the operation to be <em>atomic</em>. That's why it's called an atom. <code>swap!</code> is atomic. A <code>swap!</code> to an atom occurs &quot;all at once&quot;, instead of on three lines like the <code>reset!</code> example. If two threads are doing <code>swap!</code>, there are two possible interleavings.</p>
+<ol style="list-style-type: decimal">
+<li>A: <code>(swap! state assoc :x x)</code></li>
+<li>B: <code>(swap! state assoc :x x)</code></li>
+</ol>
+<p>And</p>
+<ol style="list-style-type: decimal">
+<li>B: <code>(swap! state assoc :x x)</code></li>
+<li>A: <code>(swap! state assoc :x x)</code></li>
+</ol>
+<p>These are usually what you want. If <em>only one</em> or <em>neither one</em> works, <strong>atom is not the right construct for you</strong>.</p>
+<p>So there you go. Atomic mutable state with immutable values gives you a nice, <strong>composable concurrency semantics</strong>. You could do it with locks but it's harder to ensure you're doing it correctly. It's slightly higher-level than locks yet it provides tremendous value. <strong>Atoms are easier to reason about and less prone to errors.</strong></p>
+<p>If you'd like to learn the basics of Clojure, I recommend my video course called <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. I don't go over concurrency, but you will learn lots of functional programming. Go check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">the description</a> to see if it's right for you.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
+<li><a href="http://www.lispcast.com/clojure-regex">Regexes in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/two-kinds-of-bootstrapping">
               Two Kinds of Bootstrapping
             </a>
@@ -850,118 +972,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <ol>
 <li id="fn1"><p>As sound as the type system in the language.<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>See <a href="http://goto.ucsd.edu/~rjhala/liquid/haskell/blog/about/">Liquid Haskell</a> for an example of applying an extrinsic type system on Haskell.<a href="#fnref2">↩</a></p></li>
-</ol>
-</div>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/json-serialization-api-clojure">
-              JSON Serialization for APIs in Clojure
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            July 10, 2014
-          </div>
-
-          
-<p>Summary: <em>Clojure is well-suited for processing JSON, but there are some decisions you have to make to suit your application. The major decisions are actually easy, though they took me a while to figure out.</em></p>
-<p>I tend to use JSON instead of <a href="https://github.com/edn-format/edn"><code>edn</code></a> for an API serialization format, if only because JSON is more readily readable from other languages. I could do both, but it's good to <strong>eat your own dogfood and test those JSON code paths</strong>.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
-<p><code>edn</code> is better, but JSON is generally pretty good. However, JSON's expressibility is decidedly a subset of the Clojure data structures, so there is <strong>considerable loss of information</strong> when going from Clojure to JSON. That information is not recovered in a round-trip, at least not automatically. There are lots of decisions that have to go into how to, at least partially, recover this.</p>
-<p>One bit of information that is lost is the type of keys to a map. JSON only allows strings as keys. Clojure allows anything. But most of the time, <strong>I find myself using <em>keywords</em> for keys</strong>. I say most, but really, it's the vast majority. Maps are bundles of named values pretty much all the time.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> So the optimal decision, after trying lots of combinations, is to convert keywords to strings (the default in JSON libraries I've seen) when emitting JSON; and to convert map keys (always strings in JSON) to keywords (also known as <code>keywordize-keys</code>) when parsing JSON. That covers nearly all cases, and pinpointed special cases can cover the rest.</p>
-<p>But that's not the end of the keyword/string story. What about namespaces? Surprisingly, the two major JSON libraries, <code>clojure.data.json</code> and <code>cheshire</code> handle things differently. <strong>How do you parse a JSON key that has a slash in it, indicating a namespace?</strong> If we're keywordizing (as I suggest above), they both give namespaced keywords (<code>keyword</code> will parse around the <code>/</code>). But when emitting JSON, they act differently. <code>clojure.data.json</code> will emit the <code>name</code> of the keyword (and ignore the <code>namespace</code>) while <code>cheshire</code> emits a string with <code>&quot;namespace/name&quot;</code>.</p>
-<p>I like to keep the namespace, or, put another way, I like to drop as little information as possible. So I prefer the namespace approach. I'm not sure how to get <code>clojure.data.json</code> to do that. <strong>I just use <code>cheshire</code></strong>.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup> The other gotcha for namespaces is that ClojureScript's <code>clj-&gt;js</code> and <code>js-&gt;clj</code> are similarly asymetrical.<sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup></p>
-<p>Keywords in other places besides the keys of maps will just get turned into strings, but they don't get converted back to keywords. That sucks, but it's minor. You'll just have to <strong>convert them back some other way</strong>. At work, we use <a href="https://github.com/prismatic/schema">Prismatic Schema</a>'s coercions. They do the trick nicely, in a declarative way.</p>
-<p>So, back to other JSON issues. The other issue is other data types. Dates, URI's, and UUID's are in our data as well. Dates, well, it's up to you how to encode them. I've always been a fan of the Unix timestamp. It's not exactly human readable, but it's universally parseable. There's also <strong>the ISO datetime format, which is probably a better bet</strong>--it's human readable and agreed upon among API designers. You could emit that as a string and coerce back to a Date object later.</p>
-<p>URI's and UUID's are by definition strings, so that's easy. How do you set up <code>cheshire</code> to handle the encoders? It's pretty simple, really.</p>
-<pre><code>(cheshire.generate/add-encoder java.net.URI cheshire.generate/encode-str)</code></pre>
-<p>That means add the encoder for the <code>java.net.URI</code> type to be encoded as a JSON string. <code>str</code> will be called on the value. You can figure out the other types you need. There are <strong>some JSON emission settings built-in, including Date (the ISO string format) and UUID</strong>. Weirdly URI is not in there, so you have to add it.</p>
-<p>What's next? Oh, pretty-printing. Yeah, I pretty-print my JSON to go over the wire. It's nice for debugging. I mean, who wants to <code>curl</code> one long, 1000-character line of JSON? <strong>Put some whitespace</strong>, please! How to do that?</p>
-<pre><code>(cheshire.core/generate-string mp {:pretty true})</code></pre>
-<p>That's right, it's basically built in, but you have to specify it. But, oh man, <strong>that's long</strong>. I don't want to type that, especially because my lazy fingers are going to not do it one time, then I'm going to look at the JSON in my browser and see a one-line JSON mess. So, what do I do? I put all my JSON stuff for each project in <code>json.clj</code>. It's got all my <code>add-encoder</code> stuff, and it's got two extra functions, just for laziness<sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup>:</p>
-<pre><code>(defn parse [s]
-  (cheshire.core/parse-string s true))
-
-(defn gen [o]
-  (cheshire.core/generate-string o {:pretty true}))</code></pre>
-<p>Or of course whatever options you want to pass those functions. This one is my choice--you make your choice. But <strong>these two functions are all I use most of the time</strong>. Parsing strings and generating strings. Woohoo! Much shorter and less to keep in my little head.</p>
-<p>Well, that just about wraps up my JSON API story. There's the slight detail of <strong>outputting JSON from <code>liberator</code></strong>, which is its own blog post. And there's a bit of <strong>generative testing I do to really challenge my assumptions</strong> about how I set up the round-tripping. But that, too, is another blog post for another day. Oh, and what about <strong>all that JSON middleware</strong>? Again, another post.</p>
-<p>If you like peanut butter and you like jelly, you will probably like peanut butter and jelly sandwiches. If you like web and you like Clojure, you will most definitely like <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure</a>, which is a <strong>gentle, soothing, visually rich video course ushering in the fundamentals of Clojure web development</strong> through your eyes and ears and down through your fingertips and into your very own Heroku-hosted web server. At least <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#preview">watch the preview</a>!</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free Ring Spec to hang on your wall
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/ring_spec_1_3.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
-</p>
-      
-<input id="mce-EMAIL"
-             class="email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][4]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
-<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
-<li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>It may be hubristic to think anyone else will use my API.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>There are exceptions, but these typically are not communicated to the outside. Those that are need special-casing. C'est la vie!<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p><code>:key-fn</code> in <code>clojure.data.json</code> only works for keys, not all keywords. Emitting a keyword in any other place emits the <code>str</code> of it, which includes the <code>:</code> in the string. Ick.<a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p><code>clj-&gt;js</code> uses <code>name</code> for keywords and <code>str</code> for symbols, so keywords lose their namespace when emitting JSON, but retain their namespace when parsing key strings as keywords.<a href="#fnref4">↩</a></p></li>
-<li id="fn5"><p>also known as ease, peace of mind, DRY, and cleanliness<a href="#fnref5">↩</a></p></li>
 </ol>
 </div>
 

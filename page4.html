@@ -73,6 +73,99 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-interview-brandon-bloom">
+              Pre-West Interview: Brandon Bloom
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 09, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#bbloom"><img src="http://www.lispcast.com/img/pre-west/brandon bloom.jpeg"
+      style="height:150px;float:right"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Brandon Bloom generously agreed to do an interview about his <a href="http://clojurewest.org/speakers#bbloom">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. The <a href="http://www.lispcast.com/pre-west-brandon-bloom">background to the talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Brandon Bloom</strong>: From 2009 to 2011, I encountered a couple of Rich's talks and writings. Each time I would look at Clojure briefly, but it never really clicked. When ClojureScript was released, my startup was heavily using CoffeeScript, so I decided to take a more serious peek at this new alternative. I immediately fell in love with Clojure and started contributing to ClojureScript. My startup never did get a chance to use ClojureScript, but Clojure on the JVM quickly became one of my favorite tools for prototypes and experiments, and I've lately, I've used it for <em>serious business</em> with some frequency.</p>
+<p><strong>LC</strong>: You will be talking about the CircleCI frontend, written in ClojureScript and Om. Om is less than 18 months old, and yet it is used in production systems and I assume replaced their previous frontend system. Can you speak to this decision? How was it evaluated?</p>
+<p><strong>BB</strong>: I honestly can't speak to the decision to use Om. That was made before I got involved. What I can say is that CircleCI was already a big Clojure user and their front end used to be CoffeeScript based. Daniel Woelfel deserves all the credit for choosing Om and delivering a production system with it. I got involved much later.</p>
+<p><strong>LC</strong>: What were some of the challenges that you faced when developing with such a new library as Om?</p>
+<p><strong>BB</strong>: Om is/was still evolving. It's got bugs, misfeatures, and other problems. Luckily, I've had the luxury of regular face time with David Nolen, Om's author, out at the Kitchen Table Coders studio in Brooklyn. I think that it's important for new library producers/consumers to interact regularly. Beyond that, the design patterns aren't established yet. It's difficult to simultaneously think deep thoughts about a challenging design space such as UI code, while also building a useful UI for your product. Sometimes, you just need to hack it and you can't be afraid to dig in to the library code while you're hacking it. After that, you need to reflect on whether your solution actually makes sense: Often it doesn't!</p>
+<p><strong>LC</strong>: What are some improvements to Om you would like to see?</p>
+<p><strong>BB</strong>: That's a tough question to answer constructively, since David has already picked all of the low hanging fruit that I've pointed out to him. Overall, Om is an absolute delight. That said, it's clearly a first real attempt at the React style of UI development in Clojure. Some parts of Om, like cursors, just never made much sense. Other parts feel like missed opportunities to truly capitalize on ClojureScript's strengths. At this point, my feedback could be rolled in to notes for a second attempt at this style of UI framework in Clojure.</p>
+<p>David has made the very pragmatic decision to assume React.js as a long term dependency. However, once you really get in to the weeds hacking on a UI, it becomes clear, at least it did to me, that less layers is always a good thing. Overall, a virtual DOM implementation is pretty easy, although getting it to perform well is tricky. I'd really like to see a ClojureScript library that drops the React.js dependency in favor of a more direct mapping to Clojure idioms.</p>
+<p>The dichotomy between primitive elements and Om components (created via om/build) has got to go. It hurts modularity and refactorability. But I also don't particularly like some users' insistence on hiccup forms for a variety of reasons.</p>
+<p>The <a href="http://blog.circleci.com/local-state-global-concerns/">&quot;no local state&quot; descriptors</a> thing should definitely be <em>the only way</em> Om operate.</p>
+<p>The &quot;world in an atom&quot; model isn't quite structured enough. We need something more database-like to manage client/server synchronization. Facebook's Relay is impressive and, if you squint right, their GraphQL looks a lot like Datomic's Pull API. I know that Sean Grove has been experimenting with a DataScript-backed UI. I think that somebody needs to ship a prescriptive framework here that integrates a client-side database with the view layer.</p>
+<p>I've also got extensive notes for an alternative events system.</p>
+<p>Beyond that, toolability is critical. The framework needs a way to design and test an individual component in the browser. You should have to go out of your way to break that, not go out of your way to enable it.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>BB</strong>:</p>
+<ul>
+<li>https://twitter.com/BrandonBloom</li>
+<li>http://www.brandonbloom.name/</li>
+</ul>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>BB</strong>: Certainly not a burrito.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
+</p>
+
+
+<p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-interview-gary-fredericks">
               Pre-West Interview: Gary Fredericks
             </a>
@@ -744,90 +837,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
 <li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
 <li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-melanie-mitchell">
-              Pre-West Interview: Melanie Mitchell
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 05, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><a href="http://clojurewest.org/speakers"><img src="http://www.lispcast.com/img/pre-west/melanie mitchell.jpg"
-      style="height:150px;float:right"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Melanie Mitchell generously agreed to do an interview about her <a href="http://clojurewest.org/speakers">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. The <a href="http://www.lispcast.com/pre-west-melanie-mitchell">background to the talk</a> is available, if you like.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: Do you program in Clojure? If not, have you heard of it? If so, how did you get into it?</p>
-<p><strong>Melanie Mitchell</strong>: No, I don’t program in Clojure, though I did write the code for my Ph.D. dissertation project in Common Lisp. I have heard of Clojure, since I’m interested in functional languages, and also some of my students have been programming in it.</p>
-<p><strong>LC</strong>: I'm no expert in AI, but I've always seen three big approaches. There are the two Peter Norvig approaches, namely the rule-based approach and the statistical approach. And then there was the approach laid out in <em>Fluid Concepts and Creative Analogies</em>, which was much more about building a system that was unpredictable but whose emergent behavior was reminiscent of human intelligence. The rule-based approach has been dismissed as too brittle. And the statistical approach has had broad impact. I have to admit that I haven't heard much about the third approach in a while. Could you talk about it briefly and some of the recent advances?</p>
-<p><strong>MM</strong>: You’re right -- statistical machine-learning approaches have recently seen some huge successes in applications such as object-recognition, image captioning, speech-recognition, and language translation. The major ideas behind statistical machine-learning approaches, including so-called &quot;deep networks&quot;, have been around for a while. Let's use the example of visual object-recognition. The idea is that a system is presented with many images of the concept it is supposed to learn, e.g., &quot;dog&quot;, along with many &quot;non-dog&quot; images as well, and the system essentially learns how to map images into a high-dimensional &quot;feature&quot; space in which dog images are close to one another and non-dog images are far from dog images. The &quot;statistical&quot; aspect comes in because the visual features used can be statistical in nature, and also statistical methods are used to find the best mapping.</p>
-<p>So why have these methods only been so successful recently? It seems that the success is due to the fact that we now have access to huge amounts of data to train these systems, as well as very fast parallel computing methods to perform the training. These kinds of methods have become very successful in tasks such recognizing faces and specific objects (e.g., &quot;dog&quot;) in images.</p>
-<p>The problem with these kinds of purely statistical methods is that, it’s hard -- maybe impossible -- to learn to recognize more abstract visual situations, such as &quot;taking a dog for a walk&quot; or &quot;training a dog&quot; or &quot;a dog show&quot;. Such situations consist of multiple objects that are related to one another in specific ways -- e.g., &quot;taking a dog for a walk&quot; typically consists of a person, a dog, and a leash, which have specific kinds of spatial and action relationships to one another. Moreover, there are lots of &quot;dog-walking&quot; situations that do not fit the prototype -- e.g., a person walking multiple dogs, a person &quot;walking a dog while riding a bike&quot;, a person running rather than walking, etc. etc. Humans are of course very good at learning to recognize abstract situations in a flexible way -- to allow &quot;slippages&quot; from a prototypical situation.</p>
-<p>The general architecture described in Fluid Concepts and Creative Analogies has been termed the &quot;active symbol&quot; architecture. The idea is that statistical methods interact with a network of symbolic-level structured activatable concepts. The activity of concepts in the network controls, and is controlled by, stochastic agents that bridge the gap between symbolic knowledge and statistical features. The various chapters in <em>Fluid Concepts and Creative Analogies</em> describe how this architecture was developed for &quot;micro-domains&quot;, such as letter-string analogies. I'm now extending this architecture to interface with deep network approaches for the task of visual situation recognition. This is what I will describe in my talk.</p>
-<p><strong>LC</strong>: Is there any background material you would suggest people read/watch before the talk?</p>
-<p><strong>MM</strong>: I’ll try to make the talk as self-contained as possible, but if people are interested, they might want to read a (somewhat long) chapter from Fluid Concepts and Creative Analogies, which <a href="http://web.cecs.pdx.edu/~mm/CopycatChapter.html">I’ve put online</a>. This describes the Copycat analogy-making project in some detail.</p>
-<p><strong>LC</strong>: Where can people follow your work online?</p>
-<p><strong>MM</strong>: I have a <a href="http://web.cecs.pdx.edu/~mm/Situate.html">web page on this project</a>. This is where I will be posting papers and updates on the project.</p>
-<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
-<p><strong>MM</strong>: Cream. (Because you put it on top of Java...).</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
 </ul>
 
 

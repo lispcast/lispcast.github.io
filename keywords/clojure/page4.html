@@ -546,6 +546,112 @@ No spam. Ever.
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/tdd-workflow-in-clojure-with-emacs-and-cider">
+              TDD Workflow in Clojure using Emacs with CIDER
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 08, 2015
+          </div>
+
+          
+<p>Summary: <em>TDD is about fast feedback. CIDER tightens the feedback loop with quick commands for running tests and a powerful test reporting system.</em></p>
+<h3 id="introduction">Introduction</h3>
+<p>I've always been into flow. One of the key aspects of flow is a short feedback loop. Test Driven Development (TDD) is partially based on this flow, too. You write a new test, then you write code to satisfy the test, then you refactor.</p>
+<p>Now, I'm not going to be a pedant in this post about what is and what is not TDD. Sometimes I like to adhere to a strict discipline of TDD. And sometimes I like to code fast and loose. But as a working definition, for the purposes of this article, I'll define TDD as writing code and tests incrementally, and running the tests fairly often. The last thing you want is to have to wait for those tests to run.</p>
+<p>Luckily, CIDER<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> has been optimized to make the whole process smooth, fast, and feedbacky. You can learn about installing CIDER <a href="https://github.com/clojure-emacs/cider/wiki/Installation">here</a>. Or <script type="text/javascript">
+<!--
+h='&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'ask me any time for help'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x61;&#x73;&#x6b;&#32;&#x6d;&#x65;&#32;&#x61;&#110;&#x79;&#32;&#116;&#x69;&#x6d;&#x65;&#32;&#102;&#x6f;&#114;&#32;&#104;&#x65;&#108;&#112;&#32;&#40;&#x65;&#114;&#x69;&#x63;&#32;&#x61;&#116;&#32;&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript> if you run into trouble.</p>
+<h3 id="what-you-need-to-know">What you need to know</h3>
+<p>First, you'll need CIDER connected to the REPL (usually just <code>C-c M-j</code>).</p>
+<p>Besides the basic commands for switching buffers (<code>C-c b</code>), I use just one command a ton while I'm TDD'ing:</p>
+<ul>
+<li><code>C-c ,</code> (That's Control-c comma.) While you're in a buffer, it will run the tests for that buffer. It could be that you're in production code, in which case it will try to find the <a href="http://www.lispcast.com/clojure-test-directory">corresponding test namespace</a> and run tests there.</li>
+</ul>
+<p>That will give you just the feedback you need: a green status report in the status bar if everything passes. And a new buffer with a failure and error report if it's not passing. You can do some cool stuff in that buffer, like jumping to the test definition, rerunning individual tests, and seeing diffs of actual vs. expected output. Look <a href="https://github.com/clojure-emacs/cider#cider-test-report-mode">here</a> for a quick reference to the available key bindings.</p>
+<p>But mostly I'm editing code, compiling it (with <code>C-c C-k</code>), and running the tests (<code>C-c ,</code>) to make sure they pass now. Unlike with running <code>lein test</code> at the command line, this command only runs the tests for that specific namespace. This is usually what you want while you're editing code in the namespace. After you're done, you'll want to rerun all of the tests in a fresh JVM at the command line.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Getting a productive workflow set up is really important. It's hard on our nerves to be waiting through long feedback cycles. CIDER tightens those loops down to human scale so we can focus on the work of making the world better.</p>
+<p>If you'd like to learn more about testing in Clojure, including how to write tests so that they work seamlessly with Leiningen and CIDER, I have to recommend my <a href="http://purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a> course. It covers the most important and fundamental concepts for testing in Clojure. You should not miss the <em>free</em> <code>clojure.test</code> cheat sheet below.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+Get a Free clojure.test Cheatsheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/clojure.test cheatsheet.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the clojure.test cheatsheet. If you write Clojure or ClojureScript, this cheatsheet contains the most important functions in a handy format. I've spent a lot of time formatting and annotating the most used functions and macros from clojure.test so that they fit onto one page and everything is easy to understand.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://github.com/clojure-emacs/cider">CIDER</a> is an Emacs package for rocking Clojure code.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/token-buckets-in-core-async">
               Token Buckets with core.async
             </a>
@@ -906,7 +1012,7 @@ Learn more
 <h4 id="normal-cases">Normal cases</h4>
 <p>You should have at least one normal case to test the expected behavior. A normal case is a list with 5 elements, or a small integer (7, 12, 34).</p>
 <h4 id="bugs">Bugs</h4>
-<p>Now, here's the thing that makes having a test system set up totally worth it: <strong>having a place to put test for known and fixed bugs</strong>. If someone reports a bug, it's really nice to reproduce it in code in a failing test <em>before</em> you fix it. If the bug happened once, it could happen again, so make it part of your anti-regression suite.</p>
+<p>Now, here's the thing that makes having a test system set up totally worth it: <strong>having a place to put tests for known and fixed bugs</strong>. If someone reports a bug, it's really nice to reproduce it in code in a failing test <em>before</em> you fix it. If the bug happened once, it could happen again, so make it part of your anti-regression suite.</p>
 <h3 id="multiple-assertions-on-the-return-value">Multiple assertions on the return value</h3>
 <p>One last thing that happens in Clojure is you want to assert a few things about the same return value. Instead of calling the function several times, why not save the value and assert a few things about it?</p>
 <pre><code>(deftest map-test
@@ -976,110 +1082,6 @@ No spam. Ever.
 <li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/what-web-framework-should-i-use">
-              What Web Framework Should I Use in Clojure?
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            March 23, 2014
-          </div>
-
-          
-<p>Summary: <em>There are a number of web frameworks in Clojure, but beginners should roll their own server stack themselves to tap into the Ring ecosystem.</em></p>
-<p>One question that I am asked a lot by beginners in Clojure is <strong>&quot;What web framework should I use?&quot;</strong> This is a good question. In Python, there's Django. In PHP, Drupal. And of course in Ruby, there's the king of all web frameworks, Ruby on Rails.</p>
-<p>What framework should you use in Clojure? The question is actually kind of hard to answer. There are a number of web frameworks out there. Some people call <a href="https://github.com/weavejester/compojure">Compojure</a> a framework, though it is really a library. <a href="https://github.com/noir-clojure/lib-noir">lib-noir</a> does a lot of work for you. Then there's your true frameworks, like <a href="https://github.com/pedestal/pedestal">Pedestal</a> or <a href="http://hoplon.io/">Hoplon</a>, which provide infrastructure and abstractions for tackling web development. All of these projects are great, but for a beginner, <strong>I have to recommend building your own web stack starting with Ring</strong>.</p>
-<p>Compojure is really just a routing library, not a framework. You can use it for your routing needs, though there are alternatives, such as <a href="https://github.com/ericnormand/playnice">playnice</a>, <a href="https://github.com/juxt/bidi">bidi</a>, <a href="https://github.com/clojurewerkz/route-one">Route One</a>, and <a href="https://github.com/thatismatt/gudu">gudu</a>. <strong>If you don't want to decide, use Compojure. It's widely used and works great.</strong> If you want to go in depth, read the docs for the others. They are each good for different cases.</p>
-<p><a href="https://github.com/noir-clojure/lib-noir">lib-noir</a> comes from <a href="http://www.webnoir.org/">Noir</a>, which was a web framework (now deprecated). It was easy and provided a bit of plumbing already built for you, so you could just start a project with a lot of the infrastructure built in. lib-noir is that infrastructure in library form. I haven't used it, but a lot of people like it. However, when I look at it, I see that <strong>most of what it provides I either won't use or it is trivial to add myself</strong>. That would normally be ok if there was huge adoption for it (like with Rails) so you get an ecosystem effect, but there isn't. <strong>lib-noir is used but certainly not dominant.</strong></p>
-<p><a href="https://github.com/pedestal/pedestal">Pedestal</a> has a lot of backing. It aims to tackle single-page apps by providing a sane front-end environment using ClojureScript in the form of a message queue. If you're into &quot;real-time apps&quot;, this may be for you. Though, I would caution you that it's not for a Clojure beginner. <strong>Pedestal introduces a lot of new concepts that even experienced Clojure programmers have to learn.</strong> The <a href="https://github.com/pedestal/app-tutorial/wiki">tutorial</a> is long and arduous. You will have problems learning Pedestal without knowing Clojure.</p>
-<p><strong>Update:</strong> <em><a href="https://groups.google.com/forum/#!topic/pedestal-users/jODwmJUIUcg">Pedestal has changed dramatically</a> since I last looked at it. It is no longer a frontend framework. It is now a high-performance backend server for high performance asynchronous processing. It's worth looking at if you need that. Otherwise, I stick with my recommendation to use basic Ring.</em></p>
-<p><a href="http://hoplon.io/">Hoplon</a> is also designed for web apps. It gives you a DOM written in ClojureScript (including custom components), dataflow programming (like a spreadsheet), and client-server communication. It's a bold step, but again, <strong>requires you to buy into programming models that will take a long time to understand</strong>. If you are not already familiar with Clojure, you are asking for trouble.</p>
-<p>There are other frameworks out there. But I recommend rolling your own stack. If you're learning Clojure, <strong>the best way to grasp how web apps work is to get a <a href="https://github.com/ring-clojure/ring">Ring</a> Jetty adapter set up with some basic handlers</strong>. Add existing middleware as you need it. Write some middleware of your own. Use Compojure to route. Use <a href="https://github.com/weavejester/hiccup">Hiccup</a> to generate HTML. <strong>That setup will get you a long way.</strong></p>
-<p>Ring is just functions. With a few basic concepts and a copy of the Ring SPEC handy, you can build a web server very quickly that does exactly what you want and <strong>you can understand every aspect of it</strong>. The experience of building one yourself can teach you a lot about how the other frameworks are put together.</p>
-<p>What's more, Ring <em>is</em> dominant. Most people write functionality (in the form of middleware and handlers) assuming Ring and no more. So by staying close to the metal, you are <strong>tapping into a huge resevoir of pre-written libraries that are all compatible with each other</strong>. Ring is the locus for the Clojure web ecosystem.</p>
-<p>Wiring up your own middleware stack is not that daunting. If you want guidance, <strong>my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure video series</a> is now for sale</strong>. It starts with a brand new Clojure project and ends with a fully functional app, backed by a database, and hosted on Heroku (for free!). In one hour, <strong>it explains all the concepts and shows you lots of examples</strong>. There's lots of exercises to get your brain whirring.</p>
-<p>Recommended stack:</p>
-<ul>
-<li><a href="https://github.com/ring-clojure/ring">Ring</a> (with Jetty adapter)
-<ul>
-<li><a href="http://ring-clojure.github.io/ring/ring.middleware.params.html#var-wrap-params">wrap-params</a> (parsing params)</li>
-<li><a href="https://github.com/ring-clojure/ring/blob/master/ring-devel/src/ring/middleware/reload.clj">wrap-reload</a> (for development)</li>
-<li><a href="http://ring-clojure.github.io/ring/ring.middleware.resource.html#var-wrap-resource">wrap-resource</a> and <a href="http://ring-clojure.github.io/ring/ring.middleware.file-info.html#var-wrap-file-info">wrap-file-info</a> (static files)</li>
-</ul></li>
-<li><a href="https://github.com/weavejester/compojure">Compojure</a></li>
-<li><a href="https://github.com/weavejester/hiccup">Hiccup</a></li>
-</ul>
-<p>Then keep adding and customizing.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free Ring Spec to hang on your wall
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/ring_spec_1_3.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
-</p>
-      
-<input id="mce-EMAIL"
-             class="email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][4]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
-<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
-<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
 </ul>
 
 

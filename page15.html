@@ -73,6 +73,78 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/church-vs-curry-types">
+              Church vs Curry Types
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 15, 2014
+          </div>
+
+          
+<p>Summary: <em>Static vs dynamic typing debates often flounder because the debators see from two different perspectives without knowing it. Learning to identify the two perspectives can calm the discussion. The tension between the two perspectives has led to Gradual Typing and other technologies.</em></p>
+<p>Many discussions about type systems around the internet fail to be interesting because one or both parties are not versed in type theory. There's a less common (yet related) reason, which I have begun to notice more and more: people who are not familiar with the <a href="http://en.wikipedia.org/wiki/Simply_typed_lambda_calculus#Intrinsic_vs._extrinsic_interpretations">difference between Church Types and Curry Types</a>. These are also known, respectively, as Intrinsic Types and Extrinsic types. Because the participants are not aware of the two perspectives, they blame the other one for ignorance, when in fact they just have a different perspective.</p>
+<p>Church Types are what Haskell has. Church types are named for Alonzo Church, the inventor of the lambda calculus. In a Church-style system, types are an <em>intrinsic</em> part of the semantics of the language. <strong>The language would be different without the types--it may even be meaningless.</strong> With an intrinsic type system, the meaning of the program is different from the runtime behavior of the program. One way to think of this is that so much of the meaning of the program occurs <em>at compile time</em> that you can begin to think of the program having properties you can reason about even if you never run the program.</p>
+<p>The other kind of types are Curry types (aka extrinsic types). They are named for Haskell Curry, the man the Haskell language is named after. Curry-style types is when a system of types is applied that is <strong>not part of the semantics of the language</strong>. This is what Clojure has in <code>core.typed</code>. <strong>The meaning of a Clojure program is not dependent on it passing the type checker</strong>--it can be run without it. The type checker simply alerts you to type errors in your code. Note that you could consider your type checker to be your own head, which, as flawed as it may be, is what most Clojure programmers use. The types could be anywhere outside of the language.</p>
+<p>Each perspective is valuable and bears its own fruit. Intrinsic types are great because you are <strong>guaranteed to have a mathematically-sound</strong><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> safety net at all times. You always have something you can <em>reason</em> about. Such is not guaranteed for extrinsic type checkers. They may not be able to reason about your code at all.</p>
+<p>Extrinsic types are useful because you can apply <strong>multiple type systems to your code</strong><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>--or even write something that you don't know how to prove is sound. There are more benefits on both sides, but you get the idea.</p>
+<p>We now have a new perspective which is slightly &quot;higher&quot; than either of them. We can now see that both perspectives exist and talk about them as such. <strong>What can we see/say now that we couldn't before?</strong></p>
+<p>A famous <a href="http://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/">article by Robert Harper</a> exemplifies the Church perspective very well. It argues that untyped programs are a subset of typed programs. They are programs that have a single type and all values are of that one type. So instead of being liberating, dynamic languages restrict you to one type. Notice the <strong>assumption that languages have a type system by default</strong> which is typical of the Church-style perspective. We can now say &quot;This reasoning is correct given that perspective.&quot;</p>
+<p>On the other side, you'll often see a dynamic typist say the exact opposite: that well-typed programs are a subset of dynamically typed programs. In other words, well-typed programs are just dynamic programs with fewer errors. Curry-style to the core: <strong>static type errors are something that is added onto the semantics of the language</strong>. We can now see that they are right, from their perspective.</p>
+<p>Here's a diagram:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/ChurchvsCurry.png" alt="Church vs Curry Types Language Subset Diagrams" /><p class="caption">Church vs Curry Types Language Subset Diagrams</p>
+</div>
+<p>Notice how they're isomorphic? That means something, I just don't know what :)</p>
+<p>My ambitious hope is that this perspective will quiet a lot of the fighting as people recognize that they are just <strong>perpetuating a rift in the field of mathematics</strong> that happened a long time ago. The perspectives are irreconcilable now, but that could change. A paper called <a href="https://www.cs.cmu.edu/~fp/papers/andrews08.pdf">Church and Curry: Combining Intrinsic and Extrinsic Typing</a> builds a language with both kinds of types. And <a href="http://www.cs.colorado.edu/~siek/pubs/pubs/2006/siek06:_gradual.pdf">Gradual Typing</a> and <a href="http://homepages.inf.ed.ac.uk/wadler/topics/blame.html">Blame Calculus</a> are investigating the intersection of static and dynamic typing. Let's stop fighting, make some cool tools and use them well.</p>
+<div class="article-cg-box">
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/Hindley-Milner-in-Clojure">Hindley-Milner in Clojure</a></li>
+<li><a href="http://www.lispcast.com/on-type-unity">On Type Unity</a></li>
+<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
+<li><a href="http://www.lispcast.com/ambrose-interview-typed-clojure">Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>As sound as the type system in the language.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>See <a href="http://goto.ucsd.edu/~rjhala/liquid/haskell/blog/about/">Liquid Haskell</a> for an example of applying an extrinsic type system on Haskell.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/json-serialization-api-clojure">
               JSON Serialization for APIs in Clojure
             </a>
@@ -474,8 +546,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
 </ul>
 
 
@@ -626,8 +698,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
 </ul>
 
 
@@ -1101,110 +1173,6 @@ No spam. Ever.
 <p>I don't want to forget. I use Ring often enough that I want a quick reference. A while ago, I printed out a quick summary of the keys for the request and response maps and hung it on the wall behind my monitor. I refer to it frequently.</p>
 <p>If you program the web in Clojure, you might appreciate this printout. If you're learning, it could be an invaluable reference. <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">Please download the PDF.</a></p>
 <p>And if you like it, you might also like my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure video series</a>.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free Ring Spec to hang on your wall
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/ring_spec_1_3.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
-</p>
-      
-<input id="mce-EMAIL"
-             class="email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][4]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
-<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
-<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/what-web-framework-should-i-use">
-              What Web Framework Should I Use in Clojure?
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            March 23, 2014
-          </div>
-
-          
-<p>Summary: <em>There are a number of web frameworks in Clojure, but beginners should roll their own server stack themselves to tap into the Ring ecosystem.</em></p>
-<p>One question that I am asked a lot by beginners in Clojure is <strong>&quot;What web framework should I use?&quot;</strong> This is a good question. In Python, there's Django. In PHP, Drupal. And of course in Ruby, there's the king of all web frameworks, Ruby on Rails.</p>
-<p>What framework should you use in Clojure? The question is actually kind of hard to answer. There are a number of web frameworks out there. Some people call <a href="https://github.com/weavejester/compojure">Compojure</a> a framework, though it is really a library. <a href="https://github.com/noir-clojure/lib-noir">lib-noir</a> does a lot of work for you. Then there's your true frameworks, like <a href="https://github.com/pedestal/pedestal">Pedestal</a> or <a href="http://hoplon.io/">Hoplon</a>, which provide infrastructure and abstractions for tackling web development. All of these projects are great, but for a beginner, <strong>I have to recommend building your own web stack starting with Ring</strong>.</p>
-<p>Compojure is really just a routing library, not a framework. You can use it for your routing needs, though there are alternatives, such as <a href="https://github.com/ericnormand/playnice">playnice</a>, <a href="https://github.com/juxt/bidi">bidi</a>, <a href="https://github.com/clojurewerkz/route-one">Route One</a>, and <a href="https://github.com/thatismatt/gudu">gudu</a>. <strong>If you don't want to decide, use Compojure. It's widely used and works great.</strong> If you want to go in depth, read the docs for the others. They are each good for different cases.</p>
-<p><a href="https://github.com/noir-clojure/lib-noir">lib-noir</a> comes from <a href="http://www.webnoir.org/">Noir</a>, which was a web framework (now deprecated). It was easy and provided a bit of plumbing already built for you, so you could just start a project with a lot of the infrastructure built in. lib-noir is that infrastructure in library form. I haven't used it, but a lot of people like it. However, when I look at it, I see that <strong>most of what it provides I either won't use or it is trivial to add myself</strong>. That would normally be ok if there was huge adoption for it (like with Rails) so you get an ecosystem effect, but there isn't. <strong>lib-noir is used but certainly not dominant.</strong></p>
-<p><a href="https://github.com/pedestal/pedestal">Pedestal</a> has a lot of backing. It aims to tackle single-page apps by providing a sane front-end environment using ClojureScript in the form of a message queue. If you're into &quot;real-time apps&quot;, this may be for you. Though, I would caution you that it's not for a Clojure beginner. <strong>Pedestal introduces a lot of new concepts that even experienced Clojure programmers have to learn.</strong> The <a href="https://github.com/pedestal/app-tutorial/wiki">tutorial</a> is long and arduous. You will have problems learning Pedestal without knowing Clojure.</p>
-<p><strong>Update:</strong> <em><a href="https://groups.google.com/forum/#!topic/pedestal-users/jODwmJUIUcg">Pedestal has changed dramatically</a> since I last looked at it. It is no longer a frontend framework. It is now a high-performance backend server for high performance asynchronous processing. It's worth looking at if you need that. Otherwise, I stick with my recommendation to use basic Ring.</em></p>
-<p><a href="http://hoplon.io/">Hoplon</a> is also designed for web apps. It gives you a DOM written in ClojureScript (including custom components), dataflow programming (like a spreadsheet), and client-server communication. It's a bold step, but again, <strong>requires you to buy into programming models that will take a long time to understand</strong>. If you are not already familiar with Clojure, you are asking for trouble.</p>
-<p>There are other frameworks out there. But I recommend rolling your own stack. If you're learning Clojure, <strong>the best way to grasp how web apps work is to get a <a href="https://github.com/ring-clojure/ring">Ring</a> Jetty adapter set up with some basic handlers</strong>. Add existing middleware as you need it. Write some middleware of your own. Use Compojure to route. Use <a href="https://github.com/weavejester/hiccup">Hiccup</a> to generate HTML. <strong>That setup will get you a long way.</strong></p>
-<p>Ring is just functions. With a few basic concepts and a copy of the Ring SPEC handy, you can build a web server very quickly that does exactly what you want and <strong>you can understand every aspect of it</strong>. The experience of building one yourself can teach you a lot about how the other frameworks are put together.</p>
-<p>What's more, Ring <em>is</em> dominant. Most people write functionality (in the form of middleware and handlers) assuming Ring and no more. So by staying close to the metal, you are <strong>tapping into a huge resevoir of pre-written libraries that are all compatible with each other</strong>. Ring is the locus for the Clojure web ecosystem.</p>
-<p>Wiring up your own middleware stack is not that daunting. If you want guidance, <strong>my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure video series</a> is now for sale</strong>. It starts with a brand new Clojure project and ends with a fully functional app, backed by a database, and hosted on Heroku (for free!). In one hour, <strong>it explains all the concepts and shows you lots of examples</strong>. There's lots of exercises to get your brain whirring.</p>
-<p>Recommended stack:</p>
-<ul>
-<li><a href="https://github.com/ring-clojure/ring">Ring</a> (with Jetty adapter)
-<ul>
-<li><a href="http://ring-clojure.github.io/ring/ring.middleware.params.html#var-wrap-params">wrap-params</a> (parsing params)</li>
-<li><a href="https://github.com/ring-clojure/ring/blob/master/ring-devel/src/ring/middleware/reload.clj">wrap-reload</a> (for development)</li>
-<li><a href="http://ring-clojure.github.io/ring/ring.middleware.resource.html#var-wrap-resource">wrap-resource</a> and <a href="http://ring-clojure.github.io/ring/ring.middleware.file-info.html#var-wrap-file-info">wrap-file-info</a> (static files)</li>
-</ul></li>
-<li><a href="https://github.com/weavejester/compojure">Compojure</a></li>
-<li><a href="https://github.com/weavejester/hiccup">Hiccup</a></li>
-</ul>
-<p>Then keep adding and customizing.</p>
 <div class="subscribe-form-wrapper">
   <form class="subscribe-form"
         action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"

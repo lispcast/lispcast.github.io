@@ -73,6 +73,133 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/willy-wonka-core-async">
+              Willy Wonka and the core.async Guidelines
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 10, 2014
+          </div>
+
+          
+<p>Summary: <em>There are a few conventions in core.async that are not hard to use once you've learned them. But learning them without help can be tedious. This article presents three guidelines that will get you through the learning curve.</em></p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/willy-wonka.jpg" alt="Willy Wonka, inventor of CSP." /><p class="caption">Willy Wonka, inventor of CSP.</p>
+</div>
+<h3 id="introduction">Introduction</h3>
+<p>The more you use core.async, <strong>the more you feel like Willy Wonka</strong>. He knew how to maximize the effectiveness of the Oomploompa. And while core.async comes with a lot of functions built in, he knew exactly which ones to use at which time.</p>
+<p>In this extremely rare glimpse into the functioning of his mysterious factory, we take a look at the guidelines Wonka himself follows when orchestrating the work of the Oompaloompas.</p>
+<h3 id="when-to-use-go-versus-thread">When to use <code>go</code> versus <code>thread</code>?</h3>
+<div class="figure">
+<img src="http://www.lispcast.com/img/oompa.jpeg" alt="Willy Wonka with his Thread Pool." /><p class="caption">Willy Wonka with his Thread Pool.</p>
+</div>
+<h4 id="background">Background</h4>
+<p>Each Oompaloompa is a thread. Willy Wonka has a special group of Oompaloompas he calls a <em>thread pool</em>. Their assigment is simple: they manage a group of tasks that Wonka calls <code>go</code> blocks. Whenever Wonka has an appropriate task, he writes a <code>go</code> block and hands it to the Oompaloompas to work on.</p>
+<p>As the Oompaloompas work, they take one task and do it until the task <em>parks</em>. When it parks, they put it down and pick up another task that isn't parked. <strong>Tasks become unparked when they get new input</strong> from the chocolate pipes. Then the Oompaloompas can continue working on them.</p>
+<p>At one time, Wonka used to give the thread pool all sorts of tasks. He would give them very long calculation tasks, like weighing each chocolate bean in his chocolate bean mountain. He noticed that when they did this, <strong>lots of tasks were left undone, even though they were not parked</strong>, because all of the Ooompaloompas were busy doing something else.</p>
+<p>So he came up with a guideline.</p>
+<h4 id="avoid-long-calculations-and-blocking-inside-go-blocks">Avoid long calculations and blocking inside <code>go</code> blocks</h4>
+<p>Does your code do significant I/O, like downloading a file or writing to the network? Are you doing a very long calculation?</p>
+<p>Then use a <code>thread</code>. <strong>If it will take a long time or block, you want a dedicated thread.</strong> It can work as long as it wants, and even block. That way it doesn't slow down the work of the thread pool.</p>
+<p>Otherwise, you can use a <code>go</code> block.</p>
+<h3 id="when-to-use-single--versus-double-bang">When to use single- versus double-bang (!)</h3>
+<div class="figure">
+<img src="http://www.lispcast.com/img/oompa-loompa-2.jpg" alt="A couple of blocked Oompaloompas." /><p class="caption">A couple of blocked Oompaloompas.</p>
+</div>
+<h4 id="background-1">Background</h4>
+<p>Wonka also noticed that he needed to <strong>write different instructions</strong> for his two types of Oompaloompa. When he wrote a <code>go</code> block, he needed to say &quot;park while you wait for input&quot;. But for the other Oompaloompas created with <code>thread</code> (or for his own work), he needed an instruction that said &quot;block while you wait for input&quot;.</p>
+<p>So he came up with a little notation convention. If you're just parking, so you're in a <code>go</code> block, use one bang. If you're outside of a <code>go</code> block, meaning you need to block, use two bangs.</p>
+<p>These were his versions of his basic instructions:</p>
+<p><code>&gt;!</code>, <code>&lt;!</code>, and <code>alts!</code> versus <code>&gt;!!</code>, <code>&lt;!!</code>, and <code>alts!!</code>. The convention is easy.</p>
+<h4 id="use-single-bang-versions-in-go-blocks-and-double-bang-versions-outside.">Use single-bang versions in <code>go</code> blocks and double-bang versions outside.</h4>
+<p>The single-bang versions of these functions are meant to park a <code>go</code> block. Although they are defined as functions, they have special meaning to the <code>go</code> macro. In fact, if you actually run the functions (outside of a <code>go</code> block), they will throw an exception unconditionally, telling you <strong>they are meant to be inside a go block</strong>.</p>
+<p>The double-bang versions are blocking. That means that the thread they are running on will block if the channel is not ready. They can be used outside of a <code>go</code> block (anywhere) or inside of a <code>thread</code> block. <strong>It's safe to block inside a <code>thread</code> block since it's a dedicated thread.</strong></p>
+<h3 id="put"><code>put!</code></h3>
+<div class="figure">
+<img src="http://www.lispcast.com/img/wonka-angry.jpg" alt="Willy Wonka writing instructions for his mailman." /><p class="caption">Willy Wonka writing instructions for his mailman.</p>
+</div>
+<h4 id="background-2">Background</h4>
+<p>Like all factories, Willy Wonka's needs deliveries. When the UPS truck comes, there's plenty of boxes to unload. But Wonka is busy. So he leaves a note outside for the delivery guy.</p>
+<p>The note tells the guy where to put everything so the Oompaloompas know where to find it. When he says where to put a box, he spells it <code>put!</code>. That is, it has a bang.</p>
+<p>It's unfortunate because <strong>the other functions with a bang mean they park</strong>. But <code>put!</code> does not park. Wonka was just angry one day, and the convention stuck.</p>
+<p>But the delivery guy knows that Wonka is eccentric, so he doesn't take it personally and does his job. He puts stuff in its places, without blocking.</p>
+<h4 id="use-put-to-get-stuff-into-your-channels-from-outside.">Use <code>put!</code> to get stuff into your channels from outside.</h4>
+<p><code>put!</code> is a way to <strong>get values from outside of core.async</strong> into core.async without blocking. For instance, if you're using a callback-style, which is very common in Javascript, you will want to make your callback call <code>put!</code> to get the value onto a channel.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>That's it! Now to eat some chocolate!</p>
+<p>core.async is really cool, but it has a learning curve. Once you learn these conventions, you will begin to feel the power they give you, whether you're making chocolate or building cars. If you'd like to learn core.async and <strong>feel like Willy Wonka</strong>, I recommend the <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a> videos. They build up a deep understanding of the fundamental concepts in a fun and gradual way.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-conj-steve-miner">
               Pre-conj Prep: Steve Miner
             </a>
@@ -724,84 +851,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <h3 id="about-edward-wibletalk2">About <a href="http://clojure-conj.org/speakers#edward-wible">Edward Wible</a></h3>
 <p><a href="https://github.com/aew">Github</a></p>
 <p><a href="http://clojure-conj.org/speakers#lucas-cavalcanti"><img src="http://www.lispcast.com/img/pre-conj/edward-wible.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-ghadi-shayban">
-              Pre-conj Prep: Ghadi Shayban
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 01, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-jvm-creature-comfortstalk">Talk: <a href="http://clojure-conj.org/speakers#ghadi-shayban">JVM Creature Comforts</a></h3>
-<p><a href="http://clojure-conj.org/speakers#ghadi-shayban">Ghadi Shayban's talk</a> at the <em>conj</em> is about the Java Virtual Machine. In case you don't know, the JVM was <strong>originally designed by James Gosling</strong> and originally only hosted Java. Recently, the JVM has become the <strong>target platform for some very popular languages</strong>, including Groovy, JRuby, Scala, and of course Clojure.</p>
-<h4 id="background">Background</h4>
-<p>I always recommend <strong>studying up on history</strong>. James Gosling gave a talk a while ago about <a href="http://www.infoq.com/presentations/gosling-jvm-lang-summit-keynote">How the JVM Spec Came To Be</a>. It's a personal history that chronicles the experiences that led up to the design decisions that are embedded in the JVM today. A good introduction to how the JVM method invocation works in bytecode (very basically) is <a href="https://www.youtube.com/watch?v=BOOXa06y96A">Charles Nutter's keynote at JAX 2012</a>. It's also a good introduction to <em>invokedynamic</em> and <em>Method Handles</em>, also mentioned in the talk description.</p>
-<p>Briefly, <a href="https://blogs.oracle.com/jrose/entry/dynamic_invocation_in_the_vm"><em>invokedynamic</em></a> is a way to <strong>dynamically dispatch</strong> based on language-specific semantics in a fast way. <a href="https://blogs.oracle.com/jrose/entry/method_handles_in_a_nutshell"><em>Method Handles</em></a> are a way to <strong>refer to a method directly</strong> as first-class values. Some other things mentioned: <a href="http://cr.openjdk.java.net/~jrose/values/values-0.html">value types</a> are a proposal to support immutable aggregate types directly in Java. <a href="http://cr.openjdk.java.net/~briangoetz/valhalla/spec-classdyn.html">classdynamic</a> is an idea for instantiating <em>patterns</em> of classes.</p>
-<h5 id="why-it-matters">Why it matters</h5>
-<p>The JVM is evolving. The growing number of languages that compile to the JVM are influencing that evolution. <em>invokedynamic</em> is an example of such an influence. It is used extensively in JRuby and Nashorn (the new Javascript implementation on the JVM). The JVM is shaping up to be an even better host than when Rich Hickey chose to target it.</p>
-<h3 id="about-ghadi-shaybantalk">About <a href="http://clojure-conj.org/speakers#ghadi-shayban">Ghadi Shayban</a></h3>
-<p><a href="http://twitter.com/smashthepast">Twitter</a> - <a href="https://github.com/ghadishayban">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#ghadi-shayban"><img src="http://www.lispcast.com/img/pre-conj/ghadi-shayban.jpg" /></a></p>
-<p>Ghadi Shayban is an accomplished pianist. Check out <a href="https://www.youtube.com/watch?v=M8BbyF5sxRU">this</a> and <a href="https://www.youtube.com/watch?v=zJIEM-MG8KY">this</a>.</p>
 <hr />
 
 <div class="article-cg-box">

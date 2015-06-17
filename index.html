@@ -73,6 +73,117 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/clojure-database-test-faster">
+              How I made my Clojure database tests 5x faster
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 17, 2015
+          </div>
+
+          
+<p>Summary: <em>Setting up and tearing down a test database can be slow. Use a rolled back transaction to quickly reset the database to a known state. You can do that in an <code>:each</code> fixture to run each test in isolation.</em></p>
+<p>On one of my projects, I wrote a bunch of tests that had to hit the database. There was a <code>:once</code> fixture to create all of the tables anew and an <code>:each</code> fixture to delete everything in the tables before each test. That ensured that <strong>I was always working with a known empty database</strong>. Overall, the tests took about 10 seconds. Woah! That's a long time. But I lived with it.</p>
+<pre><code>(defn clear
+  &quot;Delete all rows before and after, just for good measure.
+  [test]
+  (cleardb db) ;; delete all rows from all tables
+  (try
+    (test)
+    (finally
+      (cleardb db))))
+
+(defn setupdb [tests]
+  (initdb db) ;; create the tables
+  (try
+    (tests)
+    (finally
+      (teardown db)))) ;; drop the tables
+
+(use-fixtures :each clear)
+(use-fixtures :once setupdb)</code></pre>
+<p>Then I remembered a technique someone once mentioned where you <strong>use a transaction that you roll back</strong> instead of starting with a fresh db each time. It's supposed to be a lot faster.</p>
+<p>After a little experimentation, I came up with this:</p>
+<pre><code>(defn clear [test]
+  (sql/with-db-transaction [db db]
+    (sql/db-set-rollback-only! db)
+    (binding [db db] ;; rebind dynamic var db, used in tests
+      (test))))</code></pre>
+<p>We open a transaction, immediately set it to rollback (which it will do when the transaction closes). Then we have to rebind our dynamic <code>db</code> var, which holds the current connection. And inside of that we run the test. Inside of the transaction, anything you write to the database will be available to read. When the test ends, <strong>the transaction closes and it rolls back all of the changes</strong>, leaving the database empty again.</p>
+<p>The result? Running the tests went <strong>from 10 seconds to 2 seconds</strong>. They still start and end with a clean database, but it's done faster with a transaction.</p>
+<p>The one gotcha that I ran into was that the PostgreSQL function <strong><code>now()</code> was always returning the same time within the transaction</strong>. I had made an assumption (that was true before) that different calls would happen at different times. That assumption was no longer true inside the transaction. I had to fix the code to not rely on time.</p>
+<p>The other part of this technique, which I did not really have to use, was that <strong>you can set up your database with test data</strong> in the <code>:once</code> fixture. It's costly to set up the test data, but because you're rolling back transactions, once it's set up it's quick to reset it.</p>
+<p>If you'd like to <strong>learn more about testing in Clojure</strong>, you might be interested in my <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>. In it, we cover test namespaces, assertions, running your tests, and of course fixtures. It's an interactive course with exercises, screencasts, animations, and code. You should also check out the free cheatsheet below.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+Get a Free clojure.test Cheatsheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/clojure.test cheatsheet.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the clojure.test cheatsheet. If you write Clojure or ClojureScript, this cheatsheet contains the most important functions in a handy format. I've spent a lot of time formatting and annotating the most used functions and macros from clojure.test so that they fit onto one page and everything is easy to understand.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/tdd-workflow-in-clojure-with-emacs-and-cider">
               TDD Workflow in Clojure using Emacs with CIDER
             </a>
@@ -153,9 +264,9 @@ No spam. Ever.
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
-<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -443,9 +554,9 @@ No spam. Ever.
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
 </ul>
 
 
@@ -798,96 +909,6 @@ style="float:right;width:150px"></a></p>
 <p><strong>PM</strong>: My <a href="http://www.priyatam.com/">website</a> and <a href="https://twitter.com/priyatam">twitter</a>.</p>
 <p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
 <p><strong>PM</strong>: Clojure would be an Herb you would combine with others and drink, like good Oolong tea.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-elango-cheran">
-              Pre-West Interview: Elango Cheran
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 19, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><a href="http://clojurewest.org/speakers#echeran"><img src="http://www.lispcast.com/img/pre-west/echeran.jpg"
-style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Elango Cheran was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#echeran">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about using Clojure in other human languages. The <a href="http://www.lispcast.com/pre-west-elango-cheran">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-elango-cheran">Interview with Elango Cheran</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Elango Cheran</strong>: I got into Clojure on the suggestion of a friend. At that point, I had been writing scripts in Python and some Ruby. I was setting off to create a cross-platform GUI desktop program using SWT, a Java UI framework. I had recently read press about Clojure, read a few Paul Graham essays, and had seen initial Clojure attempts at work, but after that, I was more skeptical about Clojure / Lisp than interested. I was thinking of using JRuby since Ruby was the most high-level language I had used by then, and I enjoyed it, entirely outside of Rails. A good friend suggested that I try Clojure instead for its elegant memory usage (via persistent data structures) and design for concurrency. As I started writing more Clojure code, the old fears faded, and I started surpassing my own expectations. I attribute the success to Clojure gently nudging me by design towards simpler, better code. It's been great fun and learning ever since.</p>
-<p><strong>LC</strong>: Your talk is about adapting Clojure to work in foreign languages with different scripts. I can imagine it's very important to someone who doesn't speak English, but you probably have more insights into it. Can you speak to the difficulties someone might have with programming if they don't read/write English?</p>
-<p><strong>EC</strong>: Certainly, a lot of the tech world operates and communicates in English. I can explain the difficulties in 2 ways. First, if you can't read/write English, and want to learn programming, then you're limited to whatever resources exist in your mother tongue. From what I've seen for the Thamil language in my visits to India, even non-English resources rely on English eventually. Coining new words in another language to translate new English terms, in a fast-changing field like technology, is challenging enough. But if you want to teach coding, you have to revert to English for the source code examples regardless.</p>
-<p>The other way of looking at it is from a native English speaker perspective: how old were we when we learned programming for the first time, and how hard was that? How old were we by the time we were fluent in a second language -- and fluent enough to use a computer and write code in it? I would bet that for many English speakers, programming fluency came first, and that would make sense to me. Computers and programming are tricky enough without the overhead of filtering the ideas through a second human language.</p>
-<p>Currently, non-native speakers of English who learn technology are eventually bottlenecked by their ability to learn English, and learning English isn't uniformly accessible, either. Being able to write code in their first language could open up new doors, and I also think that Clojure currently would make for the easiest path to getting there.</p>
-<p><strong>LC</strong>: You mention that Clojure is well-suited to adapting to another human language. Why is that so?</p>
-<p><strong>EC</strong>: The things that make Clojure great for adapting to another human language are some of what make Clojure great as a programming language to begin with. Specific to another human language, the simplicity in the syntax is helpful in that there are less terms to translate, and the regularity of the syntax makes it easier as a beginner to wrap your head around. And more importantly, being able to extend the language without having to edit and re-compile the compiler is empowering. However, I wouldn't make any linguistic arguments in this regard -- 80+% of languages' sentence word order are either Subject-Verb-Object (e.g. English, Chinese) or Subject-Object-Verb (e.g. Thamil, Japanese), but Lisp puts the function (verb) at the beginning. Clojure targets popular runtimes (especially JVM and JavaScript), and the Clojure compiler and its target runtimes all support Unicode, which is the universal character set to represent the text of any language.</p>
-<p><strong>LC</strong>: What is the most interesting thing you have done with clj-thamil?</p>
-<p><strong>EC</strong>: I've written functions to implement various, basic Thamil language processing steps, like splitting a string into a seq of Thamil letters or phonemes, alphabetical sorting of strings, basic suffix-adding rules, and transliteration/character set conversions. Among other things, I've used clj-thamil along with Enlive to convert the Thamil text in an XHTML doc from a pre-Unicode character set to Unicode. I have ideas for wider-appeal applied uses in the future.</p>
-<p><strong>LC</strong>: Are people writing Clojure in Thamil?</p>
-<p><strong>EC</strong>: It's just me at the moment, but I hope that improves! The simplicity of Clojure has made something that has been viewed up until now as tricky and largely unimplemented, like lexicographic Thamil text sorting, into 30 lines of Clojure. And Clojure targets Java (JVM) and JavaScript. Clojure's benefits are tremendous and speak for themselves.</p>
-<p><strong>LC</strong>: How can people help? What would be most helpful for you?</p>
-<p><strong>EC</strong>: The biggest help in terms of translating Clojure would be to figure out how to iron out a few details: how to get the reader to understand the translation for ns (or require, use, etc.), how to support translated literals (e.g. true, false, :else, numerals), and get the underlying JavaScript compiler to successfully run optimizations when identifiers are non-English. In terms of education, if we could modify clojail (used in tryclj.com) to use a JavaScript console widget that supports Unicode characters, it would provide an immediate way to experience Clojure in the language of your choice. After that, if we could translate turtle-based teaching languages, we can provide a platform for kids to learn programming in their own language.</p>
-<p>But at the same time, it would be great to get help in refactoring and extending this project for other languages. Although each language has its own unique characteristics, many languages will share solutions, even in ways we don't necessarily expect.</p>
-<p><strong>LC</strong>: Where can people follow you online?</p>
-<p><strong>EC</strong>: I'm <a href="https://github.com/echeran">@echeran</a> on Github, <a href="http://google.com/+ElangoCheran">+ElangoCheran</a> on Google Plus, and my blog is at <a href="http://www.elangocheran.com/blog">www.elangocheran.com/blog</a>.</p>
-<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
-<p><strong>EC</strong>: If Clojure were a food, it would be Sambar, a South Indian curry. It's tasty, has a lot of different good-for-you ingredients, it goes well with a lot of things, and I can eat it all day.</p>
 <hr />
 
 <div class="article-cg-box">

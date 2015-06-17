@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>How I made my Clojure database tests 5x faster</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-database-test-faster</guid>
+                  <link>http://www.lispcast.com/clojure-database-test-faster</link>
+                  <pubDate>Wed 17 Jun 2015 05:12:05 PM CDT</pubDate>
+                  <description>
+                    Setting up and tearing down a test database can be slow. Use a rolled back transaction to quickly reset the database to a known state. You can do that in an `:each` fixture to run each test in isolation.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-database-test-faster"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>TDD Workflow in Clojure using Emacs with CIDER</title>
                   <guid isPermalink="false">http://www.lispcast.com/tdd-workflow-in-clojure-with-emacs-and-cider</guid>
                   <link>http://www.lispcast.com/tdd-workflow-in-clojure-with-emacs-and-cider</link>
@@ -129,20 +143,6 @@
                     Priyatam Mudivarti is giving a talk about grid systems in Garden.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-priyatam-mudivarti"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Pre-West Interview: Elango Cheran</title>
-                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-elango-cheran</guid>
-                  <link>http://www.lispcast.com/pre-west-interview-elango-cheran</link>
-                  <pubDate>Sun 19 Apr 2015 10:32:10 AM CDT</pubDate>
-                  <description>
-                    Elango Cheran will talk about translating Clojure to other human languages.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-elango-cheran"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

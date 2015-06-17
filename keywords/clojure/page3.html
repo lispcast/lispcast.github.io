@@ -73,6 +73,158 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/lists-in-clojure">
+              Warty Lists in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            May 27, 2014
+          </div>
+
+          
+<p>Summary: <em>Lists are kind of warty in Clojure. Care should be taken, especially by those coming from other Lisps.</em></p>
+<p>One of the things that still trips me up in Clojure is the actual types of lists. I used to program in Common Lisp, where things are a bit easier to understand: something is either a list or an atom. Lists are built out of conses and end with <code>nil</code>. Everything else is an atom.</p>
+<p>Coming from Common Lisp, one might expect this to work:</p>
+<pre><code>=&gt; (listp (cons 1 nil))</code></pre>
+<p>In CL, it will be true. In Clojure, it is also true. (Try it out yourself!) Launch a REPL. Go to <a href="http://tryclj.com/">Try Clojure</a>.</p>
+<pre><code>=&gt; (list? (cons 1 nil))</code></pre>
+<p>What about this:</p>
+<pre><code>=&gt; (list? (cons 1 (cons 1 nil)))</code></pre>
+<p>We're consing onto a list, should be a list, no?</p>
+<p>In Common Lisp, yes. In Clojure?</p>
+<p>NO!</p>
+<p>That's not a list. Go ahead, try it at your Clojure REPL.</p>
+<p>What gives? How is that possible? Are we living in a Kafkaesque ECMAScript World?</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/kafkaesque.png" />
+</div>
+<p>Well . . . probably.</p>
+<p>What's going on? Put on your Indiana Jones fedora. We're going on an adventure deep into the heart of the Clojure JVM implementation.</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders3.jpg" />
+</div>
+<p>First, how is <code>list?</code> defined?</p>
+<p><a href="https://github.com/richhickey/clojure/blob/a1eff35124b923ef8539a35e7a292813ba54a0e0/src/clj/clojure/core.clj#L4961">In clojure.core</a>:</p>
+<pre><code>(defn list?
+  &quot;Returns true if x implements IPersistentList&quot;
+  {:added &quot;1.0&quot;}
+  [x] (instance? clojure.lang.IPersistentList x))</code></pre>
+<p>Great, <code>list?</code> is just an instance check. <strong>What classes implement <code>clojure.lang.IPersistentList</code>?</strong> According to the javadoc on the Clojure sources, there are two: <code>PersistentQueue</code> and <code>PersistentList</code>. There's also a static inner class in <code>PersistentList</code> called <code>EmptyList</code>.</p>
+<p>Let's see those at the REPL:</p>
+<pre><code>=&gt; (type ())
+  clojure.lang.PersistentList$EmptyList
+=&gt; (list? ())
+  true
+
+=&gt; (type (list 1 2 3))
+  clojure.lang.PersistentList
+=&gt; (list? (list 1 2 3))
+  true
+
+=&gt; (type clojure.lang.PersistentQueue/EMPTY)
+  clojure.lang.PersistentQueue
+=&gt; (list? clojure.lang.PersistentQueue/EMPTY)
+  true</code></pre>
+<p>These all return true when given to <code>list?</code>. What about <code>(cons 1 nil)</code>?</p>
+<pre><code>=&gt; (type (cons 1 nil))
+  clojure.lang.PersistentList
+=&gt; (list? (cons 1 nil))
+  true</code></pre>
+<p>Great. <strong>Consing onto nil gives you a list</strong>. Let's cons onto a list:</p>
+<pre><code>=&gt; (type (cons 0 (list 1 2 3)))
+  clojure.lang.Cons
+=&gt; (list? (cons 0 (list 1 2 3)))
+  false</code></pre>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders4.jpg" />
+</div>
+<p>Oh, no! Why does consing onto <code>nil</code> create a list, but <strong>consing onto a list create a cons</strong>? Poisonous dart averted! Back to the source code!</p>
+<p><a href="https://github.com/richhickey/clojure/blob/a1eff35124b923ef8539a35e7a292813ba54a0e0/src/clj/clojure/core.clj#L22">In clojure.core</a>:</p>
+<pre><code>(def
+ ^{:arglists &#39;([x seq])
+    :doc &quot;Returns a new seq where x is the first element and seq is
+    the rest.&quot;
+   :added &quot;1.0&quot;}
+
+ cons (fn* cons [x seq] (. clojure.lang.RT (cons x seq))))</code></pre>
+<p>So it calls <code>clojure.lang.RT/cons</code>. We can <a href="https://github.com/clojure/clojure/blob/1.5.x/src/jvm/clojure/lang/RT.java#L565">look that up</a>:</p>
+<pre><code>static public ISeq cons(Object x, Object coll){
+    //ISeq y = seq(coll);
+    if(coll == null)
+        return new PersistentList(x);
+    else if(coll instanceof ISeq)
+        return new Cons(x, (ISeq) coll);
+    else
+        return new Cons(x, seq(coll));
+}</code></pre>
+<p>Wow! The code is clear: if the second argument is <code>null</code> (<code>nil</code>), <strong>it makes a <code>PersistentList</code></strong>. Otherwise, it constructs a <code>clojure.lang.Cons</code>, which is not a list! We're at the root of our wart, but there's nothing we can really do about it except keep exploring.</p>
+<p>If I have a list (according to <code>list?</code>) and I want to add an element to the front to make a new list, how do I do that?</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders%205.jpg" />
+</div>
+<p>Well, the answer is a little disappointing:</p>
+<pre><code>=&gt; (def ls (list 1 2 3))
+=&gt; (def ls2 (conj ls 0))
+=&gt; (list? ls2)
+  true</code></pre>
+<p><code>conj</code> will maintain the type, <code>cons</code> will not. What happens if I <code>conj</code> onto a <code>Cons</code>?</p>
+<pre><code>=&gt; (def c (cons 1 (cons 2 nil)))
+=&gt; (conj c 0)
+  (0 1 2)
+=&gt; (type (conj c 0))
+  clojure.lang.Cons</code></pre>
+<p>So, there you have it. It's a bit of a wart having all of these slightly different types and predicates like <code>list?</code> that slice them up in odd ways. Sometimes it's like running away from a giant paper-mache ball.</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders6.jpg" />
+</div>
+<p>In Clojure's defense, I will say that <strong>I rarely use <code>list?</code></strong>, if at all. It's <strong>not a very useful function</strong> in <code>clojure.core</code>. I'm usually working at a much higher level than that, thinking in terms of sequences (an abstraction), not their concrete implementations. And in the end, you never get out of danger.</p>
+<iframe width="560" height="315" src="//www.youtube.com/embed/lQg7QKDButo" frameborder="0" allowfullscreen></iframe>
+
+<p>There you have it. If you'd like to learn more Clojure, I have a nice video series:</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/nil-punning">
               Nil Punning (Or Null Pointers Considered Not So Bad)
             </a>
@@ -127,8 +279,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -844,83 +996,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <h3 id="about-john-humetalk">About <a href="http://clojurewest.org/speakers#jhume">John Hume</a></h3>
 <p><a href="https://github.com/duelinmarkers">Github</a> - <a href="http://twitter.com/duelinmarkers">Twitter</a> - <a href="http://duelinmarkers.com">Website</a></p>
 <p><a href="http://clojurewest.org/speakers#jhume"><img src="http://www.lispcast.com/img/pre-west/john-hume.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-nathaniel-smith-ruth-linehan">
-              Pre-West Prep: Nathaniel Smith and Ruth Linehan
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 04, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-one-binder-to-rule-them-all-introduction-to-trapperkeepertalk">Talk: <a href="http://clojurewest.org/speakers#nsmith">One Binder to Rule Them All: Introduction to Trapperkeeper</a></h3>
-<p><a href="http://clojurewest.org/speakers#nsmith">Nathaniel Smith and Ruth Linehan's talk</a> at <em>Clojure/West</em> is about Trapperkeeper, a Clojure services framework.</p>
-<h4 id="background">Background</h4>
-<p><a href="https://github.com/puppetlabs/trapperkeeper">Trapperkeeper</a> is PuppetLabs' application services framework for Clojure and other JVM languages. It provides a coherent set of core services and a means for you to define new services. Those services can depend on each other and can be configured through standard config files. As applications become bigger and more complex, standardizing on a configuration mechanism and communication medium is a must.</p>
-<p>As background, I suggest you read the <a href="https://puppetlabs.com/blog/new-era-application-services-puppet-labs">intro article</a> and the more technical <a href="https://puppetlabs.com/blog/clojure-nerds-puppet-labs-application-services">follow-up article</a>.</p>
-<h3 id="about-nathaniel-smithtalk">About <a href="http://clojurewest.org/speakers#nsmith">Nathaniel Smith</a></h3>
-<p><a href="http://chiptheglasses.com/">Homepage</a> - <a href="https://github.com/nathanielksmith">GitHub</a> - <a href="https://twitter.com/nate_smith">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/nsmith.jpg" /></a></p>
-<h3 id="about-ruth-linehantalk">About <a href="http://clojurewest.org/speakers#nsmith">Ruth Linehan</a></h3>
-<p><a href="https://github.com/rlinehan">GitHub</a> - <a href="https://twitter.com/ruthlinehan">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/rlinehan.png" /></a></p>
 <hr />
 
 <div class="article-cg-box">

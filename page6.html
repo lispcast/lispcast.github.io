@@ -73,6 +73,82 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-gary-fredericks">
+              Pre-West Prep: Gary Fredericks
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 03, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-purely-randomtalk">Talk: <a href="http://clojurewest.org/speakers#gfredericks">Purely Random</a></h3>
+<p><a href="http://clojurewest.org/speakers#gfredericks">Gary Fredericks' talk</a> at <em>Clojure/West</em> is about a functional approach to generating random numbers.</p>
+<h4 id="background">Background</h4>
+<p>Random number generation (RNG) is typically achieved by using mutable state. And of course, that means they're not great for parallel processing, let alone being generally harder to reason about.</p>
+<p>An <em>immutable</em> random number generator returns the next random bytes <em>and</em> a new generator for the next number. A splittable random number generator adds a new function called <code>split</code>, which takes a generator and returns two new generators. It lets you guarantee that the same numbers are generated every time regardless of interleaving.</p>
+<p>Haskell's <a href="https://hackage.haskell.org/package/QuickCheck">Quickcheck</a> uses splittable random number generators. The talk description states that Clojure's <a href="https://github.com/clojure/test.check">test.check</a>, which is based on Quickcheck, would benefit from splittable random number generators, presumably by allowing for concurrency.</p>
+<p>I found an interesting paper about an efficient implementation of <a href="http://publications.lib.chalmers.se/records/fulltext/183348/local_183348.pdf">Splittable RNGs</a>. Also, the <a href="http://www.dunaj.org/dunaj.math.random.api.html">dunaj-project</a> has some interesting work in this area, using <a href="https://docs.oracle.com/javase/8/docs/api/java/util/SplittableRandom.html"><code>java.util.SplittableRandom</code></a> (Java 8) and Transducers.</p>
+<h3 id="about-gary-frederickstalk">About <a href="http://clojurewest.org/speakers#gfredericks">Gary Fredericks</a></h3>
+<p><a href="http://gfredericks.com/">Homepage</a> - <a href="https://github.com/gfredericks">GitHub</a> - <a href="https://twitter.com/gfredericks_">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#gfredericks"><img src="http://www.lispcast.com/img/pre-west/gfredericks.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
+</p>
+
+
+<p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-interview-alan-dipert-micha-niskin">
               Pre-West Interview: Alan Dipert and Micha Niskin
             </a>
@@ -352,9 +428,9 @@ No spam. Ever.
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -593,8 +669,8 @@ No spam. Ever.
 <ul>
 <li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
 <li><a href="http://www.lispcast.com/new-course-format">New Course Format</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
-<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
 </ul>
 
 
@@ -724,9 +800,9 @@ No spam. Ever.
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
-<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
 </ul>
 
 
@@ -823,8 +899,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -871,80 +947,6 @@ Learn more
 <h3 id="about-elango-cherantalk">About <a href="http://clojurewest.org/speakers#echeran">Elango Cheran</a></h3>
 <p><a href="http://www.elangocheran.com/blog/">Homepage</a> - <a href="https://github.com/echeran">GitHub</a> - <a href="https://twitter.com/elangoc">Twitter</a></p>
 <p><a href="http://clojurewest.org/speakers#echeran"><img src="http://www.lispcast.com/img/pre-west/echeran.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-dan-lidral-porter">
-              Pre-West Prep: Dan Lidral-Porter
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            March 21, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-generating-art-in-many-worldstalk">Talk: <a href="http://clojurewest.org/speakers#dlidral-porter">Generating Art in Many Worlds</a></h3>
-<p><a href="http://clojurewest.org/speakers#dlidral-porter">Dan Lidral-Porter's talk</a> at <em>Clojure/West</em> is about computer-generated art in Clojure.</p>
-<h4 id="background">Background</h4>
-<p>Dan's talk is about his solution for creating interesting art while live coding. Since there's a huge space to explore, you don't want to make your audience watch all the boring parts of the exploration. His solution is to be able to see the art ahead of the audience so <em>they</em> don't have to see it unless you've discovered it's interesting.</p>
-<p>Check out some of <a href="https://vimeo.com/user1217375">his generated art</a>. He's also the creator of <a href="http://labmaniac.com/">this very cool ClojureScript + Om + Zelkova app</a> for exploring <em>Magic: The Gathering</em> decks.</p>
-<h3 id="about-dan-lidral-portertalk">About <a href="http://clojurewest.org/speakers#dlidral-porter">Dan Lidral-Porter</a></h3>
-<p><a href="https://github.com/aperiodic">GitHub</a> - <a href="https://twitter.com/aperiodic">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#dlidral-porter"><img src="http://www.lispcast.com/img/pre-west/dlidral-porter.jpg" /></a></p>
 <hr />
 
 <div class="article-cg-box">

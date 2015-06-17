@@ -73,6 +73,48 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="http://www.infoq.com/presentations/Parser-Combinators">
+              Parser Combinators: How to Parse (nearly) Anything
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/parser-combinators-how-to-parse-nearly-everything">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            January 26, 2012
+          </div>
+
+          
+<p>This is the best video I've ever seen defining monadic parser combinators from the ground up. Nate Young explains <a href="https://github.com/youngnh/parsatron">his translation</a> of <a href="http://www.haskell.org/haskellwiki/Parsec">Parsec</a> into Clojure<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. I'm surprised he could show the code and explain it well in less than forty-five minutes.</p>
+<p>As you may know, I have my own PEG parser combinator library called <a href="https://github.com/ericnormand/squarepeg">squarepeg</a>. I began developing it as monadic, but decided that I didn't like having to write my own version of Haskell's <code>do</code> notation (<code>let-&gt;&gt;</code> in his version), which felt awkward in Clojure. Instead, squarepeg lets you bind variables and refer to them later within each parser itself (instead of in the code that builds the parser). There were a few other differences, but in general, I think the two libraries are more similar than different.</p>
+<p>One thing I think I will borrow from his library is counting the character position of the current parser to help report parsing errors. It's going on my TODO list.</p>
+<p>I have more plans for squarepeg when I get a chance. They include limiting the laziness of the parser and being able to report better error messages.</p>
+<p><strong>Update</strong> The kindly <a href="https://twitter.com/spariev">Sergey Pariev</a> clued me into the github repo of <a href="https://github.com/youngnh/parsatron">The Parsatron</a>.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Nate said his parser was available on Clojars under the name &quot;The Parsitron&quot;, but I could not find it.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://clojurescriptone.com/">
               ClojureScript One
             </a>
@@ -430,43 +472,6 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <pre><code>    java -cp clojure-1.3.0.jar clojure.main</code></pre>
 <p>It's nice that Clojure is so easy to run.</p>
 <p>Again, thumbs up to Giorgio for finishing a kata in a new language. Keep up with the Clojure!</p>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://cognitivecomputing.wordpress.com/1986/01/28/a-short-ballad-dedicated-to-the-growth-of-programs/">
-              A Short Ballad Dedicated to the Growth of Programs
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/growth-ballad">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            December 10, 2011
-          </div>
-
-          
-<p>This is a cautionary tale set in a dystopian Lisp where <code>nil</code> is not false and false is not <code>nil</code>.</p>
-<blockquote>
-<p>So I went back to the master and appealed once again<br /> I said, pardon me, but now I’m really insane<br /> He said, no you’re not really going out of your head<br /> Instead of just <code>VAL</code>, you must use <code>NOT NULL</code> instead</p>
-</blockquote>
-<p><code>nil</code> means (traditionally) false, the empty list, and also &quot;no value&quot;. In my opinion, Lisp has hit a sweet spot. Somehow, <code>nil</code> overloading makes for succinct programs.</p>
-<p>It's possible to go overboard and do this wrong. Case in point: <a href="http://www.mapbender.org/JavaScript_pitfalls:_null,_false,_undefined,_NaN">the problems with boolean values and comparison in Javascript</a>.</p>
 
 
           <div class="endmark">

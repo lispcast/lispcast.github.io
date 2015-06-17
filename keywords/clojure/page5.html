@@ -73,6 +73,138 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/unit-testing-in-functional-languages">
+              Example-based Unit Testing in Clojure
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            March 26, 2015
+          </div>
+
+          
+<p>Summary: <em>Unit testing in Clojure is straightforward. Here are a few testing ideas as they apply to Clojure.</em></p>
+<p>Most of the Unit Testing literature discusses how to unit test Object Oriented code. However, Unit Testing is very useful for functional code, including Clojure. <strong>I'd like to document a few unit testing ideas as they relate to Clojure.</strong></p>
+<h3 id="the-unit-youre-testing-is-the-function">The Unit you're testing is the function</h3>
+<p>Unit testing is about testing the smallest unit of code. In Object Oriented languages, the unit is the class. In functional languages, <strong>the unit is typically the function</strong>. This is true in Clojure. If you're testing individual functions, you're unit testing Clojure.</p>
+<h3 id="example-based-tests">Example-based tests</h3>
+<p>The easiest kind of tests to do is example-based, which means you test that <strong>for a given argument, you get a known return value</strong>. Let's look at a simple example:</p>
+<pre><code>(deftest addition-tests
+  (is (= 5 (+ 3 2)))
+  (is (= 10 (+ 5 5))))</code></pre>
+<p>You're testing that <code>+</code> works on two different inputs! Notice: 2 lines and 2 inputs, it looks like we'll get <strong>linear growth in tests as our coverage increases</strong>.</p>
+<h3 id="round-trip-testing">Round-trip testing</h3>
+<p>Ok, it's not exactly unit testing, if you are strictly going by the definition of &quot;unit&quot;, because you're actually testing <em>two</em> functions. But who's really being so strict? A really <em>useful</em> kind of test is the <strong>round-trip test</strong>.</p>
+<p>In Clojure, <code>pr-str</code> prints a value readably, meaning if the value <em>can</em> be read back in, this will make a string that could be read in using <code>clojure.edn/read-string</code>. You can do a round-trip from value to string back to value, and the two values should be equal. <strong>You're testing the property that these two functions are inverses of each other.</strong></p>
+<p>Example:</p>
+<pre><code>(deftest pr-str-read-string-round-trip
+  (is (= [1 2 3] (read-string (pr-str [1 2 3]))))
+  (is (= {:a :b :c :d} (read-string (pr-str {:a :b :c :d})))))</code></pre>
+<p>Again, we're getting <strong>linear test growth</strong>.</p>
+<p>Here's another example where I test that addition is the opposite of subtraction:</p>
+<pre><code>(deftest +---round-trip
+  (is (= 5 (-&gt; 5 (+ 10) (- 10))))
+  (is (= 10 (-&gt; 10 (+ 100) (- 100)))))</code></pre>
+<h3 id="what-examples-to-test">What examples to test</h3>
+<p>If you're writing example-based tests one-by-one, and you're getting linear benefit for your examples, you've really <strong>got to maximize what you test</strong>, because linear growth is actually quite bad. In that case, what do you test? The best thing to test are the corner cases. Corner cases are mostly domain-dependent, but there are some domain-independent ones.</p>
+<h4 id="empty-collections">Empty collections</h4>
+<p>It's good to test what happens when you call a function on an empty collection. It could be that you didn't handle that, or didn't handle it correctly. The biggest gotcha is stuff like dividing by the size of the collection. If it's empty, the size is zero, and that's undefined.</p>
+<h4 id="empty-strings">Empty strings</h4>
+<p>The bane of the web programmer's existence, empty strings are usually not valid input, but of course that doesn't stop someone from passing one in. Are you testing that it's valid?</p>
+<h4 id="zero">Zero</h4>
+<p>Zero is actually a typical corner case. Try it out.</p>
+<h4 id="one">One</h4>
+<p>One is also a typical corner case.</p>
+<h4 id="normal-cases">Normal cases</h4>
+<p>You should have at least one normal case to test the expected behavior. A normal case is a list with 5 elements, or a small integer (7, 12, 34).</p>
+<h4 id="bugs">Bugs</h4>
+<p>Now, here's the thing that makes having a test system set up totally worth it: <strong>having a place to put tests for known and fixed bugs</strong>. If someone reports a bug, it's really nice to reproduce it in code in a failing test <em>before</em> you fix it. If the bug happened once, it could happen again, so make it part of your anti-regression suite.</p>
+<h3 id="multiple-assertions-on-the-return-value">Multiple assertions on the return value</h3>
+<p>One last thing that happens in Clojure is you want to assert a few things about the same return value. Instead of calling the function several times, why not save the value and assert a few things about it?</p>
+<pre><code>(deftest map-test
+  (let [return (map - [1 2 3 4 5 6 7])]
+    (is (= 7 (count return)))
+    (is (every? neg? return))))</code></pre>
+<h3 id="one-step-further">One step further</h3>
+<p>Ok, I've mentioned a few times that example-based testing does not scale. Code coverage grows linearly as the number of examples grows. How do you get better than linear? One way is to use <a href="https://github.com/clojure/test.check">property-based testing</a> (also known as generative testing). Instead of the programmer giving examples, the program generates examples! Here's a preview:</p>
+<pre><code>(defspec edn-roundtrips 50
+  (prop/for-all [a gen/any]
+    (= a (-&gt; a prn-str edn/read-string))))</code></pre>
+<p>This tests that any value (<code>gen/any</code>) can be printed to a string and read back in, and you get an equivalent value. Three lines. You can run this with as many randomly generated values as you'd like. Thousands. Millions. With three lines. That's leverage.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Ok, those are just a few ideas that could <strong>get you started with example-based unit testing in Clojure</strong>. If you'd like to start automated testing in Clojure, I suggest you check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Intro to clojure.test</a>. <code>clojure.test</code> is the built-in, standard Clojure testing library that most systems use (or are compatible with). The LispCast course is an interactive course with animation, examples, screencasts, text, code samples, and more!</p>
+<p>Now, if you'd like to up your game at testing, and want to get more than linear bang for your buck, you've got to get into <a href="https://github.com/clojure/test.check">generative testing</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+Get a Free clojure.test Cheatsheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/clojure.test cheatsheet.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the clojure.test cheatsheet. If you write Clojure or ClojureScript, this cheatsheet contains the most important functions in a handy format. I've spent a lot of time formatting and annotating the most used functions and macros from clojure.test so that they fit onto one page and everything is easy to understand.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/what-web-framework-should-i-use">
               What Web Framework Should I Use in Clojure?
             </a>
@@ -292,8 +424,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
 </ul>
 
 
@@ -331,8 +463,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
 </ul>
 
 
@@ -370,8 +502,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
 </ul>
 
 

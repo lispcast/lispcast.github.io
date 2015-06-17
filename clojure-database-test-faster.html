@@ -8,8 +8,8 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Ambrose Bonnaire-Sergeant interviewed about Typed Clojure | LispCast</title>
-    <meta name="description" content="">
+    <title>How I made my Clojure database tests 5x faster | LispCast</title>
+    <meta name="description" content="Setting up and tearing down a test database can be slow. Use a rolled back transaction to quickly reset the database to a known state. You can do that in an `:each` fixture to run each test in isolation.">
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -73,28 +73,100 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
-               href="http://us4.campaign-archive2.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=c43c157edd">
-              Ambrose Bonnaire-Sergeant interviewed about Typed Clojure
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/ambrose-interview-typed-clojure">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
+               href="/clojure-database-test-faster">
+              How I made my Clojure database tests 5x faster
             </a>
           </h2>
 
           <div class="timestamp">
-            October 08, 2013
+            June 17, 2015
           </div>
 
           
-<p>Way back in May 2012, Ambrose was beginning work on Typed Clojure for Google Summer of Code. I interviewed him to get an idea of what kind of type system we could expect. Since he's now running a very successful <a href="http://www.indiegogo.com/projects/typed-clojure">crowd funding campaign</a>, I thought I'd bring up this blast from the past.</p>
+<p>Summary: <em>Setting up and tearing down a test database can be slow. Use a rolled back transaction to quickly reset the database to a known state. You can do that in an <code>:each</code> fixture to run each test in isolation.</em></p>
+<p>On one of my projects, I wrote a bunch of tests that had to hit the database. There was a <code>:once</code> fixture to create all of the tables anew and an <code>:each</code> fixture to delete everything in the tables before each test. That ensured that <strong>I was always working with a known empty database</strong>. Overall, the tests took about 10 seconds. Woah! That's a long time. But I lived with it.</p>
+<pre><code>(defn clear
+  &quot;Delete all rows before and after, just for good measure.
+  [test]
+  (cleardb db) ;; delete all rows from all tables
+  (try
+    (test)
+    (finally
+      (cleardb db))))
+
+(defn setupdb [tests]
+  (initdb db) ;; create the tables
+  (try
+    (tests)
+    (finally
+      (teardown db)))) ;; drop the tables
+
+(use-fixtures :each clear)
+(use-fixtures :once setupdb)</code></pre>
+<p>Then I remembered a technique someone once mentioned where you <strong>use a transaction that you roll back</strong> instead of starting with a fresh db each time. It's supposed to be a lot faster.</p>
+<p>After a little experimentation, I came up with this:</p>
+<pre><code>(defn clear [test]
+  (sql/with-db-transaction [db db]
+    (sql/db-set-rollback-only! db)
+    (binding [db db] ;; rebind dynamic var db, used in tests
+      (test))))</code></pre>
+<p>We open a transaction, immediately set it to rollback (which it will do when the transaction closes). Then we have to rebind our dynamic <code>db</code> var, which holds the current connection. And inside of that we run the test. Inside of the transaction, anything you write to the database will be available to read. When the test ends, <strong>the transaction closes and it rolls back all of the changes</strong>, leaving the database empty again.</p>
+<p>The result? Running the tests went <strong>from 10 seconds to 2 seconds</strong>. They still start and end with a clean database, but it's done faster with a transaction.</p>
+<p>The one gotcha that I ran into was that the PostgreSQL function <strong><code>now()</code> was always returning the same time within the transaction</strong>. I had made an assumption (that was true before) that different calls would happen at different times. That assumption was no longer true inside the transaction. I had to fix the code to not rely on time.</p>
+<p>The other part of this technique, which I did not really have to use, was that <strong>you can set up your database with test data</strong> in the <code>:once</code> fixture. It's costly to set up the test data, but because you're rolling back transactions, once it's set up it's quick to reset it.</p>
+<p>If you'd like to <strong>learn more about testing in Clojure</strong>, you might be interested in my <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>. In it, we cover test namespaces, assertions, running your tests, and of course fixtures. It's an interactive course with exercises, screencasts, animations, and code. You should also check out the free cheatsheet below.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+    <h3 class="subscribe-form-title">
+      
+Get a Free clojure.test Cheatsheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/clojure.test cheatsheet.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the clojure.test cheatsheet. If you write Clojure or ClojureScript, this cheatsheet contains the most important functions in a handy format. I've spent a lot of time formatting and annotating the most used functions and macros from clojure.test so that they fit onto one page and everything is easy to understand.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][32]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
+<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
 </ul>
 
 
@@ -117,12 +189,8 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 
     <footer class="footer-banner">
       <a class="footer-previous"
-         href="http://www.lispcast.com/lisp-with-macros-language-stack">
+         href="http://www.lispcast.com/tdd-workflow-in-clojure-with-emacs-and-cider">
         <i class="fa fa-chevron-left footer-arrow"></i>
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/sharp-and-gets-things-cut">
-        <i class="fa fa-chevron-right footer-arrow"></i>
       </a>
     </footer>
 

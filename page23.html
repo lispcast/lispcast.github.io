@@ -73,6 +73,56 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="http://www.michaelnielsen.org/ddi/how-to-answer-a-question-a-simple-system/">
+              How to answer a question: a simple system
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/how-to-answer-a-question">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 15, 2012
+          </div>
+
+          
+<p><a href="http://scholarworks.uno.edu/td/877/">My Master's thesis</a><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> was very related to this topic, so I thought I would share a little anecdote.</p>
+<p>Michael Nielsen:</p>
+<blockquote>
+<p>As I describe in detail below, their approach was to take the question asked, to rewrite it in the form of a search engine query, or perhaps several queries, and then extract the answer by analysing the Google results for those queries.</p>
+</blockquote>
+<p>While I was researching my thesis, I came across <a href="http://ilpubs.stanford.edu:8090/421/1/1999-65.pdf">a paper by Sergey Brin</a> (cofounder of Google) which described a system called DIPRE which tried to do a similar thing using the Google index, though before Google was Google. My favorite quote from the paper was &quot;the Google search engine and other research projects&quot;. Brin has been aware of the power of huge sets of redundant documents for a long time.</p>
+<p>The system Nielsen describes is interesting and worth a look. I will just nitpick a little.</p>
+<ol style="list-style-type: decimal">
+<li>Why do so much query rewriting? Google does a lot of query augmentation itself now. Also, a high number of documents means it is very likely to find the question exactly as it was posed. Try asking Google a question and see if you can find the answer on the results page.</li>
+<li>The system does not actually get rid of domain knowledge: it replaces part of the algorithm with a Google search, but there is a lot of domain knowledge of the English language used to extract the data from the text. An implementation of the system would use a simple statistical model of answers to find the text to extract.</li>
+<li>The system of weighting queries is very hard to justify mathematically. Much better would be a probabilistic system, such as Naive Bayes. Naive Bayes is very simple and, modulo a naive assumption, is mathematically correct.</li>
+<li>Be careful with questions like &quot;Who shot JFK?&quot; It is difficult for humans to answer, let alone computers.</li>
+</ol>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The introduction to my thesis is a pretty good introduction to the techniques of information extraction in general.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://stackoverflow.com/questions/10947636/idiomatic-way-to-represent-sum-type-either-a-b-in-clojure/10951001#10951001">
               Idiomatic way to represent sum type (Either a b) in Clojure
             </a>
@@ -372,42 +422,6 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 
           
 <p>A great talk by programming language legend Guy Steele. (referenced in Rich Hickey's <a href="http://clojure.com/blog/2012/05/15/anatomy-of-reducer.html">recent post</a>.)</p>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://clojure.com/blog/2012/05/15/anatomy-of-reducer.html">
-              Anatomy of a Reducer
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/anatomy-of-a-reducer">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            May 15, 2012
-          </div>
-
-          
-<p>Rich Hickey:</p>
-<blockquote>
-<p>I hope this makes reducers easier to understand, use and define.</p>
-</blockquote>
-<p>It does.</p>
 
 
           <div class="endmark">

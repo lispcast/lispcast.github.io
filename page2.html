@@ -73,6 +73,96 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-interview-elango-cheran">
+              Pre-West Interview: Elango Cheran
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 19, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><a href="http://clojurewest.org/speakers#echeran"><img src="http://www.lispcast.com/img/pre-west/echeran.jpg"
+style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Elango Cheran was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#echeran">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about using Clojure in other human languages. The <a href="http://www.lispcast.com/pre-west-elango-cheran">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-elango-cheran">Interview with Elango Cheran</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Elango Cheran</strong>: I got into Clojure on the suggestion of a friend. At that point, I had been writing scripts in Python and some Ruby. I was setting off to create a cross-platform GUI desktop program using SWT, a Java UI framework. I had recently read press about Clojure, read a few Paul Graham essays, and had seen initial Clojure attempts at work, but after that, I was more skeptical about Clojure / Lisp than interested. I was thinking of using JRuby since Ruby was the most high-level language I had used by then, and I enjoyed it, entirely outside of Rails. A good friend suggested that I try Clojure instead for its elegant memory usage (via persistent data structures) and design for concurrency. As I started writing more Clojure code, the old fears faded, and I started surpassing my own expectations. I attribute the success to Clojure gently nudging me by design towards simpler, better code. It's been great fun and learning ever since.</p>
+<p><strong>LC</strong>: Your talk is about adapting Clojure to work in foreign languages with different scripts. I can imagine it's very important to someone who doesn't speak English, but you probably have more insights into it. Can you speak to the difficulties someone might have with programming if they don't read/write English?</p>
+<p><strong>EC</strong>: Certainly, a lot of the tech world operates and communicates in English. I can explain the difficulties in 2 ways. First, if you can't read/write English, and want to learn programming, then you're limited to whatever resources exist in your mother tongue. From what I've seen for the Thamil language in my visits to India, even non-English resources rely on English eventually. Coining new words in another language to translate new English terms, in a fast-changing field like technology, is challenging enough. But if you want to teach coding, you have to revert to English for the source code examples regardless.</p>
+<p>The other way of looking at it is from a native English speaker perspective: how old were we when we learned programming for the first time, and how hard was that? How old were we by the time we were fluent in a second language -- and fluent enough to use a computer and write code in it? I would bet that for many English speakers, programming fluency came first, and that would make sense to me. Computers and programming are tricky enough without the overhead of filtering the ideas through a second human language.</p>
+<p>Currently, non-native speakers of English who learn technology are eventually bottlenecked by their ability to learn English, and learning English isn't uniformly accessible, either. Being able to write code in their first language could open up new doors, and I also think that Clojure currently would make for the easiest path to getting there.</p>
+<p><strong>LC</strong>: You mention that Clojure is well-suited to adapting to another human language. Why is that so?</p>
+<p><strong>EC</strong>: The things that make Clojure great for adapting to another human language are some of what make Clojure great as a programming language to begin with. Specific to another human language, the simplicity in the syntax is helpful in that there are less terms to translate, and the regularity of the syntax makes it easier as a beginner to wrap your head around. And more importantly, being able to extend the language without having to edit and re-compile the compiler is empowering. However, I wouldn't make any linguistic arguments in this regard -- 80+% of languages' sentence word order are either Subject-Verb-Object (e.g. English, Chinese) or Subject-Object-Verb (e.g. Thamil, Japanese), but Lisp puts the function (verb) at the beginning. Clojure targets popular runtimes (especially JVM and JavaScript), and the Clojure compiler and its target runtimes all support Unicode, which is the universal character set to represent the text of any language.</p>
+<p><strong>LC</strong>: What is the most interesting thing you have done with clj-thamil?</p>
+<p><strong>EC</strong>: I've written functions to implement various, basic Thamil language processing steps, like splitting a string into a seq of Thamil letters or phonemes, alphabetical sorting of strings, basic suffix-adding rules, and transliteration/character set conversions. Among other things, I've used clj-thamil along with Enlive to convert the Thamil text in an XHTML doc from a pre-Unicode character set to Unicode. I have ideas for wider-appeal applied uses in the future.</p>
+<p><strong>LC</strong>: Are people writing Clojure in Thamil?</p>
+<p><strong>EC</strong>: It's just me at the moment, but I hope that improves! The simplicity of Clojure has made something that has been viewed up until now as tricky and largely unimplemented, like lexicographic Thamil text sorting, into 30 lines of Clojure. And Clojure targets Java (JVM) and JavaScript. Clojure's benefits are tremendous and speak for themselves.</p>
+<p><strong>LC</strong>: How can people help? What would be most helpful for you?</p>
+<p><strong>EC</strong>: The biggest help in terms of translating Clojure would be to figure out how to iron out a few details: how to get the reader to understand the translation for ns (or require, use, etc.), how to support translated literals (e.g. true, false, :else, numerals), and get the underlying JavaScript compiler to successfully run optimizations when identifiers are non-English. In terms of education, if we could modify clojail (used in tryclj.com) to use a JavaScript console widget that supports Unicode characters, it would provide an immediate way to experience Clojure in the language of your choice. After that, if we could translate turtle-based teaching languages, we can provide a platform for kids to learn programming in their own language.</p>
+<p>But at the same time, it would be great to get help in refactoring and extending this project for other languages. Although each language has its own unique characteristics, many languages will share solutions, even in ways we don't necessarily expect.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>EC</strong>: I'm <a href="https://github.com/echeran">@echeran</a> on Github, <a href="http://google.com/+ElangoCheran">+ElangoCheran</a> on Google Plus, and my blog is at <a href="http://www.elangocheran.com/blog">www.elangocheran.com/blog</a>.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>EC</strong>: If Clojure were a food, it would be Sambar, a South Indian curry. It's tasty, has a lot of different good-for-you ingredients, it goes well with a lot of things, and I can eat it all day.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
+</p>
+
+
+<p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-interview-robert-krahn">
               Pre-West Interview: Robert Krahn
             </a>
@@ -823,80 +913,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <h3 id="about-nathan-sorensontalk">About <a href="http://clojurewest.org/speakers#nsorenson">Nathan Sorenson</a></h3>
 <p><a href="https://github.com/takeoutweight">GitHub</a> - <a href="https://twitter.com/takeoutweight">Twitter</a></p>
 <p><a href="http://clojurewest.org/speakers#nsorenson"><img src="http://www.lispcast.com/img/pre-west/nsorenson.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-james-macaulay">
-              Pre-West Prep: James MacAulay
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 15, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-composing-interactive-applications-with-zelkovatalk">Talk: <a href="http://clojurewest.org/speakers#jmacaulay">Composing interactive applications with Zelkova</a></h3>
-<p><a href="http://clojurewest.org/speakers#jmacaulay">James MacAulay's talk</a> at <em>Clojure/West</em> is about Zelkova, his Functional Reactive Programming library.</p>
-<h4 id="background">Background</h4>
-<p>Zelkova is a Functional Reactive Programming (FRP) library inspired by the <a href="http://elm-lang.org">Elm</a> FRP model. FRP is a model for building composable &quot;signals&quot; that maintain the state of the system over time. The talk promises to show us how to use it with Om to create interactive applications.</p>
-<p>There are many resources out there, but I recommend <a href="https://www.youtube.com/watch?v=F-nTU3Wy26I">this talk about Functional Reactive Programming in Elm</a> by Elm's creator Evan Czaplicki. It shows the possibilities of FRP. <a href="https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf">His thesis</a>, which describes the basic constructs of Elm, is <em>surprisingly</em> approachable. I recommend that highly. Also, James MacAulay himself did a <a href="https://www.youtube.com/watch?v=gH3M2nweKJ0">Papers We Love presentation</a> about it, which is worth watching.</p>
-<h3 id="about-james-macaulaytalk">About <a href="http://clojurewest.org/speakers#jmacaulay">James MacAulay</a></h3>
-<p><a href="https://github.com/jamesmacaulay">GitHub</a> - <a href="https://twitter.com/jamesmacaulay">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#jmacaulay"><img src="http://www.lispcast.com/img/pre-west/jmacaulay.jpg" /></a></p>
 <hr />
 
 <div class="article-cg-box">

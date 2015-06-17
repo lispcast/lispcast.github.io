@@ -73,6 +73,55 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="https://plus.google.com/u/0/110981030061712822816/posts/KaSKeg4vQtz">
+              Notes from the Mystery Machine Bus
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/notes-from-the-mystery-machine-bus">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            August 14, 2012
+          </div>
+
+          
+<p>Steve Yegge:</p>
+<blockquote>
+<p>Software engineering has its own political axis, ranging from conservative to liberal.</p>
+</blockquote>
+<p>Steve, I am so often with you. Typically, you write stuff that is very concrete and easy to agree with. In fact, I agree with most of what you have written in your very long rants.</p>
+<p>But this, I am afraid, is bullshit. Not right, not wrong, just <em>bullshit</em>.</p>
+<p>I was giving you the benefit of the doubt until I read your list of categorized features, either conservative or liberal. That list made absolutely no objective sense. <strong>There is not one shred of a good idea in the dichotomy you gave.</strong></p>
+<p>The dichotomy conflates so many different dichotomies into a single one in the name of clarifying a terrible mess. In that way, it makes the same mistake as classifying people into conservative and liberal does. It does not help explain anything. And <strong>it only creates more fighting by arming people with names to call each other</strong>.</p>
+<p>Which is more &quot;liberal&quot;, Common Lisp or C? Common Lisp protects against the most common types of C errors: memory leaks and buffer overflows. Does that make Common Lisp more conservative because it protects the programmer from errors? But C has compile-time type checks! And &quot;conservative&quot; syntax! Bullshit!</p>
+<p>But then came the clincher. When you said that Clojure was a conservative language, <strong>I came up with something which may actually have some merit: how <em>opinionated</em> the language is</strong>.</p>
+<p>Clojure is strongly opinionated. So is Python. So is Haskell.</p>
+<p>Clojure's opinions: state changes should be explicit, values should be immutable, functions should be separated from data, etc.</p>
+<p>Python's opinion: code should be well-indented.</p>
+<p>Haskell's opinions: functions should be pure, types should be consistent.</p>
+<p>These languages may appear conservative because, in their respective worlds, <strong>the opinions are solidified into laws and imposed on the programmer</strong>. Python does not allow you to write unindented code. Haskell does not allow you to write programs with inconsistent types. You cannot mutate a Clojure map.</p>
+<p><strong>Perhaps, Steve, you mean to say that you don't like when a programming language's opinion is imposed on the programmer?</strong></p>
+<p>I personally like some laws and dislike others. For instance, Clojure's immutability is great. <strong>It's not just great because it's possible. It's great because it is enforced.</strong> Nothing can change my values--not me, not you, not anyone! And I like Haskell's type system in production but not during development. I like that my program is guaranteed to have consistent types on production. But in development, I'd rather run it and debug it (for some definition of &quot;run&quot; for a type-inconsistent Haskell program).</p>
+<p><strong>If you say it like that, it ceases to be bullshit.</strong> And then we can get back into a discussion. Question: Which features should be imposed on the programmer and which should not? Discuss.</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://www.infoq.com/presentations/Value-Values">
               The Value of Values
             </a>
@@ -358,56 +407,6 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <p>Imagine two pieces of medical equipment. One is easy to use, easy to clean, and always reliable. The other is buggy, has lots of crevices and corner which seem to collect infected goo, and needs constant maintenance. One of these apps was created by a rigorous design process, extensive testing, and built in an immaculate, air-conditioned factory manned by attractive MD/PhDs. The other was created in a basement from spare parts by a high school dropout with bad hygiene. What if the beautiful machine was created by the dropout?</p>
 <p>Is it even possible? Is it possible that software can be successful over time if it is not well-built? In my experience, messy software eventually drags new development (including bug fixes) to a halt. Time needs to be invested in cleanup.</p>
 <p>What I hear Hague saying is that some software architecture choices do not matter. This is true. But some do matter. They are not just important to you as a programmer. They are directly related to the number of bugs, the time it takes to fix a bug, and the time it takes to make a new feature. Don't throw the baby out with the bathwater.</p>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.michaelnielsen.org/ddi/how-to-answer-a-question-a-simple-system/">
-              How to answer a question: a simple system
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/how-to-answer-a-question">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            June 15, 2012
-          </div>
-
-          
-<p><a href="http://scholarworks.uno.edu/td/877/">My Master's thesis</a><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> was very related to this topic, so I thought I would share a little anecdote.</p>
-<p>Michael Nielsen:</p>
-<blockquote>
-<p>As I describe in detail below, their approach was to take the question asked, to rewrite it in the form of a search engine query, or perhaps several queries, and then extract the answer by analysing the Google results for those queries.</p>
-</blockquote>
-<p>While I was researching my thesis, I came across <a href="http://ilpubs.stanford.edu:8090/421/1/1999-65.pdf">a paper by Sergey Brin</a> (cofounder of Google) which described a system called DIPRE which tried to do a similar thing using the Google index, though before Google was Google. My favorite quote from the paper was &quot;the Google search engine and other research projects&quot;. Brin has been aware of the power of huge sets of redundant documents for a long time.</p>
-<p>The system Nielsen describes is interesting and worth a look. I will just nitpick a little.</p>
-<ol style="list-style-type: decimal">
-<li>Why do so much query rewriting? Google does a lot of query augmentation itself now. Also, a high number of documents means it is very likely to find the question exactly as it was posed. Try asking Google a question and see if you can find the answer on the results page.</li>
-<li>The system does not actually get rid of domain knowledge: it replaces part of the algorithm with a Google search, but there is a lot of domain knowledge of the English language used to extract the data from the text. An implementation of the system would use a simple statistical model of answers to find the text to extract.</li>
-<li>The system of weighting queries is very hard to justify mathematically. Much better would be a probabilistic system, such as Naive Bayes. Naive Bayes is very simple and, modulo a naive assumption, is mathematically correct.</li>
-<li>Be careful with questions like &quot;Who shot JFK?&quot; It is difficult for humans to answer, let alone computers.</li>
-</ol>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>The introduction to my thesis is a pretty good introduction to the techniques of information extraction in general.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
 
 
           <div class="endmark">

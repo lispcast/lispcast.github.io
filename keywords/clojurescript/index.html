@@ -272,10 +272,9 @@ No spam. Ever.
 <pre><code>(ns history.core
   (:require
    [secretary.core :as secretary :refer-macros [defroute]]
-   [goog.events]
-   [goog.history.EventType :as EventType])
+   [goog.events])
   (:import
-   [goog.history Html5History]))</code></pre>
+   [goog.history Html5History EventType]))</code></pre>
 <p>We need a function that will get the current path fragment to switch on. We'll just use the path and the query string.</p>
 <pre><code>(defn get-token []
   (str js/window.location.pathname js/window.location.search))</code></pre>
@@ -310,7 +309,7 @@ No spam. Ever.
   (secretary/dispatch! (get-token)))</code></pre>
 <p>Now we set up our global history object. We use <code>defonce</code> so we can <strong>hot reload the code</strong>.</p>
 <pre><code>(defonce history (doto (make-history)
-                   (goog.events/listen EventType/NAVIGATE
+                   (goog.events/listen EventType.NAVIGATE
                                        ;; wrap in a fn to allow live reloading
                                        #(handle-url-change %))
                    (.setEnabled true)))</code></pre>

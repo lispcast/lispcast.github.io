@@ -73,6 +73,55 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="http://java.dzone.com/articles/clojure-dummies-kata-0">
+              Clojure for dummies: a kata
+            </a>
+            <a class="loguito"
+               href="http://www.lispcast.com/clojure-for-dummies-a-kata">
+              <img class="lambda-loguito"
+                   src="/img/lambda.png" />
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            December 10, 2011
+          </div>
+
+          
+<p>It's good to see someone trying Clojure and sharing his experiences. Congratulations are due for getting it up and running and finishing a kata.</p>
+<p>Giorgio Sironi:</p>
+<blockquote>
+<p>Clojure is a LISP dialect; if you have ever been forced to use LISP in a computer science class, I understand your resistance towards this class of totally functional languages.</p>
+</blockquote>
+<p>I appreciate his honesty here. Universities have traditionally used Lisp to teach functional programming. They often neglect to mention that mosts Lisps are <em>not</em> purely functional. In fact, they lie to the students in the name of pedagogy. People leave Programming Languages class with many false notions about Lisp.</p>
+<blockquote>
+<p>In fact, LISP for many of us means lots of Reverse Polish Notation where (+ 1 2) evaluates to three; absence of for cycles <em>[loops]</em> and other commodities to privilege tail recursion; and absolute lack of state in the form of variables (the state isn't really absent: I've seen it on the stack.)</p>
+</blockquote>
+<p>In <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish notation</a>, the same expression would be <code>(2 1 +)</code>. Lisp uses <a href="http://en.wikipedia.org/wiki/Polish_notation">Polish notation</a>, otherwise known as Prefix notation.</p>
+<p>Common Lisp, in fact, has <em>more loops than Java</em>. Java has <code>for</code>, <code>while</code>, and the sadder <code>do..while</code> loops. Common Lisp's <code>loop</code> macro alone trumps any other language I know for <em>imperative</em> and <em>stateful</em> iteration. In addition to <code>loop</code>, Common Lisp defines <a href="http://clhs.lisp.se/Body/m_dotime.htm"><code>dotimes</code></a>, <a href="http://clhs.lisp.se/Body/m_dolist.htm"><code>dolist</code></a>, <a href="http://clhs.lisp.se/Body/m_do_do.htm"><code>do</code></a>, <a href="http://clhs.lisp.se/Body/m_do_do.htm"><code>do*</code></a> (a variation on <code>do</code>), and the loops for symbols in a package <a href="http://clhs.lisp.se/Body/m_do_sym.htm"><code>do-symbols</code></a>, <a href="http://clhs.lisp.se/Body/m_do_sym.htm"><code>do-external-symbols</code></a>, and <a href="http://clhs.lisp.se/Body/m_do_sym.htm"><code>do-all-symbols</code></a>.</p>
+<p>The fact that a non-lisper believes something about Lisp so false yet so common hints that something is very wrong. The misconception &quot;absolute lack of state in the form of variables&quot; will be familiar to many Lisp programmers who talk to non-lispers.</p>
+<blockquote>
+<p>Download and unzip the last release of Clojure. Start up a class by specifying clojure-1.3.0.jar in the classpath :</p>
+</blockquote>
+<pre><code>    java -cp clojure-1.3.0.jar clojure.main</code></pre>
+<p>It's nice that Clojure is so easy to run.</p>
+<p>Again, thumbs up to Giorgio for finishing a kata in a new language. Keep up with the Clojure!</p>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="http://cognitivecomputing.wordpress.com/1986/01/28/a-short-ballad-dedicated-to-the-growth-of-programs/">
               A Short Ballad Dedicated to the Growth of Programs
             </a>

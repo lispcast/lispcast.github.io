@@ -73,6 +73,100 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/ring-1-3">
+              Ring 1.3
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 22, 2014
+          </div>
+
+          
+<p>Summary: <em>Ring is great because it closely models the HTTP message format using native Clojure data structures. It strictly defines a message format that any software can use and rely on. With Ring 1.3, the specification has gotten even closer to the HTTP spec.</em></p>
+<p>A couple of months ago, Ring 1.3 was released without much fanfare. It included a few improvements and updates, but in general, not much had changed.</p>
+<p>One change, though, is very significant: the specification is <em>shorter</em>. It's simpler. Three keys were deprecated in the Ring request map (<code>:content-type</code>, <code>:content-length</code>, and <code>:character-encoding</code>). <strong>These keys were unnecessary because their values were in the headers</strong>, which are also in the Ring request. Equivalent utility functions have been added for pulling the data out of the headers.</p>
+<p>Why is this important? While many libraries get more complex and overburdened, <strong>it is refreshing to see a library going in the correct direction of <em>shedding complexity</em></strong>. It does not significantly impact application development. Nor does it reduce the already low barrier to entry. Still, I welcome this kind of change.</p>
+<p><strong>Ring is the central specification that ties most of the Clojure web ecosystem together.</strong> The spec <em>should</em> be minimal. <strong>And a mark of good software is that it models the problem very closely without unnecessary abstraction.</strong> Ring merely defines a common format (using Clojure data structures) that mirrors the text-based HTTP message format. That's why Ring has worked so well thus far and why it is appreciated in Clojure.</p>
+<p>Because I was so happy about the change, I decided to update my <a href="http://www.lispcast.com/ring-spec-hang-on-wall">Ring Spec to Hang on the Wall PDF</a>. The newly deprecated keys are gone. It used to be two pages long. The Ring Request took up an entire page, and the Response took up about half of one. But now, with three keys removed and a little tweaking of the font sizes, <strong>everything fits on one page</strong>.</p>
+<center> 
+<a
+    href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe"><img
+    src="http://www.purelyfunctional.tv/img/ring_spec_1_3.png"
+    style="box-shadow: 2px 2px 5px #888888; max-width: 200px" /></a>
+</center>
+
+<p>One page in big, readable fonts, with just the information you need for quick reference. I like it. <strong>I'm printing one out right now to tack on the wall.</strong> You can <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">get a free copy</a> for yourself by getting on the PurelyFunctional.tv mailing list <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">here</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free Ring Spec to hang on your wall
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/ring_spec_1_3.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
+</p>
+      
+<input id="mce-EMAIL"
+             class="email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][4]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/church-vs-curry-types">
               Church vs Curry Types
             </a>
@@ -1149,92 +1243,6 @@ No spam. Ever.
 <li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
 <li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
 <li><a href="http://www.lispcast.com/parts-of-ring">The Parts of Ring</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/ring-spec-hang-on-wall">
-              A Ring Spec to Hang on the Wall
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            March 28, 2014
-          </div>
-
-          
-<p>Summary: <em>The Ring SPEC is the core of the Clojure web ecosystem. The standard is small and <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">a reference</a> is handy.</em></p>
-<p>If you program the web in Clojure, you probably use Ring. Even if you don't, your server is likely <a href="http://http-kit.org/">Ring compatible</a>.</p>
-<p>Ring has a small SPEC. It's centered around defining the keys one can expect in the request and response maps. And the exact names for keywords are easy to forget.</p>
-<p>I don't want to forget. I use Ring often enough that I want a quick reference. A while ago, I printed out a quick summary of the keys for the request and response maps and hung it on the wall behind my monitor. I refer to it frequently.</p>
-<p>If you program the web in Clojure, you might appreciate this printout. If you're learning, it could be an invaluable reference. <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">Please download the PDF.</a></p>
-<p>And if you like it, you might also like my <a href="http://www.purelyfunctional.tv/web-dev-in-clojure">Web Development in Clojure video series</a>.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free Ring Spec to hang on your wall
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/ring_spec_1_3.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
-</p>
-      
-<input id="mce-EMAIL"
-             class="email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][4]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
-<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
-<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
 </ul>
 
 

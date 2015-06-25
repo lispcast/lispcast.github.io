@@ -249,6 +249,206 @@ No spam. Ever.
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/mastering-client-side-routing-with-secretary-and-goog-history">
+              Mastering ClojureScript Routing with Secretary and goog.History
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            June 24, 2015
+          </div>
+
+          
+<p>Summary: <em>The Google Closure Library provides a nice interface to the HTML5 History API. Coupling it with Secretary is very easy. But not all browsers support HTML5 History. In this post I'll talk about one way to make sure you have client-side routing in all browsers.</em></p>
+<p>In a project I did about a year ago, we wanted the speed of a single page application but we wanted the back button to work and we wanted the URL to reflect where the reader was in the app. We turned to the <strong>HTML5 History API</strong>.</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/History">HTML5 History API</a> is an API for manipulating the browser's history without making a request to the server and loading a new page. The idea is that <strong>your Javascript application can keep all of its state in memory, but still change the URLs and keep the back button working</strong>. You have to code it up yourself, but it gives you fine-grained control over what exactly the back button does.</p>
+<p>Luckily (and not surprisingly), the Google Closure Library has a nice way to access the History API. It's in a class called <a href="https://closure-library.googlecode.com/git-history/docs/class_goog_history_Html5History.html"><code>goog.history.Html5History</code></a>. That gives you <strong>events about when the URL changes</strong>. We used that along with <a href="https://github.com/gf3/secretary">Secretary</a> to parse, interpret, and dispatch on the URL.</p>
+<p>Let's see the code!</p>
+<p>First, we set up our <code>ns</code> declaration.</p>
+<pre><code>(ns history.core
+  (:require
+   [secretary.core :as secretary :refer-macros [defroute]]
+   [goog.events]
+   [goog.history.EventType :as EventType])
+  (:import
+   [goog.history Html5History]))</code></pre>
+<p>We need a function that will get the current path fragment to switch on. We'll just use the path and the query string.</p>
+<pre><code>(defn get-token []
+  (str js/window.location.pathname js/window.location.search))</code></pre>
+<p>Now we define how to instatiate the history object.</p>
+<pre><code>(defn make-history []
+  (doto (Html5History.)
+    (.setPathPrefix (str js/window.location.protocol
+                         &quot;//&quot;
+                         js/window.location.host))
+    (.setUseFragment false)))</code></pre>
+<p>Let's make a couple of simple routes. I won't go into how to make routes with Secretary in this post.</p>
+<pre><code>(defroute home-page &quot;/&quot; []
+  (js/console.log &quot;Homepage!&quot;))
+
+(defroute default-route &quot;*&quot; []
+  (js/console.log (str &quot;unknown route: &quot; (get-token))))</code></pre>
+<p>Now a handler for what to do when the URL changes.</p>
+<pre><code>(defn handle-url-change [e]
+  ;; log the event object to console for inspection
+  (js/console.log e)
+  ;; and let&#39;s see the token
+  (js/console.log (str &quot;Navigating: &quot; (get-token)))
+  ;; we are checking if this event is due to user action,
+  ;; such as click a link, a back button, etc.
+  ;; as opposed to programmatically setting the URL with the API
+  (when-not (.-isNavigation e)
+    ;; in this case, we&#39;re setting it
+    (js/console.log &quot;Token set programmatically&quot;)
+    ;; let&#39;s scroll to the top to simulate a navigation
+    (js/window.scrollTo 0 0))
+  ;; dispatch on the token
+  (secretary/dispatch! (get-token)))</code></pre>
+<p>Now we set up our global history object. We use <code>defonce</code> so we can <strong>hot reload the code</strong>.</p>
+<pre><code>(defonce history (doto (make-history)
+                   (goog.events/listen EventType/NAVIGATE
+                                       ;; wrap in a fn to allow live reloading
+                                       #(handle-url-change %))
+                   (.setEnabled true)))</code></pre>
+<p>And we will want a function to programmatically change the URL (and add to the history).</p>
+<pre><code>(defn nav! [token]
+  (.setToken history token))</code></pre>
+<p>Incidentally, my links look like this in Om:</p>
+<pre><code>(dom/a
+  #js {:href &quot;/some/page&quot;
+       :onClick #(do
+                   (.preventDefault %)
+                   (nav! &quot;/some/page&quot;))}
+  &quot;some page&quot;)</code></pre>
+<p>That is, I try to follow the principle of graceful fallback. If Javascript fails for some reason, the <code>href</code> is still valid. It will make a request to the server and fetch the page. But if Javascript is working, we override it.</p>
+<p>On the server side, I make sure that the same routes exist and that they return valid pages that include this script. When the page loads, the <code>EventType/NAVIGATE</code> event will fire, and so Secretary will route it. This usually means a repaint, but it's very quick and acceptable.</p>
+<p>Let's add some Om rendering to this example, just for testing.</p>
+<p>Add the requires:</p>
+<pre><code>   [om.core :as om]
+   [om.dom :as dom]</code></pre>
+<p>And the Om code to render and get it started:</p>
+<pre><code>(defonce state (atom {}))
+
+(defn cmp-link [cursor owner]
+  (reify
+    om/IRender
+    (render [_]
+      (dom/a
+       #js {:href &quot;/some/link&quot;
+            :onClick #(do
+                        (.preventDefault %)
+                        (nav! &quot;/some/link&quot;))}
+       &quot;some link&quot;))))
+
+(om/root cmp-link state
+         {:target (. js/document (getElementById &quot;app&quot;))})</code></pre>
+<p>When you click the link, you should see a message in the console saying it's navigating to <code>/some/link</code>.</p>
+<p>I was using this for a while when I got a message about it not working for someone. After a little investigation, it turned out they were using an older version of IE. :( <strong>IE &lt;= 9 does not support HTML5 History.</strong> In fact, according to caniuse.com, <a href="http://caniuse.com/#feat=history">only 88.2% of users have a browser with HTML5 support</a>. That means that 12 out of every 100 visitors can't use what we just wrote.</p>
+<p>What a lot of people would do at this point is just to use the hash-based history wrangling that <a href="http://caniuse.com/#search=hash">93% of the internet supports</a>. But I wanted to do better without punishing people who upgrade their browsers.</p>
+<p>Here's what I did: the server still serves content at URLs as normal. The routes on the client stay the same. <em>But</em> I used feature detection to <strong>determine if the browser supports HTML5 History</strong>. If it does support it, it runs the code above. If it doesn't, it uses the hash API. Lucky for me, Google Closure has a class called <a href="https://closure-library.googlecode.com/git-history/docs/class_goog_History.html"><code>goog.History</code></a> that is interface-compatible with <code>goog.history.Html5History</code>. So 90% of the work was done.</p>
+<p>First, we need to add this import:</p>
+<pre><code>  [goog History]</code></pre>
+<p><code>goog.history.Html5History</code> required a tiny little patch to work.</p>
+<pre><code>;; Replace this method:
+;;  https://closure-library.googlecode.com/git-history/docs/local_closure_goog_history_html5history.js.source.html#line237
+(aset js/goog.history.Html5History.prototype &quot;getUrl_&quot;
+      (fn [token]
+        (this-as this
+          (if (.-useFragment_ this)
+            (str &quot;#&quot; token)
+            (str (.-pathPrefix_ this) token)))))</code></pre>
+<p>I was very reluctant to do that, but it was the only solution I found to making it work consistently with the query string. Unfortunately, it was done a year ago and I don't remember the exact reason.</p>
+<p>Now we need to modify <code>get-token</code> so it works in both cases. In the case HTML5 History is not supported, the token is everything after the <code>#</code> if we're on <code>/</code>.</p>
+<pre><code>(defn get-token []
+  (if (Html5History.isSupported)
+    (str js/window.location.pathname js/window.location.search)
+    (if (= js/window.location.pathname &quot;/&quot;)
+      (.substring js/window.location.hash 1)
+      (str js/window.location.pathname js/window.location.search))))</code></pre>
+<p><code>make-history</code> is different, too. If we don't support HTML5 History, we check if we're on <code>/</code>. If not, we redirect to <code>/</code> with the token. If we are, we construct an instance of <code>goog.History</code>.</p>
+<pre><code>(defn make-history []
+  (if (Html5History.isSupported)
+    (doto (Html5History.)
+      (.setPathPrefix (str js/window.location.protocol
+                           &quot;//&quot;
+                           js/window.location.host))
+      (.setUseFragment false))
+    (if (not= &quot;/&quot; js/window.location.pathname)
+      (aset js/window &quot;location&quot; (str &quot;/#&quot; (get-token)))
+      (History.))))</code></pre>
+<p>Everything else is the same! You can even test out what happens without the HTML5 History API by replacing the <code>(Html5History.isSupported)</code> with <code>false</code> in both places in the code above. You'll see it start to use the <code>#</code> fragment when you click the link!</p>
+<p>I figured out all of this stuff incrementally by experimentation. I wanted to share this with you because I think it's valuable. The biggest lesson to take away is that <strong>the Google Closure Library is <em>very</em> complete and well-built</strong>. We should lean on it as much as we can from ClojureScript.</p>
+<p>If you're interested in learning some ClojureScript, Om, and how to make Single Page Applications, I have to recommend my LispCast Single Page Applications with ClojureScript and Om course. It's interactive with lots of animations, exercises, screencasts, and code. It's designed to get you <strong>up and running with a smooth dev process all the way through deploying code to production</strong>. It won't teach you <em>everything</em> about ClojureScript and Om, but it will get you over lots of the major hurdles we all encounter.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get free Clojure stuff and news on ClojureScript courses
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/spaom-cover.jpg">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+The LispCast Single Page Applications with ClojureScript and Om course is in development <em>right now</em>! Sign up here to get news as it's being created and learn when it will launch. Also, you'll get to download all of the free stuff for learning and using Clojure.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][64]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/react-another-level-of-indirection">React: Another Level of Indirection</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-interview-anna-pawlicka">Pre-Conj Interview: Anna Pawlicka</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/react-another-level-of-indirection">
               React: Another Level of Indirection
             </a>
@@ -284,29 +484,57 @@ No spam. Ever.
 </ul>
 <p>Any other problems left? I can't think of any. That's something to <a href="http://www.twitter.com/ericnormand"><em>discuss on Twitter</em></a>.</p>
 <p>I suggest you try React. <a href="https://github.com/swannodette/om"><em>Om</em></a> by David Nolen is the most mature React ClojureScript library I know of. It does a bit more than I've described here (Om manages your state tree for you, among other things) and is evolving quickly. I have some code that generates React Virtual DOM using <code>hiccup</code> style with macros (so the work is done at compile time), but other than that, contains only half-baked implementations of what's in Om. If you're interested in the <code>hiccup</code> macros, <em>let me know what you'd use it for and I'll put it on github</em>.</p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get free Clojure stuff and news on ClojureScript courses
 </h3>
-  <p class="article-cg-box-text">
     
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/spaom-cover.jpg">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+The LispCast Single Page Applications with ClojureScript and Om course is in development <em>right now</em>! Sign up here to get news as it's being created and learn when it will launch. Also, you'll get to download all of the free stuff for learning and using Clojure.
 </p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][64]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
 </div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
 
 
 
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history">Mastering ClojureScript Routing with Secretary and goog.History</a></li>
 </ul>
 
 

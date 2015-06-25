@@ -73,6 +73,81 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-conj-interview-zach-oakes">
+              Pre-Conj Interview: Zach Oakes
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            October 22, 2014
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#zach-oakes"><img src="http://www.lispcast.com/img/pre-conj/zach-oakes.jpg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>I had a conversation with Zach Oakes about game development in Clojure. He is <a href="http://clojure-conj.org/speakers#zach-oakes">giving a talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a>. Read the <a href="http://www.lispcast.com/pre-conj-zach-oakes">background to his talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: Briefly, how did you get into Clojure?</p>
+<p><strong>Zach Oakes</strong>: Being hosted on the JVM was my original draw to Clojure. I wanted to hack on an anonymous networking project called I2P, which is written in Java, but I wanted to use a more enjoyable language. Clojure's interop made it effortless, and later on I came to enjoy the other aspects of Clojure as well.</p>
+<p><strong>LC</strong>: How long have you been into games programming?</p>
+<p><strong>ZO</strong>: Games were how I originally got into programming as a teenager. However, I had a ten-year period where I did nothing but crypto software. I only got back into games last year, and since Clojure was my favorite language by then, it was inevitable that I would start using it for game development.</p>
+<p><strong>LC</strong>: What is the main concept of play-clj? Is it based on immutable game states, or something else?</p>
+<p><strong>ZO</strong>: The main technical concept is that most of your game should just be list transformations, so your code mostly consists of using normal Clojure functions to transform your entities. It definitely encourages immutability, but since it builds on top of a Java framework, there are times when you will need to mutate things.</p>
+<p><strong>LC</strong>: What is the advantage of using list transformations instead of mutating game objects? Is this a drastic departure from normal game architectures?</p>
+<p><strong>ZO</strong>: The advantage of functional programming in games is the same as in other kinds of software; the code becomes simpler to understand, and parallelism becomes trivial. I think this is very unusual for game development. Many games keep entities as class data members that the methods mutate directly, which quickly becomes a mess.</p>
+<p>That said, I think the REPL is by far the biggest reason to use Clojure for game development. A disciplined programmer might be able to avoid the aforementioned mess, but it's hard to replicate the runtime modifiability of Clojure if your language wasn't built for it, and I think it has a big effect on how you make your game.</p>
+<p><strong>LC</strong>: What kind of response from game programmers have you had to using functional programming in games?</p>
+<p><strong>ZO</strong>: So far the response to functional game development has been tepid. They are understandably conservative about their technical choices due to the performance sensitivity of games, but nonetheless they are slowly adopting functional idioms in their non-functional languages. The next step is to get them to use a functional language. I think it's up for grabs, and the languages that are hosted and provide an excellent REPL will have the advantage.</p>
+<p><strong>LC</strong>: Can you tell us a little about play-clj? Is it based on a Java framework?</p>
+<p><strong>ZO</strong>: Yes, play-clj is essentially a big wrapper around libGDX, a popular Java framework. I used it to teach Java game development, and eventually made play-clj so I could use Clojure instead. It is a fairly thick wrapper and hopefully a nice teaching tool.</p>
+<p>The core of the library is <code>defscreen</code>, a macro in which you provide functions that will be run during various events like &quot;on-show&quot; and &quot;on-key-down&quot;. Making a game consists primarily of transforming your entities in response to these events.</p>
+<p>There is always a design compromise when you build on top of a large object-oriented framework, but I think it is crucial to leverage existing work to make it practical to use a functional language to build games worth shipping.</p>
+<p><strong>LC</strong>: Yeah, I agree. Game frameworks have a lot of work put into them. Was it a challenge combining OO/mutable state with the Clojure functional approach?</p>
+<p><strong>ZO</strong>: It's definitely a challenge, and since this is the first library I've ever made I have been learning as I go along. I took some inspiration from neko, a Clojure wrapper for the Android API, since it is doing something similar. I don't try to hide mutations; most of the library is just a series of macros that allow you to use the underlying Java classes with a nicer syntax.</p>
+<p>That said, you can at least keep your core game logic free of side-effects by deferring those mutations until later. In my play-clj games, I typically first map over my entities with a series of pure functions, then afterwards I do various side-effecting things like playing sounds and rendering. This allows me to trivially parallelize the pure portion of my code while also doing the necessary side-effecting things.</p>
+<p><strong>LC</strong>: That's pretty cool. I've always wanted to program games, but every time I start, I get lost in a forest of spaghetti code. Have you found that a functional approach makes that better?</p>
+<p><strong>ZO</strong>: I think it definitely imposes discipline on your game's code. It is easy in Java to make your entities and other objects data members in a class and mutate them from methods without even explicitly passing them as arguments, which is an easy path to spaghetti code. In play-clj, entities are records so transforming them requires explicitly passing them to functions and returning new ones at the end.</p>
+<p>I would say that play-clj also imposes an additional degree of structure as well. It has its own built-in system for managing state, including its own entity system, which is exposed to you in the defscreen macro. I think this causes play-clj games to essentially have the same general design. The downside is that it makes a lot of design decisions for you, so more advanced Clojure programmers may desire a thinner wrapper.</p>
+<p><strong>LC</strong>: What resources could a beginner use beforehand to make the most of your talk?</p>
+<p><strong>ZO</strong>: I wrote a tutorial for play-clj that people could check out if they'd like to see how it works:</p>
+<p><a href="https://github.com/oakes/play-clj/blob/master/TUTORIAL.md">https://github.com/oakes/play-clj/blob/master/TUTORIAL.md</a></p>
+<p>There are also some example games they could play to see it in action:</p>
+<p><a href="https://github.com/oakes/play-clj-examples">https://github.com/oakes/play-clj-examples</a></p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>ZO</strong>: I don't do much social networking, unless Reddit/HN count. I suppose the best way to see what I'm up to is follow <a href="gh">my Github</a>!</p>
+<p><strong>LC</strong>: One last question: If Clojure were a Star Trek character from the original series, what character would it be?</p>
+<p><strong>ZO</strong>: I suppose Clojure would be all the redshirts collectively. It sounds like a bad thing, but when they died they were always replaced, so I guess that means Clojure will live forever.</p>
+<p><strong>LC</strong>: Thanks for the informative interview. It was a pleasure.</p>
+<p>*include: templates/pre-conj.html</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-conj-interview-colin-fleming">
               Pre-Conj Interview: Colin Fleming
             </a>
@@ -866,84 +941,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <h3 id="about-paul-degrandistalk">About <a href="http://clojure-conj.org/speakers#paul-degrandis">Paul deGrandis</a></h3>
 <p><a href="https://github.com/ohpauleez">Github</a> - <a href="http://twitter.com/ohpauleez">Twitter</a></p>
 <p><a href="http://clojure-conj.org/speakers#paul-degrandis"><img src="http://www.lispcast.com/img/pre-conj/paul-degrandis.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-conj-steven-yi">
-              Pre-conj Prep: Steven Yi
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            October 10, 2014
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-developing-music-systems-on-the-jvm-with-pink-and-scoretalk">Talk: <a href="http://clojure-conj.org/speakers#steven-yi">Developing Music Systems on the JVM with Pink and Score</a></h3>
-<p><a href="http://clojure-conj.org/speakers#steven-yi">Steven Yi's talk</a> at the <em>conj</em> is about music systems on the JVM, focusing on two systems he built, called Pink and Score.</p>
-<h4 id="background">Background</h4>
-<p><a href="https://github.com/kunstmusik/pink">Pink</a> is a library for signal generation and processing and event handling. It is designed as a low-level library to use to build your own audio system. It is written in Clojure.</p>
-<p><a href="https://github.com/kunstmusik/score">Score</a> is a library for composing musical scores. Those scores are generic, so that they can be played by a variety of backend systems. Score is written in Clojure.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Electronic music is an interesting field. It is one that Lisp has been applied to for many years. To paraphrase <a href="http://sam.aaron.name/">Sam Aaron</a>, creator of <a href="http://overtone.github.io/">Overtone</a>, Clojure's high-level allows a programmer to leverage programming ability to create better music. Pink and Score join Overtone and Rich Hickey's <a href="https://github.com/richhickey/harmonikit">Harmonikit</a> as music systems developed in Clojure.</p>
-<h3 id="about-steven-yitalk">About <a href="http://clojure-conj.org/speakers#steven-yi">Steven Yi</a></h3>
-<p><a href="https://github.com/kunstmusik">Github</a> - <a href="http://twitter.com/kunstmusik">Twitter</a> - <a href="http://kunstmusik.com/">Blog</a></p>
-<p><a href="http://clojure-conj.org/speakers#steven-yi"><img src="http://www.lispcast.com/img/pre-conj/steven-yi.jpeg" /></a></p>
-<p>Steven Yi is the author of the <a href="http://blue.kunstmusik.com/">Blue Integrated Music Environment</a>. He is also a core developer of <a href="http://csound.github.io/">Csound</a>.</p>
 <hr />
 
 <div class="article-cg-box">

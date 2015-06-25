@@ -8,8 +8,8 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>How I made my Clojure database tests 5x faster | LispCast</title>
-    <meta name="description" content="Setting up and tearing down a test database can be slow. Use a rolled back transaction to quickly reset the database to a known state. You can do that in an `:each` fixture to run each test in isolation.">
+    <title>Customize Your lein test | LispCast</title>
+    <meta name="description" content="">
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -73,48 +73,18 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
-               href="/clojure-database-test-faster">
-              How I made my Clojure database tests 5x faster
+               href="/lein-test-customization">
+              Customize Your lein test
             </a>
           </h2>
 
           <div class="timestamp">
-            June 17, 2015
+            June 24, 2015
           </div>
 
           
-<p>Summary: <em>Setting up and tearing down a test database can be slow. Use a rolled back transaction to quickly reset the database to a known state. You can do that in an <code>:each</code> fixture to run each test in isolation.</em></p>
-<p>On one of my projects, I wrote a bunch of tests that had to hit the database. There was a <code>:once</code> fixture to create all of the tables anew and an <code>:each</code> fixture to delete everything in the tables before each test. That ensured that <strong>I was always working with a known empty database</strong>. Overall, the tests took about 10 seconds. Woah! That's a long time. But I lived with it.</p>
-<pre><code>(defn clear
-  &quot;Delete all rows before and after, just for good measure.
-  [test]
-  (cleardb db) ;; delete all rows from all tables
-  (try
-    (test)
-    (finally
-      (cleardb db))))
-
-(defn setupdb [tests]
-  (initdb db) ;; create the tables
-  (try
-    (tests)
-    (finally
-      (teardown db)))) ;; drop the tables
-
-(use-fixtures :each clear)
-(use-fixtures :once setupdb)</code></pre>
-<p>Then I remembered a technique someone once mentioned where you <strong>use a transaction that you roll back</strong> instead of starting with a fresh db each time. It's supposed to be a lot faster.</p>
-<p>After a little experimentation, I came up with this:</p>
-<pre><code>(defn clear [test]
-  (sql/with-db-transaction [db db]
-    (sql/db-set-rollback-only! db)
-    (binding [db db] ;; rebind dynamic var db, used in tests
-      (test))))</code></pre>
-<p>We open a transaction, immediately set it to rollback (which it will do when the transaction closes). Then we have to rebind our dynamic <code>db</code> var, which holds the current connection. And inside of that we run the test. Inside of the transaction, anything you write to the database will be available to read. When the test ends, <strong>the transaction closes and it rolls back all of the changes</strong>, leaving the database empty again.</p>
-<p>The result? Running the tests went <strong>from 10 seconds to 2 seconds</strong>. They still start and end with a clean database, but it's done faster with a transaction.</p>
-<p>The one gotcha that I ran into was that the PostgreSQL function <strong><code>now()</code> was always returning the same time within the transaction</strong>. I had made an assumption (that was true before) that different calls would happen at different times. That assumption was no longer true inside the transaction. I had to fix the code to not rely on time.</p>
-<p>The other part of this technique, which I did not really have to use, was that <strong>you can set up your database with test data</strong> in the <code>:once</code> fixture. It's costly to set up the test data, but because you're rolling back transactions, once it's set up it's quick to reset it.</p>
-<p>If you'd like to <strong>learn more about testing in Clojure</strong>, you might be interested in my <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>. In it, we cover test namespaces, assertions, running your tests, and of course fixtures. It's an interactive course with exercises, screencasts, animations, and code. You should also check out the free cheatsheet below.</p>
+<p>Summary: * *</p>
+<p>What's the second biggest pain of <code>lein test</code>? It's interpreting the output. If everything goes well, there's no output except a nice message indicating everything passed. But if it fails, the causes is often buried in a lot of output.</p>
 <div class="subscribe-form-wrapper">
   <form class="subscribe-form"
         action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
@@ -161,14 +131,6 @@ No spam. Ever.
 
 
 
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/announcing-lispcast-intro-to-clojure-test">Announcing: LispCast Intro to clojure.test</a></li>
-<li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
-<li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
-<li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
-</ul>
-
 
           <div class="endmark">
             <a class="endmark-link"
@@ -188,14 +150,6 @@ No spam. Ever.
     </div>
 
     <footer class="footer-banner">
-      <a class="footer-previous"
-         href="http://www.lispcast.com/tdd-workflow-in-clojure-with-emacs-and-cider">
-        <i class="fa fa-chevron-left footer-arrow"></i>
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history">
-        <i class="fa fa-chevron-right footer-arrow"></i>
-      </a>
     </footer>
 
 

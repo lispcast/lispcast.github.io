@@ -149,7 +149,7 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
                    (nav! &quot;/some/page&quot;))}
   &quot;some page&quot;)</code></pre>
 <p>That is, I try to follow the principle of graceful fallback. If Javascript fails for some reason, the <code>href</code> is still valid. It will make a request to the server and fetch the page. But if Javascript is working, we override it.</p>
-<p>On the server side, I make sure that the same routes exist and that they return valid pages that include this script. When the page loads, the <code>EventType/NAVIGATE</code> event will fire, and so Secretary will route it. This usually means a repaint, but it's very quick and acceptable.</p>
+<p>On the server side, I make sure that the same routes exist and that they return valid pages that include this script. When the page loads, the <code>EventType.NAVIGATE</code> event will fire, and so Secretary will route it. This usually means a repaint, but it's very quick and acceptable.</p>
 <p>Add the requires:</p>
 <pre><code>   [om.core :as om]
    [om.dom :as dom]</code></pre>

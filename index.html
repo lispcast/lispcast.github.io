@@ -73,6 +73,90 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/avoid-naming-at-all-costs">
+              Avoid Naming at All Costs
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            July 05, 2015
+          </div>
+
+          
+<p>Summary: <em>If naming is one of the two hardest things in programming, it follows that every other possible solution (except those few involving cache invalidation) should be attempted before naming something. As a corrolary, bad names are a code smell.</em></p>
+<p>Phil Karlton (attributed):</p>
+<blockquote>
+<p>There are only two hard things in Computer Science: cache invalidation and naming things.</p>
+</blockquote>
+<p>Programs used to be written in binary. That is, the only names we had were those the computer understood directly. Over time, we've improved programming languages so that they are better for people to read and write. A lot of that improvement is building in higher-level concepts, such as functions, garbage-collection, etc. But <strong>the majority of the improvement comes from the ability to name things</strong>.</p>
+<p>Naming things helps us organize our ideas about the software<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. A program has to deal with many levels of abstraction. We write about how data gets represented in the machine, how that relates to domain concepts, and what the user is intending to do. <strong>Naming things helps us organize those, just like good headings in an outline help us organize ideas about a topic.</strong></p>
+<p>And yet it is one of the hardest problems we solve regularly. There are times when I have looked for a good name for hours, only to find none. <strong>A bad name can cost a lot.</strong> Someone coming in later could be confused, wasting precious cognitive resources.</p>
+<p>Naming is hard because of a fundamental property of abstraction: <strong>the name does not have to relate at all to what it is naming</strong>. Names are just a string of letters. They're not meaningful to the machine, just to us. Names can lie, and that's a fundamental part of carrying meaning. If you could not lie, you could not convey new truthful information, either. And even truthful names can begin to diverge with the original code with time.</p>
+<p>Naming is hard because it's a different kind of thinking from the rest of programming. We are coding along, in a nice engineering flow, and all of a sudden, we need a nice, human-readable name. <strong>We need to find compassion for the reader from within our cold, calculating programmer trance.</strong> This is very difficult.</p>
+<p>Naming is hard be cause names need to be at the right abstraction level. Are you doing a low-level trie operation? Or is it a concept from the problem domain? <strong>Another choice to make.</strong> But it gets worse! Domain experts invent new words all the time. They're called <em>jargon</em>. And they're very useful. Maybe you should <em>invent</em> a name, instead of trying to <em>find</em> a name. Another difficult choice.</p>
+<p>When I'm having trouble naming something, there is often <strong>an easy change to the code that makes the name unnecessary</strong>. If we can avoid having to name something (while also keeping the code readable), we've avoided a very costly and error-prone process. Here are a few alternatives I use a lot:</p>
+<ul>
+<li><p><strong>Inline the code.</strong> Inline expressions don't need names. This works really well with anonymous functions.</p></li>
+<li><p><strong>Use threading.</strong> Instead of naming each intermediate value, thread the value through the process without naming it.</p></li>
+<li><p><strong>Name something else at a different level of abstraction.</strong> We're constantly switching the level of abstraction we're working at. Try going up or down the levels. It could be that there is something easy to name at an adjacent level that does the same thing.</p></li>
+<li><p><strong>Split it in two.</strong> Are you trying to name something that's really two things? If the two parts are easier to name, it's a good sign that you should split.</p></li>
+</ul>
+<p>You'll notice these all play with the <em>means of combination</em> instead of naming. <em>8Recombine to avoid naming when naming is hard.</em>*</p>
+<p>Since there are so many alternatives to naming that are easier than naming, it follows that <strong>if there is a bad name in our code, it means there might be a better way to organize</strong> it that we overlooked. That makes it a code smell. A little (re)<a href="http://www.lispcast.com/stop-refactoring-and-start-factoring">factoring</a> can get rid of that name.</p>
+<div class="article-cg-box">
+  <h3>
+You may like the Clojure Gazette
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/lambda-abstraction">Lambda Abstraction</a></li>
+<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Abelson and Sussman in <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1">SICP 1.1</a>:</p>
+<blockquote>
+<p>A powerful programming language is more than just a means for instructing a computer to perform tasks. The language also serves as a framework within which we organize our ideas about processes. Thus, when we describe a language, we should pay particular attention to the means that the language provides for combining simple ideas to form more complex ideas. Every powerful language has three mechanisms for accomplishing this:</p>
+<p><strong>primitive expressions</strong>, which represent the simplest entities the language is concerned with,</p>
+<p><strong>means of combination</strong>, by which compound elements are built from simpler ones, and</p>
+<p><strong>means of abstraction</strong>, by which compound elements can be named and manipulated as units.</p>
+</blockquote>
+<a href="#fnref1">↩</a></li>
+</ol>
+</div>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/mastering-client-side-routing-with-secretary-and-goog-history">
               Mastering ClojureScript Routing with Secretary and goog.History
             </a>
@@ -539,6 +623,11 @@ Learn more
 
 
 
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/avoid-naming-at-all-costs">Avoid Naming at All Costs</a></li>
+</ul>
+
 
           <div class="endmark">
             <a class="endmark-link"
@@ -919,104 +1008,6 @@ style="height:150px"></a></p>
 <p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
 <p><strong>RL</strong>: Hm... maybe a melon? From the outside it seems hard and impenetrable, but once you get inside it's awesome and delicious! Also, a slice of melon looks like a parenthesis. :)</p>
 <p><strong>NS</strong>: Delicious whole wheat bread (ooh, or oat bread) used to make function sandwiches.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-leon-barrett">
-              Pre-West Interview: Leon Barrett
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 19, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><a href="http://clojurewest.org/speakers#lbarrett"><img src="http://www.lispcast.com/img/pre-west/lbarrett.jpg"
-style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Leon Barrett was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#lbarrett">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about parallel programming in Clojure. The <a href="http://www.lispcast.com/pre-west-leon-barrett">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-leon-barrett">Interview with Leon Barrett</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Leon Barrett</strong>: Actually, I wasn't even aware of Clojure until I started at The Climate Corporation 2.5 years ago. I had used Lisp a number of times in school, so it wasn't too foreign, but I'd never imagined that I'd write Lisp for a living.</p>
-<p><strong>LC</strong>: Clojure is great for shared-memory parallelism. Is it good for distributed programming?</p>
-<p><strong>LB</strong>: It can be; the same set of abstractions that are helpful locally can be helpful when distributed. For instance, there are some nice Hadoop MapReduce tools (though I happen to dislike Cascalog--it doesn't mesh with my mental model of mapreduce). Of course, you have to do some extra work to support distributed computing, but all in all it's relatively pleasant.</p>
-<p><strong>LC</strong>: What are your preferred distributed Clojure abstractions?</p>
-<p><strong>LB</strong>: You know, I don't feel qualified to opine on this too much. I mostly end up working on tasks that are fairly embarrassingly parallel, and I spend more of my time worrying about single-machine parallelism (hence my need for Claypoole). The core idea in the better Clojure distribution work I've done was, for both Storm and Hadoop, to just write simple, functional data transformations and then let the distribution framework worry about everything else.</p>
-<p><strong>LC</strong>: Where should someone get started with distributed programming in Clojure?</p>
-<p><strong>LB</strong>: I think both Parkour and Storm are very nice, though I had some issues using Parkour on Amazon's EMR. Just working with those, it's pretty easy to write distributed tools without worrying about the hard distributed parts (data movement, reliability, etc) yourself.</p>
-<p><strong>LC</strong>: What makes Clojure great for parallel programming?</p>
-<p><strong>LB</strong>: Clojure is great for parallel programming because of three things: Immutability, good core libraries, and macros.</p>
-<p>First, the bane of parallel programming is mutable state; state makes parallel programs much harder to reason about. While it's possible to avoid shared state by writing functional programs with immutable data even in other languages, it's much easier in Clojure because all the standard libraries support it, so Clojure is easier to do parallelism with from the very beginning. Also, Clojure's parallelism features, such as future and deref, are well-designed and easy to use, making it very easy to get started with parallelism. Finally, macros make it possible to write parallel things without so much fuss; for instance, Clojure's futures (built with macros) are easier to use than Java's futures because they don't require any boilerplate. Similarly, the library core.async uses macros to add amazing parallel and asynchronous features as a library, whereas in other languages such features would need to be designed into the core language.</p>
-<p><strong>LC</strong>: Can you briefly explain Claypoole? What does it do? Why did you write it?</p>
-<p><strong>LB</strong>: I wrote Claypoole because I was dissatisfied with Clojure's built-in pmap for several reasons, including 2 in particular: First, I wanted to control the degree of parallelism, but core pmap's parallelism is determined only by the number of CPUs. Second, I wanted my pmaps to get things done as fast as possible, but core pmap is lazy and may be inefficient when the individual tasks have a high variance in duration.</p>
-<p>Claypoole's core feature is a pmap that meets my demands--it's eager, and I can control the degree of parallelism, even across multiple simultaenous pmaps. As a bonus, it turns out that once one has good control over sharing threadpools in pmaps, it's easy to add other such features, so Claypoole also does a number of related, handy things, such as parallel for (pfor), unordered pmaps that return results in the order they're completed (upmap), and so on. I see Claypoole as a tool to provide an advanced degree of control over parallelism.</p>
-<p><strong>LC</strong>: Those sound really handy! Do you use reducers in your work? Where have you found them most helpful?</p>
-<p><strong>LB</strong>: I don't actually use reducers a lot. I used them while working with Parkour, and they were very cute there. However, in my own work I've tended to prefer Claypoole. Reducers is good because it has much less overhead than chained maps, which is great for functionally combining small tasks. However, I find that I tend map bigger tasks, so I benefit more from fine-grained control of parallelism in Claypoole than I would from the efficiency of reducers.</p>
-<p><strong>LC</strong>: Do you have any good background materials for people who want to do a little pre-reading/watching?</p>
-<p><strong>LB</strong>: Nope. My talk will start with some basics to make sure that everyone's on the same page, and my initial test audiences seemed to indicate that my intro works well for both beginners and more advanced programmers.</p>
-<p><strong>LC</strong>: How can people help with Claypoole?</p>
-<p><strong>LB</strong>: I love pull requests, and I appreciate bug reports (obviously, repeatable test cases make my life easier). But mostly, my goal with open-sourcing Claypoole was to have the community do this stuff right once, rather than having lots of people making partial reimplementations that work on just their case. So, just use it! I want people to use Claypoole rather than reimplementing it.</p>
-<p><strong>LC</strong>: Where can people follow you online?</p>
-<p><strong>LB</strong>: I'm not terribly vocal online. I guess I post to the <a href="http://eng.climate.com/">Climate Corp engineering blog</a> every so often.</p>
-<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
-<p><strong>LB</strong>: One could claim that it'd be Cajun blackened catfish, because it's lean and full of flavor.</p>
 <hr />
 
 <div class="article-cg-box">

@@ -8,7 +8,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Keyword: lambda-calculus | LispCast</title>
+    <title>LispCast</title>
     <meta name="description" content="A blog about the simple joys of functional programming.">
     <meta name="author" content="Eric Normand">
 
@@ -73,53 +73,18 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
-               href="/lambda-abstraction">
-              Lambda Abstraction
+               href="/from-humble-beginnings">
+              Reborn!
             </a>
           </h2>
 
           <div class="timestamp">
-            May 17, 2015
+            December 06, 2011
           </div>
 
           
-<p>Summary: <em>Lambda abstractions are always leaky, but some are leakier than others. Clojure programmers recommend keeping most of your functions pure and containing the leaks as much as possible.</em></p>
-<p>Lambda abstraction refers to something we do all of the time. Let's say I have some code:</p>
-<pre><code>(+ 1 2)</code></pre>
-<p>I'm adding the number 2 to a number, in this case, 1. I could abstract that into a <em>lambda</em>:</p>
-<pre><code>(defn add2 [x] (+ x 2))</code></pre>
-<p>Now it's a function, which I can apply to 1. <code>(add2 1)</code>. I can apply it to any number I want. The actual thing I am adding 2 to is abstracted away and replaced by the variable <code>x</code>. <strong>Lambda abstractions are just functions.</strong></p>
-<p>Functional programming is at its best when lambda abstractions are referentially transparent. That means that given the same arguments, a function will always return the same value. Being referentially transparent makes a <strong>software function more like a mathematical function</strong>. And that lets you reason about your code.</p>
-<p>But there's a very real difference between software functions and mathematical functions: <strong>mathematical functions take no time or energy to &quot;compute&quot;</strong>. They are defined abstractly, with no notion of computation. In contrast, software functions always take some time to compute. Sometimes the clearest way to write a function takes enough time that the illusion of mathematical functions is shattered. <strong>The abstraction is leaky.</strong></p>
-<p>So software functions are already a leaky abstraction, even if they are referentially transparent. Clojure (like most programming languages) opens the leak even further: <strong>you can put stuff that's not referentially transparent right in your function</strong>. For instance, you can write a &quot;function&quot; that reads from the disk or makes a web request. Making the same request twice can obviously return different values.</p>
-<p>What most people programming Clojure recommend is to program <em>mostly</em> with pure functions (that means referentially transparent). You still have to deal with time, but that's way easier than dealing with the chaos of the world outside. That leaves a small bit of your code to deal with mutation, input/output, and the disk. It's still a lambda abstraction (function) but <strong>it's just leakier</strong>. Clojure simply leaves the decision up to you where to draw the line. Clojure tries to make pure functions easy, even when not everything fits into pure functions.</p>
-<p>The takeaway of functional programming is the same recommendation: <strong>write <em>most</em> of your code as referentially transparent functions</strong>. The degree to which a language helps you do that is how &quot;functional&quot; the language is.</p>
-<p>If you'd like to learn more about Clojure and pure functions, check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's 2.5 hours of high quality video. You probably haven't seen anything <a href="http://www.purelyfunctional.tv/intro-to-clojure#preview">like this</a>! There's animations, exercises, characters, and screencasts. It takes you from no knowledge to a deep experience, all while having fun!</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/avoid-naming-at-all-costs">Avoid Naming at All Costs</a></li>
-</ul>
+<p>LispCast has been reborn from the ashes of its former existence.</p>
+<p>Please stay tuned.</p>
 
 
           <div class="endmark">
@@ -140,6 +105,10 @@ Learn more
     </div>
 
     <footer class="footer-banner">
+      <a class="footer-next"
+         href="page29.html">
+        <i class="fa fa-chevron-right footer-arrow"></i>
+      </a>
     </footer>
 
 

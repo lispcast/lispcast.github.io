@@ -279,7 +279,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <p>Actually, if you analyze it, you can quantify the complexity pretty well. We'll make some simplifying assumptions. Let's just say we have the type key and the three &quot;value&quot; keys. The type key can have four possible values (<code>:image/in-memory</code>, <code>:image/on-disk</code>, <code>:image/web</code>, and <code>nil</code> (or missing)) and the values keys have either a valid value or are missing (or <code>nil</code>). The number of states is <code>4 * 2 * 2 * 2 = 32</code>. So instead of three cases, like we want above, we have 32 cases to deal with.</p>
 <p>Is there a way to reduce this complexity? Is there a way to nip it in the bud before we've got <strong>code enforcing these assumptions all over the place</strong>? Do we really need to drown in assertions and <code>nil</code> checks?</p>
 <h3 id="a-great-solution">A great solution</h3>
-<p>Jeanine showed us a well-suited and complete solution. Her solution, as I mentioned before, is called &quot;variants&quot;. We have three variants of image representation. Instead of representing them in a map, we represent them in a vector, like this:</p>
+<p>Jeanine showed us a well-suited solution. Her solution, as I mentioned before, is called &quot;variants&quot;. We have three variants of image representation. Instead of representing them in a map, we represent them in a vector, like this:</p>
 <pre><code>[:image/in-memory [...]]
 
 [:image/on-disk &quot;/cats.jpg&quot;]

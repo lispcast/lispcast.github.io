@@ -390,7 +390,7 @@ No spam. Ever.
 <h3 id="compiling-your-snippets">Compiling your snippets</h3>
 <p>You may know this, but Hiccup is a <em>compiling</em> macro. That means it takes your literal vectors, maps, etc, and at <em>compile time</em>, generates code that will generate your HTML. All this means is that <strong>Hiccup is really fast</strong>, about as fast as concatenating strings can be.</p>
 <p>But, because the Hiccup compiler doesn't do a full examination of your code, it can't compile everything. It inserts run time fallbacks for stuff it can't handle at compile time which will interpret it at run time. So, for instance, <strong>if you're calling a function that returns some Hiccup, it can't compile that automatically</strong>. It has to wait till the function returns to know what it is. That is, unless . . .</p>
-<p>**The fix: ** The way to get Hiccup to compile something is with the <a href="http://weavejester.github.io/hiccup/hiccup.core.html#var-html"><code>hiccup.core/html</code></a> macro. That's the macro that does the compilation and it will do it anywhere. So if you've got code like this:</p>
+<p><strong>The fix:</strong> The way to get Hiccup to compile something is with the <a href="http://weavejester.github.io/hiccup/hiccup.core.html#var-html"><code>hiccup.core/html</code></a> macro. That's the macro that does the compilation and it will do it anywhere. So if you've got code like this:</p>
 <pre><code>(defn make-list [items]
   [:ul
     (for [i items]

@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Reduce Complexity with Variants</title>
+                  <guid isPermalink="false">http://www.lispcast.com/reduce-complexity-with-variants</guid>
+                  <link>http://www.lispcast.com/reduce-complexity-with-variants</link>
+                  <pubDate>Wed 08 Jul 2015 11:09:35 PM EDT</pubDate>
+                  <description>
+                    The structure of our data should match the relevant structures in the real world. And to ensure that our data is structured well, we should reduce the potential for incorrect structure. Variants provide a great solution for it.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/reduce-complexity-with-variants"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Avoid Naming at All Costs</title>
                   <guid isPermalink="false">http://www.lispcast.com/avoid-naming-at-all-costs</guid>
                   <link>http://www.lispcast.com/avoid-naming-at-all-costs</link>
@@ -129,20 +143,6 @@
                     Ront Toland will talk about developing large Clojure applications.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-ron-toland"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Pre-West Interview: Nathaniel Smith and Ruth Linehan</title>
-                  <guid isPermalink="false">http://www.lispcast.com/pre-west-interview-nathaniel-smith-ruth-linehan</guid>
-                  <link>http://www.lispcast.com/pre-west-interview-nathaniel-smith-ruth-linehan</link>
-                  <pubDate>Tue 21 Apr 2015 10:10:14 AM CDT</pubDate>
-                  <description>
-                    Nathaniel Smith and Ruth Linehan will talk about developing large applications in Clojure.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/pre-west-interview-nathaniel-smith-ruth-linehan"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

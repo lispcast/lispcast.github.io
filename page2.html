@@ -73,6 +73,103 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
         <article class="article">
           <h2 class="article-title-wrapper">
             <a class="article-title"
+               href="/pre-west-interview-nathaniel-smith-ruth-linehan">
+              Pre-West Interview: Nathaniel Smith and Ruth Linehan
+            </a>
+          </h2>
+
+          <div class="timestamp">
+            April 21, 2015
+          </div>
+
+          
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<div style="float:right">
+
+<p><a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/nsmith.jpg"
+style="height:150px"></a> <br> <a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/rlinehan.png"
+style="height:150px"></a></p>
+</div>
+
+<h3 id="introduction">Introduction</h3>
+<p>Nathaniel Smith and Ruth Linehan generously agreed to do an interview about their <a href="http://clojurewest.org/speakers#nsmith">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. They will be talking about Trapperkeeper. The <a href="http://www.lispcast.com/pre-west-nathaniel-smith-ruth-linehan">background to their talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Ruth Linehan</strong>: I started using Clojure about a year and a half ago, when my team at Puppet Labs started working on a new project in it. Previously I had mostly worked in Ruby and Javascript, and while switching to Clojure required a bit of a mind shift, I really enjoy it!</p>
+<p><strong>Nathaniel Smith</strong>: I had never used it, but was offered a job at Puppet Labs two years ago to write it full time. I thoroughly enjoyed learning it on the 5 hour flight to my first interview there and have loved writing it ever since (in other words, I got the job :) )</p>
+<p><strong>LC</strong>: What does Trapperkeeper offer the Clojure developer?</p>
+<p><strong>RL</strong>: Great question! Trapperkeeper is great for complicated Clojure applications. It allows you to easily break up your code into modular pieces (what we call &quot;services&quot;), and it serves as a binder for these pieces of code. Any state a service needs can be stored in a map in the service context, rather than kept globally. It provides a consistent way for expressing the lifecycle of these services - what happens at startup and shutdown - and for managing dependencies between services. It has built in config file parsing, and it initializes a logging system using logback for you, so that you don't have to worry about this. It also has some useful test helpers that allow you to start up a Trapperkeeper application in code and test the whole system.</p>
+<p><strong>NS</strong>: A better way to compose the various services (Database, job queue, web server, logging, configuration...) that one has in a large, long running Clojure application. Trapperkeeper leads to more maintanable and reusable code.</p>
+<p><strong>LC</strong>: How does breaking everything into small services help build a large application?</p>
+<p><strong>NS</strong>: You have well-defined, protocol-enforced APIs for you various services and get to leverage TK's dependency management to ensure clean statups/shutdowns of all of your JVM infrastructure bits.</p>
+<p><strong>RL</strong>: Frequently, some of the code that's necessary to build a large application is code you (or someone else) had to write to build a different application. Breaking it down into smaller, more modular services means that you can more easily reuse that code across multiple applications. Furthermore, each service manages the state that it needs, so you don't end up with a huge mess of global state. It also makes testing much easier - you can test a service on its own, rather than having to set up the entire system to test it.</p>
+<p><strong>LC</strong>: Are there any similar systems in Clojure or elsewhere?</p>
+<p><strong>NS</strong>: A few, but none of them met our needs at Puppet Labs. We think that Immutant and Components and other similar projects are great, but they weren't a good fit for our needs.</p>
+<p><strong>RL</strong>: Trapperkeeper was heavily influenced by Stuart Sierra's &quot;Clojure, Reloaded&quot; workflow, and it has a number of similarities with other frameworks motivated by this, such as Jig and Component. Our way of turning on and off services and managing service dependencies borrows a lot from OSGi's service registry.</p>
+<p><strong>LC</strong>: Where can people follow you online?</p>
+<p><strong>RL</strong>: Nathaniel and I are both on twitter: I'm <a href="https://twitter.com/ruthlinehan">@ruthlinehan</a>, he's <a href="https://twitter.com/nate_smith">@nate_smith</a>. If you want to follow Trapperkeeper, we (&quot;we&quot; meaning many of the folks at Puppet Labs who work on or with Trapperkeeper) hangout on IRC on freednode in #trapperkeeper. We'd love to see folks there!</p>
+<p><strong>NS</strong>: I publish poetry and other esoterica at <a href="http://chiptheglasses.com">http://chiptheglasses.com</a>.</p>
+<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
+<p><strong>RL</strong>: Hm... maybe a melon? From the outside it seems hard and impenetrable, but once you get inside it's awesome and delicious! Also, a slice of melon looks like a parenthesis. :)</p>
+<p><strong>NS</strong>: Delicious whole wheat bread (ooh, or oat bread) used to make function sandwiches.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
+</p>
+
+
+<h3>
+You may like the Clojure Gazette
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+</ul>
+
+
+          <div class="endmark">
+            <a class="endmark-link"
+               href="/">
+              <img class="endmark-lambda"
+                   src="/img/lambda.png" />
+            </a>
+          </div>
+
+        </article>
+
+
+        <article class="article">
+          <h2 class="article-title-wrapper">
+            <a class="article-title"
                href="/pre-west-interview-leon-barrett">
               Pre-West Interview: Leon Barrett
             </a>
@@ -932,95 +1029,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
 <li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
 <li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
-
-        </article>
-
-
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-james-macaulay">
-              Pre-West Interview: James MacAulay
-            </a>
-          </h2>
-
-          <div class="timestamp">
-            April 15, 2015
-          </div>
-
-          
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><a href="http://clojurewest.org/speakers#jmacaulay"><img src="http://www.lispcast.com/img/james-macaulay"
-      style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>James MacAulay is the next interview participant. He is <a href="http://clojurewest.org/speakers#jmacaulay">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about Functional Reactive Programming with the clojure library Zelkova. The <a href="http://www.lispcast.com/pre-west-james-macaulay">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-james-macaulay">Interview with James MacAulay</h3>
-<p><strong>Nola</strong>: How long have you been doing clojure and how did you get into it?</p>
-<p><strong>James</strong>: I've been writing Clojure in my spare time on-and-off for about three years.</p>
-<p>In late 2011 I was on a small team developing a JavaScript MVC framework, and we had this problem of managing state in the browser over long periods of time. Our response was to let mutation happen all over the place and keep track of it all with a network of observed properties. It felt fun and empowering at first, but unfortunately it resulted in systems that were very difficult to reason about.</p>
-<p>At some point I looked at the system and realized that all it needed to do was handle external events one at a time, and render some views based on those events. It was all starting to look like one big function to me...so I figured I should give a serious look at what functional programming was all about. Clojure had some really compelling answers to the questions I had, and soon I was hooked.</p>
-<p><strong>Nola</strong>: Any suggestions for someone wanting to dive into clojure?</p>
-<p><strong>James</strong>: If you're coming from an Object-Oriented background, take your time just getting used to writing different kinds of functions without relying on mutable state. The more you do it, the more fun it is, and it ends up being a really valuable habit to have when writing software in any language.</p>
-<p><strong>Nola</strong>: What languages did you do before clojure?</p>
-<p><strong>James</strong>: Mainly Ruby and JavaScript. In university it was Java more than anything else, but we were exposed to a number of other languages in smaller doses: Scheme, Prolog, C, x86 Assembly are the ones I'm most thankful for. When I first got interested in functional programming I dug into Haskell for a bit before Clojure really grabbed me.</p>
-<p><strong>Nola</strong>: Your talk is about Zelkova which is heavily inspired by Elm. Have you done much with Elm or implemented Functional Reactive Programming in other languages?</p>
-<p><strong>James</strong>: I first really got the Elm bug at Strange Loop 2013, where I saw Evan Czaplicki live code the Mario demo first-hand. I started playing with both Elm and Bacon.js, a JavaScript FRP library. Last summer I decided to try my hand at implementing FRP in Clojure, and figured I should read Evan's thesis to see how Elm works. I hadn't implemented any kind of FRP before, but Clojure seemed like a great language to do it in.</p>
-<p>My experience with the Elm thesis was very similar to the one Eric Normand described having at around the same time – the code in the paper was just begging for a core.async implementation. I started hacking away, and learned a ton about both Elm and core.async in the process.</p>
-<p>At Strange Loop 2014, I got to meet Evan and we had a really great chat about Elm and my work on porting its FRP system to Clojure and ClojureScript. He encouraged me to share my work and clarified a lot of things for me, and I've been poking away at Zelkova ever since.</p>
-<p><strong>Nola</strong>: What is the average airspeed velocity of an unladed Clojure REPL?</p>
-<p><strong>James</strong>: I try not to throw my laptop across the room when I get frustrated :)</p>
-<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
 </ul>
 
 

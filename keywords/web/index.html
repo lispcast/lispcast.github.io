@@ -668,7 +668,7 @@ No spam. Ever.
 <pre><code>&lt;script /&gt;</code></pre>
 <p>It's true. A <code>script</code> tag can't be self-closing.</p>
 <p>There's all sort of silly rules in HTML like this. And then there's XML mode versus HTML mode. We are lucky: <strong>Hiccup does all of this for you</strong>, so you don't have to wade through the HTML spec(s!) looking for why something won't render in IE7.</p>
-<p><strong>The fix:</strong> <code>hiccup.core/html</code> takes a map of options as the first argument (it's optional). If you pass in a <code>:mode</code> option, it will set the correct HTML mode, which unfortunately are incompatible. There are three modes, <code>:xml</code>, <code>:html</code>, and <code>:xhtml</code>. The default is <code>:xhtml</code>.</p>
+<p><strong>The fix:</strong> <code>hiccup.core/html</code> takes a map of options as the first argument (it's optional). If you pass in a <code>:mode</code> option, it will set the correct HTML mode. The various modes unfortunately are incompatible. There are three modes, <code>:xml</code>, <code>:html</code>, and <code>:xhtml</code>. The default is <code>:xhtml</code>.</p>
 <h3 id="idclass-dsl">Id/class DSL</h3>
 <p>Hiccup is a DSL. And it has its own <strong>sub DSL for HTML ids and classes</strong>. It's similar to CSS selectors.</p>
 <p>Let's say you have a <code>div</code> like this:</p>

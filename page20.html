@@ -9,7 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
+    <meta name="twitter:title" content="">
+
+    <meta property="og:title" content="">
+    <meta property="og:description" content="A blog about the simple joys of functional programming.">
+
     <meta name="description" content="A blog about the simple joys of functional programming.">
+
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,10 +35,10 @@
 
     <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
 
-<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
-  </head>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
 
   <body>
     <header class="banner">
@@ -70,86 +80,86 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
     <div class="main-container">
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="https://google-styleguide.googlecode.com/svn/trunk/lispguide.xml">
-              Google Common Lisp Style Guide
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/google-common-lisp-style-guide">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="https://google-styleguide.googlecode.com/svn/trunk/lispguide.xml">
+            Google Common Lisp Style Guide
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/google-common-lisp-style-guide">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 11, 2012
-          </div>
+        <div class="timestamp">
+          October 11, 2012
+        </div>
 
-          
+        
 <p>In April 2011, Google acquired ITA Software. ITA provides airline flight search for several of the major companies. The interesting thing is that ITA's search engine was written in Common Lisp.</p>
 <p>This style guide shows that Google is adopting the existing Lisp code base instead of rewriting it. Not so surprising since the code is, from what I have heard, well-engineered. But a bit surprising since Google chose Python over Lisp some time ago. Peter Norvig explains the choice a bit on <a href="http://www.youtube.com/watch?v=hE7k0_9k0VA#t=03m20s">Reddit</a> and <a href="http://news.ycombinator.com/item?id=1803815">Hacker News</a>.</p>
 <p>In addition, it also shows that Google is affecting ITA with its culture, to some degree. Google uses this format for <a href="https://google-styleguide.googlecode.com/svn/trunk/">all of its style guides</a>.</p>
 <p>Anyway, I love style guides!</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="https://oracleus.activeevents.com/connect/sessionDetail.ww?SESSION_ID=3242">
-              Clojure/ClojureScript: One Language to Rule the Web
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/clojure-clojurescript-one-language-to-rule-the-web">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="https://oracleus.activeevents.com/connect/sessionDetail.ww?SESSION_ID=3242">
+            Clojure/ClojureScript: One Language to Rule the Web
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/clojure-clojurescript-one-language-to-rule-the-web">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 11, 2012
-          </div>
+        <div class="timestamp">
+          October 11, 2012
+        </div>
 
-          
+        
 <p>Nice intro to Clojurescript.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/static-vs-dynamic-typing">
-              Static vs. Dynamic Typing
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/static-vs-dynamic-typing">
+            Static vs. Dynamic Typing
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 05, 2012
-          </div>
+        <div class="timestamp">
+          October 05, 2012
+        </div>
 
-          
+        
 <p>I was reading <a href="http://programmers.stackexchange.com/questions/167305/what-functionality-does-dynamic-typing-allow">this question</a> on Stack Exchange asking what is possible in a dynamically typed language that is impossible in a statically typed language. Most of the responses were terrible. It reminded me that <strong>the level of discussion surrounding the topic of types in general is very disappointing.</strong> Basically, most people do not know what they are talking about.</p>
 <p>Luckily, one of the answerers posted a link to <a href="http://blogs.perl.org/users/ovid/2010/08/what-to-know-before-debating-type-systems.html">this post about debating type systems</a>. I had never read it before and I am glad I have, now.</p>
 <p>The author takes the approach of describing how people generally use typing terms as opposed to prescribing a definition. His main point is that the terms are generally misunderstood so much that trying to discuss them is not productive. <strong>There is no agreed-upon definition in most contexts.</strong> I agree. I wish it were not the case, though.</p>
@@ -168,35 +178,35 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <p>Just one last word: I am not a dynamic typing zealot. I use Haskell more than Clojure. And I am very excited to see static analysis come to Clojure. However, the static typing crowd seems to have the rhetorical upper hand at the moment. I just want to have better discussions.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.infoq.com/presentations/Impedance-Mismatch">
-              The Impedance Mismatch is Our Fault
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/the-impedance-mismatch-is-our-fault">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.infoq.com/presentations/Impedance-Mismatch">
+            The Impedance Mismatch is Our Fault
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/the-impedance-mismatch-is-our-fault">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 05, 2012
-          </div>
+        <div class="timestamp">
+          October 05, 2012
+        </div>
 
-          
+        
 <p>Stuart Halloway continues the world-round campaign of iconoclastic and well-argumented presentations that spring from Clojure's programming model and now Datomic's architecture. Stuart gives hard-hitting, reasoned practices that make our software better in measurable ways.</p>
 <p>This is just one of the many ways Clojure is having (and will have) a huge impact on programming in any language. Immutable data by default is obvious. A model of time, while not so obvious, will seem like manual memory management does now. Sure, you can work with it, but who would give up garbage collection? Similarly, having a better model of state change (transactional or otherwise) enforced by the language will be something we will not want to live without.</p>
 <p>Separating data from code will take years, maybe a generation, to catch on. Our field has drilled the Java model of Object-Orientation into students for years. But the change has already started. Though not being led by Clojure, JSON is now a universal data format accepted by nearly every language, and the fact that the standard does not allow code in JSON is significant.</p>
@@ -204,70 +214,70 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <p>Enjoy.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.youtube.com/watch?v=A7de6pC-tnU">
-              David Nolen on Clojure's core.logic
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/david-nolen-on-clojure.core.logic">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.youtube.com/watch?v=A7de6pC-tnU">
+            David Nolen on Clojure's core.logic
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/david-nolen-on-clojure.core.logic">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 28, 2012
-          </div>
+        <div class="timestamp">
+          September 28, 2012
+        </div>
 
-          
+        
 <p>A bootleg video of a talk from Strange Loop 2012.</p>
 <p>I do not think the official videos are up yet. For those of us who could not make it to the conference, this is great, even though it was recorded with an iPhone. You can hear Nolen well and see the slides.</p>
 <p>The presentation starts with a short review of how to use <a href="https://github.com/clojure/core.logic">core.logic</a> before Nolen goes into the implementation details. I still need to spend some time understanding the code myself. core.logic is based on miniKanren, described in <a href="http://www.amazon.com/Reasoned-Schemer-Daniel-P-Friedman/dp/0262562146?tag=lisp0b-20"><em>The Reasoned Schemer</em></a>.</p>
 <p>Actually, I have just bought a copy of <a href="http://www.amazon.com/Little-Schemer-Daniel-P-Friedman/dp/0262560992?tag=lisp0b-20"><em>The Little Schemer</em></a>, the first book in the series of which <a href="http://www.amazon.com/Reasoned-Schemer-Daniel-P-Friedman/dp/0262562146?tag=lisp0b-20"><em>The Reasoned Schemer</em></a> is a part. I am trying to catch up on all of these Lisp classics. I will write a review when I am finished, but so far so good.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.infoq.com/presentations/ClojureScript">
-              ClojureScript Anatomy
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/clojurescript-anatomy">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.infoq.com/presentations/ClojureScript">
+            ClojureScript Anatomy
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/clojurescript-anatomy">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 27, 2012
-          </div>
+        <div class="timestamp">
+          September 27, 2012
+        </div>
 
-          
+        
 <p>Michael Fogus:</p>
 <blockquote>
 <p>What is the greatest limitation of Haskell's type system? The greatest limitation in Haskell's type system is it only does Haskell's type system.</p>
@@ -280,62 +290,62 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <p>Those are some ideas I had watching that video and thinking about static analysis in Clojure. I am quite excited.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.youtube.com/playlist?list=PL7664379246A246CB&amp;feature=plcp">
-              Douglas Crockford on Javascript
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/douglas-crockford-amazing">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.youtube.com/playlist?list=PL7664379246A246CB&amp;feature=plcp">
+            Douglas Crockford on Javascript
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/douglas-crockford-amazing">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 21, 2012
-          </div>
+        <div class="timestamp">
+          September 21, 2012
+        </div>
 
-          
+        
 <p>These are amazing. I learned so much about the browser and Javascript that I want to weep for the web.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/data-reusability">
-              On the configurations of data and functions
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/data-reusability">
+            On the configurations of data and functions
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 21, 2012
-          </div>
+        <div class="timestamp">
+          September 21, 2012
+        </div>
 
-          
+        
 <p>Rich Hickey recently commented (I cannot remember where) that there are a limited number of useful configurations of data. He claimed that the Clojure literal syntax is just about right. The one thing to add to it is the extensibility that we now have with 1.4.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
 <p>Part of the context was that we as programmers should be separating data from process. The separation makes our data more reusable. A string is a string in any language. An array is an array. Data is data and should be regarded as such. This allows for much more reuse than object oriented programming ever has. We can see the tremendous success of JSON as a case in point: a well-defined, constrained data language that gets it mostly right.</p>
 <p>But Hickey's point goes a little farther, I think. It is not just data that is reusable, but functions as well. Look at the enormous savings in the amount of code required to get a Swing app running when you use <a href="https://github.com/daveray/seesaw">Seesaw</a>. I am not just talking only about the incessant boilerplate anonymous class declarations Swing forces you to write. I am talking also about the fact that I can use any function to handle an event. I do not need to figure out what class the thing is expecting. Defining a subclass of a single class is inherently non-reusable.</p>
@@ -349,35 +359,35 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html">
-              Class AbstractSingletonProxyFactoryBean
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/class-abstractsingletonproxyfactorybean">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html">
+            Class AbstractSingletonProxyFactoryBean
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/class-abstractsingletonproxyfactorybean">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 20, 2012
-          </div>
+        <div class="timestamp">
+          September 20, 2012
+        </div>
 
-          
+        
 <p>From the docs:</p>
 <blockquote>
 <p>Convenient proxy factory bean superclass for proxy factory beans that create only singletons.</p>
@@ -386,35 +396,35 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <p>Good thing this is &quot;convenient&quot;.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="https://vimeo.com/45136212">
-              The Datomic Architecture and Data Model
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/the-datomic-architecture-and-data-model">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="https://vimeo.com/45136212">
+            The Datomic Architecture and Data Model
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/the-datomic-architecture-and-data-model">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 20, 2012
-          </div>
+        <div class="timestamp">
+          September 20, 2012
+        </div>
 
-          
+        
 <p>Rich Hickey:</p>
 <blockquote>
 <p>This is not a schema<em>less</em> system. There's no such thing as a schema<em>less</em> system. There are systems where you write your schema down and ones where you don't. There's no such thing as a schemaless database. So we do require you to be explicit about this part of your database.</p>
@@ -423,15 +433,15 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
 <p>That said, the <a href="http://docs.datomic.com/schema.html">Datomic schemas</a>, along with the &quot;datom&quot; model, do look expressive.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
       <div class="notes">
@@ -459,45 +469,45 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
       document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
 
           if(window.oberon && mixpanel) {
-            if(document.cookie.indexOf('oberon-id') < 0) {
-              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
-              mixpanel.alias(window.oberon.id);
-              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
-            }
-            mixpanel.identify(window.oberon.id);
-          }
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
 
-      mixpanel.register({URL: window.location.pathname,
-                         Title: $("title").text()});
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
 
-      mixpanel.track("Page Visit");
+                                                    mixpanel.track("Page Visit");
 
-      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
-      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
 
-      mixpanel.track_links('a.homepage-offer-box-link',
-                           'Click PurelyFunctional.tv',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      mixpanel.track_links('a.js-clojuregazette',
-                           'Click Clojure Gazette',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      $('input[name=EMAIL]').change(function() {
-                                                      var i = $(this);
-                                                      window.o_email = i.val();
-                                                      });
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
 
-      $('form').submit(function() {
-        if(window.o_email)
-          mixpanel.people.set({"$email": window.o_email});
-});
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
 
-    </script>
+                                                    </script>
 
   </body>
 </html>

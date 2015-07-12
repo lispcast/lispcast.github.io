@@ -9,7 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>Nil Punning (Or Null Pointers Considered Not So Bad) | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Null pointers are still a problem in Clojure, but several design decisions have made them less problematic than other languages.">
+    <meta name="twitter:title" content="Nil Punning (Or Null Pointers Considered Not So Bad)">
+
+    <meta property="og:title" content="Nil Punning (Or Null Pointers Considered Not So Bad)">
+    <meta property="og:description" content="Null pointers are still a problem in Clojure, but several design decisions have made them less problematic than other languages.">
+
     <meta name="description" content="Null pointers are still a problem in Clojure, but several design decisions have made them less problematic than other languages.">
+
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,10 +35,10 @@
 
     <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
 
-<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
-  </head>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
 
   <body>
     <header class="banner">
@@ -70,19 +80,19 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
     <div class="main-container">
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/nil-punning">
-              Nil Punning (Or Null Pointers Considered Not So Bad)
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/nil-punning">
+            Nil Punning (Or Null Pointers Considered Not So Bad)
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 12, 2013
-          </div>
+        <div class="timestamp">
+          September 12, 2013
+        </div>
 
-          
+        
 <p>Null pointers are <a href="http://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">considered by their inventor</a> to be a huge mistake. Clojure inherits its null pointer, called <code>nil</code> in Clojure, from the JVM. In contrast to Java<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, Clojure seems to embrace the null pointer. In this post, I'd like to explore how Clojure uses the null pointer in what is often called <em>nil-punning</em>.</p>
 <p>Nil-punning has its roots in the very first Lisps, where <code>nil</code> was both false (the boolean value) and the end of a list (the empty list). It was also often used to represent &quot;no answer&quot;, as in what is the first element of an empty list. It is called <em>punning</em> because you can use it to mean different things in different contexts.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
 <p><em>In Clojure, <code>nil</code>, as a value, is nearly void of meaning. And it is all pervasive, because it can be returned from any Clojure function or Java method.</em></p>
@@ -143,15 +153,15 @@ Learn more
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
       <div class="notes">
@@ -179,45 +189,45 @@ Learn more
       document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
 
           if(window.oberon && mixpanel) {
-            if(document.cookie.indexOf('oberon-id') < 0) {
-              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
-              mixpanel.alias(window.oberon.id);
-              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
-            }
-            mixpanel.identify(window.oberon.id);
-          }
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
 
-      mixpanel.register({URL: window.location.pathname,
-                         Title: $("title").text()});
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
 
-      mixpanel.track("Page Visit");
+                                                    mixpanel.track("Page Visit");
 
-      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
-      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
 
-      mixpanel.track_links('a.homepage-offer-box-link',
-                           'Click PurelyFunctional.tv',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      mixpanel.track_links('a.js-clojuregazette',
-                           'Click Clojure Gazette',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      $('input[name=EMAIL]').change(function() {
-                                                      var i = $(this);
-                                                      window.o_email = i.val();
-                                                      });
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
 
-      $('form').submit(function() {
-        if(window.o_email)
-          mixpanel.people.set({"$email": window.o_email});
-});
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
 
-    </script>
+                                                    </script>
 
   </body>
 </html>

@@ -9,7 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
+    <meta name="twitter:title" content="">
+
+    <meta property="og:title" content="">
+    <meta property="og:description" content="A blog about the simple joys of functional programming.">
+
     <meta name="description" content="A blog about the simple joys of functional programming.">
+
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,10 +35,10 @@
 
     <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
 
-<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
-  </head>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
 
   <body>
     <header class="banner">
@@ -70,19 +80,19 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
     <div class="main-container">
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/how-to-use-new-relic-with-clojure-on-heroku">
-              How to Use New Relic with Clojure on Heroku
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/how-to-use-new-relic-with-clojure-on-heroku">
+            How to Use New Relic with Clojure on Heroku
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            December 03, 2013
-          </div>
+        <div class="timestamp">
+          December 03, 2013
+        </div>
 
-          
+        
 <p><a href="https://www.heroku.com/">Heroku</a> is a great service, especially for the lone developer who wants free hosting for an app.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> The free hosting works just like the paid service except that your server will be &quot;spun down&quot;, meaning that after five minutes of no activity, <strong>your server is stopped</strong>. It will be &quot;spun up&quot; again when there is a request. This spin up process can take a while and certainly <strong>does not give a good user experience</strong>.</p>
 <p>Luckily there is a recommended way of avoiding this delay. The solution is to run <a href="http://newrelic.com/">New Relic</a> monitoring, which periodically polls your server, avoiding the five minutes of no activity and hence <strong>keeping your server running</strong>.</p>
 <p>In addition to keeping your server from falling asleep, it also gathers lots of profiling information that could help you understand your server as it runs in production. Luckily, <strong>both Heroku and New Relic offer free tiers</strong>. This brings us to my favorite financial formula:</p>
@@ -185,35 +195,35 @@ No spam. Ever.
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://logaan.github.io/clojure/validations/vlad/2013/11/25/what-to-look-for-in-validations.html">
-              What to look for in validations
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/what-to-look-for-in-validations">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://logaan.github.io/clojure/validations/vlad/2013/11/25/what-to-look-for-in-validations.html">
+            What to look for in validations
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/what-to-look-for-in-validations">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            November 25, 2013
-          </div>
+        <div class="timestamp">
+          November 25, 2013
+        </div>
 
-          
+        
 <p>Nice validation library plus very good motivational blog post.</p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
@@ -224,35 +234,35 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.shirky.com/weblog/2013/11/healthcare-gov-and-the-gulf-between-planning-and-reality/">
-              Healthcare.gov and the Gulf Between Planning and Reality
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/healthcare-gov-gulf-between-planning-and-reality">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.shirky.com/weblog/2013/11/healthcare-gov-and-the-gulf-between-planning-and-reality/">
+            Healthcare.gov and the Gulf Between Planning and Reality
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/healthcare-gov-gulf-between-planning-and-reality">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            November 24, 2013
-          </div>
+        <div class="timestamp">
+          November 24, 2013
+        </div>
 
-          
+        
 <p>Clay Shirky nails it with nice, narrative style.</p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
@@ -263,30 +273,30 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/on-type-unity">
-              On Type Unity
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/on-type-unity">
+            On Type Unity
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            November 02, 2013
-          </div>
+        <div class="timestamp">
+          November 02, 2013
+        </div>
 
-          
+        
 <blockquote>
 <p>It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures. -- <a href="http://www.cs.yale.edu/quotes.html">Alan Perlis</a></p>
 </blockquote>
@@ -318,35 +328,35 @@ No spam. Ever.
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.youtube.com/watch?v=eky5uKILXtM">
-              Maciej Cegłowski, Pinboard - XOXO Festival (2013)
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/maciej-ceglowski-pinboard-xoxo-2013">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.youtube.com/watch?v=eky5uKILXtM">
+            Maciej Cegłowski, Pinboard - XOXO Festival (2013)
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/maciej-ceglowski-pinboard-xoxo-2013">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 18, 2013
-          </div>
+        <div class="timestamp">
+          October 18, 2013
+        </div>
 
-          
+        
 <iframe width="420" height="315" src="//www.youtube.com/embed/eky5uKILXtM" frameborder="0" allowfullscreen></iframe>
 
 <blockquote>
@@ -359,35 +369,35 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://blog.fogus.me/2013/10/07/scala-sharp-and-gets-things-cut/">
-              Scala: sharp and gets things cut
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/sharp-and-gets-things-cut">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://blog.fogus.me/2013/10/07/scala-sharp-and-gets-things-cut/">
+            Scala: sharp and gets things cut
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/sharp-and-gets-things-cut">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 08, 2013
-          </div>
+        <div class="timestamp">
+          October 08, 2013
+        </div>
 
-          
+        
 <p>Michael Fogus is right (as usual) about this one. Someone with Odersky's stature should not fear lack of humilty but instead lack of confidence.</p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
@@ -398,35 +408,35 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://us4.campaign-archive2.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=c43c157edd">
-              Ambrose Bonnaire-Sergeant interviewed about Typed Clojure
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/ambrose-interview-typed-clojure">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://us4.campaign-archive2.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=c43c157edd">
+            Ambrose Bonnaire-Sergeant interviewed about Typed Clojure
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/ambrose-interview-typed-clojure">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 08, 2013
-          </div>
+        <div class="timestamp">
+          October 08, 2013
+        </div>
 
-          
+        
 <p>Way back in May 2012, Ambrose was beginning work on Typed Clojure for Google Summer of Code. I interviewed him to get an idea of what kind of type system we could expect. Since he's now running a very successful <a href="http://www.indiegogo.com/projects/typed-clojure">crowd funding campaign</a>, I thought I'd bring up this blast from the past.</p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
@@ -437,30 +447,30 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/lisp-with-macros-language-stack">
-              Lisp with Macros is Two Languages
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/lisp-with-macros-language-stack">
+            Lisp with Macros is Two Languages
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 08, 2013
-          </div>
+        <div class="timestamp">
+          October 08, 2013
+        </div>
 
-          
+        
 <p>A Lisp with a macro system is actually two languages in a stack. The bottom language is the macro-less target language (which I'll call the Lambda language). It includes everything that can be interpreted or compiled directly.</p>
 <p>The Macro language is a superset of the Lambda language. It has its own semantics, which is that Macro language code is recursively expanded into code of the Lambda language.</p>
 <p>Why isn't this obvious at first glance? My take on it is that because the syntax of both languages is the same and the output of the Macro language is Lambda language code (instead of machine code), it is easy to see the Macro language as a feature of the Lisp. Macros in Lisp are stored in the dynamic environment (in a way similar to functions), are compiled just like functions in the Lisp language (also written in the Macro language) which makes it even easier to confuse the layers. It seems like a phase in some greater language which is the amalgam of the two.</p>
@@ -483,30 +493,30 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/making-true-false-easy">
-              Making True/False Questions Easy
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/making-true-false-easy">
+            Making True/False Questions Easy
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 21, 2013
-          </div>
+        <div class="timestamp">
+          September 21, 2013
+        </div>
 
-          
+        
 <p>When I was training as a teacher, I gave a simple quiz with True/False (T/F) questions. The results were terrible. Worse than chance. On one question, <strong>about 20% of the class got it right</strong>.</p>
 <p>I had asked a simple question involving a logical AND:</p>
 <blockquote>
@@ -540,30 +550,30 @@ No spam. Ever.
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/use-your-imagination">
-              Use Your Imagination
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/use-your-imagination">
+            Use Your Imagination
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 17, 2013
-          </div>
+        <div class="timestamp">
+          September 17, 2013
+        </div>
 
-          
+        
 <p><strong>I always hated in school when the teacher would instruct us to <em>use our imaginations</em> to solve problems.</strong> Well, hmm. Especially as a kid, my imagination was filled with magic. Not very useful. Not that you shouldn't use your imagination. You should. But as an instruction, I find it lacking. The teachers were just being lazy.</p>
 <p>See, the thing I learned through a lot of experiments and reading is that our imagination is very powerful if you use it correctly. <strong>But much as our computers can run any possible program, our minds can imagine any situation.</strong> The key to using our imagination effectively is to learn to harness the infinite potential and direct it to a purpose.</p>
 <p>One set of techniques I studied was called <em>Neuro Linguistic Programming</em>. It is thoroughly interesting, especially the earliest stuff, but avoid the cultish seminars. The early stuff was based on <a href="http://en.wikipedia.org/wiki/Cybernetics">Cybernetics</a> and linguistics (specifically Noam Chomsky's <a href="http://en.wikipedia.org/wiki/Transformational_grammar">transformational grammar</a>). It was quite rigorous as far as informal studies go. It has since become a new-age movement. Tread carefully if you wish to explore it.</p>
@@ -590,15 +600,15 @@ No spam. Ever.
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
       <div class="notes">
@@ -626,45 +636,45 @@ No spam. Ever.
       document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
 
           if(window.oberon && mixpanel) {
-            if(document.cookie.indexOf('oberon-id') < 0) {
-              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
-              mixpanel.alias(window.oberon.id);
-              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
-            }
-            mixpanel.identify(window.oberon.id);
-          }
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
 
-      mixpanel.register({URL: window.location.pathname,
-                         Title: $("title").text()});
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
 
-      mixpanel.track("Page Visit");
+                                                    mixpanel.track("Page Visit");
 
-      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
-      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
 
-      mixpanel.track_links('a.homepage-offer-box-link',
-                           'Click PurelyFunctional.tv',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      mixpanel.track_links('a.js-clojuregazette',
-                           'Click Clojure Gazette',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      $('input[name=EMAIL]').change(function() {
-                                                      var i = $(this);
-                                                      window.o_email = i.val();
-                                                      });
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
 
-      $('form').submit(function() {
-        if(window.o_email)
-          mixpanel.people.set({"$email": window.o_email});
-});
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
 
-    </script>
+                                                    </script>
 
   </body>
 </html>

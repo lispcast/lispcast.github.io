@@ -9,7 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>Keyword: functional-programming | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
+    <meta name="twitter:title" content="Keyword: functional-programming">
+
+    <meta property="og:title" content="Keyword: functional-programming">
+    <meta property="og:description" content="A blog about the simple joys of functional programming.">
+
     <meta name="description" content="A blog about the simple joys of functional programming.">
+
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,10 +35,10 @@
 
     <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
 
-<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
-  </head>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
 
   <body>
     <header class="banner">
@@ -70,19 +80,19 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
     <div class="main-container">
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/object-function-duals-dispatch">
-              Object-Oriented Dispatch is the Dual of Functional Dispatch
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/object-function-duals-dispatch">
+            Object-Oriented Dispatch is the Dual of Functional Dispatch
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            March 11, 2015
-          </div>
+        <div class="timestamp">
+          March 11, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>Object-oriented dispatch is contrasted with functional dispatch, but they are shown to be two one-dimensional views of the same two-dimensional data. Clojure does not provide the two-dimensional representation, but does interesting things to transcend the one-dimensional views.</em></p>
 <p>About a month ago, I wrote a post about how <a href="http://www.lispcast.com/object-oriented-vs-functional-duals">OO-style is the dual of functional-style</a>. OO focuses on the data first, while functional focuses on the code. It is cool that <strong>the correspondence between the two is fairly clear and mechanical</strong>. It means that they're equivalent in a way. The distinction is mostly important when choosing how to represent a problem. A language should provide ways to express both (as Clojure does), and a way to translate between the two (which Clojure does not).</p>
 <p>But it goes further than data vs code. In OO, the object is the unit of data (which manifests as the principle of encapsulation). <strong>But the object is also the unit of <em>dispatch</em>.</strong> Objects know their class, and classes know the implementations of their methods. <em>Class first, behavior second.</em> In a functional style of programming, <strong>the function is the unit of dispatch</strong>. A function knows how to react to all possible classes of arguments. <em>Behavior first, class second.</em></p>
@@ -198,30 +208,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/object-oriented-vs-functional-duals">
-              Object-Oriented Programming is the Dual of Functional Programming
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/object-oriented-vs-functional-duals">
+            Object-Oriented Programming is the Dual of Functional Programming
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            February 08, 2015
-          </div>
+        <div class="timestamp">
+          February 08, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>Object-Oriented Programming is often shown in contrast to Functional Programming. But they are so exactly opposite that they are duals, and so equivalent in important ways. Which one to use should be left up to the programmer, as is done in Clojure and Javascript.</em></p>
 <p>Let's take a quick look at programming from an interesting perspective. Let's say that programs are divided into <em>code</em> and <em>data</em>. <sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> <strong>These are the two main axes</strong>: structuring code and structuring data.</p>
 <p>Now, let's design a language. First decisions: <strong>which axis is primary, which is secondary</strong>?</p>
@@ -292,30 +302,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/paper-metaphor">
-              The Paper Metaphor
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/paper-metaphor">
+            The Paper Metaphor
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            February 27, 2015
-          </div>
+        <div class="timestamp">
+          February 27, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>Functional programs follow a simple rule: never write on the same paper twice. Imperative programs are free to define their own rules. Both have interesting consequences.</em></p>
 <p>I just read <a href="https://emily.st/2015/02/26/functional-programming-for-everyone-else/">Functional Programming for Everyone Else</a> by Emily St. It's a good read about the fundamental differences between Turing Machines and Lambda Calculus. Near the end, she mentioned this:</p>
 <blockquote>
@@ -358,30 +368,30 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/the-content-of-your-code">
-              The Content of Your Code
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/the-content-of-your-code">
+            The Content of Your Code
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 06, 2014
-          </div>
+        <div class="timestamp">
+          October 06, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>Code style is important, but way less important than content. Yet everyone talks about style because it's easier. Let's talk about content. I'll start with some bullet points.</em></p>
 <p>In fiction writing, there is a fine, but visible, line between style and content. Style is your <strong>choice of words and grammar</strong> while you're telling a story. Content is <strong>the parts of the story</strong> itself. It's the characters, the plot devices, the motivations, etc.</p>
 <p>Style is important. Classic works of literature usually have a good style. But content is more important. Good style can enhance a story. But a story can be retold many times, each with a different style, because a good character and story can stand on its own. <strong>No amount of style is going to save crappy storytelling</strong> with uninteresting characters. It didn't work for The Matrix 2 &amp; 3, and man, did not help at all in the Star Wars prequels.</p>
@@ -441,30 +451,30 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/the-world-is-mutable">
-              But the World is Mutable
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/the-world-is-mutable">
+            But the World is Mutable
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            May 11, 2015
-          </div>
+        <div class="timestamp">
+          May 11, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>The world may be mutable, but people have been using the notion of immutability to build reliable systems for a long time.</em></p>
 <p>Immutability is a hard topic to breach. As a programmer used to modeling the world, you might object to immutable data structures. How do you model a changing world? <strong>Why would you choose to use immutable data structures when everything in the world is changeable?</strong></p>
 <p>Let's do a little thought experiment. Let's look at <strong>a nice mutable system</strong>: paper and pencil. You can write, erase, and write again. It's very convenient. It lets you correct mistakes. And when you don't need something anymore, you can easily erase it.</p>
@@ -517,30 +527,30 @@ Learn more
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/what-is-functional-programming">
-              What is Functional Programming?
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/what-is-functional-programming">
+            What is Functional Programming?
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            July 01, 2014
-          </div>
+        <div class="timestamp">
+          July 01, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>I prefer to define Functional Programming as making a distinction between pure and impure code. With this definition, you can program functionally in any language. What differentiates the functional languages is how much help they give you to make the distinction.</em></p>
 <p>There are a lot of conflicting definitions of Functional Programming out there. <strong>I'd like to share mine, which serves me well.</strong> It explains why Haskell is more functional than Scheme, and also how you can program functionally in a non-functional language like Java.</p>
 <p><strong>Functional programming means programming with a distinction between pure code and impure code.</strong> Pure code has no side effects. It's referentially transparent. It means the same thing every time you run it. Impure code contains side effects, so running it twice is different from running it once.</p>
@@ -579,35 +589,35 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.infoq.com/presentations/functional-pros-cons">
-              Deconstructing Functional Programming
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/deconstructing-functional-programming">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.infoq.com/presentations/functional-pros-cons">
+            Deconstructing Functional Programming
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/deconstructing-functional-programming">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            December 22, 2013
-          </div>
+        <div class="timestamp">
+          December 22, 2013
+        </div>
 
-          
+        
 <blockquote>
 <p>Because if you think about it, the stack itself is just an optimization. Right? There are these frames which contain information about each invocation. Each stack frame. Each activation record. And that's what they are--they're activation records. They're sort of objects. If you really have objects on the brain, like I do, then you realize that they're all just objects.</p>
 </blockquote>
@@ -635,15 +645,15 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
       <div class="notes">
@@ -663,45 +673,45 @@ Learn more
       document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
 
           if(window.oberon && mixpanel) {
-            if(document.cookie.indexOf('oberon-id') < 0) {
-              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
-              mixpanel.alias(window.oberon.id);
-              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
-            }
-            mixpanel.identify(window.oberon.id);
-          }
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
 
-      mixpanel.register({URL: window.location.pathname,
-                         Title: $("title").text()});
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
 
-      mixpanel.track("Page Visit");
+                                                    mixpanel.track("Page Visit");
 
-      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
-      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
 
-      mixpanel.track_links('a.homepage-offer-box-link',
-                           'Click PurelyFunctional.tv',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      mixpanel.track_links('a.js-clojuregazette',
-                           'Click Clojure Gazette',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      $('input[name=EMAIL]').change(function() {
-                                                      var i = $(this);
-                                                      window.o_email = i.val();
-                                                      });
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
 
-      $('form').submit(function() {
-        if(window.o_email)
-          mixpanel.people.set({"$email": window.o_email});
-});
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
 
-    </script>
+                                                    </script>
 
   </body>
 </html>

@@ -9,7 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
+    <meta name="twitter:title" content="">
+
+    <meta property="og:title" content="">
+    <meta property="og:description" content="A blog about the simple joys of functional programming.">
+
     <meta name="description" content="A blog about the simple joys of functional programming.">
+
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,10 +35,10 @@
 
     <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
 
-<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
-  </head>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
 
   <body>
     <header class="banner">
@@ -70,19 +80,19 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
     <div class="main-container">
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/nil-punning">
-              Nil Punning (Or Null Pointers Considered Not So Bad)
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/nil-punning">
+            Nil Punning (Or Null Pointers Considered Not So Bad)
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 12, 2013
-          </div>
+        <div class="timestamp">
+          September 12, 2013
+        </div>
 
-          
+        
 <p>Null pointers are <a href="http://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">considered by their inventor</a> to be a huge mistake. Clojure inherits its null pointer, called <code>nil</code> in Clojure, from the JVM. In contrast to Java<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, Clojure seems to embrace the null pointer. In this post, I'd like to explore how Clojure uses the null pointer in what is often called <em>nil-punning</em>.</p>
 <p>Nil-punning has its roots in the very first Lisps, where <code>nil</code> was both false (the boolean value) and the end of a list (the empty list). It was also often used to represent &quot;no answer&quot;, as in what is the first element of an empty list. It is called <em>punning</em> because you can use it to mean different things in different contexts.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
 <p><em>In Clojure, <code>nil</code>, as a value, is nearly void of meaning. And it is all pervasive, because it can be returned from any Clojure function or Java method.</em></p>
@@ -143,30 +153,30 @@ Learn more
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/tap-into-your-social-brain">
-              Tap Into Your Social Brain
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/tap-into-your-social-brain">
+            Tap Into Your Social Brain
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 11, 2013
-          </div>
+        <div class="timestamp">
+          September 11, 2013
+        </div>
 
-          
+        
 <p>Let's look at this logic problem:</p>
 <p><center>
 <img src="http://lispcast.com/img/logic-cards.png" alt="A logic problem involving cards" />
@@ -209,35 +219,35 @@ Learn more
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.braveclojure.com/">
-              Clojure for the Brave and True
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/brave-clojure">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.braveclojure.com/">
+            Clojure for the Brave and True
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/brave-clojure">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 11, 2013
-          </div>
+        <div class="timestamp">
+          September 11, 2013
+        </div>
 
-          
+        
 <p>I am pretty excited about this project. Please check it out.</p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
@@ -248,35 +258,35 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://blog.jacius.info/2012/05/29/a-personal-lisp-crisis/">
-              A Personal Lisp Crisis
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/a-personal-lisp-crisis">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://blog.jacius.info/2012/05/29/a-personal-lisp-crisis/">
+            A Personal Lisp Crisis
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/a-personal-lisp-crisis">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 11, 2013
-          </div>
+        <div class="timestamp">
+          September 11, 2013
+        </div>
 
-          
+        
 <blockquote>
 <p>There are other languages with healthier communities, more momentum, cleaner cores, and features on par with CL. So I have to ask myself, why bother with CL?</p>
 </blockquote>
@@ -288,30 +298,30 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/why-technical-explanation-alone-is-not-enough">
-              Why technical explanation alone is not enough
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/why-technical-explanation-alone-is-not-enough">
+            Why technical explanation alone is not enough
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            September 09, 2013
-          </div>
+        <div class="timestamp">
+          September 09, 2013
+        </div>
 
-          
+        
 <p>Here's a problem you might see on a standardized test:</p>
 <p><center>
 <img src="http://www.lispcast.com/img/logic-puzzle.png" alt="Choose the answer that makes the following statement FALSE: If the Triangle is Red, then the Square is Blue." />
@@ -369,63 +379,63 @@ D. ~X &amp;  Y  </code></pre>
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html">
-              Functors, Applicatives, And Monads In Pictures
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/functors-applicatives-and-monads-in-pictures">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html">
+            Functors, Applicatives, And Monads In Pictures
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/functors-applicatives-and-monads-in-pictures">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            May 22, 2013
-          </div>
+        <div class="timestamp">
+          May 22, 2013
+        </div>
 
-          
+        
 <p>This is a nice, short post. It does the job well, though it might need a few readings if you have never seen these concepts before.</p>
 <p>Learn these ideas and get on with your life. The sooner we get over this Functor/Applicative/Monad obsession, the better.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/3-things-java-can-steal-from-clojure">
-              3 Things Java Programmers Can Steal from Clojure
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/3-things-java-can-steal-from-clojure">
+            3 Things Java Programmers Can Steal from Clojure
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            March 09, 2013
-          </div>
+        <div class="timestamp">
+          March 09, 2013
+        </div>
 
-          
+        
 <p>The other day I wrote about some <a href="http://www.lispcast.com/java-learn-from-clojure">principles that programming in Clojure</a> makes very clear. Those principles could be applied just as well in Java, and often are. However, there are some things that make Clojure distinct.</p>
 <p>Three of those distinctions are the way it deals with state change (using an <a href="http://en.wikipedia.org/wiki/Software_transactional_memory">STM</a>), the <a href="http://clojure.org/data_structures">Persistent Data Structures</a>, and the literal syntax for data with a reader (now called <a href="https://github.com/edn-format/edn">edn</a>). Diving into the <a href="https://github.com/clojure/clojure">source code for Clojure</a>, I realized that these three bits were written in Java. And that means that they can be used from Java. It is certainly not as easy as using them in Clojure, but they are all three powerful enough to warrant using them if you are using Java. <a href="http://mvnrepository.com/artifact/org.clojure/clojure/1.5.0">You simply need to add one more JAR to your project (or add a maven dependency).</a> I have constructed a few minimal examples of their use.</p>
 <h3 id="persistent-data-structures">1. Persistent Data Structures</h3>
@@ -548,30 +558,30 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/java-learn-from-clojure">
-              4 Things Java Programmers Can Learn from Clojure without learning Clojure
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/java-learn-from-clojure">
+            4 Things Java Programmers Can Learn from Clojure without learning Clojure
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            March 06, 2013
-          </div>
+        <div class="timestamp">
+          March 06, 2013
+        </div>
 
-          
+        
 <p>I was trained in Java at University. The OOP matrix was firmly implanted in my thinking. I wanted to share some things that I have learned from Clojure that were certainly possible in Java but never became fundamental to my programming practice.</p>
 <p>Clojure certainly has learned a lot from Java. It might be cool if the learning went both ways. These are universal principles. In fact, these principles are actually well known in the OOP world. You probably already know them, so learning Clojure is not required (but it is recommended!).</p>
 <h3 id="use-immutable-values">1. Use immutable values</h3>
@@ -641,30 +651,30 @@ Learn more
 
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/clojure-screencasts">
-              Existing Clojure Introductory Videos
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure-screencasts">
+            Existing Clojure Introductory Videos
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            March 03, 2013
-          </div>
+        <div class="timestamp">
+          March 03, 2013
+        </div>
 
-          
+        
 <p>As you probably know, I am running a <a href="http://www.kickstarter.com/projects/376627045/lispcast-introduction-to-clojure-videos">Kickstarter project to create Introduction to Clojure videos</a>. The project is still going (it runs until March 14, 2013). Please support it if you want the videos.</p>
 <p>I know that there are many great videos out there that teach the basics of Clojure. Allow me to present my selection.</p>
 <p><a href="http://www.youtube.com/watch?v=P6S_1nCfjWA">Jim Slaterry is creating video walkthroughs</a> of the <a href="http://clojurekoans.com/">Clojure Koans</a>.</p>
@@ -674,47 +684,47 @@ Learn more
 <p><a href="http://www.youtube.com/watch?v=dGVqrGmwOAw">Rich Hickey</a> gave <a href="http://www.youtube.com/watch?v=P76Vbsk_3J0">some talks</a> a long time ago teaching Clojure. Again, a little old, but I learned a lot from them when they were new.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.clojuresphere.com/">
-              ClojureSphere
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/clojuresphere">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.clojuresphere.com/">
+            ClojureSphere
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/clojuresphere">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            March 01, 2013
-          </div>
+        <div class="timestamp">
+          March 01, 2013
+        </div>
 
-          
+        
 <p>Pretty cool.</p>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
       <div class="notes">
@@ -742,45 +752,45 @@ Learn more
       document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
 
           if(window.oberon && mixpanel) {
-            if(document.cookie.indexOf('oberon-id') < 0) {
-              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
-              mixpanel.alias(window.oberon.id);
-              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
-            }
-            mixpanel.identify(window.oberon.id);
-          }
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
 
-      mixpanel.register({URL: window.location.pathname,
-                         Title: $("title").text()});
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
 
-      mixpanel.track("Page Visit");
+                                                    mixpanel.track("Page Visit");
 
-      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
-      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
 
-      mixpanel.track_links('a.homepage-offer-box-link',
-                           'Click PurelyFunctional.tv',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      mixpanel.track_links('a.js-clojuregazette',
-                           'Click Clojure Gazette',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      $('input[name=EMAIL]').change(function() {
-                                                      var i = $(this);
-                                                      window.o_email = i.val();
-                                                      });
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
 
-      $('form').submit(function() {
-        if(window.o_email)
-          mixpanel.people.set({"$email": window.o_email});
-});
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
 
-    </script>
+                                                    </script>
 
   </body>
 </html>

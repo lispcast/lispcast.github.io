@@ -9,7 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
+    <meta name="twitter:title" content="">
+
+    <meta property="og:title" content="">
+    <meta property="og:description" content="A blog about the simple joys of functional programming.">
+
     <meta name="description" content="A blog about the simple joys of functional programming.">
+
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,10 +35,10 @@
 
     <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
 
-<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
-  </head>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
 
   <body>
     <header class="banner">
@@ -70,19 +80,19 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
     <div class="main-container">
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/separation-of-presentation-and-content">
-              Separation of Presentation and Content
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/separation-of-presentation-and-content">
+            Separation of Presentation and Content
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            April 17, 2014
-          </div>
+        <div class="timestamp">
+          April 17, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>One reason to separate style from content is to reuse HTML or CSS. Ultimately, we would like a solution where we can reuse both.</em></p>
 <h3 id="reusable-content">Reusable Content</h3>
 <p>There is an economic reason to separate presentation from content. Publishers have thousands of pages of HTML on their site, yet they want to enhance the style of their pages over time. It would <strong>cost a lot of money to change every single page to match their new style</strong>. So they invest a little more time writing each page so that the HTML markup does not refer to styles but to the semantics of the content (referred to as <em>semantic HTML</em>). Then they hire a designer to write CSS to make their existing content look new. The HTML is permanent and reusable, and the CSS is temporary and not-reusable. <strong>The separation is only one way: the HTML doesn't know the CSS, but the CSS does know the HTML.</strong></p>
@@ -130,30 +140,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/clojure-web-security">
-              Clojure Web Security
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure-web-security">
+            Clojure Web Security
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            April 05, 2014
-          </div>
+        <div class="timestamp">
+          April 05, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>Use the OWASP Top Ten Project to minimize security vulnerabilities in your Clojure web application.</em></p>
 <p>Aaron Bedra gave a very damning talk about <a href="https://www.youtube.com/watch?v=CBL59w7fXw4">the security of Clojure web applications</a>. He went so far as to say that Clojure web apps are some of the worst he has seen. You should <a href="https://www.youtube.com/watch?v=CBL59w7fXw4">watch the talk</a>. He has some good recommendations.</p>
 <p>One of the jobs of web frameworks is to handle security concerns inherent in the web itself. Because most Clojure programmers build their own web stack, they often <strong>fail to look at the security implications of their application</strong>. They do not protect their site from even the easiest and most common forms of vulnerabilities. These vulnerabilities are problems with the way the web works, not with the particular server technology, yet it has become the server's responsibility to mitigate the vulnerabilities. Luckily, <strong>the vulnerabilities are well-studied and there are known fixes</strong>.</p>
@@ -391,30 +401,30 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/ring-spec-hang-on-wall">
-              A Ring Spec to Hang on the Wall
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/ring-spec-hang-on-wall">
+            A Ring Spec to Hang on the Wall
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            March 28, 2014
-          </div>
+        <div class="timestamp">
+          March 28, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>The Ring SPEC is the core of the Clojure web ecosystem. The standard is small and <a href="http://www.purelyfunctional.tv/web-dev-in-clojure#subscribe">a reference</a> is handy.</em></p>
 <p>If you program the web in Clojure, you probably use Ring. Even if you don't, your server is likely <a href="http://http-kit.org/">Ring compatible</a>.</p>
 <p>Ring has a small SPEC. It's centered around defining the keys one can expect in the request and response maps. And the exact names for keywords are easy to forget.</p>
@@ -477,30 +487,30 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/what-web-framework-should-i-use">
-              What Web Framework Should I Use in Clojure?
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/what-web-framework-should-i-use">
+            What Web Framework Should I Use in Clojure?
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            March 23, 2014
-          </div>
+        <div class="timestamp">
+          March 23, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>There are a number of web frameworks in Clojure, but beginners should roll their own server stack themselves to tap into the Ring ecosystem.</em></p>
 <p>One question that I am asked a lot by beginners in Clojure is <strong>&quot;What web framework should I use?&quot;</strong> This is a good question. In Python, there's Django. In PHP, Drupal. And of course in Ruby, there's the king of all web frameworks, Ruby on Rails.</p>
 <p>What framework should you use in Clojure? The question is actually kind of hard to answer. There are a number of web frameworks out there. Some people call <a href="https://github.com/weavejester/compojure">Compojure</a> a framework, though it is really a library. <a href="https://github.com/noir-clojure/lib-noir">lib-noir</a> does a lot of work for you. Then there's your true frameworks, like <a href="https://github.com/pedestal/pedestal">Pedestal</a> or <a href="http://hoplon.io/">Hoplon</a>, which provide infrastructure and abstractions for tackling web development. All of these projects are great, but for a beginner, <strong>I have to recommend building your own web stack starting with Ring</strong>.</p>
@@ -581,30 +591,30 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/when-to-use-a-macro">
-              When To Use a Macro in Clojure
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/when-to-use-a-macro">
+            When To Use a Macro in Clojure
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            March 07, 2014
-          </div>
+        <div class="timestamp">
+          March 07, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>Macros should be avoided to the extent possible. There are three circumstances where they are required.</em></p>
 <p>There's a common theme in Lisp that you should only use macros when you need them. <strong>It is very common to see a new lisper overuse macros.</strong> I did it myself when I first learned Lisp. They are very powerful and make you the king of syntax.</p>
 <p>Clojure macros do have their uses, but why should you avoid them if possible? The principle reason is that <strong>macros are not first-class in Clojure</strong>. You cannot access them at runtime. You cannot pass them as an argument to a function, nor do any of the other powerful stuff you've come to love from functional programming. In short, <strong>macros are not functional programming</strong> (though they can make use of it).</p>
@@ -676,30 +686,30 @@ Learn more
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/less-abstraction-combination">
-              LESS has Better Forms of Abstraction than CSS
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/less-abstraction-combination">
+            LESS has Better Forms of Abstraction than CSS
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            February 12, 2014
-          </div>
+        <div class="timestamp">
+          February 12, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>LESS has obviously better forms of abstraction and combination than CSS. It has recursive style definitions, which is enough to consider it a &quot;powerful language&quot;.</em></p>
 <p>Ok, it's obvious that <a href="http://www.lispcast.com/css-abstraction-combination">CSS has weak forms of combination and abstraction</a>. But now we have a good framework for understanding <em>why</em>. &quot;CSS Preprocessors&quot;, as they are called, are getting really popular now. We would be smart to <strong>analyze LESS in the same way that we analyzed CSS</strong>, if only to temper the glamor of trendiness that surrounds it. <a href="http://twitter.com/ericnormand">Comments are welcome.</a></p>
 <p>Because LESS aims to be a superset of CSS, it has all of <a href="http://www.lispcast.com/css-abstraction-combination">the primitive expressions, means of combination, and means of abstraction that come baked into CSS</a>. I already went over those last time, so I will not go over them again. <strong>So what things are added by LESS?</strong></p>
@@ -744,30 +754,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/css-abstraction-combination">
-              CSS has Weak Forms of Abstraction and Combination
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/css-abstraction-combination">
+            CSS has Weak Forms of Abstraction and Combination
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            February 08, 2014
-          </div>
+        <div class="timestamp">
+          February 08, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>According to the requirements proposed by Abelson and Sussman, CSS does not provide adequate means of combination and abstraction to be considered a powerful language.</em></p>
 <p>I am trying to improve the maintainability and reusability of my CSS over the longterm. I've written about <a href="http://www.lispcast.com/cascading-separation-abstraction">how to organize CSS</a> before. I've learned a lot since I wrote that. I've tried lots of things and talked to lots of people, I finally seem to have found a conceptual framework to capture my new understanding. I'm trying to explore it here. <a href="http://twitter.com/ericnormand">Comments are welcome.</a></p>
 <p>I'm going to take a cue from the first page of <a href="http://mitpress.mit.edu/sicp/">SICP</a> and analyze CSS as a language.</p>
@@ -824,30 +834,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/Hindley-Milner-in-Clojure">
-              Hindley-Milner in Clojure
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/Hindley-Milner-in-Clojure">
+            Hindley-Milner in Clojure
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            January 13, 2014
-          </div>
+        <div class="timestamp">
+          January 13, 2014
+        </div>
 
-          
+        
 <p>
 <center>
   
@@ -906,30 +916,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/react-another-level-of-indirection">
-              React: Another Level of Indirection
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/react-another-level-of-indirection">
+            React: Another Level of Indirection
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            December 31, 2013
-          </div>
+        <div class="timestamp">
+          December 31, 2013
+        </div>
 
-          
+        
 <blockquote>
 <p>Any problem in computer science can be solved with another level of indirection. -- David Wheeler</p>
 </blockquote>
@@ -1009,35 +1019,35 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="http://www.infoq.com/presentations/functional-pros-cons">
-              Deconstructing Functional Programming
-            </a>
-            <a class="loguito"
-               href="http://www.lispcast.com/deconstructing-functional-programming">
-              <img class="lambda-loguito"
-                   src="/img/lambda.png" />
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.infoq.com/presentations/functional-pros-cons">
+            Deconstructing Functional Programming
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/deconstructing-functional-programming">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            December 22, 2013
-          </div>
+        <div class="timestamp">
+          December 22, 2013
+        </div>
 
-          
+        
 <blockquote>
 <p>Because if you think about it, the stack itself is just an optimization. Right? There are these frames which contain information about each invocation. Each stack frame. Each activation record. And that's what they are--they're activation records. They're sort of objects. If you really have objects on the brain, like I do, then you realize that they're all just objects.</p>
 </blockquote>
@@ -1065,15 +1075,15 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
       <div class="notes">
@@ -1101,45 +1111,45 @@ No spam. Ever.
       document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
 
           if(window.oberon && mixpanel) {
-            if(document.cookie.indexOf('oberon-id') < 0) {
-              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
-              mixpanel.alias(window.oberon.id);
-              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
-            }
-            mixpanel.identify(window.oberon.id);
-          }
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
 
-      mixpanel.register({URL: window.location.pathname,
-                         Title: $("title").text()});
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
 
-      mixpanel.track("Page Visit");
+                                                    mixpanel.track("Page Visit");
 
-      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
-      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
 
-      mixpanel.track_links('a.homepage-offer-box-link',
-                           'Click PurelyFunctional.tv',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      mixpanel.track_links('a.js-clojuregazette',
-                           'Click Clojure Gazette',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      $('input[name=EMAIL]').change(function() {
-                                                      var i = $(this);
-                                                      window.o_email = i.val();
-                                                      });
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
 
-      $('form').submit(function() {
-        if(window.o_email)
-          mixpanel.people.set({"$email": window.o_email});
-});
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
 
-    </script>
+                                                    </script>
 
   </body>
 </html>

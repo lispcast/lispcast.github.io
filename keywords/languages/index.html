@@ -9,7 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>Keyword: languages | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
+    <meta name="twitter:title" content="Keyword: languages">
+
+    <meta property="og:title" content="Keyword: languages">
+    <meta property="og:description" content="A blog about the simple joys of functional programming.">
+
     <meta name="description" content="A blog about the simple joys of functional programming.">
+
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,10 +35,10 @@
 
     <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
 
-<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
-  </head>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
 
   <body>
     <header class="banner">
@@ -70,19 +80,19 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
     <div class="main-container">
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/church-vs-curry-types">
-              Church vs Curry Types
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/church-vs-curry-types">
+            Church vs Curry Types
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            July 15, 2014
-          </div>
+        <div class="timestamp">
+          July 15, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>Static vs dynamic typing debates often flounder because the debators see from two different perspectives without knowing it. Learning to identify the two perspectives can calm the discussion. The tension between the two perspectives has led to Gradual Typing and other technologies.</em></p>
 <p>Many discussions about type systems around the internet fail to be interesting because one or both parties are not versed in type theory. There's a less common (yet related) reason, which I have begun to notice more and more: people who are not familiar with the <a href="http://en.wikipedia.org/wiki/Simply_typed_lambda_calculus#Intrinsic_vs._extrinsic_interpretations">difference between Church Types and Curry Types</a>. These are also known, respectively, as Intrinsic Types and Extrinsic types. Because the participants are not aware of the two perspectives, they blame the other one for ignorance, when in fact they just have a different perspective.</p>
 <p>Church Types are what Haskell has. Church types are named for Alonzo Church, the inventor of the lambda calculus. In a Church-style system, types are an <em>intrinsic</em> part of the semantics of the language. <strong>The language would be different without the types--it may even be meaningless.</strong> With an intrinsic type system, the meaning of the program is different from the runtime behavior of the program. One way to think of this is that so much of the meaning of the program occurs <em>at compile time</em> that you can begin to think of the program having properties you can reason about even if you never run the program.</p>
@@ -134,30 +144,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/css-abstraction-combination">
-              CSS has Weak Forms of Abstraction and Combination
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/css-abstraction-combination">
+            CSS has Weak Forms of Abstraction and Combination
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            February 08, 2014
-          </div>
+        <div class="timestamp">
+          February 08, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>According to the requirements proposed by Abelson and Sussman, CSS does not provide adequate means of combination and abstraction to be considered a powerful language.</em></p>
 <p>I am trying to improve the maintainability and reusability of my CSS over the longterm. I've written about <a href="http://www.lispcast.com/cascading-separation-abstraction">how to organize CSS</a> before. I've learned a lot since I wrote that. I've tried lots of things and talked to lots of people, I finally seem to have found a conceptual framework to capture my new understanding. I'm trying to explore it here. <a href="http://twitter.com/ericnormand">Comments are welcome.</a></p>
 <p>I'm going to take a cue from the first page of <a href="http://mitpress.mit.edu/sicp/">SICP</a> and analyze CSS as a language.</p>
@@ -214,30 +224,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/less-abstraction-combination">
-              LESS has Better Forms of Abstraction than CSS
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/less-abstraction-combination">
+            LESS has Better Forms of Abstraction than CSS
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            February 12, 2014
-          </div>
+        <div class="timestamp">
+          February 12, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>LESS has obviously better forms of abstraction and combination than CSS. It has recursive style definitions, which is enough to consider it a &quot;powerful language&quot;.</em></p>
 <p>Ok, it's obvious that <a href="http://www.lispcast.com/css-abstraction-combination">CSS has weak forms of combination and abstraction</a>. But now we have a good framework for understanding <em>why</em>. &quot;CSS Preprocessors&quot;, as they are called, are getting really popular now. We would be smart to <strong>analyze LESS in the same way that we analyzed CSS</strong>, if only to temper the glamor of trendiness that surrounds it. <a href="http://twitter.com/ericnormand">Comments are welcome.</a></p>
 <p>Because LESS aims to be a superset of CSS, it has all of <a href="http://www.lispcast.com/css-abstraction-combination">the primitive expressions, means of combination, and means of abstraction that come baked into CSS</a>. I already went over those last time, so I will not go over them again. <strong>So what things are added by LESS?</strong></p>
@@ -282,30 +292,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/lisp-with-macros-language-stack">
-              Lisp with Macros is Two Languages
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/lisp-with-macros-language-stack">
+            Lisp with Macros is Two Languages
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            October 08, 2013
-          </div>
+        <div class="timestamp">
+          October 08, 2013
+        </div>
 
-          
+        
 <p>A Lisp with a macro system is actually two languages in a stack. The bottom language is the macro-less target language (which I'll call the Lambda language). It includes everything that can be interpreted or compiled directly.</p>
 <p>The Macro language is a superset of the Lambda language. It has its own semantics, which is that Macro language code is recursively expanded into code of the Lambda language.</p>
 <p>Why isn't this obvious at first glance? My take on it is that because the syntax of both languages is the same and the output of the Macro language is Lambda language code (instead of machine code), it is easy to see the Macro language as a feature of the Lisp. Macros in Lisp are stored in the dynamic environment (in a way similar to functions), are compiled just like functions in the Lisp language (also written in the Macro language) which makes it even easier to confuse the layers. It seems like a phase in some greater language which is the amalgam of the two.</p>
@@ -328,30 +338,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/two-kinds-of-bootstrapping">
-              Two Kinds of Bootstrapping
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/two-kinds-of-bootstrapping">
+            Two Kinds of Bootstrapping
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            August 23, 2014
-          </div>
+        <div class="timestamp">
+          August 23, 2014
+        </div>
 
-          
+        
 <p>Summary: <em>I like languages with a small core that is extensible. The languages tend to be weird and require less code to bootstrap.</em></p>
 <p>I know of two ways to bootstrap a language.</p>
 <p>The first way is probably more traditional. I'll call the first way Type 1. In Type 1, you write a bare-minimum compiler for your language in a host language. So maybe you write a Lua compiler in C. Then you write a Lua compiler in Lua. Then you compile your compiler. Now you have a compiler, written in Lua. You can add to it and modify it without ever having to touch the C code again. You have the advantage of writing the features of your language (Lua) in a higher-level language (Lua). And finally, as you add features to your compiler, you can use those to add more features. There's some leverage.</p>
@@ -393,15 +403,15 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
       <div class="notes">
@@ -421,45 +431,45 @@ Learn more
       document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
 
           if(window.oberon && mixpanel) {
-            if(document.cookie.indexOf('oberon-id') < 0) {
-              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
-              mixpanel.alias(window.oberon.id);
-              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
-            }
-            mixpanel.identify(window.oberon.id);
-          }
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
 
-      mixpanel.register({URL: window.location.pathname,
-                         Title: $("title").text()});
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
 
-      mixpanel.track("Page Visit");
+                                                    mixpanel.track("Page Visit");
 
-      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
-      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
 
-      mixpanel.track_links('a.homepage-offer-box-link',
-                           'Click PurelyFunctional.tv',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      mixpanel.track_links('a.js-clojuregazette',
-                           'Click Clojure Gazette',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      $('input[name=EMAIL]').change(function() {
-                                                      var i = $(this);
-                                                      window.o_email = i.val();
-                                                      });
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
 
-      $('form').submit(function() {
-        if(window.o_email)
-          mixpanel.people.set({"$email": window.o_email});
-});
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
 
-    </script>
+                                                    </script>
 
   </body>
 </html>

@@ -9,7 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
+    <meta name="twitter:title" content="">
+
+    <meta property="og:title" content="">
+    <meta property="og:description" content="A blog about the simple joys of functional programming.">
+
     <meta name="description" content="A blog about the simple joys of functional programming.">
+
     <meta name="author" content="Eric Normand">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,10 +35,10 @@
 
     <link rel="alternate" type="application/rss+xml" title="LispCast" href="/feed" />
 
-<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
-  </head>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
 
   <body>
     <header class="banner">
@@ -70,19 +80,19 @@ mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
     <div class="main-container">
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/reduce-complexity-with-variants">
-              Reduce Complexity with Variants
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/reduce-complexity-with-variants">
+            Reduce Complexity with Variants
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            July 08, 2015
-          </div>
+        <div class="timestamp">
+          July 08, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>The structure of our data should match the relevant structures in the real world. And to ensure that our data is structured well, we should reduce the potential for incorrect structure. Variants provide a great solution for it.</em></p>
 <h3 id="introduction">Introduction</h3>
 <p><a href="https://www.youtube.com/watch?v=ZQkIWWTygio">Jeanine Adkisson's talk at the Conj</a> last year was my favorite talk of the Conj. Her presentation was well-delivered, her slides were just quirky enough, and of course the material was so important. You should go watch the talk before you read on.</p>
@@ -165,30 +175,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/avoid-naming-at-all-costs">
-              Avoid Naming at All Costs
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/avoid-naming-at-all-costs">
+            Avoid Naming at All Costs
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            July 05, 2015
-          </div>
+        <div class="timestamp">
+          July 05, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>If naming is one of the two hardest things in programming, it follows that every other possible solution (except those few involving cache invalidation) should be attempted before naming something. As a corrolary, bad names are a code smell.</em></p>
 <p>Phil Karlton (attributed):</p>
 <blockquote>
@@ -249,30 +259,30 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/mastering-client-side-routing-with-secretary-and-goog-history">
-              Mastering ClojureScript Routing with Secretary and goog.History
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/mastering-client-side-routing-with-secretary-and-goog-history">
+            Mastering ClojureScript Routing with Secretary and goog.History
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            June 24, 2015
-          </div>
+        <div class="timestamp">
+          June 24, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>The Google Closure Library provides a nice interface to the HTML5 History API. Coupling it with Secretary is very easy. But not all browsers support HTML5 History. In this post I'll talk about one way to make sure you have client-side routing in all browsers.</em></p>
 <h3 id="background">Background</h3>
 <p><em>About a year ago I was working for a company of three people. Two coders and one business person. I was developing a consumer product and the other programmer was building a related B2B product. We were as agile as could be: no planning meetings, no prioritized list of features, just a shared vision. I was working in Clojure and ClojureScript and getting paid to do it.</em></p>
@@ -455,30 +465,30 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/clojure-database-test-faster">
-              How I made my Clojure database tests 5x faster
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure-database-test-faster">
+            How I made my Clojure database tests 5x faster
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            June 17, 2015
-          </div>
+        <div class="timestamp">
+          June 17, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>Setting up and tearing down a test database can be slow. Use a rolled back transaction to quickly reset the database to a known state. You can do that in an <code>:each</code> fixture to run each test in isolation.</em></p>
 <p>On one of my projects, I wrote a bunch of tests that had to hit the database. There was a <code>:once</code> fixture to create all of the tables anew and an <code>:each</code> fixture to delete everything in the tables before each test. That ensured that <strong>I was always working with a known empty database</strong>. Overall, the tests took about 10 seconds. Woah! That's a long time. But I lived with it.</p>
 <pre><code>(defn clear
@@ -566,30 +576,30 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/tdd-workflow-in-clojure-with-emacs-and-cider">
-              TDD Workflow in Clojure using Emacs with CIDER
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/tdd-workflow-in-clojure-with-emacs-and-cider">
+            TDD Workflow in Clojure using Emacs with CIDER
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            June 08, 2015
-          </div>
+        <div class="timestamp">
+          June 08, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>TDD is about fast feedback. CIDER tightens the feedback loop with quick commands for running tests and a powerful test reporting system.</em></p>
 <h3 id="introduction">Introduction</h3>
 <p>I've always been into flow. One of the key aspects of flow is a short feedback loop. Test Driven Development (TDD) is partially based on flow, too. You write a new test, then you write code to satisfy the test, then you refactor. You cycle quickly with very small steps. Great for flow!</p>
@@ -672,30 +682,30 @@ No spam. Ever.
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/lambda-abstraction">
-              Lambda Abstraction
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/lambda-abstraction">
+            Lambda Abstraction
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            May 17, 2015
-          </div>
+        <div class="timestamp">
+          May 17, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>Lambda abstractions are always leaky, but some are leakier than others. Clojure programmers recommend keeping most of your functions pure and containing the leaks as much as possible.</em></p>
 <p>Lambda abstraction refers to something we do all of the time. Let's say I have some code:</p>
 <pre><code>(+ 1 2)</code></pre>
@@ -735,30 +745,30 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/infinite-application">
-              Infinite Application
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/infinite-application">
+            Infinite Application
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            May 17, 2015
-          </div>
+        <div class="timestamp">
+          May 17, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>Function application is a key concept in lambda calculus. While it is commonly expressed using parentheses in Clojure, it is also reified into a function which itself can be applied to another function.</em></p>
 <p>Function application in Clojure is easily expressed with a couple of parentheses:</p>
 <pre><code>(foo 1 2 3)</code></pre>
@@ -803,30 +813,30 @@ Learn more
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/the-world-is-mutable">
-              But the World is Mutable
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/the-world-is-mutable">
+            But the World is Mutable
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            May 11, 2015
-          </div>
+        <div class="timestamp">
+          May 11, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>The world may be mutable, but people have been using the notion of immutability to build reliable systems for a long time.</em></p>
 <p>Immutability is a hard topic to breach. As a programmer used to modeling the world, you might object to immutable data structures. How do you model a changing world? <strong>Why would you choose to use immutable data structures when everything in the world is changeable?</strong></p>
 <p>Let's do a little thought experiment. Let's look at <strong>a nice mutable system</strong>: paper and pencil. You can write, erase, and write again. It's very convenient. It lets you correct mistakes. And when you don't need something anymore, you can easily erase it.</p>
@@ -879,30 +889,30 @@ Learn more
 </div>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/clojure-test-cheatsheet">
-              clojure.test cheatsheet
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure-test-cheatsheet">
+            clojure.test cheatsheet
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            May 03, 2015
-          </div>
+        <div class="timestamp">
+          May 03, 2015
+        </div>
 
-          
+        
 <p>Summary: <em>I made a clojure.test cheatsheet that you can get for free.</em></p>
 <p>Cheatsheets are a great way to bootstrap new skills. Because at first there is so much to learn, we need all the support we can get. Instead of asking a beginner to scour through docs, hand them a good cheatsheet and they can get something accomplished. They'll remember the details eventually, with practice.</p>
 <p>And as part of my campaign to rock the Clojure world with cool stuff, I made a cheatsheet for <code>clojure.test</code>, the built-in and oh-so-popular testing library for Clojure. Just sign up for the email list and it will be yours for free, along with the core.async reference sheet and the one-page Ring Spec.</p>
@@ -961,30 +971,30 @@ No spam. Ever.
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
-        <article class="article">
-          <h2 class="article-title-wrapper">
-            <a class="article-title"
-               href="/pre-west-interview-ron-toland">
-              Pre-West Interview: Ron Toland
-            </a>
-          </h2>
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/pre-west-interview-ron-toland">
+            Pre-West Interview: Ron Toland
+          </a>
+        </h2>
 
-          <div class="timestamp">
-            April 21, 2015
-          </div>
+        <div class="timestamp">
+          April 21, 2015
+        </div>
 
-          
+        
 <div class="figure">
 <img src="http://www.lispcast.com/img/pre-west-prep.png" />
 </div>
@@ -1059,15 +1069,15 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 </ul>
 
 
-          <div class="endmark">
-            <a class="endmark-link"
-               href="/">
-              <img class="endmark-lambda"
-                   src="/img/lambda.png" />
-            </a>
-          </div>
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
 
-        </article>
+      </article>
 
 
       <div class="notes">
@@ -1091,45 +1101,45 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
       document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
 
           if(window.oberon && mixpanel) {
-            if(document.cookie.indexOf('oberon-id') < 0) {
-              var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
-              mixpanel.alias(window.oberon.id);
-              document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
-            }
-            mixpanel.identify(window.oberon.id);
-          }
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
 
-      mixpanel.register({URL: window.location.pathname,
-                         Title: $("title").text()});
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
 
-      mixpanel.track("Page Visit");
+                                                    mixpanel.track("Page Visit");
 
-      mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
-      mixpanel.track_forms('.subscribe-form', 'Subscribe');
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
 
-      mixpanel.track_links('a.homepage-offer-box-link',
-                           'Click PurelyFunctional.tv',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      mixpanel.track_links('a.js-clojuregazette',
-                           'Click Clojure Gazette',
-                           function(e) {
-                             return {ToURL: $(e).prop('href')};
-                           });
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
 
-      $('input[name=EMAIL]').change(function() {
-                                                      var i = $(this);
-                                                      window.o_email = i.val();
-                                                      });
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
 
-      $('form').submit(function() {
-        if(window.o_email)
-          mixpanel.people.set({"$email": window.o_email});
-});
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
 
-    </script>
+                                                    </script>
 
   </body>
 </html>

@@ -1,0 +1,59 @@
+// A plugin to annotate code blocks
+
+(function() {
+    var $container = $('.article');
+    var $codecards = $('.code-card code');
+    var $window = $(window);
+
+    var transform
+
+    $window.resize(function() {
+        $codecards.each(function(i, e) {
+            var $code_card = $(e);
+            var $title     = $code_card.find('.code-card-title');
+            var $content   = $code_card.find('.code-card-content');
+            var $wrapper   = $code_card.find('.code-card-content-wrapper');
+
+            var wh = calcRatio($container.width(), $window.height());
+            $code_card.css({'width':wh.width, 'height':wh.height});
+            $wrapper.css({'height': $content.height(),
+                          'width' : $content.width()});
+
+            $('.annotation-down').each(function(i, e) {
+                var $e = $(e);
+                var $a = $('a[name=' + $e.attr('for') + ']');
+                var pos = $a.position();
+                if(pos) 
+                    $e.css({top:pos.top - $e.height(), left:pos.left});
+            });
+
+            var $spans = $content.find('span');
+            var rights = _.map($spans, function(e) {
+                var $e = $(e);
+                var pos = $e.position();
+                return pos.left + $e.width();
+            });
+
+            var mright = _.max(rights);
+
+            $('.annotation-left').each(function(i, e) {
+                var $e = $(e);
+                var $a = $('a[name=' + $e.attr('for') + ']');
+                var pos = $a.position();
+                if(pos)
+                    $e.css({top:pos.top - $e.height() / 4, left:mright});
+            });
+
+            var cpos = $content.position();
+
+            $('.annotation-right').each(function(i, e) {
+                var $e = $(e);
+                var $a = $('a[name=' + $e.attr('for') + ']');
+                var pos = $a.position();
+                if(pos)
+                    $e.css({top:pos.top - $e.height() / 4, left:cpos.left - $e.width()});
+            });
+
+        });
+    });
+}());

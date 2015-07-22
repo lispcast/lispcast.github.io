@@ -86,6 +86,94 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/pre-west-interview-ryan-neufeld">
+            Pre-West Interview: Ryan Neufeld
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          April 14, 2015
+        </div>
+
+        
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
+<p><a href="http://clojurewest.org/speakers#rneufeld"><img src="http://www.lispcast.com/img/pre-west/rneufeld.jpg"
+      style="float:right;width:150px"></a></p>
+<h3 id="introduction">Introduction</h3>
+<p>Ryan Neufeld is the next interview participant. He is <a href="http://clojurewest.org/speakers#rneufeld">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about Simulation Testing. The <a href="http://www.lispcast.com/pre-west-ryan-neufeld">background to his talk</a> is available, if you like.</p>
+<h3 id="interview-with-ryan-neufeld">Interview with Ryan Neufeld</h3>
+<p><strong>Nola</strong>: How long have you been doing clojure and how did you get into it?</p>
+<p><strong>Ryan</strong>: By my reckoning, I've been using Clojure professionally for about 2.5 years now.</p>
+<p>How I got started is actually pretty interesting; I was hired by Cognitect (née Relevance) in early 2012 as a Ruby on Rails developer. Once the business shifted <em>hard</em> towards Clojure, I jumped at the first opportunity to get on with a Clojure client. My first Clojure project was with the most excellent Paul deGrandis, so it was a just a matter of letting osmosis take it's course. I haven't looked back since.</p>
+<p><strong>Nola</strong>: What suggestions do you have for someone getting started with clojure?</p>
+<p><strong>Ryan</strong>: Experiment liberally, and don't be afraid to make mistakes or &quot;do it wrong.&quot; A breadth of experience with the language and its libraries is crucial for knowing what tool to reach for when it is finally time to get down to business.</p>
+<p>For those seeking to make the jump to full-time Clojure, a word of career advice: Never pass over a job opportunity because you lack on-paper experience. Every company wants to hire a Rich Hickey to work with them, but in most cases, they'd be more than happy with a bright, passionate developer such as yourself. Just give it a shot–at worst, you'll get a no, at best, you could change your life!</p>
+<p><strong>Nola</strong>: Your talk is about Simulation Testing, is there anything like this in other languages? If yes, what advantage does the implementation in clojure have over other languages?</p>
+<p><strong>Ryan</strong>: Indeed there is. While Simulation Testing is novel to the Clojure community, it's been around for a number of years under various names; it's sometimes called model or agent-based testing, or just plain &quot;simulation.&quot; I heard from a little bird that organizations like DARPA use the technique on nearly all of their projects.</p>
+<p>There are a couple of big benefits to doing Simulation Testing in Clojure, however. First and foremost is Simulant. In addition to being a useful framework for running Simulation Tests, the way it segregates tests into phases makes tests both reproducible and amenable to new validations that you can bring to bare against old sim runs.</p>
+<p>The second superpower Clojure brings to the table is Datomic. Given Datomic is a time-based fact-store, it is a nearly perfect fit for long-term, continuous-integration style simulation testing. With Datomic, very few of the validations I write involve procedural code; generally a simple Datomic query will suffice to detect abnormalities. Even better, it is trivial to query how test results have change over time.</p>
+<p><strong>Nola</strong>: What is the average airspeed velocity of an unladen Clojure REPL?</p>
+<p><strong>Ryan</strong>: Well, the bird is a little slow to get off the ground (Clojure start times, and all), but once she's airborne you're looking at about 2-4 Rubies (that's 10 Javas, in the imperial system).</p>
+<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
+</p>
+
+
+<h3>
+You may like the Clojure Gazette
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/pre-west-interview-john-hume">
             Pre-West Interview: John Hume
           </a>
@@ -766,86 +854,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <h3 id="about-soren-macbethtalk">About <a href="http://clojurewest.org/speakers#smacbeth">Soren Macbeth</a></h3>
 <p><a href="http://dopeness.org/">Homepage</a> - <a href="https://twitter.com/sorenmacbeth">Twitter</a> - <a href="https://github.com/sorenmacbeth">GitHub</a></p>
 <p><a href="http://clojurewest.org/speakers#smacbeth"><img src="http://www.lispcast.com/img/pre-west/smacbeth.png" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/lambda.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/pre-west-timothy-gardner-ramsey-nasser">
-            Pre-West Prep: Timothy Gardner and Ramsey Nasser
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          April 06, 2015
-        </div>
-
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-games-and-3d-graphics-in-arcadiatalk">Talk: <a href="http://clojurewest.org/speakers#tgardner">Games and 3D Graphics in Arcadia</a></h3>
-<p><a href="http://clojurewest.org/speakers#tgardner">Timothy Gardner and Ramsey Nasser's talk</a> at <em>Clojure/West</em> is about <a href="http://arcadia-unity.tumblr.com/">Arcadia</a>, the integration of Clojure and Unity 3D.</p>
-<h4 id="background">Background</h4>
-<p>It took a lot of work to get Clojure running with Unity 3D. For one, Unity 3D is based on .NET, so the version of Clojure for the CLR had to be updated and retrofitted to work with it. But Unity 3D is a very popular game engine that exports to lots of major platforms, including consoles. This gives Clojure an inroad into even more systems. I've always wanted to program games, and this gives me hope that I'll do it one day.</p>
-<p>For background, the two speakers have given several talks about Arcadia. At <a href="https://www.youtube.com/watch?v=tJr_TD1BtF0">Strange Loop 2014</a>, at <a href="https://www.youtube.com/watch?v=lHz5A19h9Z8">CodeMesh 2014</a>, and at the <a href="https://www.youtube.com/watch?v=tBvNIJzlWEI">Clojure NYC Meetup</a>.</p>
-<h3 id="about-timothy-gardnertalk">About <a href="http://clojurewest.org/speakers#tgardner">Timothy Gardner</a></h3>
-<p><a href="http://timsgardner.com/">Homepage</a> - <a href="https://twitter.com/timsgardner">Twitter</a> - <a href="https://github.com/timsgardner">GitHub</a></p>
-<p><a href="http://clojurewest.org/speakers#tgardner"><img src="http://www.lispcast.com/img/pre-west/tgardner.jpg" /></a></p>
-<h3 id="about-ramsey-nassertalk">About <a href="http://clojurewest.org/speakers#tgardner">Ramsey Nasser</a></h3>
-<p><a href="http://nas.sr/">Homepage</a> - <a href="https://twitter.com/ra">Twitter</a> - <a href="https://github.com/nasser">GitHub</a></p>
-<p><a href="http://clojurewest.org/speakers#tgardner"><img src="http://www.lispcast.com/img/pre-west/rnasser.jpg" /></a></p>
 <hr />
 
 <div class="article-cg-box">

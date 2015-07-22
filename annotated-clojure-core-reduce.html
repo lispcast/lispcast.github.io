@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>The Ultimate Guide to Learning Clojure for Free | LispCast</title>
+    <title>Some Annotated clojure.core/reduce examples | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="There are many great resources out there for learning Clojure. Some of the resources are paid, but fortunately many of the best resources are absolutely free.">
-    <meta name="twitter:title" content="The Ultimate Guide to Learning Clojure for Free">
+    <meta name="twitter:description" content="reduce is a very useful function. You can use it for many calculations over a collection. Code annotations are useful, as are physical metaphors.">
+    <meta name="twitter:title" content="Some Annotated clojure.core/reduce examples">
 
-    <meta property="og:title" content="The Ultimate Guide to Learning Clojure for Free">
-    <meta property="og:description" content="There are many great resources out there for learning Clojure. Some of the resources are paid, but fortunately many of the best resources are absolutely free.">
+    <meta property="og:title" content="Some Annotated clojure.core/reduce examples">
+    <meta property="og:description" content="reduce is a very useful function. You can use it for many calculations over a collection. Code annotations are useful, as are physical metaphors.">
 
-    <meta name="description" content="There are many great resources out there for learning Clojure. Some of the resources are paid, but fortunately many of the best resources are absolutely free.">
+    <meta name="description" content="reduce is a very useful function. You can use it for many calculations over a collection. Code annotations are useful, as are physical metaphors.">
 
     <meta name="author" content="Eric Normand">
 
@@ -86,128 +86,133 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/ultimate-guide-to-learning-clojure-for-free">
-            The Ultimate Guide to Learning Clojure for Free
+             href="/annotated-clojure-core-reduce">
+            Some Annotated clojure.core/reduce examples
           </a>
         </h2>
 
         <div class="timestamp">
-          December 11, 2014
+          July 21, 2015
         </div>
 
         
-<p>Summary: <em>There are many great resources out there for learning Clojure. Some of the resources are paid, but fortunately many of the best resources are absolutely free.</em></p>
-<p><strong>Are you interested in learning Clojure?</strong> Would you like to get started without risking your money on a book? Is there something that can help you even know whether you want to learn Clojure?</p>
-<p>Well, yes.</p>
-<p>I learned Clojure for free. In fact, I'm a bit of a cheapskate. For many years I would avoid spending money if there was a free alternative. I also keep an eye on resources that pop up around the internet.</p>
-<p>I have assembled what I believe to be the best resources to start with if you want to get into Clojure but want to spend $0.</p>
-<h3 id="beginner">Beginner</h3>
-<p>Start here if you have never programmed in Clojure before.</p>
-<h4 id="reading">Reading</h4>
-<ul>
-<li><a href="https://github.com/ClojureBridge/curriculum">ClojureBridge Curriculum</a></li>
-</ul>
-<p>The ClojureBridge curriculum is a community effort that is informed by real-world workshops. It is excellent for starting.</p>
-<ul>
-<li><a href="http://www.braveclojure.com/">Clojure for the Brave and True</a></li>
-</ul>
-<p>A fun and adventurous guide through the Clojure journey.</p>
-<ul>
-<li><a href="http://aphyr.com/tags/Clojure-from-the-ground-up">Clojure from the Ground Up</a></li>
-</ul>
-<p>A direct approach to bringing more people (especially underrepresented groups) to the Clojure community. The style of this book is very direct and approachable.</p>
-<h4 id="exercises">Exercises</h4>
-<p>For beginners, these two exercise sets will give you plenty of practice with the details of the language.</p>
-<ul>
-<li><a href="http://www.4clojure.com/">4Clojure</a></li>
-</ul>
-<p>Exercises you can do right in your browser.</p>
-<ul>
-<li><a href="http://clojurekoans.com/">Clojure Koans</a></li>
-</ul>
-<p>Exercises you do with git and an editor on your local machine.</p>
-<h4 id="editors-and-installation">Editors and Installation</h4>
-<ul>
-<li><a href="https://github.com/ClojureBridge/curriculum/blob/master/outline/setup.md">ClojureBridge: Getting Set Up</a></li>
-</ul>
-<p>The best install guide is from <a href="http://www.clojurebridge.org/">ClojureBridge</a>. If you follow this completely you'll have Light Table installed, which is a great (and open source) editor that makes Clojure development very easy.</p>
-<h4 id="documentation">Documentation</h4>
-<ul>
-<li><a href="https://github.com/jafingerhut/clojure-cheatsheets/tree/master/pdf">Clojure Cheatsheet</a></li>
-</ul>
-<p>An organized list of built-in Clojure functions and macros.</p>
-<ul>
-<li><a href="http://conj.io/">Grimoire</a></li>
-</ul>
-<p>A searchable version of the cheatsheet with documentation, source code, and examples.</p>
-<h4 id="workshops-and-events">Workshops and Events</h4>
-<ul>
-<li><a href="http://www.clojurebridge.org/">ClojureBridge</a></li>
-</ul>
-<p>ClojureBridge hosts free workshops around the world to encourage diversity in the Clojure community. Go to one if you can.</p>
-<ul>
-<li><a href="http://clojure.meetup.com/">Clojure Meetups</a></li>
-</ul>
-<p>There are many groups on Meetup.com that are interested in Clojure and functional programming. Find one in your area and get in touch.</p>
-<h4 id="online-community">Online Community</h4>
-<ul>
-<li><a href="http://irc.lc/freenode/clojure/irctc">#clojure IRC channel on freenode</a></li>
-</ul>
-<p>Always hundreds of people on and someone to help you if you get stuck.</p>
-<ul>
-<li><a href="https://groups.google.com/forum/#!forum/clojure">Clojure Google Group</a></li>
-</ul>
-<p>Clojure discussion group. This contains everything from announcements of new library releases to beginners asking questions.</p>
-<ul>
-<li><a href="http://stackoverflow.com/">stackoverflow</a></li>
-</ul>
-<p>Ask questions on stackoverflow. They are usually answered very quickly.</p>
-<h4 id="videos">Videos</h4>
-<ul>
-<li><a href="https://vimeo.com/68375202">Stuart Halloway: Introduction to Clojure</a></li>
-</ul>
-<p>A great high-level introduction to the philosophy behind Clojure.</p>
-<h3 id="intermediate">Intermediate</h3>
-<p>Once you've got the basics and need to go deeper.</p>
-<h4 id="reading-1">Reading</h4>
-<ul>
-<li><a href="https://github.com/clojure-cookbook/clojure-cookbook">Clojure Cookbook</a></li>
-</ul>
-<p>An open source, community-built book (also available for purchase). It includes many real-world, practical &quot;recipes&quot;.</p>
-<h4 id="exercises-1">Exercises</h4>
-<ul>
-<li><a href="http://exercism.io/">exercism.io</a></li>
-</ul>
-<p>Once you're writing Clojure code, do these exercises and get comments on your style.</p>
-<ul>
-<li><a href="https://projecteuler.net/">Project Euler</a></li>
-</ul>
-<p>These exercises are not Clojure-specific. They are small problems but are usually tricky enough to require deep thinking. I cut my Clojure teeth on Project Euler before other systems existed.</p>
-<h4 id="documentation-1">Documentation</h4>
-<ul>
-<li><a href="https://clojure.github.io/clojure/clojure.core-api.html">Clojure API Docs</a></li>
-</ul>
-<p>The official documentation.</p>
-<ul>
-<li><a href="http://clojuredocs.org/">ClojureDocs</a></li>
-</ul>
-<p>A searchable community documentation project.</p>
-<ul>
-<li><a href="http://crossclj.info/">CrossClj</a></li>
-</ul>
-<p>Cross-references between Clojure libraries. Very interesting stuff.</p>
-<h4 id="editors">Editors</h4>
-<p>At this point, you may want to think about dedicating some time to learning a different editor. Emacs is the most popular, and many people use vim.</p>
-<ul>
-<li><a href="http://clojure-doc.org/articles/tutorials/emacs.html">Emacs + CIDER</a></li>
-</ul>
-<p>An Emacs plugin called CIDER is the most popular way to use Emacs with Clojure. It gives you lots of functionality.</p>
-<ul>
-<li><a href="http://www.neo.com/2014/02/25/getting-started-with-clojure-in-vim">vim + Fireplace</a></li>
-</ul>
-<p>Many people use vim, so if you like it, here's a setup guide.</p>
+<p>Summary: <em>reduce is a very useful function. You can use it for many calculations over a collection. Code annotations are useful, as are physical metaphors.</em></p>
+<p><code>reduce</code> is used a lot in Clojure. I've heard a lot of people get scared by <code>reduce</code>, like it's something deep and mysterious. It is deep, but it's not mysterious. It's also very loveable for its <strong>easy mechanistic application</strong>.</p>
+<p>I love to watch my toddler doing mechanistic stuff. She picks up a bean and puts it in the cup. She picks up a bean and puts it in the cup. <strong>Over. And over.</strong> And then I think: that's reduce!</p>
+<p>Let's look at a first example. Let's say we want to <strong>add up a list of numbers</strong>.</p>
+<pre id="reduce1" class="code-card"><code>(reduce +
+        0
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce1" data-at="+">
+let's add
+</div>
+
+<div class="annotation-left" for="reduce1" data-at="0">
+start with zero
+</div>
+
+<div class="annotation-left" for="reduce1" data-at="1 2 3">
+add these numbers to it, one at a time
+</div>
+
+<p>Imagine holding <code>0</code> in your left hand and walking down the list of numbers <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>. You approach the number <code>1</code>. You grab it with your right hand. You have two numbers in your hands. You add them together (<code>+</code>) and hold the answer in your left hand. Now proceed to the next number. Repeat until you're done with the list. At the end, what number are you holding in your left hand? That's the answer.</p>
+<p>We can add stuff to a set.</p>
+<pre id="reduce2" class="code-card"><code>(reduce conj
+        #{}
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce2" data-at="conj">
+let's add things to a collection
+</div>
+
+<div class="annotation-left" for="reduce2" data-at="#{}">
+start with an empty set
+</div>
+
+<div class="annotation-left" for="reduce2" data-at="1 2 3">
+add these numbers to it, one at a time
+</div>
+
+<p>Imagine holding an empty bucket (like the empty set) in your left hand and walking down the list of numbers. When you get to <code>1</code>, you pick it up in your right hand. Now drop it in the bucket (<code>conj</code>). Proceed to the next number and repeat down the list. What is in your left hand at the end? A bucket with the numbers 1-5. That's the value of this expression.</p>
+<p>Alright, we can do something more complicated. This time, let's use an anonymous function. We'll calculate the maximum number from a list.</p>
+<pre id="reduce3" class="code-card"><code>(reduce (fn [a b]
+          (if (&gt; a b)
+            a
+            b))
+        0
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce3" data-at="fn">
+we can use an anonymous function
+</div>
+
+<div class="annotation-left" for="reduce3" data-at=" a b">
+return the larger of the two
+</div>
+
+<div class="annotation-left" for="reduce3" data-at="0">
+start with zero
+</div>
+
+<div class="annotation-left" for="reduce3" data-at="1 2 3">
+compare these numbers to it, one at a time
+</div>
+
+<p>Hold <code>0</code> in your left hand and walk down the list. When you get to <code>1</code>, pick it up. Which is bigger, what's in your left hand or what's in your right hand? Whichever it is, put that in your left hand and proceed to the next number, and so on down the line. The answer is in your left hand.</p>
+<p>Hmm. What about averages? We think of averages as the sum of a bunch of numbers divided by the number of numbers. We can keep the sum and the count separate so we can operate on them.</p>
+<pre id="reduce4" class="code-card"><code>(reduce (fn [[n d] b]
+          [(+ n b)
+           (inc d)])
+        [0 0]
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce4" data-at="fn">
+<code>n</code> is the numerator, <code>d</code> is the denominator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="n b">
+add each number to the numerator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="inc d">
+add 1 to the denominator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="0 0">
+start here
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="1 2 3">
+average these numbers, one at a time
+</div>
+
+<p>Hold <code>[0 0]</code> in your left hand. Walk down the list. When you get to <code>1</code>, pick it up in your right hand. Now, add what's in your right hand to the first number in your left hand, and add 1 to the second number in your left hand. Hold the two new numbers in your left hand. Proceed down the line, picking each number up in your right hand, until the end. The answer is in your left hand.</p>
+<p>Now, one final time, the general pattern:</p>
+<pre id="reduce5" class="code-card"><code>(reduce (fn [left right]
+          (dosomething left right))
+        starting-value
+        collection)</code></pre>
+<div class="annotation-down" for="reduce5" data-at="(f">
+a function of 2 arguments
+</div>
+
+<div class="annotation-left" for="reduce5" data-at="left">
+the arguments correspond to your hands
+</div>
+
+<div class="annotation-left" for="reduce5" data-at="something">
+the return value of this function will be the next value in your left hand
+</div>
+
+
+<div class="annotation-left" for="reduce5" data-at="starting-value">
+what you start with in your left hand
+</div>
+
+<div class="annotation-left" for="reduce5" data-at="collection">
+the items you grab with your right hand
+</div>
+
 <h3 id="conclusions">Conclusions</h3>
-<p>There is a ton of value in these free resources. But if you'd like to venture into something that is tailored for bringing up up to speed in Clojure from nothing to writing code and you don't mind paying, check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's 95 minutes of screencasts, exercises, and visuals and there's nothing else like it.</p>
+<p>Well, that was fun. <code>reduce</code> is not hard. <strong>You just need a good way of thinking about it.</strong> Physical metaphors can help a ton. I wish I could have made this visual with a cartoon, but that would take more time and skill than I have. And I think the code annotations really help add context to what would otherwise be very terse code. Context is so important.</p>
+<p>If you liked the code annotations and this style of teaching the basics, you will love <a href="http://www.purelyfunctional.tv/intro-to-clojure">Lispcast Introduction to Clojure</a>. It has lots of visuals, lots of metaphors, exercises, and code annotations. It teaches the basics of Clojure and functional programming in a fun way. <a href="http://www.purelyfunctional.tv/intro-to-clojure#preview">Check out a preview</a>.</p>
 <div class="article-offer-box">
   
 <a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
@@ -231,9 +236,9 @@ Learn more
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 
 
@@ -256,12 +261,8 @@ Learn more
 
     <footer class="footer-banner">
       <a class="footer-previous"
-         href="http://www.lispcast.com/pre-conj-scheme-workshop">
+         href="http://www.lispcast.com/reduce-complexity-with-variants">
         <i class="fa fa-chevron-left footer-arrow"></i>
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/data-functions-macros-why">
-        <i class="fa fa-chevron-right footer-arrow"></i>
       </a>
     </footer>
 

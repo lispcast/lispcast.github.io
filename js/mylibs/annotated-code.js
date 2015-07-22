@@ -74,7 +74,8 @@
                 var $a = $code_card.find('a[name=' + aid + ']');
                 $ann.data('a', $a);
                 $ann.html($ann.html() +
-                          '<img src="/img/down arrow.png" style="display:block;width:50px"></img>');
+                          '<img src="/img/down arrow.png" style="display:block;height:50px"></img>');
+                $code_card.css({'margin-top': 85});
             });
             $(aright).each(function(i, e) {
                 var $ann = $(e);

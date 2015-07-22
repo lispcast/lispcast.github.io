@@ -212,6 +212,176 @@ Learn more
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/pre-conj-brian-goetz">Pre-conj Prep: Brian Goetz</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/annotated-clojure-core-reduce">
+            Some Annotated clojure.core/reduce examples
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          July 21, 2015
+        </div>
+
+        
+<p>Summary: <em>reduce is a very useful function. You can use it for many calculations over a collection. Code annotations are useful, as are physical metaphors.</em></p>
+<p><code>reduce</code> is used a lot in Clojure. I've heard a lot of people get scared by <code>reduce</code>, like it's something deep and mysterious. It is deep, but it's not mysterious. It's also very loveable for its <strong>easy mechanistic application</strong>.</p>
+<p>I love to watch my toddler doing mechanistic stuff. She picks up a bean and puts it in the cup. She picks up a bean and puts it in the cup. <strong>Over. And over.</strong> And then I think: that's reduce!</p>
+<p>Let's look at a first example. Let's say we want to <strong>add up a list of numbers</strong>.</p>
+<pre id="reduce1" class="code-card"><code>(reduce +
+        0
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce1" data-at="+">
+let's add
+</div>
+
+<div class="annotation-left" for="reduce1" data-at="0">
+start with zero
+</div>
+
+<div class="annotation-left" for="reduce1" data-at="1 2 3">
+add these numbers to it, one at a time
+</div>
+
+<p>Imagine holding <code>0</code> in your left hand and walking down the list of numbers <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>. You approach the number <code>1</code>. You grab it with your right hand. You have two numbers in your hands. You add them together (<code>+</code>) and hold the answer in your left hand. Now proceed to the next number. Repeat until you're done with the list. At the end, what number are you holding in your left hand? That's the answer.</p>
+<p>We can add stuff to a set.</p>
+<pre id="reduce2" class="code-card"><code>(reduce conj
+        #{}
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce2" data-at="conj">
+let's add things to a collection
+</div>
+
+<div class="annotation-left" for="reduce2" data-at="#{}">
+start with an empty set
+</div>
+
+<div class="annotation-left" for="reduce2" data-at="1 2 3">
+add these numbers to it, one at a time
+</div>
+
+<p>Imagine holding an empty bucket (like the empty set) in your left hand and walking down the list of numbers. When you get to <code>1</code>, you pick it up in your right hand. Now drop it in the bucket (<code>conj</code>). Proceed to the next number and repeat down the list. What is in your left hand at the end? A bucket with the numbers 1-5. That's the value of this expression.</p>
+<p>Alright, we can do something more complicated. This time, let's use an anonymous function. We'll calculate the maximum number from a list.</p>
+<pre id="reduce3" class="code-card"><code>(reduce (fn [a b]
+          (if (&gt; a b)
+            a
+            b))
+        0
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce3" data-at="fn">
+we can use an anonymous function
+</div>
+
+<div class="annotation-left" for="reduce3" data-at=" a b">
+return the larger of the two
+</div>
+
+<div class="annotation-left" for="reduce3" data-at="0">
+start with zero
+</div>
+
+<div class="annotation-left" for="reduce3" data-at="1 2 3">
+compare these numbers to it, one at a time
+</div>
+
+<p>Hold <code>0</code> in your left hand and walk down the list. When you get to <code>1</code>, pick it up. Which is bigger, what's in your left hand or what's in your right hand? Whichever it is, put that in your left hand and proceed to the next number, and so on down the line. The answer is in your left hand.</p>
+<p>Hmm. What about averages? We think of averages as the sum of a bunch of numbers divided by the number of numbers. We can keep the sum and the count separate so we can operate on them.</p>
+<pre id="reduce4" class="code-card"><code>(reduce (fn [[n d] b]
+          [(+ n b)
+           (inc d)])
+        [0 0]
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce4" data-at="fn">
+<code>n</code> is the numerator, <code>d</code> is the denominator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="n b">
+add each number to the numerator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="inc d">
+add 1 to the denominator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="0 0">
+start here
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="1 2 3">
+average these numbers, one at a time
+</div>
+
+<p>Hold <code>[0 0]</code> in your left hand. Walk down the list. When you get to <code>1</code>, pick it up in your right hand. Now, add what's in your right hand to the first number in your left hand, and add 1 to the second number in your left hand. Hold the two new numbers in your left hand. Proceed down the line, picking each number up in your right hand, until the end. The answer is in your left hand.</p>
+<p>Now, one final time, the general pattern:</p>
+<pre id="reduce5" class="code-card"><code>(reduce (fn [left right]
+          (dosomething left right))
+        starting-value
+        collection)</code></pre>
+<div class="annotation-down" for="reduce5" data-at="(f">
+a function of 2 arguments
+</div>
+
+<div class="annotation-left" for="reduce5" data-at="left">
+the arguments correspond to your hands
+</div>
+
+<div class="annotation-left" for="reduce5" data-at="something">
+the return value of this function will be the next value in your left hand
+</div>
+
+
+<div class="annotation-left" for="reduce5" data-at="starting-value">
+what you start with in your left hand
+</div>
+
+<div class="annotation-left" for="reduce5" data-at="collection">
+the items you grab with your right hand
+</div>
+
+<h3 id="conclusions">Conclusions</h3>
+<p>Well, that was fun. <code>reduce</code> is not hard. <strong>You just need a good way of thinking about it.</strong> Physical metaphors can help a ton. I wish I could have made this visual with a cartoon, but that would take more time and skill than I have. And I think the code annotations really help add context to what would otherwise be very terse code. Context is so important.</p>
+<p>If you liked the code annotations and this style of teaching the basics, you will love <a href="http://www.purelyfunctional.tv/intro-to-clojure">Lispcast Introduction to Clojure</a>. It has lots of visuals, lots of metaphors, exercises, and code annotations. It teaches the basics of Clojure and functional programming in a fun way. <a href="http://www.purelyfunctional.tv/intro-to-clojure#preview">Check out a preview</a>.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
@@ -334,9 +504,9 @@ Learn more
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
 </ul>
 
 
@@ -519,9 +689,9 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -602,9 +772,9 @@ Learn more
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -729,9 +899,9 @@ Learn more
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 
 
@@ -1166,120 +1336,15 @@ Learn more
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 <div class="footnotes">
 <hr />
 <ol>
 <li id="fn1"><p>That's a macro.<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>For instance, inside of a <code>let</code>, parens take on the meaning of grouping the bindings and also grouping the variable with its value.<a href="#fnref2">↩</a></p></li>
-</ol>
-</div>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/lambda.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/conj-mental-bump">
-            The conj Mental Bump
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          March 23, 2015
-        </div>
-
-        
-<p>Summary: <em><code>conj</code> can be confusing if you're used to other languages. It is not a commonly defined operation. Most languages define common positional adding operations. <code>conj</code>, however, has more useful semantics. How do you use <code>conj</code> usefully if you can't guarantee the position?</em></p>
-<p>When I was at university, we were taught object-oriented programming as it exists in Java. We learned about interfaces, inheritance, and the <a href="http://en.wikipedia.org/wiki/Liskov_substitution_principle"><em>Liskov Substitution Principle</em></a>. It makes sense. If you're claiming that you've got a (sub)type of car, <strong>it still has to do everything a car can do</strong>. Otherwise it's not really a subtype of car.</p>
-<h3 id="the-point-of-confusion">The point of confusion</h3>
-<p>Whenever I'm teaching someone Clojure, there's <strong>a point in the journey where everyone gets at least curious</strong>, if not outright confused.</p>
-<pre><code>(conj &#39;(1 2 3) 4) ;;=&gt; &#39;(4 1 2 3)</code></pre>
-<p>vs</p>
-<pre><code>(conj [1 2 3] 4) ;;=&gt; [1 2 3 4]</code></pre>
-<p>What's the deal? <strong>Does <code>conj</code> add to the beginning or the end?</strong> What possible contract could allow both of these behaviors?</p>
-<p>Then I show them that the confusion goes even deeper:</p>
-<pre><code>(conj #{1 2 3} 4) ;;=&gt; #{1 4 2 3} ;; or some other random order</code></pre>
-<p>and</p>
-<pre><code>(conj {1 2 3 4} [5 6]) ;;=&gt; {1 2 3 4 5 6}</code></pre>
-<p>What gives? How is this even possible? <strong>Do hashmaps and linked lists even share a common class ancestor?</strong></p>
-<p>The answer is, <em>sure, if you want them to</em>. The student must get over a tiny conceptual bump. And once that bump is surmounted, poof, a new way of seeing is discovered.</p>
-<h3 id="the-bump">The bump</h3>
-<p>Let's get over that bump right here, right now.</p>
-<p>Let's imagine a traditional collection interface, let's call it <code>List</code>. It has two methods, <code>addFirst</code> and <code>addLast</code> that add new elements. So you write an algorithm that adds a bunch of items to the end with <code>addLast</code>. It takes a <code>List</code> as argument, because that's <strong>the least subtype you need to perform the algorithm</strong>.</p>
-<p>You call that algorithm with an <code>ArrayList</code>, which has the nice property that <code>addLast</code> is constant time. Woohoo! <strong>Your algorithm is fast and great.</strong></p>
-<p>A few months later, you get a phone call from another developer. He's complaining that he used your routine and can't figure out why it's so slow. It was working fine for a while, but <strong>as the users generated more records in the database</strong>, the routine was grinding to a hault.</p>
-<p>You check out the code and immediately see the problem: the database query was returning not an <code>ArrayList</code> but a <code>LinkedList</code>. The implementation of <code>addLast</code> on <code>LinkedList</code>s is actually linear. <strong>Adding a bunch of stuff to the end was turning into a quadratic operation.</strong></p>
-<p>Let's say that again: even though the location semantics of the operation were the same, <code>addLast</code> on one had constant time and on the other had linear time. They both gave equivalent lists, but one of them was too slow. <strong>Does this satisfy the Liskov Substitution Principle?</strong> In practice, can you <em>really</em> substitute one for the other? <strong>Algorithmic complexity matters.</strong></p>
-<p>Clojure avoids that mess (while swapping it for another, which I'll get to shortly). It defines <code>conj</code>, which means not &quot;put this at the beginning&quot; or &quot;put this at the end&quot;, but &quot;hey, collection, you know yourself better than I ever can. Please add this wherever it makes sense for you as long as you <strong>do it in constant time</strong>. Thanks.&quot;<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
-<p>Practically, that means that <code>conj</code> on <code>LinkedList</code> adds to the front, because that's constant time. And <code>conj</code> on <code>ArrayList</code> adds to the end. But, because the operation doesn't talk about order, like <code>addFirst</code> and <code>addLast</code> do, you can now extend <code>conj</code> to <code>Set</code> and even <code>Map</code> if you consider key/value pairs as single items. And that means that linear algorithms using <code>conj</code> will <strong>remain linear regardless of which collection you use</strong>.</p>
-<h3 id="the-mess-that-clojure-chooses-over-the-other-mess">The mess that Clojure chooses over the other mess</h3>
-<p>Does this satisfy the Liskov Substitution Principle? Well, that depends on how you look at it. You certainly <strong>don't guarantee that you get the same or even equivalent answers out</strong>. Consider this:</p>
-<pre><code>(def a [1 2 3])
-(def b &#39;(1 2 3))
-
-(= a b) ;;=&gt; true
-(= (conj a 4) (conj b 4)) ;;=&gt; false</code></pre>
-<p>So, here, performing the same operation on two equal values does not give equal results. That's kind of hard to reason about. <strong>But it's a similar tradeoff that you see with other operations that don't guarantee order.</strong> For instance, imagine two sets <code>a</code> and <code>b</code>.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
-<pre><code>(= a b) ;;=&gt; true
-
-(= (seq a) (seq b)) ;;=&gt; could be false!</code></pre>
-<p>The order of most sets is not guaranteed! This means that Clojure has some operations that do not maintain equality. <code>conj</code> just happens to be one of them.</p>
-<h3 id="whats-the-point">What's the point?</h3>
-<p>So Clojure does not provide <code>add</code> operations that guarantee order regardless of collection type. Fine. What's the point?</p>
-<p>The point is that, in practice, <code>conj</code> is more useful than <code>addFirst</code> and <code>addLast</code> combined. By defining a function using <code>conj</code>, <strong>it will work on a broader number of collections</strong>. It might give different answers for each, but it won't explode on one and do fine on the rest. And often <strong>the answers it gives are just fine</strong>. A basic version of <code>into</code> can be defined very easily. It works on all collections (for both <code>to</code> and <code>from</code>).</p>
-<pre><code>(defn into [to from]
-  (reduce conj to from))</code></pre>
-<h3 id="common-usage">Common usage</h3>
-<p>One last thing before I wrap up: because the <em>collection itself</em> defines where the item will be added, I often find myself choosing the collection based on where I need it. A common idiom in Common Lisp was to make a new list by <code>cons</code>ing onto the front, then reversing it at the end because you really wanted them in the other order. In Clojure, there's no need, because you can just use a vector (and use <code>conj</code>). <strong>As long as the vector is local to the algorithm, it's not part of the contract, so it's your choice.</strong></p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Java was wrong. <code>addFirst</code> and <code>addLast</code> cannot be substituted in <code>LinkedList</code> and <code>ArrayList</code>. They have <strong>different algorithmic complexities</strong> and at some point one's performance will be totally unacceptable. The operation that <em>does</em> allow for substitutibility in algorithm complexity is <code>conj</code>, which is always constant time. But then it doesn't maintain equality. However, I find that <code>conj</code> is way more natural and helps algorithmic reasoning more than guaranteeing <em>where</em> the item is placed.</p>
-<p>If you'd like to learn Clojure, I recommend my video course <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a>. It's a great introduction to the language using animations, exercises, and screencasts. It's designed to give a deep dive straight to what makes Clojure interesting. It begins with syntax, goes through functional programming, and ends with data-driven programming.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>It's even polite!<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p><code>(def a (set (range 100))) (def b (apply sorted-set (range 100)))</code><a href="#fnref2">↩</a></p></li>
 </ol>
 </div>
 

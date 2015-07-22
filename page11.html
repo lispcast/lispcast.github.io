@@ -86,6 +86,106 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/pre-conj-interview-anna-pawlicka">
+            Pre-Conj Interview: Anna Pawlicka
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          October 24, 2014
+        </div>
+
+        
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#anna-pawlicka"><img src="http://www.lispcast.com/img/pre-conj/anna-pawlicka.jpeg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>Anna Pawlicka generously agreed to do an interview about her <a href="http://clojure-conj.org/speakers#anna-pawlicka">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a>. The <a href="http://www.lispcast.com/pre-conj-anna-pawlicka">background to her talk</a> is available, if you like.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Anna Pawlicka</strong>: During my final year at university I was looking for a contract work or a summer internship and my recruiter suggested a big data startup. Description mentioned Clojure so I solved some 4clojure problems and they sparked my interest. Computer Science course I studied was mostly based on Java so it was refreshing if not challenging to try functional programming. I got a Clojure in Action book, applied for the internship and luckily was offered the job. It was a fun summer: lots of Cascalog queries, friendly Clojure Dojos and interesting talks organised by London Clojure Community. It felt like home and you don’t walk away from that feeling. I stayed for both the language and community.</p>
+<p><strong>LC</strong>: You've been presenting and blogging a lot about Om. What are you using Om for and why?</p>
+<p><strong>AP</strong>: We’ve been recently working on a building performance platform at Mastodon C (project is open sourced). It’s built around high volumes of data and big part of it was UI programming. We were looking for something that performs well but isn’t t too complex and Om came out just in time for us to solve this problem. We’ve built the entire UI using Om and we combined it with d3.js and core.async for nice data visualisations and user interaction. I don’t think we’d be able to achieve that using vanilla JavaScript. Sure, there were some bumps along the way but the overall reusability makes it worth a while. Outside of my day job I’m working on a in-browser genetic algorithm testing tool, using Om and Quil, but with all the presenting and other activities I had to pause the development for a while.</p>
+<p><strong>LC</strong>: I've used React or Om for a few things and it quite simply enables me to develop UI interaction that would be too intricate otherwise. How has your experience with Om been relative to other frameworks?</p>
+<p><strong>AP</strong>: I haven’t used any frameworks as it’s just easier to mix and match various Clojure/ClojureScript libraries depending on one’s needs. Om was the first library we’ve tried for interacting with React and it suited our needs well enough that we haven’t had the need to try anything else. If you choose a framework, like let’s say Hoplon, you have to go with its programming model and you lose the ability to control every part of your stack.</p>
+<p><strong>LC</strong>: You say you're using Om with d3.js. Om is a very functional style, while d3 uses mutation pervasively. How does the integration work? How well do they work together?</p>
+<p><strong>AP</strong>: Fortunately both are driven by data so having d3 visualisations render on your application state change makes perfect sense. I use interop a lot, and although it doesn’t look as nice as pure ClojureScript, it does the job. We can easily replace iteration methods like map and reduce with their ClojureScript alternatives. The only problem is the type coercion between Clojure’s data structures and JavaScript’s Object. It’s not always immediately clear which one should be used where. The perfect option would be to control SVG via Om (or similar library) and use C2’s functions to calculate path data. But I haven’t tried that myself yet. Charts I’ve been working on are quite complex and d3 comes with this gold mine of resources that none of the other visualisation libraries has. I’m not yet done experimenting though.</p>
+<p><strong>LC</strong>: Can you explain the basic models of Om and d3?</p>
+<p><strong>AP</strong>: D3 performs data-driven DOM manipulation, e.g. you can build a bar chart out of an array of numbers and when your data changes so will your chart. D3 can manipulate any part of DOM and has lots of helper functions to compute our visualisations. React/Om works on DOM as well - we write functions that translate our data into a DOM, but the difference is that the DOM is virtual. Each time the data changes, React/Om compares the old and new state and computes the minimal set of transformations that will be applied to the real DOM. DOM operations are slow so naturally this virtual representation speeds things up by skipping unnecessary transformations. This means that both Om and d3 want to be in control of the DOM inside our component. To make use of both libraries, you can either have Om take care of everything (but this means we need to write functions to compute paths, scales, etc.), or you could use d3’s scales, projection helpers and path generation while having Om generate and manage SVG, or you can have an empty div rendered by Om and allow d3 to generate and manipulate the SVG inside. The latter is the most common approach, probably because we leave the decision whether to re-render to Om (skipping any insignificant data changes), and when Om decides to render the component, d3 takes care of the rest. We combine the best of both.</p>
+<p>My talk will include some of that, with examples, since you can’t have a dashboard without a nice chart :)</p>
+<p><strong>LC</strong>: I see. It sounds like they work well together. I wouldn't have guessed that.</p>
+<p>In the talk you mention live data. How does your system handle that?</p>
+<p><strong>AP</strong>: I don’t have an actual system that I plan to demo - the talk is based around various ways to create, reuse and combine Om components to display data. Long polling and HTTP streaming are available through <a href="http://http-kit.org/">HTTP Kit</a>, but I also like how <a href="https://github.com/ptaoussanis/sente">Sente</a> combines that with core.async. But the focus is mainly on the components themselves - how you can mix and match them.</p>
+<p><strong>LC</strong>: Really cool.</p>
+<p>Talks are always limited in time, and there's lots of context that you assume people have (or wish they have). What is something people can learn more about to help them get ready for your talk?</p>
+<p><strong>AP</strong>: I will try to keep the talk as self contained as possible, but I won’t be able to cover things like the basics of web development with ClojureScript - this would be material for a separate talk. However, more and more people are using ClojureScript so I hope most of the attendees shouldn’t have a problem with that. Those who feel that they need to prepare more will find lots of resources online.</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>AP</strong>: The usual: <a href="http://twitter.com/AnnaPawlicka">Twitter</a>, my <a href="http://www.annapawlicka.com/">blog</a> and GitHub <a href="https://github.com/annapawlicka">account</a>. I’m also often on #clojure and #clojurescript IRC channels if someone wants to chat.</p>
+<p><strong>LC</strong>: Ok. One last question: when they make a movie about programming languages, who will play Clojure?</p>
+<p><strong>AP</strong>: That's a tricky one! I'd say Leonardo DiCaprio since he's one of the best actors yet still without an Oscar (read: very good but underappreciated) :-)</p>
+<p><strong>LC</strong>: Thanks for a great, informative interview.</p>
+<p><strong>AP</strong>: Thanks for putting this together. It was my first interview and it was fun :)</p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
+</p>
+
+
+<h3>
+You may like the Clojure Gazette
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/pre-conj-interview-julian-gamble">
             Pre-Conj Interview: Julian Gamble
           </a>
@@ -947,87 +1047,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <p><strong>DP</strong>: If Rich is writing the Clojure I give it a fighting chance, otherwise it's the T-Rex for sure.</p>
 <p><strong>LC</strong>: Awesome! Thanks for a great interview. I look forward to seeing you at the Conj.</p>
 <p><strong>DP</strong>: Awesome, thanks Eric!</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/lambda.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/pre-conj-zach-tellman">
-            Pre-conj Prep: Zach Tellman
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          October 13, 2014
-        </div>
-
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-always-be-composingtalk">Talk: <a href="http://clojure-conj.org/speakers#zach-tellman">Always Be Composing</a></h3>
-<p><a href="http://clojure-conj.org/speakers#zach-tellman">Zach Tellman's talk</a> at the <em>conj</em> is about building composable software.</p>
-<h4 id="background">Background</h4>
-<p>People often boast of the composability of Clojure programs. <a href="https://github.com/weavejester/compojure">Compojure claims</a> that it &quot;allows web application to be composed of small, independent parts.&quot; <a href="https://github.com/ring-clojure/ring">Ring</a> itself is based on composing middleware and handlers to build a web server. In fact, you can compose pieces easily with Ring, if those pieces were designed to compose with Ring. But not all libraries compose well with the Ring ecosystem. This talk asks &quot;How can we design libraries that compose well in general?&quot; A good intro to composition in Clojure is Rich Hickey's talk <a href="http://www.infoq.com/presentations/design-composition-performance-keynote">Design, Composition, and Performance</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>I often get asked why a certain library in Clojure doesn't have an easy interface like the one in Ruby. The answer, in many cases, is that the Clojure library was designed to compose with other code, while the Ruby library was meant for programmer convenience.</p>
-<p>But if I leave it at that, this answer is unsatisfactory. Behind my answer is years of experience telling me that composition beats convenience in the long run. The asker of that question does not have that experience. I would love to have a way to explain why in an analytical way.</p>
-<p>If this talk even so much as opens the conversation up about the design space of composition, it would be extremely helpful. But I'm expecting more from Zach Tellman. His talk could have a profound impact similar to Rich Hickey's talks on <a href="http://www.infoq.com/presentations/Value-Values">immutable values</a> and <a href="https://www.youtube.com/watch?v=rI8tNMsozo0">simplicity</a>.</p>
-<h3 id="about-zach-tellmantalk">About <a href="http://clojure-conj.org/speakers#zach-tellman">Zach Tellman</a></h3>
-<p><a href="https://github.com/ztellman">Github</a> - <a href="http://twitter.com/ztellman">Twitter</a></p>
-<p><a href="http://clojure-conj.org/speakers#zach-tellman"><img src="http://www.lispcast.com/img/pre-conj/zach-tellman.jpeg" /></a></p>
 <hr />
 
 <div class="article-cg-box">

@@ -86,6 +86,83 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/pre-west-anthony-marcar">
+            Pre-West Prep: Anthony Marcar
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          March 18, 2015
+        </div>
+
+        
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-clojure-at-scaletalk">Talk: <a href="http://clojurewest.org/speakers#amarcar">Clojure at Scale</a></h3>
+<p><a href="http://clojurewest.org/speakers#amarcar">Anthony Marcar's talk</a> at <em>Clojure/West</em> is about how to build larger Clojure applications.</p>
+<h4 id="background">Background</h4>
+<p>Clojure was released in 2007. That means it's coming up on 8 years. It is also a powerful language for parallel computations, like we see in Cascalog and Storm. As big data has become more popular, Clojure's ease with processing lots of information has given it a great role to play recently. It came about at just the right time to take advantage of the big data boom. Several large companies acquired smaller Clojure companies, including Walmart, Staples, and Twitter. And because Clojure runs on the JVM, it's perfect for the enterprise. But we don't have many experience reports about how they have learned to use it.</p>
+<p>Anthony Marcar works at Walmart using Clojure. I'm sure there will be some great information in this talk. I don't know specifically what it will be about, but it might be interesting to contrast it with <a href="https://skillsmatter.com/skillscasts/2863-real-world-clojure">Reflections on a real-world Clojure application</a>, a talk by Malcolm Sparks.</p>
+<h3 id="about-anthony-marcartalk">About <a href="http://clojurewest.org/speakers#amarcar">Anthony Marcar</a></h3>
+<p><a href="https://github.com/Moocar">GitHub</a> - <a href="https://twitter.com/moocar">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#amarcar"><img src="http://www.lispcast.com/img/pre-west/marcar.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
+</p>
+
+
+<h3>
+You may like the Clojure Gazette
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
+<li><a href="http://www.lispcast.com/pre-west-brandon-bloom">Pre-West Prep: Brandon Bloom</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/pre-west-alan-dipert-micha-niskin">
             Pre-West Prep: Alan Dipert and Micha Niskin
           </a>
@@ -968,64 +1045,6 @@ Learn more
 <li><a href="http://www.lispcast.com/lisp-with-macros-language-stack">Lisp with Macros is Two Languages</a></li>
 <li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
 <li><a href="http://www.lispcast.com/pre-conj-david-pick">Pre-conj Prep: David Pick</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/lambda.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/data-first-programming">
-            Data-First Programming
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          February 27, 2015
-        </div>
-
-        
-<p>Summary: <em>If something is important, you should deal with it sooner and more often. That's the approach Clojure takes to data representations. It means serialization of internal data is a non-issue.</em></p>
-<p>Netflix has a counterintuitive but brilliant system called <em>Chaos Monkey</em>. Chaos Monkey will randomly kill services. It is trying to simulate, in the microcosm of a business day, the craziness that happens in the production macrocosm. Services die, servers fail, latency spikes, and networks partition. It might not be soon, but eventually it will happen. Better deal with it now, when people are at work to deal with it. Chaos Monkey encourages you to <strong>write your code to work in such a chaos-filled environment so that unexpected failures are a breeze.</strong> The idea is an instance of the more general principle of &quot;if something is important, deal with it sooner and more often&quot;.</p>
-<p>There's something related to this idea of surfacing the errors early that I've been thinking about. It's about data. Have you ever written some classes and everything is well and good. And then after a while, you need to serialize that to disk or across a network. Now you have to come up with some format (maybe JSON or XML) to represent your class. Then, whenever the class changes, <strong>you have to remember to change the data format to keep them in sync</strong>. It's kind of painful!</p>
-<p>Well, I'll tell you, that rarely happens in Clojure. Because in Clojure, you often <strong>start with data structures</strong>. Meaning, you're already thinking in data, modeling in data, and working in data. <strong>Serialization becomes a non-issue</strong>, because Clojure data structures come built in with <a href="https://github.com/edn-format/edn">readers and writers</a>. Just like causing errors to happen early because they will happen eventually, Clojure programmers code in data <em>in part</em> because you're going to need data (serialization and deserialization) eventually.</p>
-<p>If this idea intrigues you, you may want to check out Clojure. Its <strong>data structures are cutting edge</strong>! Check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> if you would like to get into functional programming using animations, exercises, and screencasts.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 
 

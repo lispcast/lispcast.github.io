@@ -86,6 +86,72 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/how-to-write-software">
+            How to Write Software
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          January 08, 2015
+        </div>
+
+        
+<p>Summary: <em>Writing software alone and in a long term sustainable manner requires a lot of discipline. Upfront planning and avoidance of feature creep can turn a stressful project into a pleasure.</em></p>
+<p><em>UPDATE: I originally wrote this piece back in 2010. I was recently reminded of it and thought it would be good to revive this article from my old blog.</em></p>
+<h3 id="a-guide-for-the-solo-programmer">A guide for the solo programmer</h3>
+<p>I have created a planning and organization process for developing software. The process works for me. I need to organize my work ahead of time or I get stuck working on unimportant details.</p>
+<p>I have built minimalism into the process. I tend to work alone. Solo programming imposes very real limitations on the scope and completeness of software. One man can only do so much.</p>
+<p>My process includes nothing that cannot be found in <a href="http://www.jwz.org/doc/worse-is-better.html">Worse is Better</a>, <a href="http://catb.org/esr/writings/homesteading/cathedral-bazaar/ar01s04.html">The Cathedral and the Bazaar</a>, <a href="http://www.paulgraham.com/startuplessons.html">Paul Graham’s writing</a>, and <a href="http://gettingreal.37signals.com/">Getting Real</a>. These are well-written and well-known works. I thought I understood them when I read them, but I was wrong. It wasn’t until recently, after projects stalled and failed due to feature creep, that I understood the essence of the <em>release early, release often</em> idea. I have attempted to formalize the idea to be more actionable instead of philosophical.</p>
+<p>Here is my hard-earned process for writing software. Note that this is not a strict algorithm. Sometimes I will apply filters from Step 2 when I am doing experiments in Step 3.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Choose a purpose.</strong></p>
+<p>The software must serve a single purpose. Clearly defining it will illuminate the entire software process.</p></li>
+<li><p>For each release:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>List features.</strong></p>
+<p>List out all of the features you want in the software. Not all of these will make it into the release, but if it is <em>not</em> on this list, it will <em>not</em> make it into the release.</p></li>
+<li><p>Apply the following filters and transformations, in any order, repeatedly, until there is nothing further to filter out from the list of features.</p>
+<ul>
+<li><p><strong>Break features into subfeatures.</strong></p>
+<p>If a feature can be broken into two features, do it. All features must be atomic. For instance, an easy one would be if I want to send messages by email and through a web API, that’s two features. Rule of thumb: if it can break, it’s a separate feature.</p></li>
+<li><p><strong>Eliminate unnecessary features.</strong></p>
+<p>Features that are not essential to the purpose are unnecessary. Features that can be put off until the next version are unnecessary. In the above example, maybe email can wait until the next release. If it can wait, it will wait. You are trying to make a B line to release.</p></li>
+<li><p><strong>Fill in “hidden features”.</strong></p>
+<p>Remember, if it can break, it’s a feature. Sometimes there are features that need to be listed because of the existence of other features. If you support two different communication channels, you need a way to choose between them. Whatever mechanism presents that choice is a feature, too. List it.</p></li>
+<li><p><strong>Simplify features.</strong></p>
+<p>If a feature can be done more simply or more easily than what you originally intended, replace it. The primary way to release quickly is to simplify the release. Do you really need it to be customizable?</p></li>
+</ul></li>
+<li><p><strong>Design and carry out experiments.</strong></p>
+<p>Within your minimal set of features, there are often questions as to the best means of implementation. The experiments determine the answers to those questions.</p></li>
+<li><p><strong>Order the features in order of dependency.</strong></p>
+<p>The first feature is the one that does not depend on any others. Dependency is a complex and sneaky issue. You might say that a function needs a button to activate it. But the button is useless without the function. Which depends on which? Personally, dependency means dependent on another feature for usefulness. If I can activate a function in a very simple way (like immediately when the program starts), then that function does not depend on the button. The button depends on the function for its usefulness.</p></li>
+<li><p><strong>Sketch out the <em>first</em> remaining feature on paper.</strong></p>
+<p>Sketch out the code. The experiments should have instructed you in how to implement the feature. Rewrite the code repeatedly, eliminating fluff and abstraction until the code is minimal and perfect.</p></li>
+<li><p><strong>Type the code in.</strong></p>
+<p>Build it and test it.</p></li>
+<li><p><strong>Make the code rock solid.</strong></p>
+<p>Clean it up. As a solo programmer, you are <em>never</em> going to come back to this code and clean it up. You won’t have time. You will never have the time to hunt for bugs in this code. Make sure it works in every possible case. The code must catch every exception. It must handle the null case. The feature is not done until it is unbreakable. If you are doubting whether it’s worth your time to work this much on one feature, maybe you should eliminate the feature.</p></li>
+<li><p><strong>Loop to Step 5 until you run out of features.</strong></p></li>
+<li><p><strong>Release.</strong></p></li>
+</ol></li>
+</ol>
+<p>The essence of this process is to follow the <em>release early, release often</em> philosophy by reducing the amount of development between releases. I mistakenly thought that release often meant “write code really fast” in the past. Now I understand that it means write less but more important code between releases but write it correctly.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/data-functions-macros-why">
             Data > Functions > Macros. But why?
           </a>
@@ -150,9 +216,9 @@ Learn more
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 
 
@@ -315,9 +381,9 @@ Learn more
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 
 
@@ -1056,106 +1122,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <p><strong>PdG</strong>: A very serious pony.</p>
 <p><strong>LC</strong>: Thanks for a great interview. It was informative.</p>
 <p><strong>PdG</strong>: Thanks a ton! I really appreciate all of this!</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/lambda.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/pre-conj-interview-anna-pawlicka">
-            Pre-Conj Interview: Anna Pawlicka
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          October 24, 2014
-        </div>
-
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#anna-pawlicka"><img src="http://www.lispcast.com/img/pre-conj/anna-pawlicka.jpeg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>Anna Pawlicka generously agreed to do an interview about her <a href="http://clojure-conj.org/speakers#anna-pawlicka">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a>. The <a href="http://www.lispcast.com/pre-conj-anna-pawlicka">background to her talk</a> is available, if you like.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Anna Pawlicka</strong>: During my final year at university I was looking for a contract work or a summer internship and my recruiter suggested a big data startup. Description mentioned Clojure so I solved some 4clojure problems and they sparked my interest. Computer Science course I studied was mostly based on Java so it was refreshing if not challenging to try functional programming. I got a Clojure in Action book, applied for the internship and luckily was offered the job. It was a fun summer: lots of Cascalog queries, friendly Clojure Dojos and interesting talks organised by London Clojure Community. It felt like home and you don’t walk away from that feeling. I stayed for both the language and community.</p>
-<p><strong>LC</strong>: You've been presenting and blogging a lot about Om. What are you using Om for and why?</p>
-<p><strong>AP</strong>: We’ve been recently working on a building performance platform at Mastodon C (project is open sourced). It’s built around high volumes of data and big part of it was UI programming. We were looking for something that performs well but isn’t t too complex and Om came out just in time for us to solve this problem. We’ve built the entire UI using Om and we combined it with d3.js and core.async for nice data visualisations and user interaction. I don’t think we’d be able to achieve that using vanilla JavaScript. Sure, there were some bumps along the way but the overall reusability makes it worth a while. Outside of my day job I’m working on a in-browser genetic algorithm testing tool, using Om and Quil, but with all the presenting and other activities I had to pause the development for a while.</p>
-<p><strong>LC</strong>: I've used React or Om for a few things and it quite simply enables me to develop UI interaction that would be too intricate otherwise. How has your experience with Om been relative to other frameworks?</p>
-<p><strong>AP</strong>: I haven’t used any frameworks as it’s just easier to mix and match various Clojure/ClojureScript libraries depending on one’s needs. Om was the first library we’ve tried for interacting with React and it suited our needs well enough that we haven’t had the need to try anything else. If you choose a framework, like let’s say Hoplon, you have to go with its programming model and you lose the ability to control every part of your stack.</p>
-<p><strong>LC</strong>: You say you're using Om with d3.js. Om is a very functional style, while d3 uses mutation pervasively. How does the integration work? How well do they work together?</p>
-<p><strong>AP</strong>: Fortunately both are driven by data so having d3 visualisations render on your application state change makes perfect sense. I use interop a lot, and although it doesn’t look as nice as pure ClojureScript, it does the job. We can easily replace iteration methods like map and reduce with their ClojureScript alternatives. The only problem is the type coercion between Clojure’s data structures and JavaScript’s Object. It’s not always immediately clear which one should be used where. The perfect option would be to control SVG via Om (or similar library) and use C2’s functions to calculate path data. But I haven’t tried that myself yet. Charts I’ve been working on are quite complex and d3 comes with this gold mine of resources that none of the other visualisation libraries has. I’m not yet done experimenting though.</p>
-<p><strong>LC</strong>: Can you explain the basic models of Om and d3?</p>
-<p><strong>AP</strong>: D3 performs data-driven DOM manipulation, e.g. you can build a bar chart out of an array of numbers and when your data changes so will your chart. D3 can manipulate any part of DOM and has lots of helper functions to compute our visualisations. React/Om works on DOM as well - we write functions that translate our data into a DOM, but the difference is that the DOM is virtual. Each time the data changes, React/Om compares the old and new state and computes the minimal set of transformations that will be applied to the real DOM. DOM operations are slow so naturally this virtual representation speeds things up by skipping unnecessary transformations. This means that both Om and d3 want to be in control of the DOM inside our component. To make use of both libraries, you can either have Om take care of everything (but this means we need to write functions to compute paths, scales, etc.), or you could use d3’s scales, projection helpers and path generation while having Om generate and manage SVG, or you can have an empty div rendered by Om and allow d3 to generate and manipulate the SVG inside. The latter is the most common approach, probably because we leave the decision whether to re-render to Om (skipping any insignificant data changes), and when Om decides to render the component, d3 takes care of the rest. We combine the best of both.</p>
-<p>My talk will include some of that, with examples, since you can’t have a dashboard without a nice chart :)</p>
-<p><strong>LC</strong>: I see. It sounds like they work well together. I wouldn't have guessed that.</p>
-<p>In the talk you mention live data. How does your system handle that?</p>
-<p><strong>AP</strong>: I don’t have an actual system that I plan to demo - the talk is based around various ways to create, reuse and combine Om components to display data. Long polling and HTTP streaming are available through <a href="http://http-kit.org/">HTTP Kit</a>, but I also like how <a href="https://github.com/ptaoussanis/sente">Sente</a> combines that with core.async. But the focus is mainly on the components themselves - how you can mix and match them.</p>
-<p><strong>LC</strong>: Really cool.</p>
-<p>Talks are always limited in time, and there's lots of context that you assume people have (or wish they have). What is something people can learn more about to help them get ready for your talk?</p>
-<p><strong>AP</strong>: I will try to keep the talk as self contained as possible, but I won’t be able to cover things like the basics of web development with ClojureScript - this would be material for a separate talk. However, more and more people are using ClojureScript so I hope most of the attendees shouldn’t have a problem with that. Those who feel that they need to prepare more will find lots of resources online.</p>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>AP</strong>: The usual: <a href="http://twitter.com/AnnaPawlicka">Twitter</a>, my <a href="http://www.annapawlicka.com/">blog</a> and GitHub <a href="https://github.com/annapawlicka">account</a>. I’m also often on #clojure and #clojurescript IRC channels if someone wants to chat.</p>
-<p><strong>LC</strong>: Ok. One last question: when they make a movie about programming languages, who will play Clojure?</p>
-<p><strong>AP</strong>: That's a tricky one! I'd say Leonardo DiCaprio since he's one of the best actors yet still without an Oscar (read: very good but underappreciated) :-)</p>
-<p><strong>LC</strong>: Thanks for a great, informative interview.</p>
-<p><strong>AP</strong>: Thanks for putting this together. It was my first interview and it was fun :)</p>
 <hr />
 
 <div class="article-cg-box">

@@ -86,6 +86,176 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/annotated-clojure-core-reduce">
+            Some Annotated clojure.core/reduce examples
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          July 21, 2015
+        </div>
+
+        
+<p>Summary: <em>reduce is a very useful function. You can use it for many calculations over a collection. Code annotations are useful, as are physical metaphors.</em></p>
+<p><code>reduce</code> is used a lot in Clojure. I've heard a lot of people get scared by <code>reduce</code>, like it's something deep and mysterious. It is deep, but it's not mysterious. It's also very loveable for its <strong>easy mechanistic application</strong>.</p>
+<p>I love to watch my toddler doing mechanistic stuff. She picks up a bean and puts it in the cup. She picks up a bean and puts it in the cup. <strong>Over. And over.</strong> And then I think: that's reduce!</p>
+<p>Let's look at a first example. Let's say we want to <strong>add up a list of numbers</strong>.</p>
+<pre id="reduce1" class="code-card"><code>(reduce +
+        0
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce1" data-at="+">
+let's add
+</div>
+
+<div class="annotation-left" for="reduce1" data-at="0">
+start with zero
+</div>
+
+<div class="annotation-left" for="reduce1" data-at="1 2 3">
+add these numbers to it, one at a time
+</div>
+
+<p>Imagine holding <code>0</code> in your left hand and walking down the list of numbers <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>. You approach the number <code>1</code>. You grab it with your right hand. You have two numbers in your hands. You add them together (<code>+</code>) and hold the answer in your left hand. Now proceed to the next number. Repeat until you're done with the list. At the end, what number are you holding in your left hand? That's the answer.</p>
+<p>We can add stuff to a set.</p>
+<pre id="reduce2" class="code-card"><code>(reduce conj
+        #{}
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce2" data-at="conj">
+let's add things to a collection
+</div>
+
+<div class="annotation-left" for="reduce2" data-at="#{}">
+start with an empty set
+</div>
+
+<div class="annotation-left" for="reduce2" data-at="1 2 3">
+add these numbers to it, one at a time
+</div>
+
+<p>Imagine holding an empty bucket (like the empty set) in your left hand and walking down the list of numbers. When you get to <code>1</code>, you pick it up in your right hand. Now drop it in the bucket (<code>conj</code>). Proceed to the next number and repeat down the list. What is in your left hand at the end? A bucket with the numbers 1-5. That's the value of this expression.</p>
+<p>Alright, we can do something more complicated. This time, let's use an anonymous function. We'll calculate the maximum number from a list.</p>
+<pre id="reduce3" class="code-card"><code>(reduce (fn [a b]
+          (if (&gt; a b)
+            a
+            b))
+        0
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce3" data-at="fn">
+we can use an anonymous function
+</div>
+
+<div class="annotation-left" for="reduce3" data-at=" a b">
+return the larger of the two
+</div>
+
+<div class="annotation-left" for="reduce3" data-at="0">
+start with zero
+</div>
+
+<div class="annotation-left" for="reduce3" data-at="1 2 3">
+compare these numbers to it, one at a time
+</div>
+
+<p>Hold <code>0</code> in your left hand and walk down the list. When you get to <code>1</code>, pick it up. Which is bigger, what's in your left hand or what's in your right hand? Whichever it is, put that in your left hand and proceed to the next number, and so on down the line. The answer is in your left hand.</p>
+<p>Hmm. What about averages? We think of averages as the sum of a bunch of numbers divided by the number of numbers. We can keep the sum and the count separate so we can operate on them.</p>
+<pre id="reduce4" class="code-card"><code>(reduce (fn [[n d] b]
+          [(+ n b)
+           (inc d)])
+        [0 0]
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce4" data-at="fn">
+<code>n</code> is the numerator, <code>d</code> is the denominator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="n b">
+add each number to the numerator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="inc d">
+add 1 to the denominator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="0 0">
+start here
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="1 2 3">
+average these numbers, one at a time
+</div>
+
+<p>Hold <code>[0 0]</code> in your left hand. Walk down the list. When you get to <code>1</code>, pick it up in your right hand. Now, add what's in your right hand to the first number in your left hand, and add 1 to the second number in your left hand. Hold the two new numbers in your left hand. Proceed down the line, picking each number up in your right hand, until the end. The answer is in your left hand.</p>
+<p>Now, one final time, the general pattern:</p>
+<pre id="reduce5" class="code-card"><code>(reduce (fn [left right]
+          (dosomething left right))
+        starting-value
+        collection)</code></pre>
+<div class="annotation-down" for="reduce5" data-at="(f">
+a function of 2 arguments
+</div>
+
+<div class="annotation-left" for="reduce5" data-at="left">
+the arguments correspond to your hands
+</div>
+
+<div class="annotation-left" for="reduce5" data-at="something">
+the return value of this function will be the next value in your left hand
+</div>
+
+
+<div class="annotation-left" for="reduce5" data-at="starting-value">
+what you start with in your left hand
+</div>
+
+<div class="annotation-left" for="reduce5" data-at="collection">
+the items you grab with your right hand
+</div>
+
+<h3 id="conclusions">Conclusions</h3>
+<p>Well, that was fun. <code>reduce</code> is not hard. <strong>You just need a good way of thinking about it.</strong> Physical metaphors can help a ton. I wish I could have made this visual with a cartoon, but that would take more time and skill than I have. And I think the code annotations really help add context to what would otherwise be very terse code. Context is so important.</p>
+<p>If you liked the code annotations and this style of teaching the basics, you will love <a href="http://www.purelyfunctional.tv/intro-to-clojure">Lispcast Introduction to Clojure</a>. It has lots of visuals, lots of metaphors, exercises, and code annotations. It teaches the basics of Clojure and functional programming in a fun way. <a href="http://www.purelyfunctional.tv/intro-to-clojure#preview">Check out a preview</a>.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
+<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/reduce-complexity-with-variants">
             Reduce Complexity with Variants
           </a>
@@ -971,104 +1141,6 @@ No spam. Ever.
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-directory">Clojure Test Directory</a></li>
 <li><a href="http://www.lispcast.com/clojure-test-launch">LispCast Intro to clojure.test</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/lambda.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/pre-west-interview-ron-toland">
-            Pre-West Interview: Ron Toland
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          April 21, 2015
-        </div>
-
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><a href="http://clojurewest.org/speakers#rtoland"><img src="http://www.lispcast.com/img/pre-west/rtoland.jpg"
-style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Ron Toland was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#rtoland">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about building large systems in Clojure. The <a href="http://www.lispcast.com/pre-west-ron-toland">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-ron-toland">Interview with Ron Toland</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Ron Toland</strong>: I got into Clojure through Scheme.</p>
-<p>There was a senior engineer at my first programming gig that kept raving about Scheme and the book Structure and Interpretation of Computer Programs (SICP). After several months of listening to him, I finally bought a copy and read through it. I was blown away by how very simple building blocks could be used to do very complicated things.</p>
-<p>In particular, it struck me that the authors covered the map-reduce paradigm in only chapter 2 of their book; given that at the time I was reading (2009-2010) hadoop was all the rage, and the book was written in the 1980s, I started wondering &quot;what else does lisp have that we're only now re-discovering&quot;?</p>
-<p>After doing some digging into currently used Lisps, I came across Clojure. Since I was already familiar with Java, it seemed like a perfectly pragmatic Lisp to me: stealing all the thunder of the JVM, but stacking on top of that the beauty and power of Lisp. It's been my favorite programming language ever since.</p>
-<p><strong>LC</strong>: You've been using Clojure at Sonian for 6 years. When you started, Clojure was very new. What made you choose Clojure at such an early point?</p>
-<p><strong>RT</strong>: I wasn't at Sonian when the decision was made to use Clojure, but I do know the background.</p>
-<p>Basically the first version of everything was written in Ruby, which worked fine until they needed to scale things out and up to handle a larger volume of email.</p>
-<p>They knew they needed to rebuild it in a different language, so they looked at several contenders: JRuby, Java, Clojure, Scala, even Erlang. They held a big meeting of all the devs to decide which one to go with, and it came down to Clojure or Erlang. Clojure, because several of the devs were familiar with Common Lisp or Scheme and liked it, and Erlang, because the architecture they were designing around is actually pretty close to the way you'd build it in Erlang.</p>
-<p>Clojure won because of the JVM. It turns out that email is terrible, with multiple standards used by different programs at different times over the decades, and so processing it into something searchable is a nightmare. Java has a lot of libraries for processing email that have been built up over the years to handle most of email's craziness. Erlang doesn't (or at least didn't at the time).</p>
-<p>Since with Clojure they could use those Java libraries directly, while if they used Erlang they'd have to write their own, they went with Clojure.</p>
-<p><strong>LC</strong>: What is the SAFE codebase?</p>
-<p><strong>RT</strong>: SAFE is the primary application we use at Sonian for email ingestion. archiving, and indexing into Elasticsearch.</p>
-<p><strong>LC</strong>: What is the most important thing to get right early when writing a large Clojure system?</p>
-<p><strong>RT</strong>: I wasn't part of the team that originally wrote SAFE, so I can't speak much about what to get right at the start of building a large system in Clojure.</p>
-<p>I can say that a lot of large systems don't start out that way; they begin as smaller applications that grow over time, as needs arise. The trick is to keep it from becoming a mess by constantly revisiting how it's put together and looking for better -- usually more abstract, but not always -- ways to express what it needs to do.</p>
-<p><strong>LC</strong>: What do you wish could be better in Clojure for large systems?</p>
-<p><strong>RT</strong>: I'm not sure there's anything in the language itself I wish was better about Clojure for building large systems. Getting logging configured correctly always seems to be a pain; it'd be nice to have a single logging library that could hide the ugliness of the underlying java libs from us.</p>
-<p><strong>LC</strong>: Is there anything else you'd think would be useful for people to know before they watch your talk?</p>
-<p><strong>RT</strong>: I think that pretty much covers it. I'd encourage people to attend the Trapper Keeper talk today, so they can compare the two approaches.</p>
-<p><strong>LC</strong>: Where can people follow you online?</p>
-<p><strong>RT</strong>: I blog at <a href="http://mindbat.com">mindbat.com</a>, and my twitter handle is <a href="http://twitter.com/mindbat">@mindbat</a>.</p>
-<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
-<p><strong>RT</strong>: If Clojure were a food, it'd be coffee. Once you use it long enough you can take it for granted, but when you don't have it you can't seem to get anything done.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
 </ul>
 
 

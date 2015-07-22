@@ -86,6 +86,62 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://www.infoq.com/presentations/functional-pros-cons">
+            Deconstructing Functional Programming
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/deconstructing-functional-programming">
+            <img class="lambda-loguito"
+                 src="/img/lambda.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          December 22, 2013
+        </div>
+
+        
+<blockquote>
+<p>Because if you think about it, the stack itself is just an optimization. Right? There are these frames which contain information about each invocation. Each stack frame. Each activation record. And that's what they are--they're activation records. They're sort of objects. If you really have objects on the brain, like I do, then you realize that they're all just objects.</p>
+</blockquote>
+<blockquote>
+<p>And they should be treated uniformly. You can even build a language that works this way--as I have. If that's the case, this is really a garbage collection problem. Right? Your stack traces might go away if you don't need them. You do need them when it's not a tail call because you need to go back there and use that information. But if it's a tail call, you don't need them, you don't need a tail call back to that frame. You need a pointer back to the last frame that wasn't a tail call. And they might get collected.</p>
+</blockquote>
+<blockquote>
+<p>Which doesn't mean you actually have to implement it that way. Erlang sort of does. And there are many implementations that do that. They are not noted for their speed. If you can have real stacks, what happens when you run out of space? If you don't run out of space, it didn't really matter if you optimized the tail calls or not.</p>
+</blockquote>
+<blockquote>
+<p>When you run out of space, you should GC the damned stack. You shouldn't just throw up your hands and say you're dead. And for all the normal programs that people write where it didn't matter, they won't care. And for your tail recursive programs, well, they might be a bit slower, but they will work. And then it's a matter of flags to the garbage collector if in production you don't want to debug it if you're sure it's all going to be fine--then go ahead and tell it to don't bother and just slam it and overwrite those frames directly.</p>
+</blockquote>
+<p>Why is this so hard for implementers to do? Optimization is an optimization and should be optional.</p>
+<blockquote>
+<p>It's a cool algorithm, but there's nothing nice that I'm prepared to say about Hindley-Milner.</p>
+</blockquote>
+<p>He nails a lot of things I didn't like about Haskell.</p>
+<p>All in all, this talk gets a lot of things right.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
+<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
+<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
+<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/how-to-use-new-relic-with-clojure-on-heroku">
             How to Use New Relic with Clojure on Heroku
           </a>
@@ -186,9 +242,9 @@ No spam. Ever.
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -231,9 +287,9 @@ No spam. Ever.
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 
 
@@ -444,9 +500,9 @@ No spam. Ever.
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce examples</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
 </ul>
 
 
@@ -549,56 +605,6 @@ No spam. Ever.
 <ol>
 <li id="fn1"><p>Looking indicates visual thinking. <a href="http://lispcast.com/why-technical-explanation-alone-is-not-enough">Use the right part of the brain.</a><a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>In my last post, I hinted at a better way to teach how to determine whether a function is a pure function. The better way is to imagine a robot in front of you. Can he run that function &quot;in his head&quot;? Or does he need to effect the outside world?<a href="#fnref2">↩</a></p></li>
-</ol>
-</div>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/lambda.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/use-your-imagination">
-            Use Your Imagination
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          September 17, 2013
-        </div>
-
-        
-<p><strong>I always hated in school when the teacher would instruct us to <em>use our imaginations</em> to solve problems.</strong> Well, hmm. Especially as a kid, my imagination was filled with magic. Not very useful. Not that you shouldn't use your imagination. You should. But as an instruction, I find it lacking. The teachers were just being lazy.</p>
-<p>See, the thing I learned through a lot of experiments and reading is that our imagination is very powerful if you use it correctly. <strong>But much as our computers can run any possible program, our minds can imagine any situation.</strong> The key to using our imagination effectively is to learn to harness the infinite potential and direct it to a purpose.</p>
-<p>One set of techniques I studied was called <em>Neuro Linguistic Programming</em>. It is thoroughly interesting, especially the earliest stuff, but avoid the cultish seminars. The early stuff was based on <a href="http://en.wikipedia.org/wiki/Cybernetics">Cybernetics</a> and linguistics (specifically Noam Chomsky's <a href="http://en.wikipedia.org/wiki/Transformational_grammar">transformational grammar</a>). It was quite rigorous as far as informal studies go. It has since become a new-age movement. Tread carefully if you wish to explore it.</p>
-<p>One of the most intriguing aspects of NLP is that it teaches you to discover the structure of a mental process through <strong>introspection in terms of the raw sensory experience</strong>. That is, what do you see, hear, feel, etc. You break it down into the smallest steps that can be measured. You can then understand your own process and give yourself more control over your own apparatus. It sounds like a structured use of imagination. By deconstructing your imagination and guiding another person through the steps, <strong>you can transfer the outline of a skill to someone else</strong>.</p>
-<p>I know this must sound like magic. But don't we expect teachers to pass skills on to others? <strong>Teachers routinely break down skills to teach them in a process known as <a href="http://www.lispcast.com/task-analysis">task analysis</a>.</strong> You are simply doing it to your imagination. It's not magic. It's not instant knowledge transfer. Practice and experience still count for a lot. But it can get you pretty far.</p>
-<p>If it still sounds like magic, all I'm saying is that you switch from A to B:</p>
-<p><strong>A:</strong> Pure functions are functions that don't have any side-effects. Use your imagination.</p>
-<p><strong>B:</strong> To determine if a function is a pure function, look through the function line-by-line. On each line, imagine a green checkmark if the line has no side-effects. Imagine a red X if it has side-effects. When all lines have been marked, if you have any red X's, your function is not pure.</p>
-<p>While correct, the first explanation gives very little help to your imagination. In fact, my first response to explanations of type <strong>A</strong> is to think about what it might mean. But I <em>can</em> use my imagination with effort. When I do that, I realize that I am imagining <em>visually</em> scanning the function (in my mind's eye) and marking lines with side-effects.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> The second one asks you to imagine just that. <strong>Asking someone to go through a process makes it clearer.</strong><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
-<p>NLP does have a lot of merit, especially when it comes to teaching. Our mental processes can be introspected, analyzed, and described. <strong>And we can then guide a student through a process similar to what goes on in our heads when we solve the problem.</strong> This is the last piece I need to tell the story of one of the most successful things I have ever taught. Next time.</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/learning-is-about-skills">How to avoid &quot;Makes sense if you already understand it.&quot;</a></li>
-<li><a href="http://www.lispcast.com/making-true-false-easy">Making True/False Questions Easy</a></li>
-<li><a href="http://www.lispcast.com/pre-west-elena-machkasova">Pre-West Prep: Elena Machkasova</a></li>
-<li><a href="http://www.lispcast.com/pre-west-interview-elena-machkasova">Pre-West Interview: Elena Machkasova</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>This is a slight lie. I don't use visual checkmarks. I actually <em>feel</em> different when I see an expression with a side-effect. The feeling infects the whole function it is in once I feel it. <strong>My feelings have modeled the scoping rules of the language.</strong> This is the ultimate goal of imagination and skill development--when your simulation is accurate enough to be relied on.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>There is another improvement which I'll get to in the very next post. It will pull together the last few teaching posts.<a href="#fnref2">↩</a></p></li>
 </ol>
 </div>
 

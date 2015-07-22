@@ -86,6 +86,120 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/css-and-the-lambda-calculus">
+            CSS and the Lambda Calculus
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          May 09, 2014
+        </div>
+
+        
+<p>Summary: <em>Using LESS, we can almost achieve the expressive power of the Lambda Calculus as applied to styling. The expressive power is enough to create reusable styles applied to reusable HTML components.</em></p>
+<p>Let's continue our exploration and analysis of <a href="http://www.lispcast.com/css-abstraction-combination">CSS</a> and <a href="http://www.lispcast.com/less-abstraction-combination">LESS</a>. This <a href="http://www.lispcast.com/keywords/functional-css/">series is about Functional CSS</a>. Our aim is to <strong>determine a good way to use HTML and CSS so that <a href="http://www.lispcast.com/separation-of-presentation-and-content">we can reuse both</a></strong>. We can't talk about &quot;Functional&quot; without talking about the Lambda Calculus.</p>
+<p>The Lambda Calculus includes three things: <em>variables</em>, <em>abstractions</em>, and <em>applications</em>. Let's look at some Javascript.</p>
+<pre><code>(function(x) { return x + x; })(10);</code></pre>
+<p>In the above code, <code>x</code> is a variable, the function definition is a lambda abstraction, and calling the function (with the parens at the end) is called application. Luckily, <strong>Javascript gives us an additional kind of abstraction where we can name an expression</strong> to be reused:</p>
+<pre><code>var f = function(x) { return x + x; };
+f(10);</code></pre>
+<p>We can name the function <code>f</code>, then apply it by referring to the name. What's more, we can <strong>compose them pretty well</strong>.</p>
+<pre><code>var g = function(x) { return x * x; };
+var h = function(x, y) { return g(x) + g(y); };
+h(10, 20);</code></pre>
+<p>We're composing function <code>g</code> by <em>applying</em> it inside of the definition of <code>h</code>. You're probably saying &quot;duh!&quot;--and rightly so. It's so common to do.</p>
+<p>Which is why it's hard to understand why CSS does not include all of these parts. Let's at least <em>try</em> to <strong>decompose CSS into some parts</strong>.</p>
+<pre><code>.some-class { width: 10px; height: 20px; }</code></pre>
+<p>Here, we're <em>applying</em> the rule which contains two properties (<code>width</code> and <code>height</code>) to all of the elements that have the class <code>.some-class</code>. <code>.some-class</code> is the <em>argument</em> to the rule's application. In fake Javascript, it would look something like this<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>:</p>
+<!-- -->
+
+<pre><code>function(element) {
+  element.width  = 10;
+  element.height = 20;
+}(document.getElementsByClassName(&#39;some-class&#39;));</code></pre>
+<p>That is, we are <em>immediately</em> applying the abstraction to the argument. CSS has no way, as Javascript does, of <em>naming</em> the abstraction for use later. We definitely <em>want</em> that. What's more, <strong>there's no way to compose two rules together</strong>. In Javascript, we could refer to <code>g</code> within <code>h</code>. But in CSS, there's no way to do that.</p>
+<p>LESS does have this ability. Since LESS is a superset of CSS, we can start with the above CSS code. Let's repeat it:</p>
+<pre><code>.some-class { width: 10px; height: 20px; }</code></pre>
+<p>Now we <em>abstract</em> it by naming it and then <em>apply</em> the name:</p>
+<pre><code>.small-box() { width: 10px; height: 20px; }
+.some-class { .small-box(); }</code></pre>
+<p>That's somewhat better. We've got a reusable component (<code>.small-box</code>) and we've also added <strong>a bit more meaning to our code because we have a meaningful name</strong>. What's more, LESS lets you compose:</p>
+<pre><code>.small-box() { width: 10px; height: 20px; }
+.my-button() { .small-box(); border: 1px solid black; }
+
+.some-class { .my-button(); }</code></pre>
+<p>Here we've made an abstraction called <code>.my-button</code> by using <code>.small-box</code> inside. That's composition. And that's on par with our Javascript examples above.</p>
+<p>There's one more thing that we might want that even Javascript doesn't have. Javascript has first-class functions. That's really nice. But there are many things in Javascript that are not first-class. For instance, the arithmetic operators (<code>+</code>, <code>*</code>, <code>-</code>, <code>/</code>) cannot be passed to a function or assigned to variables. <strong>They are treated differently by the language.</strong> They are a bit like properties in CSS: all you can do with them is refer to them directly in an expression.</p>
+<p>But what if Javascript did have first-class arithmetic functions? We can certainly fake them out.</p>
+<pre><code>var plus  = function(a, b) { return a + b; };
+var times = function(a, b) { return a * b; };
+var minus = function(a, b) { return a - b; };
+var over  = function(a, b) { return a / b; };</code></pre>
+<p>Now we have functions that act just like the operators--and they're first-class. It's also way more consistent: every operator is a function.</p>
+<p>We can do something similar in LESS. Imagine we took every property and did what I do to these:</p>
+<pre><code>.width(@w)  { width:  @w; }
+.height(@h) { height: @h; }
+. . .</code></pre>
+<p>Now we have the consistency that everything is at least referrable as a mixin. This is pretty good.</p>
+<p>We can now define our styles--and name them--in this subset of LESS. <strong>Styles may reference other styles.</strong> And rules with selectors may reference styles. You could import pure styles from an external library, then refer to them in your rules, where you apply them to selectors. <strong>The HTML does not have to change, and neither do the styles.</strong></p>
+<p><strong>Rules--where styles and selectors are tied together--will change the most.</strong> As common sets of styles are used together often, you might think about factoring them out into a new style, which would be added to your organization's standard style library. Also, as HTML components solidify, you could begin to firm up the class names and their structure, reusing them in a more permanent way. Yet, even though these two assets (the standard styles and the standard class names / HTML structures) are permanent, you can still change how they are styled by changing the rules. <strong>Both assets retain their value over time.</strong></p>
+<h3 id="a-fly-in-the-ointment">A fly in the ointment</h3>
+<p>Even though we have tremendous power over that given by CSS, <strong>we are not at the level of first-class styles</strong>. The following will NOT work in LESS, though we would expect it to.</p>
+<pre><code>/* refer to variable like a mixin */
+.apply(@style, @arg) { @style(@arg); }
+
+.width(@w) { width: @w; }
+
+/* pass in .width mixin */
+#xyz { .apply(.width, 10px); }</code></pre>
+<p>The problem is that <strong>you cannot use a mixin named with a variable</strong>. The same limitation exists in SCSS (SASS). The following is invalid.</p>
+<pre><code>@mixin apply($s, $a) { @include $s($a); }</code></pre>
+<p>Why can't a mixin be assigned to a variable? Mixins appear to be in a different namespace from variables, and only mixin syntax can appear in the mixin position. Though I don't think <code>apply</code> itself would be very useful, it would indicate a <strong>recursive abstraction power that could be used well</strong>.</p>
+<p>Not being able to write <code>apply</code> hints that the developers of these two languages are thinking at the syntax level. They have added some great features, but <strong>they have not truly modeled the problem semantically</strong>. Instead, it feels like a mix of special-cased syntax rules and string interpolation. <a href="http://lesscss.org/features/#detached-rulesets-feature">You can assign a ruleset to a variable, but not a mixin?</a></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>LESS (and SASS, etc) have some very powerful features that are miles above CSS in terms of abstraction and composition. I hate using plain CSS after using LESS--LESS is just so much more expressive. You can do some impressive and useful things with them, and I continue to use them. I want to write about <strong>how I use a subset of LESS and a strict discipline in HTML to make styling easier and more maintainable</strong>. In addition, I'd like to <strong>explore what a better-designed style language might look like</strong>.</p>
+<div class="article-cg-box">
+  <h3>
+You may like the Clojure Gazette
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Please ignore the fact that CSS does operate on sets of elements, not simple elements.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/lambda.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/separation-of-presentation-and-content">
             Separation of Presentation and Content
           </a>
@@ -1019,62 +1133,6 @@ No spam. Ever.
 <ul>
 <li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
 <li><a href="http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history">Mastering ClojureScript Routing with Secretary and goog.History</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/lambda.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.infoq.com/presentations/functional-pros-cons">
-            Deconstructing Functional Programming
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/deconstructing-functional-programming">
-            <img class="lambda-loguito"
-                 src="/img/lambda.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          December 22, 2013
-        </div>
-
-        
-<blockquote>
-<p>Because if you think about it, the stack itself is just an optimization. Right? There are these frames which contain information about each invocation. Each stack frame. Each activation record. And that's what they are--they're activation records. They're sort of objects. If you really have objects on the brain, like I do, then you realize that they're all just objects.</p>
-</blockquote>
-<blockquote>
-<p>And they should be treated uniformly. You can even build a language that works this way--as I have. If that's the case, this is really a garbage collection problem. Right? Your stack traces might go away if you don't need them. You do need them when it's not a tail call because you need to go back there and use that information. But if it's a tail call, you don't need them, you don't need a tail call back to that frame. You need a pointer back to the last frame that wasn't a tail call. And they might get collected.</p>
-</blockquote>
-<blockquote>
-<p>Which doesn't mean you actually have to implement it that way. Erlang sort of does. And there are many implementations that do that. They are not noted for their speed. If you can have real stacks, what happens when you run out of space? If you don't run out of space, it didn't really matter if you optimized the tail calls or not.</p>
-</blockquote>
-<blockquote>
-<p>When you run out of space, you should GC the damned stack. You shouldn't just throw up your hands and say you're dead. And for all the normal programs that people write where it didn't matter, they won't care. And for your tail recursive programs, well, they might be a bit slower, but they will work. And then it's a matter of flags to the garbage collector if in production you don't want to debug it if you're sure it's all going to be fine--then go ahead and tell it to don't bother and just slam it and overwrite those frames directly.</p>
-</blockquote>
-<p>Why is this so hard for implementers to do? Optimization is an optimization and should be optional.</p>
-<blockquote>
-<p>It's a cool algorithm, but there's nothing nice that I'm prepared to say about Hindley-Milner.</p>
-</blockquote>
-<p>He nails a lot of things I didn't like about Haskell.</p>
-<p>All in all, this talk gets a lot of things right.</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
-<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
-<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
-<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
 </ul>
 
 

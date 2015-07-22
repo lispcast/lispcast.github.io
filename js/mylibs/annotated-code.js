@@ -32,8 +32,6 @@
 
                 var a = '<a name="' + aid + '"></a>';
                 var at = '' + $ann.data('at');
-                console.log(at);
-                console.log(typeof at);
                 var re = new RegExp(escapeRegExp(at));
                 var sep = "UnlikelyText019292";
                 var f = function(g) {
@@ -44,6 +42,7 @@
                 done_text = done_text + split[0];
                 remaining_text = split[1];
                 $ann.data('aid', aid);
+                $ann.css({display:"block"});
             });
 
             done_text = done_text + remaining_text;
@@ -122,6 +121,5 @@
     var escapeRegExp = function (s) {
         return s.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
-
-    run_plugin();
+    $(run_plugin);
 }());

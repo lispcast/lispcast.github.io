@@ -86,6 +86,107 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/pre-conj-interview-paul-degrandis">
+            Pre-Conj Interview: Paul deGrandis
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          October 25, 2014
+        </div>
+
+        
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-conj-header.png" />
+</div>
+<center>
+<a href="http://clojure-conj.org/speakers#paul-degrandis"><img src="http://www.lispcast.com/img/pre-conj/paul-degrandis.jpg" /></a>
+</center>
+
+<h3 id="introduction">Introduction</h3>
+<p>Paul deGrandis gave a nice interview about his <a href="http://clojure-conj.org/speakers#paul-degrandis">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> about data-driven systems. Read the <a href="http://www.lispcast.com/pre-conj-paul-degrandis">background to his talk</a>.</p>
+<h3 id="interview">Interview</h3>
+<p><strong>LispCast</strong>: How did you get into Clojure?</p>
+<p><strong>Paul deGrandis</strong>: I was a very early Clojure adopter. I came from Python (and before that a mix of C/C++/Java/Python), but I had always used Common Lisp to prototype ideas. Once I saw Clojure publicly announced, I gave it a shot and instantly identified with the Clojure Trinity: Simplicity, Power, and Focus. I began using it in all of my proof-of-concept work, and as I became confident in the language, integration with the platform, and my own skill set, I also started putting it into production.</p>
+<p><strong>LC</strong>: Can you define Data-Driven systems briefly?</p>
+<p><strong>PdG</strong>: Data-driven systems capture their interactions and operations as values - they are one possible conclusion of programming with values. We see this done in Datomic - queries are expressed as data. This concept is easily mapped to other systems - services, client-side applications, and more. Note that is more than just, &quot;data all the things,&quot; this is, &quot;data all the thing's things.&quot; Another example: Pedestal routes are represented as data (&quot;data all the things&quot;), but imagine if we captured the expression of an entire service as data. Imagine the properties that naturally fall out from that design decision. My talk walks through a real project that pushed this design decision as far as possible, and the steps that other developers can follow to do the same for their own systems.</p>
+<p><strong>LC</strong>: At Cognitect, they talk about Data &gt; Functions &gt; Macros. Is that what your talk is about?</p>
+<p><strong>PdG</strong>: My talk, at a <em>very</em> high level is about &quot;Data &gt; Functions &gt; Macros,&quot; but it's mostly about modeling entire systems (not just interfaces) as data, why you'd want to, and why it's hard. It definitely challenges the previous notions (established by existing tooling) of what the conclusions of &quot;programming with values&quot; actually are (or could/should be). Tangentially, I'll talk about DSLs, but only in regards to constraining your domain as a means to increase expressiveness.</p>
+<p><strong>LC</strong>: I'm a big fan of working with data. But I've also seen its dark side. I've seen it pushed too far, or in the wrong area, to where it would have been better to use code. Have you noticed this? How do you avoid that?</p>
+<p><strong>PdG</strong>: I have indeed noticed it and it's a topic within my talk. Two crucial pieces of any great design (in software or otherwise) are the external constraints imposed by the problem, and the internal constraints imposed by the designer. Both are important, but it seems common that people overlook self-imposing constraints - and one needs them to achieve a really great design. I don't necessarily agree that capturing a system in data can be pushed too far, but I think it can be done without constraint or design intent - which produces a useless system. The crux is knowing that limitation and working within it. Outside of those limitations and constraints, one should fall back to foundation - regular Clojure code, etc.</p>
+<p><strong>LC</strong>: What is one thing you want someone to be able to do after they watch your talk?</p>
+<p><strong>PdG</strong>: I want someone to come away with a set of techniques to envision, constrain, and design data-driven systems. I want to create a spark that encourages Clojure developers to look beyond the initial merits of programming with values, and see further-reaching impact within their own systems - how to turn our ecosystem into a set of super powers.</p>
+<p>I hope to provide a compelling example of how this approach plays out in production systems, and the general metrics and project impact it has.</p>
+<p><strong>LC</strong>: What resources would you recommend to a beginner so they could maximize their understanding of your talk?</p>
+<p><strong>PdG</strong>: My talk touches upon a lot of themes covered in some inspiring and informative talks: Tim Ewald's keynote from last year's Conj (<a href="https://www.youtube.com/watch?v=ShEez0JkOFw">Programming with Hand Tools</a>), Rich Hickey's GOTO conference Keynote (<a href="http://www.infoq.com/presentations/Value-Values">The value of values</a>), and previous Conj talks. I'm still searching for literature and books that I like on the topic, but I haven't hit any that I'd strongly recommend.</p>
+<p><strong>LC</strong>: Where can people follow your adventures online?</p>
+<p><strong>PdG</strong>:</p>
+<ul>
+<li>My Twitter: <a href="https://twitter.com/OhPauleez">@OhPauleez</a></li>
+<li>My Github: <a href="https://github.com/ohpauleez">https://github.com/ohpauleez</a></li>
+<li>I sometimes blog: <a href="http://www.pauldee.org/blog/">http://www.pauldee.org/blog/</a></li>
+</ul>
+<p><strong>LC</strong>: If Clojure rode an animal, what animal would it ride?</p>
+<p><strong>PdG</strong>: A very serious pony.</p>
+<p><strong>LC</strong>: Thanks for a great interview. It was informative.</p>
+<p><strong>PdG</strong>: Thanks a ton! I really appreciate all of this!</p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
+</p>
+
+
+<h3>
+You may like the Clojure Gazette
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/pre-conj-interview-anna-pawlicka">
             Pre-Conj Interview: Anna Pawlicka
           </a>
@@ -1002,105 +1103,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
       </article>
 
 
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/pre-conj-interview-david-pick">
-            Pre-Conj Interview: David Pick
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          October 15, 2014
-        </div>
-
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#david-pick"><img src="http://www.lispcast.com/img/pre-conj/david-pick.jpeg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>David Pick was kind enough to answer a few questions about himself and his upcoming <a href="http://www.clojure-conj.org/">Clojure/conj</a> talk. You may want to <a href="http://www.lispcast.com/pre-conj-david-pick">read the background</a> before you begin.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>David Pick</strong>: A friend of my mine suggested I read <a href="http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504">Purely Functional Data Structures</a> and told me the work in the book was the basis for Clojure's persistent data structures. I really enjoyed it and decided to give Clojure a try.</p>
-<p><strong>LC</strong>: Braintree must process a lot of very important data, since it's a payments service. What were you using before you developed the Clojure and Kafka system?</p>
-<p><strong>DP</strong>: I'd say for 98% of our systems we still use Ruby and Postgres, we're simply using Clojure and Kafka as a messaging platform to move data between systems.</p>
-<p><strong>LC</strong>: What is Kafka?</p>
-<p><strong>DP</strong>: Kafka is a system for doing publish subscribe messaging, that was built by LinkedIn to have extremely high throughput and replay ability of messages. It stores all messages sent through the system for a rolling window. So consumers simply say give me messages starting with offset n or whatever your most recent message is. This way if a receiving system goes down the consumer can just rewind the stream and replay messages that were missed.</p>
-<p><strong>LC</strong>: Could you describe the problem you were trying to solve? What were the requirements?</p>
-<p><strong>DP</strong>: There were actually two problems we were trying to solve. The first was to pull our search tool into a separate system that was more scalable than our current one (the current one just runs sql queries on main database). The second was to improve the accuracy and speed that our data warehouse is updated.</p>
-<p>For the infrastructure part of the solution we ended up using Kafka, Zookeeper, and Elasticsearch which are all JVM based so that ended up heavily influencing our decision to use Clojure.</p>
-<p><strong>LC</strong>: You mentioned in the talk description that Clojure had certain advantages. What tradeoffs did Clojure, or your choice of technologies, bring about?</p>
-<p><strong>DP</strong>: The biggest tradeoff I think we made with Clojure is familiarity, I was the only one on the team who knew Clojure prior to starting this project. So that has certainly slowed us down. Other than that things have gone surprisingly well.</p>
-<p><strong>LC</strong>: I'm really fascinated by the engineering efforts to build very reliable and robust systems. Are you going to talk about that?</p>
-<p><strong>DP</strong>: Yep, that's the plan!</p>
-<p><strong>LC</strong>: Awesome.</p>
-<p>Do you have any resources that would help someone new to Clojure or new to Kafka so that they can make the most of your talk? Some pre-reading or pre-watching materials?</p>
-<p><strong>DP</strong>: For Clojure I definitely recommend both the <a href="http://clojurekoans.com/">Clojure Koans</a> and <a href="http://4clojure.com/">4Clojure</a>. For Kafka I'd recommend the <a href="http://kafka.apache.org/documentation.html#introduction">introduction on their site</a>.</p>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>DP</strong>: Twitter is probably the best place <a href="http://twitter.com/davidpick">@davidpick</a>.</p>
-<p><strong>LC</strong>: Who would win in a no-holds-barred fight to the finish, Clojure with an Arduino-controlled laser or a T-Rex?</p>
-<p><strong>DP</strong>: If Rich is writing the Clojure I give it a fighting chance, otherwise it's the T-Rex for sure.</p>
-<p><strong>LC</strong>: Awesome! Thanks for a great interview. I look forward to seeing you at the Conj.</p>
-<p><strong>DP</strong>: Awesome, thanks Eric!</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
       <div class="notes">
 
       </div>
@@ -1122,7 +1124,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
 
-    <script src="/js/mylibs/annotated-code.js"></script>
+
 
     <script>
 
@@ -1168,6 +1170,9 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
                                                     });
 
                                                     </script>
+      <script src="/js/mylibs/annotated-code.js"></script>
+      <script src="/js/libs/codemirror.js"></script>
+      <script src="/js/mylibs/feedback.js"></script>
 
   </body>
 </html>

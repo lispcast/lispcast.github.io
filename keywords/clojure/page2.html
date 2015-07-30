@@ -86,6 +86,76 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/complex-syntax">
+            Complex Syntax
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          August 19, 2014
+        </div>
+
+        
+<p>Summary: <em>Lisps are revered for their simple syntax, but parens are complex. They complect function calls and macro calls, which have drastically different semantics.</em></p>
+<p>One of the problems that people have with Lisps is that they hate the parentheses. Clojure does a pretty good job of minimizing unnecessary parens and giving them a much clearer meaning. But there's a deeper problem that people express all the time when they're first learning. It's frustrating to watch people struggle with it, because it's not their fault. <strong>It's a problem with Lisps in general.</strong></p>
+<p>Parens in all Lisps I've seen, including Clojure, are complex. I'm not using the word lightly. <strong>Parens complect two similar but distinct ideas: macro application and function application.</strong></p>
+<p>Macros and functions are obviously different. Macros are expanded at a time just before compilation called &quot;macro-expansion time&quot;. They typically cannot be accessed at runtime. Functions, on the other hand, are applied at runtime. And they are first-class, meaning they are runtime values. In addition, the calling semantics are different. Macros are call-by-name. The code of each gets passed unevaluated. Functions are call-by-value. <strong>Functions and macros are two distinct species.</strong></p>
+<p>However, despite being distinct semantics, the syntax for calling the two is identical. Parens complect applying macros with applying functions. Beginners trip up on this all the time. Their head is already spinning from the notion that some of the things they are learning are macros, called at compile time. Now add on top that the syntax of the language does not help one bit in distinguishing macro calls from function calls. <strong>You just have to memorize what's a macro and what's a function.</strong></p>
+<p>We learned in <a href="http://www.thecorememory.com/Next_700.pdf">The Next 700 Programming Languages</a> that our syntax should serve to elucidate the semantics. Lisp just fails at this pretty hard. The only consolation is that <strong>you actually can remember, with time and experience, what's a macro and what's a function</strong>. Every Lisp programmer is proof of that.</p>
+<p>A simple solution would be to have <strong>a weird syntax for calling macros</strong>. You know, instead of parens, you use something else. Something that distinguishes the two to decomplect them. This would have broad and deep implications for the language that I cannot begin to fathom.</p>
+<p>The takeaway for the beginner is that, sorry, Clojure won't help you much with this, but <strong>it's very important to know what's a macro and what's a function</strong>. You just have to keep track in your head. If you're not sure, you can call <code>clojure.repl/doc</code><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> on any symbol. If it names a macro, it will tell you.</p>
+<p>So, there you have it. <strong>Lisps complect function calls and macro calls</strong>, which have drastically different semantics, using the same notation. Common Lisp and Scheme use parens for much more than that, making the syntax complex and context-dependent<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>. Clojure removes a lot of those parens, replacing them with square braces or removing them altogether. However, the complexity of macro and function calls remains.</p>
+<p>Despite this, Clojure is still a great language! If you'd like to learn Clojure, I have to recommend the <a href="http://purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video series.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>That's a macro.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>For instance, inside of a <code>let</code>, parens take on the meaning of grouping the bindings and also grouping the variable with its value.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/conj-mental-bump">
             The conj Mental Bump
           </a>
@@ -165,8 +235,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -302,8 +372,8 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 </ul>
 
 
@@ -604,8 +674,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 </ul>
 
 
@@ -688,8 +758,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 </ul>
 
 
@@ -760,8 +830,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -968,8 +1038,8 @@ No spam. Ever.
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -977,101 +1047,6 @@ No spam. Ever.
 <li id="fn1"><p>We use (and pay for) Heroku at work and we like the paid service, too!<a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/is-core-async-against-clojure-philosophy">
-            Is core.async Against the Clojure Philosophy?
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 06, 2014
-        </div>
-
-        
-<p>Summary: <em>Clojure core.async is a way to manage mutable state. Isn't that against functional programming?</em></p>
-<p>When core.async was first announced, there was a lot of fanfare. But among the celebration, there was some consternation about core.async. <strong>Isn't core.async against the functional principles of Clojure?</strong> Aren't channels just mutable state? Aren't the <code>&lt;!</code> and <code>&gt;!</code> operations mutation?</p>
-<p>Well, it's true. core.async is about mutation. <strong>It's procedural code.</strong> Go blocks run their bodies one step at a time. It's imperative.</p>
-<p>But that's what Clojure is all about. It <strong>makes functional programming easy</strong> (with <code>fn</code>s, immutable data structures, and higher order functions). It also makes mutable state <em>easy to reason about</em>. It does not eliminate it. <strong>It simply gives you better abstractions.</strong> That's what Atoms, Refs, Vars, and Agents are: useful abstractions for dealing with state.</p>
-<p>core.async is just another abstraction for dealing with state. But, following the Clojure philosophy, it was chosen to be easy to reason about. <strong>The hardest part about coordinating and communicating with independent threads normally is that neither of them know what the other is doing.</strong> You can make little signals using shared memory. But those signals get complicated fast once you scale past two threads.</p>
-<p>And that's what a channel is: it's just <strong>a shared coordination point</strong>. But it has some cool properties that make it super easy to reason about:</p>
-<ol>
-<li>Carry semantics: the channel carries its own coordination semantics (buffering, unbuffered, etc).</li>
-<li>Simple interface: channels have put, take, and close. That's it.</li>
-<li>Very scalable: any number of processes can use a single channel with no additional cost.</li>
-<li>Decoupling: consumers don't need to know producers and <em>vice versa</em>.</li>
-</ol>
-<p>Channels are awesome, but they're not the whole story. The other part of core.async is the go block. <a href="http://www.lispcast.com/core-async-browser-motivation">Go blocks are another abstraction</a>. They allow you to <strong>write code in an imperative style that blocks on channels</strong>. You get to use loops and conditionals, as well as local let variables, global variables, and function calls -- everything you're already using, but augmented with the coordination power of channels.</p>
-<p>All of these features add up to something you can reason about <em>locally</em>. That's the key: <strong>the code you're looking at now can be understood without looking at other code</strong>.</p>
-<p>But there's a downside: you now have more choices. In theory, they're easier choices. But that requires you to understand the choices. <strong>You need to understand the abstractions, the idioms, and the tradeoffs.</strong> That's the goal of the <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a> video course. If you'd like to use core.async but you don't know where to start, this is a good place.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free core.async Reference Sheet
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
-</p>
-      
-<input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][8]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
-<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
-<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
-<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
-</ul>
 
 
         <div class="endmark">
@@ -1106,7 +1081,7 @@ No spam. Ever.
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
 
-    <script src="/js/mylibs/annotated-code.js"></script>
+
 
     <script>
 
@@ -1152,6 +1127,9 @@ No spam. Ever.
                                                     });
 
                                                     </script>
+      <script src="/js/mylibs/annotated-code.js"></script>
+      <script src="/js/libs/codemirror.js"></script>
+      <script src="/js/mylibs/feedback.js"></script>
 
   </body>
 </html>

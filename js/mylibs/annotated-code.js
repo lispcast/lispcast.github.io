@@ -40,7 +40,7 @@
                 var temp_text = remaining_text.replace(re, f);
                 var split = temp_text.split(sep);
                 done_text = done_text + split[0];
-                remaining_text = split[1];
+                remaining_text = split[1] || "";
                 $ann.data('aid', aid);
                 $ann.css({display:"block"});
             });

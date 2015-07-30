@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Annotated map</title>
+                  <guid isPermalink="false">http://www.lispcast.com/annotated-map</guid>
+                  <link>http://www.lispcast.com/annotated-map</link>
+                  <pubDate>Wed 29 Jul 2015 09:33:06 PM CDT</pubDate>
+                  <description>
+                    map is one of the staples of functional programming. It's totally useful and also surprisingly simple. Let's look at some examples and annotated code.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/annotated-map"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Some Annotated clojure.core/reduce Examples</title>
                   <guid isPermalink="false">http://www.lispcast.com/annotated-clojure-core-reduce</guid>
                   <link>http://www.lispcast.com/annotated-clojure-core-reduce</link>
@@ -129,20 +143,6 @@
                     The world may be mutable, but people have been using the notion of immutability to build reliable systems for a long time.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/the-world-is-mutable"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>clojure.test cheatsheet</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-test-cheatsheet</guid>
-                  <link>http://www.lispcast.com/clojure-test-cheatsheet</link>
-                  <pubDate>Sun 03 May 2015 10:59:22 PM CDT</pubDate>
-                  <description>
-                    I made a clojure.test cheatsheet that you can get for free.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-test-cheatsheet"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

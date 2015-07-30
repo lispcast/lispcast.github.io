@@ -86,6 +86,101 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/is-core-async-against-clojure-philosophy">
+            Is core.async Against the Clojure Philosophy?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          August 06, 2014
+        </div>
+
+        
+<p>Summary: <em>Clojure core.async is a way to manage mutable state. Isn't that against functional programming?</em></p>
+<p>When core.async was first announced, there was a lot of fanfare. But among the celebration, there was some consternation about core.async. <strong>Isn't core.async against the functional principles of Clojure?</strong> Aren't channels just mutable state? Aren't the <code>&lt;!</code> and <code>&gt;!</code> operations mutation?</p>
+<p>Well, it's true. core.async is about mutation. <strong>It's procedural code.</strong> Go blocks run their bodies one step at a time. It's imperative.</p>
+<p>But that's what Clojure is all about. It <strong>makes functional programming easy</strong> (with <code>fn</code>s, immutable data structures, and higher order functions). It also makes mutable state <em>easy to reason about</em>. It does not eliminate it. <strong>It simply gives you better abstractions.</strong> That's what Atoms, Refs, Vars, and Agents are: useful abstractions for dealing with state.</p>
+<p>core.async is just another abstraction for dealing with state. But, following the Clojure philosophy, it was chosen to be easy to reason about. <strong>The hardest part about coordinating and communicating with independent threads normally is that neither of them know what the other is doing.</strong> You can make little signals using shared memory. But those signals get complicated fast once you scale past two threads.</p>
+<p>And that's what a channel is: it's just <strong>a shared coordination point</strong>. But it has some cool properties that make it super easy to reason about:</p>
+<ol>
+<li>Carry semantics: the channel carries its own coordination semantics (buffering, unbuffered, etc).</li>
+<li>Simple interface: channels have put, take, and close. That's it.</li>
+<li>Very scalable: any number of processes can use a single channel with no additional cost.</li>
+<li>Decoupling: consumers don't need to know producers and <em>vice versa</em>.</li>
+</ol>
+<p>Channels are awesome, but they're not the whole story. The other part of core.async is the go block. <a href="http://www.lispcast.com/core-async-browser-motivation">Go blocks are another abstraction</a>. They allow you to <strong>write code in an imperative style that blocks on channels</strong>. You get to use loops and conditionals, as well as local let variables, global variables, and function calls -- everything you're already using, but augmented with the coordination power of channels.</p>
+<p>All of these features add up to something you can reason about <em>locally</em>. That's the key: <strong>the code you're looking at now can be understood without looking at other code</strong>.</p>
+<p>But there's a downside: you now have more choices. In theory, they're easier choices. But that requires you to understand the choices. <strong>You need to understand the abstractions, the idioms, and the tradeoffs.</strong> That's the goal of the <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a> video course. If you'd like to use core.async but you don't know where to start, this is a good place.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+Get a Free core.async Reference Sheet
+</h3>
+    
+<img class="subscribe-form-image"
+         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][8]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
+<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
+<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/reification">
             Reification
           </a>
@@ -974,160 +1069,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/lists-in-clojure">
-            Warty Lists in Clojure
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          May 27, 2014
-        </div>
-
-        
-<p>Summary: <em>Lists are kind of warty in Clojure. Care should be taken, especially by those coming from other Lisps.</em></p>
-<p>One of the things that still trips me up in Clojure is the actual types of lists. I used to program in Common Lisp, where things are a bit easier to understand: something is either a list or an atom. Lists are built out of conses and end with <code>nil</code>. Everything else is an atom.</p>
-<p>Coming from Common Lisp, one might expect this to work:</p>
-<pre><code>=&gt; (listp (cons 1 nil))</code></pre>
-<p>In CL, it will be true. In Clojure, it is also true. (Try it out yourself!) Launch a REPL. Go to <a href="http://tryclj.com/">Try Clojure</a>.</p>
-<pre><code>=&gt; (list? (cons 1 nil))</code></pre>
-<p>What about this:</p>
-<pre><code>=&gt; (list? (cons 1 (cons 1 nil)))</code></pre>
-<p>We're consing onto a list, should be a list, no?</p>
-<p>In Common Lisp, yes. In Clojure?</p>
-<p>NO!</p>
-<p>That's not a list. Go ahead, try it at your Clojure REPL.</p>
-<p>What gives? How is that possible? Are we living in a Kafkaesque ECMAScript World?</p>
-<div class="figure">
-<img src="http://lispcast.com/pictures/kafkaesque.png" />
-</div>
-<p>Well . . . probably.</p>
-<p>What's going on? Put on your Indiana Jones fedora. We're going on an adventure deep into the heart of the Clojure JVM implementation.</p>
-<div class="figure">
-<img src="http://lispcast.com/pictures/raiders3.jpg" />
-</div>
-<p>First, how is <code>list?</code> defined?</p>
-<p><a href="https://github.com/richhickey/clojure/blob/a1eff35124b923ef8539a35e7a292813ba54a0e0/src/clj/clojure/core.clj#L4961">In clojure.core</a>:</p>
-<pre><code>(defn list?
-  &quot;Returns true if x implements IPersistentList&quot;
-  {:added &quot;1.0&quot;}
-  [x] (instance? clojure.lang.IPersistentList x))</code></pre>
-<p>Great, <code>list?</code> is just an instance check. <strong>What classes implement <code>clojure.lang.IPersistentList</code>?</strong> According to the javadoc on the Clojure sources, there are two: <code>PersistentQueue</code> and <code>PersistentList</code>. There's also a static inner class in <code>PersistentList</code> called <code>EmptyList</code>.</p>
-<p>Let's see those at the REPL:</p>
-<pre><code>=&gt; (type ())
-  clojure.lang.PersistentList$EmptyList
-=&gt; (list? ())
-  true
-
-=&gt; (type (list 1 2 3))
-  clojure.lang.PersistentList
-=&gt; (list? (list 1 2 3))
-  true
-
-=&gt; (type clojure.lang.PersistentQueue/EMPTY)
-  clojure.lang.PersistentQueue
-=&gt; (list? clojure.lang.PersistentQueue/EMPTY)
-  true</code></pre>
-<p>These all return true when given to <code>list?</code>. What about <code>(cons 1 nil)</code>?</p>
-<pre><code>=&gt; (type (cons 1 nil))
-  clojure.lang.PersistentList
-=&gt; (list? (cons 1 nil))
-  true</code></pre>
-<p>Great. <strong>Consing onto nil gives you a list</strong>. Let's cons onto a list:</p>
-<pre><code>=&gt; (type (cons 0 (list 1 2 3)))
-  clojure.lang.Cons
-=&gt; (list? (cons 0 (list 1 2 3)))
-  false</code></pre>
-<div class="figure">
-<img src="http://lispcast.com/pictures/raiders4.jpg" />
-</div>
-<p>Oh, no! Why does consing onto <code>nil</code> create a list, but <strong>consing onto a list create a cons</strong>? Poisonous dart averted! Back to the source code!</p>
-<p><a href="https://github.com/richhickey/clojure/blob/a1eff35124b923ef8539a35e7a292813ba54a0e0/src/clj/clojure/core.clj#L22">In clojure.core</a>:</p>
-<pre><code>(def
- ^{:arglists &#39;([x seq])
-    :doc &quot;Returns a new seq where x is the first element and seq is
-    the rest.&quot;
-   :added &quot;1.0&quot;}
-
- cons (fn* cons [x seq] (. clojure.lang.RT (cons x seq))))</code></pre>
-<p>So it calls <code>clojure.lang.RT/cons</code>. We can <a href="https://github.com/clojure/clojure/blob/1.5.x/src/jvm/clojure/lang/RT.java#L565">look that up</a>:</p>
-<pre><code>static public ISeq cons(Object x, Object coll){
-    //ISeq y = seq(coll);
-    if(coll == null)
-        return new PersistentList(x);
-    else if(coll instanceof ISeq)
-        return new Cons(x, (ISeq) coll);
-    else
-        return new Cons(x, seq(coll));
-}</code></pre>
-<p>Wow! The code is clear: if the second argument is <code>null</code> (<code>nil</code>), <strong>it makes a <code>PersistentList</code></strong>. Otherwise, it constructs a <code>clojure.lang.Cons</code>, which is not a list! We're at the root of our wart, but there's nothing we can really do about it except keep exploring.</p>
-<p>If I have a list (according to <code>list?</code>) and I want to add an element to the front to make a new list, how do I do that?</p>
-<div class="figure">
-<img src="http://lispcast.com/pictures/raiders%205.jpg" />
-</div>
-<p>Well, the answer is a little disappointing:</p>
-<pre><code>=&gt; (def ls (list 1 2 3))
-=&gt; (def ls2 (conj ls 0))
-=&gt; (list? ls2)
-  true</code></pre>
-<p><code>conj</code> will maintain the type, <code>cons</code> will not. What happens if I <code>conj</code> onto a <code>Cons</code>?</p>
-<pre><code>=&gt; (def c (cons 1 (cons 2 nil)))
-=&gt; (conj c 0)
-  (0 1 2)
-=&gt; (type (conj c 0))
-  clojure.lang.Cons</code></pre>
-<p>So, there you have it. It's a bit of a wart having all of these slightly different types and predicates like <code>list?</code> that slice them up in odd ways. Sometimes it's like running away from a giant paper-mache ball.</p>
-<div class="figure">
-<img src="http://lispcast.com/pictures/raiders6.jpg" />
-</div>
-<p>In Clojure's defense, I will say that <strong>I rarely use <code>list?</code></strong>, if at all. It's <strong>not a very useful function</strong> in <code>clojure.core</code>. I'm usually working at a much higher level than that, thinking in terms of sequences (an abstraction), not their concrete implementations. And in the end, you never get out of danger.</p>
-<iframe width="560" height="315" src="//www.youtube.com/embed/lQg7QKDButo" frameborder="0" allowfullscreen></iframe>
-
-<p>There you have it. If you'd like to learn more Clojure, I have a nice video series:</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 </ul>
 
 
@@ -1163,7 +1106,7 @@ Learn more
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
 
-    <script src="/js/mylibs/annotated-code.js"></script>
+
 
     <script>
 
@@ -1209,6 +1152,9 @@ Learn more
                                                     });
 
                                                     </script>
+      <script src="/js/mylibs/annotated-code.js"></script>
+      <script src="/js/libs/codemirror.js"></script>
+      <script src="/js/mylibs/feedback.js"></script>
 
   </body>
 </html>

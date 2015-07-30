@@ -235,10 +235,144 @@ Learn more
 
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 <li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-<li><a href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">Clojure Gazette Looking Forward</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/annotated-map">
+            Annotated map
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          July 29, 2015
+        </div>
+
+        
+<p>Summary: <em><code>map</code> is one of the staples of functional programming. It's totally useful and also surprisingly simple. Let's look at some examples and annotated code.</em></p>
+<p>About a week ago I showed some <a href="http://lispcast.com/annotated-clojure-core-reduce">examples of using <code>reduce</code></a>, a very commonly used function. This time, I'm going to give some examples of <code>map</code>, which is probably even more common.</p>
+<p><code>map</code> is one of those things that's so useful and so straightforward that it finds its way into every language. Javascript has a <code>map</code> in the newer versions, but people couldn't live without it so it's in a lot of Javascript libraries (for example, in <a href="http://underscorejs.org/#map">Underscore</a>).</p>
+<p>Let's imagine you're walking down a list <code>[0 1 2 3 4 5]</code>. Your job is to increment each one. As you pass each each number on your right you pick it up, add one to it, and put it down on your left. Boom, a new list on your left.</p>
+<pre id="map1" class="code-card"><code>(map inc [0 1 2 3 4 5])
+  =&gt; (1 2 3 4 5 6)</code></pre>
+<div class="annotation-down" for="map1" data-at="map i">
+add 1
+</div>
+
+<div class="annotation-left" for="map1" data-at="5">
+to each of these
+</div>
+
+<div class="annotation-left" for="map1" data-at="1 2 3">
+it returns a new list with the numbers incremented
+</div>
+
+<p>Ok, next one. Let's say you're walking down a list . . . of lists. Your job? Write down the sizes of those lists. Let's do it! Walk down the list, pick up each list as you go, and drop the size to your left. You just made a new list!</p>
+<pre id="map2" class="code-card"><code>(map count
+     [[]
+      [1]
+      [1 1]
+      [1 1 1]
+      [1 1 1 1]
+      [1 1 1 1 1]])
+  =&gt; (0 1 2 3 4 5)</code></pre>
+<div class="annotation-left" for="map2" data-at="count">
+get the size
+</div>
+
+<div class="annotation-left" for="map2" data-at="[[">
+of each of these
+</div>
+
+<div class="annotation-left" for="map2" data-at="0 1 2">
+a list of the sizes
+</div>
+
+<p>Alright, let's get fun with this one. You walk down a list of maps. Your job? figure out what's under the <code>:a</code> key. Drop the answers on the left. Remember, if the map doesn't have the list, it gives you <code>nil</code>.</p>
+<pre id="map3" class="code-card"><code>(map :a
+     [{:a 1}
+      {:a 2}
+      {:a 3}
+      {:b 4}])
+  =&gt; (1 2 3 nil)</code></pre>
+<div class="annotation-left" for="map3" data-at=":a">
+keywords are functions, too
+</div>
+
+<div class="annotation-left" for="map3" data-at="{:a">
+look at these little maps, just waiting there!
+</div>
+
+<div class="annotation-left" for="map3" data-at="1 2 3">
+look, the last one was <code>nil</code>
+</div>
+
+<p>Ok, here's a good one. Someone wrote a bunch of sentences, but you want to make them angry. ALL CAPS!! Walk down the list, apply this epic function to each, and make a new list!</p>
+<pre id="map4" class="code-card"><code>(map (fn [x] (str (.toUpperCase x) &quot;!!&quot;))
+     [&quot;I am angry&quot;
+      &quot;don&#39;t yell at me&quot;
+      &quot;stop yelling&quot;])
+  =&gt; (&quot;I AM ANGRY!!&quot;
+      &quot;DON&#39;T YELL AT ME!!&quot;
+      &quot;STOP YELLING!!&quot;)</code></pre>
+<div class="annotation-left" for="map4" data-at="toUpperCase">
+our epic function
+</div>
+
+<div class="annotation-left" for="map4" data-at="I am angry">
+make these angry!!!
+</div>
+
+<div class="annotation-left" for="map4" data-at="=">
+LOOK AT THEM!!
+</div>
+
+<h3 id="conclusions">Conclusions</h3>
+<p>Yep, <code>map</code> is useful. It's one of the staples of functional programming. Once you start using it, you'll use it everywhere.</p>
+<p>If you liked the code with annotations, the physical metaphors, the focus on the basics, you will love <a href="http://www.purelyfunctional.tv/intro-to-clojure">Lispcast Introduction to Clojure</a>. Visuals, metaphors, exercises, annotated code, and lots of code in a repo. You learn the basics of Clojure down to your fingertips, writing code right away.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 </ul>
 
 
@@ -266,7 +400,7 @@ Learn more
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
 
-    <script src="/js/mylibs/annotated-code.js"></script>
+
 
     <script>
 
@@ -312,6 +446,9 @@ Learn more
                                                     });
 
                                                     </script>
+      <script src="/js/mylibs/annotated-code.js"></script>
+      <script src="/js/libs/codemirror.js"></script>
+      <script src="/js/mylibs/feedback.js"></script>
 
   </body>
 </html>

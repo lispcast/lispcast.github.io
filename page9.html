@@ -86,6 +86,112 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/try-three-times">
+            Try Three Times
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          March 05, 2015
+        </div>
+
+        
+<p>Summary: <em>Distributed systems fail in indistinguishable ways. Often, retrying is a good solution to intermittent errors. We create a retry macro to handle the retries in a generic way.</em></p>
+<p>Let's face it: your system is probably a distributed system. All web apps are by definition distributed. They have at least one server, probably a separate database server, and many browser clients. And now microservices are getting popular. Distributed is the current and future normal. While Clojure solves the problems of multiple cores sharing memory at the language level, <strong>distributed systems problems are left to be addressed at the application level</strong>.</p>
+<h2 id="the-problem">The problem</h2>
+<p>One big problem that comes up all the time in distributed systems is dealing with failure. Failure happens everywhere. The problem in a distributed system is that <strong>you don't know where the failure happened</strong>. For example, let's say you make an HTTP GET request and 20 seconds later, you're still waiting for the response. Is it:</p>
+<ul>
+<li>A network failure?
+<ul>
+<li>Did the message not get to the server?</li>
+<li>Did the message get there, but the response didn't make it back?</li>
+</ul></li>
+<li>The server is down?</li>
+<li>The server is still working?</li>
+<li>The response is still coming?</li>
+<li>An intermediate computer (proxy) has filtered the request/response?</li>
+</ul>
+<p>It is literally impossible to know what the problem is. And that's ok. There's a lot of machinery between one machine and the next. Even if you could diagnose the problem, <strong>are you really going to program each error case?</strong></p>
+<h3 id="metaphor">Metaphor</h3>
+<p>Let's say you call your friend and they don't pick up. Are they asleep? Is their phone off? Did the call not go through? The phone won't tell you. And you really want to talk to them. So what do you do? <strong>You call back.</strong> You might even call back a couple of times. If they pick up when you call back, great! If not, then you get tired and give up.</p>
+<p>That's a common approach in distributed systems as well: retry your distributed message a few times before you give up. It's easy and <strong>fixes a surprising number of problems</strong>. What's more, there's a good solution that's <em>simple</em> in the Hickeyan sense.</p>
+<h2 id="the-solution">The solution</h2>
+<p><strong>Failure in Clojure typically means an Exception.</strong> So we'll need to catch exceptions and run code multiple times.</p>
+<pre><code>(defn try-n-times [f n]
+  (if (zero? n)
+    (f)
+    (try
+      (f)
+      (catch Throwable _
+        (try-n-times f (dec n))))))</code></pre>
+<p>You pass it a function and a number of times to retry it. The base case is when <code>n</code> is 0. In that case, it will just try it (not <em>re</em>try). If it's greater than 0, it will wrap the function call in a <code>try/catch</code>, catch everything, and recurse. If after n retries, is still throws an exception, <code>try-n-times</code> will fail and some other code will have to deal with it. <strong>The concern of retrying is separated from what is being retried.</strong></p>
+<h3 id="how-do-you-use-it">How do you use it?</h3>
+<p>Wrap your distributed calls in this bad boy and you're good to go.</p>
+<p>Instead of this:</p>
+<pre><code>(http/get &quot;http://somewhat-reliable.com/resource&quot;
+          {:socket-timeout 1000
+           :conn-timeout   1000})</code></pre>
+<p>You do this:</p>
+<pre><code>(try-n-times #(http/get &quot;http://somewhat-reliable.com/resource&quot;
+                        {:socket-timeout 1000
+                         :conn-timeout 1000}) 2)</code></pre>
+<p>Remember, <code>n</code> is the number of <em>re</em>tries. So that's 1 <em>try</em> + 2 <em>re</em>tries.</p>
+<h3 id="macro-anyone">Macro, anyone?</h3>
+<p><strong>Alright, yes, I made a macro for that.</strong> It does come in handy to have a macro that you can put code in instead of passing in a function.</p>
+<pre><code>(defmacro try3 [&amp; body]
+  `(try-n-times (fn [] ~@body) 2))</code></pre>
+<p>This one is used like this:</p>
+<pre><code>(try3
+  (println &quot;trying!&quot;)
+  (do-some-stuff))</code></pre>
+<h3 id="warning">Warning</h3>
+<p>Now, a little care needs to be taken when you use this. Remember, when you get a failure, it could be a timeout. The server could be processing your request. Or it could have failed halfway through a multi-step process. What that means practically is that <strong>your distributed message has to be idempotent</strong>. HTTP GET <em>is</em> idempotent, so it's ok. POST generally is not, but sometimes it is. Use your judgment! Also, you should make your call timeout, to turn long waits into errors.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This pattern is just one piece of a larger distributed system puzzle. The network and servers are unreliable. They might work the whole time during development, but in the fullness of time, <strong>an always-on distributed system <em>will</em> have some kind of failure eventually</strong>. Sometimes the failures are temporary, and in those cases, a quick retry can fix it right away.</p>
+<p>Though Clojure does not have specific solutions to distributed systems problems, coding them up is short and straightforward. If you're interested in learning Clojure, I suggest you check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course that uses animation, storytelling, and exercises to install Clojure into your brain.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/exponential-backoff">Exponential Backoff</a></li>
+<li><a href="http://www.lispcast.com/lisp-with-macros-language-stack">Lisp with Macros is Two Languages</a></li>
+<li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
+<li><a href="http://www.lispcast.com/pre-conj-david-pick">Pre-conj Prep: David Pick</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/data-first-programming">
             Data-First Programming
           </a>
@@ -125,8 +231,8 @@ Learn more
 <ul>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
 </ul>
 
 
@@ -972,86 +1078,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
       </article>
 
 
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/clojure-gazette-looking-forward-2015">
-            Clojure Gazette Looking Forward
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          January 19, 2015
-        </div>
-
-        
-<p>Summary: <em>I am looking for more sponsors for the Clojure Gazette and I need your help.</em></p>
-<p>I have some big plans for the Clojure Gazette this year.</p>
-<p>As far as I can tell, the Clojure Gazette is the only Clojure-focussed newsletter out there<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. It's usually a collection of links to material I think would interest and educate people interested in Clojure. It's not always directly about Clojure. But Clojurists seem to be <strong>interested in a variety of things</strong>. Sometimes the issue is based around a strong theme, like Haskell or Object Oriented Programming. And sometimes it is an interview. This year, I'd like to do more themed issues are more interviews.</p>
-<p>I think it <strong>plays an important part in the community</strong>. I have interviewed the Google Summer of Code participants for a couple of years now. The interviews let the community know what they were working on and what progress they had made. And some of the themed issues got the most positive commentary I've ever received. People seem to want to learn and to have existing information organized for them.</p>
-<p>As you can imagine, the Clojure Gazette takes a lot of work to put out each week. There are over 3,200 subscribers now, and it's growing every day. In July 2014, I began inviting sponsors to <strong>purchase a placement in issues of the Gazette</strong>. I've had a few generous sponsors contact me, which got me a few months of sponsorship.</p>
-<p>The sponsorships have been a success, in different ways. One job advertisement got hundreds of clicks and valuable exposure to a company that is just beginning to use Clojure. Others brought qualified visitors to developer-related services. I'm very greatful to Clojure/conj, which bought a placement. <strong>It is a big vote of confidence when the official Clojure conference asks to put their logo in your newsletter.</strong></p>
-<p>Now I am trying to be more active to find the sponsors. The goals for the Gazette are modest. None of them require any more money, just more time and work, and a little more organization. But the total time input is significant. With a small amount of funding, <strong>I'll be able to justify increasing the quality of the Gazette</strong>. I've always thought it would become a business one day. Putting money on the line always makes things more crisp and professional.</p>
-<p>Now is where I ask for a favor. If you can spare a few moments, would you please think about whether you get value from the Gazette and what you can do to <strong>send some sponsors my way</strong>. It may be contacting the hiring department at your company and suggesting a paid job listing. Or it could be experimenting with selling your company's service to the thousands of smart Clojure programmers subscribed to the newsletter. Or maybe you just want to show your appreciation and get some good karma in the community. I appreciate all help. Get in touch by <script type="text/javascript">
-<!--
-h='&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x65;&#114;&#x69;&#x63;&#32;&#x61;&#116;&#32;&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript>, <a href="http://twitter.com/ericnormand">twitter</a>, or call me at 504-302-3742.</p>
-<p>Here is a link to the <a href="http://www.clojuregazette.com/Clojure_Gazette_Media_Kit_Current.pdf">current version of the Media Kit</a> if you'd like more information.</p>
-<p>Thanks</p>
-<p>Eric &lt;<script type="text/javascript">
-<!--
-h='&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x65;&#114;&#x69;&#x63;&#32;&#x61;&#116;&#32;&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript>&gt;</p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-<li><a href="http://www.lispcast.com/clojure-database-test-faster">How I made my Clojure database tests 5x faster</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>There is <a href="http://defnewsletter.com/">(def newsletter)</a> which has not had an issue since October 2013.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
       <div class="notes">
 
       </div>
@@ -1073,7 +1099,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
 
-    <script src="/js/mylibs/annotated-code.js"></script>
+
 
     <script>
 
@@ -1119,6 +1145,9 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
                                                     });
 
                                                     </script>
+      <script src="/js/mylibs/annotated-code.js"></script>
+      <script src="/js/libs/codemirror.js"></script>
+      <script src="/js/mylibs/feedback.js"></script>
 
   </body>
 </html>

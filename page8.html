@@ -86,6 +86,86 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/pre-west-boris-kourtoukov">
+            Pre-West Prep: Boris Kourtoukov
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          March 18, 2015
+        </div>
+
+        
+<div class="figure">
+<img src="http://www.lispcast.com/img/pre-west-prep.png" />
+</div>
+<h3 id="talk-clojure-sound-and-wearable-technologytalk">Talk: <a href="http://clojurewest.org/speakers#bkourtoukov">Clojure, Sound, and Wearable Technology</a></h3>
+<p><a href="http://clojurewest.org/speakers#bkourtoukov">Boris Kourtoukov's talk</a> at <em>Clojure/West</em> is about Clojure and wearables.</p>
+<h4 id="background">Background</h4>
+<p>Boris Kourtoukov works with wearables and other interesting media projects. The talk description says a lot:</p>
+<blockquote>
+<p>This could not be achieved without Clojure's ability to inter-operate with its host platforms, provide tools for live prototyping, and the incredible diversity of interests within the Clojure community.</p>
+</blockquote>
+<p>See <a href="http://boris.kourtoukov.com/">his website</a> and <a href="http://makezine.com/2015/02/09/our-favorite-tools-and-resources-for-prototyping-wearable-projects/">these</a> <a href="http://makezine.com/magazine/make-43/body-boards/">articles</a> for some more background.</p>
+<h3 id="about-boris-kourtoukovtalk">About <a href="http://clojurewest.org/speakers#bkourtoukov">Boris Kourtoukov</a></h3>
+<p><a href="http://boris.kourtoukov.com/">Homepage</a> - <a href="https://github.com/BorisKourt">GitHub</a> - <a href="https://twitter.com/boriskourt">Twitter</a></p>
+<p><a href="http://clojurewest.org/speakers#bkourtoukov"><img src="http://www.lispcast.com/img/pre-west/bkourtoukov.jpg" /></a></p>
+<hr />
+
+<div class="article-cg-box">
+  <p style="font-size:0.8em">
+    
+<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
+</p>
+
+
+<h3>
+You may like the Clojure Gazette
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
+</p>
+
+<p><a href="http://www.clojuregazette.com/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+<p style="font-size:0.8em">
+<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
+</p>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
+<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
+<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
+<li><a href="http://www.lispcast.com/pre-west-brandon-bloom">Pre-West Prep: Brandon Bloom</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/pre-west-anthony-marcar">
             Pre-West Prep: Anthony Marcar
           </a>
@@ -953,112 +1033,6 @@ No spam. Ever.
       </article>
 
 
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/try-three-times">
-            Try Three Times
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          March 05, 2015
-        </div>
-
-        
-<p>Summary: <em>Distributed systems fail in indistinguishable ways. Often, retrying is a good solution to intermittent errors. We create a retry macro to handle the retries in a generic way.</em></p>
-<p>Let's face it: your system is probably a distributed system. All web apps are by definition distributed. They have at least one server, probably a separate database server, and many browser clients. And now microservices are getting popular. Distributed is the current and future normal. While Clojure solves the problems of multiple cores sharing memory at the language level, <strong>distributed systems problems are left to be addressed at the application level</strong>.</p>
-<h2 id="the-problem">The problem</h2>
-<p>One big problem that comes up all the time in distributed systems is dealing with failure. Failure happens everywhere. The problem in a distributed system is that <strong>you don't know where the failure happened</strong>. For example, let's say you make an HTTP GET request and 20 seconds later, you're still waiting for the response. Is it:</p>
-<ul>
-<li>A network failure?
-<ul>
-<li>Did the message not get to the server?</li>
-<li>Did the message get there, but the response didn't make it back?</li>
-</ul></li>
-<li>The server is down?</li>
-<li>The server is still working?</li>
-<li>The response is still coming?</li>
-<li>An intermediate computer (proxy) has filtered the request/response?</li>
-</ul>
-<p>It is literally impossible to know what the problem is. And that's ok. There's a lot of machinery between one machine and the next. Even if you could diagnose the problem, <strong>are you really going to program each error case?</strong></p>
-<h3 id="metaphor">Metaphor</h3>
-<p>Let's say you call your friend and they don't pick up. Are they asleep? Is their phone off? Did the call not go through? The phone won't tell you. And you really want to talk to them. So what do you do? <strong>You call back.</strong> You might even call back a couple of times. If they pick up when you call back, great! If not, then you get tired and give up.</p>
-<p>That's a common approach in distributed systems as well: retry your distributed message a few times before you give up. It's easy and <strong>fixes a surprising number of problems</strong>. What's more, there's a good solution that's <em>simple</em> in the Hickeyan sense.</p>
-<h2 id="the-solution">The solution</h2>
-<p><strong>Failure in Clojure typically means an Exception.</strong> So we'll need to catch exceptions and run code multiple times.</p>
-<pre><code>(defn try-n-times [f n]
-  (if (zero? n)
-    (f)
-    (try
-      (f)
-      (catch Throwable _
-        (try-n-times f (dec n))))))</code></pre>
-<p>You pass it a function and a number of times to retry it. The base case is when <code>n</code> is 0. In that case, it will just try it (not <em>re</em>try). If it's greater than 0, it will wrap the function call in a <code>try/catch</code>, catch everything, and recurse. If after n retries, is still throws an exception, <code>try-n-times</code> will fail and some other code will have to deal with it. <strong>The concern of retrying is separated from what is being retried.</strong></p>
-<h3 id="how-do-you-use-it">How do you use it?</h3>
-<p>Wrap your distributed calls in this bad boy and you're good to go.</p>
-<p>Instead of this:</p>
-<pre><code>(http/get &quot;http://somewhat-reliable.com/resource&quot;
-          {:socket-timeout 1000
-           :conn-timeout   1000})</code></pre>
-<p>You do this:</p>
-<pre><code>(try-n-times #(http/get &quot;http://somewhat-reliable.com/resource&quot;
-                        {:socket-timeout 1000
-                         :conn-timeout 1000}) 2)</code></pre>
-<p>Remember, <code>n</code> is the number of <em>re</em>tries. So that's 1 <em>try</em> + 2 <em>re</em>tries.</p>
-<h3 id="macro-anyone">Macro, anyone?</h3>
-<p><strong>Alright, yes, I made a macro for that.</strong> It does come in handy to have a macro that you can put code in instead of passing in a function.</p>
-<pre><code>(defmacro try3 [&amp; body]
-  `(try-n-times (fn [] ~@body) 2))</code></pre>
-<p>This one is used like this:</p>
-<pre><code>(try3
-  (println &quot;trying!&quot;)
-  (do-some-stuff))</code></pre>
-<h3 id="warning">Warning</h3>
-<p>Now, a little care needs to be taken when you use this. Remember, when you get a failure, it could be a timeout. The server could be processing your request. Or it could have failed halfway through a multi-step process. What that means practically is that <strong>your distributed message has to be idempotent</strong>. HTTP GET <em>is</em> idempotent, so it's ok. POST generally is not, but sometimes it is. Use your judgment! Also, you should make your call timeout, to turn long waits into errors.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>This pattern is just one piece of a larger distributed system puzzle. The network and servers are unreliable. They might work the whole time during development, but in the fullness of time, <strong>an always-on distributed system <em>will</em> have some kind of failure eventually</strong>. Sometimes the failures are temporary, and in those cases, a quick retry can fix it right away.</p>
-<p>Though Clojure does not have specific solutions to distributed systems problems, coding them up is short and straightforward. If you're interested in learning Clojure, I suggest you check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course that uses animation, storytelling, and exercises to install Clojure into your brain.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/exponential-backoff">Exponential Backoff</a></li>
-<li><a href="http://www.lispcast.com/lisp-with-macros-language-stack">Lisp with Macros is Two Languages</a></li>
-<li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-david-pick">Pre-conj Prep: David Pick</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
       <div class="notes">
 
       </div>
@@ -1080,7 +1054,7 @@ Learn more
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
 
-    <script src="/js/mylibs/annotated-code.js"></script>
+
 
     <script>
 
@@ -1126,6 +1100,9 @@ Learn more
                                                     });
 
                                                     </script>
+      <script src="/js/mylibs/annotated-code.js"></script>
+      <script src="/js/libs/codemirror.js"></script>
+      <script src="/js/mylibs/feedback.js"></script>
 
   </body>
 </html>

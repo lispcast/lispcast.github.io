@@ -86,6 +86,158 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/lists-in-clojure">
+            Warty Lists in Clojure
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          May 27, 2014
+        </div>
+
+        
+<p>Summary: <em>Lists are kind of warty in Clojure. Care should be taken, especially by those coming from other Lisps.</em></p>
+<p>One of the things that still trips me up in Clojure is the actual types of lists. I used to program in Common Lisp, where things are a bit easier to understand: something is either a list or an atom. Lists are built out of conses and end with <code>nil</code>. Everything else is an atom.</p>
+<p>Coming from Common Lisp, one might expect this to work:</p>
+<pre><code>=&gt; (listp (cons 1 nil))</code></pre>
+<p>In CL, it will be true. In Clojure, it is also true. (Try it out yourself!) Launch a REPL. Go to <a href="http://tryclj.com/">Try Clojure</a>.</p>
+<pre><code>=&gt; (list? (cons 1 nil))</code></pre>
+<p>What about this:</p>
+<pre><code>=&gt; (list? (cons 1 (cons 1 nil)))</code></pre>
+<p>We're consing onto a list, should be a list, no?</p>
+<p>In Common Lisp, yes. In Clojure?</p>
+<p>NO!</p>
+<p>That's not a list. Go ahead, try it at your Clojure REPL.</p>
+<p>What gives? How is that possible? Are we living in a Kafkaesque ECMAScript World?</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/kafkaesque.png" />
+</div>
+<p>Well . . . probably.</p>
+<p>What's going on? Put on your Indiana Jones fedora. We're going on an adventure deep into the heart of the Clojure JVM implementation.</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders3.jpg" />
+</div>
+<p>First, how is <code>list?</code> defined?</p>
+<p><a href="https://github.com/richhickey/clojure/blob/a1eff35124b923ef8539a35e7a292813ba54a0e0/src/clj/clojure/core.clj#L4961">In clojure.core</a>:</p>
+<pre><code>(defn list?
+  &quot;Returns true if x implements IPersistentList&quot;
+  {:added &quot;1.0&quot;}
+  [x] (instance? clojure.lang.IPersistentList x))</code></pre>
+<p>Great, <code>list?</code> is just an instance check. <strong>What classes implement <code>clojure.lang.IPersistentList</code>?</strong> According to the javadoc on the Clojure sources, there are two: <code>PersistentQueue</code> and <code>PersistentList</code>. There's also a static inner class in <code>PersistentList</code> called <code>EmptyList</code>.</p>
+<p>Let's see those at the REPL:</p>
+<pre><code>=&gt; (type ())
+  clojure.lang.PersistentList$EmptyList
+=&gt; (list? ())
+  true
+
+=&gt; (type (list 1 2 3))
+  clojure.lang.PersistentList
+=&gt; (list? (list 1 2 3))
+  true
+
+=&gt; (type clojure.lang.PersistentQueue/EMPTY)
+  clojure.lang.PersistentQueue
+=&gt; (list? clojure.lang.PersistentQueue/EMPTY)
+  true</code></pre>
+<p>These all return true when given to <code>list?</code>. What about <code>(cons 1 nil)</code>?</p>
+<pre><code>=&gt; (type (cons 1 nil))
+  clojure.lang.PersistentList
+=&gt; (list? (cons 1 nil))
+  true</code></pre>
+<p>Great. <strong>Consing onto nil gives you a list</strong>. Let's cons onto a list:</p>
+<pre><code>=&gt; (type (cons 0 (list 1 2 3)))
+  clojure.lang.Cons
+=&gt; (list? (cons 0 (list 1 2 3)))
+  false</code></pre>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders4.jpg" />
+</div>
+<p>Oh, no! Why does consing onto <code>nil</code> create a list, but <strong>consing onto a list create a cons</strong>? Poisonous dart averted! Back to the source code!</p>
+<p><a href="https://github.com/richhickey/clojure/blob/a1eff35124b923ef8539a35e7a292813ba54a0e0/src/clj/clojure/core.clj#L22">In clojure.core</a>:</p>
+<pre><code>(def
+ ^{:arglists &#39;([x seq])
+    :doc &quot;Returns a new seq where x is the first element and seq is
+    the rest.&quot;
+   :added &quot;1.0&quot;}
+
+ cons (fn* cons [x seq] (. clojure.lang.RT (cons x seq))))</code></pre>
+<p>So it calls <code>clojure.lang.RT/cons</code>. We can <a href="https://github.com/clojure/clojure/blob/1.5.x/src/jvm/clojure/lang/RT.java#L565">look that up</a>:</p>
+<pre><code>static public ISeq cons(Object x, Object coll){
+    //ISeq y = seq(coll);
+    if(coll == null)
+        return new PersistentList(x);
+    else if(coll instanceof ISeq)
+        return new Cons(x, (ISeq) coll);
+    else
+        return new Cons(x, seq(coll));
+}</code></pre>
+<p>Wow! The code is clear: if the second argument is <code>null</code> (<code>nil</code>), <strong>it makes a <code>PersistentList</code></strong>. Otherwise, it constructs a <code>clojure.lang.Cons</code>, which is not a list! We're at the root of our wart, but there's nothing we can really do about it except keep exploring.</p>
+<p>If I have a list (according to <code>list?</code>) and I want to add an element to the front to make a new list, how do I do that?</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders%205.jpg" />
+</div>
+<p>Well, the answer is a little disappointing:</p>
+<pre><code>=&gt; (def ls (list 1 2 3))
+=&gt; (def ls2 (conj ls 0))
+=&gt; (list? ls2)
+  true</code></pre>
+<p><code>conj</code> will maintain the type, <code>cons</code> will not. What happens if I <code>conj</code> onto a <code>Cons</code>?</p>
+<pre><code>=&gt; (def c (cons 1 (cons 2 nil)))
+=&gt; (conj c 0)
+  (0 1 2)
+=&gt; (type (conj c 0))
+  clojure.lang.Cons</code></pre>
+<p>So, there you have it. It's a bit of a wart having all of these slightly different types and predicates like <code>list?</code> that slice them up in odd ways. Sometimes it's like running away from a giant paper-mache ball.</p>
+<div class="figure">
+<img src="http://lispcast.com/pictures/raiders6.jpg" />
+</div>
+<p>In Clojure's defense, I will say that <strong>I rarely use <code>list?</code></strong>, if at all. It's <strong>not a very useful function</strong> in <code>clojure.core</code>. I'm usually working at a much higher level than that, thinking in terms of sequences (an abstraction), not their concrete implementations. And in the end, you never get out of danger.</p>
+<iframe width="560" height="315" src="//www.youtube.com/embed/lQg7QKDButo" frameborder="0" allowfullscreen></iframe>
+
+<p>There you have it. If you'd like to learn more Clojure, I have a nice video series:</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/css-and-the-lambda-calculus">
             CSS and the Lambda Calculus
           </a>
@@ -1044,109 +1196,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
       </article>
 
 
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/react-another-level-of-indirection">
-            React: Another Level of Indirection
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          December 31, 2013
-        </div>
-
-        
-<blockquote>
-<p>Any problem in computer science can be solved with another level of indirection. -- David Wheeler</p>
-</blockquote>
-<p>The <a href="http://facebook.github.io/react/">React</a> library from Facebook makes DOM programming functional by using a Virtual DOM. The Virtual DOM is an <em>indirection mechanism</em> that solves the difficult problem of DOM programming: <strong>how to deal with incremental changes to a stateful tree structure</strong>. By abstracting away the statefulness, the Virtual DOM turns the real DOM into an immediate mode GUI, which is perfect for functional programming. Further, the Virtual DOM provides <strong>the last piece of the Web Frontend Puzzle for ClojureScript</strong>.</p>
-<p>David Nolen has written up a <a href="http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/">short explanation</a> of how the Virtual DOM works, as well as some amazing performance benchmarking of React in a ClojureScript context. His work is important, so you should read it. I'd like to focus a bit more on the expressivity and why <strong>I would use React even if it were not so fast</strong>.</p>
-<p>One can view MVC frameworks as an attempt to impose some structure on the code that has to interface with the DOM. The bargain they propose is this: <strong>wrap the DOM in View objects</strong>, so that subtrees of DOM nodes are managed by a View object. <strong>Wrap your state in Model objects</strong>, which will notify the View objects of changes. You thereby keep a <em>layer of indirection between Models and Views</em>, which inherently need different structure and need to change independently.</p>
-<p>The layer of indirection (usually an event or observer system) solves a <em>coupling problem</em>. It decouples your state from the DOM, while <strong>leaving you to deal with all of the difficulties of the DOM</strong>. You are essentially making a new type of DOM that is better suited to your GUI domain than plain HTML, but is still a PITA. It is little more than a coat of paint. <em>The DOM is still stateful.</em></p>
-<p>React takes a different approach. It provides a level of indirection which solves the actual problem with the DOM--statefulness. The DOM has become a smart canvas. <strong>Paint the whole picture again, but only the different parts get wet.</strong></p>
-<p>Instead of wrapping the DOM in View objects, you create a Virtual DOM (completely managed by React) which mirrors the real DOM. When the model changes, you generate a new Virtual DOM. The differences are calculated and converted into batch operations to the real DOM. In essence, <strong>React is a function which takes two DOMs and generates a list of DOM operations</strong>, <em>i.e.</em>, <strong>it's referentially transparent</strong>.</p>
-<p>It's easy to imagine how this changes the game. <strong>You no longer need an initializer to set up the DOM and observers to modify it.</strong> The first Virtual DOM rendering is like the second one, in fact like any other! Your &quot;View&quot;, if you want to call it that, is simply a function from state to Virtual DOM nodes. <strong>If the state and DOM nodes are immutable, all the better.</strong> There's less work to know if it has changed.</p>
-<p>This also means that your Views can be composed functionally. Define a component (as a function) and your subcomponents, and build them up functionally. All of the functional abstraction and refactoring that you're used to is available. If you're doing it right, <strong>your code should get shorter, easier to read, and more fun to maintain</strong>.</p>
-<p>My (short) experience rewriting a program to use React converted me. It was the only library I have used that actually made DOM programming fun and functional--and dare I say my code now works!</p>
-<p>Which gets me to my last point, which is that React is the final puzzle piece for ClojureScript web frontend development.</p>
-<ul>
-<li>Problem: <strong>Global state management</strong></li>
-<li><p>Solution: Atoms and persistent data structures</p></li>
-<li>Problem: <strong>Client-server communication</strong></li>
-<li><p>Solution: EDN (also solved pretty well by JSON)</p></li>
-<li>Problem: <strong>Callback hell</strong></li>
-<li><p>Solution: core.async</p></li>
-<li>Problem: <strong>Stateful DOM</strong></li>
-<li><p>Solution: React</p></li>
-</ul>
-<p>Any other problems left? I can't think of any. That's something to <a href="http://www.twitter.com/ericnormand"><em>discuss on Twitter</em></a>.</p>
-<p>I suggest you try React. <a href="https://github.com/swannodette/om"><em>Om</em></a> by David Nolen is the most mature React ClojureScript library I know of. It does a bit more than I've described here (Om manages your state tree for you, among other things) and is evolving quickly. I have some code that generates React Virtual DOM using <code>hiccup</code> style with macros (so the work is done at compile time), but other than that, contains only half-baked implementations of what's in Om. If you're interested in the <code>hiccup</code> macros, <em>let me know what you'd use it for and I'll put it on github</em>.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get free Clojure stuff and news on ClojureScript courses
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/spaom-cover.jpg">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-The LispCast Single Page Applications with ClojureScript and Om course is in development <em>right now</em>! Sign up here to get news as it's being created and learn when it will launch. Also, you'll get to download all of the free stuff for learning and using Clojure.
-</p>
-      
-<input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][64]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
-<li><a href="http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history">Mastering ClojureScript Routing with Secretary and goog.History</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
       <div class="notes">
 
       </div>
@@ -1168,7 +1217,7 @@ No spam. Ever.
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
 
-    <script src="/js/mylibs/annotated-code.js"></script>
+
 
     <script>
 
@@ -1214,6 +1263,9 @@ No spam. Ever.
                                                     });
 
                                                     </script>
+      <script src="/js/mylibs/annotated-code.js"></script>
+      <script src="/js/libs/codemirror.js"></script>
+      <script src="/js/mylibs/feedback.js"></script>
 
   </body>
 </html>

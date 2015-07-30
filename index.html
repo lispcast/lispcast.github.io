@@ -101,6 +101,7 @@
 <p><code>map</code> is one of those things that's so useful and so straightforward that it finds its way into every language. Javascript has a <code>map</code> in the newer versions, but people couldn't live without it so it's in a lot of Javascript libraries (for example, in <a href="http://underscorejs.org/#map">Underscore</a>).</p>
 <p>Let's imagine you're walking down a list <code>[0 1 2 3 4 5]</code>. Your job is to increment each one. As you pass each each number on your right you pick it up, add one to it, and put it down on your left. Boom, a new list on your left.</p>
 <pre id="map1" class="code-card"><code>(map inc [0 1 2 3 4 5])
+
   =&gt; (1 2 3 4 5 6)</code></pre>
 <div class="annotation-down" for="map1" data-at="map i">
 add 1
@@ -122,6 +123,7 @@ it returns a new list with the numbers incremented
       [1 1 1]
       [1 1 1 1]
       [1 1 1 1 1]])
+      
   =&gt; (0 1 2 3 4 5)</code></pre>
 <div class="annotation-left" for="map2" data-at="count">
 get the size
@@ -141,6 +143,7 @@ a list of the sizes
       {:a 2}
       {:a 3}
       {:b 4}])
+      
   =&gt; (1 2 3 nil)</code></pre>
 <div class="annotation-left" for="map3" data-at=":a">
 keywords are functions, too
@@ -159,6 +162,7 @@ look, the last one was <code>nil</code>
      [&quot;I am angry&quot;
       &quot;don&#39;t yell at me&quot;
       &quot;stop yelling&quot;])
+      
   =&gt; (&quot;I AM ANGRY!!&quot;
       &quot;DON&#39;T YELL AT ME!!&quot;
       &quot;STOP YELLING!!&quot;)</code></pre>

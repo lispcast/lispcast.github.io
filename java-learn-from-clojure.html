@@ -107,7 +107,9 @@
 <p>The answer, of course, is to not have any setters on an object. After construction, the object can't change. That way, my internal state remains encapsulated.</p>
 <p>This applies to collections as well. Have you ever read the docs for <code>Iterator</code>. Can you tell what happens when the underlying list changes? Neither can I. An immutable list would not have such a complicated interface.</p>
 <p><strong>Solution</strong>: Don't write setter methods. For collections, you have a couple of options. One easy thing to do is use the <a href="https://code.google.com/p/guava-libraries/">Google Guava</a> <code>Immutable...</code> classes. If using Guava is not an option, whenever you are returning a collection, make a copy, wrap it in a <code>java.util.Collections.unmodifiable...()</code>, and throw away the reference to the copy.</p>
-<p>public static Map immutableMap(Map m) { return Collections.unmodifiableMap(new HashMap(m)); }</p>
+<pre><code>public static Map immutableMap(Map m) {
+  return Collections.unmodifiableMap(new HashMap(m));
+}</code></pre>
 <p>To learn more about immutable values, I suggest watching <a href="http://www.youtube.com/watch?v=-6BsiVyC1kM">The Value of Values</a>, a talk by Rich Hickey, the creator of Clojure.</p>
 <iframe width="900" height="506" src="http://www.youtube.com/embed/-6BsiVyC1kM" frameborder="0" allowfullscreen></iframe>
 

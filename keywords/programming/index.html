@@ -95,55 +95,7 @@
           July 24, 2014
         </div>
 
-        
-<p>Summary: <em>Refactoring is focused on the quality of code, while factoring aims to uncover the underlying beauty of the problem domain, as expressed in code. Instead of cleaning up your code, try factoring.</em></p>
-<p>You have some code. You notice that it's not too readable. Maybe it's a little messy. There are some obvious code smells: some repeated code and large functions.</p>
-<p>You start refactoring. After a while, it's a clean, neat bit of code. It's very understandable and will be cheaper to modify next time.</p>
-<p><strong>But is it correct?</strong></p>
-<p>I don't mean in the &quot;all-the-tests-pass&quot; kind of way, because refactoring takes care of that. I mean: <strong>does the code do what it should?</strong> Refactoring only says that it does not modify the outward behavior of the code, not make it more correct. And although it's clear what the code <em>does</em> (thanks to all that cleanup), it's not clear that the code <em>does what it should</em>.</p>
-<p>I am a big fan of the book <a href="http://www.amazon.com/gp/product/0201485672/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0201485672&amp;linkCode=as2&amp;tag=lisp0b-20&amp;linkId=XFG25IMDVIX7JQY7">Refactoring</a> by Martin Fowler. It's an edifice of analytical thinking and presentation. Go read it now. <strong>It will make you a better thinker and programmer.</strong> However, I have a slight, semantic beef with refactoring. Here's Fowler's definition from the book:</p>
-<blockquote>
-<p><em>noun:</em> a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior</p>
-<p><em>verb:</em> to restructure software by applying a series of refactorings without changing its observable behavior</p>
-</blockquote>
-<p>That's a great definition of refactoring. My beef is not with the definition. <strong>My beef is with its purpose</strong>, which is to &quot;make it easier to understand and cheaper to modify&quot;. Again, it's a great thing to make your code easier to understand and cheaper to modify. But that's not what I'm after, most of the time.</p>
-<p>What I'm after is <em>code that models the problem</em>. This is the <strong>only reliable way to make software that works</strong>. Code that inadequately models the problem is littered with nested conditionals for special cases, is unnecessarily bound in time and context, and is generally obtuse. You might be able to understand what the code is doing, but it's unclear whether it should be doing it.</p>
-<p>The only known way to write code that models the problem is to <em>factor</em>. Let's get a definition:</p>
-<blockquote>
-<p><em>verb:</em> to decompose code to reveal the structure of the problem</p>
-</blockquote>
-<p><strong>Factoring is inherently about decomposition.</strong> It means splitting functions into smaller functions (along the structural lines of the problem). It means finding those functions which are fundamental to the problem (you can tell they are fundamental because they are used in multiple places). It means revealing symmetries. It means separating concerns. Factoring is about uncovering structural beauty in problem domains.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Symmetry, proportion, and harmony.</p>
-<p>The problem with factoring is that it takes a long time. And you actually <strong>have to understand the domain</strong>. You have to explore the problem a lot longer, perhaps trying different variations in the code, before you can be satisfied that the code models the problem. Time is not something we have in our &quot;Just ship it!&quot; modern world.</p>
-<p>The feeling of refactoring is like bringing order to a room: you put things away, you label things clearly, you might even throw out some old junk. But the feeling of factoring is like rebuilding a room for a specific purpose. Refactoring is cleaning up the kitchen. <strong>Factoring is taking the kitchen apart and building a new kitchen better suited to the styles of the individual chef.</strong> It's not practical to rebuild your kitchen all the time, though it is practical to tidy up. But when you do it, it makes all the difference.</p>
-<p>That metaphor gets at the other fundamental difference between factoring and refactoring: refactoring does not change the behavior of the code, while factoring might. It might because the code might turn out to be incorrect for the problem. Refactoring can reveal bugs. But if you're going to fix the bug, you've stopped refactoring and gone to something else. In factoring, changing the behavior is just part of the process. <strong>From the factoring perspective, you're not fixing a bug. You're correcting the expression of your problem.</strong></p>
-<p>Refactoring by design and definition is focused on the code itself. Factoring is more of a process. It's a journey the programmer takes into the heart of the problem. In its wake, the hills and valleys of the problem are mapped out in the code. <strong>And the programmer ends, like in most journeys, a different person.</strong></p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>I suggest you choose a good notation.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
+        Refactoring is focused on the quality of code, while factoring aims to uncover the underlying beauty of the problem domain, as expressed in code. Instead of cleaning up your code, try factoring.
 
         <div class="endmark">
           <a class="endmark-link"

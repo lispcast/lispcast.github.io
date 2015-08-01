@@ -95,52 +95,7 @@
           August 19, 2014
         </div>
 
-        
-<p>Summary: <em>Lisps are revered for their simple syntax, but parens are complex. They complect function calls and macro calls, which have drastically different semantics.</em></p>
-<p>One of the problems that people have with Lisps is that they hate the parentheses. Clojure does a pretty good job of minimizing unnecessary parens and giving them a much clearer meaning. But there's a deeper problem that people express all the time when they're first learning. It's frustrating to watch people struggle with it, because it's not their fault. <strong>It's a problem with Lisps in general.</strong></p>
-<p>Parens in all Lisps I've seen, including Clojure, are complex. I'm not using the word lightly. <strong>Parens complect two similar but distinct ideas: macro application and function application.</strong></p>
-<p>Macros and functions are obviously different. Macros are expanded at a time just before compilation called &quot;macro-expansion time&quot;. They typically cannot be accessed at runtime. Functions, on the other hand, are applied at runtime. And they are first-class, meaning they are runtime values. In addition, the calling semantics are different. Macros are call-by-name. The code of each gets passed unevaluated. Functions are call-by-value. <strong>Functions and macros are two distinct species.</strong></p>
-<p>However, despite being distinct semantics, the syntax for calling the two is identical. Parens complect applying macros with applying functions. Beginners trip up on this all the time. Their head is already spinning from the notion that some of the things they are learning are macros, called at compile time. Now add on top that the syntax of the language does not help one bit in distinguishing macro calls from function calls. <strong>You just have to memorize what's a macro and what's a function.</strong></p>
-<p>We learned in <a href="http://www.thecorememory.com/Next_700.pdf">The Next 700 Programming Languages</a> that our syntax should serve to elucidate the semantics. Lisp just fails at this pretty hard. The only consolation is that <strong>you actually can remember, with time and experience, what's a macro and what's a function</strong>. Every Lisp programmer is proof of that.</p>
-<p>A simple solution would be to have <strong>a weird syntax for calling macros</strong>. You know, instead of parens, you use something else. Something that distinguishes the two to decomplect them. This would have broad and deep implications for the language that I cannot begin to fathom.</p>
-<p>The takeaway for the beginner is that, sorry, Clojure won't help you much with this, but <strong>it's very important to know what's a macro and what's a function</strong>. You just have to keep track in your head. If you're not sure, you can call <code>clojure.repl/doc</code><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> on any symbol. If it names a macro, it will tell you.</p>
-<p>So, there you have it. <strong>Lisps complect function calls and macro calls</strong>, which have drastically different semantics, using the same notation. Common Lisp and Scheme use parens for much more than that, making the syntax complex and context-dependent<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>. Clojure removes a lot of those parens, replacing them with square braces or removing them altogether. However, the complexity of macro and function calls remains.</p>
-<p>Despite this, Clojure is still a great language! If you'd like to learn Clojure, I have to recommend the <a href="http://purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video series.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
-<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>That's a macro.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>For instance, inside of a <code>let</code>, parens take on the meaning of grouping the bindings and also grouping the variable with its value.<a href="#fnref2">↩</a></p></li>
-</ol>
-</div>
-
+        Lisps are revered for their simple syntax, but parens are complex. They complect function calls and macro calls, which have drastically different semantics.
 
         <div class="endmark">
           <a class="endmark-link"

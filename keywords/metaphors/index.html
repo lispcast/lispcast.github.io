@@ -95,48 +95,7 @@
           February 27, 2015
         </div>
 
-        
-<p>Summary: <em>Functional programs follow a simple rule: never write on the same paper twice. Imperative programs are free to define their own rules. Both have interesting consequences.</em></p>
-<p>I just read <a href="https://emily.st/2015/02/26/functional-programming-for-everyone-else/">Functional Programming for Everyone Else</a> by Emily St. It's a good read about the fundamental differences between Turing Machines and Lambda Calculus. Near the end, she mentioned this:</p>
-<blockquote>
-<p>I think of functional programs as ones which do their jobs without stopping to take notes along the way.</p>
-</blockquote>
-<p>That got me thinking of the metaphor of taking notes. It's an interesting metaphor, because as she mentions in the article, modern computers are based more on Turing Machines, with their tapes (notes), rather than Lambda Calculus. <strong>Lambda Calculus being abstract instead of mechanical (what instead of how), it doesn't show its work.</strong></p>
-<p>In the spirit of more perspectives being better than fewer, I'd like to give my metaphor, inspired by idea above. <strong>Functional programs are those that have a very simple rule: never write on the same paper twice.</strong> In Turing Machine terms, it means never write on the same piece of tape twice. This rule is simple enough that you can build it into the compiler and runtime to enforce it. <strong>In programming language theory, we call this immutability.</strong> Once a paper is written on, it is immutable.</p>
-<p>Imperative programs, on the other hand, don't have such a rule. They can write on any piece of paper, even write over or erase what's written. <strong>They rely on their own code to enforce rules</strong> for how to organize these pieces of paper so that it still makes sense. They might use locks, which are notoriously hard to get right.</p>
-<p>The nice thing about functional programs is you get a nice <strong>record of what's happened</strong>. You can step through all of the intermediate work because it was never overwritten. It's like an <strong>artist keeping their old sketches</strong> that led up to their masterpiece. Imperative programs are like finding out that it was all done on the same canvas, art painted over art, irrevocably lost. There is no xray to uncover it.</p>
-<p>The other nice thing about functional programs is <strong>multiple programs can share the same stack of paper</strong>. Since they're following a rule, they will never overwrite someone else's work. But imperative programs need to have <strong>complex coordination rules</strong> to make sure that they aren't writing on the same page at the same time, or overwriting something that someone else will need.</p>
-<p>If you'd like to learn Functional Programming, I can recommend <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It will teach you Functional Programming using Clojure, animations, and screencasts, along with many exercises.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
-<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
-<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
-<li><a href="http://www.lispcast.com/the-world-is-mutable">But the World is Mutable</a></li>
-</ul>
-
+        Functional programs follow a simple rule: never write on the same paper twice. Imperative programs are free to define their own rules. Both have interesting consequences.
 
         <div class="endmark">
           <a class="endmark-link"

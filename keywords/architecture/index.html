@@ -95,79 +95,7 @@
           April 21, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<div style="float:right">
-
-<p><a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/nsmith.jpg"
-style="height:150px"></a> <br> <a href="http://clojurewest.org/speakers#nsmith"><img src="http://www.lispcast.com/img/pre-west/rlinehan.png"
-style="height:150px"></a></p>
-</div>
-
-<h3 id="introduction">Introduction</h3>
-<p>Nathaniel Smith and Ruth Linehan generously agreed to do an interview about their <a href="http://clojurewest.org/speakers#nsmith">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. They will be talking about Trapperkeeper. The <a href="http://www.lispcast.com/pre-west-nathaniel-smith-ruth-linehan">background to their talk</a> is available, if you like.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Ruth Linehan</strong>: I started using Clojure about a year and a half ago, when my team at Puppet Labs started working on a new project in it. Previously I had mostly worked in Ruby and Javascript, and while switching to Clojure required a bit of a mind shift, I really enjoy it!</p>
-<p><strong>Nathaniel Smith</strong>: I had never used it, but was offered a job at Puppet Labs two years ago to write it full time. I thoroughly enjoyed learning it on the 5 hour flight to my first interview there and have loved writing it ever since (in other words, I got the job :) )</p>
-<p><strong>LC</strong>: What does Trapperkeeper offer the Clojure developer?</p>
-<p><strong>RL</strong>: Great question! Trapperkeeper is great for complicated Clojure applications. It allows you to easily break up your code into modular pieces (what we call &quot;services&quot;), and it serves as a binder for these pieces of code. Any state a service needs can be stored in a map in the service context, rather than kept globally. It provides a consistent way for expressing the lifecycle of these services - what happens at startup and shutdown - and for managing dependencies between services. It has built in config file parsing, and it initializes a logging system using logback for you, so that you don't have to worry about this. It also has some useful test helpers that allow you to start up a Trapperkeeper application in code and test the whole system.</p>
-<p><strong>NS</strong>: A better way to compose the various services (Database, job queue, web server, logging, configuration...) that one has in a large, long running Clojure application. Trapperkeeper leads to more maintanable and reusable code.</p>
-<p><strong>LC</strong>: How does breaking everything into small services help build a large application?</p>
-<p><strong>NS</strong>: You have well-defined, protocol-enforced APIs for you various services and get to leverage TK's dependency management to ensure clean statups/shutdowns of all of your JVM infrastructure bits.</p>
-<p><strong>RL</strong>: Frequently, some of the code that's necessary to build a large application is code you (or someone else) had to write to build a different application. Breaking it down into smaller, more modular services means that you can more easily reuse that code across multiple applications. Furthermore, each service manages the state that it needs, so you don't end up with a huge mess of global state. It also makes testing much easier - you can test a service on its own, rather than having to set up the entire system to test it.</p>
-<p><strong>LC</strong>: Are there any similar systems in Clojure or elsewhere?</p>
-<p><strong>NS</strong>: A few, but none of them met our needs at Puppet Labs. We think that Immutant and Components and other similar projects are great, but they weren't a good fit for our needs.</p>
-<p><strong>RL</strong>: Trapperkeeper was heavily influenced by Stuart Sierra's &quot;Clojure, Reloaded&quot; workflow, and it has a number of similarities with other frameworks motivated by this, such as Jig and Component. Our way of turning on and off services and managing service dependencies borrows a lot from OSGi's service registry.</p>
-<p><strong>LC</strong>: Where can people follow you online?</p>
-<p><strong>RL</strong>: Nathaniel and I are both on twitter: I'm <a href="https://twitter.com/ruthlinehan">@ruthlinehan</a>, he's <a href="https://twitter.com/nate_smith">@nate_smith</a>. If you want to follow Trapperkeeper, we (&quot;we&quot; meaning many of the folks at Puppet Labs who work on or with Trapperkeeper) hangout on IRC on freednode in #trapperkeeper. We'd love to see folks there!</p>
-<p><strong>NS</strong>: I publish poetry and other esoterica at <a href="http://chiptheglasses.com">http://chiptheglasses.com</a>.</p>
-<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
-<p><strong>RL</strong>: Hm... maybe a melon? From the outside it seems hard and impenetrable, but once you get inside it's awesome and delicious! Also, a slice of melon looks like a parenthesis. :)</p>
-<p><strong>NS</strong>: Delicious whole wheat bread (ooh, or oat bread) used to make function sandwiches.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
+        Nathaniel Smith and Ruth Linehan will talk about developing large applications in Clojure.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -192,80 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           April 21, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><a href="http://clojurewest.org/speakers#rtoland"><img src="http://www.lispcast.com/img/pre-west/rtoland.jpg"
-style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Ron Toland was gracious enough to agree to an interview. He is <a href="http://clojurewest.org/speakers#rtoland">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about building large systems in Clojure. The <a href="http://www.lispcast.com/pre-west-ron-toland">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-ron-toland">Interview with Ron Toland</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Ron Toland</strong>: I got into Clojure through Scheme.</p>
-<p>There was a senior engineer at my first programming gig that kept raving about Scheme and the book Structure and Interpretation of Computer Programs (SICP). After several months of listening to him, I finally bought a copy and read through it. I was blown away by how very simple building blocks could be used to do very complicated things.</p>
-<p>In particular, it struck me that the authors covered the map-reduce paradigm in only chapter 2 of their book; given that at the time I was reading (2009-2010) hadoop was all the rage, and the book was written in the 1980s, I started wondering &quot;what else does lisp have that we're only now re-discovering&quot;?</p>
-<p>After doing some digging into currently used Lisps, I came across Clojure. Since I was already familiar with Java, it seemed like a perfectly pragmatic Lisp to me: stealing all the thunder of the JVM, but stacking on top of that the beauty and power of Lisp. It's been my favorite programming language ever since.</p>
-<p><strong>LC</strong>: You've been using Clojure at Sonian for 6 years. When you started, Clojure was very new. What made you choose Clojure at such an early point?</p>
-<p><strong>RT</strong>: I wasn't at Sonian when the decision was made to use Clojure, but I do know the background.</p>
-<p>Basically the first version of everything was written in Ruby, which worked fine until they needed to scale things out and up to handle a larger volume of email.</p>
-<p>They knew they needed to rebuild it in a different language, so they looked at several contenders: JRuby, Java, Clojure, Scala, even Erlang. They held a big meeting of all the devs to decide which one to go with, and it came down to Clojure or Erlang. Clojure, because several of the devs were familiar with Common Lisp or Scheme and liked it, and Erlang, because the architecture they were designing around is actually pretty close to the way you'd build it in Erlang.</p>
-<p>Clojure won because of the JVM. It turns out that email is terrible, with multiple standards used by different programs at different times over the decades, and so processing it into something searchable is a nightmare. Java has a lot of libraries for processing email that have been built up over the years to handle most of email's craziness. Erlang doesn't (or at least didn't at the time).</p>
-<p>Since with Clojure they could use those Java libraries directly, while if they used Erlang they'd have to write their own, they went with Clojure.</p>
-<p><strong>LC</strong>: What is the SAFE codebase?</p>
-<p><strong>RT</strong>: SAFE is the primary application we use at Sonian for email ingestion. archiving, and indexing into Elasticsearch.</p>
-<p><strong>LC</strong>: What is the most important thing to get right early when writing a large Clojure system?</p>
-<p><strong>RT</strong>: I wasn't part of the team that originally wrote SAFE, so I can't speak much about what to get right at the start of building a large system in Clojure.</p>
-<p>I can say that a lot of large systems don't start out that way; they begin as smaller applications that grow over time, as needs arise. The trick is to keep it from becoming a mess by constantly revisiting how it's put together and looking for better -- usually more abstract, but not always -- ways to express what it needs to do.</p>
-<p><strong>LC</strong>: What do you wish could be better in Clojure for large systems?</p>
-<p><strong>RT</strong>: I'm not sure there's anything in the language itself I wish was better about Clojure for building large systems. Getting logging configured correctly always seems to be a pain; it'd be nice to have a single logging library that could hide the ugliness of the underlying java libs from us.</p>
-<p><strong>LC</strong>: Is there anything else you'd think would be useful for people to know before they watch your talk?</p>
-<p><strong>RT</strong>: I think that pretty much covers it. I'd encourage people to attend the Trapper Keeper talk today, so they can compare the two approaches.</p>
-<p><strong>LC</strong>: Where can people follow you online?</p>
-<p><strong>RT</strong>: I blog at <a href="http://mindbat.com">mindbat.com</a>, and my twitter handle is <a href="http://twitter.com/mindbat">@mindbat</a>.</p>
-<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
-<p><strong>RT</strong>: If Clojure were a food, it'd be coffee. Once you use it long enough you can take it for granted, but when you don't have it you can't seem to get anything done.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
+        Ront Toland will talk about developing large Clojure applications.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -290,59 +145,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           April 06, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-staying-safe-a-foundation-for-clojure-applicationstalk">Talk: <a href="http://clojurewest.org/speakers#rtoland">Staying SAFE: a Foundation for Clojure Applications</a></h3>
-<p><a href="http://clojurewest.org/speakers#rtoland">Ron Toland's talk</a> at <em>Clojure/West</em> is about large-scale Clojure systems.</p>
-<h4 id="background">Background</h4>
-<p>I detect a theme in the Clojure/West talks. Clojure has been around almost eight years now. We're starting to see companies that have mature Clojure codebases. And they are wanting to talk about them.</p>
-<p>This talk seems to go with that theme. Sonian has been using Clojure for six years and they want to share how they build their services. As background, I have to again suggest <a href="https://skillsmatter.com/skillscasts/2863-real-world-clojure">Reflections on a real-world Clojure application</a>. Unfortunately, there isn't much out there right now. I am very much looking forward to these talks being published.</p>
-<h3 id="about-ron-tolandtalk">About <a href="http://clojurewest.org/speakers#rtoland">Ron Toland</a></h3>
-<p><a href="http://mindbat.com/">Homepage</a> - <a href="https://twitter.com/mindbat">Twitter</a> - <a href="https://github.com/mindbat">GitHub</a></p>
-<p><a href="http://clojurewest.org/speakers#rtoland"><img src="http://www.lispcast.com/img/pre-west/rtoland.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
+        Ron Toland will talk about large-scale Clojure systems.
 
         <div class="endmark">
           <a class="endmark-link"

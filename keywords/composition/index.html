@@ -95,81 +95,7 @@
           October 23, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#zach-tellman"><img src="http://www.lispcast.com/img/pre-conj/zach-tellman.jpeg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>Zach Tellman is the next interview participant. He is <a href="http://clojure-conj.org/speakers#zach-tellman">giving a talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> about composition. The <a href="http://www.lispcast.com/pre-conj-zach-tellman">background to his talk</a> is available, if you like.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: Briefly, how did you get into Clojure?</p>
-<p><strong>Zach Tellman</strong>: At my first job, the main language was C#. However, I worked with Tom Faulhaber, who is a Common Lisp guy from way back, and at the time was just working on the initial implementation of clojure.pprint. I started playing around with Clojure, and started building <a href="https://github.com/ztellman/penumbra">Penumbra</a> in <a href="http://ideolalia.com/rendering-a-sierpinski-pyramid-in-clojure/index.html">mid 2009</a>. I haven't looked back since.</p>
-<p><strong>LC</strong>: Composition is a very important concept in the Clojure world, yet you claim that many libraries can't compose cleanly. Why is it such a problem?</p>
-<p><strong>ZT</strong>: Clojure is a young language, and is fairly unique in the way it tries to couple functional idioms with less-than-functional host environments. It also lacks any real organizational principle: a namespace can encompass an enormous amount of functionality (see clojure.core), or a very small, focused piece of functionality (see most of Ring). Both of these allow us enormous flexibility, but it also means that Clojure programmers are without either precedent or obvious affordances when starting out with Clojure. It's understandable that we'd make some missteps.</p>
-<p>If we look at the first two or three SQL libraries written for Clojure, it's notable that they all used macros. It became clear after not too long, though, that this was a really limiting approach - the only way to compose with a macro was with more macros. This doesn't mean that macros shouldn't be used, of course, just that we should always be aware of how they constrain the surrounding code. Abstractions that are incredibly useful in application-level code might be irritating and arbitrary in a library.</p>
-<p>I think a lot of people begin to innately understand these design considerations after a few years of using Clojure, but I haven't heard anyone try to articulate them in a general form. I guess we'll see how I do at that.</p>
-<p><strong>LC</strong>: You mention Ring. I think it's a great example of a system with very good composability. Middleware written by different programmers can be combined without problems. Ring achieves this by being a standard protocol. So there is coordination between the programmers in that they both agree to the centralized standard. Are there other patterns besides standards that can allow for composition?</p>
-<p><strong>ZT</strong>: Ring is useful because it's focused. Modeling HTTP requests as a pure function is a lossy abstraction, but it works for the vast majority of requests. If it wasn't so simple, I don't think it would have had nearly as much adoption (see the n-many mostly unused async extensions to Ring that try to accurately model the entire problem space). But by using Ring, we commit ourselves to its simplified view of the world, as well as its thread-per-connection execution model. This is almost always an acceptable simplification, but it transitively limits everything downstream of it. Now we find ourselves in a situation where the entire ecosystem is predicated on this simplified view of things, and anyone who tries to do something more general has to start over from scratch.</p>
-<p>So to actually answer your question, composition can't happen without conventions. But conventions, like macros (which really are just conventions of code structure), constrain and shape the code around them. The tradeoffs and resulting design space are what I want to explore.</p>
-<p><strong>LC</strong>: You've mentioned that Clojure does not constrain the code. One of the most common questions I answer from Clojure beginners is how to structure their code given the freedom allowed in Clojure. Do you think conventions that support composition could help answer that question?</p>
-<p><strong>ZT</strong>: I use a lot of Java-land libraries, so I spend a lot of time reading Javadocs. The nice thing about Javadocs is that even if the actual docstrings are minimal, it gives you a full, unambiguous dependency graph between all the different pieces of code. There's no analogue for that in Clojure, which makes reuse a lot harder than it otherwise would be.</p>
-<p>I'm not sure what the solution for this is. I think standardizing on a narrower sort of code structure, like the &quot;class&quot; convention in Javascript, isn't that useful or likely to be popular. Standardized (and better) documentation, though, along with tooling to effectively browse it, would be enormously helpful. Formal specifications of data shapes or types, like Schema or core.typed, might be helpful but I don't think they're a necessary precondition.</p>
-<p><strong>LC</strong>: You mention dependency graph. Have you had a chance to look at <a href="http://crossclj.info/">CrossClj</a>? Would that kind of thing be helpful? What would it need to be more helpful?</p>
-<p><strong>ZT</strong>: I've looked at it, it's a good place to start, but raw dependency data isn't useful without the tooling to integrate it into our development process. Light Table and others are playing around in this space, but it's a genuinely hard problem, because it's not a one-size-fits-all visualization problem. I don't have any solutions to offer, but I'm certainly paying attention to how things develop.</p>
-<p><strong>LC</strong>: So there are going to be a lot of beginners at the conj. Are there any resources that could prepare them to make the most of your talk? Any blog posts or videos that would get them ready to participate actively?</p>
-<p><strong>ZT</strong>: I'll talk about macros, transducers, and core.async, among other things. Being conversant in each will help, but isn't necessary.</p>
-<p><strong>LC</strong>: Where can people follow you and your adventures?</p>
-<p><strong>ZT</strong>: I twit about software sometimes at <a href="https://twitter.com/ztellman">https://twitter.com/ztellman</a>. I write longer stuff less often at <a href="http://ideolalia.com/">http://ideolalia.com/</a>.</p>
-<p><strong>LC</strong>: Ok, last question: What is the average airspeed velocity of an unladed Clojure REPL?</p>
-<p><strong>ZT</strong>: JVM or V8?</p>
-<p><strong>LC</strong>: I don't know that!</p>
-<p>Thanks for the interview. It was very informative.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Zach Tellman interview about his talk about composition.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -194,63 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 13, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-always-be-composingtalk">Talk: <a href="http://clojure-conj.org/speakers#zach-tellman">Always Be Composing</a></h3>
-<p><a href="http://clojure-conj.org/speakers#zach-tellman">Zach Tellman's talk</a> at the <em>conj</em> is about building composable software.</p>
-<h4 id="background">Background</h4>
-<p>People often boast of the composability of Clojure programs. <a href="https://github.com/weavejester/compojure">Compojure claims</a> that it &quot;allows web application to be composed of small, independent parts.&quot; <a href="https://github.com/ring-clojure/ring">Ring</a> itself is based on composing middleware and handlers to build a web server. In fact, you can compose pieces easily with Ring, if those pieces were designed to compose with Ring. But not all libraries compose well with the Ring ecosystem. This talk asks &quot;How can we design libraries that compose well in general?&quot; A good intro to composition in Clojure is Rich Hickey's talk <a href="http://www.infoq.com/presentations/design-composition-performance-keynote">Design, Composition, and Performance</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>I often get asked why a certain library in Clojure doesn't have an easy interface like the one in Ruby. The answer, in many cases, is that the Clojure library was designed to compose with other code, while the Ruby library was meant for programmer convenience.</p>
-<p>But if I leave it at that, this answer is unsatisfactory. Behind my answer is years of experience telling me that composition beats convenience in the long run. The asker of that question does not have that experience. I would love to have a way to explain why in an analytical way.</p>
-<p>If this talk even so much as opens the conversation up about the design space of composition, it would be extremely helpful. But I'm expecting more from Zach Tellman. His talk could have a profound impact similar to Rich Hickey's talks on <a href="http://www.infoq.com/presentations/Value-Values">immutable values</a> and <a href="https://www.youtube.com/watch?v=rI8tNMsozo0">simplicity</a>.</p>
-<h3 id="about-zach-tellmantalk">About <a href="http://clojure-conj.org/speakers#zach-tellman">Zach Tellman</a></h3>
-<p><a href="https://github.com/ztellman">Github</a> - <a href="http://twitter.com/ztellman">Twitter</a></p>
-<p><a href="http://clojure-conj.org/speakers#zach-tellman"><img src="http://www.lispcast.com/img/pre-conj/zach-tellman.jpeg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Zach Tellman will talk about building composable software.
 
         <div class="endmark">
           <a class="endmark-link"

@@ -95,48 +95,7 @@
           September 11, 2013
         </div>
 
-        
-<p>Let's look at this logic problem:</p>
-<p><center>
-<img src="http://lispcast.com/img/logic-cards.png" alt="A logic problem involving cards" />
-</center></p>
-
-<p>Try to determine the answer.</p>
-<p>Hint: It's presented visually to try to trick you (as we saw <a href="http://www.lispcast.com/why-technical-explanation-alone-is-not-enough">last time</a>).</p>
-<p>The answer is <strong>two cards</strong>, the <em>A</em> and the <em>3</em>.</p>
-<p>Try this one:</p>
-<blockquote>
-<p>You are a police officer enforcing this law:</p>
-<p>It is only legal for minors to drink non-alcoholic beverages.</p>
-<p>You are busy, so you need to quickly assess each bar with the minimum amount of checks.</p>
-<p>You walk into a bar, and you see this scene:</p>
-<p>There are <strong><em>four people</em></strong> in the bar. One is a <strong><em>teenage boy</em></strong>, but you can't see his drink. One is an <strong><em>old man</em></strong>, and you can't see his drink. The third person has a <strong><em>coke</em></strong><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, but he/she is behind a column so you can't see their age. The last person has a <strong><em>big pint of beer</em></strong>, but he/she is also blocked by a column.</p>
-</blockquote>
-<p>Did you get the answer? You need to check <strong>two people</strong>. You don't need to check the old man, he's obviously not a minor. You don't need to check the person with a coke, even though he might be underage. That leaves the other two. The teenage boy on the left might have an alcoholic drink (which you can't see), and the person you can't see has a beer, so he/she might be a minor.</p>
-<p>Was that easier? Would it surprise you if I told you that <strong>the card problem and the bar problem are equivalent</strong>?<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> Why is it easier to solve the bar problem with almost no effort?</p>
-<p>There are two reasons: one, it calls on years of built-up, real-world experience. Second, the problem is <em>social</em>--that is, it is about people. We humans are built to handle complex relationships between people. Our reasoning power is somehow magnified and clarified when phrased in terms of people in a familiar situation.</p>
-<p><strong>Moral:</strong> When possible present a logic problem as a problem people have no difficulty solving.</p>
-<p>What's interesting is that you instantly know the shape of the solution when presented with the bar version of the problem. You think &quot;I'm looking for minors and alcoholic beverages.&quot; Whereas my first reaction to the card version was &quot;I'm looking for vowels and even numbers&quot; (which is wrong). Only after careful, slow, deliberate thinking was I able to see that I should be looking for vowels and odds.</p>
-<p>If you present material in the right way, it will help you teach the material better. You've likely had this experience before. <strong>Did your teacher ever do a math problem in terms of buying something and making change?</strong> Somehow, kids who score poorly in math class can still do the same problem when it's presented as a human-to-human exchange!</p>
-<p>Social problems are not the only ones that we are hyper-capable of solving. There are also other situations that we are hardwired to understand better than symbolic puzzles. <strong>Spatial orientation</strong> (for instance, that the arm sticking out from behind the column is attached to a person) and <strong>movement</strong> are also easy to solve, and luckily some of the most interesting math problems are equivalent to orientation and motion.</p>
-<p>By converting a symbolic problem to one that is a familiar, real-world situation, you are tapping into many different parts of the brain. <strong>The key to a good logic-to-social conversion is whether the problem solver can properly simulate the situation themselves.</strong> The bar problem is good because it's something we can all imagine.</p>
-<p>This is one thing I try to take advantage of in <a href="http://www.purelyfunctional.tv">my videos</a>. Yes, you are learning Clojure to solve a very complex problem. However, the problem is familiar to most, as it involves many metaphors and simulated situations. You are teaching someone to bake. A function is like a recipe. Pure functions are like doing a calculation in your head. Side effects move you around or use up ingredients, etc. <strong>I worked hard to make it seamless to learn.</strong></p>
-<p>Now that we know that it's easier to learn something if we can already simulate it, the next question is <em>how</em> to convert math/logic problems from their symbolic form into something more suitable for whole-brain simulation. This post is long enough already, so I'll address that next time.</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/learning-is-about-skills">How to avoid &quot;Makes sense if you already understand it.&quot;</a></li>
-<li><a href="http://www.lispcast.com/making-true-false-easy">Making True/False Questions Easy</a></li>
-<li><a href="http://www.lispcast.com/pre-west-elena-machkasova">Pre-West Prep: Elena Machkasova</a></li>
-<li><a href="http://www.lispcast.com/pre-west-interview-elena-machkasova">Pre-West Interview: Elena Machkasova</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Yes, I come from that <a href="http://www.popvssoda.com/">part of the country</a>.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>Here's the conversion: minors are vowels, legal-aged are consonants. Alcoholic drinks are odd numbers, non-alcoholic drinks are even numbers. And legal is true and illegal is false. (That is the big one!)<a href="#fnref2">↩</a></p></li>
-</ol>
-</div>
-
+        We can solve social problems much more easily than logic problems, even when they are equivalent. Convert a logic problem into a social problem to make it easier to solve.
 
         <div class="endmark">
           <a class="endmark-link"

@@ -95,58 +95,7 @@
           May 11, 2015
         </div>
 
-        
-<p>Summary: <em>The world may be mutable, but people have been using the notion of immutability to build reliable systems for a long time.</em></p>
-<p>Immutability is a hard topic to breach. As a programmer used to modeling the world, you might object to immutable data structures. How do you model a changing world? <strong>Why would you choose to use immutable data structures when everything in the world is changeable?</strong></p>
-<p>Let's do a little thought experiment. Let's look at <strong>a nice mutable system</strong>: paper and pencil. You can write, erase, and write again. It's very convenient. It lets you correct mistakes. And when you don't need something anymore, you can easily erase it.</p>
-<p>Now answer this: <strong>would you trust a bank that used pencils to record transactions?</strong> It would be easy: whenever you would withdraw money, they would erase the old balance and write the new balance. And if you transferred money from one account to another, they'd erase two balances and write the new ones in. It may sound great, but there's a reason banks don't use pencils: they want to be sure <strong>nothing has changed</strong>. That sounds like immutability.</p>
-<div class="figure">
-<img src="http://www.lispcast.com/img/ledger.jpg" alt="Bank ledger (photo credit)" /><p class="caption">Bank ledger (<a href="https://www.nottingham.ac.uk/manuscriptsandspecialcollections/researchguidance/accounting/business.aspx">photo credit</a>)</p>
-</div>
-<p>This is a bank ledger. Each transaction gets its own line. Always done in pen. It's an example of an append-only data structure. You can answer questions about the past like &quot;How much money was in the account at the close of last Tuesday?&quot; by going up lines until you find the last entry for Tuesday. And you can do that because you never modify existing entries. You only add new entries on blank lines.</p>
-<div class="figure">
-<img src="http://www.lispcast.com/img/medicalrecords.jpg" alt="Medical record system (photo credit)" /><p class="caption">Medical record system (<a href="https://www.flickr.com/photos/digitaldrew/4930438982/">photo credit</a>)</p>
-</div>
-<p>This is another example of an append-only data structure in the real world: medical records. Each patient gets a file that everything is added to. You never modify old records. That way, everything is recorded, even the wrong diagnoses (mistakes) of the doctor.</p>
-<p>It turns out that traditional systems that <strong>need a high degree reliability create immutable records out of mutable paper</strong>. Even though you could in theory scratch out some data and write it again, or white it out, or find some other way to mutate the document, a mark of professionalism in the job is to <strong>discipline yourself to adhere to strict append-only behaviors</strong>.</p>
-<p>Wouldn't it be nice if the machine took care of the discipline for us? Even though RAM and disk are mutable like paper and pen, we can impose a discipline inside of our program. We <em>could</em> rely on the programmer to never accidentally overwrite existing data. But that's just shifting the burden. Instead, we can build in immutability into our data structures and make a paper that cannot be overwritten.</p>
-<p>That's how immutable data structures work. <strong>All new pieces of information are written to new locations in memory.</strong> Only when it is proven that a location is never going to be used again is it reused.</p>
-<p>Reliable paper-based systems use immutable data. There was a time when computer memory was expensive when we had to reuse storage, so we couldn't make immutable systems. But RAM is cheap now! We should be using immutable data, just as <strong>banks have done for hundreds of years</strong>. Ready to join the 13th century?<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
-<p>If you're interested in a language with a very cool set of powerful immutable data structures, probably the most <strong>cutting edge immutable data structures</strong> in any language, you're in luck! You can get <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course with animations, exercises, and screencasts that teaches you Clojure so you'll learn it and remember it.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
-<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
-<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
-<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>The Double-entry method of accounting can trace its history back to 13th century Florence.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
+        The world may be mutable, but people have been using the notion of immutability to build reliable systems for a long time.
 
         <div class="endmark">
           <a class="endmark-link"

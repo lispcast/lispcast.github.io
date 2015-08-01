@@ -95,40 +95,7 @@
           February 27, 2015
         </div>
 
-        
-<p>Summary: <em>If something is important, you should deal with it sooner and more often. That's the approach Clojure takes to data representations. It means serialization of internal data is a non-issue.</em></p>
-<p>Netflix has a counterintuitive but brilliant system called <em>Chaos Monkey</em>. Chaos Monkey will randomly kill services. It is trying to simulate, in the microcosm of a business day, the craziness that happens in the production macrocosm. Services die, servers fail, latency spikes, and networks partition. It might not be soon, but eventually it will happen. Better deal with it now, when people are at work to deal with it. Chaos Monkey encourages you to <strong>write your code to work in such a chaos-filled environment so that unexpected failures are a breeze.</strong> The idea is an instance of the more general principle of &quot;if something is important, deal with it sooner and more often&quot;.</p>
-<p>There's something related to this idea of surfacing the errors early that I've been thinking about. It's about data. Have you ever written some classes and everything is well and good. And then after a while, you need to serialize that to disk or across a network. Now you have to come up with some format (maybe JSON or XML) to represent your class. Then, whenever the class changes, <strong>you have to remember to change the data format to keep them in sync</strong>. It's kind of painful!</p>
-<p>Well, I'll tell you, that rarely happens in Clojure. Because in Clojure, you often <strong>start with data structures</strong>. Meaning, you're already thinking in data, modeling in data, and working in data. <strong>Serialization becomes a non-issue</strong>, because Clojure data structures come built in with <a href="https://github.com/edn-format/edn">readers and writers</a>. Just like causing errors to happen early because they will happen eventually, Clojure programmers code in data <em>in part</em> because you're going to need data (serialization and deserialization) eventually.</p>
-<p>If this idea intrigues you, you may want to check out Clojure. Its <strong>data structures are cutting edge</strong>! Check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> if you would like to get into functional programming using animations, exercises, and screencasts.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
-<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-</ul>
-
+        If something is important, you should deal with it sooner and more often. That's the approach Clojure takes to data representations. It means serialization of internal data is a non-issue.
 
         <div class="endmark">
           <a class="endmark-link"

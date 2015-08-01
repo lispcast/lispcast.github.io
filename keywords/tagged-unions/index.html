@@ -95,80 +95,7 @@
           October 18, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#jeanine-adkisson"><img src="http://www.lispcast.com/img/pre-conj/jeanine-adkisson.jpg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>Jeanine Adkisson was kind enough to answer some questions. Her <a href="http://clojure-conj.org/speakers#jeanine-adkisson">talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> will be about variants in Clojure. Read the <a href="http://www.lispcast.com/pre-conj-jeanine-adkisson">background to her talk</a>.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>Jeanine Adkisson</strong>: Through work, actually. I'd seen clojure around and studied some of its features from a language design perspective, but I've never really been a lisper, so it hadn't occurred to me to actually use it until we started a migration to Datomic at GoodGuide. I admit to being a bit skeptical - I often find that lisps are a bit oversold - but a coworker of mine (<a href="https://twitter.com/bonkydog">@bonkydog</a>) started really gushing about generative testing, core.typed, and the awesomeness that is leiningen, so I decided to give it a closer look.</p>
-<p><strong>LC</strong>: Your talk is about Variants. Can you explain Variants and how they are useful?</p>
-<p><strong>JA</strong>: Sure! Variants are a functional design pattern that should be familiar to anyone who's worked in the Haskell/ML family of languages (and to a lesser extent, Erlang). Their main purpose is to provide a structured way to manage polymorphism. In lisps and other single-type languages, they're not that widespread because we don't have to convince a type-checker that our polymorphism works out in the end. But we still have to convice users of our libraries and our doc writers that our functions make sense!</p>
-<p>The method of representing variants I'll be talking about came out of some frustrations I was having at porting part of a language over to Clojure, and finding it difficult to represent and destructure the trees I needed to process. But I was really impressed at how quickly David Nolen and Ambrose BS got back to me and shipped patches that made this approach possible (and typeable!).</p>
-<p><strong>LC</strong>: You mean David Nolen patched ClojureScript and Ambrose BS patched core.typed?</p>
-<p>I wonder what it means about dynamic languages like Clojure that you can add Variants as a library instead of making it an integral part like in Haskell. What do you think about that?</p>
-<p><strong>JA</strong>: Yeah, actually it was a bugfix to the <code>match</code> macro and the way that core.typed handled vectors that were key. What's even more interesting about variants is that there is really no library to write - all the machinery is already there. The solution isn't even particularly clever or novel - it's already in use in, for example, instaparse. It's just not on people's radars, or they have misconceptions about the approach from their OO training.</p>
-<p>I love the fact that you can backport this pattern into a language that's not explicitly built for it. I wouldn't necessarily count that as a strength for dynamic languages in general though - I find a language's strengths often come from ways in which semantics are restricted. Clojure is already a great example of this because it explicitly rejects the use of willy-nilly mutable structures, to great benefit. Sure, you can program that way in Ruby, but the tools are already there in Clojure.</p>
-<p>What I find coolest about the Clojure case is the extent to which core.typed has been able to backport types onto a mostly untyped ecosystem. The general problems with dynamic languages are still there, but they have to be made explicit with union types. How many functions surprised you by outputting <code>(U &lt;thing&gt; (Value nil))</code>? But because it's powerful enough to support variants in a lightweight and usable way, I think we now have a tool to deal with one of the most common culprits of surprise nils.</p>
-<p><strong>LC</strong>: I think the approach is worthy of study. I flipflop between statically typed vs dynamically typed because there are obvious problems with both. How close does your core.match and core.typed solution come to a full-on ML/Haskell-style, integrated solution?</p>
-<p><strong>JA</strong>: It's pretty comparable, and actually has some advantages. Since it's just vectors and keywords, it's trivial to handle in a generic way, and as long as you're not putting functions or host objects in them it's trivial to serialize and send over the wire. (Haskell and ML can do most of this programming for you with various generic programming extensions, but it's not straightforward or obvious). But yeah, core.typed is capable of refining types based on the tag matching code generated by core.match - a little roundabout, but it gets the job done. The match macro can also match against more than one object at a time, something OO languages constantly struggle with. There's a <em>little</em> more macro work to be done in core.typed to make it really straightforward to do variants, but it's a relatively trivial syntactic transformation.</p>
-<p>In terms of typed vs. untyped, I think there's lessons to be learned from both. My instinct is to say that we just haven't really figured out how to make typed systems all that usable. Haskell and ML went a long way towards this, and I think they kind of hit a wall because of their restriction that compilation be decidable. In other words, the compiler is not allowed to infinite-loop - which sounds like a good idea until you line up all the restrictions required to make that happen. In dynamic languages, we don't have a semantic separation between &quot;compile-time&quot; and &quot;run-time&quot;, but we still talk about &quot;load-time&quot; vs &quot;run-time&quot;. And at load-time you can wield the full turing-complete power of the language. That's why I'm also excited about projects like Agda and Idris, which, while still statically typed and compiled, blur the lines between runtime and compile time - moving away from strict decidability guarantees in exchange for a more expressive system.</p>
-<p><strong>LC</strong>: A lot of the audience is going to be new to Clojure or they have never heard of variants. Is there a resource that you think would help make the most of their time? Just a little pre-reading or pre-watching so they feel confident with the material?</p>
-<p><strong>JA</strong>: Yeah, there's unfortunately not a whole lot targeting Clojure or other lisps, which is one of the reasons I wanted to give this talk. There's a great section in the <a href="http://ocaml.org/learn/tutorials/data_types_and_matching.html#Variantsqualifiedunionsandenums">ocaml tutorial</a> about them, and <a href="http://learnyouahaskell.com/making-our-own-types-and-typeclasses#algebraic-data-types">Learn You a Haskell</a> covers them as well (although they call them ADTs). The approach I'll be talking about is most like what's used in Erlang, as in the <a href="http://learnyousomeerlang.com/syntax-in-functions#in-case-of">temperature example here</a>.</p>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>JA</strong>: Probably the best way to keep up with me is on twitter at <a href="https://twitter.com/jneen_">@jneen_</a> (note the final underscore), or on github as <a href="https://github.com/jneen">@jneen</a>.</p>
-<p><strong>LC</strong>: One last question: If Clojure were a comic book superhero, what would its superpower be?</p>
-<p><strong>JA</strong>: Hahaha, I'd probably say a shapeshifter, like most lisps I suppose.</p>
-<p><strong>LC</strong>: Thanks for an excellent interview. I had fun.</p>
-<p><strong>JA</strong>: Awesome, thanks!</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Jeanine Adkisson interview about variants.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -193,62 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 03, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-variants-are-not-unionstalk">Talk: <a href="http://clojure-conj.org/speakers#jeanine-adkisson">Variants are Not Unions</a></h3>
-<p><a href="http://clojure-conj.org/speakers#jeanine-adkisson">Jeanine Adkisson's talk</a> at the <em>conj</em> is about using Variants in Clojure. Variants are a way to represent different cases of value that belong to the same type. For instance, a linked list type might be represented as two cases: an empty list and a tuple of an element and a list. A <em>tag</em> distinguishes between the two cases.</p>
-<h4 id="background">Background</h4>
-<p>In a dynamically typed language, we often play fast and loose with type. For instance, we might write a function with a giant <code>cond</code> statement in the body that does little more than switch on type. But how do we know we've checked all the types we need to? Variants solve this problem.</p>
-<p>Variants are a key feature of Haskell and ML. Adkisson mentions that there is no standard way of representing them in Clojure, which is true, though several commonplace conventions exist for getting <em>some</em> of the uses of Variants. However, there is not a common convention for noting all of the possible tags and ensuring that all cases are covered in a conditional. The talk description also mentions <a href="https://github.com/clojure/core.typed">core.typed</a> (a type system for Clojure, which does not have Variants) and <a href="http://www.datomic.com/">Datomic</a> (a database written by the creators of Clojure).</p>
-<h5 id="why-it-matters">Why it matters</h5>
-<p>Adding Variants to Clojure is a good example of the Clojure community's excitement about borrowing good ideas from a variety of languages. And the fact that a new kind of type can be introduced that works in the dynamic language, a type system, and a database is promising for the future of idea borrowing in Clojure.</p>
-<h3 id="about-jeanine-adkissontalk">About <a href="http://clojure-conj.org/speakers#jeanine-adkisson">Jeanine Adkisson</a></h3>
-<p><a href="http://twitter.com/jneen_">Twitter</a> - <a href="https://github.com/jneen">Github</a> - <a href="http://jneen.net/">Blog</a></p>
-<p><a href="http://clojure-conj.org/speakers#jeanine-adkisson"><img src="http://www.lispcast.com/img/pre-conj/jeanine-adkisson.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Jeanine Adkisson will give a talk about Variants in Clojure at the Clojure/conj 2014.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -273,88 +145,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           July 08, 2015
         </div>
 
-        
-<p>Summary: <em>The structure of our data should match the relevant structures in the real world. And to ensure that our data is structured well, we should reduce the potential for incorrect structure. Variants provide a great solution for it.</em></p>
-<h3 id="introduction">Introduction</h3>
-<p><a href="https://www.youtube.com/watch?v=ZQkIWWTygio">Jeanine Adkisson's talk at the Conj</a> last year was my favorite talk of the Conj. Her presentation was well-delivered, her slides were just quirky enough, and of course the material was so important. You should go watch the talk before you read on.</p>
-<h3 id="the-problem">The problem</h3>
-<p>In Clojure we often <strong>represent things as maps with some implicit rules</strong>. For instance, there might be three different ways to represent an image: an array of pixels in memory, a filename for a jpeg file on disk, or a URL of a jpeg on the web. We might have maps that look like this:</p>
-<pre><code>{:type :image/in-memory
- :pixels [...]}
-
-{:type :image/on-disk
- :filename &quot;/cats.jpg&quot;}
-
-{:type :image/web
- :url &quot;http://cats.com/cats.jpg&quot;}</code></pre>
-<p>This is all well and good. Except it's rife with incidental complexity. We have an <strong>implicit rule</strong> that if the <code>:type</code> is <code>:image/in-memory</code>, then the pixels will be at <code>:pixels</code>, but if the <code>:type</code> is <code>:image/on-disk</code>, we are expecting a string containing a filename at <code>:filename</code>, and so on. <strong>The rule might seem obvious, but it's actually kind of cumbersome.</strong></p>
-<p>If it's a rule, are we going to enforce it? Where? How strictly? How often? Enforcement is great, but what do we do if we find an <code>:image/web</code> without a <code>:url</code>? Decisions, decisions. Plus, it's a hashmap! It <em>looks</em> like you can have multiple things. Some lazy programmer is going to reuse those keys. For instance, there could be a <code>save-to-disk</code> function that takes an image and writes it to disk. It returns the original image with the filename where it was saved attached at <code>:filename</code>. Now you've got <code>:filename</code> and <code>:pixels</code>. It's unclear whether that's what we want, but <strong>it's totally allowed by the data structure</strong>.</p>
-<p>Actually, if you analyze it, you can quantify the complexity pretty well. We'll make some simplifying assumptions. Let's just say we have the type key and the three &quot;value&quot; keys. The type key can have four possible values (<code>:image/in-memory</code>, <code>:image/on-disk</code>, <code>:image/web</code>, and <code>nil</code> (or missing)) and the values keys have either a valid value or are missing (or <code>nil</code>). The number of states is <code>4 * 2 * 2 * 2 = 32</code>. So instead of three cases, like we want above, we have 32 cases to deal with.</p>
-<p>Is there a way to reduce this complexity? Is there a way to nip it in the bud before we've got <strong>code enforcing these assumptions all over the place</strong>? Do we really need to drown in assertions and <code>nil</code> checks?</p>
-<h3 id="a-great-solution">A great solution</h3>
-<p>Jeanine showed us a well-suited solution. Her solution, as I mentioned before, is called &quot;variants&quot;. We have three variants of image representation. Instead of representing them in a map, we represent them in a vector, like this:</p>
-<pre><code>[:image/in-memory [...]]
-
-[:image/on-disk &quot;/cats.jpg&quot;]
-
-[:image/web &quot;http://cats.com/cats.jpg&quot;]</code></pre>
-<p>How does this help?</p>
-<p>Well, let's do the math. There are now <strong>two positions where data can be</strong> (instead of four in the hashmap representation). If we make the same simplifications we made above, we have <code>4 * 2 = 8</code>. This is cheating slightly because we're only considering vectors of two elements or less. But then again, we cheated above because we never considered adding arbitrary keys to the hashmap.</p>
-<p>Okay, so it's 32 vs. 8. But what happens when we add a <em>new</em> kind of image? In the hashmap version, we're adding a new key and a new <code>:type</code>, so the new states become <code>5 * 2 * 2 * 2 * 2 = 80</code>. Woah! And in the vector version? <code>5 * 2 = 10</code>. Wow! Much better. <strong>The variant solution actually grows in complexity more slowly than the hashmap solution.</strong></p>
-<p>But we've gained something less quantifiable: the data is now easier to write, easier to read, and most importantly, <strong>easier to get right</strong>. It looks a lot like the tuple pattern we're used to in Clojure. The first value of the tuple is a tag telling you what kind of image it is. As Jeanine pointed out, it's the <strong>same pattern employed by hiccup to represent HTML</strong>. The first element of a hiccup vector tells you what kind of HTML tag it is.</p>
-<h3 id="a-plot-twist">A plot twist</h3>
-<p>Now, Jeanine's solution works really well for deeply nested structures like ASTs or HTML trees. However, I always get a little scared when I see vectors being overloaded.</p>
-<p>It works okay in hiccup because when you're writing hiccup, you are mostly making big chunks of hiccup. You're not passing hiccup around. Hiccup in your code is <strong>dense and will typically only be returned</strong> (as opposed to passed to another function). But notice the problem with having to <a href="http://www.lispcast.com/hiccup-tips#overloading-vectors">use lists within hiccup to represent sequences</a>. Even in hiccup, people get tripped up. But it's still a great solution.</p>
-<p>However, once you start shipping these things around as units of data, they get to be a problem. This has happened to me in the past. You start accumulating values, you have a vector of variants, and all of a sudden you're counting how many nesting levels you've got to know how to interpret each level. You've got a <strong>vector of vectors of vectors</strong>. It happens everywhere where vectors are overloaded.</p>
-<p>It happens in Pedestal routes. Here's a sample Pedestal route data structure. Notice it starts with three nesting levels. <strong>Each of those vectors has a different meaning.</strong> Perhaps putting keywords in the front would help, but I suspect that's not a good solution here.</p>
-<p><a href="https://github.com/pedestal/pedestal/blob/9058f30f16ec5f109e73f46b7cea948804205cfb/samples/hello-world/src/hello_world/service.clj#L25"><img src="http://www.lispcast.com/img/pedestal%20routes.png" alt="Pedestal routes from Hello, World! sample" /></a></p>
-<h3 id="a-different-solution">A different solution</h3>
-<p>I do have a solution to the case of variants that need to get passed around and collected into sequences. I propose that you <strong>use a hashmap with a single key</strong>, which is the variant's tag. The value for that key is a vector of data.</p>
-<pre><code>{:image/in-memory [[...]]} ;; ellipsis represents lots of pixel data
-
-{:image/on-disk [&quot;/dogs.jpg&quot;]}
-
-{:image/web [&quot;http://doggy.com/dogs.jpg&quot;]}</code></pre>
-<p>This can still be checked by core.typed and used in core.match. It's natural in Clojure for a hashmap to represent a self-contained value. It's also only slightly harder to type than the vector version, and just as easy to read. I think it's easy, at least, because this is <strong>clearly a different pattern from the original hashmap pattern</strong>. And it's still easy to get right. I also recommend adding a namespace to the tag to show that that they are related.</p>
-<h3 id="the-takeaway">The takeaway</h3>
-<p><strong>When do you use variants?</strong></p>
-<p>Whenever you have different data that have the same operations (for instance, all three kinds of images can be displayed to the screen).</p>
-<p><strong>When do you use the vector version of variants?</strong></p>
-<p>If you have trees like HTML documents or ASTs after parsing.</p>
-<p><strong>When do you use the single key hashmap version of variants?</strong></p>
-<p>If you are planning on collecting values into a vector, or the nesting is not obvious.</p>
-<h3 id="other-ways-to-reduce-complexity">Other ways to reduce complexity</h3>
-<p>Jeanine went over core.typed and core.match for variants.</p>
-<p>By using core.typed, you can encode the exact data structures you want, eliminate nils, and enforce enumerations (like the <code>:type</code>s). You can eliminate all of the erroneous cases statically and be left with only the three correct cases (or your code won't compile).</p>
-<p>core.match can be used, too, both for convenience (comparing and defining locals in one go), encoding some more complex rules (like extra keys are allowed but ignored), and also collapsing all of the erroneous cases into a single catch-all case. <strong>That's still four cases instead of three, but that's way nicer.</strong> And core.match works for all of the solutions I've presented (including the original hashmap version).</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Variants are a great tool that we should keep up front for lots of jobs. Their complexity grows much more slowly than the hashmap-with-<code>:type</code> solution we saw at first. We should all be considerate of how much complexity our choice of data representations is adding to our system. <a href="https://www.youtube.com/watch?v=ZQkIWWTygio">Don't forget the talk.</a> There is also an <a href="http://www.lispcast.com/pre-conj-interview-jeanine-adkisson">interview</a> with Jeanine I did before the Conj.</p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-interview-jeanine-adkisson">Pre-Conj Interview: Jeanine Adkisson</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-jeanine-adkisson">Pre-conj Prep: Jeanine Adkisson</a></li>
-</ul>
-
+        The structure of our data should match the relevant structures in the real world. And to ensure that our data is structured well, we should reduce the potential for incorrect structure. Variants provide a great solution for it.
 
         <div class="endmark">
           <a class="endmark-link"

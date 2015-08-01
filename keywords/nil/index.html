@@ -95,66 +95,7 @@
           September 12, 2013
         </div>
 
-        
-<p>Null pointers are <a href="http://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">considered by their inventor</a> to be a huge mistake. Clojure inherits its null pointer, called <code>nil</code> in Clojure, from the JVM. In contrast to Java<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, Clojure seems to embrace the null pointer. In this post, I'd like to explore how Clojure uses the null pointer in what is often called <em>nil-punning</em>.</p>
-<p>Nil-punning has its roots in the very first Lisps, where <code>nil</code> was both false (the boolean value) and the end of a list (the empty list). It was also often used to represent &quot;no answer&quot;, as in what is the first element of an empty list. It is called <em>punning</em> because you can use it to mean different things in different contexts.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
-<p><em>In Clojure, <code>nil</code>, as a value, is nearly void of meaning. And it is all pervasive, because it can be returned from any Clojure function or Java method.</em></p>
-<p>Let's go through that last part bit by bit.</p>
-<ol style="list-style-type: decimal">
-<li><strong>It <em>is</em> a value.</strong> Java made the mistake of making <code>null</code> a lack of object even though it was pointed to by an object pointer. You can't call methods on it. It is not an object. It has a weird <em><a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/typesValues.html#4.1">nameless type</a></em>. Clojure did not make this mistake. It is a first-class value and type<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup>, meaning <em>it can be compared to other values</em>, <em>it can implement protocols</em>, and be used as <em>the key or value of a map</em>, etc. Using <code>nil</code> where it doesn't make sense in Clojure code is <em>usually</em> a type error, not a NullPointerException, just as using a number as a function is a type error.</li>
-</ol>
-<ol start="2" style="list-style-type: decimal">
-<li><strong>It is nearly void of meaning.</strong> It means &quot;no answer&quot;, but not much more. Because of this, <em>it can take whatever form fits the context</em>. With proper wisdom in choosing what form it takes, <code>nil</code> can become an asset instead of a liability. Clojure takes nil-punning to an extreme.</li>
-</ol>
-<p><code>nil</code> can be many things. To name but a few, <code>nil</code> plays <code>false</code> as a boolean. It plays the empty <code>seq</code> as a <code>seq</code><sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup>. It plays the empty map as a map. Because <code>nil</code> has a role to play in most of the major abstractions of core Clojure, it rarely leads you into an <em>error</em> situation. An unexpected nil can surprise a good programmer, just as much as an unexpected <code>Nothing</code> from a Haskell function can bewilder even the most experienced Haskeller. <sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup> Finding out where a <code>nil</code> came from is the hardest problem that <code>nil</code>s present.</p>
-<ol start="3" style="list-style-type: decimal">
-<li><strong>It is all-pervasive.</strong> <code>nil</code>s are normal parts of Clojure programs. They are not anomalous as in Java, where you often have to check it everywhere. This means it is always on the experienced programmer's mind. <code>nil</code>s flow like water through s-expressions.</li>
-</ol>
-<p><code>first</code> has nothing to return if the seq is empty, and so it returns <code>nil</code>. Because <code>nil</code> is a seq, <code>first</code> works on <code>nil</code>, and returns <code>nil</code>. <sup><a href="#fn6" class="footnoteRef" id="fnref6">6</a></sup>. <code>rest</code> works on <code>nil</code> as well, because <code>nil</code> is a seq.</p>
-<p>These examples show the best of nil-punning. <strong>When nil-punning works right, <code>nil</code>s are expected and they give the expected results.</strong></p>
-<p><code>nil</code> is everywhere, but it can be used mostly everywhere as well--without error and often with exactly the desired result. There are many abstractions that <code>nil</code> does not participate in (for instance IFn, which is Clojure's interface for things that can be called like functions). In these places, <code>nil</code> can present a problem--a problem of type, the same as if you tried to call a number as a function.</p>
-<p>The best thing to do, in my experience, is simply to wrap the expression in a <code>(when )</code> to catch the <code>nil</code> cases, if appropriate, while also preserving it. Otherwise, perhaps letting the Exception bubble up is the best answer. If you got a <code>nil</code> where you couldn't use one, the stack trace is probably your best clue to where it came from.</p>
-<p>After a bit of experience with Clojure, I rarely have <em>difficult</em> problems with out-of-place <code>nil</code>s in pure Clojure code. However, there is often some Java interop--namely, calling Java methods directly--that will cause a NullPointerException if the object of the method call is <code>nil</code>. In these cases, wrapping a Java method call in a <code>(when )</code> is often appropriate. But sometimes not, and the NullPointerException is welcome.</p>
-<p>There are some decisions in Clojure that I think make poor use of nil-punning. These places actually make working with Clojure more difficult than they need to be. For instance, <code>(str nil)</code> is the empty string. Printing this out prints nothing--a form of silence, which is rarely what you want so you have to check for <code>nil</code>s in these cases. But <code>nil</code> <em>is not</em> the empty string, like it is the empty <code>seq</code>. <code>(clojure.string/trim nil)</code> throws a NullPointerException. This is inconsistent behavior. <strong>When <code>nil</code> acts inconsistently, nil-punning does not work right. <code>nil</code>s need to be checked. In the worst cases, <code>nil</code>s fail silently.</strong> While I have learned to deal with these situations, they are a wart on the language. The fact that <code>nil</code>s are so common does help surface the bugs sooner. A small consolation.</p>
-<p>Let me make it clear: null pointers are still a costly problem in Clojure. But I can make a claim similar to what Haskellers claim about the type system: <em>nil-punning eliminates a certain class of errors</em>. A fortuitous set of decisions in Clojure has reduced the magnitude of the problem. And some decisions have made the problem worse by hiding it. In general, I find that by <a href="http://www.apl.jhu.edu/~hall/lisp/Scheme-Ballad.text">embracing nil-punning</a>, my code gets better.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
-<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>I don't mean to pick on Java alone. I just wanted to be specific.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>Note that this is very different from weak typing as you find in Javascript or Python. Nil-punning is more like polymorphism.<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>The type of <code>nil</code> is <code>nil</code><a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p>Clojure's core is built on several small, powerful abstractions. The most prominent abstraction is <em>seq</em>, which stands for <em>sequence</em>. <em>seq</em> basically has two operations, <code>first</code> and <code>rest</code>. The most obvious use for them is to iterate through items of a collection. There are built-in implementations for lists, vectors, sets, hashmaps, and even strings. But anything that has a notion of sequential values can implement <em>seq</em>, including Java Iterators. I would also like to posit that the most important and often overlooked implementation of <code>seq</code> is for <code>nil</code> itself.<a href="#fnref4">↩</a></p></li>
-<li id="fn5"><p>Even the best Haskellers complain about not knowing where a Nothing came from.<a href="#fnref5">↩</a></p></li>
-<li id="fn6"><p>You might look at this as nil-preserving behavior--much like the Nothing-preserving behavior of the Maybe Monad<a href="#fnref6">↩</a></p></li>
-</ol>
-</div>
-
+        Null pointers are still a problem in Clojure, but several design decisions have made them less problematic than other languages.
 
         <div class="endmark">
           <a class="endmark-link"

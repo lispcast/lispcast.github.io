@@ -95,121 +95,7 @@
           March 11, 2015
         </div>
 
-        
-<p>Summary: <em>Object-oriented dispatch is contrasted with functional dispatch, but they are shown to be two one-dimensional views of the same two-dimensional data. Clojure does not provide the two-dimensional representation, but does interesting things to transcend the one-dimensional views.</em></p>
-<p>About a month ago, I wrote a post about how <a href="http://www.lispcast.com/object-oriented-vs-functional-duals">OO-style is the dual of functional-style</a>. OO focuses on the data first, while functional focuses on the code. It is cool that <strong>the correspondence between the two is fairly clear and mechanical</strong>. It means that they're equivalent in a way. The distinction is mostly important when choosing how to represent a problem. A language should provide ways to express both (as Clojure does), and a way to translate between the two (which Clojure does not).</p>
-<p>But it goes further than data vs code. In OO, the object is the unit of data (which manifests as the principle of encapsulation). <strong>But the object is also the unit of <em>dispatch</em>.</strong> Objects know their class, and classes know the implementations of their methods. <em>Class first, behavior second.</em> In a functional style of programming, <strong>the function is the unit of dispatch</strong>. A function knows how to react to all possible classes of arguments. <em>Behavior first, class second.</em></p>
-<p>Example:</p>
-<pre><code>(defn foo [x]
-  (cond
-    (string? x)
-    ...
-    (integer? x)
-    ...
-    (vector? x)
-    ...</code></pre>
-<p>So again, we have a kind of duality. The classic way to explain this is to show it in a table.</p>
-<center>
-
-<table>
-<thead>
-<tr class="header">
-<th align="left">method/class</th>
-<th align="left"><code>String</code></th>
-<th align="left"><code>Integer</code></th>
-<th align="left"><code>Vector</code></th>
-<th align="left">...</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code>toString</code></td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left">.</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left"><code>length</code></td>
-<td align="left">.</td>
-<td align="left">x</td>
-<td align="left">.</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left"><code>+</code></td>
-<td align="left">x</td>
-<td align="left">.</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left"><code>*</code></td>
-<td align="left">x</td>
-<td align="left">.</td>
-<td align="left">x</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">...</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-</center>
-
-<p>A dot represents an implementation, whereas an x represents an undefined operation.</p>
-<p>In OO style, <strong>the class represents a single column</strong>. In functional style, <strong>the function represents a single row</strong>. Logically, however, the information is a two-dimensional table. That brings up a question: <strong>why don't languages store the information in this form internally?</strong> It is easy to project a column view or a row view from a table. And the x's in the table seem to be really useful for static checks.</p>
-<p>Clojure does not represent its functions this way. But it does allow you to <strong>express your code in <em>either</em> a column view or a row view</strong>. The row view is the standard functional approach shown above. The column view is using <code>deftype</code>.</p>
-<p>Example:</p>
-<pre><code>(deftype Person
-  Object ;; indicating I&#39;m overriding methods from Object
-  (toString [p]
-    ...)
-  java.util.Comparable
-  (compareTo [p]
-    ...)
-  ...)</code></pre>
-<p>Clojure goes a step further: instead of having to write out the entire column (all methods given a class) in one place, you can essentially <strong>index directly into the table given a method/class pair</strong>, and define the implementation directly. This only works with protocol methods (not methods on classes/interfaces due to limitations in the JVM).</p>
-<p>Example:</p>
-<pre><code>(extend-type Object
-  MyProtocol
-  (mymethod [x o]
-    ...))</code></pre>
-<p>OO-style and functional-style are duals in terms of dispatch. It's very related to the data-first or code-first duality I wrote about before. Clojure again <strong>straddles both sides of the duality</strong> and lets you write code in both styles, as well as transcend the column/row distinction entirely when using protocols.</p>
-<p><strong>How does your language deal with dispatch?</strong> Can you express the problem in the best way? If you're interested in this kind of topic, you would probably enjoy the <a href="http://www.clojuregazette.com/">Clojure Gazette</a>. It's a weekly newsletter filled with content to inspire Clojure programmers. It's completely free and it's easy to unsubscribe.</p>
-<p>Thanks to <a href="http://www.marcusblankenship.com/">Marcus Blankenship</a> for the inspiration for this article.</p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
-<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
-<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
-<li><a href="http://www.lispcast.com/the-world-is-mutable">But the World is Mutable</a></li>
-</ul>
-
+        Object-oriented dispatch is contrasted with functional dispatch, but they are shown to be two one-dimensional projections of the same two-dimensional data. Clojure does not provide the two-dimensional representation, but does interesting things to transcend the one-dimensional views.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -234,76 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           February 08, 2015
         </div>
 
-        
-<p>Summary: <em>Object-Oriented Programming is often shown in contrast to Functional Programming. But they are so exactly opposite that they are duals, and so equivalent in important ways. Which one to use should be left up to the programmer, as is done in Clojure and Javascript.</em></p>
-<p>Let's take a quick look at programming from an interesting perspective. Let's say that programs are divided into <em>code</em> and <em>data</em>. <sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> <strong>These are the two main axes</strong>: structuring code and structuring data.</p>
-<p>Now, let's design a language. First decisions: <strong>which axis is primary, which is secondary</strong>?</p>
-<center>
-
-<table>
-<thead>
-<tr class="header">
-<th align="left">Style</th>
-<th align="left">Data</th>
-<th align="left">Code</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">OOP</td>
-<td align="left">Primary</td>
-<td align="left">Secondary</td>
-</tr>
-<tr class="even">
-<td align="left">FP</td>
-<td align="left">Secondary</td>
-<td align="left">Primary</td>
-</tr>
-</tbody>
-</table>
-</center>
-
-<p>In an OOP-style approach, we have <strong>a pointer to an object which is the <em>data</em></strong>. And the data also tells you where the <em>code</em> is to access it (methods in the vtable). An FP-style approach will make <strong>functions (<em>code</em>) primary</strong>, with <em>data</em> referred to by the closures (the captured lexical environment).</p>
-<p>I'm positive I'm not the first person to remark on this, but I think it's pretty cool that <strong>they are duals of each other</strong>. <strong>A simple transformation will switch one in the table with the other.</strong></p>
-<p>Perhaps the next obvious question is &quot;which one is better?&quot;. Many arguments about OOP vs FP focus on this choice, about which axis should be primary. Because a compiler could easily transform between them, the decision is not quite so important as we might think at first. I think that <strong>a language should make both available and let the programmer choose</strong>. The programmer is then free to choose whichever best models the problem.</p>
-<p>For instance, in Clojure, fns are closures, so they are really FP-style -- code meant to be executed which happens to refer to some data. But collections are data which refer to code which knows how to access the data. <strong>Both coexist quite cooperatively.</strong></p>
-<p>And <strong>Clojure gives you, the programmer, ways of expressing both styles</strong>. When you want to create some code to be executed, <code>fn</code> lets you define lexical closures. But sometimes you want to make a new data structure which acts like others. For instance, a new type of sequence. <code>deftype</code> lets you define data with interface and protocol implementations. I use both <code>fn</code> and <code>deftype</code> very often.</p>
-<p>Interestingly, <strong>Javascript gives you these two options as well.</strong> <code>function</code> defines lexical closures, making code primary. But very often you define an object which contains (or refers to) data and secondary accessor functions. It's one of the nicer things about Javascript, included in <a href="http://www.amazon.com/dp/0596517742">Javascript, the Good Parts</a>.</p>
-<p><strong>How does your language prioritize these two axes?</strong> Is there a way to choose which to use to best implement your design? If you're interested in this kind of topic, you would probably enjoy the <a href="http://www.clojuregazette.com/">Clojure Gazette</a>. It's a weekly newsletter filled with content to inspire Clojure programmers. It's completely free and it's easy to unsubscribe.</p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
-<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
-<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
-<li><a href="http://www.lispcast.com/the-world-is-mutable">But the World is Mutable</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>I don't want to go down the code-is-data rabbit hole. Let's stick to one floor in the tower of languages model.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
+        Object-Oriented Programming is often shown in contrast to Functional Programming. But they are so exactly opposite that they are duals, and so equivalent in important ways. Which one to use should be left up to the programmer, as is done in Clojure and Javascript.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -328,48 +145,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           February 27, 2015
         </div>
 
-        
-<p>Summary: <em>Functional programs follow a simple rule: never write on the same paper twice. Imperative programs are free to define their own rules. Both have interesting consequences.</em></p>
-<p>I just read <a href="https://emily.st/2015/02/26/functional-programming-for-everyone-else/">Functional Programming for Everyone Else</a> by Emily St. It's a good read about the fundamental differences between Turing Machines and Lambda Calculus. Near the end, she mentioned this:</p>
-<blockquote>
-<p>I think of functional programs as ones which do their jobs without stopping to take notes along the way.</p>
-</blockquote>
-<p>That got me thinking of the metaphor of taking notes. It's an interesting metaphor, because as she mentions in the article, modern computers are based more on Turing Machines, with their tapes (notes), rather than Lambda Calculus. <strong>Lambda Calculus being abstract instead of mechanical (what instead of how), it doesn't show its work.</strong></p>
-<p>In the spirit of more perspectives being better than fewer, I'd like to give my metaphor, inspired by idea above. <strong>Functional programs are those that have a very simple rule: never write on the same paper twice.</strong> In Turing Machine terms, it means never write on the same piece of tape twice. This rule is simple enough that you can build it into the compiler and runtime to enforce it. <strong>In programming language theory, we call this immutability.</strong> Once a paper is written on, it is immutable.</p>
-<p>Imperative programs, on the other hand, don't have such a rule. They can write on any piece of paper, even write over or erase what's written. <strong>They rely on their own code to enforce rules</strong> for how to organize these pieces of paper so that it still makes sense. They might use locks, which are notoriously hard to get right.</p>
-<p>The nice thing about functional programs is you get a nice <strong>record of what's happened</strong>. You can step through all of the intermediate work because it was never overwritten. It's like an <strong>artist keeping their old sketches</strong> that led up to their masterpiece. Imperative programs are like finding out that it was all done on the same canvas, art painted over art, irrevocably lost. There is no xray to uncover it.</p>
-<p>The other nice thing about functional programs is <strong>multiple programs can share the same stack of paper</strong>. Since they're following a rule, they will never overwrite someone else's work. But imperative programs need to have <strong>complex coordination rules</strong> to make sure that they aren't writing on the same page at the same time, or overwriting something that someone else will need.</p>
-<p>If you'd like to learn Functional Programming, I can recommend <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It will teach you Functional Programming using Clojure, animations, and screencasts, along with many exercises.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
-<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
-<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
-<li><a href="http://www.lispcast.com/the-world-is-mutable">But the World is Mutable</a></li>
-</ul>
-
+        Functional programs follow a simple rule: never write on the same paper twice. Imperative programs are free to define their own rules. Both have interesting consequences.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -394,65 +170,7 @@ Learn more
           October 06, 2014
         </div>
 
-        
-<p>Summary: <em>Code style is important, but way less important than content. Yet everyone talks about style because it's easier. Let's talk about content. I'll start with some bullet points.</em></p>
-<p>In fiction writing, there is a fine, but visible, line between style and content. Style is your <strong>choice of words and grammar</strong> while you're telling a story. Content is <strong>the parts of the story</strong> itself. It's the characters, the plot devices, the motivations, etc.</p>
-<p>Style is important. Classic works of literature usually have a good style. But content is more important. Good style can enhance a story. But a story can be retold many times, each with a different style, because a good character and story can stand on its own. <strong>No amount of style is going to save crappy storytelling</strong> with uninteresting characters. It didn't work for The Matrix 2 &amp; 3, and man, did not help at all in the Star Wars prequels.</p>
-<p>You can roughly divide programming decisions along a similar line. Coding style versus coding content. <strong>So much advice falls on the style side.</strong> It talks about variable naming, function length, what parts of a language not to use.</p>
-<p>Where is all the stuff about code content? How do we choose an algorithm? How do we pick a data structure? Basically, how do we translate a real-world problem into a computational model? How do we determine if a program correctly models the problem? How do we judge if one model is better than another? The answer is so simplistic. <strong>A model fits a problem if the structure of the model matches the structure of the problem.</strong></p>
-<p>Structure, structure, structure.</p>
-<p>Here are some bullet points:</p>
-<h3 id="choose-the-right-collection">1. Choose the right collection</h3>
-<p>Here's a good example that we should all be familiar with. How do you choose between an array and a map? Well, if your problem is to do things in order, an array is the better choice because it is naturally ordered. If your problem is &quot;I have an x and I need a y&quot;, a map is probably better, because maps associate one value with another. <strong>The data structure's properties mirror the properties of the problem.</strong></p>
-<h3 id="factor-your-code">2. Factor your code</h3>
-<p>Refactoring is improving the style of your code without changing the content. But <a href="http://www.lispcast.com/stop-refactoring-and-start-factoring">factoring</a> is changing the structure of your code to reveal the <strong>underlying structure of the problem</strong>. This is the only reliable way to get a one-to-one mapping between code and reality.</p>
-<h3 id="determine-the-essential-structure-of-the-problem">3. Determine the essential structure of the problem</h3>
-<p>I have <a href="http://www.lispcast.com/java-learn-from-clojure#represent-computation-not-the-world">written before</a> about finding the essential idea in a problem. Object Oriented Programming advice tends to recommend <strong>picking each of the objects in the real world and creating a class for each</strong>. So, if you're modeling students and courses, regardless of the problem you're solving, you should have a student class and a course class.</p>
-<p>This practice comes from the early days of OOP, when it was still used a lot in simulations. I can see the benefit of representing each thing in your simulation as an object. But we're not building a simulation. <strong>A university registration system is not a university simulator.</strong> We are not simulating students. We are not simulating courses. We need to be looking at the problem we're trying to solve.</p>
-<h4 id="how-is-it-already-done">How is it already done?</h4>
-<p>I really think the best way is to look at the process that is already being used. If you're hired to replace a manual, pen-and-paper system, you have a head start over a new system. Computerizing an existing process is easier because <strong>the problem is already well-understood</strong>. Go ask the registrar's office how they are doing it.</p>
-<p>Let's say that each department keeps a large list of all the courses they give each semester. For each semester, they start a new notebook and make a page for each course. As students register, they write down their name. If they unregister, they cross them out. They leave room for enough students between each course, sometimes skipping a page. They put post-it notes sticking out the top so they can quickly turn to the page for a course when a student comes in the office.</p>
-<p>Wow! Your job is now way easier. You just have to <strong>replicate that notebook in code</strong>. That is so much easier than modeling students and courses. And once it's done, you have a place for improvements that are only possible in a computer.</p>
-<h4 id="finding-the-essence">Finding the essence</h4>
-<p>But let's say it's a new university, trying to get a head start on old universities by organizing everything on a computer. So there's no existing process. You've got to make it up.</p>
-<p>What do you do if the structure is not obvious? How do you determine the structure of a poem? Reading. Re-reading. Underlining. Arrows. Notes. Clarifying definitions. Basically, look for structure. Dig it all up. Then use your judgment about what is important. There often is not one single kind of structure, but <strong>a constellation of structure</strong>.</p>
-<h3 id="factor-out-incidence-from-essence">4. Factor out incidence from essence</h3>
-<p>The incidental structure just happens because of the choice of solution instead of the structure of the problem. <strong>The structure inherent in the problem is essential structure.</strong></p>
-<p>In the notebook used for registering students, there are some incidental implementation details that you don't want to replicate. In the notebook, they left some blank space for more students after each page so that they wouldn't run out of room. But running out of room is not an issue in a computer (no university is that big). So <strong>you can leave that part out</strong>.</p>
-<p>But less obviously, the fact that there is a separate page for each course is also incidental. It's not important that the students in one class all be stored in a single place. What's important is that at any time, a student can register for the course (random access!) and that at any time, a teacher can list all students in a particular course (random access!). We need a way to <em>project</em> a list of students <em>quickly enough</em> in a course from however it is stored.</p>
-<p>But it turns out that, if you factor correctly and find the essence, <strong>your solution should be generic</strong>. Why? Because structure is generic. It is pure content. The correct solution to this problem is to make a system to manage many-to-many relationships. Relational databases can do this easily with one table. You could make a <code>ManyToMany&lt;A, B&gt;</code> class. Those are implementation details that are incidental. What's essential is the many-to-many part.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>We need more discussion about the content of programs. Style is important, but we need people to create acronyms and rules of thumb for choosing program constructs. The <em>Design Patterns</em> book (and movement) were important in this respect. It documented patterns of common structure. But <strong>it failed to do a good job teaching the how</strong>, and added an air of mystery.</p>
-<p>Although this process is language-agnostic, Clojure is great for finding essential structure. One thing I like about Clojure is that the <strong>data structures are described in terms of their usage structure</strong>. And Rich Hickey has expressed many times that to understand a problem, to design a solution, we must <strong>pull things apart</strong> into its essential parts.</p>
-<p>If you'd like to learn Clojure and see how it might help you think in terms of structure, I can recommend my <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video course. It builds up skills from complete beginner to decomposing a problem into a generic solution.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
-<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
-<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
-<li><a href="http://www.lispcast.com/the-world-is-mutable">But the World is Mutable</a></li>
-</ul>
-
+        Code style is important, but way less important than content. Yet everyone talks about style because it's easier. Let's talk about content.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -477,58 +195,7 @@ Learn more
           May 11, 2015
         </div>
 
-        
-<p>Summary: <em>The world may be mutable, but people have been using the notion of immutability to build reliable systems for a long time.</em></p>
-<p>Immutability is a hard topic to breach. As a programmer used to modeling the world, you might object to immutable data structures. How do you model a changing world? <strong>Why would you choose to use immutable data structures when everything in the world is changeable?</strong></p>
-<p>Let's do a little thought experiment. Let's look at <strong>a nice mutable system</strong>: paper and pencil. You can write, erase, and write again. It's very convenient. It lets you correct mistakes. And when you don't need something anymore, you can easily erase it.</p>
-<p>Now answer this: <strong>would you trust a bank that used pencils to record transactions?</strong> It would be easy: whenever you would withdraw money, they would erase the old balance and write the new balance. And if you transferred money from one account to another, they'd erase two balances and write the new ones in. It may sound great, but there's a reason banks don't use pencils: they want to be sure <strong>nothing has changed</strong>. That sounds like immutability.</p>
-<div class="figure">
-<img src="http://www.lispcast.com/img/ledger.jpg" alt="Bank ledger (photo credit)" /><p class="caption">Bank ledger (<a href="https://www.nottingham.ac.uk/manuscriptsandspecialcollections/researchguidance/accounting/business.aspx">photo credit</a>)</p>
-</div>
-<p>This is a bank ledger. Each transaction gets its own line. Always done in pen. It's an example of an append-only data structure. You can answer questions about the past like &quot;How much money was in the account at the close of last Tuesday?&quot; by going up lines until you find the last entry for Tuesday. And you can do that because you never modify existing entries. You only add new entries on blank lines.</p>
-<div class="figure">
-<img src="http://www.lispcast.com/img/medicalrecords.jpg" alt="Medical record system (photo credit)" /><p class="caption">Medical record system (<a href="https://www.flickr.com/photos/digitaldrew/4930438982/">photo credit</a>)</p>
-</div>
-<p>This is another example of an append-only data structure in the real world: medical records. Each patient gets a file that everything is added to. You never modify old records. That way, everything is recorded, even the wrong diagnoses (mistakes) of the doctor.</p>
-<p>It turns out that traditional systems that <strong>need a high degree reliability create immutable records out of mutable paper</strong>. Even though you could in theory scratch out some data and write it again, or white it out, or find some other way to mutate the document, a mark of professionalism in the job is to <strong>discipline yourself to adhere to strict append-only behaviors</strong>.</p>
-<p>Wouldn't it be nice if the machine took care of the discipline for us? Even though RAM and disk are mutable like paper and pen, we can impose a discipline inside of our program. We <em>could</em> rely on the programmer to never accidentally overwrite existing data. But that's just shifting the burden. Instead, we can build in immutability into our data structures and make a paper that cannot be overwritten.</p>
-<p>That's how immutable data structures work. <strong>All new pieces of information are written to new locations in memory.</strong> Only when it is proven that a location is never going to be used again is it reused.</p>
-<p>Reliable paper-based systems use immutable data. There was a time when computer memory was expensive when we had to reuse storage, so we couldn't make immutable systems. But RAM is cheap now! We should be using immutable data, just as <strong>banks have done for hundreds of years</strong>. Ready to join the 13th century?<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
-<p>If you're interested in a language with a very cool set of powerful immutable data structures, probably the most <strong>cutting edge immutable data structures</strong> in any language, you're in luck! You can get <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course with animations, exercises, and screencasts that teaches you Clojure so you'll learn it and remember it.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
-<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
-<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
-<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>The Double-entry method of accounting can trace its history back to 13th century Florence.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
+        The world may be mutable, but people have been using the notion of immutability to build reliable systems for a long time.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -553,44 +220,7 @@ Learn more
           July 01, 2014
         </div>
 
-        
-<p>Summary: <em>I prefer to define Functional Programming as making a distinction between pure and impure code. With this definition, you can program functionally in any language. What differentiates the functional languages is how much help they give you to make the distinction.</em></p>
-<p>There are a lot of conflicting definitions of Functional Programming out there. <strong>I'd like to share mine, which serves me well.</strong> It explains why Haskell is more functional than Scheme, and also how you can program functionally in a non-functional language like Java.</p>
-<p><strong>Functional programming means programming with a distinction between pure code and impure code.</strong> Pure code has no side effects. It's referentially transparent. It means the same thing every time you run it. Impure code contains side effects, so running it twice is different from running it once.</p>
-<p><strong>The distinction between pure code and impure code uniquely identifies functional programming and distinguishes it from other paradigms such as procedural and Object Oriented.</strong> Procedural is about modeling your solution as sequential steps. Object Oriented is about modeling your solution as communicating objects. Functional programming is about modeling your solution as pure functions.</p>
-<p>Now, this definition is very practical. Notice that it's not about choice of language. <strong>You can write functional code in any language</strong>, just as you can code up an object system in C and say you're doing OO. The question is how much the language <em>helps</em> you write functional code or OO code.</p>
-<p>On one extreme, you've got Haskell. There is no doubt that Haskell is a functional language. How does it help you write functional code? It has no mutable values and side-effects are confined to a single type: <code>IO</code>. <strong>The language forces you to make the distinction between pure and impure.</strong></p>
-<p>On the other extreme, you've got machine code or assembly. At the lowest level, the language pushes you to avoid the distinction. <strong>All operations are about changing at least one location in memory.</strong> It could be a register or the top of the stack or something. But you are forced to change something. However, with a lot of super-human discipline, you could keep the distinction in your head. You might create a little heap and keep the discipline &quot;a procedure can only write to memory it allocates directly&quot;. And this way, you make a bit of room for some functional programming. <strong>But that language is not giving you any help.</strong></p>
-<p>So why functional programming? Well, it turns out that knowing that running code twice will produce the same result makes it <strong>very easy to reason about</strong> it. And reasoning about code is basically our job as software engineers. What's more, the kind of reasoning you can do with functional programs can reach all the way up to the highest forms of reasoning, like math. That's where Haskell really shines. All of the category theory stuff (monads, functors, applicatives, etc) is an expression of that--mathematical concepts that are applicable in Haskell code.</p>
-<p>That's it. That's my definition. The definition is <strong>inclusive yet gets at the essence</strong>. Functional Programming is a perspective that makes code easier to understand and maintain as it's being used in a system complex beyond your possible comprehension. And at its most sublime and abstract levels, Functional Programming approaches mathematical reasoning.</p>
-<p>If you'd like to get started with Functional Programming in Clojure, you can do worse than using the <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video course.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
-<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
-<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
-<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
-</ul>
-
+        I prefer to define Functional Programming as making a distinction between pure and impure code. With this definition, you can program functionally in any language. What differentiates the functional languages is how much help they give you to make the distinction.
 
         <div class="endmark">
           <a class="endmark-link"

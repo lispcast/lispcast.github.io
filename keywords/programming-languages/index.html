@@ -95,55 +95,7 @@
           September 04, 2014
         </div>
 
-        
-<p>Summary: <em>Lisp is viewed as difficult and academic but it is a great language for hacking a solution together.</em></p>
-<p>I used to be in a carpool with other developers. We would drive an hour to work each way. And sometimes we'd talk about programming languages. Once I was talking about why Common Lisp wasn't more popular. Someone answered <strong>&quot;people just want to hack something together&quot;</strong>.</p>
-<p>That took a while to unpack and it felt like many conversations I had with that group. Without exploding all of the context, I'll just say that he meant that <strong>Common Lisp was less amenable to quickly building a solution than Java</strong><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. That notion caused my head to spin and I didn't know how to respond.</p>
-<p>So I'll respond here, now (5 or 6 years later!). <strong>Lisp was made to explore solutions quickly.</strong> Lisp is often seen as a difficult, academic language. But Lisp has several things that make it a beautiful language for hacking a solution together.</p>
-<h3 id="the-repl">1. The REPL</h3>
-<p><strong>You can type code in and it will run.</strong> Right there. The entire language is available without having to open a text file. You can experiment on a solution, testing as you go. This is much faster than having to write a main method.</p>
-<h3 id="incremental-compilation">2. Incremental compilation</h3>
-<p>You can redefine a function. Any code that calls that function will now use the new definition. You no longer have the edit-compile-run cycle. <strong>You can make changes and fixes much faster.</strong></p>
-<h3 id="data-structures">3. Data structures</h3>
-<p><strong>Even the humble Lisp list is better than most of what Java gives you.</strong> Lists can represent linear data, trees, or associative data. But more importantly, the interface is powerful. There are many operations built to use lists, so you're compounding effectiveness on top of everything built in. And if you bring in Clojure's data structures, there's no comparison.</p>
-<p>In Java, you can use Lists and Maps. But most of the time, people will create a new class to represent their data. And <strong>making a new class means you have to write all of the methods</strong>. And that is definitely slower than using an existing data structure with existing methods.</p>
-<h3 id="less-code">4. Less code</h3>
-<p><strong>Lisp is less verbose than Java.</strong> If you're trying to go quickly, one limiting factor is how fast you can type the code in.</p>
-<p>I purposefully left out a lot of the features of Lisp that make it great because some of them are considered &quot;advanced&quot;. I want to keep the list down to <strong>those basic things that you're going to have to use in order to use the language</strong>. The &quot;advanced&quot; features require expertise in order to be more efficient at them. <strong>You can be more effective in Lisp with a small cheatsheet of syntax and functions.</strong></p>
-<p>I think it's pretty clear that <strong>Lisp is superior to Java for &quot;hacking&quot;</strong>. It was developed to experiment with programs interactively. And it serves that purpose very well. If you think you'd like to learn a modern Lisp, I suggest learning from <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a great video series that takes you from zero knowledge to a deep understanding of functional programming.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/infinite-application">Infinite Application</a></li>
-<li><a href="http://www.lispcast.com/a-personal-lisp-crisis">A Personal Lisp Crisis</a></li>
-<li><a href="http://www.lispcast.com/pre-west-jeanine-adkisson">Pre-West Prep: Jeanine Adkisson</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>I don't mean to pick on Java, it was his language of choice. Having a comparison language merely helps the imagination<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
+        Lisp is viewed as difficult and academic but it is a great language for hacking a solution together.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -168,60 +120,7 @@ Learn more
           April 03, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-design-and-prototype-a-language-in-clojuretalk">Talk: <a href="http://clojurewest.org/speakers#jadkisson">Design and Prototype a Language in Clojure</a></h3>
-<p><a href="http://clojurewest.org/speakers#jadkisson">Jeanine Adkisson's talk</a> at <em>Clojure/West</em> is about designing and prototyping a language using Clojure.</p>
-<h4 id="background">Background</h4>
-<p>Lisps have been used for a long time to prototype other languages. Scheme was designed and used for just that purpose. The most popular books on compiler design often start with Lex and Yacc, which are just really old tools built when memory was so restricted you had to do your parsing in stages. <a href="https://github.com/Engelberg/instaparse">Instaparse</a> is way better for quickly exploring syntax. And since lambda calculus (which Clojure is based on) is computationally complete, you're in good hands exploring the entire range of computational semantics.</p>
-<p>However, these are just generalities. Jeanine Adkisson will likely bring wit and depth to the talk, as she did in <a href="https://www.youtube.com/watch?v=ZQkIWWTygio">her Clojure/conj talk</a>. She's a language designer, so she's got plenty of experience to draw from.</p>
-<p>As an interesting background to language prototyping in Clojure, check out <a href="https://www.youtube.com/watch?v=DHubfS8E--o">Bodil Stokke talking about her language Bodol</a>.</p>
-<h3 id="about-jeanine-adkissontalk">About <a href="http://clojurewest.org/speakers#jadkisson">Jeanine Adkisson</a></h3>
-<p><a href="http://www.jneen.net/">Homepage</a> - <a href="https://github.com/jneen">GitHub</a> - <a href="https://twitter.com/jneen_">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#jadkisson"><img src="http://www.lispcast.com/img/pre-west/jneen.jpeg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
+        Jeanine Adkisson will talk about prototyping a language in Clojure.
 
         <div class="endmark">
           <a class="endmark-link"

@@ -95,69 +95,7 @@
           April 05, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><a href="http://clojurewest.org/speakers"><img src="http://www.lispcast.com/img/pre-west/melanie mitchell.jpg"
-      style="height:150px;float:right"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Melanie Mitchell generously agreed to do an interview about her <a href="http://clojurewest.org/speakers">talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a>. The <a href="http://www.lispcast.com/pre-west-melanie-mitchell">background to the talk</a> is available, if you like.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: Do you program in Clojure? If not, have you heard of it? If so, how did you get into it?</p>
-<p><strong>Melanie Mitchell</strong>: No, I don’t program in Clojure, though I did write the code for my Ph.D. dissertation project in Common Lisp. I have heard of Clojure, since I’m interested in functional languages, and also some of my students have been programming in it.</p>
-<p><strong>LC</strong>: I'm no expert in AI, but I've always seen three big approaches. There are the two Peter Norvig approaches, namely the rule-based approach and the statistical approach. And then there was the approach laid out in <em>Fluid Concepts and Creative Analogies</em>, which was much more about building a system that was unpredictable but whose emergent behavior was reminiscent of human intelligence. The rule-based approach has been dismissed as too brittle. And the statistical approach has had broad impact. I have to admit that I haven't heard much about the third approach in a while. Could you talk about it briefly and some of the recent advances?</p>
-<p><strong>MM</strong>: You’re right -- statistical machine-learning approaches have recently seen some huge successes in applications such as object-recognition, image captioning, speech-recognition, and language translation. The major ideas behind statistical machine-learning approaches, including so-called &quot;deep networks&quot;, have been around for a while. Let's use the example of visual object-recognition. The idea is that a system is presented with many images of the concept it is supposed to learn, e.g., &quot;dog&quot;, along with many &quot;non-dog&quot; images as well, and the system essentially learns how to map images into a high-dimensional &quot;feature&quot; space in which dog images are close to one another and non-dog images are far from dog images. The &quot;statistical&quot; aspect comes in because the visual features used can be statistical in nature, and also statistical methods are used to find the best mapping.</p>
-<p>So why have these methods only been so successful recently? It seems that the success is due to the fact that we now have access to huge amounts of data to train these systems, as well as very fast parallel computing methods to perform the training. These kinds of methods have become very successful in tasks such recognizing faces and specific objects (e.g., &quot;dog&quot;) in images.</p>
-<p>The problem with these kinds of purely statistical methods is that, it’s hard -- maybe impossible -- to learn to recognize more abstract visual situations, such as &quot;taking a dog for a walk&quot; or &quot;training a dog&quot; or &quot;a dog show&quot;. Such situations consist of multiple objects that are related to one another in specific ways -- e.g., &quot;taking a dog for a walk&quot; typically consists of a person, a dog, and a leash, which have specific kinds of spatial and action relationships to one another. Moreover, there are lots of &quot;dog-walking&quot; situations that do not fit the prototype -- e.g., a person walking multiple dogs, a person &quot;walking a dog while riding a bike&quot;, a person running rather than walking, etc. etc. Humans are of course very good at learning to recognize abstract situations in a flexible way -- to allow &quot;slippages&quot; from a prototypical situation.</p>
-<p>The general architecture described in Fluid Concepts and Creative Analogies has been termed the &quot;active symbol&quot; architecture. The idea is that statistical methods interact with a network of symbolic-level structured activatable concepts. The activity of concepts in the network controls, and is controlled by, stochastic agents that bridge the gap between symbolic knowledge and statistical features. The various chapters in <em>Fluid Concepts and Creative Analogies</em> describe how this architecture was developed for &quot;micro-domains&quot;, such as letter-string analogies. I'm now extending this architecture to interface with deep network approaches for the task of visual situation recognition. This is what I will describe in my talk.</p>
-<p><strong>LC</strong>: Is there any background material you would suggest people read/watch before the talk?</p>
-<p><strong>MM</strong>: I’ll try to make the talk as self-contained as possible, but if people are interested, they might want to read a (somewhat long) chapter from Fluid Concepts and Creative Analogies, which <a href="http://web.cecs.pdx.edu/~mm/CopycatChapter.html">I’ve put online</a>. This describes the Copycat analogy-making project in some detail.</p>
-<p><strong>LC</strong>: Where can people follow your work online?</p>
-<p><strong>MM</strong>: I have a <a href="http://web.cecs.pdx.edu/~mm/Situate.html">web page on this project</a>. This is where I will be posting papers and updates on the project.</p>
-<p><strong>LC</strong>: If Clojure were a food, what food would it be?</p>
-<p><strong>MM</strong>: Cream. (Because you put it on top of Java...).</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Melanie Mitchell will talk about computer systems that recognize visual situations.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -182,61 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           March 17, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-visual-situation-recognition-an-integration-of-deep-networks-and-analogy-makingtalk">Talk: <a href="http://clojurewest.org/speakers">Visual Situation Recognition: An Integration of Deep Networks and Analogy-Making</a></h3>
-<p><a href="http://clojurewest.org/speakers">Melanie Mitchell's keynote</a> at <em>Clojure/West</em> is about building computer systems that recognize visual situations.</p>
-<h4 id="background">Background</h4>
-<p>Melanie Mitchell is a researcher in Artificial Intelligence, complex systems, and machine learning. She did her PhD with Douglas Hofstadter, which resulted in Copycat, which was featured prominently in Hofstadter's book <a href="http://www.amazon.com/Fluid-Concepts-And-Creative-Analogies/dp/0465024750?tag=lisp0b-20">Fluid Concepts and Creative Analogies</a>. Perhaps coincidentally, Copycat was <a href="http://web.cecs.pdx.edu/~mm/how-to-get-copycat.html">written in Lisp</a>. The branch of Artificial Intelligence that she works in is probably different from what you would read in most texbooks or learn in college courses.</p>
-<p>As an introduction to her work, I would recommend <a href="https://www.youtube.com/watch?v=GYChwJq0310">Complexity a Guided Tour</a> (Youtube) for a good introduction to Complexity in general. And <a href="https://www.youtube.com/watch?v=6wRltq_qWDg">Using analogy to discover the meaning of images</a> (Youtube) as an introduction to her work with analogies.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Alex Miller (the conference organizer) is a fan of Hofstadter's. He invited Hofstadter to keynote at Strange Loop in 2013. He also had <a href="http://www.infoq.com/presentations/Brain-Computing">Jeff Hawkins talk about modeling the neocortex at Strange Loop 2012</a>.</p>
-<h3 id="about-melanie-mitchelltalk">About <a href="http://clojurewest.org/speakers">Melanie Mitchell</a></h3>
-<p><a href="http://web.cecs.pdx.edu/~mm/">Homepage</a> - <a href="https://twitter.com/MelMitchell1">Twitter</a> - <a href="http://www.amazon.com/Melanie-Mitchell/e/B001H6OO62?tag=lisp0b-20">Author page on Amazon</a></p>
-<p><a href="http://clojurewest.org/speakers"><img src="http://www.lispcast.com/img/pre-west/melanie%20mitchell.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
+        Melanie Mitchell will talk about computer systems that recognize visual situations.
 
         <div class="endmark">
           <a class="endmark-link"

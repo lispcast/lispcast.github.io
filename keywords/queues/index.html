@@ -95,68 +95,7 @@
           April 15, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
-<p><a href="http://clojurewest.org/speakers#ztellman"><img src="http://www.lispcast.com/img/pre-west/ztellman.jpg"
-      style="float:right;width:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Zach Tellman is the next interview participant. He is <a href="http://clojurewest.org/speakers#ztellman">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about queueing theory and its applications. The <a href="http://www.lispcast.com/pre-west-zach-tellman">background to his talk</a> is available, if you like.</p>
-<h3 id="interview-with-zach-tellman">Interview with Zach Tellman</h3>
-<p><strong>Nola</strong>: How long have you been doing Clojure and how did you get into it?</p>
-<p><strong>Zach</strong>: About six years, four years professionally. I started looking at Clojure around the time Tom Faulhaber (author of clojure.pprint, and some other stuff), who I worked with at the time, invited Rich Hickey to give a talk at our office. It was on chunked seqs, if I recall correctly, and way over my head. But it got me interested, and here I am.</p>
-<p><strong>Nola</strong>: Any suggestions for someone wanting to dive into Clojure?</p>
-<p><strong>Zach</strong>: I've always learned by doing. I'll come up with a project, and learn what I need to know on the way. The more it forces you to learn, the better. My first project in Clojure, which I started the same week I read Stu Halloway's Clojure book, was way over-ambitious, but I learned a ton doing it.</p>
-<p><strong>Nola</strong>: What languages did you do before Clojure?</p>
-<p><strong>Zach</strong>: In school, C++ and Java. For work, C# and Java. In my own time I've poked at Erlang, OCaml, Ruby, and a few others.</p>
-<p><strong>Nola</strong>: Can you describe a good use-case for Clojure that you see has an advantage over another language?</p>
-<p><strong>Zach</strong>: Clojure's a data-oriented language, it excels at taking data in one shape and transforming it into another. While this isn't all we do in our day-to-day software, it's an awful lot of it. Lately, though, I've been interested in the problems that fall outside of that category, which is in part what my talk is about.</p>
-<p><strong>Nola</strong>: Emacs or Vim or ?? Can you describe your typical workflow?</p>
-<p><strong>Zach</strong>: I use Emacs, where I know about five commands, plus paredit. I don't particularly like it, but I don't dislike it enough to switch to something else.</p>
-<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Zach Tellman interview by Nola.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -181,59 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           April 15, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-everything-will-flowtalk">Talk: <a href="http://clojurewest.org/speakers#ztellman">Everything Will Flow</a></h3>
-<p><a href="http://clojurewest.org/speakers#ztellman">Zach Tellman's talk</a> at <em>Clojure/West</em> is about applying Queueing Theory to Clojure code.</p>
-<h4 id="background">Background</h4>
-<p>Zach Tellman is known for his philosophical talks. They connect a broad range of ideas. This talk is about Queueing Theory, which has its roots in telephone network analysis. Since core.async channels are essentially queues, knowledge of how queues behave is fundamental to using the library well.</p>
-<p>The <a href="http://en.wikipedia.org/wiki/Queueing_theory">Wikipedia page on Queueing Theory</a> is informative. There is kind of <a href="https://www.youtube.com/watch?v=rSZWig173xM">a longer lecture</a> if you're interested in going for an hour on the topic. Finally, I recommend <a href="https://www.youtube.com/watch?v=4dfk3ucthN8">this talk from the React conference</a>, which touches on queueing theory in computer systems.</p>
-<h3 id="about-zach-tellmantalk">About <a href="http://clojurewest.org/speakers#ztellman">Zach Tellman</a></h3>
-<p><a href="http://ideolalia.com/">Homepage</a> - <a href="https://github.com/ztellman">GitHub</a> - <a href="https://twitter.com/ztellman">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#ztellman"><img src="http://www.lispcast.com/img/pre-west/ztellman.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
+        Zach Tellman will talk about Queueing Theory.
 
         <div class="endmark">
           <a class="endmark-link"

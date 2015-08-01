@@ -95,85 +95,7 @@
           December 31, 2013
         </div>
 
-        
-<blockquote>
-<p>Any problem in computer science can be solved with another level of indirection. -- David Wheeler</p>
-</blockquote>
-<p>The <a href="http://facebook.github.io/react/">React</a> library from Facebook makes DOM programming functional by using a Virtual DOM. The Virtual DOM is an <em>indirection mechanism</em> that solves the difficult problem of DOM programming: <strong>how to deal with incremental changes to a stateful tree structure</strong>. By abstracting away the statefulness, the Virtual DOM turns the real DOM into an immediate mode GUI, which is perfect for functional programming. Further, the Virtual DOM provides <strong>the last piece of the Web Frontend Puzzle for ClojureScript</strong>.</p>
-<p>David Nolen has written up a <a href="http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/">short explanation</a> of how the Virtual DOM works, as well as some amazing performance benchmarking of React in a ClojureScript context. His work is important, so you should read it. I'd like to focus a bit more on the expressivity and why <strong>I would use React even if it were not so fast</strong>.</p>
-<p>One can view MVC frameworks as an attempt to impose some structure on the code that has to interface with the DOM. The bargain they propose is this: <strong>wrap the DOM in View objects</strong>, so that subtrees of DOM nodes are managed by a View object. <strong>Wrap your state in Model objects</strong>, which will notify the View objects of changes. You thereby keep a <em>layer of indirection between Models and Views</em>, which inherently need different structure and need to change independently.</p>
-<p>The layer of indirection (usually an event or observer system) solves a <em>coupling problem</em>. It decouples your state from the DOM, while <strong>leaving you to deal with all of the difficulties of the DOM</strong>. You are essentially making a new type of DOM that is better suited to your GUI domain than plain HTML, but is still a PITA. It is little more than a coat of paint. <em>The DOM is still stateful.</em></p>
-<p>React takes a different approach. It provides a level of indirection which solves the actual problem with the DOM--statefulness. The DOM has become a smart canvas. <strong>Paint the whole picture again, but only the different parts get wet.</strong></p>
-<p>Instead of wrapping the DOM in View objects, you create a Virtual DOM (completely managed by React) which mirrors the real DOM. When the model changes, you generate a new Virtual DOM. The differences are calculated and converted into batch operations to the real DOM. In essence, <strong>React is a function which takes two DOMs and generates a list of DOM operations</strong>, <em>i.e.</em>, <strong>it's referentially transparent</strong>.</p>
-<p>It's easy to imagine how this changes the game. <strong>You no longer need an initializer to set up the DOM and observers to modify it.</strong> The first Virtual DOM rendering is like the second one, in fact like any other! Your &quot;View&quot;, if you want to call it that, is simply a function from state to Virtual DOM nodes. <strong>If the state and DOM nodes are immutable, all the better.</strong> There's less work to know if it has changed.</p>
-<p>This also means that your Views can be composed functionally. Define a component (as a function) and your subcomponents, and build them up functionally. All of the functional abstraction and refactoring that you're used to is available. If you're doing it right, <strong>your code should get shorter, easier to read, and more fun to maintain</strong>.</p>
-<p>My (short) experience rewriting a program to use React converted me. It was the only library I have used that actually made DOM programming fun and functional--and dare I say my code now works!</p>
-<p>Which gets me to my last point, which is that React is the final puzzle piece for ClojureScript web frontend development.</p>
-<ul>
-<li>Problem: <strong>Global state management</strong></li>
-<li><p>Solution: Atoms and persistent data structures</p></li>
-<li>Problem: <strong>Client-server communication</strong></li>
-<li><p>Solution: EDN (also solved pretty well by JSON)</p></li>
-<li>Problem: <strong>Callback hell</strong></li>
-<li><p>Solution: core.async</p></li>
-<li>Problem: <strong>Stateful DOM</strong></li>
-<li><p>Solution: React</p></li>
-</ul>
-<p>Any other problems left? I can't think of any. That's something to <a href="http://www.twitter.com/ericnormand"><em>discuss on Twitter</em></a>.</p>
-<p>I suggest you try React. <a href="https://github.com/swannodette/om"><em>Om</em></a> by David Nolen is the most mature React ClojureScript library I know of. It does a bit more than I've described here (Om manages your state tree for you, among other things) and is evolving quickly. I have some code that generates React Virtual DOM using <code>hiccup</code> style with macros (so the work is done at compile time), but other than that, contains only half-baked implementations of what's in Om. If you're interested in the <code>hiccup</code> macros, <em>let me know what you'd use it for and I'll put it on github</em>.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get free Clojure stuff and news on ClojureScript courses
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/spaom-cover.jpg">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-The LispCast Single Page Applications with ClojureScript and Om course is in development <em>right now</em>! Sign up here to get news as it's being created and learn when it will launch. Also, you'll get to download all of the free stuff for learning and using Clojure.
-</p>
-      
-<input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][64]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
-<li><a href="http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history">Mastering ClojureScript Routing with Secretary and goog.History</a></li>
-</ul>
-
+        React provides a better abstraction over the DOM than MVC frameworks ever can. React is the last piece of the puzzle for ClojureScript web frontend development.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -254,108 +176,7 @@ No spam. Ever.
           December 03, 2013
         </div>
 
-        
-<p><a href="https://www.heroku.com/">Heroku</a> is a great service, especially for the lone developer who wants free hosting for an app.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> The free hosting works just like the paid service except that your server will be &quot;spun down&quot;, meaning that after five minutes of no activity, <strong>your server is stopped</strong>. It will be &quot;spun up&quot; again when there is a request. This spin up process can take a while and certainly <strong>does not give a good user experience</strong>.</p>
-<p>Luckily there is a recommended way of avoiding this delay. The solution is to run <a href="http://newrelic.com/">New Relic</a> monitoring, which periodically polls your server, avoiding the five minutes of no activity and hence <strong>keeping your server running</strong>.</p>
-<p>In addition to keeping your server from falling asleep, it also gathers lots of profiling information that could help you understand your server as it runs in production. Luckily, <strong>both Heroku and New Relic offer free tiers</strong>. This brings us to my favorite financial formula:</p>
-<center>
-<strong>Free + Free = Free</strong>
-</center>
-
-
-<p>You can also use this process with the paid versions. Note also that <strong>Heroku itself recommends setting this up</strong>, so don't feel guilty!</p>
-<h2 id="instructions">Instructions</h2>
-<p>I am assuming you are already using Heroku and have a working app hosted there, using an uberjar deploy. You also have the <a href="https://toolbelt.heroku.com">Heroku Toolbelt</a> installed.</p>
-<h3 id="add-the-new-relic-add-on-to-your-app.">1. Add the New Relic add-on to your app.</h3>
-<pre><code>$ heroku addons:add newrelic:stark</code></pre>
-<p>I recommend the <code>stark</code> plan for free apps. You can choose any of the <a href="https://addons.heroku.com/newrelic#stark">New Relic tiers</a>.</p>
-<h3 id="find-and-download-the-latest-new-relic-java-api-release.">2. Find and download the latest New Relic Java API release.</h3>
-<p><a href="http://download.newrelic.com/newrelic/java-agent/newrelic-agent/">This download page</a> lists all of the versions. Find the latest one and download the ZIP file.</p>
-<h3 id="unzip-the-zip-file-into-the-base-of-your-app.">3. Unzip the ZIP file into the base of your app.</h3>
-<pre><code>$ cd projects/my-app
-$ unzip ~/Downloads/newrelic-java-3.2.0.zip</code></pre>
-<p>It should unzip into a <code>newrelic/</code> directory.</p>
-<h3 id="check-your-.gitignore-file-for-.jar">4. Check your <code>.gitignore</code> file for <code>*.jar</code></h3>
-<p>New Relic includes its own JAR file which needs to be deployed with your app in the git repo. My <code>.gitignore</code> included a line <code>*.jar</code> which would exclude all JAR files. Remove this line if you see it.</p>
-<h3 id="add-the-.gitignore-and-the-newrelic-directory-to-your-repo.">5. Add the .gitignore and the <code>newrelic/</code> directory to your repo.</h3>
-<pre><code>$ git add .gitignore
-$ git add newrelic
-$ git commit -m &quot;Add New Relic monitoring agent.&quot;</code></pre>
-<p>Make sure the file <code>newrelic/newrelic.jar</code> was added.</p>
-<h3 id="release-to-heroku.">6. Release to Heroku.</h3>
-<pre><code>$ git push heroku master</code></pre>
-<h3 id="configure-your-app-to-use-new-relic.">7. Configure your app to use New Relic.</h3>
-<p>We need to add a new JVM option. There is an environment variable called <code>JVM_OPTS</code> which is typically used to do this. Find out what value it has now.</p>
-<pre><code>$ heroku config</code></pre>
-<p>Find the line starting with <code>JVM_OPTS:</code>. Mine says &quot;<code>-Xmx400m</code>&quot;. Now we add this to the variable: &quot;<code>-javaagent:newrelic/newrelic.jar</code>&quot;.</p>
-<pre><code>$ heroku config:set JVM_OPTS=&quot;-Xmx400m -javaagent:newrelic/newrelic.jar&quot;</code></pre>
-<p>The app should restart with the new options. Visit your <a href="https://dashboard.heroku.com/apps">Heroku dashboard</a>, find your app, and click on the New Relic addon to see the New Relic Dashboard for your app. The first load might take some time, but subsequent loads will be at full speed and it won't spin down. load!</p>
-<p>References:</p>
-<ul>
-<li><a href="https://devcenter.heroku.com/articles/newrelic">New Relic guide on Heroku Dev Center</a></li>
-<li><a href="http://rafael-chacon.com/post/19069499949/new-relic-clojure-heroku-easy-steps-integration">New Relic + Clojure + Heroku: Easy Steps Integration</a></li>
-</ul>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free Ring Spec to hang on your wall
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/ring_spec_1_3.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of a Ring Spec to hang on your wall. If you are programming in Ring (covered in the videos), you'll find it very useful as a reference. You'll also hear about exclusive previews and discounts of other video courses.
-</p>
-      
-<input id="mce-EMAIL"
-             class="email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][4]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
-<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
-<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>We use (and pay for) Heroku at work and we like the paid service, too!<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
+        New Relic lets you get more out of Heroku. Install it in 7 steps.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -458,37 +279,7 @@ No spam. Ever.
           November 02, 2013
         </div>
 
-        
-<blockquote>
-<p>It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures. -- <a href="http://www.cs.yale.edu/quotes.html">Alan Perlis</a></p>
-</blockquote>
-<p>In his essay titled &quot;<a href="http://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/">Dynamic languages are static languages</a>&quot;, Robert Harper states:</p>
-<blockquote>
-<p>the so-called <em>untyped</em> (that is &quot;dynamically typed&quot;) languages are, in fact, <em>unityped</em>. Rather than have a variety of types from which to choose, there is but one!</p>
-</blockquote>
-<p>The notion that a language with <em>no</em> types also has <em>one</em> type is absurd, so we must proceed and allow the perspective that a language with dynamic typing actually has a single static type. The argument is <a href="http://trevorjim.com/tar-pit-thinking/">very rhetorical</a>, but it does seem to be a valuable perspective<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. However, I disagree with the final conclusion:</p>
-<blockquote>
-<p>And this is precisely what is wrong with dynamically typed languages: rather than affording the <em>freedom</em> to ignore types, they instead impose the <em>bondage</em> of restricting attention to a <em>single</em> type! Every single value has to be a value of that type, you have no choice!</p>
-</blockquote>
-<p>I believe that a well-chosen type is freeing.</p>
-<p>In Smalltalk, &quot;everything is an object&quot;. This statement is one of the first things you might hear about the language--from people who use it and like it. What is that statement but a declaration of having one type? That one type, with its single operation (send message), is what made Smalltalk so powerful.</p>
-<p>Smalltalk's power comes from adhering to a small, firm discipline that others also adhere to. Much like the laws of a government might be binding in a certain sense, in another they give rise to the freedom and privilege citizens enjoy in society. The prohibition of murder allows us the freedom to move about without fear of death. The rules governing market transactions ensure a minimum of fairness. Everyone benefits.</p>
-<p>In the same way, Smalltalk's message passing presents a very small point of agreement in order to participate in the bounty of the runtime. Powerful tools, services, and metaprogramming facilities were available for the small price of conforming to a very simple type.</p>
-<p>Far from being restrictive, a single type is <em>freeing</em>. The rhetoric of &quot;bondage&quot; does not hold, since there is an existential proof of a single type being the source of freedom and power. I wonder if a paucity of perspectives is part of the reason such an obvious flaw can arise in an intelligent essay. There are no sides in the search for better tools. We will want to combine the powerful elements from as many different perspectives as possible.</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
-<li><a href="http://www.lispcast.com/Hindley-Milner-in-Clojure">Hindley-Milner in Clojure</a></li>
-<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
-<li><a href="http://www.lispcast.com/ambrose-interview-typed-clojure">Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Which I will gladly add to my repertoire, thank you very much!<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
-
+        Languages with strong, dynamic types (like Scheme) are actually single-typed languages, not untyped languages. Some would say this is restrictive, but this unity of type is a source of their strength.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -632,28 +423,7 @@ No spam. Ever.
           October 08, 2013
         </div>
 
-        
-<p>A Lisp with a macro system is actually two languages in a stack. The bottom language is the macro-less target language (which I'll call the Lambda language). It includes everything that can be interpreted or compiled directly.</p>
-<p>The Macro language is a superset of the Lambda language. It has its own semantics, which is that Macro language code is recursively expanded into code of the Lambda language.</p>
-<p>Why isn't this obvious at first glance? My take on it is that because the syntax of both languages is the same and the output of the Macro language is Lambda language code (instead of machine code), it is easy to see the Macro language as a feature of the Lisp. Macros in Lisp are stored in the dynamic environment (in a way similar to functions), are compiled just like functions in the Lisp language (also written in the Macro language) which makes it even easier to confuse the layers. It seems like a phase in some greater language which is the amalgam of the two.</p>
-<p>However, it is very useful to see these as two languages in a stack. For one, realizing that macroexpansion is an interpreter (called <code>macroexpand</code>) means that we can apply all of our experience of programming language design to this language. What useful additions can be added? Also, it makes clear why macros typically are not first-class values in Lisps: they are not part of the Lambda language, which is the one in which values are defined.</p>
-<p>
-  <center>
-  
-<img src="http://www.lispcast.com/img/macro-stack.png" alt="Lisp stack showing both interpretation and compilation" />
-</center>
-</p>
-
-<p>The separation of these two languages reveals another subtlety: that the macro language is at once an interpreter and a compiler. The semantics of the Macro language are defined to always output Lambda language, whereas the Lambda language is defined as an interpreter (as in <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.91.4527&amp;rep=rep1&amp;type=pdf">McCarthy's original Lisp paper</a>) and the compiler is an optimization. We can say that the Macro language has translation semantics.</p>
-<p>But what if we define a stack that only allows languages whose semantics are simply translation semantics? That is, at the bottom there is a language whose semantics define what machine code it translates to. We would never need to explicitly write a compiler for that language (it would be equivalent to the interpreter). This is what I am exploring now.</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/exponential-backoff">Exponential Backoff</a></li>
-<li><a href="http://www.lispcast.com/try-three-times">Try Three Times</a></li>
-<li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
-<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
-</ul>
-
+        Lisp with macros can be seen as two languages, each with different semantics. The base language can be interpreted directly, whereas the result of interpreting the macro language is to produce a new program in the base language.
 
         <div class="endmark">
           <a class="endmark-link"

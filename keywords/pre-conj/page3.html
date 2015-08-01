@@ -95,57 +95,7 @@
           October 22, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#zach-oakes"><img src="http://www.lispcast.com/img/pre-conj/zach-oakes.jpg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>I had a conversation with Zach Oakes about game development in Clojure. He is <a href="http://clojure-conj.org/speakers#zach-oakes">giving a talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a>. Read the <a href="http://www.lispcast.com/pre-conj-zach-oakes">background to his talk</a>.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: Briefly, how did you get into Clojure?</p>
-<p><strong>Zach Oakes</strong>: Being hosted on the JVM was my original draw to Clojure. I wanted to hack on an anonymous networking project called I2P, which is written in Java, but I wanted to use a more enjoyable language. Clojure's interop made it effortless, and later on I came to enjoy the other aspects of Clojure as well.</p>
-<p><strong>LC</strong>: How long have you been into games programming?</p>
-<p><strong>ZO</strong>: Games were how I originally got into programming as a teenager. However, I had a ten-year period where I did nothing but crypto software. I only got back into games last year, and since Clojure was my favorite language by then, it was inevitable that I would start using it for game development.</p>
-<p><strong>LC</strong>: What is the main concept of play-clj? Is it based on immutable game states, or something else?</p>
-<p><strong>ZO</strong>: The main technical concept is that most of your game should just be list transformations, so your code mostly consists of using normal Clojure functions to transform your entities. It definitely encourages immutability, but since it builds on top of a Java framework, there are times when you will need to mutate things.</p>
-<p><strong>LC</strong>: What is the advantage of using list transformations instead of mutating game objects? Is this a drastic departure from normal game architectures?</p>
-<p><strong>ZO</strong>: The advantage of functional programming in games is the same as in other kinds of software; the code becomes simpler to understand, and parallelism becomes trivial. I think this is very unusual for game development. Many games keep entities as class data members that the methods mutate directly, which quickly becomes a mess.</p>
-<p>That said, I think the REPL is by far the biggest reason to use Clojure for game development. A disciplined programmer might be able to avoid the aforementioned mess, but it's hard to replicate the runtime modifiability of Clojure if your language wasn't built for it, and I think it has a big effect on how you make your game.</p>
-<p><strong>LC</strong>: What kind of response from game programmers have you had to using functional programming in games?</p>
-<p><strong>ZO</strong>: So far the response to functional game development has been tepid. They are understandably conservative about their technical choices due to the performance sensitivity of games, but nonetheless they are slowly adopting functional idioms in their non-functional languages. The next step is to get them to use a functional language. I think it's up for grabs, and the languages that are hosted and provide an excellent REPL will have the advantage.</p>
-<p><strong>LC</strong>: Can you tell us a little about play-clj? Is it based on a Java framework?</p>
-<p><strong>ZO</strong>: Yes, play-clj is essentially a big wrapper around libGDX, a popular Java framework. I used it to teach Java game development, and eventually made play-clj so I could use Clojure instead. It is a fairly thick wrapper and hopefully a nice teaching tool.</p>
-<p>The core of the library is <code>defscreen</code>, a macro in which you provide functions that will be run during various events like &quot;on-show&quot; and &quot;on-key-down&quot;. Making a game consists primarily of transforming your entities in response to these events.</p>
-<p>There is always a design compromise when you build on top of a large object-oriented framework, but I think it is crucial to leverage existing work to make it practical to use a functional language to build games worth shipping.</p>
-<p><strong>LC</strong>: Yeah, I agree. Game frameworks have a lot of work put into them. Was it a challenge combining OO/mutable state with the Clojure functional approach?</p>
-<p><strong>ZO</strong>: It's definitely a challenge, and since this is the first library I've ever made I have been learning as I go along. I took some inspiration from neko, a Clojure wrapper for the Android API, since it is doing something similar. I don't try to hide mutations; most of the library is just a series of macros that allow you to use the underlying Java classes with a nicer syntax.</p>
-<p>That said, you can at least keep your core game logic free of side-effects by deferring those mutations until later. In my play-clj games, I typically first map over my entities with a series of pure functions, then afterwards I do various side-effecting things like playing sounds and rendering. This allows me to trivially parallelize the pure portion of my code while also doing the necessary side-effecting things.</p>
-<p><strong>LC</strong>: That's pretty cool. I've always wanted to program games, but every time I start, I get lost in a forest of spaghetti code. Have you found that a functional approach makes that better?</p>
-<p><strong>ZO</strong>: I think it definitely imposes discipline on your game's code. It is easy in Java to make your entities and other objects data members in a class and mutate them from methods without even explicitly passing them as arguments, which is an easy path to spaghetti code. In play-clj, entities are records so transforming them requires explicitly passing them to functions and returning new ones at the end.</p>
-<p>I would say that play-clj also imposes an additional degree of structure as well. It has its own built-in system for managing state, including its own entity system, which is exposed to you in the defscreen macro. I think this causes play-clj games to essentially have the same general design. The downside is that it makes a lot of design decisions for you, so more advanced Clojure programmers may desire a thinner wrapper.</p>
-<p><strong>LC</strong>: What resources could a beginner use beforehand to make the most of your talk?</p>
-<p><strong>ZO</strong>: I wrote a tutorial for play-clj that people could check out if they'd like to see how it works:</p>
-<p><a href="https://github.com/oakes/play-clj/blob/master/TUTORIAL.md">https://github.com/oakes/play-clj/blob/master/TUTORIAL.md</a></p>
-<p>There are also some example games they could play to see it in action:</p>
-<p><a href="https://github.com/oakes/play-clj-examples">https://github.com/oakes/play-clj-examples</a></p>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>ZO</strong>: I don't do much social networking, unless Reddit/HN count. I suppose the best way to see what I'm up to is follow <a href="gh">my Github</a>!</p>
-<p><strong>LC</strong>: One last question: If Clojure were a Star Trek character from the original series, what character would it be?</p>
-<p><strong>ZO</strong>: I suppose Clojure would be all the redshirts collectively. It sounds like a bad thing, but when they died they were always replaced, so I guess that means Clojure will live forever.</p>
-<p><strong>LC</strong>: Thanks for the informative interview. It was a pleasure.</p>
-<p>*include: templates/pre-conj.html</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Zach Oakes interview about games in Clojure.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -170,81 +120,7 @@
           October 23, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#zach-tellman"><img src="http://www.lispcast.com/img/pre-conj/zach-tellman.jpeg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>Zach Tellman is the next interview participant. He is <a href="http://clojure-conj.org/speakers#zach-tellman">giving a talk</a> at <a href="http://www.clojure-conj.org/">Clojure/conj</a> about composition. The <a href="http://www.lispcast.com/pre-conj-zach-tellman">background to his talk</a> is available, if you like.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: Briefly, how did you get into Clojure?</p>
-<p><strong>Zach Tellman</strong>: At my first job, the main language was C#. However, I worked with Tom Faulhaber, who is a Common Lisp guy from way back, and at the time was just working on the initial implementation of clojure.pprint. I started playing around with Clojure, and started building <a href="https://github.com/ztellman/penumbra">Penumbra</a> in <a href="http://ideolalia.com/rendering-a-sierpinski-pyramid-in-clojure/index.html">mid 2009</a>. I haven't looked back since.</p>
-<p><strong>LC</strong>: Composition is a very important concept in the Clojure world, yet you claim that many libraries can't compose cleanly. Why is it such a problem?</p>
-<p><strong>ZT</strong>: Clojure is a young language, and is fairly unique in the way it tries to couple functional idioms with less-than-functional host environments. It also lacks any real organizational principle: a namespace can encompass an enormous amount of functionality (see clojure.core), or a very small, focused piece of functionality (see most of Ring). Both of these allow us enormous flexibility, but it also means that Clojure programmers are without either precedent or obvious affordances when starting out with Clojure. It's understandable that we'd make some missteps.</p>
-<p>If we look at the first two or three SQL libraries written for Clojure, it's notable that they all used macros. It became clear after not too long, though, that this was a really limiting approach - the only way to compose with a macro was with more macros. This doesn't mean that macros shouldn't be used, of course, just that we should always be aware of how they constrain the surrounding code. Abstractions that are incredibly useful in application-level code might be irritating and arbitrary in a library.</p>
-<p>I think a lot of people begin to innately understand these design considerations after a few years of using Clojure, but I haven't heard anyone try to articulate them in a general form. I guess we'll see how I do at that.</p>
-<p><strong>LC</strong>: You mention Ring. I think it's a great example of a system with very good composability. Middleware written by different programmers can be combined without problems. Ring achieves this by being a standard protocol. So there is coordination between the programmers in that they both agree to the centralized standard. Are there other patterns besides standards that can allow for composition?</p>
-<p><strong>ZT</strong>: Ring is useful because it's focused. Modeling HTTP requests as a pure function is a lossy abstraction, but it works for the vast majority of requests. If it wasn't so simple, I don't think it would have had nearly as much adoption (see the n-many mostly unused async extensions to Ring that try to accurately model the entire problem space). But by using Ring, we commit ourselves to its simplified view of the world, as well as its thread-per-connection execution model. This is almost always an acceptable simplification, but it transitively limits everything downstream of it. Now we find ourselves in a situation where the entire ecosystem is predicated on this simplified view of things, and anyone who tries to do something more general has to start over from scratch.</p>
-<p>So to actually answer your question, composition can't happen without conventions. But conventions, like macros (which really are just conventions of code structure), constrain and shape the code around them. The tradeoffs and resulting design space are what I want to explore.</p>
-<p><strong>LC</strong>: You've mentioned that Clojure does not constrain the code. One of the most common questions I answer from Clojure beginners is how to structure their code given the freedom allowed in Clojure. Do you think conventions that support composition could help answer that question?</p>
-<p><strong>ZT</strong>: I use a lot of Java-land libraries, so I spend a lot of time reading Javadocs. The nice thing about Javadocs is that even if the actual docstrings are minimal, it gives you a full, unambiguous dependency graph between all the different pieces of code. There's no analogue for that in Clojure, which makes reuse a lot harder than it otherwise would be.</p>
-<p>I'm not sure what the solution for this is. I think standardizing on a narrower sort of code structure, like the &quot;class&quot; convention in Javascript, isn't that useful or likely to be popular. Standardized (and better) documentation, though, along with tooling to effectively browse it, would be enormously helpful. Formal specifications of data shapes or types, like Schema or core.typed, might be helpful but I don't think they're a necessary precondition.</p>
-<p><strong>LC</strong>: You mention dependency graph. Have you had a chance to look at <a href="http://crossclj.info/">CrossClj</a>? Would that kind of thing be helpful? What would it need to be more helpful?</p>
-<p><strong>ZT</strong>: I've looked at it, it's a good place to start, but raw dependency data isn't useful without the tooling to integrate it into our development process. Light Table and others are playing around in this space, but it's a genuinely hard problem, because it's not a one-size-fits-all visualization problem. I don't have any solutions to offer, but I'm certainly paying attention to how things develop.</p>
-<p><strong>LC</strong>: So there are going to be a lot of beginners at the conj. Are there any resources that could prepare them to make the most of your talk? Any blog posts or videos that would get them ready to participate actively?</p>
-<p><strong>ZT</strong>: I'll talk about macros, transducers, and core.async, among other things. Being conversant in each will help, but isn't necessary.</p>
-<p><strong>LC</strong>: Where can people follow you and your adventures?</p>
-<p><strong>ZT</strong>: I twit about software sometimes at <a href="https://twitter.com/ztellman">https://twitter.com/ztellman</a>. I write longer stuff less often at <a href="http://ideolalia.com/">http://ideolalia.com/</a>.</p>
-<p><strong>LC</strong>: Ok, last question: What is the average airspeed velocity of an unladed Clojure REPL?</p>
-<p><strong>ZT</strong>: JVM or V8?</p>
-<p><strong>LC</strong>: I don't know that!</p>
-<p>Thanks for the interview. It was very informative.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Zach Tellman interview about his talk about composition.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -269,62 +145,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 03, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-variants-are-not-unionstalk">Talk: <a href="http://clojure-conj.org/speakers#jeanine-adkisson">Variants are Not Unions</a></h3>
-<p><a href="http://clojure-conj.org/speakers#jeanine-adkisson">Jeanine Adkisson's talk</a> at the <em>conj</em> is about using Variants in Clojure. Variants are a way to represent different cases of value that belong to the same type. For instance, a linked list type might be represented as two cases: an empty list and a tuple of an element and a list. A <em>tag</em> distinguishes between the two cases.</p>
-<h4 id="background">Background</h4>
-<p>In a dynamically typed language, we often play fast and loose with type. For instance, we might write a function with a giant <code>cond</code> statement in the body that does little more than switch on type. But how do we know we've checked all the types we need to? Variants solve this problem.</p>
-<p>Variants are a key feature of Haskell and ML. Adkisson mentions that there is no standard way of representing them in Clojure, which is true, though several commonplace conventions exist for getting <em>some</em> of the uses of Variants. However, there is not a common convention for noting all of the possible tags and ensuring that all cases are covered in a conditional. The talk description also mentions <a href="https://github.com/clojure/core.typed">core.typed</a> (a type system for Clojure, which does not have Variants) and <a href="http://www.datomic.com/">Datomic</a> (a database written by the creators of Clojure).</p>
-<h5 id="why-it-matters">Why it matters</h5>
-<p>Adding Variants to Clojure is a good example of the Clojure community's excitement about borrowing good ideas from a variety of languages. And the fact that a new kind of type can be introduced that works in the dynamic language, a type system, and a database is promising for the future of idea borrowing in Clojure.</p>
-<h3 id="about-jeanine-adkissontalk">About <a href="http://clojure-conj.org/speakers#jeanine-adkisson">Jeanine Adkisson</a></h3>
-<p><a href="http://twitter.com/jneen_">Twitter</a> - <a href="https://github.com/jneen">Github</a> - <a href="http://jneen.net/">Blog</a></p>
-<p><a href="http://clojure-conj.org/speakers#jeanine-adkisson"><img src="http://www.lispcast.com/img/pre-conj/jeanine-adkisson.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Jeanine Adkisson will give a talk about Variants in Clojure at the Clojure/conj 2014.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -349,61 +170,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 04, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-applying-the-paradigms-of-core.async-in-clojurescripttalk">Talk: <a href="http://clojure-conj.org/speakers#julian-gamble">Applying the paradigms of core.async in ClojureScript</a></h3>
-<p><a href="http://clojure-conj.org/speakers#julian-gamble">Julian Gamble's talk</a> at the <em>conj</em> is about <a href="https://github.com/clojure/core.async/">core.async</a> in ClojureScript. core.async is an implementation of CSP for Clojure and ClojureScript. It allows for concurrency, and communication using an abstraction called channels. It is similar to built-in facilities in the Go programming language.</p>
-<h4 id="background">Background</h4>
-<p>core.async provides two main abstractions: go blocks and channels. Go blocks are lightweight processes that give the basic type of independent concurrency. To coordinate and communicate between the go blocks, the go blocks take values from and put values to channels.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p><a href="https://github.com/clojure/core.async/">core.async</a> is important because it is a very powerful way to structure your code. Further, core.async is a library, not a core feature of the language, even though in many languages it is a fundamental part of the language. Finally, core.async gives Javascript (through ClojureScript) a much needed asynchrony model that is more expressive than callbacks.</p>
-<h3 id="about-julian-gambletalk">About <a href="http://clojure-conj.org/speakers#julian-gamble">Julian Gamble</a></h3>
-<p><a href="http://twitter.com/juliansgamble">Twitter</a> - <a href="https://github.com/juliangamble">Github</a> - <a href="http://juliangamble.com/blog/">Blog</a></p>
-<p><a href="http://clojure-conj.org/speakers#julian-gamble"><img src="http://www.lispcast.com/img/pre-conj/julian-gamble.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Julian Gamble will give a talk about core.async in ClojureScript.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -428,64 +195,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 01, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-exploring-four-hidden-superpowers-of-datomictalk">Talk: <a href="http://clojure-conj.org/speakers#lucas-cavalcanti">Exploring Four Hidden Superpowers of Datomic</a></h3>
-<p><a href="http://clojure-conj.org/speakers#lucas-cavalcanti">Lucas Cavalcanti and Edward Wible's talk</a> at the <em>conj</em> is about <a href="http://www.datomic.com/">Datomic</a>, a database that extends the concurrency semantics of Clojure into a distributed database. They have created generic solutions to common problems using Datomic.</p>
-<h4 id="background">Background</h4>
-<p>Datomic is an append-only database. That means you never delete or modify existing records. It appears that the speakers have used this property to solve some tricky problems, including HTTP caching, audit trails, mobile sync, and authorization. A nice introduction is <a href="https://www.youtube.com/watch?v=4iaIwiemqfo">this talk by Rich Hickey</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Datomic is a relatively new database and people are still working out the best usage patterns for it. Its data model is quite flexible, so you often have to enforce your own structure. While that may be more work, the promise is that lots of other problems with traditional databases become non-issues. This talk promises to show us a glimpse of those practical benefits of Datomic.</p>
-<h3 id="about-lucas-cavalcantitalk">About <a href="http://clojure-conj.org/speakers#lucas-cavalcanti">Lucas Cavalcanti</a></h3>
-<p><a href="http://twitter.com/lucascs">Twitter</a> - <a href="https://github.com/lucascs">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#lucas-cavalcanti"><img src="http://www.lispcast.com/img/pre-conj/lucas-cavalcanti.png" /></a></p>
-<h3 id="about-edward-wibletalk2">About <a href="http://clojure-conj.org/speakers#edward-wible">Edward Wible</a></h3>
-<p><a href="https://github.com/aew">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#lucas-cavalcanti"><img src="http://www.lispcast.com/img/pre-conj/edward-wible.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Lucas Cavalcanti and Edward Wible will talk about Datomic.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -510,62 +220,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 06, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-persistent-data-structures-for-special-occasionstalk">Talk: <a href="http://clojure-conj.org/speakers#michał-marczyk">Persistent Data Structures for Special Occasions</a></h3>
-<p><a href="http://clojure-conj.org/speakers#michał-marczyk">Michał Marczyk's talk</a> at the <em>conj</em> is about Persistent Data Structures that are available as libraries to Clojure. Given Michał Marczyk's contributions, this should be a great talk.</p>
-<h4 id="background">Background</h4>
-<p>Clojure comes with several Persistent Data Structures built-in. There is no need to copy them to share them, since they are immutable. And they are efficient at making modified copies as well, since they share structure. A great introduction to Clojure's Persistent Data Structures is <a href="http://www.infoq.com/presentations/Value-Identity-State-Rich-Hickey">this talk by Rich Hickey</a>. For a deeper dive into how they work, check out <a href="https://vimeo.com/28760673">Daniel Spiewak's talk</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Although the built-in data structures are great, there's no reason not to have more! Other data structures might be more appropriate at different times, given that they have different performance characteristics. It's great that there is development in these areas.</p>
-<h3 id="about-michał-marczyktalk">About <a href="http://clojure-conj.org/speakers#michał-marczyk">Michał Marczyk</a></h3>
-<p><a href="https://github.com/michalmarczyk">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#michał-marczyk"><img src="http://www.lispcast.com/img/pre-conj/michal-marczyk.jpg" /></a></p>
-<p>Michał Marczyk has written several persistent data structures in use by lots of us every day. He wrote the map and set types for ClojureScript, along with transients.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Michał Marczyk will talk about Persistent Data Structures.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -590,67 +245,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 07, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-helping-voters-with-pedestal-datomic-om-and-core.asynctalk">Talk: <a href="http://clojure-conj.org/speakers#nathan-herzing">Helping voters with Pedestal, Datomic, Om and core.async</a></h3>
-<p><a href="http://clojure-conj.org/speakers#nathan-herzing">Nathan Herzing and Chris Shea's talk</a> at the <em>conj</em> is about using Pedestal, Om, Datomic, and core.async together. They promise to code systems live.</p>
-<h4 id="background">Background</h4>
-<p>Pedestal was the name for a frontend framework create by Cognitect. They deprecated that framework and used the name for a small piece of it that was libraries for backend web servers, which is now under development. So <a href="https://github.com/pedestal/pedestal">Pedestal</a> now is a set of libraries for web development. Watch this <a href="https://www.youtube.com/watch?v=sFT_0v-iKVQ">Webcast</a> for background.</p>
-<p><a href="http://www.datomic.com/">Datomic</a> is Cognitect's append-only database with Datalog queries. A nice introduction is <a href="https://www.youtube.com/watch?v=4iaIwiemqfo">this talk by Rich Hickey</a>.</p>
-<p><a href="https://github.com/swannodette/om">Om</a> is a library in ClojureScript created by <a href="https://twitter.com/swannodette">David Nolen</a>. It is a wrapper around <a href="http://facebook.github.io/react/">React</a>, which is Facebook's library for manipulating the DOM in a functional way. Watch <a href="https://www.youtube.com/watch?v=DMtwq3QtddY">David Nolen's talk</a> for a good introduction.</p>
-<p><a href="https://github.com/clojure/core.async">core.async</a> is a library that brings Communicating Sequential Processes to Clojure and ClojureScript. A great talk on it is <a href="http://www.infoq.com/presentations/clojure-core-async">one by Rich Hickey</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>I've said before that I like experience reports. This one will also combine it with live coding, which is exciting. Live coding is always a risk. This talk will combine four of the major components Clojure brings to the table, which are all very powerful in their own right. What will happen when their powers combine?</p>
-<h3 id="about-nathan-herzingtalk">About <a href="http://clojure-conj.org/speakers#nathan-herzing">Nathan Herzing</a></h3>
-<p><a href="https://github.com/nherzing">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#nathan-herzing"><img src="http://www.lispcast.com/img/pre-conj/nathan-herzing.jpeg" /></a></p>
-<h3 id="about-chris-sheat2">About <a href="http://clojure-conj.org/speakers#chris-shea">Chris Shea</a></h3>
-<p><a href="https://github.com/tie-rack">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#nathan-herzing"><img src="http://www.lispcast.com/img/pre-conj/chris-shea.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Nathan Herzing and Chris Shea will talk about Pedestal, Om, Datomic, and core.async.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -675,63 +270,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 12, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-unlocking-data-driven-systemstalk">Talk: <a href="http://clojure-conj.org/speakers#paul-degrandis">Unlocking Data-Driven Systems</a></h3>
-<p><a href="http://clojure-conj.org/speakers#paul-degrandis">Paul deGrandis' talk</a> at the <em>conj</em> is about the design tradeoffs when building your system in a Data-Driven way.</p>
-<h4 id="background">Background</h4>
-<p>The recommended priority for choosing an implementation strategy is Data &gt; Function &gt; Macro. <strong>Macros are made for humans</strong>, not machines, so they are the least composable. <strong>Functions are composable</strong>, but opaque. Their only meaning is their side-effects and their return value. <strong>Data, however, can be interpreted</strong> in different ways, depending on the context. If one can design it right, a data-driven system can be both <strong>easy for a person</strong> to read and write and <strong>reusable for many problems</strong>.</p>
-<p>This talk is part of an ongoing discussion about data-driven systems in Clojure. Data-driven design has been around far longer than Clojure has. <a href="http://www.amazon.com/Paradigms-Artificial-Intelligence-Programming-Studies/dp/1558601910/">Paradigms of Artificial Intelligence Programming</a> is <em>the</em> book on the subject, showing its use in Common Lisp. <a href="https://www.youtube.com/watch?v=3yvrs9S0RIw">Christophe Grand gave a talk</a> at the Clojure/conj in 2010 that explained in depth why macros should not be the first choice when building DSLs.</p>
-<p>Many systems use data as their primary interface. Datalog queries in Datomic are just Clojure data. Prismatic Schemas are data. Leiningen project files are data (with a small macro for human convenience). Data-driven system is related to code-as-data, that all Lisps share. If code is data, why can't data be code? Clojure makes data-driven solutions easy with its variety of literal data structures.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>The conversation about how best to design data-driven systems is not over. Active Clojure developers are still experimenting and testing the approach. This talk will show data-driven systems taken to an extreme, where an entire ClojureScript application is represented as data. Many people already agree with the approach and are eagerly awaiting the deeper analysis this talk promises.</p>
-<h3 id="about-paul-degrandistalk">About <a href="http://clojure-conj.org/speakers#paul-degrandis">Paul deGrandis</a></h3>
-<p><a href="https://github.com/ohpauleez">Github</a> - <a href="http://twitter.com/ohpauleez">Twitter</a></p>
-<p><a href="http://clojure-conj.org/speakers#paul-degrandis"><img src="http://www.lispcast.com/img/pre-conj/paul-degrandis.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Paul deGrandis will talk about Data-Driven Systems.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -756,62 +295,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 03, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-transducerstalk">Talk: <a href="http://clojure-conj.org/speakers#rich-hickey">Transducers</a></h3>
-<p><a href="http://clojure-conj.org/speakers#rich-hickey">Rich Hickey's talk</a> at the <em>conj</em> is about Transducers, a new abstraction in the core language (coming in <a href="https://github.com/clojure/clojure/blob/master/changes.md#changes-to-clojure-in-version-17">Clojure 1.7</a>).</p>
-<h4 id="background">Background</h4>
-<p><a href="http://blog.cognitect.com/blog/2014/8/6/transducers-are-coming">Transducers</a> are a way to define the standard map, filter, and mapcat functions that does not bake in the idea of creating a list as output. Instead, it takes that as a parameter. It's hard to explain, but <a href="https://www.youtube.com/watch?v=6mTbuzafcII">Rich Hickey does a great job</a> making it clear.</p>
-<p>The talk has no abstract at the time of this writing, so I can't say what he will add to the Strange Loop talk he gave. But I would guess that it will be more deeply aimed at Clojure programmers.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Transducers are very new. They haven't even been released yet. However, they've already made a splash, with static typists trying to come up with their type signature, and implementations in other libraries.</p>
-<h3 id="about-rich-hickeytalk">About <a href="http://clojure-conj.org/speakers#rich-hickey">Rich Hickey</a></h3>
-<p><a href="https://github.com/richhickey">Github</a> - <a href="http://twitter.com/richhickey">Twitter</a> - <a href="http://blog.cognitect.com/?author=53b41822e4b03d3e9732635e">Blog</a></p>
-<p><a href="http://clojure-conj.org/speakers#rich-hickey"><img src="http://www.lispcast.com/img/pre-conj/rich-hickey.jpeg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Rich Hickey will talk about Transducers.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -836,73 +320,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           November 17, 2014
         </div>
 
-        
-<h3 id="introduction">Introduction</h3>
-<p>Well, just at the last minute, this interview was finished. Jason Hemann is the organizer of this year's <a href="http://homes.soic.indiana.edu/jhemann/scheme-14/">Scheme and Functional Programming Workshop</a> that is happening just before the Conj. Tickets are very affordable and still available.</p>
-<p>The schemers are inviting everyone to attend <em>Programming Enthusiasts Unite for Great Justice</em>, an after-hours event at 8:30 on Wednesday, November 19 at the Mezzanine Lounge, Capitol City Brewing Company, 1100 New York Ave. I'm going to be there, so say hi!</p>
-<p>On with the interview!</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: Tell me a bit about the Scheme Workshop.</p>
-<p><strong>Jason Hemann</strong>: The Scheme Workshop (or Scheme and Functional Programming Workshop, to use the full title) is an annual meeting for the community of folk interested in Scheme and functional programming generally. The purpose is to report recent developments in the language, to foster collaboration among the members of the community, and for researchers, implementers, and users to present recent work.</p>
-<p>The first workshop was held in 2000, making this the Scheme Workshop's 15th anniversary. In previous years we've hosted it with PLI, ICFP, and SPLASH, among other venues. We're excited this year to again be co-located with Clojure/conj.</p>
-<p><strong>LC</strong>: What is something that Clojure (as a language or as a community) can learn from Scheme?</p>
-<p><strong>JH</strong>: I think the Schemer's view of the world offers an interesting comparison for Clojurers. To me, Scheme is a tiny extensible core, one basic data structure (the cons pair), tail recursion, and the ability to redefine almost everything in the language. It is amazing how few primitives you can get away with using in practice. To quote from a recent standard document,</p>
-<p>&quot;Scheme demonstrates that a very small number of rules for forming expressions, with no restrictions on how they are composed, suffice to form a practical and efficient programming language....&quot;</p>
-<p>From this vantage point, Clojure feels like an extremely large and complex language (this is not to say it's the correct or only point of view, of course).</p>
-<p>Historically, the design of Scheme has had relatively few compromises---some might say because there wasn't much language to begin with. This feels very different than Clojure, which readily compromises in order to interact with Java seamlessly. For example, Scheme implementations must handle tail calls properly. This isn't to say that Clojure makes the wrong decision--Clojure has different design goals, and unoptimized tail calls makes sense when interacting with Java. But by comparison Scheme feels very uncompromised, and it's fun to play around in such a minimal language with relatively few corner cases.</p>
-<p>That design fits well with the Scheme workflow for writing small programs. Many Schemes exist as single standalone executables; you simply run it, and the REPL starts instantly. And then you're programming. There aren't any toolchains to build, projects to setup, or package dependencies to fight with. Compared with other languages' toolchains and workflows, there is very little to get in the way of thinking about a problem, and Scheme feels lightweight and nimble by comparison.</p>
-<p>There are obviously tradeoffs to this design, and there can be a strain when trying to move to medium to large scale projects. Scheme has no large standard library, or standard build and versioning tools, or canonical directory layout, or anything like that. When creating large- or even medium-sized applications, the support you get in the Clojure world can be very useful. But when trying to quickly experiment with a new idea, Scheme doesn't have the encumberance of these (admittedly sometimes useful) features.</p>
-<p>Scheme has been a useful tool for exploring and explaining new ideas, some of which have found their way into Scheme itself. Its relatively small size has made it a proving ground for language features. The Scheme approach has been to lean toward adding fewer, more highly expressive primitives. An example of this is the Scheme operator call/cc, which subsumes what would otherwise be a variety of distinct primitives.</p>
-<p>Another idea that Schemers have explored and then added to the language is hygienic macros. While traditional unhygienic and pseudo-hygienic macros do great things for other lisps, Scheme's hygienic macros and the more recent procedural hygienic macro systems designed and developed in Scheme have really pushed the state of the art forward. The macro systems available in Scheme seem more usable than those of other lisps, and lead to more readable and more reliable code as well.</p>
-<p><strong>LC</strong>: So, now the opposite: what can Scheme learn from Clojure?</p>
-<p><strong>JH</strong>: Well, one thing I haven't mentioned yet is that Scheme is in the process of growing. The Scheme steering committee hopes both to keep Scheme as this small, lightweight language, but also make it a language able to meet &quot;the practical needs of modern software development&quot;. The groups working on the latest language standard are producing both a spec for a small language and a spec for a large language, which is to be, by some metrics, larger than Common Lisp. The small language report is finished and was announced at last year's Scheme Workshop. This year, we will hear an update from John Cowan, the head of the large language working group. I'm excited to hear what they've been up to.</p>
-<p>I mention this all because Clojure is a recent, comparatively large lisp designed with the practical considerations of real software development in mind. Clojure provides an example of one way to build a large language and ecosystem, and from which we can learn. The first thing that comes to mind is persistent data structures. Clojure comes out-of-the-box with a suite of persistent data structures that'd make programmers in a lot of other languages envious. The R7 large group has an immutable data structures proposal on the table, and I think that would be a nice addition. Clojure has a number of libraries that could be good additions to the large language.</p>
-<p>Too, for a (comparatively) young language you all have---and have had---a broad, vibrant, and growing community. The conj itself is a <em>big</em> event. The recipe for that kind of enthusiasm and growth is something I hope the Scheme community can bring back with us.</p>
-<p><strong>LC</strong>: What are some resources for Clojurists who want to learn about Scheme to prep for the workshop?</p>
-<p><strong>JH</strong>: Clojurists are already about as well prepared as anybody to learn about Scheme. That's the wonderful thing about being close linguistic cousins. A classic introductory text that uses Scheme to talk about some really neat concepts is Abelson &amp; Sussman's &quot;Structure and Interpretation of Computer Programs&quot;. Another good resource is &quot;The Little Schemer&quot; by Friedman &amp; Felleisen. It's cute, and as much puzzle book as it is textbook (full disclosure, my advisor is one of the authors). As far as online references, <a href="http://schemers.org">schemers.org</a>, <a href="http://readscheme.org">readscheme.org</a>, and <a href="http://schemewiki.org">schemewiki.org</a> have enough information to keep one busy for quite a while. Also, we've just put up on the <a href="http://homes.soic.indiana.edu/jhemann/scheme-14">Scheme '14 website</a> the papers that will be presented. Those still hungry for more might be interested in the proceedings of previous years' Scheme Workshops, available at <a href="http://schemeworkshop.org">schemeworkshop.org</a>.</p>
-<p><strong>LC</strong>: Thanks for the great interview!</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Jason Hemann talks about the Scheme Workshop.
 
         <div class="endmark">
           <a class="endmark-link"

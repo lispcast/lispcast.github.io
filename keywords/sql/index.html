@@ -95,59 +95,7 @@
           March 30, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<h3 id="talk-honeysql-sql-queries-as-clojure-data-structurestalk">Talk: <a href="http://clojurewest.org/speakers#fhanreich">HoneySQL: SQL Queries as Clojure Data Structures</a></h3>
-<p><a href="http://clojurewest.org/speakers#fhanreich">Fumiko Hanreich's talk</a> at <em>Clojure/West</em> is about HoneySQL, a Clojure DSL for representing SQL queries.</p>
-<h4 id="background">Background</h4>
-<p>People in the Clojure community talk a lot about representing things as data. This is an approach inherited from its Lisp forebears. <a href="https://github.com/jkk/honeysql">HoneySQL</a> is a data-oriented DSL that represents SQL queries. You build up SQL statements in a structured form, not string concatenation.</p>
-<p><a href="https://github.com/jkk/honeysql">HoneySQL</a> is a good example of a case where the Clojure philosophy allows for a solution to an existing problem. The problem is that SQL is designed as a human-facing language. That's fine by itself, but it is not a good language for composing pieces of a query into a larger query--the kind of things a program would do. HoneySQL provides an intermediate representation that is way more amenable to manipulation. In a way, it does the same thing for SQL as Lisp s-expressions did for code.</p>
-<h3 id="about-fumiko-hanreichtalk">About <a href="http://clojurewest.org/speakers#fhanreich">Fumiko Hanreich</a></h3>
-<p><a href="https://twitter.com/fhanreich">Twitter</a></p>
-<p><a href="http://clojurewest.org/speakers#fhanreich"><img src="http://www.lispcast.com/img/pre-west/fhanreich.png" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
+        Fumiko Hanreich will talk about HoneySQL.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -172,68 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           April 15, 2015
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-west-prep.png" />
-</div>
-<p><em>This interview was graciously conducted by <a href="https://twitter.com/clojuregeek">Nola Stowe</a>. She's a <a href="https://github.com/rubygeek">programmer</a>, the co-founder of <a href="https://twitter.com/devchix">DevChix</a>, and a prolific teacher. She recently ran <a href="http://www.clojurebridge.org/events/2015-03-13-austin">ClojureBridge Austin</a>. Please shout out to her and say thanks!</em></p>
-<p><a href="http://clojurewest.org/speakers#fhanreich"><img src="http://www.lispcast.com/img/pre-west/fhanreich.png"
-      style="float:right;height:150px"></a></p>
-<h3 id="introduction">Introduction</h3>
-<p>Fumiko Hanreich is the next interview participant. She is <a href="http://clojurewest.org/speakers#fhanreich">giving a talk</a> at <a href="http://www.clojurewest.org/">Clojure/West</a> about using the HoneySQL library for Clojure. The <a href="http://www.lispcast.com/pre-west-fumiko-hanreich">background to her talk</a> is available, if you like.</p>
-<h3 id="interview-with-fumiko-hanreich">Interview with Fumiko Hanreich</h3>
-<p><strong>Nola</strong>: How did you get into Clojure?</p>
-<p><strong>Fumiko</strong>: In January 2012, my then-former-company asked me to take an online Clojure course. They asked me to spend about 5 hours a week for the course (and my twins were barely 16 month olds then), and I thought it was doable and I said yes. The reality was that I spent way more than 5 hours a week. Just reading and “understanding” reading assignments took a lot of time before starting an assignment. Clojure was my first Functional Programming language. Then the company sent me to Cascalog training offered prior to 2012 Clojure/West, which was my very first Clojure conference. I rejoined the company in summer. A few months later, I started coding in Clojure (for production). Very steep learning curve, yet I fell in love with the language immediately. That’s how :)</p>
-<p><strong>Nola</strong>: What other languages have you done?</p>
-<p><strong>Fumiko</strong>: My very first language was C++ followed by Java at college. From the get-go, everything was OOP (and I believed that was the best thing). I have done quite a few other languages such as Visual Basic, groovy, Flex / ActionScript 3.0, php, ColdFusion, JavaScript, etc. To me, it was easy to adapt to a new language except for Clojure.</p>
-<p><strong>Nolq</strong>: Your talk is about SQL and Clojure, how did you decide on HoneySQL?</p>
-<p><strong>Fumiko</strong>: Very good question. I knew someone was going to ask thist :) To tell you the truth, I did not decide it myself. Our architect, Sean (<a href="http://twitter.com/seancorfield">@seancorfield</a>), and Justin (<a href="http://twitter.com/jkkramer">@jkkramer</a>), author of honeysql, spoke at 2012 Clojure conj. After that, it was recommended to me to use for the project I was assigned. I am extremely grateful that honeysql was already there when I needed it. It had everything I needed and made my life much easier.</p>
-<p><strong>Nola</strong>: What editor(s) do you use and what is your tooling like?</p>
-<p><strong>Fumiko</strong>: Emacs + paredit and Light Table. I still go back and forth.</p>
-<p><strong>Nola</strong>: If Clojure was a food, what do you think it would be?</p>
-<p><strong>Fumiko</strong>: This is an easy question. Quinoa and arugula or kale salad with lemon juice and splash of grounded ginger. Because that’s what I love and am excited to have every single day! It can also be any vegetables or fruits like mango, for example. Simply put, anything I love represents Clojure :)</p>
-<p><strong>Nola</strong>: Thanks for the interview. It was very informative.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-west">Pre-West Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojurewest.org/">Clojure/West</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/West or Cognitect. It is simply me (and helpers) curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-west-2015">Pre-West Prep 2015</a></li>
-<li><a href="http://www.lispcast.com/pre-west-alan-dipert-micha-niskin">Pre-West Prep: Alan Dipert and Micha Niskin</a></li>
-<li><a href="http://www.lispcast.com/pre-west-anthony-marcar">Pre-West Prep: Anthony Marcar</a></li>
-<li><a href="http://www.lispcast.com/pre-west-boris-kourtoukov">Pre-West Prep: Boris Kourtoukov</a></li>
-</ul>
-
+        Fumiko Hanreich interview by Nola.
 
         <div class="endmark">
           <a class="endmark-link"

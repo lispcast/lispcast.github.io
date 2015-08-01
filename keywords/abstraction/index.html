@@ -95,66 +95,7 @@
           July 05, 2015
         </div>
 
-        
-<p>Summary: <em>If naming is one of the two hardest things in programming, it follows that every other possible solution (except those few involving cache invalidation) should be attempted before naming something. As a corrolary, bad names are a code smell.</em></p>
-<p>Phil Karlton (attributed):</p>
-<blockquote>
-<p>There are only two hard things in Computer Science: cache invalidation and naming things.</p>
-</blockquote>
-<p>Programs used to be written in binary. That is, the only names we had were those the computer understood directly. Over time, we've improved programming languages so that they are better for people to read and write. A lot of that improvement is building in higher-level concepts, such as functions, garbage-collection, etc. But <strong>the majority of the improvement comes from the ability to name things</strong>.</p>
-<p>Naming things helps us organize our ideas about the software<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. A program has to deal with many levels of abstraction. We write about how data gets represented in the machine, how that relates to domain concepts, and what the user is intending to do. <strong>Naming things helps us organize those, just like good headings in an outline help us organize ideas about a topic.</strong></p>
-<p>And yet it is one of the hardest problems we solve regularly. There are times when I have looked for a good name for hours, only to find none. <strong>A bad name can cost a lot.</strong> Someone coming in later could be confused, wasting precious cognitive resources.</p>
-<p>Naming is hard because of a fundamental property of abstraction: <strong>the name does not have to relate at all to what it is naming</strong>. Names are just a string of letters. They're not meaningful to the machine, just to us. Names can lie, and that's a fundamental part of carrying meaning. If you could not lie, you could not convey new truthful information, either. And even truthful names can begin to diverge with the original code with time.</p>
-<p>Naming is hard because it's a different kind of thinking from the rest of programming. We are coding along, in a nice engineering flow, and all of a sudden, we need a nice, human-readable name. <strong>We need to find compassion for the reader from within our cold, calculating programmer trance.</strong> This is very difficult.</p>
-<p>Naming is hard because names need to be at the right abstraction level. Are you doing a low-level trie operation? Or is it a concept from the problem domain? <strong>Another choice to make.</strong> But it gets worse! Domain experts invent new words all the time. They're called <em>jargon</em>. And they're very useful. Maybe you should <em>invent</em> a name, instead of trying to <em>find</em> a name. Another difficult choice.</p>
-<p>When I'm having trouble naming something, there is often <strong>an easy change to the code that makes the name unnecessary</strong>. If we can avoid having to name something (while also keeping the code readable), we've avoided a very costly and error-prone process. Here are a few alternatives I use a lot:</p>
-<ul>
-<li><p><strong>Inline the code.</strong> Inline expressions don't need names. This works really well with anonymous functions.</p></li>
-<li><p><strong>Use threading.</strong> Instead of naming each intermediate value, thread the value through the process without naming it.</p></li>
-<li><p><strong>Name something else at a different level of abstraction.</strong> We're constantly switching the level of abstraction we're working at. Try going up or down the levels. It could be that there is something easy to name at an adjacent level that does the same thing.</p></li>
-<li><p><strong>Split it in two.</strong> Are you trying to name something that's really two things? If the two parts are easier to name, it's a good sign that you should split.</p></li>
-</ul>
-<p>You'll notice these all play with the <em>means of combination</em> instead of naming. <strong>Recombine to avoid naming when naming is hard.</strong></p>
-<p>Since there are so many alternatives to naming that are easier than naming, it follows that <strong>if there is a bad name in our code, it means there might be a better way to organize</strong> it that we overlooked. That makes it a code smell. A little (re)<a href="http://www.lispcast.com/stop-refactoring-and-start-factoring">factoring</a> can get rid of that name.</p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/lambda-abstraction">Lambda Abstraction</a></li>
-<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Abelson and Sussman in <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1">SICP 1.1</a>:</p>
-<blockquote>
-<p>A powerful programming language is more than just a means for instructing a computer to perform tasks. The language also serves as a framework within which we organize our ideas about processes. Thus, when we describe a language, we should pay particular attention to the means that the language provides for combining simple ideas to form more complex ideas. Every powerful language has three mechanisms for accomplishing this:</p>
-<p><strong>primitive expressions</strong>, which represent the simplest entities the language is concerned with,</p>
-<p><strong>means of combination</strong>, by which compound elements are built from simpler ones, and</p>
-<p><strong>means of abstraction</strong>, by which compound elements can be named and manipulated as units.</p>
-</blockquote>
-<a href="#fnref1">↩</a></li>
-</ol>
-</div>
-
+        If naming is one of the two hardest things in programming, it follows that every other possible solution (except those few involving cache invalidation) should be attempted before naming something. As a corrolary, bad names are a code smell.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -179,45 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           May 17, 2015
         </div>
 
-        
-<p>Summary: <em>Lambda abstractions are always leaky, but some are leakier than others. Clojure programmers recommend keeping most of your functions pure and containing the leaks as much as possible.</em></p>
-<p>Lambda abstraction refers to something we do all of the time. Let's say I have some code:</p>
-<pre><code>(+ 1 2)</code></pre>
-<p>I'm adding the number 2 to a number, in this case, 1. I could abstract that into a <em>lambda</em>:</p>
-<pre><code>(defn add2 [x] (+ x 2))</code></pre>
-<p>Now it's a function, which I can apply to 1. <code>(add2 1)</code>. I can apply it to any number I want. The actual thing I am adding 2 to is abstracted away and replaced by the variable <code>x</code>. <strong>Lambda abstractions are just functions.</strong></p>
-<p>Functional programming is at its best when lambda abstractions are referentially transparent. That means that given the same arguments, a function will always return the same value. Being referentially transparent makes a <strong>software function more like a mathematical function</strong>. And that lets you reason about your code.</p>
-<p>But there's a very real difference between software functions and mathematical functions: <strong>mathematical functions take no time or energy to &quot;compute&quot;</strong>. They are defined abstractly, with no notion of computation. In contrast, software functions always take some time to compute. Sometimes the clearest way to write a function takes enough time that the illusion of mathematical functions is shattered. <strong>The abstraction is leaky.</strong></p>
-<p>So software functions are already a leaky abstraction, even if they are referentially transparent. Clojure (like most programming languages) opens the leak even further: <strong>you can put stuff that's not referentially transparent right in your function</strong>. For instance, you can write a &quot;function&quot; that reads from the disk or makes a web request. Making the same request twice can obviously return different values.</p>
-<p>What most people programming Clojure recommend is to program <em>mostly</em> with pure functions (that means referentially transparent). You still have to deal with time, but that's way easier than dealing with the chaos of the world outside. That leaves a small bit of your code to deal with mutation, input/output, and the disk. It's still a lambda abstraction (function) but <strong>it's just leakier</strong>. Clojure simply leaves the decision up to you where to draw the line. Clojure tries to make pure functions easy, even when not everything fits into pure functions.</p>
-<p>The takeaway of functional programming is the same recommendation: <strong>write <em>most</em> of your code as referentially transparent functions</strong>. The degree to which a language helps you do that is how &quot;functional&quot; the language is.</p>
-<p>If you'd like to learn more about Clojure and pure functions, check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's 2.5 hours of high quality video. You probably haven't seen anything <a href="http://www.purelyfunctional.tv/intro-to-clojure#preview">like this</a>! There's animations, exercises, characters, and screencasts. It takes you from no knowledge to a deep experience, all while having fun!</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/avoid-naming-at-all-costs">Avoid Naming at All Costs</a></li>
-</ul>
-
+        Lambda abstractions are always leaky, but some are leakier than others. Clojure programmers recommend keeping most of your functions pure and containing the leaks as much as possible.
 
         <div class="endmark">
           <a class="endmark-link"

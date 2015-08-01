@@ -95,57 +95,7 @@
           July 15, 2014
         </div>
 
-        
-<p>Summary: <em>Static vs dynamic typing debates often flounder because the debators see from two different perspectives without knowing it. Learning to identify the two perspectives can calm the discussion. The tension between the two perspectives has led to Gradual Typing and other technologies.</em></p>
-<p>Many discussions about type systems around the internet fail to be interesting because one or both parties are not versed in type theory. There's a less common (yet related) reason, which I have begun to notice more and more: people who are not familiar with the <a href="http://en.wikipedia.org/wiki/Simply_typed_lambda_calculus#Intrinsic_vs._extrinsic_interpretations">difference between Church Types and Curry Types</a>. These are also known, respectively, as Intrinsic Types and Extrinsic types. Because the participants are not aware of the two perspectives, they blame the other one for ignorance, when in fact they just have a different perspective.</p>
-<p>Church Types are what Haskell has. Church types are named for Alonzo Church, the inventor of the lambda calculus. In a Church-style system, types are an <em>intrinsic</em> part of the semantics of the language. <strong>The language would be different without the types--it may even be meaningless.</strong> With an intrinsic type system, the meaning of the program is different from the runtime behavior of the program. One way to think of this is that so much of the meaning of the program occurs <em>at compile time</em> that you can begin to think of the program having properties you can reason about even if you never run the program.</p>
-<p>The other kind of types are Curry types (aka extrinsic types). They are named for Haskell Curry, the man the Haskell language is named after. Curry-style types is when a system of types is applied that is <strong>not part of the semantics of the language</strong>. This is what Clojure has in <code>core.typed</code>. <strong>The meaning of a Clojure program is not dependent on it passing the type checker</strong>--it can be run without it. The type checker simply alerts you to type errors in your code. Note that you could consider your type checker to be your own head, which, as flawed as it may be, is what most Clojure programmers use. The types could be anywhere outside of the language.</p>
-<p>Each perspective is valuable and bears its own fruit. Intrinsic types are great because you are <strong>guaranteed to have a mathematically-sound</strong><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> safety net at all times. You always have something you can <em>reason</em> about. Such is not guaranteed for extrinsic type checkers. They may not be able to reason about your code at all.</p>
-<p>Extrinsic types are useful because you can apply <strong>multiple type systems to your code</strong><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>--or even write something that you don't know how to prove is sound. There are more benefits on both sides, but you get the idea.</p>
-<p>We now have a new perspective which is slightly &quot;higher&quot; than either of them. We can now see that both perspectives exist and talk about them as such. <strong>What can we see/say now that we couldn't before?</strong></p>
-<p>A famous <a href="http://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/">article by Robert Harper</a> exemplifies the Church perspective very well. It argues that untyped programs are a subset of typed programs. They are programs that have a single type and all values are of that one type. So instead of being liberating, dynamic languages restrict you to one type. Notice the <strong>assumption that languages have a type system by default</strong> which is typical of the Church-style perspective. We can now say &quot;This reasoning is correct given that perspective.&quot;</p>
-<p>On the other side, you'll often see a dynamic typist say the exact opposite: that well-typed programs are a subset of dynamically typed programs. In other words, well-typed programs are just dynamic programs with fewer errors. Curry-style to the core: <strong>static type errors are something that is added onto the semantics of the language</strong>. We can now see that they are right, from their perspective.</p>
-<p>Here's a diagram:</p>
-<div class="figure">
-<img src="http://www.lispcast.com/img/ChurchvsCurry.png" alt="Church vs Curry Types Language Subset Diagrams" /><p class="caption">Church vs Curry Types Language Subset Diagrams</p>
-</div>
-<p>Notice how they're isomorphic? That means something, I just don't know what :)</p>
-<p>My ambitious hope is that this perspective will quiet a lot of the fighting as people recognize that they are just <strong>perpetuating a rift in the field of mathematics</strong> that happened a long time ago. The perspectives are irreconcilable now, but that could change. A paper called <a href="https://www.cs.cmu.edu/~fp/papers/andrews08.pdf">Church and Curry: Combining Intrinsic and Extrinsic Typing</a> builds a language with both kinds of types. And <a href="http://www.cs.colorado.edu/~siek/pubs/pubs/2006/siek06:_gradual.pdf">Gradual Typing</a> and <a href="http://homepages.inf.ed.ac.uk/wadler/topics/blame.html">Blame Calculus</a> are investigating the intersection of static and dynamic typing. Let's stop fighting, make some cool tools and use them well.</p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/Hindley-Milner-in-Clojure">Hindley-Milner in Clojure</a></li>
-<li><a href="http://www.lispcast.com/on-type-unity">On Type Unity</a></li>
-<li><a href="http://www.lispcast.com/pre-west-nathan-sorenson">Pre-West Prep: Nathan Sorenson</a></li>
-<li><a href="http://www.lispcast.com/ambrose-interview-typed-clojure">Ambrose Bonnaire-Sergeant interviewed about Typed Clojure</a></li>
-</ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>As sound as the type system in the language.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>See <a href="http://goto.ucsd.edu/~rjhala/liquid/haskell/blog/about/">Liquid Haskell</a> for an example of applying an extrinsic type system on Haskell.<a href="#fnref2">↩</a></p></li>
-</ol>
-</div>
-
+        Static vs dynamic typing debates often flounder because the debators see from two different perspectives without knowing it. Learning to identify the two perspectives can calm the discussion. The tension between the two perspectives has led to Gradual Typing and other technologies.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -170,62 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           February 08, 2014
         </div>
 
-        
-<p>Summary: <em>According to the requirements proposed by Abelson and Sussman, CSS does not provide adequate means of combination and abstraction to be considered a powerful language.</em></p>
-<p>I am trying to improve the maintainability and reusability of my CSS over the longterm. I've written about <a href="http://www.lispcast.com/cascading-separation-abstraction">how to organize CSS</a> before. I've learned a lot since I wrote that. I've tried lots of things and talked to lots of people, I finally seem to have found a conceptual framework to capture my new understanding. I'm trying to explore it here. <a href="http://twitter.com/ericnormand">Comments are welcome.</a></p>
-<p>I'm going to take a cue from the first page of <a href="http://mitpress.mit.edu/sicp/">SICP</a> and analyze CSS as a language.</p>
-<p>Abelson and Sussman in <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1">SICP 1.1</a> (<em>italics</em> mine):</p>
-<blockquote>
-<p>A powerful programming language is more than just a means for instructing a computer to perform tasks. The language also serves as <em>a framework within which we organize our ideas</em> about processes. Thus, when we describe a language, we should pay particular attention to <em>the means that the language provides for combining simple ideas to form more complex ideas</em>. <em>Every powerful language has three mechanisms</em> for accomplishing this:</p>
-<p><strong>primitive expressions</strong>, which represent the simplest entities the language is concerned with,</p>
-<p><strong>means of combination</strong>, by which compound elements are built from simpler ones, and</p>
-<p><strong>means of abstraction</strong>, by which compound elements can be named and manipulated as units.</p>
-</blockquote>
-<p>Let's analyze CSS in terms of these three mechanisms.</p>
-<h3 id="primitive-expressions">Primitive Expressions</h3>
-<p>The <em>simplest entities the language is concerned with</em> are <em>properties</em> and <em>primitive selectors</em>. CSS properties, though they have a property name and property value part, are meaningless if split up. Primitive selectors include element name selectors (<code>body</code>, <code>a</code>, <code>div</code>), class name selectors (<code>.main-wrapper</code>), id selectors (<code>#login-form</code>), and pseudo-class selectors (<code>:hover</code>), among others. Properties appear inside the rule body (<code>{}</code>), while selectors appear before the rule body. <strong>The two are semantically and syntactically separated.</strong></p>
-<h3 id="means-of-combination">Means of Combination</h3>
-<p><em>Properties</em> can be combined in two ways. First, <strong>multiple properties can be put inside the same rule body</strong>. This is the most obvious and most readable form of property combination. The second form is harder to reason about. It occurs automatically within the browser during rendering. That form of combination, involving the application of multiple rule bodies to the same HTML element, uses a <strong>complex ordering of properties from all bits of CSS and element styles on the page</strong>.</p>
-<p>Tomes have been written about how difficult it is to reason about this automatic form of combination. Usually, the answer is <strong>limiting it (or avoiding it altogether) through programmer discipline</strong>, with varying degrees of success.</p>
-<p><em>Primitive selectors</em> can be combined in several ways. Without spaces between them, multiple selectors will <em>intersect</em>, meaning they target elements more specifically. <code>div.main-container</code> will target <code>div</code> elements that ALSO have the class <code>main-container</code>.</p>
-<p>With spaces, multiple selectors indicate <em>nesting</em>. <code>div .main-container</code> matches any element of class <code>main-container</code> within any <code>div</code>. There are several operators which combine them in different ways (<code>&gt;</code> indicates direct nesting, etc.). Nested selectors are associated with CSS that is <strong>strongly coupled with the structure of the HTML</strong> it is styling and therefore <strong>less reusable</strong>.</p>
-<p>Selectors that are combined with commas create a <em>group</em>. These compound selectors will match any element that matches at least one of the component selectors. <code>header, .header</code> will match all <code>header</code> elements and all elements with class <code>header</code>.</p>
-<p>There are more types of selector combintation operators, but they are more specialized and less frequently used.</p>
-<p>The locus of combination, for both properties and selectors, is the <em>rule</em>. The rule has one compound selector and zero or more properties. Rules with zero properties have no effect.</p>
-<h3 id="means-of-abstraction">Means of Abstraction</h3>
-<p>The means of abstraction in CSS are quite limited. There is no way to name <em>anything</em>. People lament the lack of named values (often refered to as <em>variables</em>) or named styles (sometimes called <em>mixins</em>). <strong>Naming is out in CSS.</strong></p>
-<p>The only means of abstraction is the class and id, which are labels that can be applied to HTML elements. With an id or class (or combinations), you can target precisely the elements you need to and achieve some reuse. For instance, I can &quot;reuse&quot; the <code>#login-form</code> id selector in two different rules. I can also <strong>add the class <code>rounded-corner</code> to two different HTML elements, effectively &quot;reusing&quot; the same rule twice</strong>. By a <em>very disciplined</em> use of class selectors by combining them with commas, one can apply &quot;rule bodies&quot; as a unit in a <em>very limited way</em>, though it is <strong>impracticable in practice</strong>.</p>
-<p>The disadvantage to this technique of using id and class selectors is that the HTML must be modified when styles change, defeating the purpose of using CSS for content/style separation. There is a lot of discussion about using semantically named classes. For instance, call the button <code>login-button</code> instead of <code>green-shiny-button</code>. This is thought to be more robust in the face of style changes, but <strong>requires existing CSS to be thrown away</strong> in order for the page to be redesigned. <strong>CSS offers no good way to modify HTML and CSS independently.</strong></p>
-<h3 id="conclusion">Conclusion</h3>
-<p><strong>CSS does not meet the criteria for a &quot;powerful language&quot; as used in SICP.</strong> This is no surprise. The reasonable means of combination are limited to the rule. The means of abstraction are almost non-existent. There is no way to name anything. And the other form of abstraction (ids and classes) provides no way of reusing both the HTML and the CSS. <strong>It is obvious why CSS is typically unmaintainable.</strong> With the current crop of compile-to-CSS languages (commonly known as &quot;CSS Preprocessors&quot;), there is hope that better means of abstraction are possible. <strong><a href="http://www.lispcast.com/less-abstraction-combination">How will compile-to-CSS languages fare in this same analysis?</a></strong></p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/less-abstraction-combination">LESS has Better Forms of Abstraction than CSS</a></li>
-<li><a href="http://www.lispcast.com/pre-west-interview-priyatam-mudivarti">Pre-West Interview: Priyatam Mudivarti</a></li>
-<li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
-</ul>
-
+        According to the requirements proposed by Abelson and Sussman, CSS does not provide adequate means of combination and abstraction to be considered a powerful language.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -250,50 +145,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           February 12, 2014
         </div>
 
-        
-<p>Summary: <em>LESS has obviously better forms of abstraction and combination than CSS. It has recursive style definitions, which is enough to consider it a &quot;powerful language&quot;.</em></p>
-<p>Ok, it's obvious that <a href="http://www.lispcast.com/css-abstraction-combination">CSS has weak forms of combination and abstraction</a>. But now we have a good framework for understanding <em>why</em>. &quot;CSS Preprocessors&quot;, as they are called, are getting really popular now. We would be smart to <strong>analyze LESS in the same way that we analyzed CSS</strong>, if only to temper the glamor of trendiness that surrounds it. <a href="http://twitter.com/ericnormand">Comments are welcome.</a></p>
-<p>Because LESS aims to be a superset of CSS, it has all of <a href="http://www.lispcast.com/css-abstraction-combination">the primitive expressions, means of combination, and means of abstraction that come baked into CSS</a>. I already went over those last time, so I will not go over them again. <strong>So what things are added by LESS?</strong></p>
-<h3 id="primitive-expressions">Primitive Expressions</h3>
-<p>Besides existing CSS properties, <strong>LESS adds two new primitive expressions.</strong> <em>Mixin application</em> (<code>.rounded-corners(10px);</code>) in a rule <strong>recursively applies the primitive expressions defined in the body of the mixin to the current rule</strong>. Mixin applications can be parameterized with value expressions, or they can have no parameters. <em>Extension</em> (<code>&amp;:extend(.blue-button);</code>) is similar, but instead of applying the primitive expressions to a rule body, it adds the selector of the rule to the rule selector of the extension. <strong>Extension is recursive as well.</strong></p>
-<p>Variables and mathematical expressions change the way primitive properties work. In CSS, primitive properties were comprised of a property name and a literal property value. In LESS, variables and math expressions, as well as literal values, can be in the value place (right hand side) of a property.</p>
-<p>Variables can also be used in selectors.</p>
-<h3 id="means-of-combination">Means of Combination</h3>
-<p><strong>The principle means of combination are still the rule</strong>, but add to it the <strong>ability to nest rules</strong>, and things are more interesting. Nesting two rules is shorthand for writing out two rules (unnested) with a nested selector. While in the simple case it is simply a shorthand, <strong>when nested rules are applied as mixins, you gain a lot more than better syntax</strong>. Mixins with nested subrules allows you to <em>name</em> a nesting and refer to it later.</p>
-<h3 id="means-of-abstraction">Means of Abstraction</h3>
-<p>CSS did not contain much in the way of abstraction. <strong>LESS focuses primarily in the realm of abstraction</strong>, probably to appease the will to power of front-end designers. <em>Variables</em> allow property values to be named, and naming is a form of abstraction. <strong>Variables are a good way to name values that all have the same meaning and would therefore change at the same time.</strong> For instance, a shade of green that is used throughout the styles is a perfect use for variables. Variables can be used in a similar way to name selectors.</p>
-<p>A more powerful form of abstraction comes from the ability to define mixins, apply mixins, and use of <code>:extend()</code>. In LESS, any rule using a single class or id selector can be used as a mixin. This is essentially <strong>a way to name a rule</strong>--our principle form of combination. In addition, if you put empty parentheses after the class selector in the rule, the rule is not outputted into the generated CSS, which can save bytes. Mixins can also have parameters (scoped variables), so they can be <strong>abstracted over a variety of values</strong>. Extend allows a similar kind of abstraction which promises to be more efficient.</p>
-<p>Mixins are very powerful. In fact, <strong>this is the kind of abstraction that is needed for LESS to be powerful</strong>, as defined by Abelson and Sussman. Because you can now name a group of styles (mixin) and then use that name in another group of styles (mixin application), <strong>LESS has full-on recursive style definitions</strong>. With extension, it also has recursive selector definitions. In LESS, we can talk of &quot;levels of abstraction&quot; whereas in CSS there was only one.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p><strong>LESS has recursion</strong>. It lets you define and name groups of properties, then refer to those groups by name in other groups of properties. We can consider LESS powerful enough to express useful abstractions. Yet though it is more powerful than CSS, it still has many of the problems of CSS (especially complex rules governing the combination of multiple rules to a single element). How can LESS be leveraged to gain its power but tame its weakness? <strong>Is there a subset of LESS that can gerrymander the good parts away from the bad parts?</strong></p>
-<div class="article-cg-box">
-  <h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
-<li><a href="http://www.lispcast.com/pre-west-interview-priyatam-mudivarti">Pre-West Interview: Priyatam Mudivarti</a></li>
-<li><a href="http://www.lispcast.com/pre-west-priyatam-mudivarti">Pre-West Prep: Priyatam Mudivarti</a></li>
-</ul>
-
+        LESS has obviously better forms of abstraction and combination than CSS. It has recursive style definitions, which is enough to consider it a "powerful language".
 
         <div class="endmark">
           <a class="endmark-link"
@@ -318,28 +170,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 08, 2013
         </div>
 
-        
-<p>A Lisp with a macro system is actually two languages in a stack. The bottom language is the macro-less target language (which I'll call the Lambda language). It includes everything that can be interpreted or compiled directly.</p>
-<p>The Macro language is a superset of the Lambda language. It has its own semantics, which is that Macro language code is recursively expanded into code of the Lambda language.</p>
-<p>Why isn't this obvious at first glance? My take on it is that because the syntax of both languages is the same and the output of the Macro language is Lambda language code (instead of machine code), it is easy to see the Macro language as a feature of the Lisp. Macros in Lisp are stored in the dynamic environment (in a way similar to functions), are compiled just like functions in the Lisp language (also written in the Macro language) which makes it even easier to confuse the layers. It seems like a phase in some greater language which is the amalgam of the two.</p>
-<p>However, it is very useful to see these as two languages in a stack. For one, realizing that macroexpansion is an interpreter (called <code>macroexpand</code>) means that we can apply all of our experience of programming language design to this language. What useful additions can be added? Also, it makes clear why macros typically are not first-class values in Lisps: they are not part of the Lambda language, which is the one in which values are defined.</p>
-<p>
-  <center>
-  
-<img src="http://www.lispcast.com/img/macro-stack.png" alt="Lisp stack showing both interpretation and compilation" />
-</center>
-</p>
-
-<p>The separation of these two languages reveals another subtlety: that the macro language is at once an interpreter and a compiler. The semantics of the Macro language are defined to always output Lambda language, whereas the Lambda language is defined as an interpreter (as in <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.91.4527&amp;rep=rep1&amp;type=pdf">McCarthy's original Lisp paper</a>) and the compiler is an optimization. We can say that the Macro language has translation semantics.</p>
-<p>But what if we define a stack that only allows languages whose semantics are simply translation semantics? That is, at the bottom there is a language whose semantics define what machine code it translates to. We would never need to explicitly write a compiler for that language (it would be equivalent to the interpreter). This is what I am exploring now.</p>
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/exponential-backoff">Exponential Backoff</a></li>
-<li><a href="http://www.lispcast.com/try-three-times">Try Three Times</a></li>
-<li><a href="http://www.lispcast.com/when-to-use-a-macro">When To Use a Macro in Clojure</a></li>
-<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
-</ul>
-
+        Lisp with macros can be seen as two languages, each with different semantics. The base language can be interpreted directly, whereas the result of interpreting the macro language is to produce a new program in the base language.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -364,47 +195,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           August 23, 2014
         </div>
 
-        
-<p>Summary: <em>I like languages with a small core that is extensible. The languages tend to be weird and require less code to bootstrap.</em></p>
-<p>I know of two ways to bootstrap a language.</p>
-<p>The first way is probably more traditional. I'll call the first way Type 1. In Type 1, you write a bare-minimum compiler for your language in a host language. So maybe you write a Lua compiler in C. Then you write a Lua compiler in Lua. Then you compile your compiler. Now you have a compiler, written in Lua. You can add to it and modify it without ever having to touch the C code again. You have the advantage of writing the features of your language (Lua) in a higher-level language (Lua). And finally, as you add features to your compiler, you can use those to add more features. There's some leverage.</p>
-<p>I like the second way better. I'll call it Type 2. In Type 2, you write a small, powerful set of abstractions in the host language. For instance, you write an <a href="http://piumarta.com/software/id-objmodel/">object system in C</a>, a <a href="https://github.com/AlexandreAbreu/jonesforth/blob/master/jonesforth.S">stack and dictionary in assembler</a>, or <a href="https://github.com/clojure/clojure/blob/34258286c5bc3cc72ca212fceb34e6d61359cb1b/src/jvm/clojure/lang/Compiler.java#L3740">lexical closures in Java</a>. Then you write a compiler that targets those abstractions. If the abstractions are chosen correctly, your compiler is done. You can begin building abstraction on top of abstraction without touching the compiler.</p>
-<p>There are a few things to note:</p>
-<ol style="list-style-type: decimal">
-<li><p>Type 2 languages (Lisp, Smalltalk, FORTH) tend to be weird because they were birthed in a different way. The abstractions, though powerful, are often raw.</p></li>
-<li><p>Type 2 languages can be bootstrapped faster. The core is often much smaller than a full-featured compiler.</p></li>
-<li><p>Type 2 languages tend to require less code in general. I guess it's because you're writing most of it in a language that is compounding leverage.</p></li>
-<li><p>Type 2 languages are more easily ported, since all you have to do is rewrite the core. Type 1 languages, depending on how they are built, can require you to re-bootstrap or write a cross-compiler.</p></li>
-</ol>
-<p>In the end, I believe that both Type 1 and Type 2 are viable options for language-building. I prefer Type 2. If Type 2 intrigues you, you should learn Lisp (or FORTH or Smalltalk). I recommend the <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure videos course</a>.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/clojure-is-imperative">Clojure is Imperative</a></li>
-<li><a href="http://www.lispcast.com/church-vs-curry-types">Church vs Curry Types</a></li>
-<li><a href="http://www.lispcast.com/css-abstraction-combination">CSS has Weak Forms of Abstraction and Combination</a></li>
-<li><a href="http://www.lispcast.com/less-abstraction-combination">LESS has Better Forms of Abstraction than CSS</a></li>
-</ul>
-
+        I like languages with a small core that is extensible. The languages tend to be weird and require less code to bootstrap.
 
         <div class="endmark">
           <a class="endmark-link"

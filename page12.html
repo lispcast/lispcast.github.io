@@ -95,81 +95,7 @@
           October 15, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<center>
-<a href="http://clojure-conj.org/speakers#david-pick"><img src="http://www.lispcast.com/img/pre-conj/david-pick.jpeg" /></a>
-</center>
-
-<h3 id="introduction">Introduction</h3>
-<p>David Pick was kind enough to answer a few questions about himself and his upcoming <a href="http://www.clojure-conj.org/">Clojure/conj</a> talk. You may want to <a href="http://www.lispcast.com/pre-conj-david-pick">read the background</a> before you begin.</p>
-<h3 id="interview">Interview</h3>
-<p><strong>LispCast</strong>: How did you get into Clojure?</p>
-<p><strong>David Pick</strong>: A friend of my mine suggested I read <a href="http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504">Purely Functional Data Structures</a> and told me the work in the book was the basis for Clojure's persistent data structures. I really enjoyed it and decided to give Clojure a try.</p>
-<p><strong>LC</strong>: Braintree must process a lot of very important data, since it's a payments service. What were you using before you developed the Clojure and Kafka system?</p>
-<p><strong>DP</strong>: I'd say for 98% of our systems we still use Ruby and Postgres, we're simply using Clojure and Kafka as a messaging platform to move data between systems.</p>
-<p><strong>LC</strong>: What is Kafka?</p>
-<p><strong>DP</strong>: Kafka is a system for doing publish subscribe messaging, that was built by LinkedIn to have extremely high throughput and replay ability of messages. It stores all messages sent through the system for a rolling window. So consumers simply say give me messages starting with offset n or whatever your most recent message is. This way if a receiving system goes down the consumer can just rewind the stream and replay messages that were missed.</p>
-<p><strong>LC</strong>: Could you describe the problem you were trying to solve? What were the requirements?</p>
-<p><strong>DP</strong>: There were actually two problems we were trying to solve. The first was to pull our search tool into a separate system that was more scalable than our current one (the current one just runs sql queries on main database). The second was to improve the accuracy and speed that our data warehouse is updated.</p>
-<p>For the infrastructure part of the solution we ended up using Kafka, Zookeeper, and Elasticsearch which are all JVM based so that ended up heavily influencing our decision to use Clojure.</p>
-<p><strong>LC</strong>: You mentioned in the talk description that Clojure had certain advantages. What tradeoffs did Clojure, or your choice of technologies, bring about?</p>
-<p><strong>DP</strong>: The biggest tradeoff I think we made with Clojure is familiarity, I was the only one on the team who knew Clojure prior to starting this project. So that has certainly slowed us down. Other than that things have gone surprisingly well.</p>
-<p><strong>LC</strong>: I'm really fascinated by the engineering efforts to build very reliable and robust systems. Are you going to talk about that?</p>
-<p><strong>DP</strong>: Yep, that's the plan!</p>
-<p><strong>LC</strong>: Awesome.</p>
-<p>Do you have any resources that would help someone new to Clojure or new to Kafka so that they can make the most of your talk? Some pre-reading or pre-watching materials?</p>
-<p><strong>DP</strong>: For Clojure I definitely recommend both the <a href="http://clojurekoans.com/">Clojure Koans</a> and <a href="http://4clojure.com/">4Clojure</a>. For Kafka I'd recommend the <a href="http://kafka.apache.org/documentation.html#introduction">introduction on their site</a>.</p>
-<p><strong>LC</strong>: Where can people follow your adventures online?</p>
-<p><strong>DP</strong>: Twitter is probably the best place <a href="http://twitter.com/davidpick">@davidpick</a>.</p>
-<p><strong>LC</strong>: Who would win in a no-holds-barred fight to the finish, Clojure with an Arduino-controlled laser or a T-Rex?</p>
-<p><strong>DP</strong>: If Rich is writing the Clojure I give it a fighting chance, otherwise it's the T-Rex for sure.</p>
-<p><strong>LC</strong>: Awesome! Thanks for a great interview. I look forward to seeing you at the Conj.</p>
-<p><strong>DP</strong>: Awesome, thanks Eric!</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        David Pick interview about Kafka and Clojure.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -194,63 +120,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 13, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-always-be-composingtalk">Talk: <a href="http://clojure-conj.org/speakers#zach-tellman">Always Be Composing</a></h3>
-<p><a href="http://clojure-conj.org/speakers#zach-tellman">Zach Tellman's talk</a> at the <em>conj</em> is about building composable software.</p>
-<h4 id="background">Background</h4>
-<p>People often boast of the composability of Clojure programs. <a href="https://github.com/weavejester/compojure">Compojure claims</a> that it &quot;allows web application to be composed of small, independent parts.&quot; <a href="https://github.com/ring-clojure/ring">Ring</a> itself is based on composing middleware and handlers to build a web server. In fact, you can compose pieces easily with Ring, if those pieces were designed to compose with Ring. But not all libraries compose well with the Ring ecosystem. This talk asks &quot;How can we design libraries that compose well in general?&quot; A good intro to composition in Clojure is Rich Hickey's talk <a href="http://www.infoq.com/presentations/design-composition-performance-keynote">Design, Composition, and Performance</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>I often get asked why a certain library in Clojure doesn't have an easy interface like the one in Ruby. The answer, in many cases, is that the Clojure library was designed to compose with other code, while the Ruby library was meant for programmer convenience.</p>
-<p>But if I leave it at that, this answer is unsatisfactory. Behind my answer is years of experience telling me that composition beats convenience in the long run. The asker of that question does not have that experience. I would love to have a way to explain why in an analytical way.</p>
-<p>If this talk even so much as opens the conversation up about the design space of composition, it would be extremely helpful. But I'm expecting more from Zach Tellman. His talk could have a profound impact similar to Rich Hickey's talks on <a href="http://www.infoq.com/presentations/Value-Values">immutable values</a> and <a href="https://www.youtube.com/watch?v=rI8tNMsozo0">simplicity</a>.</p>
-<h3 id="about-zach-tellmantalk">About <a href="http://clojure-conj.org/speakers#zach-tellman">Zach Tellman</a></h3>
-<p><a href="https://github.com/ztellman">Github</a> - <a href="http://twitter.com/ztellman">Twitter</a></p>
-<p><a href="http://clojure-conj.org/speakers#zach-tellman"><img src="http://www.lispcast.com/img/pre-conj/zach-tellman.jpeg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Zach Tellman will talk about building composable software.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -275,63 +145,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 12, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-making-games-at-runtime-with-clojuretalk">Talk: <a href="http://clojure-conj.org/speakers#zach-oakes">Making Games at Runtime with Clojure</a></h3>
-<p><a href="http://clojure-conj.org/speakers#zach-oakes">Zach Oakes' talk</a> at the <em>conj</em> is about making games in a dynamic programming environment.</p>
-<h4 id="background">Background</h4>
-<p>Clojure, and Lisps in general, are famous for dynamic programming. That means being able to modify the program as it is running without restarting it. Wouldn't it be nice to develop games in this way? It seems like the perfect fit, since video games are so visual, you'd want to see what your code changes look like very quickly. This talk will explore this. <a href="https://nightmod.net/">Nightmod</a> is a development environment written by Zach Oakes to modify a game in one window while it is running in another. It is based on the <a href="https://github.com/oakes/play-clj">play-clj</a> library, which he also wrote.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Game programming is a huge industry dominated by static languages with long code-compile-run cycles. Games cost millions of dollars to make, so even small improvements in developer productivity can save lots of money.</p>
-<p>But further, games are hugely complex systems that are often on the cutting edge of programming. Functional programming has a lot to say about complex systems, yet there has not been a lot of functional programming in commercial games. The domain is ripe for exploration and discovery.</p>
-<h3 id="about-zach-oakestalk">About <a href="http://clojure-conj.org/speakers#zach-oakes">Zach Oakes</a></h3>
-<p><a href="https://github.com/oakes">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#zach-oakes"><img src="http://www.lispcast.com/img/pre-conj/zach-oakes.jpg" /></a></p>
-<p>You can support Zach Oakes at <a href="https://gratipay.com/oakes/">Gratipay</a>.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Zach Oakes will talk about making games at runtime.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -356,63 +170,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 12, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-unlocking-data-driven-systemstalk">Talk: <a href="http://clojure-conj.org/speakers#paul-degrandis">Unlocking Data-Driven Systems</a></h3>
-<p><a href="http://clojure-conj.org/speakers#paul-degrandis">Paul deGrandis' talk</a> at the <em>conj</em> is about the design tradeoffs when building your system in a Data-Driven way.</p>
-<h4 id="background">Background</h4>
-<p>The recommended priority for choosing an implementation strategy is Data &gt; Function &gt; Macro. <strong>Macros are made for humans</strong>, not machines, so they are the least composable. <strong>Functions are composable</strong>, but opaque. Their only meaning is their side-effects and their return value. <strong>Data, however, can be interpreted</strong> in different ways, depending on the context. If one can design it right, a data-driven system can be both <strong>easy for a person</strong> to read and write and <strong>reusable for many problems</strong>.</p>
-<p>This talk is part of an ongoing discussion about data-driven systems in Clojure. Data-driven design has been around far longer than Clojure has. <a href="http://www.amazon.com/Paradigms-Artificial-Intelligence-Programming-Studies/dp/1558601910/">Paradigms of Artificial Intelligence Programming</a> is <em>the</em> book on the subject, showing its use in Common Lisp. <a href="https://www.youtube.com/watch?v=3yvrs9S0RIw">Christophe Grand gave a talk</a> at the Clojure/conj in 2010 that explained in depth why macros should not be the first choice when building DSLs.</p>
-<p>Many systems use data as their primary interface. Datalog queries in Datomic are just Clojure data. Prismatic Schemas are data. Leiningen project files are data (with a small macro for human convenience). Data-driven system is related to code-as-data, that all Lisps share. If code is data, why can't data be code? Clojure makes data-driven solutions easy with its variety of literal data structures.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>The conversation about how best to design data-driven systems is not over. Active Clojure developers are still experimenting and testing the approach. This talk will show data-driven systems taken to an extreme, where an entire ClojureScript application is represented as data. Many people already agree with the approach and are eagerly awaiting the deeper analysis this talk promises.</p>
-<h3 id="about-paul-degrandistalk">About <a href="http://clojure-conj.org/speakers#paul-degrandis">Paul deGrandis</a></h3>
-<p><a href="https://github.com/ohpauleez">Github</a> - <a href="http://twitter.com/ohpauleez">Twitter</a></p>
-<p><a href="http://clojure-conj.org/speakers#paul-degrandis"><img src="http://www.lispcast.com/img/pre-conj/paul-degrandis.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Paul deGrandis will talk about Data-Driven Systems.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -437,63 +195,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 10, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-developing-music-systems-on-the-jvm-with-pink-and-scoretalk">Talk: <a href="http://clojure-conj.org/speakers#steven-yi">Developing Music Systems on the JVM with Pink and Score</a></h3>
-<p><a href="http://clojure-conj.org/speakers#steven-yi">Steven Yi's talk</a> at the <em>conj</em> is about music systems on the JVM, focusing on two systems he built, called Pink and Score.</p>
-<h4 id="background">Background</h4>
-<p><a href="https://github.com/kunstmusik/pink">Pink</a> is a library for signal generation and processing and event handling. It is designed as a low-level library to use to build your own audio system. It is written in Clojure.</p>
-<p><a href="https://github.com/kunstmusik/score">Score</a> is a library for composing musical scores. Those scores are generic, so that they can be played by a variety of backend systems. Score is written in Clojure.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Electronic music is an interesting field. It is one that Lisp has been applied to for many years. To paraphrase <a href="http://sam.aaron.name/">Sam Aaron</a>, creator of <a href="http://overtone.github.io/">Overtone</a>, Clojure's high-level allows a programmer to leverage programming ability to create better music. Pink and Score join Overtone and Rich Hickey's <a href="https://github.com/richhickey/harmonikit">Harmonikit</a> as music systems developed in Clojure.</p>
-<h3 id="about-steven-yitalk">About <a href="http://clojure-conj.org/speakers#steven-yi">Steven Yi</a></h3>
-<p><a href="https://github.com/kunstmusik">Github</a> - <a href="http://twitter.com/kunstmusik">Twitter</a> - <a href="http://kunstmusik.com/">Blog</a></p>
-<p><a href="http://clojure-conj.org/speakers#steven-yi"><img src="http://www.lispcast.com/img/pre-conj/steven-yi.jpeg" /></a></p>
-<p>Steven Yi is the author of the <a href="http://blue.kunstmusik.com/">Blue Integrated Music Environment</a>. He is also a core developer of <a href="http://csound.github.io/">Csound</a>.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Steven Yi will talk about music systems on the JVM.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -518,109 +220,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 10, 2014
         </div>
 
-        
-<p>Summary: <em>There are a few conventions in core.async that are not hard to use once you've learned them. But learning them without help can be tedious. This article presents three guidelines that will get you through the learning curve.</em></p>
-<div class="figure">
-<img src="http://www.lispcast.com/img/willy-wonka.jpg" alt="Willy Wonka, inventor of CSP." /><p class="caption">Willy Wonka, inventor of CSP.</p>
-</div>
-<h3 id="introduction">Introduction</h3>
-<p>The more you use core.async, <strong>the more you feel like Willy Wonka</strong>. He knew how to maximize the effectiveness of the Oomploompa. And while core.async comes with a lot of functions built in, he knew exactly which ones to use at which time.</p>
-<p>In this extremely rare glimpse into the functioning of his mysterious factory, we take a look at the guidelines Wonka himself follows when orchestrating the work of the Oompaloompas.</p>
-<h3 id="when-to-use-go-versus-thread">When to use <code>go</code> versus <code>thread</code>?</h3>
-<div class="figure">
-<img src="http://www.lispcast.com/img/oompa.jpeg" alt="Willy Wonka with his Thread Pool." /><p class="caption">Willy Wonka with his Thread Pool.</p>
-</div>
-<h4 id="background">Background</h4>
-<p>Each Oompaloompa is a thread. Willy Wonka has a special group of Oompaloompas he calls a <em>thread pool</em>. Their assigment is simple: they manage a group of tasks that Wonka calls <code>go</code> blocks. Whenever Wonka has an appropriate task, he writes a <code>go</code> block and hands it to the Oompaloompas to work on.</p>
-<p>As the Oompaloompas work, they take one task and do it until the task <em>parks</em>. When it parks, they put it down and pick up another task that isn't parked. <strong>Tasks become unparked when they get new input</strong> from the chocolate pipes. Then the Oompaloompas can continue working on them.</p>
-<p>At one time, Wonka used to give the thread pool all sorts of tasks. He would give them very long calculation tasks, like weighing each chocolate bean in his chocolate bean mountain. He noticed that when they did this, <strong>lots of tasks were left undone, even though they were not parked</strong>, because all of the Ooompaloompas were busy doing something else.</p>
-<p>So he came up with a guideline.</p>
-<h4 id="avoid-long-calculations-and-blocking-inside-go-blocks">Avoid long calculations and blocking inside <code>go</code> blocks</h4>
-<p>Does your code do significant I/O, like downloading a file or writing to the network? Are you doing a very long calculation?</p>
-<p>Then use a <code>thread</code>. <strong>If it will take a long time or block, you want a dedicated thread.</strong> It can work as long as it wants, and even block. That way it doesn't slow down the work of the thread pool.</p>
-<p>Otherwise, you can use a <code>go</code> block.</p>
-<h3 id="when-to-use-single--versus-double-bang">When to use single- versus double-bang (!)</h3>
-<div class="figure">
-<img src="http://www.lispcast.com/img/oompa-loompa-2.jpg" alt="A couple of blocked Oompaloompas." /><p class="caption">A couple of blocked Oompaloompas.</p>
-</div>
-<h4 id="background-1">Background</h4>
-<p>Wonka also noticed that he needed to <strong>write different instructions</strong> for his two types of Oompaloompa. When he wrote a <code>go</code> block, he needed to say &quot;park while you wait for input&quot;. But for the other Oompaloompas created with <code>thread</code> (or for his own work), he needed an instruction that said &quot;block while you wait for input&quot;.</p>
-<p>So he came up with a little notation convention. If you're just parking, so you're in a <code>go</code> block, use one bang. If you're outside of a <code>go</code> block, meaning you need to block, use two bangs.</p>
-<p>These were his versions of his basic instructions:</p>
-<p><code>&gt;!</code>, <code>&lt;!</code>, and <code>alts!</code> versus <code>&gt;!!</code>, <code>&lt;!!</code>, and <code>alts!!</code>. The convention is easy.</p>
-<h4 id="use-single-bang-versions-in-go-blocks-and-double-bang-versions-outside.">Use single-bang versions in <code>go</code> blocks and double-bang versions outside.</h4>
-<p>The single-bang versions of these functions are meant to park a <code>go</code> block. Although they are defined as functions, they have special meaning to the <code>go</code> macro. In fact, if you actually run the functions (outside of a <code>go</code> block), they will throw an exception unconditionally, telling you <strong>they are meant to be inside a go block</strong>.</p>
-<p>The double-bang versions are blocking. That means that the thread they are running on will block if the channel is not ready. They can be used outside of a <code>go</code> block (anywhere) or inside of a <code>thread</code> block. <strong>It's safe to block inside a <code>thread</code> block since it's a dedicated thread.</strong></p>
-<h3 id="put"><code>put!</code></h3>
-<div class="figure">
-<img src="http://www.lispcast.com/img/wonka-angry.jpg" alt="Willy Wonka writing instructions for his mailman." /><p class="caption">Willy Wonka writing instructions for his mailman.</p>
-</div>
-<h4 id="background-2">Background</h4>
-<p>Like all factories, Willy Wonka's needs deliveries. When the UPS truck comes, there's plenty of boxes to unload. But Wonka is busy. So he leaves a note outside for the delivery guy.</p>
-<p>The note tells the guy where to put everything so the Oompaloompas know where to find it. When he says where to put a box, he spells it <code>put!</code>. That is, it has a bang.</p>
-<p>It's unfortunate because <strong>the other functions with a bang mean they park</strong>. But <code>put!</code> does not park. Wonka was just angry one day, and the convention stuck.</p>
-<p>But the delivery guy knows that Wonka is eccentric, so he doesn't take it personally and does his job. He puts stuff in its places, without blocking.</p>
-<h4 id="use-put-to-get-stuff-into-your-channels-from-outside.">Use <code>put!</code> to get stuff into your channels from outside.</h4>
-<p><code>put!</code> is a way to <strong>get values from outside of core.async</strong> into core.async without blocking. For instance, if you're using a callback-style, which is very common in Javascript, you will want to make your callback call <code>put!</code> to get the value onto a channel.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>That's it! Now to eat some chocolate!</p>
-<p>core.async is really cool, but it has a learning curve. Once you learn these conventions, you will begin to feel the power they give you, whether you're making chocolate or building cars. If you'd like to learn core.async and <strong>feel like Willy Wonka</strong>, I recommend the <a href="http://www.purelyfunctional.tv/core-async">LispCast Clojure core.async</a> videos. They build up a deep understanding of the fundamental concepts in a fun and gradual way.</p>
-<div class="subscribe-form-wrapper">
-  <form class="subscribe-form"
-        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
-        method="POST"
-        name="mc-embedded-subscribe-form"
-        novalidate="true">
-      <h3 class="subscribe-form-title">
-        
-Get a Free core.async Reference Sheet
-</h3>
-    
-<img class="subscribe-form-image"
-         src="http://www.lispcast.com/img/core_async_reference_thumb.png">
-<div class="subscribe-form-text">
-      <p class="subscribe-form-description">
-        
-Subscribe below to receive a free copy of the core.async reference sheet. If you are interested in core.async, this reference sheet contains lots of the important functions in a handy format. You'll also get a few emails introducing you to core.async.
-</p>
-      
-<input id="mce-EMAIL.email-field"
-             type="email"
-             value=""
-             placeholder="Email"
-             name="EMAIL"> <input type="hidden"
-             name="group[18565][8]"
-             value="1">
-<div style="position: absolute; left: -5000px;">
-        
-<input type="text"
-               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
-</div>
-      
-<input class="subscribe-button"
-             type="submit"
-             value="Get it"
-             name="subscribe">
-<div class="field-text-text2">
-        
-No spam. Ever.
-</div>
-    </div>
-  </form>
-</div>
-
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
-<li><a href="http://www.lispcast.com/core-async-code-style">core.async Code Style</a></li>
-<li><a href="http://www.lispcast.com/core-async-conveyor-belts-true-history">Conveyor Belts: Nature's core.async Channels</a></li>
-<li><a href="http://www.lispcast.com/elm-frp-clojure-core-async">Elm FRP in Clojure core.async</a></li>
-</ul>
-
+        There are a few conventions in core.async that are not hard to use once you've learned them. But learning them without help can be tedious. This article presents three guidelines that will get you through the learning curve.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -645,62 +245,7 @@ No spam. Ever.
           October 09, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-generating-generatorstalk">Talk: <a href="http://clojure-conj.org/speakers#steve-miner">Generating Generators</a></h3>
-<p><a href="http://clojure-conj.org/speakers#steve-miner">Steve Miner's talk</a> at the <em>conj</em> is about automatically creating test.check generators from a data-driven schema.</p>
-<h4 id="background">Background</h4>
-<p>Steve Miner is the author of the <a href="https://github.com/miner/herbert">Herbert</a> schema library. In Herbert, schemas are presented as plain EDN. They describe the structure and type of data. You can take a value and validate that it conforms to the schema. He is going to present a way to generate test.check generators from the schema. This way, you can do runtime checks and test-time checks. A good intro to Herbert is <a href="http://youtu.be/bmHTFo2Rf2w?t=19m50s">Steve Miner's lightning talk</a> from Clojure/conj last year. Reid Draper gave a <a href="https://www.youtube.com/watch?v=JMhNINPo__g">talk about test.check at Clojure/West</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>test.check contains a set of combinators to create new generators from existing generators. But combinators are not very easy to read or write when the data they are generating is fairly complex. Being able to generate them automatically from a declarative, data-driven style is one way to make it easier.</p>
-<p>Besides being easier, it also unifies the contracts (schema validation in function preconditions) with generative testing. The next domino would have to be building core.typed type signatures from the same data.</p>
-<h3 id="about-steve-minertalk">About <a href="http://clojure-conj.org/speakers#steve-miner">Steve Miner</a></h3>
-<p><a href="https://github.com/miner">Github</a> - <a href="http://twitter.com/miner">Twitter</a></p>
-<p><a href="http://clojure-conj.org/speakers#steve-miner"><img src="http://www.lispcast.com/img/pre-conj/steve-miner.jpeg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Steve Miner will talk about generating test.check generators.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -725,67 +270,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 07, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-helping-voters-with-pedestal-datomic-om-and-core.asynctalk">Talk: <a href="http://clojure-conj.org/speakers#nathan-herzing">Helping voters with Pedestal, Datomic, Om and core.async</a></h3>
-<p><a href="http://clojure-conj.org/speakers#nathan-herzing">Nathan Herzing and Chris Shea's talk</a> at the <em>conj</em> is about using Pedestal, Om, Datomic, and core.async together. They promise to code systems live.</p>
-<h4 id="background">Background</h4>
-<p>Pedestal was the name for a frontend framework create by Cognitect. They deprecated that framework and used the name for a small piece of it that was libraries for backend web servers, which is now under development. So <a href="https://github.com/pedestal/pedestal">Pedestal</a> now is a set of libraries for web development. Watch this <a href="https://www.youtube.com/watch?v=sFT_0v-iKVQ">Webcast</a> for background.</p>
-<p><a href="http://www.datomic.com/">Datomic</a> is Cognitect's append-only database with Datalog queries. A nice introduction is <a href="https://www.youtube.com/watch?v=4iaIwiemqfo">this talk by Rich Hickey</a>.</p>
-<p><a href="https://github.com/swannodette/om">Om</a> is a library in ClojureScript created by <a href="https://twitter.com/swannodette">David Nolen</a>. It is a wrapper around <a href="http://facebook.github.io/react/">React</a>, which is Facebook's library for manipulating the DOM in a functional way. Watch <a href="https://www.youtube.com/watch?v=DMtwq3QtddY">David Nolen's talk</a> for a good introduction.</p>
-<p><a href="https://github.com/clojure/core.async">core.async</a> is a library that brings Communicating Sequential Processes to Clojure and ClojureScript. A great talk on it is <a href="http://www.infoq.com/presentations/clojure-core-async">one by Rich Hickey</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>I've said before that I like experience reports. This one will also combine it with live coding, which is exciting. Live coding is always a risk. This talk will combine four of the major components Clojure brings to the table, which are all very powerful in their own right. What will happen when their powers combine?</p>
-<h3 id="about-nathan-herzingtalk">About <a href="http://clojure-conj.org/speakers#nathan-herzing">Nathan Herzing</a></h3>
-<p><a href="https://github.com/nherzing">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#nathan-herzing"><img src="http://www.lispcast.com/img/pre-conj/nathan-herzing.jpeg" /></a></p>
-<h3 id="about-chris-sheat2">About <a href="http://clojure-conj.org/speakers#chris-shea">Chris Shea</a></h3>
-<p><a href="https://github.com/tie-rack">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#nathan-herzing"><img src="http://www.lispcast.com/img/pre-conj/chris-shea.jpg" /></a></p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Nathan Herzing and Chris Shea will talk about Pedestal, Om, Datomic, and core.async.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -810,65 +295,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
           October 06, 2014
         </div>
 
-        
-<p>Summary: <em>Code style is important, but way less important than content. Yet everyone talks about style because it's easier. Let's talk about content. I'll start with some bullet points.</em></p>
-<p>In fiction writing, there is a fine, but visible, line between style and content. Style is your <strong>choice of words and grammar</strong> while you're telling a story. Content is <strong>the parts of the story</strong> itself. It's the characters, the plot devices, the motivations, etc.</p>
-<p>Style is important. Classic works of literature usually have a good style. But content is more important. Good style can enhance a story. But a story can be retold many times, each with a different style, because a good character and story can stand on its own. <strong>No amount of style is going to save crappy storytelling</strong> with uninteresting characters. It didn't work for The Matrix 2 &amp; 3, and man, did not help at all in the Star Wars prequels.</p>
-<p>You can roughly divide programming decisions along a similar line. Coding style versus coding content. <strong>So much advice falls on the style side.</strong> It talks about variable naming, function length, what parts of a language not to use.</p>
-<p>Where is all the stuff about code content? How do we choose an algorithm? How do we pick a data structure? Basically, how do we translate a real-world problem into a computational model? How do we determine if a program correctly models the problem? How do we judge if one model is better than another? The answer is so simplistic. <strong>A model fits a problem if the structure of the model matches the structure of the problem.</strong></p>
-<p>Structure, structure, structure.</p>
-<p>Here are some bullet points:</p>
-<h3 id="choose-the-right-collection">1. Choose the right collection</h3>
-<p>Here's a good example that we should all be familiar with. How do you choose between an array and a map? Well, if your problem is to do things in order, an array is the better choice because it is naturally ordered. If your problem is &quot;I have an x and I need a y&quot;, a map is probably better, because maps associate one value with another. <strong>The data structure's properties mirror the properties of the problem.</strong></p>
-<h3 id="factor-your-code">2. Factor your code</h3>
-<p>Refactoring is improving the style of your code without changing the content. But <a href="http://www.lispcast.com/stop-refactoring-and-start-factoring">factoring</a> is changing the structure of your code to reveal the <strong>underlying structure of the problem</strong>. This is the only reliable way to get a one-to-one mapping between code and reality.</p>
-<h3 id="determine-the-essential-structure-of-the-problem">3. Determine the essential structure of the problem</h3>
-<p>I have <a href="http://www.lispcast.com/java-learn-from-clojure#represent-computation-not-the-world">written before</a> about finding the essential idea in a problem. Object Oriented Programming advice tends to recommend <strong>picking each of the objects in the real world and creating a class for each</strong>. So, if you're modeling students and courses, regardless of the problem you're solving, you should have a student class and a course class.</p>
-<p>This practice comes from the early days of OOP, when it was still used a lot in simulations. I can see the benefit of representing each thing in your simulation as an object. But we're not building a simulation. <strong>A university registration system is not a university simulator.</strong> We are not simulating students. We are not simulating courses. We need to be looking at the problem we're trying to solve.</p>
-<h4 id="how-is-it-already-done">How is it already done?</h4>
-<p>I really think the best way is to look at the process that is already being used. If you're hired to replace a manual, pen-and-paper system, you have a head start over a new system. Computerizing an existing process is easier because <strong>the problem is already well-understood</strong>. Go ask the registrar's office how they are doing it.</p>
-<p>Let's say that each department keeps a large list of all the courses they give each semester. For each semester, they start a new notebook and make a page for each course. As students register, they write down their name. If they unregister, they cross them out. They leave room for enough students between each course, sometimes skipping a page. They put post-it notes sticking out the top so they can quickly turn to the page for a course when a student comes in the office.</p>
-<p>Wow! Your job is now way easier. You just have to <strong>replicate that notebook in code</strong>. That is so much easier than modeling students and courses. And once it's done, you have a place for improvements that are only possible in a computer.</p>
-<h4 id="finding-the-essence">Finding the essence</h4>
-<p>But let's say it's a new university, trying to get a head start on old universities by organizing everything on a computer. So there's no existing process. You've got to make it up.</p>
-<p>What do you do if the structure is not obvious? How do you determine the structure of a poem? Reading. Re-reading. Underlining. Arrows. Notes. Clarifying definitions. Basically, look for structure. Dig it all up. Then use your judgment about what is important. There often is not one single kind of structure, but <strong>a constellation of structure</strong>.</p>
-<h3 id="factor-out-incidence-from-essence">4. Factor out incidence from essence</h3>
-<p>The incidental structure just happens because of the choice of solution instead of the structure of the problem. <strong>The structure inherent in the problem is essential structure.</strong></p>
-<p>In the notebook used for registering students, there are some incidental implementation details that you don't want to replicate. In the notebook, they left some blank space for more students after each page so that they wouldn't run out of room. But running out of room is not an issue in a computer (no university is that big). So <strong>you can leave that part out</strong>.</p>
-<p>But less obviously, the fact that there is a separate page for each course is also incidental. It's not important that the students in one class all be stored in a single place. What's important is that at any time, a student can register for the course (random access!) and that at any time, a teacher can list all students in a particular course (random access!). We need a way to <em>project</em> a list of students <em>quickly enough</em> in a course from however it is stored.</p>
-<p>But it turns out that, if you factor correctly and find the essence, <strong>your solution should be generic</strong>. Why? Because structure is generic. It is pure content. The correct solution to this problem is to make a system to manage many-to-many relationships. Relational databases can do this easily with one table. You could make a <code>ManyToMany&lt;A, B&gt;</code> class. Those are implementation details that are incidental. What's essential is the many-to-many part.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>We need more discussion about the content of programs. Style is important, but we need people to create acronyms and rules of thumb for choosing program constructs. The <em>Design Patterns</em> book (and movement) were important in this respect. It documented patterns of common structure. But <strong>it failed to do a good job teaching the how</strong>, and added an air of mystery.</p>
-<p>Although this process is language-agnostic, Clojure is great for finding essential structure. One thing I like about Clojure is that the <strong>data structures are described in terms of their usage structure</strong>. And Rich Hickey has expressed many times that to understand a problem, to design a solution, we must <strong>pull things apart</strong> into its essential parts.</p>
-<p>If you'd like to learn Clojure and see how it might help you think in terms of structure, I can recommend my <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> video course. It builds up skills from complete beginner to decomposing a problem into a generic solution.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
-    </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
-</div>
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
-<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
-<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
-<li><a href="http://www.lispcast.com/the-world-is-mutable">But the World is Mutable</a></li>
-</ul>
-
+        Code style is important, but way less important than content. Yet everyone talks about style because it's easier. Let's talk about content.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -893,62 +320,7 @@ Learn more
           October 06, 2014
         </div>
 
-        
-<div class="figure">
-<img src="http://www.lispcast.com/img/pre-conj-header.png" />
-</div>
-<h3 id="talk-persistent-data-structures-for-special-occasionstalk">Talk: <a href="http://clojure-conj.org/speakers#michał-marczyk">Persistent Data Structures for Special Occasions</a></h3>
-<p><a href="http://clojure-conj.org/speakers#michał-marczyk">Michał Marczyk's talk</a> at the <em>conj</em> is about Persistent Data Structures that are available as libraries to Clojure. Given Michał Marczyk's contributions, this should be a great talk.</p>
-<h4 id="background">Background</h4>
-<p>Clojure comes with several Persistent Data Structures built-in. There is no need to copy them to share them, since they are immutable. And they are efficient at making modified copies as well, since they share structure. A great introduction to Clojure's Persistent Data Structures is <a href="http://www.infoq.com/presentations/Value-Identity-State-Rich-Hickey">this talk by Rich Hickey</a>. For a deeper dive into how they work, check out <a href="https://vimeo.com/28760673">Daniel Spiewak's talk</a>.</p>
-<h4 id="why-it-matters">Why it matters</h4>
-<p>Although the built-in data structures are great, there's no reason not to have more! Other data structures might be more appropriate at different times, given that they have different performance characteristics. It's great that there is development in these areas.</p>
-<h3 id="about-michał-marczyktalk">About <a href="http://clojure-conj.org/speakers#michał-marczyk">Michał Marczyk</a></h3>
-<p><a href="https://github.com/michalmarczyk">Github</a></p>
-<p><a href="http://clojure-conj.org/speakers#michał-marczyk"><img src="http://www.lispcast.com/img/pre-conj/michal-marczyk.jpg" /></a></p>
-<p>Michał Marczyk has written several persistent data structures in use by lots of us every day. He wrote the map and set types for ClojureScript, along with transients.</p>
-<hr />
-
-<div class="article-cg-box">
-  <p style="font-size:0.8em">
-    
-<em> This post is one of a series called <a href="http://www.lispcast.com/keyword/pre-conj">Pre-conj Prep</a>. </em>
-</p>
-
-
-<h3>
-You may like the Clojure Gazette
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to Clojure programmers, get the free Clojure Gazette.
-</p>
-
-<p><a href="http://www.clojuregazette.com/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The Clojure Gazette shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-
-</div>
-
-<p style="font-size:0.8em">
-<em> <a href="http://clojure-conj.org/">Clojure/conj</a> is a conference organized and hosted by <a href="http://cognitect.com/">Cognitect</a>. This information is in no way official. It is not sponsored by nor affiliated with Clojure/conj or Cognitect. It is simply me curating and organizing public information about the conference. </em>
-</p>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/pre-conj-2014">Pre-conj Prep 2014</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-anna-pawlicka">Pre-conj Prep: Anna Pawlicka</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-ashton-kemerling">Pre-conj Prep: Ashton Kemerling</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-</ul>
-
+        Michał Marczyk will talk about Persistent Data Structures.
 
         <div class="endmark">
           <a class="endmark-link"

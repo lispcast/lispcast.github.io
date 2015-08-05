@@ -100,11 +100,13 @@
 <p><code>map</code> is one of those functions that you should learn to write yourself. It's a good exercise in recursion, the idea of building a list up, and it's a higher order function. And it's also simple enough to do in a few lines.</p>
 <p><code>map</code> is also amenable to Test Driven Development. Test Driven Development can really help focus. You work on one small step at a time. It's great for working on bigger problems.</p>
 <p>I wrote some software to help code with TDD. It's totally new<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, so there may be problems. The goal is to turn all of the tests green. As you turn each test green, a new test appears. Remember to focus on each test as it comes up. Then make sure to keep the existing tests green as you pass new ones. Try it! And if it doesn't work, or if you have any suggestions, please let me know! (hints below)</p>
+<h3 id="specification">Specification</h3>
+<p>Define a function <code>my-map</code> that takes a function <code>f</code> (of one argument) and a collection <code>coll</code>. It returns a new list containing the result of <code>f</code> applied to the elements of <code>coll</code>, in order, one at a time.</p>
 <div class="feedback" data-code="(defn my-map [f coll])" data-fname="my-map">
 
 <table>
-<col width="51%" />
-<col width="26%" />
+<col width="50%" />
+<col width="28%" />
 <col width="21%" />
 <tbody>
 <tr class="odd">
@@ -131,6 +133,11 @@
 <td align="left">dec applied to all</td>
 <td align="left">(my-map dec [1 2 3])</td>
 <td align="left">[0 1 2]</td>
+</tr>
+<tr class="even">
+<td align="left">test a big list</td>
+<td align="left">(my-map even? (range 10))</td>
+<td align="left">[true false true false true false true false true false]</td>
 </tr>
 </tbody>
 </table>
@@ -151,8 +158,8 @@
   ())" data-fname="my-map">
 
 <table>
-<col width="51%" />
-<col width="26%" />
+<col width="50%" />
+<col width="28%" />
 <col width="21%" />
 <tbody>
 <tr class="odd">
@@ -179,6 +186,11 @@
 <td align="left">dec applied to all</td>
 <td align="left">(my-map dec [1 2 3])</td>
 <td align="left">[0 1 2]</td>
+</tr>
+<tr class="even">
+<td align="left">test a big list</td>
+<td align="left">(my-map even? (range 10))</td>
+<td align="left">[true false true false true false true false true false]</td>
 </tr>
 </tbody>
 </table>
@@ -190,8 +202,8 @@
     [2]))" data-fname="my-map">
 
 <table>
-<col width="51%" />
-<col width="26%" />
+<col width="50%" />
+<col width="28%" />
 <col width="21%" />
 <tbody>
 <tr class="odd">
@@ -218,6 +230,11 @@
 <td align="left">dec applied to all</td>
 <td align="left">(my-map dec [1 2 3])</td>
 <td align="left">[0 1 2]</td>
+</tr>
+<tr class="even">
+<td align="left">test a big list</td>
+<td align="left">(my-map even? (range 10))</td>
+<td align="left">[true false true false true false true false true false]</td>
 </tr>
 </tbody>
 </table>
@@ -229,8 +246,8 @@
     [(f (first coll))]))" data-fname="my-map">
 
 <table>
-<col width="51%" />
-<col width="26%" />
+<col width="50%" />
+<col width="28%" />
 <col width="21%" />
 <tbody>
 <tr class="odd">
@@ -257,6 +274,11 @@
 <td align="left">dec applied to all</td>
 <td align="left">(my-map dec [1 2 3])</td>
 <td align="left">[0 1 2]</td>
+</tr>
+<tr class="even">
+<td align="left">test a big list</td>
+<td align="left">(my-map even? (range 10))</td>
+<td align="left">[true false true false true false true false true false]</td>
 </tr>
 </tbody>
 </table>
@@ -269,8 +291,8 @@
           (my-map f (rest coll)))))" data-fname="my-map">
 
 <table>
-<col width="51%" />
-<col width="26%" />
+<col width="50%" />
+<col width="28%" />
 <col width="21%" />
 <tbody>
 <tr class="odd">
@@ -297,6 +319,11 @@
 <td align="left">dec applied to all</td>
 <td align="left">(my-map dec [1 2 3])</td>
 <td align="left">[0 1 2]</td>
+</tr>
+<tr class="even">
+<td align="left">test a big list</td>
+<td align="left">(my-map even? (range 10))</td>
+<td align="left">[true false true false true false true false true false]</td>
 </tr>
 </tbody>
 </table>

@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>Annotated map | LispCast</title>
+    <title>Let's TDD clojure.core/map | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="map is one of the staples of functional programming. It's totally useful and also surprisingly simple. Let's look at some examples and annotated code.">
-    <meta name="twitter:title" content="Annotated map">
+    <meta name="twitter:description" content="Learning to write map is a good lesson because it has recursion, list building, and higher order functions. It's everything that makes Lisp great.">
+    <meta name="twitter:title" content="Let's TDD clojure.core/map">
 
-    <meta property="og:title" content="Annotated map">
-    <meta property="og:description" content="map is one of the staples of functional programming. It's totally useful and also surprisingly simple. Let's look at some examples and annotated code.">
+    <meta property="og:title" content="Let's TDD clojure.core/map">
+    <meta property="og:description" content="Learning to write map is a good lesson because it has recursion, list building, and higher order functions. It's everything that makes Lisp great.">
 
-    <meta name="description" content="map is one of the staples of functional programming. It's totally useful and also surprisingly simple. Let's look at some examples and annotated code.">
+    <meta name="description" content="Learning to write map is a good lesson because it has recursion, list building, and higher order functions. It's everything that makes Lisp great.">
 
     <meta name="author" content="Eric Normand">
 
@@ -86,101 +86,224 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/annotated-map">
-            Annotated map
+             href="/tdd-clojure-core-map">
+            Let's TDD clojure.core/map
           </a>
         </h2>
 
         <div class="timestamp">
-          July 29, 2015
+          August 04, 2015
         </div>
 
         
-<p>Summary: <em><code>map</code> is one of the staples of functional programming. It's totally useful and also surprisingly simple. Let's look at some examples and annotated code.</em></p>
-<p>About a week ago I showed some <a href="http://lispcast.com/annotated-clojure-core-reduce">examples of using <code>reduce</code></a>, a very commonly used function. This time, I'm going to give some examples of <code>map</code>, which is probably even more common.</p>
-<p><code>map</code> is one of those things that's so useful and so straightforward that it finds its way into every language. Javascript has a <code>map</code> in the newer versions, but people couldn't live without it so it's in a lot of Javascript libraries (for example, in <a href="http://underscorejs.org/#map">Underscore</a>).</p>
-<p>Let's imagine you're walking down a list <code>[0 1 2 3 4 5]</code>. Your job is to increment each one. As you pass each each number on your right you pick it up, add one to it, and put it down on your left. Boom, a new list on your left.</p>
-<pre id="map1" class="code-card"><code>(map inc [0 1 2 3 4 5])
+<p>Summary: <em>Learning to write map is a good lesson because it has recursion, list building, and higher order functions. It's everything that makes Lisp great.</em></p>
+<p><code>map</code> is one of those functions that you should learn to write yourself. It's a good exercise in recursion, the idea of building a list up, and it's a higher order function. And it's also simple enough to do in a few lines.</p>
+<p><code>map</code> is also amenable to Test Driven Development. Test Driven Development can really help focus. You work on one small step at a time. It's great for working on bigger problems.</p>
+<p>I wrote some software to help code with TDD. It's totally new<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, so there may be problems. The goal is to turn all of the tests green. As you turn each test green, a new test appears. Remember to focus on each test as it comes up. Then make sure to keep the existing tests green as you pass new ones. Try it! And if it doesn't work, or if you have any suggestions, please let me know! (hints below)</p>
+<div class="feedback" data-code="(defn my-map [f coll])" data-fname="my-map">
 
-  =&gt; (1 2 3 4 5 6)</code></pre>
-<div class="annotation-down" for="map1" data-at="map i">
-add 1
+<table>
+<col width="51%" />
+<col width="26%" />
+<col width="21%" />
+<tbody>
+<tr class="odd">
+<td align="left">empty list returns empty list</td>
+<td align="left">(my-map inc [])</td>
+<td align="left">()</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [1])</td>
+<td align="left">[2]</td>
+</tr>
+<tr class="odd">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [2])</td>
+<td align="left">[3]</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to all</td>
+<td align="left">(my-map inc [1 2 3])</td>
+<td align="left">[2 3 4]</td>
+</tr>
+<tr class="odd">
+<td align="left">dec applied to all</td>
+<td align="left">(my-map dec [1 2 3])</td>
+<td align="left">[0 1 2]</td>
+</tr>
+</tbody>
+</table>
 </div>
 
-<div class="annotation-left" for="map1" data-at="5">
-to each of these
+<h3 id="hints">Hints</h3>
+<ol>
+<li><code>(= () [])</code> Empty list is equal to empty vector.</li>
+<li><code>(if test then else)</code> You will need an <code>if</code>.</li>
+<li><code>(empty? [])</code> gives true.</li>
+<li><code>(first [3])</code> gives <code>3</code>.</li>
+<li><code>(cons 1 ())</code> gives <code>(1)</code> (<code>cons</code> adds an element to the front of a list).</li>
+<li>There's always recursion (a function calling itself).</li>
+</ol>
+<h3 id="solution">Solution</h3>
+<p>Just one possible solution.</p>
+<div class="feedback" data-code="(defn my-map [f coll]
+  ())" data-fname="my-map">
+
+<table>
+<col width="51%" />
+<col width="26%" />
+<col width="21%" />
+<tbody>
+<tr class="odd">
+<td align="left">empty list returns empty list</td>
+<td align="left">(my-map inc [])</td>
+<td align="left">()</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [1])</td>
+<td align="left">[2]</td>
+</tr>
+<tr class="odd">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [2])</td>
+<td align="left">[3]</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to all</td>
+<td align="left">(my-map inc [1 2 3])</td>
+<td align="left">[2 3 4]</td>
+</tr>
+<tr class="odd">
+<td align="left">dec applied to all</td>
+<td align="left">(my-map dec [1 2 3])</td>
+<td align="left">[0 1 2]</td>
+</tr>
+</tbody>
+</table>
 </div>
 
-<div class="annotation-left" for="map1" data-at="1 2 3">
-it returns a new list with the numbers incremented
+<div class="feedback" data-code="(defn my-map [f coll]
+  (if (empty? coll)
+    ()
+    [2]))" data-fname="my-map">
+
+<table>
+<col width="51%" />
+<col width="26%" />
+<col width="21%" />
+<tbody>
+<tr class="odd">
+<td align="left">empty list returns empty list</td>
+<td align="left">(my-map inc [])</td>
+<td align="left">()</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [1])</td>
+<td align="left">[2]</td>
+</tr>
+<tr class="odd">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [2])</td>
+<td align="left">[3]</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to all</td>
+<td align="left">(my-map inc [1 2 3])</td>
+<td align="left">[2 3 4]</td>
+</tr>
+<tr class="odd">
+<td align="left">dec applied to all</td>
+<td align="left">(my-map dec [1 2 3])</td>
+<td align="left">[0 1 2]</td>
+</tr>
+</tbody>
+</table>
 </div>
 
-<p>Ok, next one. Let's say you're walking down a list . . . of lists. Your job? Write down the sizes of those lists. Let's do it! Walk down the list, pick up each list as you go, and drop the size to your left. You just made a new list!</p>
-<pre id="map2" class="code-card"><code>(map count
-     [[]
-      [1]
-      [1 1]
-      [1 1 1]
-      [1 1 1 1]
-      [1 1 1 1 1]])
-      
-  =&gt; (0 1 2 3 4 5)</code></pre>
-<div class="annotation-left" for="map2" data-at="count">
-get the size
+<div class="feedback" data-code="(defn my-map [f coll]
+  (if (empty? coll)
+    ()
+    [(f (first coll))]))" data-fname="my-map">
+
+<table>
+<col width="51%" />
+<col width="26%" />
+<col width="21%" />
+<tbody>
+<tr class="odd">
+<td align="left">empty list returns empty list</td>
+<td align="left">(my-map inc [])</td>
+<td align="left">()</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [1])</td>
+<td align="left">[2]</td>
+</tr>
+<tr class="odd">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [2])</td>
+<td align="left">[3]</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to all</td>
+<td align="left">(my-map inc [1 2 3])</td>
+<td align="left">[2 3 4]</td>
+</tr>
+<tr class="odd">
+<td align="left">dec applied to all</td>
+<td align="left">(my-map dec [1 2 3])</td>
+<td align="left">[0 1 2]</td>
+</tr>
+</tbody>
+</table>
 </div>
 
-<div class="annotation-left" for="map2" data-at="[[">
-of each of these
+<div class="feedback" data-code="(defn my-map [f coll]
+  (if (empty? coll)
+    ()
+    (cons (f (first coll))
+          (my-map f (rest coll)))))" data-fname="my-map">
+
+<table>
+<col width="51%" />
+<col width="26%" />
+<col width="21%" />
+<tbody>
+<tr class="odd">
+<td align="left">empty list returns empty list</td>
+<td align="left">(my-map inc [])</td>
+<td align="left">()</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [1])</td>
+<td align="left">[2]</td>
+</tr>
+<tr class="odd">
+<td align="left">inc applied to first</td>
+<td align="left">(my-map inc [2])</td>
+<td align="left">[3]</td>
+</tr>
+<tr class="even">
+<td align="left">inc applied to all</td>
+<td align="left">(my-map inc [1 2 3])</td>
+<td align="left">[2 3 4]</td>
+</tr>
+<tr class="odd">
+<td align="left">dec applied to all</td>
+<td align="left">(my-map dec [1 2 3])</td>
+<td align="left">[0 1 2]</td>
+</tr>
+</tbody>
+</table>
 </div>
 
-<div class="annotation-left" for="map2" data-at="0 1 2">
-a list of the sizes
-</div>
-
-<p>Alright, let's get fun with this one. You walk down a list of maps. Your job? figure out what's under the <code>:a</code> key. Drop the answers on the left. Remember, if the map doesn't have the list, it gives you <code>nil</code>.</p>
-<pre id="map3" class="code-card"><code>(map :a
-     [{:a 1}
-      {:a 2}
-      {:a 3}
-      {:b 4}])
-      
-  =&gt; (1 2 3 nil)</code></pre>
-<div class="annotation-left" for="map3" data-at=":a">
-keywords are functions, too
-</div>
-
-<div class="annotation-left" for="map3" data-at="{:a">
-look at these little maps, just waiting there!
-</div>
-
-<div class="annotation-left" for="map3" data-at="1 2 3">
-look, the last one was <code>nil</code>
-</div>
-
-<p>Ok, here's a good one. Someone wrote a bunch of sentences, but you want to make them angry. ALL CAPS!! Walk down the list, apply this epic function to each, and make a new list!</p>
-<pre id="map4" class="code-card"><code>(map (fn [x] (str (.toUpperCase x) &quot;!!&quot;))
-     [&quot;I am angry&quot;
-      &quot;don&#39;t yell at me&quot;
-      &quot;stop yelling&quot;])
-      
-  =&gt; (&quot;I AM ANGRY!!&quot;
-      &quot;DON&#39;T YELL AT ME!!&quot;
-      &quot;STOP YELLING!!&quot;)</code></pre>
-<div class="annotation-left" for="map4" data-at="toUpperCase">
-our epic function
-</div>
-
-<div class="annotation-left" for="map4" data-at="I am angry">
-make these angry!!!
-</div>
-
-<div class="annotation-left" for="map4" data-at="=">
-LOOK AT THEM!!
-</div>
-
-<h3 id="conclusions">Conclusions</h3>
-<p>Yep, <code>map</code> is useful. It's one of the staples of functional programming. Once you start using it, you'll use it everywhere.</p>
-<p>If you liked the code with annotations, the physical metaphors, the focus on the basics, you will love <a href="http://www.purelyfunctional.tv/intro-to-clojure">Lispcast Introduction to Clojure</a>. Visuals, metaphors, exercises, annotated code, and lots of code in a repo. You learn the basics of Clojure down to your fingertips, writing code right away.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>I hope you like it. If you liked this, you may like <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course about Clojure, starting from the ground up. It has exercises, animations, visuals, and code. Try it!</p>
 <div class="article-offer-box">
   
 <a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
@@ -204,10 +327,16 @@ Learn more
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
-<li><a href="http://www.lispcast.com/tdd-clojure-core-map">Let's TDD clojure.core/map</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 </ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Many thanks to the ClojureScript contributors who made this possible in the browser.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
 
 
         <div class="endmark">
@@ -229,12 +358,8 @@ Learn more
 
     <footer class="footer-banner">
       <a class="footer-previous"
-         href="http://www.lispcast.com/annotated-clojure-core-reduce">
+         href="http://www.lispcast.com/annotated-map">
         previous
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/tdd-clojure-core-map">
-        next
       </a>
     </footer>
 

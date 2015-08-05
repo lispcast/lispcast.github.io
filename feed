@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Let's TDD clojure.core/map</title>
+                  <guid isPermalink="false">http://www.lispcast.com/tdd-clojure-core-map</guid>
+                  <link>http://www.lispcast.com/tdd-clojure-core-map</link>
+                  <pubDate>Tue 04 Aug 2015 11:27:58 PM CDT</pubDate>
+                  <description>
+                    Learning to write map is a good lesson because it has recursion, list building, and higher order functions. It's everything that makes Lisp great.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/tdd-clojure-core-map"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Annotated map</title>
                   <guid isPermalink="false">http://www.lispcast.com/annotated-map</guid>
                   <link>http://www.lispcast.com/annotated-map</link>
@@ -129,20 +143,6 @@
                     Function application is a key concept in lambda calculus. While it is commonly expressed using parentheses in Clojure, it is also reified into a function which itself can be applied to another function.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/infinite-application"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>But the World is Mutable</title>
-                  <guid isPermalink="false">http://www.lispcast.com/the-world-is-mutable</guid>
-                  <link>http://www.lispcast.com/the-world-is-mutable</link>
-                  <pubDate>Mon 11 May 2015 11:46:58 PM CDT</pubDate>
-                  <description>
-                    The world may be mutable, but people have been using the notion of immutability to build reliable systems for a long time.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/the-world-is-mutable"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

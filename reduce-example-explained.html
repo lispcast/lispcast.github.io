@@ -1,0 +1,305 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>A reduce Example Explained | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="A deep-dive into a single reduce example shows how much can happen in a short bit of code.">
+    <meta name="twitter:title" content="A reduce Example Explained">
+
+    <meta property="og:title" content="A reduce Example Explained">
+    <meta property="og:description" content="A deep-dive into a single reduce example shows how much can happen in a short bit of code.">
+
+    <meta name="description" content="A deep-dive into a single reduce example shows how much can happen in a short bit of code.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+    title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/reduce-example-explained">
+            A reduce Example Explained
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          August 10, 2015
+        </div>
+
+        
+<p>Summary: <em>A deep-dive into a single <code>reduce</code> example shows how much can happen in a short bit of code.</em></p>
+<p>A few weeks ago I published a <a href="http://www.lispcast.com/annotated-clojure-core-reduce">post with some annotated reduce examples</a>. The idea was to explain <strong>using metaphor</strong> what reduce was doing and <strong>visually explain</strong> how those parts worked in the code.</p>
+<p>I think it was pretty successful in general. But a reader asked me some great questions about one of the examples that got me thinking that I should explain it deeper.</p>
+<p>Here is the example:</p>
+<pre id="reduce4" class="code-card"><code>(reduce (fn [[n d] b]
+          [(+ n b)
+           (inc d)])
+        [0 0]
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-left" for="reduce4" data-at="fn">
+<code>n</code> is the numerator, <code>d</code> is the denominator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="n b">
+add each number to the numerator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="inc d">
+add 1 to the denominator
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="0 0">
+start here
+</div>
+
+<div class="annotation-left" for="reduce4" data-at="1 2 3">
+average these numbers, one at a time
+</div>
+
+<p>The real problem with this example is <strong>the number of things going on at the same time</strong>. I don't want to distract people from the main point, which was that reduce itself is simple and easy to follow.</p>
+<p>So now I'm going to focus on that example by itself, and annotate it even further.</p>
+<p>First, notice that it has the normal reduce arguments: a function, an initial value, and a collection. It might be confusing because the initial value is itself a collection! This is a wonderful example of something beautiful about <code>reduce</code>: the first argument to the function, the return value of the function, and the initial value <strong>should have the same structure</strong>.</p>
+<pre id="reduce-pair" class="code-card"><code>(reduce (fn [[n d] b]
+          [(+ n b) (inc d)])
+        [0 0]
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-down" for="reduce-pair" data-at="[n">
+a pair
+</div>
+
+<div class="annotation-left" for="reduce-pair" data-at="+ n b">
+a pair
+</div>
+
+<div class="annotation-left" for="reduce-pair" data-at="0 0">
+a pair
+</div>
+
+<p>In this example, they're all pairs. In Clojure we represent pairs as vectors of two elements. So although the vector <code>[1 2 3 4 5]</code> is also a vector, <strong>it's semantically different</strong>. That one we treat as a sequence.</p>
+<p>We can break this down a little further. We're using argument destructuring in the function:</p>
+<pre id="reduce-args" class="code-card"><code>(fn [[n d] b]
+  [(+ n b) (inc d)])</code></pre>
+<div class="annotation-down" for="reduce-args" data-at="fn ">
+first <code>[</code> indicates arguments; second <code>[</code> indicates destructuring
+</div>
+
+<p>Destructuring in Clojure is a convenient way to name parts of a collection without writing all of the parts the long way. The above function could be rewritten like this:</p>
+<pre id="reduce-des" class="code-card"><code>(fn [avg b]
+  (let [n (first avg)
+        d (second avg)]
+    [(+ n b) (inc d)]))</code></pre>
+<div class="annotation-down" for="reduce-des" data-at="av">
+see, it's really two arguments
+</div>
+
+<div class="annotation-left" for="reduce-des" data-at="first">
+name the first element
+</div>
+
+<div class="annotation-left" for="reduce-des" data-at="second">
+name the second element
+</div>
+
+<div class="annotation-left" for="reduce-des" data-at="inc">
+then return a pair of numbers
+</div>
+
+<p><strong>It's up to you how you want to write it.</strong> I like using destructuring. In a case like this, it's kind of a toss-up. As the destructuring gets longer, there's more of a savings. It's also a great way to indicate what your function expects as an argument. The longer way is not as clear. Two lines of naming distract from one line doing work.</p>
+<p>Now, there's one more thing about this function. The return value is a vector using the <strong>literal vector syntax</strong>, acting as a pair. The two values of the pair will be evaluated, crammed into a vector, and returned. That pair will hold two numbers. This is really just like <code>[0 0]</code>, except instead of literal <code>0</code>s, we have two expressions that evaluate to numbers.</p>
+<p>So let's go through the whole example once more:</p>
+<pre id="reduce-final" class="code-card"><code>(reduce (fn [[n d] b]
+          [(+ n b)
+           (inc d)])
+        [0 0]
+        [1 2 3 4 5])</code></pre>
+<div class="annotation-down" for="reduce-final" data-at="[[">
+2 arguments: pair of numbers (<code>n</code> and <code>d</code>) and a number (<code>b</code>)
+</div>
+
+<div class="annotation-left" for="reduce-final" data-at="n b">
+return a vector with <code>n + b</code>
+</div>
+
+<div class="annotation-left" for="reduce-final" data-at="inc d">
+  and <code>d + 1</code>
+</div>
+
+<div class="annotation-left" for="reduce-final" data-at="0 0">
+initial pair of numbers passed as 1st argument
+</div>
+
+<div class="annotation-left" for="reduce-final" data-at="1 2 3">
+the numbers to be passed as <code>b</code>, 2nd argument
+</div>
+
+<p>Hold <code>[0 0]</code> in your left hand. Walk down the list. When you get to <code>1</code>, pick it up in your right hand. Now, add what's in your right hand to the first number in your left hand, and add 1 to the second number in your left hand. Hold the two new numbers in your left hand. Proceed down the line, picking each number up in your right hand, until the end. The answer is in your left hand.</p>
+<p>At each step, you start with a pair, you do something to it, and you end with a pair. When you're done, you have <strong>a pair that is the answer</strong>.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Well, I hope that these explanations helped you see a little bit better how to read Clojure code. There are quite a few things to learn, and it takes a little practice, but an <strong>reading or writing an expression like this does become second nature</strong>. That's why I so casually threw it out there, like it was self-explanatory. Sorry!</p>
+<p>If you're into functional programming and I didn't scare you off from Clojure, you might be interested in <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It covers the basic syntax with a step-by-step sequence of exercises to make it second nature. It's fun: you get to teach a robot how to bake!</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
+
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
+
+                                                    mixpanel.track("Page Visit");
+
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
+
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
+
+                                                    </script>
+      <script src="/js/mylibs/annotated-code.js" defer></script>
+      <script src="/js/libs/codemirror.js" defer></script>
+      <script src="/js/mylibs/feedback.js" defer></script>
+
+  </body>
+</html>

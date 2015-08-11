@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>A reduce Example Explained</title>
+                  <guid isPermalink="false">http://www.lispcast.com/reduce-example-explained</guid>
+                  <link>http://www.lispcast.com/reduce-example-explained</link>
+                  <pubDate>Mon 10 Aug 2015 09:46:29 PM CDT</pubDate>
+                  <description>
+                    A deep-dive into a single reduce example shows how much can happen in a short bit of code.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/reduce-example-explained"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Let's TDD clojure.core/map</title>
                   <guid isPermalink="false">http://www.lispcast.com/tdd-clojure-core-map</guid>
                   <link>http://www.lispcast.com/tdd-clojure-core-map</link>
@@ -129,20 +143,6 @@
                     Lambda abstractions are always leaky, but some are leakier than others. Clojure programmers recommend keeping most of your functions pure and containing the leaks as much as possible.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/lambda-abstraction"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Infinite Application</title>
-                  <guid isPermalink="false">http://www.lispcast.com/infinite-application</guid>
-                  <link>http://www.lispcast.com/infinite-application</link>
-                  <pubDate>Sun 17 May 2015 10:26:44 PM CDT</pubDate>
-                  <description>
-                    Function application is a key concept in lambda calculus. While it is commonly expressed using parentheses in Clojure, it is also reified into a function which itself can be applied to another function.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/infinite-application"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

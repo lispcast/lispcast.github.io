@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Let's TDD clojure.core/reduce</title>
+                  <guid isPermalink="false">http://www.lispcast.com/lets-tdd-clojure-core-reduce</guid>
+                  <link>http://www.lispcast.com/lets-tdd-clojure-core-reduce</link>
+                  <pubDate>Mon 17 Aug 2015 09:53:32 PM CDT</pubDate>
+                  <description>
+                    `clojure.core/reduce` is a powerful function, yet the code for it is so simple. It's four lines! We TDD our own implementation.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/lets-tdd-clojure-core-reduce"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>A reduce Example Explained</title>
                   <guid isPermalink="false">http://www.lispcast.com/reduce-example-explained</guid>
                   <link>http://www.lispcast.com/reduce-example-explained</link>
@@ -129,20 +143,6 @@
                     TDD is about fast feedback. CIDER tightens the feedback loop with quick commands for running tests and a powerful test reporting system.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/tdd-workflow-in-clojure-with-emacs-and-cider"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Lambda Abstraction</title>
-                  <guid isPermalink="false">http://www.lispcast.com/lambda-abstraction</guid>
-                  <link>http://www.lispcast.com/lambda-abstraction</link>
-                  <pubDate>Sun 17 May 2015 11:40:36 PM CDT</pubDate>
-                  <description>
-                    Lambda abstractions are always leaky, but some are leakier than others. Clojure programmers recommend keeping most of your functions pure and containing the leaks as much as possible.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/lambda-abstraction"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

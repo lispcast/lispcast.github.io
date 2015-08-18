@@ -15,13 +15,13 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="`clojure.core/reduce` is a powerful function, yet the code for it is so simple. It's four lines! We TDD our own implementation.">
     <meta name="twitter:title" content="Let's TDD clojure.core/reduce">
 
     <meta property="og:title" content="Let's TDD clojure.core/reduce">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="`clojure.core/reduce` is a powerful function, yet the code for it is so simple. It's four lines! We TDD our own implementation.">
 
-    <meta name="description" content="">
+    <meta name="description" content="`clojure.core/reduce` is a powerful function, yet the code for it is so simple. It's four lines! We TDD our own implementation.">
 
     <meta name="author" content="Eric Normand">
 
@@ -92,11 +92,97 @@
         </h2>
 
         <div class="timestamp">
-          August 12, 2015
+          August 17, 2015
         </div>
 
         
+<p>Summary: <em><code>clojure.core/reduce</code> is a powerful function, yet the code for it is so simple. It's four lines! We TDD our own implementation.</em></p>
+<p>A couple of weeks ago I introduced a <a href="http://www.lispcast.com/tdd-clojure-core-map">TDD-in-the-browser system</a> and applied it to build <code>map</code>. <code>reduce</code> is another cornerstone of functional programming. I explained <a href="http://www.lispcast.com/annotated-clojure-core-reduce">how <code>reduce</code> works</a> recently, so that should help understand it from the outside.</p>
+<p>But how does it work from the inside? Let's write a version of <code>reduce</code>.</p>
+<h3 id="specification">Specification</h3>
+<p>Define a function <code>my-reduce</code>. It should take three arguments. The first argument, <code>f</code>, is a function. The second argument is the initial value. And the third argument is a collection of values. <code>f</code> is a function of two arguments. <code>my-reduce</code> should take one value from the collection and apply <code>f</code> to the initial argument and the first value. The return value of <code>f</code> will become the new initial value, and then</p>
+<h3 id="tdd">TDD</h3>
+<div class="feedback" data-code="(defn my-reduce [f init coll])" data-fname="my-reduce">
 
+<table>
+<col width="48%" />
+<col width="31%" />
+<col width="20%" />
+<tbody>
+<tr class="odd">
+<td align="left">empty list returns init</td>
+<td align="left">(my-reduce + 0 [])</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left">0 + 1</td>
+<td align="left">(my-reduce + 0 [1])</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">0 + 1 + 2</td>
+<td align="left">(my-reduce + 0 [1 2])</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">0 + 1 + 2 + 3</td>
+<td align="left">(my-reduce + 0 [1 2 3])</td>
+<td align="left">6</td>
+</tr>
+<tr class="odd">
+<td align="left">(sum (range 100))</td>
+<td align="left">(my-reduce + 0 (range 100))</td>
+<td align="left">4950</td>
+</tr>
+<tr class="even">
+<td align="left">1 * 1</td>
+<td align="left">(my-reduce * 1 [1])</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">1 * 1 * 2</td>
+<td align="left">(my-reduce * 1 [1 2])</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">1 * 1 * 2 * 3</td>
+<td align="left">(my-reduce * 1 [1 2 3])</td>
+<td align="left">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="conclusion">Conclusion</h3>
+<p><code>clojure.core/reduce</code> is a very useful function. It's one of those functions I wish I had started using earlier. And building a version of <code>reduce</code> yourself can help you understand how the recursion works.</p>
+<p>I hope you like it. If you liked this, you may like <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course about Clojure, starting from the ground up. It has exercises, animations, visuals, and code. Try it!</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+<li><a href="http://www.lispcast.com/reduce-example-explained">A reduce Example Explained</a></li>
+<li><a href="http://www.lispcast.com/tdd-clojure-core-map">Let's TDD clojure.core/map</a></li>
+</ul>
 
 
         <div class="endmark">
@@ -117,6 +203,10 @@
     </div>
 
     <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/reduce-example-explained">
+        previous
+      </a>
     </footer>
 
 

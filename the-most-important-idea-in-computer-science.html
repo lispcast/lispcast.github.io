@@ -146,64 +146,79 @@
 <td align="left">&quot;yo!&quot;</td>
 </tr>
 <tr class="odd">
+<td align="left">symbols eval to their value in the environment</td>
+<td align="left">(my-eval {'x nil} 'x)</td>
+<td align="left">nil</td>
+</tr>
+<tr class="even">
 <td align="left">functions evaluate to themselves</td>
 <td align="left">(my-eval {} +)</td>
 <td align="left">+</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">functions evaluate to themselves</td>
 <td align="left">(my-eval {} *)</td>
 <td align="left">*</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">if statements with nil test eval else</td>
 <td align="left">(my-eval {} '(if nil 0 1))</td>
 <td align="left">1</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">if statements with non-nil test eval then</td>
 <td align="left">(my-eval {'t 1 'x 0 'y 1} '(if t x y))</td>
 <td align="left">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">empty do statement evals to nil</td>
 <td align="left">(my-eval {} '(do))</td>
 <td align="left">nil</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">one-expression do evals to expression</td>
 <td align="left">(my-eval {} '(do 1))</td>
 <td align="left">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">multi-expression do evals to last</td>
 <td align="left">(my-eval {} '(do 1 2 3 4))</td>
 <td align="left">4</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">let statements add to environment</td>
 <td align="left">(my-eval {} '(let [x 1] x))</td>
 <td align="left">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">let statements have implicit do</td>
 <td align="left">(my-eval {} '(let [x 10] &quot;hello&quot; x))</td>
 <td align="left">10</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">function application evals the args, then applies function to evaled args (use map and apply)</td>
 <td align="left">(my-eval {'+ +} '(+ 1 1))</td>
 <td align="left">2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">function application evals the args, then applies function to evaled args (use map and apply)</td>
 <td align="left">(my-eval {'/ /} '(/ 20 4))</td>
 <td align="left">5</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">ensure we're calling my-eval recusively</td>
 <td align="left">(my-eval {'+ +} '(do (+ 1 2)))</td>
 <td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">ensure we're calling my-eval recusively</td>
+<td align="left">(my-eval {'+ +} '(+ (+ 1 10) 2))</td>
+<td align="left">13</td>
+</tr>
+<tr class="odd">
+<td align="left">do expressions evaluate all forms</td>
+<td align="left">(my-eval {'deref deref 'reset! reset! 'a (atom nil) '+ +} '(do (reset! a 10) (+ (deref a) 75)))</td>
+<td align="left">85</td>
 </tr>
 </tbody>
 </table>

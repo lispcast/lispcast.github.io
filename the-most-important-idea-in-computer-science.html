@@ -200,6 +200,11 @@
 <td align="left">(my-eval {'/ /} '(/ 20 4))</td>
 <td align="left">5</td>
 </tr>
+<tr class="even">
+<td align="left">ensure we're calling my-eval recusively</td>
+<td align="left">(my-eval {'+ +} '(do (+ 1 2)))</td>
+<td align="left">3</td>
+</tr>
 </tbody>
 </table>
 </div>

@@ -86,6 +86,40 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://www.infoq.com/presentations/Value-Values">
+            The Value of Values
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/the-value-of-values">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          August 14, 2012
+        </div>
+
+        
+<p>Rich Hickey is a force of nature. The mark he will leave on programming will reach much farther than the Clojure programming language. The agenda he is setting forth will have as much impact on the notion of state as McCarthy conditionals had on structured programming.</p>
+<p>Please listen closely. The main idea of this talk goes far deeper than &quot;immutable good, mutable bad&quot;.</p>
+<p>It is wonderful to be a part of this.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.infoq.com/presentations/Functional-Data-Structures-in-Scala">
             Extreme Cleverness: Functional Data Structures in Scala
           </a>
@@ -387,52 +421,6 @@
 <li id="fn1"><p>The introduction to my thesis is a pretty good introduction to the techniques of information extraction in general.<a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://stackoverflow.com/questions/10947636/idiomatic-way-to-represent-sum-type-either-a-b-in-clojure/10951001#10951001">
-            Idiomatic way to represent sum type (Either a b) in Clojure
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/idiomatic-way-to-represent-either">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          June 13, 2012
-        </div>
-
-        
-<blockquote>
-<p>how do you represent sum types, also known as tagged unions and variant records? Something like <code>Either a b</code> in Haskell or <code>Either[+A, +B]</code> in Scala.</p>
-</blockquote>
-<p><code>Either</code> has two uses: to return a value of one of two types or to return two values of the same type that should have different semantics based on the tag.</p>
-<p>The first use is only important when using a static type system. <code>Either</code> is basically the minimum solution possible given the constraints of the Haskell type system. With a dynamic type system, you can return values of any type you want. <code>Either</code> is not needed.</p>
-<p>The second use <em>is</em> significant but can be accomplished quite simply in two (or more) ways:</p>
-<ol style="list-style-type: decimal">
-<li><code>{:tag :left :value 123} {:tag :right :value &quot;hello&quot;}</code></li>
-<li><code>{:left 123}             {:right &quot;hello&quot;}</code></li>
-</ol>
-<blockquote>
-<p>What I'd like to ensure, is that :tag is always there, and it can take only one of the specified values, and corresponding value is consistently of the same type/behaviour and cannot be nil, and there is an easy way to see that I took care of all cases in the code.</p>
-</blockquote>
-<p>If you would like to ensure this statically, Clojure is probably not your language. The reason is simple: expressions do not have types until runtime--until they return a value.</p>
-<p>The reason a macro will not work is that at macro expansion time, you do not have runtime values--and hence runtime types. You have compile-time constructs like symbols, atoms, sexpressions, etc. You can <code>eval</code> them, but using <code>eval</code> is considered bad practice for a number of reasons.</p>
 
 
         <div class="endmark">

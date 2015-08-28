@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>The Most Important Idea in Computer Science</title>
+                  <guid isPermalink="false">http://www.lispcast.com/the-most-important-idea-in-computer-science</guid>
+                  <link>http://www.lispcast.com/the-most-important-idea-in-computer-science</link>
+                  <pubDate>Fri 28 Aug 2015 01:22:35 AM CDT</pubDate>
+                  <description>
+                    Computer Science has ideas that are important to the broader world. The most important is the Universal Turing Machine. From one perspective, Lisp embodies the idea at its core. To really understand how, I ask you to implement your own Lisp interpreter.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/the-most-important-idea-in-computer-science"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Let's TDD clojure.core/reduce</title>
                   <guid isPermalink="false">http://www.lispcast.com/lets-tdd-clojure-core-reduce</guid>
                   <link>http://www.lispcast.com/lets-tdd-clojure-core-reduce</link>
@@ -129,20 +143,6 @@
                     Setting up and tearing down a test database can be slow. Use a rolled back transaction to quickly reset the database to a known state. You can do that in an `:each` fixture to run each test in isolation.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-database-test-faster"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>TDD Workflow in Clojure using Emacs with CIDER</title>
-                  <guid isPermalink="false">http://www.lispcast.com/tdd-workflow-in-clojure-with-emacs-and-cider</guid>
-                  <link>http://www.lispcast.com/tdd-workflow-in-clojure-with-emacs-and-cider</link>
-                  <pubDate>Mon 08 Jun 2015 10:15:10 PM CDT</pubDate>
-                  <description>
-                    TDD is about fast feedback. CIDER tightens the feedback loop with quick commands for running tests and a powerful test reporting system.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/tdd-workflow-in-clojure-with-emacs-and-cider"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

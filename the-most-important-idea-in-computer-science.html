@@ -1,0 +1,325 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>The Most Important Idea in Computer Science | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Computer Science has ideas that are important to the broader world. The most important is the Universal Turing Machine. From one perspective, Lisp embodies the idea at its core. To really understand how, I ask you to implement your own Lisp interpreter.">
+    <meta name="twitter:title" content="The Most Important Idea in Computer Science">
+
+    <meta property="og:title" content="The Most Important Idea in Computer Science">
+    <meta property="og:description" content="Computer Science has ideas that are important to the broader world. The most important is the Universal Turing Machine. From one perspective, Lisp embodies the idea at its core. To really understand how, I ask you to implement your own Lisp interpreter.">
+
+    <meta name="description" content="Computer Science has ideas that are important to the broader world. The most important is the Universal Turing Machine. From one perspective, Lisp embodies the idea at its core. To really understand how, I ask you to implement your own Lisp interpreter.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+    title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/the-most-important-idea-in-computer-science">
+            The Most Important Idea in Computer Science
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          August 28, 2015
+        </div>
+
+        
+<p>Summary: <em>Computer Science has ideas that are important to the broader world. The most important is the Universal Turing Machine. From one perspective, Lisp embodies the idea at its core. To really understand how, I ask you to implement your own Lisp interpreter.</em></p>
+<p>The most important<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> idea in Computer Science is <strong>the idea of the Universal Turing Machine</strong>. There are all these different types of computation, which can be ordered by their power. For instance, finite state machines can't count arbitrarily high, but stack machines can. And <em>way</em> at the top of the list, the most powerful, is the Turing Machine.</p>
+<p>The Turing Machine is curious because, according to the Church-Turing Thesis, what it can compute <strong>is the <em>definition</em> of computability</strong>. Practically, this means that all languages are equivalently powerful in the <em>computability</em> sense. PHP, JavaScript, Java, C, machine code. They're all <em>Turing-complete</em>, meaning they're sitting on the same top rung of that hierarchy of computing power.</p>
+<p>So not only is the Turing Machine up at the top (and we believe that nothing can be higher), the Turing Machine is also curious for another very important reason: <strong>it can compute itself</strong>. You can program a Turing Machine to act like a Turing Machine. Put another way, on Turing Machine hardware, you can write a Turing Machine in software. And, of course, that software Turing Machine can run another software Turing Machine, <em>ad infinitum</em>.</p>
+<p>We take this property for granted every day. Our computers are Turing Machines. They leave the factory complete, never to be changed. And we buy them, completely confident that we can run Turing-complete software on them. We don't need specialized hardware for each problem we want to solve. <strong>We can solve it in software.</strong> And what about virtualization? We run a virtual machine (software) that emulates a machine (hardware) to run more software. That's all thanks to the idea of the Universal Turing Machine.</p>
+<p>All general-purpose languages are Turing-complete. It doesn't take that much to be Turing-complete. But there's something that most languages don't address that Lisp does. You can break up Turing-completeness into two parts: one is that it can compute any computable function. All general-purpose languages do that. The second thing is that <strong>they can emulate themselves and all other languages</strong>. Most languages don't even try that part.</p>
+<p>Just to be clear, not doing the second thing does not affect where it sits on the hierarchy. It's still at the top. Not doing the second one merely omits the meatiest idea in Computer Science.</p>
+<p><strong>Lisp was first defined in itself</strong><sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>. From day one, it could emulate itself. And it was also a demonstration of how you could emulate other semantics. Lisp embodies the coolest idea that Computer Science has brought to the world.</p>
+<p>Yes, you can write a JavaScript interpreter in JavaScript. But it's not at the core. It's not part of the JavaScript ethos. It's right there in Lisp. It's actually really easy. And there's a right of passage that Lisp programmers go through: write your own Lisp.</p>
+<p>So let's do that! Let's write a Lisp interpreter <em>in Clojure</em>. It's actually a small Lisp, because, well, Lisps are big and this is just an exercise. But you could continue past this small language if you like.</p>
+<h3 id="specification">Specification</h3>
+<p>Write a function <code>my-eval</code> that takes an environment (all the variables defined) and an expression (some code). <code>my-eval</code> should do evaluate the code.</p>
+<div class="feedback" data-code="(defn my-eval [env exp])" data-fname="my-eval">
+
+<table>
+<col width="48%" />
+<col width="31%" />
+<col width="20%" />
+<tbody>
+<tr class="odd">
+<td align="left">nil evals to nil</td>
+<td align="left">(my-eval {} nil)</td>
+<td align="left">nil</td>
+</tr>
+<tr class="even">
+<td align="left">numbers eval to themselves</td>
+<td align="left">(my-eval {} 1)</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numbers eval to themselves</td>
+<td align="left">(my-eval {} 2)</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">strings eval to themselves</td>
+<td align="left">(my-eval {} &quot;hello&quot;)</td>
+<td align="left">&quot;hello&quot;</td>
+</tr>
+<tr class="odd">
+<td align="left">symbols eval to their value in the environment</td>
+<td align="left">(my-eval {'x 10} 'x)</td>
+<td align="left">10</td>
+</tr>
+<tr class="even">
+<td align="left">symbols eval to their value in the environment</td>
+<td align="left">(my-eval {'x &quot;yo!&quot;} 'x)</td>
+<td align="left">&quot;yo!&quot;</td>
+</tr>
+<tr class="odd">
+<td align="left">functions evaluate to themselves</td>
+<td align="left">(my-eval {} +)</td>
+<td align="left">+</td>
+</tr>
+<tr class="even">
+<td align="left">functions evaluate to themselves</td>
+<td align="left">(my-eval {} *)</td>
+<td align="left">*</td>
+</tr>
+<tr class="odd">
+<td align="left">if statements with nil test eval else</td>
+<td align="left">(my-eval {} '(if nil 0 1))</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">if statements with non-nil test eval then</td>
+<td align="left">(my-eval {'t 1 'x 0 'y 1} '(if t x y))</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left">empty do statement evals to nil</td>
+<td align="left">(my-eval {} '(do))</td>
+<td align="left">nil</td>
+</tr>
+<tr class="even">
+<td align="left">one-expression do evals to expression</td>
+<td align="left">(my-eval {} '(do 1))</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">multi-expression do evals to last</td>
+<td align="left">(my-eval {} '(do 1 2 3 4))</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">let statements add to environment</td>
+<td align="left">(my-eval {} '(let [x 1] x))</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">let statements have implicit do</td>
+<td align="left">(my-eval {} '(let [x 10] &quot;hello&quot; x))</td>
+<td align="left">10</td>
+</tr>
+<tr class="even">
+<td align="left">function application evals the args, then applies function to evaled args (use map and apply)</td>
+<td align="left">(my-eval {'+ +} '(+ 1 1))</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">function application evals the args, then applies function to evaled args (use map and apply)</td>
+<td align="left">(my-eval {'/ /} '(/ 20 4))</td>
+<td align="left">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>I've put my solution on the discussion forum <a href="http://discuss.purelyfunctional.tv/t/the-most-important-idea-in-computer-science/391">here</a>. If you'd like to share your solution, please post your solution there. You can also see how other people have solved it.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>I really like the idea of the Universal Turing Machine. It makes my mind spin with recursive infinities. And I see it in our everyday lives. And it's right there at the heart of Lisp. Lispers write interpreters all the time. It's just another layer of emulation.</p>
+<p>If you'd like to experience this idea firsthand, you may want to learn Clojure with <a href="http://purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It starts at the very beginning and goes deep into this idea of interpretation that's at the heart of Lisp. It uses exercises, animations, screenscasts, and metaphor to guide you through everything you need to know to get to that deep experience.</p>
+<div class="article-offer-box">
+  
+<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
+<div class="article-offer-box-text-wrapper">
+      <div class="article-offer-box-text">
+        <div class="article-offer-box-text-pitch">
+          
+Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
+</div>
+        <div class="offer-box-buy-button">
+Learn more
+</div>
+      </div>
+    </div>
+    
+<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/infinite-application">Infinite Application</a></li>
+<li><a href="http://www.lispcast.com/just-hack-something-together">Just Hack Something Together</a></li>
+<li><a href="http://www.lispcast.com/a-personal-lisp-crisis">A Personal Lisp Crisis</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>According to me.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><a href="http://www-formal.stanford.edu/jmc/recursive.html">Recursive Functions of Symbolic Expressions and Their Computation by Machine</a>.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/lets-tdd-clojure-core-reduce">
+        previous
+      </a>
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
+
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
+
+                                                    mixpanel.track("Page Visit");
+
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
+
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
+
+                                                    </script>
+      <script src="/js/mylibs/annotated-code.js" defer></script>
+      <script src="/js/libs/codemirror.js" defer></script>
+      <script src="/js/mylibs/feedback.js" defer></script>
+
+  </body>
+</html>

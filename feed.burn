@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>What is ClojureScript?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/what-is-clojurescript</guid>
+                  <link>http://www.lispcast.com/what-is-clojurescript</link>
+                  <pubDate>Fri 11 Sep 2015 01:07:15 PM CDT</pubDate>
+                  <description>
+                    ClojureScript is Clojure that compiles to JavaScript. It combines the power of Clojure with the reach of JavaScript.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-is-clojurescript"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>The Most Important Idea in Computer Science</title>
                   <guid isPermalink="false">http://www.lispcast.com/the-most-important-idea-in-computer-science</guid>
                   <link>http://www.lispcast.com/the-most-important-idea-in-computer-science</link>
@@ -129,20 +143,6 @@
                     The Google Closure Library provides a nice interface to the HTML5 History API. Coupling it with Secretary is very easy. But not all browsers support HTML5 History. In this post I'll talk about one way to make sure you have client-side routing in all browsers.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>How I made my Clojure database tests 5x faster</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-database-test-faster</guid>
-                  <link>http://www.lispcast.com/clojure-database-test-faster</link>
-                  <pubDate>Wed 17 Jun 2015 05:12:05 PM CDT</pubDate>
-                  <description>
-                    Setting up and tearing down a test database can be slow. Use a rolled back transaction to quickly reset the database to a known state. You can do that in an `:each` fixture to run each test in isolation.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-database-test-faster"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

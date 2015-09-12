@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Won't it be hard to debug ClojureScript in my browser?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/debugging-clojurescript</guid>
+                  <link>http://www.lispcast.com/debugging-clojurescript</link>
+                  <pubDate>Sat 12 Sep 2015 03:03:13 PM CDT</pubDate>
+                  <description>
+                    Even though ClojureScript adds another layer of abstraction, the tooling makes it easier to debug that plain JavaScript.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/debugging-clojurescript"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>What is ClojureScript?</title>
                   <guid isPermalink="false">http://www.lispcast.com/what-is-clojurescript</guid>
                   <link>http://www.lispcast.com/what-is-clojurescript</link>
@@ -129,20 +143,6 @@
                     If naming is one of the two hardest things in programming, it follows that every other possible solution (except those few involving cache invalidation) should be attempted before naming something. As a corrolary, bad names are a code smell.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/avoid-naming-at-all-costs"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Mastering ClojureScript Routing with Secretary and goog.History</title>
-                  <guid isPermalink="false">http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history</guid>
-                  <link>http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history</link>
-                  <pubDate>Wed 24 Jun 2015 11:27:14 PM CDT</pubDate>
-                  <description>
-                    The Google Closure Library provides a nice interface to the HTML5 History API. Coupling it with Secretary is very easy. But not all browsers support HTML5 History. In this post I'll talk about one way to make sure you have client-side routing in all browsers.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

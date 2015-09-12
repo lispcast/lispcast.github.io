@@ -1,0 +1,326 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Won't it be hard to debug ClojureScript in my browser? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Even though ClojureScript adds another layer of abstraction, the tooling makes it easier to debug that plain JavaScript.">
+    <meta name="twitter:title" content="Won't it be hard to debug ClojureScript in my browser?">
+
+    <meta property="og:title" content="Won't it be hard to debug ClojureScript in my browser?">
+    <meta property="og:description" content="Even though ClojureScript adds another layer of abstraction, the tooling makes it easier to debug that plain JavaScript.">
+
+    <meta name="description" content="Even though ClojureScript adds another layer of abstraction, the tooling makes it easier to debug that plain JavaScript.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+    title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/debugging-clojurescript">
+            Won't it be hard to debug ClojureScript in my browser?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 12, 2015
+        </div>
+
+        
+<p>Summary: <em>Even though ClojureScript adds another layer of abstraction, the tooling makes it easier to debug that plain JavaScript.</em></p>
+<p>In the browser, we're dealing with so many levels of abstraction, <strong>won't adding another make things harder to understand what's going on?</strong> Won't it be hard to find the source of the bug, because we'll be looking at outputted JavaScript code instead of the code we wrote? Will we have to understand how the compiler works in order to translate back into our code?</p>
+<p>If you had asked me these questions a year ago, I would have said &quot;yes&quot;. But a lot has happened since then, and debugging ClojureScript is, in many ways, <strong><em>easier</em> than debugging JavaScript</strong>. ClojureScript (and, honestly, the browsers, as well) has come a long way.</p>
+<p>Intuitively, Clojure and ClojureScript have been better designed than JavaScript. JavaScript was designed and implemented in <em>ten days</em>. <strong>We're lucky that it works at all.</strong> And now it has to support backwards compatibility. Let's go over some of the specific things that makes debugging easier in ClojureScript.</p>
+<h2 id="unknown-variables">Unknown variables</h2>
+<p>Let's start at the beginning. When ClojureScript is compiled to JavaScript, it's a great time to do a little analysis. The entire file is read in, with all of its dependencies, and so there are certain errors you can detect without running the program. One of the easiest things to detect is <strong>variables that are accessed but never defined</strong>.</p>
+<p>In JavaScript, this won't give an error until you run <code>badFunction</code>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">badFunction</span>() {
+  <span class="kw">var</span> myVariable = <span class="dv">10</span>;
+  <span class="kw">return</span> myVarible + <span class="dv">1</span>; <span class="co">// misspelled variable</span>
+}</code></pre>
+<p>In Chrome, this says: <code>Uncaught ReferenceError: myVarible is not defined</code>. Notice that <code>myVarible</code> is misspelled in the code. Of course, this was easy to detect in this short bit of code. But if we don't run <code>badFunction</code> right away to force the error, <strong>this code could make it to production and stop working in a customer's browser</strong>. This kind of bug is difficult even to detect.</p>
+<p>In ClojureScript, I can write something similar:</p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">defn</span><span class="fu"> bad-function </span>[]
+  (<span class="kw">let</span> [my-variable <span class="dv">10</span>]
+    (<span class="kw">+</span> my-varible <span class="dv">1</span>)))</code></pre>
+<p>But once I type that in, I get a warning right away. I've detected the bug immediately: <code>WARNING: Use of undeclared Var cljs.user/my-varible at line 3</code>.</p>
+<h2 id="function-call-warnings">Function call warnings</h2>
+<p>ClojureScript can also warn me if I call a function with the <strong>wrong number of arguments</strong>. In JavaScript, this is legal:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> firstname = <span class="st">&quot;&quot;</span>;
+<span class="kw">var</span> lastname  = <span class="st">&quot;&quot;</span>;
+
+<span class="kw">function</span> <span class="fu">saveName</span>(first, last) {
+  firstname = first;
+  lastname  = last;
+}
+
+<span class="co">// later ...</span>
+
+<span class="fu">saveName</span>(<span class="st">&quot;Eric&quot;</span>); <span class="co">// what about last?</span></code></pre>
+<p>What error will JavaScript give you in this case? <strong>Nothing!</strong> It will set <code>lastname</code> to <code>undefined</code>.</p>
+<p>In ClojureScript, if I call a known function of two arguments with only one argument, <strong>it will at least tell me</strong>.</p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">defn</span><span class="fu"> two-args </span>[a b]
+  <span class="co">;;...</span>
+  )
+
+<span class="co">;; later ...</span>
+
+(two-args <span class="dv">1</span>)</code></pre>
+<p>ClojureScript will tell me: <code>WARNING: Wrong number of args (1) passed to cljs.user/two-args at line 132</code>.</p>
+<h2 id="type-inference">Type inference</h2>
+<p>ClojureScript does a little bit of type inference. It's not Haskell, but <strong>it can catch some major errors</strong>.</p>
+<p>Ugh, JavaScript can have some really cryptic behavior. Again, you won't see this until runtime.</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">&gt; <span class="dv">5</span> + [<span class="dv">1</span>];
+<span class="st">&quot;51&quot;</span>
+&gt;</code></pre>
+<p>ClojureScript will give a warning when it can infer numeric math errors:</p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="kw">&gt;</span> (<span class="kw">+</span> <span class="dv">5</span> [<span class="dv">1</span>])
+WARNING: cljs.core/+, all arguments must be numbers,
+  got [number cljs.core/IVector] instead. at line <span class="dv">1</span>
+<span class="st">&quot;5[1]&quot;</span></code></pre>
+<p>It still gives a weird answer, but <strong>the warning is given at compile time</strong>.</p>
+<h2 id="source-maps">Source Maps</h2>
+<p>So those are some of the bugs that ClojureScript can detect at compile time. But other bugs still happen and you'll want to <strong>figure out where in the code they are</strong>. Luckily, ClojureScript has great <a href="http://swannodette.github.io/2013/09/15/source-maps/">Source Maps</a> support.</p>
+<p>Source Maps are a feature of <strong>your browser's developer tools</strong> that tell it where in <em>your</em> code the bug happened.</p>
+<p>If something throws an error, I can see in my console the error, the source file, and the line number. Notice that it's a <code>cljs</code> source file! The whole stack trace is like that.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/cljs-stacktrace.png" alt="Stacktrace with CLJS source" /><p class="caption">Stacktrace with CLJS source</p>
+</div>
+<p>When I click on one of the files, I'm whisked to <em>my actual code</em> as I wrote it. I can see exactly what line the problem happened on.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/cljs-breakpoint.png" alt="Set breakpoints in CLJS" /><p class="caption">Set breakpoints in CLJS</p>
+</div>
+<p>I can even set breakpoints!</p>
+<h2 id="repl">REPL</h2>
+<p>You can run ClojureScript code right in the browser with the built-in ClojureScript Browser REPL. The JavaScript console lets you run JavaScript to test things out and figure out what your state is. The ClojureScript REPL give you the same power to <strong>interactively try out functions, inspect state, and access the DOM</strong>.</p>
+<h2 id="incremental-compilation">Incremental compilation</h2>
+<p>Because your code is being compiled as you write it, you will <strong>see the errors and warnings much, much sooner</strong> than you would if you had to reload your browser and trigger your code to run.</p>
+<h2 id="fewer-bugs-in-general">Fewer bugs in general</h2>
+<p>Finally, ClojureScript avoids lots of bugs by virtue of its more functional semantics. ClojureScript is immutable by default. It is not weakly typed. And the language is more thought out. You'll simply encounter fewer bugs in ClojureScript. And the bugs you do have are the same bugs that you would have had in plain JavaScript.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>ClojureScript has come a long way for debugging. It has embraced its nature as a compiled language and built in simple static analysis that catches many errors. And the excellent support for REPL-driven development and incremental compilations make it great for debugging small bits of code before they get lumped into the whole program. And finally, ClojureScript's semantics are less prone to bugs that JavaScript's. I actually feel that JavaScript is harder to debug.</p>
+<p>If you're interested in getting started with ClojureScript, I recommend <a href="http://www.purelyfunctional.tv/single-page-applications">LispCast Single Page Applications with ClojureScript and Om</a>. It uses Om (a React wrapper) to build an application from the ground up. The course teaches everything you need using animations, exercises, code screencasts, and more. It's the fastest and most effective way to learn to build Om applications. The course shows you how to use the REPL and fast, incremental compilation to build your app.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+FREE: Getting Started with ClojureScript
+</h3>
+    
+<img class="subscribe-form-image" src="http://www.lispcast.com/img/scientist.png"
+         style="max-height:500px; float:right; width:inherit;box-shadow:none">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to get my <em>Getting Started with ClojureScript</em> course. Each module is delivered by email. It's designed to help you decide if ClojureScript will work for you, to get set up, and to explore some of its cooler features.
+</p>
+      <p class="subscribe-form-description">
+        
+Here are some of the topics:
+</p>
+      <ul>
+        <li>
+What do you need to start using ClojureScript?
+</li>
+        <li>
+Won't it be hard to debug ClojureScript in my browser?
+</li>
+        <li>
+How can I use existing JavaScript libraries from ClojureScript?
+</li>
+      </ul>
+      <p>
+        
+You'll also get some free Clojure goodies and information about upcoming courses.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][64]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history">Mastering ClojureScript Routing with Secretary and goog.History</a></li>
+<li><a href="http://www.lispcast.com/react-another-level-of-indirection">React: Another Level of Indirection</a></li>
+<li><a href="http://www.lispcast.com/what-is-clojurescript">What is ClojureScript?</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/what-is-clojurescript">
+        previous
+      </a>
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
+
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
+
+                                                    mixpanel.track("Page Visit");
+
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
+
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
+
+                                                    </script>
+      <script src="/js/mylibs/annotated-code.js" defer></script>
+      <script src="/js/libs/codemirror.js" defer></script>
+      <script src="/js/mylibs/feedback.js" defer></script>
+
+  </body>
+</html>

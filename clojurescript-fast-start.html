@@ -1,0 +1,282 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>What's the fastest way to get started using ClojureScript? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="If you know Clojure already and just want to experiment writing ClojureScript, using Figwheel can really help get you there quickly. I show you how in a few commands.">
+    <meta name="twitter:title" content="What's the fastest way to get started using ClojureScript?">
+
+    <meta property="og:title" content="What's the fastest way to get started using ClojureScript?">
+    <meta property="og:description" content="If you know Clojure already and just want to experiment writing ClojureScript, using Figwheel can really help get you there quickly. I show you how in a few commands.">
+
+    <meta name="description" content="If you know Clojure already and just want to experiment writing ClojureScript, using Figwheel can really help get you there quickly. I show you how in a few commands.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+    title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojurescript-fast-start">
+            What's the fastest way to get started using ClojureScript?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 13, 2015
+        </div>
+
+        
+<p>Summary: <em>If you know Clojure already and just want to experiment writing ClojureScript, using Figwheel can really help get set up quickly. I show you how in a few commands.</em></p>
+<p>Getting set up with ClojureScript has <strong>never been easier</strong> and it's still improving. There's an official <a href="https://github.com/clojure/clojurescript/wiki/Quick-Start">Quickstart Guide</a> that is an <strong>excellent way to understand all of the pieces and how they work together</strong>. I recommend you read it eventually. All you need is Java 8, download a JAR, and follow along.</p>
+<p>But it's likely that you want to evaluate ClojureScript first, before you invest a lot of time learning how everything works. If you want the fastest way to get started writing an app in ClojureScript, you'll want something that writes the boilerplate for you. <strong>You don't want to mess with configuration, creating directories, and setting up files.</strong> The <a href="https://github.com/bhauman/figwheel-template">Figwheel template</a> is your answer.</p>
+<p><a href="https://github.com/bhauman/lein-figwheel">Figwheel</a> is a system for incrementally compiling and reloading ClojureScript code. You save code, Figwheel compiles it, and sends it to the browser. <strong>It usually takes less than a second to see your changes.</strong> Yes, this is awesome and it's what I use in <a href="http://www.purelyfunctional.tv/single-page-applications"><em>LispCast Single Page Applications with ClojureScript and Om</em></a> to compile. I'll probably go into Figwheel more in future email.</p>
+<p>You will need:</p>
+<ul>
+<li>Java</li>
+<li>A terminal</li>
+<li><a href="http://leiningen.org"><strong>Leiningen</strong></a></li>
+<li>A browser</li>
+<li>A text editor</li>
+</ul>
+<p>If you don't have Leiningen installed, I recommend following the <a href="https://github.com/ClojureBridge/curriculum/blob/gh-pages/outline/setup.md">ClojureBridge Setup Guide</a>. You don't need to install their recommended editor nor git to follow along here.</p>
+<p>Let's go!</p>
+<p>Open your terminal, move to a directory where you can create a new project.</p>
+<pre><code>&gt; cd projects</code></pre>
+<p>Then create a new project based on the Figwheel template.</p>
+<pre><code>&gt; lein new figwheel cljs-example</code></pre>
+<p>Then move to that directory and start Figwheel.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">&gt;</span> <span class="kw">cd</span> cljs-example
+<span class="kw">&gt;</span> <span class="kw">lein</span> figwheel</code></pre>
+<p>Figwheel will do an initial compile (which will be longer than normal), then wait for a browser to connect. It should look like this:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/figwheel-terminal.png" />
+</div>
+<p>Now open up the html file in your browser. It's located at</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">resources/public/index.html</span></code></pre>
+<p>It should load a page like this:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/figwheel-template.png" />
+</div>
+<p>Now switch back to your terminal. There should now be a REPL prompt. You can type ClojureScript there and it will run in the browser. Try this:</p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure">cljs.user=&gt; (js/alert <span class="st">&quot;Hello, world!&quot;</span>)</code></pre>
+<p>The code for the ClojureScript application it set up is in <code>src/cljs_example/core.cljs</code>. Whenever you save to that file, Figwheel will reload it in the browser <em>without refreshing the page</em>.</p>
+<p>You now have ClojureScript compilation, autoreloading in the browser, and a browser REPL. The tooling in ClojureScript has been getting really good.</p>
+<p>If you'd like to learn more about Figwheel, check out the <a href="https://github.com/bhauman/lein-figwheel">README</a>, the <a href="https://github.com/bhauman/lein-figwheel/wiki/Quick-Start">Quickstart Guide</a>, and if you're into video, <a href="https://www.youtube.com/watch?v=j-kj2qwJa_E">the talk</a> Bruce Hauman (the creator of Figwheel) gave at Clojure/West.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/j-kj2qwJa_E?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<h3 id="conclusions">Conclusions</h3>
+<p>There really are no shortcuts to learning a powerful tool like ClojureScript. You <em>should</em> read the Quickstarts for <a href="https://github.com/bhauman/lein-figwheel/wiki/Quick-Start">Figwheel</a> and <a href="https://github.com/clojure/clojurescript/wiki/Quick-Start">ClojureScript</a> itself. When you're deciding whether ClojureScript is right for you, knowing that there is a friendly and easy development tool can help you.</p>
+<p>If you're interested in getting started with ClojureScript, I recommend <a href="http://www.purelyfunctional.tv/single-page-applications">LispCast Single Page Applications with ClojureScript and Om</a>. It uses Om (a React wrapper) to build an application from the ground up. The course teaches everything you need using animations, exercises, code screencasts, and more. It's the fastest and most effective way to learn to build Om applications. Of course we use Figwheel to compile our code in the course.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+FREE: Getting Started with ClojureScript
+</h3>
+    
+<img class="subscribe-form-image" src="http://www.lispcast.com/img/scientist.png"
+         style="max-height:500px; float:right; width:inherit;box-shadow:none">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to get my <em>Getting Started with ClojureScript</em> course. Each module is delivered by email. It's designed to help you decide if ClojureScript will work for you, to get set up, and to explore some of its cooler features.
+</p>
+      <p class="subscribe-form-description">
+        
+Here are some of the topics:
+</p>
+      <ul>
+        <li>
+What do you need to start using ClojureScript?
+</li>
+        <li>
+Won't it be hard to debug ClojureScript in my browser?
+</li>
+        <li>
+How can I use existing JavaScript libraries from ClojureScript?
+</li>
+      </ul>
+      <p>
+        
+You'll also get some free Clojure goodies and information about upcoming courses.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][64]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
+
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
+
+                                                    mixpanel.track("Page Visit");
+
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
+
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
+
+                                                    </script>
+      <script src="/js/mylibs/annotated-code.js" defer></script>
+      <script src="/js/libs/codemirror.js" defer></script>
+      <script src="/js/mylibs/feedback.js" defer></script>
+
+  </body>
+</html>

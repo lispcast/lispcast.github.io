@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>What is ClojureScript? | LispCast</title>
+    <title>What is React? | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="ClojureScript is Clojure that compiles to JavaScript. It combines the power of Clojure with the reach of JavaScript.">
-    <meta name="twitter:title" content="What is ClojureScript?">
+    <meta name="twitter:description" content="React is a view library for web pages that makes DOM rendering in a functional style really easy. React makes web programming fun again.">
+    <meta name="twitter:title" content="What is React?">
 
-    <meta property="og:title" content="What is ClojureScript?">
-    <meta property="og:description" content="ClojureScript is Clojure that compiles to JavaScript. It combines the power of Clojure with the reach of JavaScript.">
+    <meta property="og:title" content="What is React?">
+    <meta property="og:description" content="React is a view library for web pages that makes DOM rendering in a functional style really easy. React makes web programming fun again.">
 
-    <meta name="description" content="ClojureScript is Clojure that compiles to JavaScript. It combines the power of Clojure with the reach of JavaScript.">
+    <meta name="description" content="React is a view library for web pages that makes DOM rendering in a functional style really easy. React makes web programming fun again.">
 
     <meta name="author" content="Eric Normand">
 
@@ -86,33 +86,45 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/what-is-clojurescript">
-            What is ClojureScript?
+             href="/what-is-react">
+            What is React?
           </a>
         </h2>
 
         <div class="timestamp">
-          September 11, 2015
+          September 13, 2015
         </div>
 
         
-<p>Summary: <em>ClojureScript is Clojure that compiles to JavaScript. It combines the power of Clojure with the reach of JavaScript.</em></p>
-<p><a href="https://github.com/clojure/clojurescript">ClojureScript</a> is a version of Clojure that compiles to JavaScript. Clojure is a functional programming language for the Java Virtual Machine. Because ClojureScript compiles to JavaScript, it can run in all browsers, on mobile devices, and on Node.js. <em>You get the power of Clojure and the reach of JavaScript.</em></p>
-<p>If you are writing JavaScript and you like Clojure, you should explore using ClojureScript. It's on the <a href="https://www.thoughtworks.com/radar/languages-and-frameworks/clojurescript">ThoughtWorks Technology Radar</a> and <a href="https://github.com/clojure/clojurescript/wiki/Companies-Using-ClojureScript">many large companies</a> are using it in production. It's a great time to give it a try.</p>
-<p>There is also an active community that is happy to help you get started. You can join them on IRC (#clojurescript on freenode.net), on <a href="http://clojurians.slack.com/">Slack</a>, and on the <a href="http://groups.google.com/group/clojure">mailing list</a>. In addition, please ask me any questions by <script type="text/javascript">
-<!--
-h='&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x65;&#114;&#x69;&#x63;&#32;&#x61;&#116;&#32;&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript> or asking on the <a href="http://discuss.purelyfunctional.tv/">PurelyFunctional.tv discussion board</a>.</p>
-<h3 id="who-makes-it">Who makes it?</h3>
-<p>ClojureScript is maintained by <a href="http://cognitect.com/">Cognitect</a>, the same company that maintains Clojure itself. It is under <strong>very active development</strong> and the versions are now in lock step. Since version 1.7, <strong>many libraries work out of the box in both Clojure and ClojureScript</strong>.</p>
-<h3 id="not-your-typical-compile-to-js-language">Not your typical Compile-to-JS language</h3>
-<p>ClojureScript programs are often shorter than equivalent JavaScript programs. ClojureScript is higher-level and includes a <strong>large standard library</strong> that works across all JavaScript engines.</p>
-<p>ClojureScript is <em>not</em> just JavaScript with a different syntax. It has Clojure's well-designed semantics--immutable data structures, multiple-arity functions, data structure literals, protocols, and more. And it's also got <em>great</em> interoperation with JavaScript. That means <strong>you can always drop down to JavaScript</strong> when you need to. Any existing JavaScript library is usable from ClojureScript.</p>
-<p>ClojureScript leverages the Google Closure Compiler (what Google uses to write Gmail, among other services) to minify the code much more than your typical minifier can. Google Closure includes dead code elimination and other advanced optimization techniques to include only code you need before it minifies it. This means you can include entire libraries and have Google Closure remove the parts you don't need. <strong>Dependencies do not bloat the final JavaScript download.</strong></p>
+<p>Summary: <em>React is a view library for web pages that makes DOM rendering in a functional style really easy. React makes web programming fun again.</em></p>
+<p>React is a library from Facebook that implements what it calls the <em>Virtual DOM</em>. It's a neat concept: instead of manipulating the DOM directly, which is error prone and relies on mutable state, you instead output a value called the <em>Virtual DOM</em>. The Virtual DOM is then <em>diffed</em> with the current state of the DOM, which generates a list of DOM operations that would make the current DOM look like the new one. <strong>Those operations are applied quickly in a batch.</strong></p>
+<p>It's a little hard to explain in prose, so I made a video:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BYbgopx44vo?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<p>The Virtual DOM approach has some very important advantages.</p>
+<h3 id="one-render-method">One render method</h3>
+<p>The Views in most MVC frameworks need to have methods for two situations (at least): the initial rendering and subsequent renderings. In React, these are actually the same. A View (called a <em>Component</em> in React) only has to <strong>define how it looks at any time</strong>, be it the first time it's rendered or after many changes. React figures out what needs to change in the actual DOM.</p>
+<h3 id="never-out-of-sync">Never out of sync</h3>
+<p>There are some very pervasive bugs when you are trying to keep changes to a Model in sync with the DOM. The easiest thing, and most secure thing, is to re-build the entire thing. This can get slow. Otherwise, you have to manually code your View to handle every situation correctly, which is error-prone and time-consuming. <strong>React solves the general problem of diffing and works with any HTML.</strong></p>
+<h3 id="less-flicker">Less flicker</h3>
+<p>Because the DOM changes are batched up, they can be <strong>applied with a single repaint of the DOM</strong>. This is possible but very difficult to do by hand otherwise.</p>
+<h3 id="functional-views">Functional views</h3>
+<p>The end result is that your render method becomes a pure function from state to a Virtual DOM value. And we like pure functions. <strong>They're better at managing complexity, easier to code, and easier to debug.</strong></p>
+<h3 id="less-view-state">Less view state</h3>
+<p>Very often MVC Views need to keep track of a lot of state themselves. There are a lot of DOM elements to keep track of, which Models they're listening to, and very often some hints about what the DOM might contain. Some of this is necessary and some of this is just incidental to the framework. <strong>React eliminates most if not all of the incidental state</strong>, leaving a small amount of manageable Component State.</p>
+<h3 id="component-lifecycle">Component lifecycle</h3>
+<p>React components are managed in what's called the <em>Component lifecycle</em>. It dictates what component methods are called when. You usually don't need more than the render method. But they're key to making things that weren't designed for React work seamlessly within it.</p>
+<h3 id="makes-hard-things-easy">Makes hard things easy</h3>
+<p>When you have a great abstraction, features that were hard to get right suddenly become easy. Syncing data to the server, undo, and live previews <strong>suddenly become straightforward to implement</strong>.</p>
+<h3 id="works-great-with-immutable-data-structures">Works great with immutable data structures</h3>
+<p>React works great with ClojureScript's immutable data structures. Because immutable data never changes, knowing if a Component has to rerender is mostly just a pointer equality check. This eliminates huge amounts of calculations, making <strong>ClojureScript uniquely suited to benefit from React</strong>. In fact, the React team, inspired by ClojureScript, has created their own immutable data structures to get the same advantage.</p>
+<h3 id="embraced-by-the-clojurescript-community">Embraced by the ClojureScript community</h3>
+<p>There are several React wrapper libraries in ClojureScript. The most notable one is <a href="https://github.com/omcljs/om">Om</a>, but each one has its advantages. This talk is about the three earliest ones (<a href="https://github.com/omcljs/om">Om</a>, <a href="https://reagent-project.github.io/">Reagent</a>, and <a href="https://github.com/levand/quiescent">Quiescent</a>). It discusses what each one is best at. Two newer wrappers are <a href="https://github.com/tonsky/rum">Rum</a> (created by the same person who wrote <a href="https://github.com/tonsky/datascript">Datascript</a>) and <a href="https://github.com/weavejester/brutha">Brutha</a> (created by the person behind <a href="https://github.com/weavejester/compojure">Compojure</a> and the maintainer of <a href="https://github.com/ring-clojure/ring">Ring</a>). Of course, <a href="http://www.purelyfunctional.tv/single-page-applications"><em>LispCast Single Page Applications with ClojureScript and Om</em></a> teaches Om.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oRmj3IUkRVk?rel=0" frameborder="0" allowfullscreen></iframe>
+
 <h3 id="conclusions">Conclusions</h3>
-<p>ClojureScript is a powerful tool for building web applications. It has the power of Clojure, the economy of the Google Closure Compiler, and the reach of JavaScript. Many companies are using it and the future looks very bright. If you're interested in getting started with ClojureScript, I recommend <a href="http://www.purelyfunctional.tv/single-page-applications"><em>LispCast Single Page Applications with ClojureScript and Om</em></a>. It uses Om (a React wrapper) to build an application from the ground up. The course teaches everything you need using animations, exercises, code screencasts, and more. It's the fastest and most effective way to learn to build Om applications.</p>
+<p>React is a great fit for ClojureScript. It enables functional programming in the View, where typically the code is a procedural, stateful mess. It lets us create reusable components that manage their own state and HTML. And ClojureScript's immutable data structures make it faster to render than other frameworks. Hard features, like undo, become easy. In short, <strong>React makes web programming fun again</strong>.</p>
+<p>If you're interested in getting started with ClojureScript and React, I recommend <a href="http://www.purelyfunctional.tv/single-page-applications"><em>LispCast Single Page Applications with ClojureScript and Om</em></a>. You'll build an Om application from the ground up, with functional components, local state, and an interactive GUI. The course is the fastest and most effective way to learn to build Om applications.</p>
 <div class="subscribe-form-wrapper">
   <form class="subscribe-form"
         action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
@@ -179,14 +191,6 @@ No spam. Ever.
 
 
 
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/clojurescript-fast-start">What's the fastest way to get started using ClojureScript?</a></li>
-<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
-<li><a href="http://www.lispcast.com/debugging-clojurescript">Won't it be hard to debug ClojureScript in my browser?</a></li>
-<li><a href="http://www.lispcast.com/mastering-client-side-routing-with-secretary-and-goog-history">Mastering ClojureScript Routing with Secretary and goog.History</a></li>
-</ul>
-
 
         <div class="endmark">
           <a class="endmark-link"
@@ -206,14 +210,6 @@ No spam. Ever.
     </div>
 
     <footer class="footer-banner">
-      <a class="footer-previous"
-         href="http://www.lispcast.com/the-most-important-idea-in-computer-science">
-        previous
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/debugging-clojurescript">
-        next
-      </a>
     </footer>
 
 

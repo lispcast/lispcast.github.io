@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Are there any DOM manipulation libraries in ClojureScript?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/cljs-dom-manipulation</guid>
+                  <link>http://www.lispcast.com/cljs-dom-manipulation</link>
+                  <pubDate>Tue 15 Sep 2015 01:04:20 PM CDT</pubDate>
+                  <description>
+                    ClojureScript has some nice DOM manipulation options, including jQuery and more idiomatic libraries.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/cljs-dom-manipulation"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>What is React?</title>
                   <guid isPermalink="false">http://www.lispcast.com/what-is-react</guid>
                   <link>http://www.lispcast.com/what-is-react</link>
@@ -129,20 +143,6 @@
                     map is one of the staples of functional programming. It's totally useful and also surprisingly simple. Let's look at some examples and annotated code.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/annotated-map"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Some Annotated clojure.core/reduce Examples</title>
-                  <guid isPermalink="false">http://www.lispcast.com/annotated-clojure-core-reduce</guid>
-                  <link>http://www.lispcast.com/annotated-clojure-core-reduce</link>
-                  <pubDate>Tue 21 Jul 2015 10:40:39 PM CDT</pubDate>
-                  <description>
-                    reduce is a very useful function. You can use it for many calculations over a collection. Code annotations are useful, as are physical metaphors.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/annotated-clojure-core-reduce"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

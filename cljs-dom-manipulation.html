@@ -1,0 +1,260 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Are there any DOM manipulation libraries in ClojureScript? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="ClojureScript has some nice DOM manipulation options, including jQuery and more idiomatic libraries.">
+    <meta name="twitter:title" content="Are there any DOM manipulation libraries in ClojureScript?">
+
+    <meta property="og:title" content="Are there any DOM manipulation libraries in ClojureScript?">
+    <meta property="og:description" content="ClojureScript has some nice DOM manipulation options, including jQuery and more idiomatic libraries.">
+
+    <meta name="description" content="ClojureScript has some nice DOM manipulation options, including jQuery and more idiomatic libraries.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+    title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/cljs-dom-manipulation">
+            Are there any DOM manipulation libraries in ClojureScript?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 15, 2015
+        </div>
+
+        
+<p>Summary: <em>ClojureScript has some nice DOM manipulation options, including jQuery and more idiomatic libraries.</em></p>
+<p>Yes. ClojureScript has access to all JavaScript libraries, including jQuery. But there are also has native DOM libraries available. What's more, there are <strong>three advantages that native libraries have over jQuery</strong>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Macros. A lot of processing can be done at compile time. For instance, parsing and interpreting of <strong>selector strings can be done during compilation</strong>.</p></li>
+<li><p>The functional nature of ClojureScript. jQuery does a lot to make sure that chaining works very smoothly. ClojureScript's functional programming and threading macros make this less important. <strong>A lot of the functionality is built-in to Clojure.</strong></p></li>
+<li><p>ClojureScript protocols. Protocols allow you to extend the functionality of <em>existing</em> types. That means if you want to add &quot;methods&quot; to all DOM nodes, you can. This gives you that <strong>jQuery-object feeling without boxing everything up</strong>.</p></li>
+</ol>
+<p><a href="http://www.purelyfunctional.tv/single-page-applications"><em>LispCast Single Page Applications with ClojureScript and Om</em></a> does not use the DOM manipulation approach because Om uses React to build views. But DOM manipulation is still a common frontend technique.</p>
+<h3 id="jayq"><a href="https://github.com/ibdknox/jayq">jayq</a></h3>
+<p>If you are familiar with jQuery, jayq will be very familiar. It is simply a jQuery wrapper library. I've used this before in production and it has a lot going for it. One, it's just jQuery, which a lot of people know. Two, the selector engine jQuery uses is one of the most full-featured. You get full access to that. Three, jQuery is probably cached in everyone's browser already, so there's likely no download. The downside? <strong>It is just jQuery.</strong> It's mutable objects and encourages that same jQuery style of programming.</p>
+<h3 id="dommy"><a href="https://github.com/Prismatic/dommy">dommy</a></h3>
+<p>Dommy is nice. It's got functions for selecting DOM nodes, manipulating them, and listening to events. It takes advantages of ClojureScript's macros. For instance, the selectors are parsed <em>at compile time</em> and converted directly into standard DOM selection code. So the code <code>(sel1 &quot;#container&quot;)</code> gets converted directly into <code>document.getElementById(&quot;container&quot;)</code>. That makes it much faster than jQuery, though not as full-featured. <strong>This is the one I recommend for selecting DOM elements and binding to events.</strong></p>
+<h3 id="hipo"><a href="https://github.com/jeluard/hipo/">hipo</a></h3>
+<p>If you need to <em>create</em> DOM nodes, dommy won't do that for you. You'll need a library like hipo. Hipo converts hiccup syntax into native DOM creation code at compile time. That means your hiccup templates are as fast as possible. <strong>Pair this with dommy and you have a complete solution.</strong></p>
+<h3 id="domina"><a href="https://github.com/levand/domina">Domina</a></h3>
+<p>Aims to be jQuery-<em>like</em> but also idiomatic ClojureScript. It has xpath as well as CSS selectors, DOM manipulation, and an event system based on Google Closure's events.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>DOM manipulation is still an important tool in JavaScript apps. ClojureScript has a good variety of libraries with approaches that make it easier and more idiomatic than jQuery. You should evaluate the options and see if one works for you.</p>
+<p>If you're interested in learning ClojureScript, albeit with Om, not one of the above libraries, you should give <a href="http://www.purelyfunctional.tv/single-page-applications"><em>Lispcast Single Page Applications with ClojureScript and Om</em></a> a look. It teaches you how to build an application from the gound up using functional programming. The course includes animations, exercises, and code casts to make it the <strong>fastest and most effective way to learn to build apps in ClojureScript with Om</strong>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+FREE: Getting Started with ClojureScript
+</h3>
+    
+<img class="subscribe-form-image" src="http://www.lispcast.com/img/scientist.png"
+         style="max-height:500px; float:right; width:inherit;box-shadow:none">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to get my <em>Getting Started with ClojureScript</em> course. Each module is delivered by email. It's designed to help you decide if ClojureScript will work for you, to get set up, and to explore some of its cooler features.
+</p>
+      <p class="subscribe-form-description">
+        
+Here are some of the topics:
+</p>
+      <ul>
+        <li>
+What do you need to start using ClojureScript?
+</li>
+        <li>
+Won't it be hard to debug ClojureScript in my browser?
+</li>
+        <li>
+How can I use existing JavaScript libraries from ClojureScript?
+</li>
+      </ul>
+      <p>
+        
+You'll also get some free Clojure goodies and information about upcoming courses.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][64]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
+
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
+
+                                                    mixpanel.track("Page Visit");
+
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
+
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
+
+                                                    </script>
+      <script src="/js/mylibs/annotated-code.js" defer></script>
+      <script src="/js/libs/codemirror.js" defer></script>
+      <script src="/js/mylibs/feedback.js" defer></script>
+
+  </body>
+</html>

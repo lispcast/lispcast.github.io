@@ -98,8 +98,8 @@
         
 <p>Summary: <em>ClojureScript's official build process is a simple shell command. There is also integration into Leiningen and Boot.</em></p>
 <p>It really depends on your build process. But the short answer is <em>probably yes</em>. I'll go over three ways to add advanced compilation for a production build to your project. You can pick whichever works better for you.</p>
-<h3 id="command-line">Command line</h3>
-<p>The <a href="https://github.com/clojure/clojurescript/wiki/Quick-Start">official way</a> to use the ClojureScript compiler is from a ClojureScript release JAR on the command line. And since the JVM runs on almost every platform, you're probably golden. You can just add it to your build script.</p>
+<h2 id="command-line">Command line</h2>
+<p>The <a href="https://github.com/clojure/clojurescript/wiki/Quick-Start">official way</a> to use the ClojureScript compiler is from a ClojureScript <a href="https://github.com/clojure/clojurescript/releases/download/r1.7.48/cljs.jar">release JAR</a> on the command line. And since the JVM runs on almost every platform, you're probably golden. You can just add it to your build script.</p>
 <p>A production build is simple. With this <code>release.clj</code> file:</p>
 <pre><code>(require &#39;cljs.build.api)
 
@@ -112,8 +112,8 @@
 <pre><code>&gt; java -cp cljs.jar:cljs-src clojure.main release.clj</code></pre>
 <p>You'll need <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java 8</a> and <a href="https://github.com/clojure/clojurescript/releases/download/r1.7.48/cljs.jar">cljs.jar</a>. That will do an advanced optimization compile of ClojureScript code in <code>cljs-src/</code> and the output will be in <code>out/main.js</code>, ready to include in your HTML page or elsewhere.</p>
 <p>This is great if you're using Make or some other shell language to build your system. Note also that the <code>cljs.jar</code> can also do other types of builds, including incremental builds. See the <a href="https://github.com/clojure/clojurescript/wiki/Quick-Start">Quickstart</a> for more information.</p>
-<h3 id="leiningen">Leiningen</h3>
-<p>If you're already using Leiningen, you might as well use it to build you ClojureScript as well. There's a well-supported plugin called <a href="https://github.com/emezeske/lein-cljsbuild"><code>lein-cljsbuild</code></a>. Getting it set up is a little trickier but depending on how things are already set up, it may fit right in.</p>
+<h2 id="leiningen">Leiningen</h2>
+<p>If you're already using <a href="http://leiningen.org/">Leiningen</a>, you might as well use it to build you ClojureScript as well. There's a well-supported plugin called <a href="https://github.com/emezeske/lein-cljsbuild"><code>lein-cljsbuild</code></a>. Getting it set up is a little trickier but depending on how things are already set up, it may fit right in.</p>
 <p>In your project's <code>project.clj</code>, you're going to add some directives inside of <code>defproject</code>.</p>
 <p>First, let's add the plugin (check <a href="https://clojars.org/lein-cljsbuild">Clojars</a> for the most recent version):</p>
 <pre><code>:plugins [[lein-cljsbuild &quot;1.1.0&quot;]]</code></pre>
@@ -132,7 +132,7 @@
 <p>Code in <code>cljs-src/</code> will be compiled and included in your jar (in the <code>out/</code> directory; change that to where you want it, of course!). If you just want to build the ClojureScript:</p>
 <pre><code>&gt; lein cljsbuild once</code></pre>
 <p>I use cljsbuild when I'm deploying stuff to Heroku or CircleCI.</p>
-<h3 id="boot">Boot</h3>
+<h2 id="boot">Boot</h2>
 <p><a href="http://boot-clj.com/">Boot</a> is another build tool for Clojure. If you're using it, there is a <strong>ClojureScript build task called <a href="https://github.com/adzerk-oss/boot-cljs">boot-cljs</a></strong>.</p>
 <p>In your <code>boot.boot</code> file, add this dependency (check <a href="https://clojars.org/adzerk/boot-cljs:">Clojars</a> for the latest version):</p>
 <pre><code>:dependencies [...
@@ -218,6 +218,14 @@ No spam. Ever.
 
 
 
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cljs-dom-manipulation">Are there any DOM manipulation libraries in ClojureScript?</a></li>
+<li><a href="http://www.lispcast.com/clojurescript-fast-start">What's the fastest way to get started using ClojureScript?</a></li>
+<li><a href="http://www.lispcast.com/core-async-browser-motivation">core.async in Browsers</a></li>
+<li><a href="http://www.lispcast.com/debugging-clojurescript">Won't it be hard to debug ClojureScript in my browser?</a></li>
+</ul>
+
 
         <div class="endmark">
           <a class="endmark-link"
@@ -237,6 +245,10 @@ No spam. Ever.
     </div>
 
     <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/cljs-dom-manipulation">
+        previous
+      </a>
     </footer>
 
 

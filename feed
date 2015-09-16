@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Can building ClojureScript assets be integrated into my build process?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/building-clojurescript-process</guid>
+                  <link>http://www.lispcast.com/building-clojurescript-process</link>
+                  <pubDate>Wed 16 Sep 2015 03:52:12 PM CDT</pubDate>
+                  <description>
+                    ClojureScript's official build process is a simple shell command. There is also integration into Leiningen and Boot.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/building-clojurescript-process"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Are there any DOM manipulation libraries in ClojureScript?</title>
                   <guid isPermalink="false">http://www.lispcast.com/cljs-dom-manipulation</guid>
                   <link>http://www.lispcast.com/cljs-dom-manipulation</link>
@@ -129,20 +143,6 @@
                     Learning to write map is a good lesson because it has recursion, list building, and higher order functions. It's everything that makes Lisp great.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/tdd-clojure-core-map"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Annotated map</title>
-                  <guid isPermalink="false">http://www.lispcast.com/annotated-map</guid>
-                  <link>http://www.lispcast.com/annotated-map</link>
-                  <pubDate>Wed 29 Jul 2015 09:33:06 PM CDT</pubDate>
-                  <description>
-                    map is one of the staples of functional programming. It's totally useful and also surprisingly simple. Let's look at some examples and annotated code.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/annotated-map"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

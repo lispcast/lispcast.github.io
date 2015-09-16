@@ -1,0 +1,297 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Can building ClojureScript assets be integrated into my build process? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="ClojureScript's official build process is a simple shell command. There is also integration into Leiningen and Boot.">
+    <meta name="twitter:title" content="Can building ClojureScript assets be integrated into my build process?">
+
+    <meta property="og:title" content="Can building ClojureScript assets be integrated into my build process?">
+    <meta property="og:description" content="ClojureScript's official build process is a simple shell command. There is also integration into Leiningen and Boot.">
+
+    <meta name="description" content="ClojureScript's official build process is a simple shell command. There is also integration into Leiningen and Boot.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+    title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/building-clojurescript-process">
+            Can building ClojureScript assets be integrated into my build process?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 16, 2015
+        </div>
+
+        
+<p>Summary: <em>ClojureScript's official build process is a simple shell command. There is also integration into Leiningen and Boot.</em></p>
+<p>It really depends on your build process. But the short answer is <em>probably yes</em>. I'll go over three ways to add advanced compilation for a production build to your project. You can pick whichever works better for you.</p>
+<h3 id="command-line">Command line</h3>
+<p>The <a href="https://github.com/clojure/clojurescript/wiki/Quick-Start">official way</a> to use the ClojureScript compiler is from a ClojureScript release JAR on the command line. And since the JVM runs on almost every platform, you're probably golden. You can just add it to your build script.</p>
+<p>A production build is simple. With this <code>release.clj</code> file:</p>
+<pre><code>(require &#39;cljs.build.api)
+
+(cljs.build.api/build &quot;cljs-src&quot;
+  {:output-to &quot;out/main.js&quot;
+   :optimizations :advanced})
+
+(System/exit 0)</code></pre>
+<p>You can run the command from your shell:</p>
+<pre><code>&gt; java -cp cljs.jar:cljs-src clojure.main release.clj</code></pre>
+<p>You'll need <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java 8</a> and <a href="https://github.com/clojure/clojurescript/releases/download/r1.7.48/cljs.jar">cljs.jar</a>. That will do an advanced optimization compile of ClojureScript code in <code>cljs-src/</code> and the output will be in <code>out/main.js</code>, ready to include in your HTML page or elsewhere.</p>
+<p>This is great if you're using Make or some other shell language to build your system. Note also that the <code>cljs.jar</code> can also do other types of builds, including incremental builds. See the <a href="https://github.com/clojure/clojurescript/wiki/Quick-Start">Quickstart</a> for more information.</p>
+<h3 id="leiningen">Leiningen</h3>
+<p>If you're already using Leiningen, you might as well use it to build you ClojureScript as well. There's a well-supported plugin called <a href="https://github.com/emezeske/lein-cljsbuild"><code>lein-cljsbuild</code></a>. Getting it set up is a little trickier but depending on how things are already set up, it may fit right in.</p>
+<p>In your project's <code>project.clj</code>, you're going to add some directives inside of <code>defproject</code>.</p>
+<p>First, let's add the plugin (check <a href="https://clojars.org/lein-cljsbuild">Clojars</a> for the most recent version):</p>
+<pre><code>:plugins [[lein-cljsbuild &quot;1.1.0&quot;]]</code></pre>
+<p>configure the build:</p>
+<pre><code>:cljsbuild {:builds {:prod {;; where your code is
+                            :source-paths [&quot;cljs-src&quot;]
+                            ;; do build this when making a jar
+                            :jar true
+                            ;; the same compiler options as above
+                            :compiler {:output-to &quot;out/main.js&quot;
+                                       :optimizations :advanced}}}}</code></pre>
+<p>Then, you should turn on the cljsbuild hooks, which will make sure ClojureScript is handled in common Leiningen commands:</p>
+<pre><code>:hooks [leiningen.cljsbuild]</code></pre>
+<p>Now if you type:</p>
+<pre><code>&gt; lein uberjar</code></pre>
+<p>Code in <code>cljs-src/</code> will be compiled and included in your jar (in the <code>out/</code> directory; change that to where you want it, of course!). If you just want to build the ClojureScript:</p>
+<pre><code>&gt; lein cljsbuild once</code></pre>
+<p>I use cljsbuild when I'm deploying stuff to Heroku or CircleCI.</p>
+<h3 id="boot">Boot</h3>
+<p><a href="http://boot-clj.com/">Boot</a> is another build tool for Clojure. If you're using it, there is a <strong>ClojureScript build task called <a href="https://github.com/adzerk-oss/boot-cljs">boot-cljs</a></strong>.</p>
+<p>In your <code>boot.boot</code> file, add this dependency (check <a href="https://clojars.org/adzerk/boot-cljs:">Clojars</a> for the latest version):</p>
+<pre><code>:dependencies [...
+               [adzerk/boot-cljs &quot;1.7.48-3&quot;]
+               ...]</code></pre>
+<p>And this source path:</p>
+<pre><code>:source-paths #{... &quot;cljs-src&quot; ...}</code></pre>
+<p>Add this <code>requires</code>:</p>
+<pre><code>(require &#39;[adzerk.boot-cljs :refer [cljs]])</code></pre>
+<p>Then create a file called <code>cljs-src/out/main.cljs.edn</code> and put this in there:</p>
+<pre><code>{:require [foo.core]}</code></pre>
+<p>Replace <code>foo.core</code> with the main namespace of your application. Typically, the ClojureScript compiler would read in all of the <code>.cljs</code> files in your source directory. But Boot adds a way to restrict what gets compiled.</p>
+<p>Then run:</p>
+<pre><code>&gt; boot cljs -O advanced</code></pre>
+<p>That will compile your code and output it to <code>out/main.js</code></p>
+<p>If you already have a build task scripted up, you can add the <code>cljs</code> task to it to have your ClojureScript compiled for you.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>The ClojureScript build story is very mature now. There are multiple options available to suit different existing build processes.</p>
+<p>If you're interested in getting started with ClojureScript, I recommend <a href="http://www.purelyfunctional.tv/single-page-applications"><em>LispCast Single Page Applications with ClojureScript and Om</em></a>. It uses Om (a React wrapper) to build an application from the ground up. The course teaches everything you need using animations, exercises, code screencasts, and more. It's the fastest and most effective way to learn to build ClojureScript applications.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+FREE: Getting Started with ClojureScript
+</h3>
+    
+<img class="subscribe-form-image" src="http://www.lispcast.com/img/scientist.png"
+         style="max-height:500px; float:right; width:inherit;box-shadow:none">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to get my <em>Getting Started with ClojureScript</em> course. Each module is delivered by email. It's designed to help you decide if ClojureScript will work for you, to get set up, and to explore some of its cooler features.
+</p>
+      <p class="subscribe-form-description">
+        
+Here are some of the topics:
+</p>
+      <ul>
+        <li>
+What do you need to start using ClojureScript?
+</li>
+        <li>
+Won't it be hard to debug ClojureScript in my browser?
+</li>
+        <li>
+How can I use existing JavaScript libraries from ClojureScript?
+</li>
+      </ul>
+      <p>
+        
+You'll also get some free Clojure goodies and information about upcoming courses.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][64]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
+
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
+
+                                                    mixpanel.track("Page Visit");
+
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
+
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
+
+                                                    </script>
+      <script src="/js/mylibs/annotated-code.js" defer></script>
+      <script src="/js/libs/codemirror.js" defer></script>
+      <script src="/js/mylibs/feedback.js" defer></script>
+
+  </body>
+</html>

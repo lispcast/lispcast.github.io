@@ -1,0 +1,259 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Will having ClojureScript, yet another asset type, slow down my deploys? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="ClojureScript builds can take a long time. But the extra time is worth it. It reduces the download size significantly.">
+    <meta name="twitter:title" content="Will having ClojureScript, yet another asset type, slow down my deploys?">
+
+    <meta property="og:title" content="Will having ClojureScript, yet another asset type, slow down my deploys?">
+    <meta property="og:description" content="ClojureScript builds can take a long time. But the extra time is worth it. It reduces the download size significantly.">
+
+    <meta name="description" content="ClojureScript builds can take a long time. But the extra time is worth it. It reduces the download size significantly.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+    title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojurescript-build-times">
+            Will having ClojureScript, yet another asset type, slow down my deploys?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 16, 2015
+        </div>
+
+        
+<p>Summary: <em>ClojureScript builds can take a long time. But the extra time is worth it. It reduces the download size significantly.</em></p>
+<p>Generating all of our assets can take a while. We've got Sass files, CoffeeScript, maybe some JSX, and even images. Adding another step could <strong>significantly increase the time</strong> it takes to build and deploy your app.</p>
+<p>ClojureScript with advanced compilation (the kind of compilation you want to do for production deployment) can take a while. <strong>Medium-sized applications can take forty seconds or more.</strong> In many cases this might not be an issue. If you are deploying automatically using a Continuous Integration server, it won't bother you.</p>
+<p>Although production builds can take a long time, <strong>compilation during development is very fast</strong>. ClojureScript can be set to watch your code so it recompiles each file as you save it. With Figwheel (a ClojureScript build and reload tool) it can even reload the code in the browser without refreshing the page. I use Figwheel a lot and changes I make usually take less than a second to show up in my browser. I'll talk more about Figwheel in another article.</p>
+<p>If long production compilation time is a dealbreaker, you <em>might</em> be able to get away with a lesser optimization mode. ClojureScript comes with four modes: <em>None</em>, <em>Whitespace</em>, <em>Simple</em>, and <em>Advanced</em>. <em>None</em> means no optimizations at all, which is what most people use in development. <em>Advanced</em> is the slowest but most powerful. The other two options do less optimization but are faster than <em>Advanced</em>, so they may work for you. <strong>The downside is that the download will be bigger and will run more slowly.</strong></p>
+<p>I've created a simple graph showing how long compilation takes on one of my codebases with the four optimization settings. <strong>The first compile often takes longer because it has to compile every file.</strong> Then the incremental compiler is quick because it only recompiles <em>changed</em> files. These numbers are gathered using <code>lein cljsbuild auto</code> for a build for each of the optimization levels.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/compile%20time%20chart.png" />
+</div>
+<p>As you can see, incremental compilation for no optimizations is very fast. <em>Simple</em> and <em>Advanced</em> are nearly the same for this project, so it's probably not worth it to do <em>Simple</em> optimizations. <strong>If this matters to you, you should try it on your own projects.</strong></p>
+<p>The following graph shows the <strong>relative sizes of the compiled JavaScript downloads, gzipped</strong>. I didn't include <em>None</em> because it really doesn't make sense to download it in production. It's lots of separate files. The others are all combined into one.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/gzipped.png" />
+</div>
+<p>We can see that there is a <em>significant</em> savings using <em>Advanced</em> optimizations. Again, <strong>try it on your code base to be sure</strong>.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>The compiler optimization settings can determine the length of build time, both during development and in production. They also determine the size of the final JavaScript download. The two recommended build settings are to use no optimizations during development using incremental compilation, and to perform <em>Advanced</em> optimizations for production deployment. <strong>The savings in gzipped bytes is significant and more than makes up for a longer build time.</strong> Try the different settings your self and see.</p>
+<p>If you're interested in getting started with ClojureScript, I recommend <a href="http://www.purelyfunctional.tv/single-page-applications"><em>LispCast Single Page Applications with ClojureScript and Om</em></a>. It uses Om to build an application from the ground up. The course teaches everything you need using animations, exercises, code screencasts, and more. It's the <strong>fastest and most effective way to learn to build Om applications</strong>.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+FREE: Getting Started with ClojureScript
+</h3>
+    
+<img class="subscribe-form-image" src="http://www.lispcast.com/img/scientist.png"
+         style="max-height:500px; float:right; width:inherit;box-shadow:none">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to get my <em>Getting Started with ClojureScript</em> course. Each module is delivered by email. It's designed to help you decide if ClojureScript will work for you, to get set up, and to explore some of its cooler features.
+</p>
+      <p class="subscribe-form-description">
+        
+Here are some of the topics:
+</p>
+      <ul>
+        <li>
+What do you need to start using ClojureScript?
+</li>
+        <li>
+Won't it be hard to debug ClojureScript in my browser?
+</li>
+        <li>
+How can I use existing JavaScript libraries from ClojureScript?
+</li>
+      </ul>
+      <p>
+        
+You'll also get some free Clojure goodies and information about upcoming courses.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][64]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
+
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
+
+                                                    mixpanel.track("Page Visit");
+
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
+
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
+
+                                                    </script>
+      <script src="/js/mylibs/annotated-code.js" defer></script>
+      <script src="/js/libs/codemirror.js" defer></script>
+      <script src="/js/mylibs/feedback.js" defer></script>
+
+  </body>
+</html>

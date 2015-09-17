@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Will having ClojureScript, yet another asset type, slow down my deploys?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojurescript-build-times</guid>
+                  <link>http://www.lispcast.com/clojurescript-build-times</link>
+                  <pubDate>Wed 16 Sep 2015 11:14:49 PM CDT</pubDate>
+                  <description>
+                    ClojureScript builds can take a long time. But the extra time is worth it. It reduces the download size significantly.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojurescript-build-times"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Can building ClojureScript assets be integrated into my build process?</title>
                   <guid isPermalink="false">http://www.lispcast.com/building-clojurescript-process</guid>
                   <link>http://www.lispcast.com/building-clojurescript-process</link>
@@ -129,20 +143,6 @@
                     A deep-dive into a single reduce example shows how much can happen in a short bit of code.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/reduce-example-explained"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Let's TDD clojure.core/map</title>
-                  <guid isPermalink="false">http://www.lispcast.com/tdd-clojure-core-map</guid>
-                  <link>http://www.lispcast.com/tdd-clojure-core-map</link>
-                  <pubDate>Tue 04 Aug 2015 11:27:58 PM CDT</pubDate>
-                  <description>
-                    Learning to write map is a good lesson because it has recursion, list building, and higher order functions. It's everything that makes Lisp great.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/tdd-clojure-core-map"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

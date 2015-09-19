@@ -12,7 +12,7 @@
                   <title>Will having ClojureScript, yet another asset type, slow down my deploys?</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojurescript-build-times</guid>
                   <link>http://www.lispcast.com/clojurescript-build-times</link>
-                  <pubDate>Wed 16 Sep 2015 11:14:49 PM CDT</pubDate>
+                  <pubDate>Wed 17 Sep 2015 1:14:49 PM CDT</pubDate>
                   <description>
                     ClojureScript builds can take a long time. But the extra time is worth it. It reduces the download size significantly.
 

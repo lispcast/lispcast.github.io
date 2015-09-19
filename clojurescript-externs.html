@@ -1,0 +1,280 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Knowing this one ClojureScript gotcha will save you hours | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="ClojureScript optimizes names by replacing them with shorter ones. Usually, that's a good thing. But it can get carried away. Externs are how you help it know what's unsafe to optimize.">
+    <meta name="twitter:title" content="Knowing this one ClojureScript gotcha will save you hours">
+
+    <meta property="og:title" content="Knowing this one ClojureScript gotcha will save you hours">
+    <meta property="og:description" content="ClojureScript optimizes names by replacing them with shorter ones. Usually, that's a good thing. But it can get carried away. Externs are how you help it know what's unsafe to optimize.">
+
+    <meta name="description" content="ClojureScript optimizes names by replacing them with shorter ones. Usually, that's a good thing. But it can get carried away. Externs are how you help it know what's unsafe to optimize.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+    title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojurescript-externs">
+            Knowing this one ClojureScript gotcha will save you hours
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 20, 2015
+        </div>
+
+        
+<p>Summary: <em>ClojureScript optimizes names by replacing them with shorter ones. Usually, that's a good thing. But it can get carried away. Externs are how you help it know what's unsafe to optimize.</em></p>
+<h3 id="problem">Problem</h3>
+<p>Here's the situation: you're writing ClojureScript code, compiling it with no optimizations (because it's faster for development). Everything is working great. You compile it with advanced compilation and test it, and <strong>things start breaking</strong>. Hopefully it's just on your local machine and <em>not</em> on production. What's happening?</p>
+<h3 id="analysis">Analysis</h3>
+<p>Surprisingly, this happens a lot. As a Clojure programmer, I'm not used to really having a difference between development and production. It's the same language and everything is available in both environments.</p>
+<p>But with ClojureScript, it helps to <strong>think of it as a <em>compiled language</em></strong>. There's a real difference between development and production. The difference is that the compiler optimizes the code. In advanced compilation (what you want to do in production), variable names are shortened.</p>
+<p>Here's some ClojureScript code and the compiled JavaScript (using advanced optimizations and pretty printing) that uses the popular JavaScript library <a href="https://github.com/chjj/marked"><code>marked</code></a> for parsing Markdown:</p>
+<p><strong>ClojureScript</strong></p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">defn</span><span class="fu"> parse-markdown </span>[s]
+  (js/window.marked s))</code></pre>
+<p><strong>JavaScript</strong></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">Af</span>(a) {
+  <span class="kw">return</span> <span class="ot">window</span>.<span class="fu">hc</span>(a);
+}</code></pre>
+<p>It's nice that the structure of the output is similar to the input. But notice that all of the names in the JavaScript are one or two letters. That's one of the ways a JavaScript file is minified. <strong>The compiler makes sure that this all makes sense where it can.</strong> And it can for all of the variables and namespaces <em>you</em> define.</p>
+<p>But <strong>it cannot for variables defined in other JavaScript included in the page</strong>. The compiler has no way of knowing <em>by itself</em> that this should not be shortened. Look at the ClojureScript code on the left: it's referring to <code>js/window.marked</code>. And when it's output, it's called <code>window.hc</code>. That's no good and it's no wonder this code doesn't work in the browser--<code>hc</code> is not defined.</p>
+<h3 id="solution">Solution</h3>
+<p>Of course, <strong>ClojureScript has a solution for this problem</strong>: <em>externs</em>. You can specify a list of files that contain all of the variables that you use that the compiler should not optimize away. Setting up your externs is easy. Just add this to your <code>:compiler</code> options in the approprate build:</p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="kw">:externs</span> [<span class="st">&quot;externs/marked.js&quot;</span>]</code></pre>
+<p>I typically create a directory called <code>externs/</code> right at the root. Be sure to add this to your version control system. Then I make a file, in this case called <code>marked.js</code>, to put all of the variables I'll need to access from that library. Inside:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="ot">window</span>.<span class="fu">marked</span> = <span class="kw">function</span>(){};</code></pre>
+<p>It's just a JavaScript file, but I don't need to give it the actual values. This is just for the compiler to know what to look for. See how <code>window.marked</code> is given a do-nothing function? <strong>It could be any function</strong>, and that's just the shortest way to write one. This tells the compiler two things:</p>
+<ol style="list-style-type: decimal">
+<li>Please don't minify this variable.</li>
+<li>You can expect a function there.</li>
+</ol>
+<p>If you have to define something that's a number, you would write this:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="ot">window</span>.<span class="fu">some_number</span> = <span class="dv">1</span>;</code></pre>
+<p>You can extend this to any type.</p>
+<h3 id="alternate-solution">Alternate solution</h3>
+<p>Because the extern files are just JavaScript, you can normally simply <strong>use the JavaScript library as its own externs file</strong>. So I'll change the externs entry to point to the file included in the HTML.</p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="kw">:externs</span> [<span class="st">&quot;resources/public/js/marked.min.js&quot;</span>]</code></pre>
+<p>This works, but it produces 145 warnings. There is a compiler option called <code>:externs-validation</code> that you can turn off to suppress those warnings.</p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="kw">:closure-warnings</span> {<span class="kw">:externs-validation</span> <span class="kw">:off</span>}</code></pre>
+<p>That also goes in your <code>:compiler</code> options in the cljsbuild build.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>The Google Closure Compiler has some very advanced optimization settings. Since they're too slow to run during development, we typically will turn them off while we're coding and testing things out. However, when we turn them on, stuff can stop working. Most of the time it's due to a missing extern. If code that relies on something <em>outside</em> of ClojureScript stops working, that could be why. Check your externs.</p>
+<p>If you're interested in getting started with ClojureScript, I recommend <a href="http://www.purelyfunctional.tv/single-page-applications"><em>LispCast Single Page Applications with ClojureScript and Om</em></a>. It uses Om to build an application from the ground up. The course teaches everything you need using animations, exercises, code screencasts, and more. It's the fastest and most effective way to learn to build Om applications.</p>
+<div class="subscribe-form-wrapper">
+  <form class="subscribe-form"
+        action="https://lispcast.us4.list-manage.com/subscribe/post?u=a33b5228d1b5bf2e0c68a83f4&amp;id=d0f96276d9"
+        method="POST"
+        name="mc-embedded-subscribe-form"
+        novalidate="true">
+      <h3 class="subscribe-form-title">
+        
+FREE: Getting Started with ClojureScript
+</h3>
+    
+<img class="subscribe-form-image" src="http://www.lispcast.com/img/scientist.png"
+         style="max-height:500px; float:right; width:inherit;box-shadow:none">
+<div class="subscribe-form-text">
+      <p class="subscribe-form-description">
+        
+Subscribe below to get my <em>Getting Started with ClojureScript</em> course. Each module is delivered by email. It's designed to help you decide if ClojureScript will work for you, to get set up, and to explore some of its cooler features.
+</p>
+      <p class="subscribe-form-description">
+        
+Here are some of the topics:
+</p>
+      <ul>
+        <li>
+What do you need to start using ClojureScript?
+</li>
+        <li>
+Won't it be hard to debug ClojureScript in my browser?
+</li>
+        <li>
+How can I use existing JavaScript libraries from ClojureScript?
+</li>
+      </ul>
+      <p>
+        
+You'll also get some free Clojure goodies and information about upcoming courses.
+</p>
+      
+<input id="mce-EMAIL.email-field"
+             type="email"
+             value=""
+             placeholder="Email"
+             name="EMAIL"> <input type="hidden"
+             name="group[18565][64]"
+             value="1">
+<div style="position: absolute; left: -5000px;">
+        
+<input type="text"
+               name="b_a33b5228d1b5bf2e0c68a83f4_d0f96276d9">
+</div>
+      
+<input class="subscribe-button"
+             type="submit"
+             value="Get it"
+             name="subscribe">
+<div class="field-text-text2">
+        
+No spam. Ever.
+</div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
+
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
+
+                                                    mixpanel.track("Page Visit");
+
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe');
+
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
+
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });
+
+                                                    </script>
+      <script src="/js/mylibs/annotated-code.js" defer></script>
+      <script src="/js/libs/codemirror.js" defer></script>
+      <script src="/js/mylibs/feedback.js" defer></script>
+
+  </body>
+</html>

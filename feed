@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>How can you test ClojureScript applications and libraries?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/testing-clojurescript</guid>
+                  <link>http://www.lispcast.com/testing-clojurescript</link>
+                  <pubDate>Fri 19 Sep 2015 01:41:04 PM CDT</pubDate>
+                  <description>
+                    Although it's still early, ClojureScript is rapidly maturing its testing story. There are a Leiningen plugin and a Boot task for autocompiling ClojureScript as it changes and running tests in a variety of engines.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/testing-clojurescript"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Will having ClojureScript, yet another asset type, slow down my deploys?</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojurescript-build-times</guid>
                   <link>http://www.lispcast.com/clojurescript-build-times</link>
@@ -129,20 +143,6 @@
                     `clojure.core/reduce` is a powerful function, yet the code for it is so simple. It's four lines! We TDD our own implementation.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/lets-tdd-clojure-core-reduce"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>A reduce Example Explained</title>
-                  <guid isPermalink="false">http://www.lispcast.com/reduce-example-explained</guid>
-                  <link>http://www.lispcast.com/reduce-example-explained</link>
-                  <pubDate>Mon 10 Aug 2015 09:46:29 PM CDT</pubDate>
-                  <description>
-                    A deep-dive into a single reduce example shows how much can happen in a short bit of code.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/reduce-example-explained"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

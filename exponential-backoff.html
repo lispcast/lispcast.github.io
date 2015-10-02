@@ -109,7 +109,7 @@
       (f)
       (catch Throwable t
         (Thread/sleep time)
-        (exponential-backoff f (* time rate) rate max)))))</code></pre>
+        (exponential-backoff (* time rate) rate max f)))))</code></pre>
 <p>This one has <strong>the same structure as <a href="http://www.lispcast.com/try-three-times"><code>try-n-times</code></a></strong> but will sleep before recursing. When it recurses, the time is multiplied by the rate. And when the last wait is more than the max, it will try one more time. Failures from that last try will propagate.</p>
 <h3 id="how-to-use-it">How to use it</h3>
 <p>Same as with <code>try-n-times</code>:</p>
@@ -129,7 +129,7 @@
         (if (p? t)
           (do
             (Thread/sleep time)
-            (exponential-backoff f (* time rate) rate max))
+            (exponential-backoff (* time rate) rate max p? f))
           (throw t))))))</code></pre>
 <p>This one only recurses if the predicate returns true on the exception. Let's service mentions &quot;queue capacity&quot; in the body of the HTTP response when it's too busy:</p>
 <pre><code>(exponential-backoff 1000 2 10000

@@ -102,56 +102,60 @@
 <h3 id="specification">Specification</h3>
 <p>Define a function <code>my-reduce</code>. It should take three arguments. The first argument, <code>f</code>, is a function. The second argument is the initial value. And the third argument is a collection of values. <code>f</code> is a function of two arguments. <code>my-reduce</code> should take one value from the collection and apply <code>f</code> to the initial argument and the first value. The return value of <code>f</code> will become the new initial value, and then</p>
 <h3 id="tdd">TDD</h3>
-<div class="feedback" data-code="(defn my-reduce [f init coll])" data-fname="my-reduce">
-
-<table>
-<col width="48%" />
-<col width="31%" />
-<col width="20%" />
-<tbody>
-<tr class="odd">
-<td align="left">empty list returns init</td>
-<td align="left">(my-reduce + 0 [])</td>
-<td align="left">0</td>
-</tr>
-<tr class="even">
-<td align="left">0 + 1</td>
-<td align="left">(my-reduce + 0 [1])</td>
-<td align="left">1</td>
-</tr>
-<tr class="odd">
-<td align="left">0 + 1 + 2</td>
-<td align="left">(my-reduce + 0 [1 2])</td>
-<td align="left">3</td>
-</tr>
-<tr class="even">
-<td align="left">0 + 1 + 2 + 3</td>
-<td align="left">(my-reduce + 0 [1 2 3])</td>
-<td align="left">6</td>
-</tr>
-<tr class="odd">
-<td align="left">(sum (range 100))</td>
-<td align="left">(my-reduce + 0 (range 100))</td>
-<td align="left">4950</td>
-</tr>
-<tr class="even">
-<td align="left">1 * 1</td>
-<td align="left">(my-reduce * 1 [1])</td>
-<td align="left">1</td>
-</tr>
-<tr class="odd">
-<td align="left">1 * 1 * 2</td>
-<td align="left">(my-reduce * 1 [1 2])</td>
-<td align="left">2</td>
-</tr>
-<tr class="even">
-<td align="left">1 * 1 * 2 * 3</td>
-<td align="left">(my-reduce * 1 [1 2 3])</td>
-<td align="left">6</td>
-</tr>
-</tbody>
-</table>
+<div class="feedback">
+<div class="settings">
+<code class="fname"> my-reduce </code> <code class="init"> (and js/window js/window.cljs js/window.cljs.user (js-delete js/window.cljs.user &quot;my_reduce&quot;)) </code> <code class="value"> (defn my-reduce [f init coll]) </code>
 </div>
+<div class="test">
+<h4>
+empty list returns init
+</h4>
+<code class="test-expression">(my-reduce + 0 [])</code> <code class="expected">0</code>
+</div>
+<div class="test">
+<h4>
+0 + 1
+</h4>
+<code class="test-expression">(my-reduce + 0 [1])</code> <code class="expected">1</code>
+</div>
+<div class="test">
+<h4>
+0 + 1 + 2
+</h4>
+<code class="test-expression">(my-reduce + 0 [1 2])</code> <code class="expected">3</code>
+</div>
+<div class="test">
+<h4>
+0 + 1 + 2 + 3
+</h4>
+<code class="test-expression">(my-reduce + 0 [1 2 3])</code> <code class="expected">6</code>
+</div>
+<div class="test">
+<h4>
+(sum (range 100))
+</h4>
+<code class="test-expression">(my-reduce + 0 (range 100))</code> <code class="expected">4950</code>
+</div>
+<div class="test">
+<h4>
+1 * 1
+</h4>
+<code class="test-expression">(my-reduce * 1 [1])</code> <code class="expected">1</code>
+</div>
+<div class="test">
+<h4>
+1 * 1 * 2
+</h4>
+<code class="test-expression">(my-reduce * 1 [1 2])</code> <code class="expected">2</code>
+</div>
+<div class="test">
+<h4>
+1 * 1 * 2 * 3
+</h4>
+<code class="test-expression">(my-reduce * 1 [1 2 3])</code> <code class="expected">6</code>
+</div>
+</div>
+
 
 <h3 id="conclusion">Conclusion</h3>
 <p><code>clojure.core/reduce</code> is a very useful function. It's one of those functions I wish I had started using earlier. And building a version of <code>reduce</code> yourself can help you understand how the recursion works.</p>
@@ -265,6 +269,7 @@ Learn more
                                                     </script>
       <script src="/js/mylibs/annotated-code.js" defer></script>
       <script src="/js/libs/codemirror.js" defer></script>
+      <link rel="stylesheet" href="/css/feedback.css" type="text/css">
       <script src="/js/mylibs/feedback.js" defer></script>
 
   </body>

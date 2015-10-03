@@ -1,0 +1,136 @@
+.feedback-container {
+  width: 100%;
+  margin-top: 2em;
+}
+.CodeMirror {
+  font-family: Inconsolata, Courier New, monospace;
+  height: auto;
+}
+.CodeMirror pre {
+  width: auto;
+}
+.feedback-editor {
+  margin-top: 1em;
+  border: 1px solid black;
+}
+.feedback-test {
+  border-radius: 7px;
+  box-sizing: border-box;
+  margin-top: 1em;
+  height: 2em;
+  border: 1px solid #dc322f;
+  transition: height 1s, color 1s, margin-top 1s;
+  position: relative;
+  background-color: white;
+  width: 100%;
+  overflow: hidden;
+}
+.feedback-test.deactivated {
+  color: #fff;
+  border: 1px solid #E99493;
+}
+.feedback-test.deactivated pre code {
+  color: #fff;
+}
+.feedback-test.deactivated .feedback-test-status {
+  background-color: #E99493;
+}
+.feedback-test.open {
+  max-height: 30em;
+}
+.feedback-test.pass {
+  border-color: #859900;
+}
+.feedback-test-status {
+  border-radius: 6px 0 0 6px;
+  background-color: #dc322f;
+  width: 30px;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: top;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+.feedback-test-status-pass {
+  border-radius: 6px 0 0 6px;
+  background-color: #859900;
+  width: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transition: width 0.5s;
+}
+.pass .feedback-test-status-pass {
+  width: 100%;
+}
+.deactivated .feedback-test-status {
+  cursor: initial;
+}
+.feedback-test-header {
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  line-height: 1.2em;
+  background-color: white;
+  padding-top: .4em;
+  padding-bottom: .4em;
+  margin-left: 30px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.pass .feedback-test-header {
+  border-color: #859900;
+}
+.deactivated .feedback-test-header {
+  cursor: initial;
+}
+.feedback-test-header-contents {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: 8px;
+}
+.feedback-test-title,
+.feedback-test-expression,
+.feedback-test-expected,
+.feedback-test-actual {
+  width: 25%;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  background-color: inherit;
+  padding: 0;
+}
+.feedback-test-contents {
+  padding: 1em 1em 1em 0;
+  box-sizing: border-box;
+  position: absolute;
+  left: 38px;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.feedback-test-contents-wrapper {
+  position: relative;
+}
+.feedback-test-contents.empty {
+  padding: 0;
+}
+.feedback-test-folder {
+  position: relative;
+}
+.feedback-test.fold-up-top {
+  height: 30px;
+}
+.feedback-test.fold-up-bottom {
+  margin-top: -30px;
+}
+.feedback-test.fold-up {
+  margin-top: -30px;
+  height: 30px;
+}

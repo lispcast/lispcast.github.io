@@ -108,120 +108,157 @@
 <p>So let's do that! Let's write a Lisp interpreter <em>in Clojure</em>. It's actually a small Lisp, because, well, Lisps are big and this is just an exercise. But you could continue past this small language if you like.</p>
 <h3 id="specification">Specification</h3>
 <p>Write a function <code>my-eval</code> that takes an environment (all the variables defined) and an expression (some code). <code>my-eval</code> should do evaluate the code.</p>
-<div class="feedback" data-code="(defn my-eval [env exp])" data-fname="my-eval">
+<div class="feedback">
 
-<table>
-<col width="48%" />
-<col width="31%" />
-<col width="20%" />
-<tbody>
-<tr class="odd">
-<td align="left">nil evals to nil</td>
-<td align="left">(my-eval {} nil)</td>
-<td align="left">nil</td>
-</tr>
-<tr class="even">
-<td align="left">numbers eval to themselves</td>
-<td align="left">(my-eval {} 1)</td>
-<td align="left">1</td>
-</tr>
-<tr class="odd">
-<td align="left">numbers eval to themselves</td>
-<td align="left">(my-eval {} 2)</td>
-<td align="left">2</td>
-</tr>
-<tr class="even">
-<td align="left">strings eval to themselves</td>
-<td align="left">(my-eval {} &quot;hello&quot;)</td>
-<td align="left">&quot;hello&quot;</td>
-</tr>
-<tr class="odd">
-<td align="left">symbols eval to their value in the environment</td>
-<td align="left">(my-eval {'x 10} 'x)</td>
-<td align="left">10</td>
-</tr>
-<tr class="even">
-<td align="left">symbols eval to their value in the environment</td>
-<td align="left">(my-eval {'x &quot;yo!&quot;} 'x)</td>
-<td align="left">&quot;yo!&quot;</td>
-</tr>
-<tr class="odd">
-<td align="left">symbols eval to their value in the environment</td>
-<td align="left">(my-eval {'x nil} 'x)</td>
-<td align="left">nil</td>
-</tr>
-<tr class="even">
-<td align="left">functions evaluate to themselves</td>
-<td align="left">(my-eval {} +)</td>
-<td align="left">+</td>
-</tr>
-<tr class="odd">
-<td align="left">functions evaluate to themselves</td>
-<td align="left">(my-eval {} *)</td>
-<td align="left">*</td>
-</tr>
-<tr class="even">
-<td align="left">if statements with nil test eval else</td>
-<td align="left">(my-eval {} '(if nil 0 1))</td>
-<td align="left">1</td>
-</tr>
-<tr class="odd">
-<td align="left">if statements with non-nil test eval then</td>
-<td align="left">(my-eval {'t 1 'x 0 'y 1} '(if t x y))</td>
-<td align="left">0</td>
-</tr>
-<tr class="even">
-<td align="left">empty do statement evals to nil</td>
-<td align="left">(my-eval {} '(do))</td>
-<td align="left">nil</td>
-</tr>
-<tr class="odd">
-<td align="left">one-expression do evals to expression</td>
-<td align="left">(my-eval {} '(do 1))</td>
-<td align="left">1</td>
-</tr>
-<tr class="even">
-<td align="left">multi-expression do evals to last</td>
-<td align="left">(my-eval {} '(do 1 2 3 4))</td>
-<td align="left">4</td>
-</tr>
-<tr class="odd">
-<td align="left">let statements add to environment</td>
-<td align="left">(my-eval {} '(let [x 1] x))</td>
-<td align="left">1</td>
-</tr>
-<tr class="even">
-<td align="left">let statements have implicit do</td>
-<td align="left">(my-eval {} '(let [x 10] &quot;hello&quot; x))</td>
-<td align="left">10</td>
-</tr>
-<tr class="odd">
-<td align="left">function application evals the args, then applies function to evaled args (use map and apply)</td>
-<td align="left">(my-eval {'+ +} '(+ 1 1))</td>
-<td align="left">2</td>
-</tr>
-<tr class="even">
-<td align="left">function application evals the args, then applies function to evaled args (use map and apply)</td>
-<td align="left">(my-eval {'/ /} '(/ 20 4))</td>
-<td align="left">5</td>
-</tr>
-<tr class="odd">
-<td align="left">ensure we're calling my-eval recusively</td>
-<td align="left">(my-eval {'+ +} '(do (+ 1 2)))</td>
-<td align="left">3</td>
-</tr>
-<tr class="even">
-<td align="left">ensure we're calling my-eval recusively</td>
-<td align="left">(my-eval {'+ +} '(+ (+ 1 10) 2))</td>
-<td align="left">13</td>
-</tr>
-<tr class="odd">
-<td align="left">do expressions evaluate all forms</td>
-<td align="left">(my-eval {'deref deref 'reset! reset! 'a (atom nil) '+ +} '(do (reset! a 10) (+ (deref a) 75)))</td>
-<td align="left">85</td>
-</tr>
-</tbody>
-</table>
+<div class="settings">
+<p><code class="fname"> my-eval </code> <code class="init"> (and js/window js/window.cljs js/window.cljs.user (js-delete js/window.cljs.user &quot;my_eval&quot;)) </code></p>
+<code class="value"> (defn my-eval [env exp]) </code>
+</div>
+
+<div class="test">
+<h4>
+nil evals to nil
+</h4>
+<code class="test-expression">(my-eval {} nil)</code> <code class="expected">nil</code>
+</div>
+
+<div class="test">
+<h4>
+numbers eval to themselves
+</h4>
+<code class="test-expression">(my-eval {} 1)</code> <code class="expected">1</code>
+</div>
+
+<div class="test">
+<h4>
+strings eval to themselves
+</h4>
+<code class="test-expression">(my-eval {} &quot;hello&quot;)</code> <code class="expected">&quot;hello&quot;</code>
+</div>
+
+<div class="test">
+<h4>
+symbols eval to their value in the environment
+</h4>
+<code class="test-expression">(my-eval {'x 10} 'x)</code> <code class="expected">10</code>
+</div>
+
+<div class="test">
+<h4>
+symbols eval to their value in the environment
+</h4>
+<code class="test-expression">(my-eval {'x &quot;yo!&quot;} 'x)</code> <code class="expected">&quot;yo!&quot;</code>
+</div>
+
+<div class="test">
+<h4>
+symbols eval to their value in nil
+</h4>
+<code class="test-expression">(my-eval {'x nil} 'x)</code> <code class="expected">nil</code>
+</div>
+
+<div class="test">
+<h4>
+functions evaluate to themselves
+</h4>
+<code class="test-expression">(my-eval {} +)</code> <code class="expected">+</code>
+</div>
+
+<div class="test">
+<h4>
+functions evaluate to themselves
+</h4>
+<code class="test-expression">(my-eval {} <em>)</code> <code class="expected"></em></code>
+</div>
+
+<div class="test">
+<h4>
+if statements with nil test eval else
+</h4>
+<code class="test-expression">(my-eval {} '(if nil 0 1))</code> <code class="expected">1</code>
+</div>
+
+<div class="test">
+<h4>
+if statements with non-nil test eval then
+</h4>
+<code class="test-expression">(my-eval {'test 1 'x 0 'y 1} '(if t x y))</code> <code class="expected">0</code>
+</div>
+
+<div class="test">
+<h4>
+empty do statement evals to nil
+</h4>
+<code class="test-expression">(my-eval {} '(do))</code> <code class="expected">nil</code>
+</div>
+
+<div class="test">
+<h4>
+one-expression do evals to expression
+</h4>
+<code class="test-expression">(my-eval {} '(do 1))</code> <code class="expected">1</code>
+</div>
+
+<div class="test">
+<h4>
+multi-expression do evals to last expression
+</h4>
+<code class="test-expression">(my-eval {} '(do 1 2 3 4))</code> <code class="expected">4</code>
+</div>
+
+<div class="test">
+<h4>
+let statements add to environment
+</h4>
+<code class="test-expression">(my-eval {} '(let [x 1] x))</code> <code class="expected">1</code>
+</div>
+
+<div class="test">
+<h4>
+function application
+</h4>
+<div class="description">
+<p>
+evals the args, then applies function to evaled args (use map and apply)
+</p>
+</div>
+
+<code class="test-expression">(my-eval {'+ +} '(+ 1 1))</code> <code class="expected">2</code>
+</div>
+
+<div class="test">
+<h4>
+function application
+</h4>
+<div class="description">
+<p>
+evals the args, then applies function to evaled args (use map and apply)
+</p>
+</div>
+<code class="test-expression">(my-eval {'/ /} '(/ 20 4))</code> <code class="expected">5</code>
+</div>
+
+<div class="test">
+<h4>
+ensure we're calling my-eval recursively
+</h4>
+<code class="test-expression">(my-eval {'+ +} '(do (+ 1 2)))</code> <code class="expected">3</code>
+</div>
+
+<div class="test">
+<h4>
+ensure we're calling my-eval recursively
+</h4>
+<code class="test-expression">(my-eval {'+ +} '(+ (+ 1 10) 2))</code> <code class="expected">13</code>
+</div>
+
+<div class="test">
+<h4>
+do expressions evaluate all forms
+</h4>
+<code class="test-expression">(my-eval {'deref deref 'reset! reset! 'a (atom nil) '+ +} '(do (reset! a 10) (+ (deref a) 75)))</code> <code class="expected">85</code>
+</div>
+
 </div>
 
 <p>I've put my solution on the discussion forum <a href="http://discuss.purelyfunctional.tv/t/the-most-important-idea-in-computer-science/391">here</a>. If you'd like to share your solution, please post your solution there. You can also see how other people have solved it.</p>
@@ -343,6 +380,7 @@ Learn more
                                                     </script>
       <script src="/js/mylibs/annotated-code.js" defer></script>
       <script src="/js/libs/codemirror.js" defer></script>
+      <link rel="stylesheet" href="/css/feedback.css" type="text/css">
       <script src="/js/mylibs/feedback.js" defer></script>
 
   </body>

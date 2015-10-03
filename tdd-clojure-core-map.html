@@ -102,45 +102,52 @@
 <p>I wrote some software to help code with TDD. It's totally new<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, so there may be problems. The goal is to turn all of the tests green. As you turn each test green, a new test appears. Remember to focus on each test as it comes up. Then make sure to keep the existing tests green as you pass new ones. Try it! And if it doesn't work, or if you have any suggestions, please let me know! (hints below)</p>
 <h3 id="specification">Specification</h3>
 <p>Define a function <code>my-map</code> that takes a function <code>f</code> (of one argument) and a collection <code>coll</code>. It returns a new list containing the result of <code>f</code> applied to the elements of <code>coll</code>, in order, one at a time.</p>
-<div class="feedback" data-code="(defn my-map [f coll])" data-fname="my-map">
-
-<table>
-<col width="50%" />
-<col width="28%" />
-<col width="21%" />
-<tbody>
-<tr class="odd">
-<td align="left">empty list returns empty list</td>
-<td align="left">(my-map inc [])</td>
-<td align="left">()</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [1])</td>
-<td align="left">[2]</td>
-</tr>
-<tr class="odd">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [2])</td>
-<td align="left">[3]</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to all</td>
-<td align="left">(my-map inc [1 2 3])</td>
-<td align="left">[2 3 4]</td>
-</tr>
-<tr class="odd">
-<td align="left">dec applied to all</td>
-<td align="left">(my-map dec [1 2 3])</td>
-<td align="left">[0 1 2]</td>
-</tr>
-<tr class="even">
-<td align="left">test a big list</td>
-<td align="left">(my-map even? (range 10))</td>
-<td align="left">[true false true false true false true false true false]</td>
-</tr>
-</tbody>
-</table>
+<div class="feedback">
+<div class="settings">
+<pre class="fname"><code>my-map</code></pre>
+<pre class="init"><code>(and js/window
+js/window.cljs
+js/window.cljs.user
+(js-delete js/window.cljs.user &quot;my_map&quot;))</code></pre>
+<pre class="value"><code>(defn my-map [f coll])</code></pre>
+</div>
+<div class="test">
+<h4>
+empty list returns empty list
+</h4>
+<pre class="test-expression"><code>(my-map inc [])</code></pre>
+<pre class="expected"><code>()</code></pre>
+</div>
+<div class="test">
+<h4>
+inc applied to first
+</h4>
+<code class="test-expression">(my-map inc [1])</code> <code class="expected">[2]</code>
+</div>
+<div class="test">
+<h4>
+inc applied to first
+</h4>
+<code class="test-expression">(my-map inc [2])</code> <code class="expected">[3]</code>
+</div>
+<div class="test">
+<h4>
+inc applied to all
+</h4>
+<code class="test-expression">(my-map inc [1 2 3])</code> <code class="expected">[2 3 4]</code>
+</div>
+<div class="test">
+<h4>
+dec applied to all
+</h4>
+<code class="test-expression">(my-map dec [1 2 3])</code> <code class="expected">[0 1 2]</code>
+</div>
+<div class="test">
+<h4>
+test a big list
+</h4>
+<code class="test-expression">(my-map even? (range 10))</code> <code class="expected">[true false true false true false true false true false]</code>
+</div>
 </div>
 
 <h3 id="hints">Hints</h3>
@@ -152,183 +159,6 @@
 <li><code>(cons 1 ())</code> gives <code>(1)</code> (<code>cons</code> adds an element to the front of a list).</li>
 <li>There's always recursion (a function calling itself).</li>
 </ol>
-<h3 id="solution">Solution</h3>
-<p>Just one possible solution.</p>
-<div class="feedback" data-code="(defn my-map [f coll]
-  ())" data-fname="my-map">
-
-<table>
-<col width="50%" />
-<col width="28%" />
-<col width="21%" />
-<tbody>
-<tr class="odd">
-<td align="left">empty list returns empty list</td>
-<td align="left">(my-map inc [])</td>
-<td align="left">()</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [1])</td>
-<td align="left">[2]</td>
-</tr>
-<tr class="odd">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [2])</td>
-<td align="left">[3]</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to all</td>
-<td align="left">(my-map inc [1 2 3])</td>
-<td align="left">[2 3 4]</td>
-</tr>
-<tr class="odd">
-<td align="left">dec applied to all</td>
-<td align="left">(my-map dec [1 2 3])</td>
-<td align="left">[0 1 2]</td>
-</tr>
-<tr class="even">
-<td align="left">test a big list</td>
-<td align="left">(my-map even? (range 10))</td>
-<td align="left">[true false true false true false true false true false]</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-<div class="feedback" data-code="(defn my-map [f coll]
-  (if (empty? coll)
-    ()
-    [2]))" data-fname="my-map">
-
-<table>
-<col width="50%" />
-<col width="28%" />
-<col width="21%" />
-<tbody>
-<tr class="odd">
-<td align="left">empty list returns empty list</td>
-<td align="left">(my-map inc [])</td>
-<td align="left">()</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [1])</td>
-<td align="left">[2]</td>
-</tr>
-<tr class="odd">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [2])</td>
-<td align="left">[3]</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to all</td>
-<td align="left">(my-map inc [1 2 3])</td>
-<td align="left">[2 3 4]</td>
-</tr>
-<tr class="odd">
-<td align="left">dec applied to all</td>
-<td align="left">(my-map dec [1 2 3])</td>
-<td align="left">[0 1 2]</td>
-</tr>
-<tr class="even">
-<td align="left">test a big list</td>
-<td align="left">(my-map even? (range 10))</td>
-<td align="left">[true false true false true false true false true false]</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-<div class="feedback" data-code="(defn my-map [f coll]
-  (if (empty? coll)
-    ()
-    [(f (first coll))]))" data-fname="my-map">
-
-<table>
-<col width="50%" />
-<col width="28%" />
-<col width="21%" />
-<tbody>
-<tr class="odd">
-<td align="left">empty list returns empty list</td>
-<td align="left">(my-map inc [])</td>
-<td align="left">()</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [1])</td>
-<td align="left">[2]</td>
-</tr>
-<tr class="odd">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [2])</td>
-<td align="left">[3]</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to all</td>
-<td align="left">(my-map inc [1 2 3])</td>
-<td align="left">[2 3 4]</td>
-</tr>
-<tr class="odd">
-<td align="left">dec applied to all</td>
-<td align="left">(my-map dec [1 2 3])</td>
-<td align="left">[0 1 2]</td>
-</tr>
-<tr class="even">
-<td align="left">test a big list</td>
-<td align="left">(my-map even? (range 10))</td>
-<td align="left">[true false true false true false true false true false]</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-<div class="feedback" data-code="(defn my-map [f coll]
-  (if (empty? coll)
-    ()
-    (cons (f (first coll))
-          (my-map f (rest coll)))))" data-fname="my-map">
-
-<table>
-<col width="50%" />
-<col width="28%" />
-<col width="21%" />
-<tbody>
-<tr class="odd">
-<td align="left">empty list returns empty list</td>
-<td align="left">(my-map inc [])</td>
-<td align="left">()</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [1])</td>
-<td align="left">[2]</td>
-</tr>
-<tr class="odd">
-<td align="left">inc applied to first</td>
-<td align="left">(my-map inc [2])</td>
-<td align="left">[3]</td>
-</tr>
-<tr class="even">
-<td align="left">inc applied to all</td>
-<td align="left">(my-map inc [1 2 3])</td>
-<td align="left">[2 3 4]</td>
-</tr>
-<tr class="odd">
-<td align="left">dec applied to all</td>
-<td align="left">(my-map dec [1 2 3])</td>
-<td align="left">[0 1 2]</td>
-</tr>
-<tr class="even">
-<td align="left">test a big list</td>
-<td align="left">(my-map even? (range 10))</td>
-<td align="left">[true false true false true false true false true false]</td>
-</tr>
-</tbody>
-</table>
-</div>
-
 <h3 id="conclusion">Conclusion</h3>
 <p>I hope you like it. If you liked this, you may like <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course about Clojure, starting from the ground up. It has exercises, animations, visuals, and code. Try it!</p>
 <div class="article-offer-box">
@@ -446,6 +276,7 @@ Learn more
                                                     </script>
       <script src="/js/mylibs/annotated-code.js" defer></script>
       <script src="/js/libs/codemirror.js" defer></script>
+      <link rel="stylesheet" href="/css/feedback.css" type="text/css">
       <script src="/js/mylibs/feedback.js" defer></script>
 
   </body>

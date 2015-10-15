@@ -1,0 +1,289 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>How to Read Clojure Code Like an Expert | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="As you get better with Clojure, it becomes easier to read. Why not jump ahead of the learning curve and read like an expert? Focus on the first thing, use the indentation, and read the evaluation order.">
+    <meta name="twitter:title" content="How to Read Clojure Code Like an Expert">
+
+    <meta property="og:title" content="How to Read Clojure Code Like an Expert">
+    <meta property="og:description" content="As you get better with Clojure, it becomes easier to read. Why not jump ahead of the learning curve and read like an expert? Focus on the first thing, use the indentation, and read the evaluation order.">
+
+    <meta name="description" content="As you get better with Clojure, it becomes easier to read. Why not jump ahead of the learning curve and read like an expert? Focus on the first thing, use the indentation, and read the evaluation order.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+    title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/how-to-read-code-like-a-clojure-expert">
+            How to Read Clojure Code Like an Expert
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          October 14, 2015
+        </div>
+
+        
+<p>Summary: <em>As you get better with Clojure, it becomes easier to read. Why not jump ahead of the learning curve and read like an expert? Focus on the first thing, use the indentation, and read the evaluation order.</em></p>
+<p>One of the most frequent complaints about Clojure (and Lisps in general) is the ever-present parenthesis. Unfortunately, the stock answer is &quot;you stop focusing on the parentheses after a few weeks&quot;. That's not very helpful for beginners. <strong>It doesn't tell the beginner <em>what to focus on instead</em>.</strong></p>
+<p>Knowing what to focus on and how to interpret what you're seeing are two skills that experts in any field have that beginners lack. <strong>Beginners see lots of parentheses. But what do experts see?</strong> What do they know that beginners don't? Here are three really important ways experts read Clojure.</p>
+<h3 id="focus-on-the-first-thing-after-the-parens">1. Focus on the first thing after the parens</h3>
+<p>In Ruby code, your eyes often use punctuation to find the meaning of code. Commas, braces, brackets, hash rocket, period, and, yes, parentheses. These all <strong>influence the meanings of what's around them</strong>. And since they're not letters, it's easy to pick them out visually.</p>
+<p>In Clojure, you do have several types of punctuation. But overwhelming all of the others are the parentheses. Lisp has been called &quot;toenail soup&quot;, and &quot;oatmeal with toenail clippings mixed in&quot;. Yet people who use it a lot say <strong>they don't mind the parentheses anymore</strong>. What gives?</p>
+<p>The thing is, the parens aren't very meaningful by themselves. It only takes a little while programming in Clojure for your eyes to start looking not at the parens but at <strong>the first thing inside the paren</strong> for meaning. The first thing in the list defines how the rest of the list is interpreted.</p>
+<p><a href="http://clojure.org/special_forms">Special forms</a> are defined in the compiler. There are also <a href="http://clojure.org/macros">macros</a>, method calls, and functions. Special forms and macros all define their own rules for interpreting the rest of the stuff in the expression. <strong>You'll pick those up over time</strong>, just like you can pick up the difference between curly braces and square braces. The other thing it can be is a method or function, which follow standard rules for evaluation (evaluate the arguments first, then call the function on them).</p>
+<p>These rules are internalized by Clojure programmers. It's not hard to learn all of the special forms and the common macros (and the rest are functions). It comes with time.</p>
+<p>Of course, all of the different types of expresions can nest very nicely. Which brings us to the next point.</p>
+<h3 id="indentation-means-scoping">2. Indentation means scoping</h3>
+<p>Another common complaint is how much nesting is done in Lisps. It's true, there's <strong>more nesting than in other languages</strong>. When I was working in JavaScript, nesting felt bad. But in Clojure, you expect more nesting than in other languages. There is still such a thing as &quot;too much nesting&quot;. The line is just drawn further to the right. But as a Clojure programmer, I appreciate the nesting because <strong>it helps me write better code</strong>.</p>
+<p>Having parens play such a big role in the language means indentation is very easy and regular. There is a rather standard style for how Clojure code should be indented.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> The result of the indentation is to let you <strong>see nesting without counting parens</strong>.</p>
+<p>Nesting is important in Clojure. Nesting defines scopes and groups functions with their arguments. <strong>Scopes let you reason about small bits of code in isolation.</strong> Nesting visually shows you the structure of your program. After a short while, you will be able to see the important structure of the code by the indentation. And that will lead you to the next point.</p>
+<h3 id="learn-the-evaluation-direction">3. Learn the evaluation direction</h3>
+<p>If you use a language like JavaScript, you're probably used to <strong>seeing the evaluation order of code very quickly</strong>. What I mean is, you know that you should read the following code from left to right.</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="ot">person</span>.<span class="fu">getName</span>().<span class="fu">toUpperCase</span>().<span class="fu">trim</span>()</code></pre>
+<p>But you also know that you should read function calls right to left (or &quot;inside out&quot;).</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="fu">trim</span>(<span class="fu">toUpperCase</span>(<span class="fu">getName</span>(person)))</code></pre>
+<p>Function definitions are read from top to bottom:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">upper_name</span>(person) {
+  <span class="kw">var</span> name = <span class="ot">person</span>.<span class="fu">getName</span>();
+  name = <span class="ot">name</span>.<span class="fu">toUpperCase</span>();
+  name = <span class="ot">name</span>.<span class="fu">trim</span>();
+  <span class="kw">return</span> name;
+}</code></pre>
+<p>And assignments are kind of left to right to left. First, you define the variable. Then you run the code on the right, <em>then</em> assign it to the thing on the left.</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> name = <span class="fu">upper_name</span>(person);</code></pre>
+<p>And of course, you can write code that combines all of those types of code. So you wind up reading each bit of code in a different way.</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">x</span>(person) {
+  <span class="kw">var</span> name = <span class="fu">trim</span>(<span class="ot">person</span>.<span class="fu">getName</span>().<span class="fu">toUpperCase</span>());
+  <span class="kw">return</span> name;
+}</code></pre>
+<p>Clojure has all of that, too (well, everything except the left to right to left order). But the <em>visual signals</em> are different. Like the first point says, you should focus on the <em>first thing</em> in each pair of parens. Here are some examples of different reading directions in Clojure.</p>
+<p>Right to left (inside out):</p>
+<ul>
+<li>function calls, method calls</li>
+</ul>
+<pre class="sourceCode clojure"><code class="sourceCode clojure">(.trim (.toUpperCase (.getName person)))</code></pre>
+<p>Top to bottom:</p>
+<ul>
+<li><a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/let"><code>let</code></a>, <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/fn"><code>fn</code></a>, <a href="http://clojure.org/special_forms#Special%20Forms--(do%20exprs*)"><code>do</code></a>, <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/doseq"><code>doseq</code></a>, <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/dotimes"><code>dotimes</code></a>, etc</li>
+</ul>
+<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">let</span> [<span class="kw">name</span> (.getName person)
+      <span class="kw">name</span> (.toUpperCase <span class="kw">name</span>)
+      <span class="kw">name</span> (.trim <span class="kw">name</span>)]
+  <span class="kw">name</span>)</code></pre>
+<p>Left to right:</p>
+<ul>
+<li><a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/-&gt;"><code>-&gt;</code></a>, <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/-&gt;&gt;"><code>-&gt;&gt;</code></a>, <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/.."><code>..</code></a>, etc</li>
+</ul>
+<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">-&gt;</span> person .getName .toUpperCase .trim)</code></pre>
+<p>Those are just some examples. It takes a little practice, but soon you'll be seeing the order you should read code in using the <em>first item</em> in the parens.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>If you've never done Lisp before, the Clojure syntax can be a bit novel and bewildering. But it only takes a couple of weeks before you'll have your bearings again. Just remember that everyone goes through that at first. After the adjustment, though, you'll be able to easily pick out the <strong>visual landmarks</strong> you'll need. And hopefully knowing what to look for can help you through that faster.</p>
+<p>If you're serious about learning Clojure for a career change, you should look into <a href="http://www.purelyfunctional.tv/mentoring"><em>PurelyFunctional.tv Online Mentoring</em></a>. It will guide you step-by-step to becoming a Clojure professional.</p>
+<div class="subscribe-form-wrapper subscribe-form">
+  <form action="https://www.getdrip.com/forms/4434441/submissions" method="post" data-drip-embedded-form="4434441">
+    <h3 data-drip-attribute="headline">
+PurelyFunctional.tv Online Mentoring
+</h3>
+    <div data-drip-attribute="description">
+      
+You're looking into a career change. But you worry that you will face difficulty trying to get your first job in Clojure, since the niche is small and you've got limited Functional Programming background.<br><br> <em>PurelyFunctional.tv Online Mentorship</em> is designed to smooth out the learning curve, get you programming as soon as possible, and fit into your busy schedule. The lessons cover a broad range of topics, from beginner skills to libraries to deploying production code. You get the skills to succeed with Clojure. If you're interested, subscribe below and find out when it starts.
+</div>
+    
+<br>
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>There are slight variations.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/clojurescript-externs">
+        previous
+      </a>
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+
+          if(window.oberon && mixpanel) {
+          if(document.cookie.indexOf('oberon-id') < 0) {
+                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
+                                                    mixpanel.alias(window.oberon.id);
+                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
+                                                    }
+                                                    mixpanel.identify(window.oberon.id);
+                                                    }
+
+                                                    mixpanel.register({URL: window.location.pathname,
+                                                    Title: $("title").text()});
+
+                                                    mixpanel.track("Page Visit");
+
+                                                    /*
+                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
+                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe'); */
+
+                                                    mixpanel.track_links('a.homepage-offer-box-link',
+                                                    'Click PurelyFunctional.tv',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    mixpanel.track_links('a.js-clojuregazette',
+                                                    'Click Clojure Gazette',
+                                                    function(e) {
+                                                    return {ToURL: $(e).prop('href')};
+                                                    });
+
+                                                    $('input[name=EMAIL]').change(function() {
+                                                    var i = $(this);
+                                                    window.o_email = i.val();
+                                                    });
+/*
+                                                    $('form').submit(function() {
+                                                    if(window.o_email)
+                                                    mixpanel.people.set({"$email": window.o_email});
+                                                    });*/
+
+                                                    </script>
+      <script src="/js/mylibs/annotated-code.js" defer></script>
+      <script src="/js/libs/codemirror.js" defer></script>
+      <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+      <script src="/js/mylibs/feedback.js" defer></script>
+
+      <!-- Drip -->
+<script type="text/javascript">
+  var _dcq = _dcq || [];
+  var _dcs = _dcs || {}; 
+  _dcs.account = '3651717';
+  
+  (function() {
+    var dc = document.createElement('script');
+    dc.type = 'text/javascript'; dc.async = true; 
+    dc.src = '//tag.getdrip.com/3651717.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(dc, s);
+  })();
+</script>
+  </body>
+</html>

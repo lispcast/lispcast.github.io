@@ -117,22 +117,31 @@
 <p>After a bit of experience with Clojure, I rarely have <em>difficult</em> problems with out-of-place <code>nil</code>s in pure Clojure code. However, there is often some Java interop--namely, calling Java methods directly--that will cause a NullPointerException if the object of the method call is <code>nil</code>. In these cases, wrapping a Java method call in a <code>(when )</code> is often appropriate. But sometimes not, and the NullPointerException is welcome.</p>
 <p>There are some decisions in Clojure that I think make poor use of nil-punning. These places actually make working with Clojure more difficult than they need to be. For instance, <code>(str nil)</code> is the empty string. Printing this out prints nothing--a form of silence, which is rarely what you want so you have to check for <code>nil</code>s in these cases. But <code>nil</code> <em>is not</em> the empty string, like it is the empty <code>seq</code>. <code>(clojure.string/trim nil)</code> throws a NullPointerException. This is inconsistent behavior. <strong>When <code>nil</code> acts inconsistently, nil-punning does not work right. <code>nil</code>s need to be checked. In the worst cases, <code>nil</code>s fail silently.</strong> While I have learned to deal with these situations, they are a wart on the language. The fact that <code>nil</code>s are so common does help surface the bugs sooner. A small consolation.</p>
 <p>Let me make it clear: null pointers are still a costly problem in Clojure. But I can make a claim similar to what Haskellers claim about the type system: <em>nil-punning eliminates a certain class of errors</em>. A fortuitous set of decisions in Clojure has reduced the magnitude of the problem. And some decisions have made the problem worse by hiding it. In general, I find that by <a href="http://www.apl.jhu.edu/~hall/lisp/Scheme-Ballad.text">embracing nil-punning</a>, my code gets better.</p>
-<div class="article-offer-box">
-  
-<a class="article-offer-box-link" href="http://www.purelyfunctional.tv/intro-to-clojure">
-<div class="article-offer-box-text-wrapper">
-      <div class="article-offer-box-text">
-        <div class="article-offer-box-text-pitch">
-          
-Learn Functional Programming using Clojure with screencasts, visual aids, and interactive exercises
-</div>
-        <div class="offer-box-buy-button">
-Learn more
-</div>
-      </div>
+<div class="article-offer-box subscribe-form-wrapper subscribe-form">
+  <form action="https://www.getdrip.com/forms/4474202/submissions" method="post" data-drip-embedded-form="4474202">
+    <h3 data-drip-attribute="headline">
+Free Getting Started with Clojure Email Course
+</h3>
+    <div data-drip-attribute="description">
+      
+It's designed to help you decide if Clojure will work for you, to get set up, and to explore some of its cooler features. <br /> <br /> Here are some of the topics:
+<ul>
+    <li>
+How to Read Code like a Clojure Expert
+</li>
+    <li>
+The Ultimate Guide to Learning Clojure for Free
+</li>
+    <li>
+How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popular
+</li>
+      </ul>
     </div>
-    
-<img class="article-offer-image" src="http://www.purelyfunctional.tv/img/intro-shot.png"> </a>
+    <div>
+      
+<label for="fields[email]">Email Address: </label><br /> <input type="email" name="fields[email]" placeholder="Email" value="" /> <input type="submit" name="submit" value="Sign Up" data-drip-attribute="sign-up-button" />
+</div>
+  </form>
 </div>
 
 

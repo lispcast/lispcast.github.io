@@ -101,8 +101,9 @@
 <p>There's something related to this idea of surfacing the errors early that I've been thinking about. It's about data. Have you ever written some classes and everything is well and good. And then after a while, you need to serialize that to disk or across a network. Now you have to come up with some format (maybe JSON or XML) to represent your class. Then, whenever the class changes, <strong>you have to remember to change the data format to keep them in sync</strong>. It's kind of painful!</p>
 <p>Well, I'll tell you, that rarely happens in Clojure. Because in Clojure, you often <strong>start with data structures</strong>. Meaning, you're already thinking in data, modeling in data, and working in data. <strong>Serialization becomes a non-issue</strong>, because Clojure data structures come built in with <a href="https://github.com/edn-format/edn">readers and writers</a>. Just like causing errors to happen early because they will happen eventually, Clojure programmers code in data <em>in part</em> because you're going to need data (serialization and deserialization) eventually.</p>
 <p>If this idea intrigues you, you may want to check out Clojure. Its <strong>data structures are cutting edge</strong>! Check out <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a> if you would like to get into functional programming using animations, exercises, and screencasts.</p>
-<div class="subscribe-form-wrapper subscribe-form">
-  <form action="https://www.getdrip.com/forms/4474202/submissions" method="post" data-drip-embedded-form="4474202">
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/4474202/submissions" method="post" data-drip-embedded-form="4474202"
+        class="subscribe-form">
     <h3 data-drip-attribute="headline">
 Free Getting Started with Clojure Email Course
 </h3>

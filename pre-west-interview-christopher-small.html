@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
 
     <link rel="alternate" type="application/rss+xml"
-    title="LispCast" href="/feed" />
+          title="LispCast" href="/feed" />
 
     <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
       for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
@@ -194,75 +194,35 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
       </a>
     </footer>
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
 
-
-
     <script>
 
-      document.write('<script src="https://oberon.herokuapp.com/cookie/get.js?_=' + (new Date()).getTime() + '"><\/script>');
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
 
-          if(window.oberon && mixpanel) {
-          if(document.cookie.indexOf('oberon-id') < 0) {
-                                                    var expires = (new Date((new Date().getTime() + 1000*60*60*24*365*10))).toUTCString();
-                                                    mixpanel.alias(window.oberon.id);
-                                                    document.cookie = "oberon-id=" + window.oberon.id + ";expires=" + expires + ";path=/";
-                                                    }
-                                                    mixpanel.identify(window.oberon.id);
-                                                    }
+      mixpanel.track("Page Visit");
 
-                                                    mixpanel.register({URL: window.location.pathname,
-                                                    Title: $("title").text()});
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
 
-                                                    mixpanel.track("Page Visit");
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
 
-                                                    /*
-                                                    mixpanel.track_forms('.gazette-form', 'Submit Clojure Gazette');
-                                                    mixpanel.track_forms('.subscribe-form', 'Subscribe'); */
-
-                                                    mixpanel.track_links('a.homepage-offer-box-link',
-                                                    'Click PurelyFunctional.tv',
-                                                    function(e) {
-                                                    return {ToURL: $(e).prop('href')};
-                                                    });
-
-                                                    mixpanel.track_links('a.js-clojuregazette',
-                                                    'Click Clojure Gazette',
-                                                    function(e) {
-                                                    return {ToURL: $(e).prop('href')};
-                                                    });
-
-                                                    $('input[name=EMAIL]').change(function() {
-                                                    var i = $(this);
-                                                    window.o_email = i.val();
-                                                    });
-/*
-                                                    $('form').submit(function() {
-                                                    if(window.o_email)
-                                                    mixpanel.people.set({"$email": window.o_email});
-                                                    });*/
-
-                                                    </script>
-      <script src="/js/mylibs/annotated-code.js" defer></script>
-      <script src="/js/libs/codemirror.js" defer></script>
-      <link rel="stylesheet" href="/css/feedback.css" type="text/css">
-      <script src="/js/mylibs/feedback.js" defer></script>
-
-      <!-- Drip -->
-<script type="text/javascript">
-  var _dcq = _dcq || [];
-  var _dcs = _dcs || {}; 
-  _dcs.account = '3651717';
-  
-  (function() {
-    var dc = document.createElement('script');
-    dc.type = 'text/javascript'; dc.async = true; 
-    dc.src = '//tag.getdrip.com/3651717.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(dc, s);
-  })();
-</script>
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
   </body>
 </html>

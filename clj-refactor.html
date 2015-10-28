@@ -1,0 +1,199 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>clj-refactor cheatsheets | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.">
+    <meta name="twitter:title" content="clj-refactor cheatsheets">
+
+    <meta property="og:title" content="clj-refactor cheatsheets">
+    <meta property="og:description" content="I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.">
+
+    <meta name="description" content="I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clj-refactor">
+            clj-refactor cheatsheets
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          October 28, 2015
+        </div>
+
+        
+<p>Summary: <em>I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.</em></p>
+<p>Wow, do I love me a good cheatsheet. Unfortunately, I don't like the name. &quot;Cheatsheet&quot; reminds me of my days at school where some kids would write in tiny writing to try to cram as much text on a little sheet of paper as possible. That may help cheat on a test, but <strong>it's not going to help you learn</strong>.</p>
+<p>The purpose of a cheatsheet for learning is to decrease the cognitive burden of the task. You've only got so much mental capacity for new things. You don't want one of your precious slots dedicated to remembering a keystroke for a new Emacs command--not while you've got 10 other things to learn. You want the cheatsheet to take care of that for you and free up that slot.</p>
+<p>However, if the cheatsheet is full of stuff, you've introduced another burden. Now you have to search through all of that stuff, most of which is not immediately relevant, to find what you need right now. If the search is too arduous, you'll have to free up some slots. And so you forget what you were trying to do in the first place.</p>
+<p>So there's this delicate balance of <em>enough information</em> with <em>easy access</em>. What I see a lot of in cheatsheets I find online is that they try to cram everything onto one page. It becomes an exercise of convincing the word processor that it can all fit. The actual user is forgotten.</p>
+<p>Here are my design principles for a good cheatsheet:</p>
+<ul>
+<li><p>Readable at a distance</p>
+<p>You should be able to read it on the wall behind your screen. You're probably already using both hands to type, so you don't want to have to pick it up, rifle through papers, scan with your finger, etc.</p>
+<p>This means <strong>large fonts</strong>, <strong>lots of whitespace</strong>, and <strong>clear organization</strong>.</p></li>
+<li><p>Focused</p>
+<p>The point is to capture a few related things that you want to practice together. Things you're not trying to learn can wait for another sheet. Things you already have mastered don't need to fit either.</p></li>
+<li><p>Terse</p>
+<p>This is a quick reference, not an explanation. Key points can be called out, but a lot is left unsaid.</p></li>
+<li><p>Evolving</p>
+<p>These are not static documents. They are learning aids and should be adapted to your needs. Have you mastered one of the things? Remove it. Is there something you've left out? Add it. Keep it relevant and you'll want to keep referring to it.</p></li>
+</ul>
+<p>All this is to say that I've made my own cheatsheets for learning <a href="https://github.com/clojure-emacs/clj-refactor.el"><code>clj-refactor</code></a>. I gave it a shot a couple of weeks ago and I realized that to really make use of the tool, I'd have to get fast at it. There's no point in using a fast tool if I slow it down. But there are lots of available refactorings.</p>
+<p>I started using <code>clj-refactor</code> with these cheatsheets and it's amazing what refactorings are available. I'm constantly surprised by how smart they are. For instance, the [<code>cljr-extract-function</code>] command creates a new <code>defn</code>, adds the expression to the body, finds all free variables and makes them parameters to the new function, adds a &quot;tabstop&quot; to type the name, and one more Tab will bring you back to where you were. This is cool stuff.</p>
+<p>If you're interested in the cheatsheets (4 in total) with big fonts, a little editing (only relevant refactorings), and terse information, please sign up for the mailing list. Once you do, you'll get access to the Clojure Resource Center where these cheatsheets and more are available.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/clj-refactor%20cheatsheets.png" />
+</div>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/4434441/submissions" method="post" data-drip-embedded-form="4434441"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+PurelyFunctional.tv Online Mentoring
+</h3>
+    <div data-drip-attribute="description">
+      
+You're looking into a career change. But you worry that you will face difficulty trying to get your first job in Clojure, since the niche is small and you've got limited Functional Programming background.<br><br> <em>PurelyFunctional.tv Online Mentorship</em> is designed to smooth out the learning curve, get you programming as soon as possible, and fit into your busy schedule. The lessons cover a broad range of topics, from beginner skills to libraries to deploying production code. You get the skills to succeed with Clojure. If you're interested, subscribe below and find out when it starts.
+</div>
+    
+<br>
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

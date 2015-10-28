@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>clj-refactor cheatsheets</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clj-refactor</guid>
+                  <link>http://www.lispcast.com/clj-refactor</link>
+                  <pubDate>Wed 28 Oct 2015 05:31:10 PM CDT</pubDate>
+                  <description>
+                    I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clj-refactor"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>How to Read Clojure Code Like an Expert</title>
                   <guid isPermalink="false">http://www.lispcast.com/how-to-read-code-like-a-clojure-expert</guid>
                   <link>http://www.lispcast.com/how-to-read-code-like-a-clojure-expert</link>
@@ -129,20 +143,6 @@
                     Even though ClojureScript adds another layer of abstraction, the tooling makes it easier to debug that plain JavaScript.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/debugging-clojurescript"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>What is ClojureScript?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/what-is-clojurescript</guid>
-                  <link>http://www.lispcast.com/what-is-clojurescript</link>
-                  <pubDate>Fri 11 Sep 2015 01:07:15 PM CDT</pubDate>
-                  <description>
-                    ClojureScript is Clojure that compiles to JavaScript. It combines the power of Clojure with the reach of JavaScript.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-is-clojurescript"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

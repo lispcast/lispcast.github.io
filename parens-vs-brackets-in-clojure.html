@@ -97,8 +97,8 @@
 
         
 <p>Summary: <em>Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.</em></p>
-<p>The other day someone asked me a very good question about Clojure. She was learning the syntax and was wondering what the significance was between parentheses and square brackets. She knew that square brackets can also make a vector. What she really wanted to know what in the more syntactic elements, like the square brackets in a <code>let</code> or <code>fn</code>, why did you use parens sometimes and brackets other times?</p>
-<p>The answer is simple: parens are for enclosing function calls or macro calls, while the square brackets inside are data for the macro call to use. For instance, in the following <code>let</code> form, the parens define the lexical scope of the bindings while the bindings themselves are in square brackets.</p>
+<p>The other day someone asked me a very good question about Clojure. She was learning the syntax and was wondering what the significance was between parentheses and square brackets. She knew that square brackets can also make a vector. What she really wanted to know what in the more syntactic elements, like the square brackets in a <code>let</code> or <code>fn</code>, <strong>why did you use parens sometimes and brackets other times?</strong></p>
+<p>The answer is simple: parens are for enclosing function calls or macro calls, while the square brackets inside are <strong>data for the macro to use</strong>. For instance, in the following <code>let</code> form, the parens define the lexical scope of the bindings while the bindings themselves are in square brackets.</p>
 <pre id="let1" class="code-card"><code>(let [x 1
       y 2
       z 3]

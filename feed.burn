@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Parens vs Brackets in Clojure</title>
+                  <guid isPermalink="false">http://www.lispcast.com/parens-vs-brackets-in-clojure</guid>
+                  <link>http://www.lispcast.com/parens-vs-brackets-in-clojure</link>
+                  <pubDate>Mon 02 Nov 2015 10:05:06 PM CST</pubDate>
+                  <description>
+                    Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/parens-vs-brackets-in-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>clj-refactor cheatsheets</title>
                   <guid isPermalink="false">http://www.lispcast.com/clj-refactor</guid>
                   <link>http://www.lispcast.com/clj-refactor</link>
@@ -129,20 +143,6 @@
                     If you know Clojure already and just want to experiment writing ClojureScript, using Figwheel can really help get you there quickly. I show you how in a few commands.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojurescript-fast-start"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Won't it be hard to debug ClojureScript in my browser?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/debugging-clojurescript</guid>
-                  <link>http://www.lispcast.com/debugging-clojurescript</link>
-                  <pubDate>Sat 12 Sep 2015 03:03:13 PM CDT</pubDate>
-                  <description>
-                    Even though ClojureScript adds another layer of abstraction, the tooling makes it easier to debug that plain JavaScript.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/debugging-clojurescript"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

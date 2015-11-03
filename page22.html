@@ -86,6 +86,48 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/static-vs-dynamic-typing">
+            Static vs. Dynamic Typing
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          October 05, 2012
+        </div>
+
+        
+<p>I was reading <a href="http://programmers.stackexchange.com/questions/167305/what-functionality-does-dynamic-typing-allow">this question</a> on Stack Exchange asking what is possible in a dynamically typed language that is impossible in a statically typed language. Most of the responses were terrible. It reminded me that <strong>the level of discussion surrounding the topic of types in general is very disappointing.</strong> Basically, most people do not know what they are talking about.</p>
+<p>Luckily, one of the answerers posted a link to <a href="http://blogs.perl.org/users/ovid/2010/08/what-to-know-before-debating-type-systems.html">this post about debating type systems</a>. I had never read it before and I am glad I have, now.</p>
+<p>The author takes the approach of describing how people generally use typing terms as opposed to prescribing a definition. His main point is that the terms are generally misunderstood so much that trying to discuss them is not productive. <strong>There is no agreed-upon definition in most contexts.</strong> I agree. I wish it were not the case, though.</p>
+<p>But there was also another gem in the article.</p>
+<blockquote>
+<p>Dynamic and static type systems are two completely different things, whose goals happen to partially overlap.</p>
+</blockquote>
+<p>I think this point is right on. Static type checking is only one possible form of static analysis. And the goal of static analysis is to detect errors as soon as possible. Dynamic typing is used more to perform dynamic type dispatch (that is, runtime polymorphism). Because they have such different goals, why are we even comparing them?</p>
+<p>I think a lot of it is C++'s fault. C++ took the idea of Classes and inheritance from OOP and conflated them into static types. But I'm not an expert. Maybe someone did that before C++. By the way, this is probably 90% of why people hate static typing. When static typing prevents something useful (like <a href="http://en.wikipedia.org/wiki/Duck_typing">duck typing</a>) but does not present an alternative to that use, you wish you did not have static typing.</p>
+<p>The real point is that <strong>static typing and dynamic typing are not inherently mutually exclusive</strong>. For instance, Java has static and dynamic typing. That is, you can ask for the type of an object at runtime, and the types of variables are checked at compile time. Clojure has some form of static analysis (no static type analysis) and inherits the runtime types from Java.</p>
+<p>The question &quot;which is a subset of the other?&quot; is actually meaningless. <strong>But the question &quot;if you had to choose a language that only had one, then add the other to it, which would you pick?&quot; is becoming increasingly relevant.</strong> <a href="http://www.lispcast.com/deferring-type-errors-to-runtime">Haskell recently added what some consider to be dynamic typing behavior (throwing type errors at runtime instead of at compile time).</a> <a href="http://us4.campaign-archive2.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=c43c157edd">And people are working on static type systems for Clojure.</a></p>
+<p>I do not think that this is a subjective question. I think it has one possible answer in the general case. And I would like to present the argument to open up the discussion. I will use Haskell (with the most advanced static type system in the world) and Clojure (it is comparable to Haskell and dynamically typed).</p>
+<p>In Clojure, type information is purely informational. It does have Java's inheritance hierarchy, but that is a mere legacy to interoperate with Java. The important part of Clojure is that every value has a type and the program can know the type at runtime. This could be considered the minimal possible dynamic type system: present types at runtime and defer to the program to do what it wishes with them. <strong>The semantics of evaluation are independent of the type system.</strong></p>
+<p>In Haskell, type information exists only at compile time. That is, the compiler figures out the type of everything, decides whether to allow the program, then compiles it (if it is allowed). <strong>Types are complected with semantics.</strong> Types determine what code is run. Further, because the type checker has to be able to infer all types, the language has been limited to the subset of possible programs that are checkable. The semantics of the language are limited by the type system.</p>
+<p>So what we have is a semantics that is independent of types (Clojure) which we can augment with different static type analyses and potentially catch errors, or we have a language that has already compromised its semantics to the type system and add runtime type annotations, which are effectively useless.</p>
+<p>Just one last word: I am not a dynamic typing zealot. I use Haskell more than Clojure. And I am very excited to see static analysis come to Clojure. However, the static typing crowd seems to have the rhetorical upper hand at the moment. I just want to have better discussions.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.infoq.com/presentations/Impedance-Mismatch">
             The Impedance Mismatch is Our Fault
           </a>
@@ -441,38 +483,6 @@
 <li id="fn2"><p>How to do it? Never change a type signature. Instead, create a new name with the same value, and modify that. Then, when it has settled into its permanent type signature, rename it to the old name, recompile, and let the error messages guide you.<a href="#fnref2">↩</a></p></li>
 </ol>
 </div>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="https://github.com/manuel/wat-js">
-            Wat
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/wat">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          September 07, 2012
-        </div>
-
-        
-<p>A Lisp written in Javascript with first-class environments and first-class continuations. The README claims it starts in 50ms on modern browsers. Looks interesting.</p>
 
 
         <div class="endmark">

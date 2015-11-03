@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>clj-refactor cheatsheets | LispCast</title>
+    <title>Parens vs Brackets in Clojure | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.">
-    <meta name="twitter:title" content="clj-refactor cheatsheets">
+    <meta name="twitter:description" content="Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.">
+    <meta name="twitter:title" content="Parens vs Brackets in Clojure">
 
-    <meta property="og:title" content="clj-refactor cheatsheets">
-    <meta property="og:description" content="I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.">
+    <meta property="og:title" content="Parens vs Brackets in Clojure">
+    <meta property="og:description" content="Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.">
 
-    <meta name="description" content="I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.">
+    <meta name="description" content="Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.">
 
     <meta name="author" content="Eric Normand">
 
@@ -86,40 +86,80 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/clj-refactor">
-            clj-refactor cheatsheets
+             href="/parens-vs-brackets-in-clojure">
+            Parens vs Brackets in Clojure
           </a>
         </h2>
 
         <div class="timestamp">
-          October 28, 2015
+          November 02, 2015
         </div>
 
         
-<p>Summary: <em>I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.</em></p>
-<p>Wow, do I love me a good cheatsheet. &quot;Cheatsheet&quot; reminds me of my days at school where some kids would write in tiny writing to try to cram as much text on a little sheet of paper as possible. That may help cheat on a test, but <strong>it's not going to help you learn</strong>.</p>
-<p>The purpose of a cheatsheet <em>for learning</em> is to <strong>decrease the cognitive burden of the task</strong>. You've only got so much mental capacity for new things. You don't want one of your precious slots dedicated to remembering a keystroke for a new Emacs command--not while you've got 10 other things to learn. You want the cheatsheet to take care of that for you and <strong>free up that slot</strong>. Then you can practice deliberately.</p>
-<p>However, if the cheatsheet is full of stuff, you've introduced another burden. Now you have to search through all of that stuff, most of which is not immediately relevant, to find what you need right now. If the search is too arduous, you'll have to free up some slots. And so you forget what you were trying to do in the first place.</p>
-<p>So there's this delicate balance of <em>enough information</em> with <em>easy access</em>. What I see a lot of in cheatsheets I find online is that they try to <strong>cram everything onto one page</strong>, like the desperate student the night before the test. The cheatsheet becomes an exercise in convincing the word processor that it can all fit. The actual user is forgotten.</p>
-<p>Here are my design principles for a good cheatsheet:</p>
-<ul>
-<li><p><strong>Readable at a distance</strong></p>
-<p>You should be able to read it on the wall behind your screen. You're probably already using both hands to type, so you don't want to have to pick it up, rifle through papers, scan with your finger, etc.</p>
-<p>This means <strong>large fonts</strong>, <strong>lots of whitespace</strong>, and <strong>clear organization</strong>.</p></li>
-<li><p><strong>Focused</strong></p>
-<p>The point is to capture a few related things that you want to practice together. Things you're not trying to learn can wait for another sheet. Things you already have mastered don't need to fit either.</p></li>
-<li><p><strong>Terse</strong></p>
-<p>This is a quick reference, not an explanation. Key points can be called out, but a lot is left unsaid.</p></li>
-<li><p><strong>Evolving</strong></p>
-<p>These are not static documents. They are learning aids and should be adapted to your needs. Have you mastered one of the things? Remove it. Is there something you've left out? Add it. Keep it relevant and you'll want to keep referring to it.</p></li>
-</ul>
-<p>All this is to say that I've made my own cheatsheets for learning <a href="https://github.com/clojure-emacs/clj-refactor.el"><code>clj-refactor</code></a>. I gave it a shot a couple of weeks ago and I realized that to really make use of the tool, I'd have to get fast at it. There's no point in using a fast tool if I slow it down. But there are lots of available refactorings.</p>
-<p>I started using <code>clj-refactor</code> with these cheatsheets and it's amazing what refactorings are available. I'm constantly surprised by how smart they are. For instance, the <a href="https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-extract-function"><code>cljr-extract-function</code></a> command creates a new <code>defn</code>, adds the expression to the body, finds all free variables and makes them parameters to the new function, adds a &quot;tabstop&quot; to type the name, and one more Tab will bring you back to where you were. This is cool stuff.</p>
-<center>
-<img src="http://www.lispcast.com/img/clj-refactor%20cheatsheet.png" />
-</center>
+<p>Summary: <em>Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.</em></p>
+<p>The other day someone asked me a very good question about Clojure. She was learning the syntax and was wondering what the significance was between parentheses and square brackets. She knew that square brackets can also make a vector. What she really wanted to know what in the more syntactic elements, like the square brackets in a <code>let</code> or <code>fn</code>, why did you use parens sometimes and brackets other times?</p>
+<p>The answer is simple: parens are for enclosing function calls or macro calls, while the square brackets inside are data for the macro call to use. For instance, in the following <code>let</code> form, the parens define the lexical scope of the bindings while the bindings themselves are in square brackets.</p>
+<pre id="let1" class="code-card"><code>(let [x 1
+      y 2
+      z 3]
+  (* z (+ x y)))</code></pre>
+<div class="annotation-down" for="let1" data-at="(l">
+here, parens mean &quot;start a <code>let</code> expression&quot;
+</div>
 
-<p>If you're interested in the cheatsheets (4 in total) with big fonts, a little editing (only relevant refactorings), and terse information, please sign up for the mailing list. Once you do, you'll get access to the Clojure Resource Center where these cheatsheets and more are available.</p>
+<div class="annotation-left" for="let1" data-at="x 1">
+binding form gets meaning from <code>let</code>
+</div>
+
+<div class="annotation-left" for="let1" data-at="z 3">
+bindings in square brackets
+</div>
+
+<div class="annotation-left" for="let1" data-at="*">
+parens because body of <code>let</code> is more calls
+</div>
+
+<p>Notice the body <code>(* z ...)</code> is again in parens because it's function calls.</p>
+<p>In the following <code>defn</code>, we have the parens defining the whole form while the brackets define the data the function definition needs, namely the argument names.</p>
+<pre id="defn1" class="code-card"><code>(defn fib [x]
+  (cond
+    (= 0 x) 1
+    (= 1 x) 1
+    :else   (+ (fib (- x 1)) (fib (- x 2)))))</code></pre>
+<div class="annotation-down" for="defn1" data-at="(d">
+start a &quot;defn&quot; expression
+</div>
+
+<div class="annotation-left" for="defn1" data-at="[x]">
+agument list gets meaning from <code>defn</code>
+</div>
+
+<div class="annotation-left" for="defn1" data-at="cond">
+body is more parens
+</div>
+
+<p>Finally, we can see that brackets also mean &quot;create a vector&quot; in this expression:</p>
+<pre id="defn2" class="code-card"><code>(defn pair
+  &quot;Create a pair from the two arguments.&quot;
+  [a b]
+  [a b])</code></pre>
+<div class="annotation-left" for="defn2" data-at="pair">
+symbol <code>pair</code> is interpreted as name of function
+</div>
+
+<div class="annotation-left" for="defn2" data-at="arguments">
+a string after the name is interpreted as the docstring
+</div>
+
+<div class="annotation-left" for="defn2" data-at="[a b]">
+these are the arguments
+</div>
+
+<div class="annotation-left" for="defn2" data-at="])">
+everything else is the body; make and return a vector
+</div>
+
+<p>The first element of an expression is used to determine how to interpret the rest. Clojure is basically interpreters (and compilers) all the way down. It's one of the coolest things about Lisps. <strong>From the get-go, they're defined in terms of themselves, recursively.</strong> If you'd like to learn Clojure, join the <em>PurelyFunctional.tv Online Mentoring</em> program. It's an exploration in interactive instruction. When you join, you set the topics, you get help where you need it, to become a Clojure professional.</p>
 <div class="subscribe-form-wrapper">
   <form action="https://www.getdrip.com/forms/4434441/submissions" method="post" data-drip-embedded-form="4434441"
         class="subscribe-form">
@@ -147,10 +187,10 @@ You're looking into a career change. But you worry that you will face difficulty
 
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
-<li><a href="http://www.lispcast.com/clojure-test-cheatsheet">clojure.test cheatsheet</a></li>
-<li><a href="http://www.lispcast.com/solarized-cheat-sheet">Solarized Cheat Sheet</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-bozhidar-batsov">Pre-conj Prep: Bozhidar Batsov</a></li>
-<li><a href="http://www.lispcast.com/pre-conj-interview-bozhidar-batsov">Pre-Conj Interview: Bozhidar Batsov</a></li>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 </ul>
 
 
@@ -173,12 +213,8 @@ You're looking into a career change. But you worry that you will face difficulty
 
     <footer class="footer-banner">
       <a class="footer-previous"
-         href="http://www.lispcast.com/how-to-read-code-like-a-clojure-expert">
+         href="http://www.lispcast.com/clj-refactor">
         previous
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/parens-vs-brackets-in-clojure">
-        next
       </a>
     </footer>
 

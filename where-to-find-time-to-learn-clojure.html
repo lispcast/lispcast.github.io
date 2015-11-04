@@ -1,0 +1,211 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Where to find time to learn and practice Clojure | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Learning any new language is a challenge, and Clojure is no different. Finding the time to learn and practice is a real challenge, so we need to make the most of what time we have. These tips will help you immerse yourself in Clojure.">
+    <meta name="twitter:title" content="Where to find time to learn and practice Clojure">
+
+    <meta property="og:title" content="Where to find time to learn and practice Clojure">
+    <meta property="og:description" content="Learning any new language is a challenge, and Clojure is no different. Finding the time to learn and practice is a real challenge, so we need to make the most of what time we have. These tips will help you immerse yourself in Clojure.">
+
+    <meta name="description" content="Learning any new language is a challenge, and Clojure is no different. Finding the time to learn and practice is a real challenge, so we need to make the most of what time we have. These tips will help you immerse yourself in Clojure.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/where-to-find-time-to-learn-clojure">
+            Where to find time to learn and practice Clojure
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          November 04, 2015
+        </div>
+
+        
+<p>Summary: <em>Learning any new language is a challenge, and Clojure is no different. Finding the time to learn and practice is a real challenge, so we need to make the most of what time we have. These tips will help you immerse yourself in Clojure.</em></p>
+<p>Learning Clojure can be a challenge. Learning any new language can take a long time. Just like with learning a new spoken language, e need to <strong>expose ourselves to the new programming language</strong> frequently and for long periods of time. When our brains are <em>immersed</em> in the subject, only then will they begin forming the neural connections that we call &quot;learning&quot;. With repetition, patterns appear and we begin to <strong>see Clojure as a native would</strong>.</p>
+<p>But we're busy and don't have much opportunity to use Clojure at work. How can we find the time to learn and practice Clojure? If you want to get good at Clojure, you're obviously going to have to make an effort. Here are my tips for making the most of that effort.</p>
+<ol style="list-style-type: decimal">
+<li><p>Get your system set up.</p>
+<p>A great first step is to get your development environment ready. Find a block of an hour or two (at the most!) to get the JVM, Leiningen, and an editor set up. You can find <a href="https://github.com/ClojureBridge/curriculum/blob/gh-pages/outline/setup.md">instructions for Windows, Mac, and Linux here</a>, compliments of Clojure Bridge. Test them out to make sure they're working. Then, when you do have some free time, all you'll have to do is run a <code>lein repl</code> and you can start coding. For learning, Light Table is fine, but so is any other editor you're comfortable with.</p></li>
+<li><p>Start a scratch project.</p>
+<p>Leiningen comes with some great project templates for many different types of applications. <strong>You can make a new project with a clean slate just to practice coding.</strong> When you're just starting out, I suggest using the default template. It will set everything up you need to get your code running in Clojure. When you're feeling inspired to solve some Clojure problems, all you'll need to do is run <code>lein new clojure-problems</code> and you'll get a new project that's ready to run. Of course, replace <code>clojure-problems</code> with whatever you want to call the project.</p></li>
+<li><p>Solve small problems.</p>
+<p>Sometimes we have 5-10 minutes here and there to code. You can make good use of that time by solving small, toy problems that practice core Clojure skills. <strong>Big skills are made out of small skills</strong>, so these little exercises really pay off. Repeat the same exercises for added insights.</p>
+<p><a href="http://www.4clojure.com/">4Clojure</a> is a great site with tons of small, fill-in-the-blank exercises that break down learning Clojure to a very fine detail. You're given some expressions with blanks. You have to fill in the blank with something that will make the expression true. These are great for practicing the micro-skills and to get you used to Clojure. <strong>You can also do them on your phone.</strong> The web version works well on mobile browsers, and there's an <a href="https://play.google.com/store/apps/details?id=org.bytopia.foreclojure">app for Android</a>.</p>
+<p>I cut my Clojure teeth on <a href="https://projecteuler.net/">Project Euler</a> problems. They're more involved than 4Clojure. They'll take more time per exercise. And they're designed to be challenging in <em>any</em> language. The easy solution is often not efficient enough, so you're challenged to dive into the nitty gritty of real-world algorithmic issues. I found these <strong>wonderful for forcing me to write practical Clojure code</strong>. Allocate 30 minutes to 1 hour per exercise.</p></li>
+<li><p>Play while you're waiting in line.</p>
+<p>There are a few ways to do Clojure on your phone. There is a free iPhone/iPad ClojureScript REPL called <a href="https://itunes.apple.com/us/app/replete/id1013465639?ls=1&amp;mt=8">Replete</a>. And there's a free <a href="https://play.google.com/store/apps/details?id=com.sattvik.clojure_repl">Clojure REPL for Android</a>. Install one on your phone now so it will be there when you have a moment.</p>
+<p>Like I said before, <a href="http://www.4clojure.com/">4Clojure</a> also works fine in mobile browsers.</p></li>
+<li><p>&quot;Increase your vocabulary.&quot;</p>
+<p>One of the iconic tools of learning a language is the <em>flashcard</em>. Why not use them for learning a programming language? Write down the names of standard library functions and macros, one on each card, with a sentence on the back for what it does, and bring them with you wherever you go. When you get a chance, whip them out and start reviewing. <strong>Your brain will pick them up with repeated exposure.</strong> I don't suggest you review the entire standard library, just what you find useful and don't already have memorized.</p></li>
+<li><p>Get unstuck quickly.</p>
+<p><strong>Programming is full of obstacles that can block you for weeks.</strong> I'm often surprised any of us have the patience for it. Instead of trying to power through, ask someone for help. The <a href="http://clojurians.net/">Clojurians Slack</a> is great for asking those quick questions. I ask questions there all the time. There are people of all experience levels ready to help out. Sign up now so it will be there when you need it. You can always ask me in the <a href="http://discuss.purelyfunctional.tv/">discussion board</a> or <script type="text/javascript">
+<!--
+h='&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'by email'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#98;&#x79;&#32;&#x65;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x65;&#114;&#x69;&#x63;&#32;&#x61;&#116;&#32;&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript>.</p></li>
+<li><p>Small bites.</p>
+<p>Don't bite off more than you can chew. For instance, don't try to learn Emacs, Clojure, and music theory to start hacking in Overtone. Start with one thing and build a foundation. <strong>Choose a project that you know a lot about and do it in Clojure.</strong> For instance, if you're a web programmer, build a simple blog engine in Clojure with an editor you're familiar with. If you do data processing, try using Clojure for it.</p></li>
+<li><p>Plan your progress.</p>
+<p>One of the best ways to learn is to choose one small skill and get it done. Plan your project out a little bit ahead of time and you'll know exactly what you can work on next. Back in a former life I was learning iOS development. I would plan a three-hour block on Saturday morning to make progress. During the week, I would figure out <em>one thing</em> to accomplish during those three hours. For instance, getting the phone to recognize a touch event and showing a circle where I touched. It might seem like a small goal, but by breaking down my larger goal (my idea for the app) into small, achievable objectives, I made sure I was never overwhelmed and always feeling like I was making progress.</p>
+<p>So if you're planning a web project in Clojure to learn, your first goal might be to get a &quot;Hello, world!&quot; server set up and deployed. <strong>There's already a lot to figure out</strong>, so start small, plan a little bit (it's always easier to plan than to do, because you can do it when you're doing laundry, eating, etc). Your next goal might be to connect to a database.</p></li>
+<li><p>Share with the world.</p>
+<p>Sharing your work with a supportive community can really help you cement your skills. Consider writing a blog post, putting your code up on Github with a nice README, or presenting it at a local user group. Explaining how you did something can help others but it's also a <strong>great way to make the skill yours</strong>.</p></li>
+</ol>
+<p>If you'd like to learn Clojure, join the [<em>PurelyFunctional.tv Online Mentoring</em>][ment] program. It's step-by-step guidance from Clojure dabbler to professional.</p>
+<p>[ment]: [ment]: http://purelyfunctional.tv/mentoring</p>
+<p>Please discuss this on <a href="http://discuss.purelyfunctional.tv">the discussion board</a>.</p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/4434441/submissions" method="post" data-drip-embedded-form="4434441"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+PurelyFunctional.tv Online Mentoring
+</h3>
+    <div data-drip-attribute="description">
+      
+You're looking into a career change. But you worry that you will face difficulty trying to get your first job in Clojure, since the niche is small and you've got limited Functional Programming background.<br><br> <em>PurelyFunctional.tv Online Mentorship</em> is designed to smooth out the learning curve, get you programming as soon as possible, and fit into your busy schedule. The lessons cover a broad range of topics, from beginner skills to libraries to deploying production code. You get the skills to succeed with Clojure. If you're interested, subscribe below and find out when it starts.
+</div>
+    
+<br>
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

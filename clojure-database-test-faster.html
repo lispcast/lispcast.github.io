@@ -128,31 +128,34 @@
 <p>The one gotcha that I ran into was that the PostgreSQL function <strong><code>now()</code> was always returning the same time within the transaction</strong>. I had made an assumption (that was true before) that different calls would happen at different times. That assumption was no longer true inside the transaction. I had to fix the code to not rely on time.</p>
 <p>The other part of this technique, which I did not really have to use, was that <strong>you can set up your database with test data</strong> in the <code>:once</code> fixture. It's costly to set up the test data, but because you're rolling back transactions, once it's set up it's quick to reset it.</p>
 <p>If you'd like to <strong>learn more about testing in Clojure</strong>, you might be interested in my <a href="http://www.purelyfunctional.tv/intro-to-clojure-test">LispCast Intro to clojure.test</a>. In it, we cover test namespaces, assertions, running your tests, and of course fixtures. It's an interactive course with exercises, screencasts, animations, and code. You should also check out the free cheatsheet below.</p>
-<form action="https://www.getdrip.com/forms/7894559/submissions" method="post" data-drip-embedded-form="7894559">
-  <h3 data-drip-attribute="headline">
+<div class="subscribe-form-wrapper subscribe-form">
+  <form action="https://www.getdrip.com/forms/7894559/submissions" method="post" data-drip-embedded-form="7894559">
+    <h3 data-drip-attribute="headline">
 Free Clojure Testing Course
 </h3>
-  <div data-drip-attribute="description">
-    
+    <div data-drip-attribute="description">
+      
 It's designed to help you understand how testing in Clojure works. Also, it comes with a free <code>clojure.test</code> reference sheet and access to the rest of the Clojure Resource Center, where I collect artefacts that help me code. <br /> <br /> Here are some of the topics:
 <ul>
-      <li>
+        <li>
 Typical Clojure testing patterns
 </li>
-      <li>
+        <li>
 How I made my database tests 5x faster
 </li>
-      <li>
+        <li>
 Where do I put my Clojure tests?
 </li>
-    </ul>
-  </div>
-  <div>
-    
+      </ul>
+    </div>
+    <div>
+      
 <label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value="" /> <input type="submit" name="submit" value="Sign Up"
-           data-drip-attribute="sign-up-button" />
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button" />
 </div>
-</form>
+  </form>
+</div>
 
 
 

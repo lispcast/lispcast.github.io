@@ -92,7 +92,7 @@
         </h2>
 
         <div class="timestamp">
-          November 08, 2015
+          November 09, 2015
         </div>
 
         
@@ -110,7 +110,7 @@
         record-string (str/join &quot;\n&quot; (for [r records]
                                        (str (:first-name r) (:last-name r) (:id r))))]
     (println record-string)))</code></pre>
-<p>That's doing three things and it's pretty obviously violating the SRP. The fix in Clojure is to refactor this into separate functions.</p>
+<p>That's doing three things and it's pretty obviously violating the SRP. The fix in Clojure is to refactor this into separate functions. <sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
 <pre><code>(defn fetch-records []
   (sql/query &quot;SELECT * FROM ...&quot;))</code></pre>
 <pre><code>(defn record-&gt;string [record]
@@ -196,6 +196,13 @@ You're looking into a career change. But you worry that you will face difficulty
 
 
 
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><code>-&gt;</code> is an idiom in Clojure (not syntax, just a naming scheme). It means &quot;transform to&quot; and is pronounced &quot;to&quot;. For instance, <code>record-&gt;string</code> is read &quot;record to string&quot;.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
 
 
         <div class="endmark">

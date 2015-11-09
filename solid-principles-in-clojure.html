@@ -1,0 +1,225 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>SOLID Principles in Clojure | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="The SOLID principles are guidelines for writing good Object-Oriented code. It turns out that these principles are followed and embodied in Clojure.">
+    <meta name="twitter:title" content="SOLID Principles in Clojure">
+
+    <meta property="og:title" content="SOLID Principles in Clojure">
+    <meta property="og:description" content="The SOLID principles are guidelines for writing good Object-Oriented code. It turns out that these principles are followed and embodied in Clojure.">
+
+    <meta name="description" content="The SOLID principles are guidelines for writing good Object-Oriented code. It turns out that these principles are followed and embodied in Clojure.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/solid-principles-in-clojure">
+            SOLID Principles in Clojure
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          November 08, 2015
+        </div>
+
+        
+<p>Summary: <em>The SOLID principles are guidelines for writing good Object-Oriented code. It turns out that these principles are followed and embodied in Clojure.</em></p>
+<p>Robert C. Martin (Uncle Bob) has named five basic principles of software design <em>SOLID</em>. It's an acronym that helps people remember them. I really like these kinds of mnemonics because, well, we all need help remembering things. The easier to remember, the more we can learn.</p>
+<p>Through lots of experience designing software, these principles were developed to help make software that is maintainable in the long term. It's a boon to the OO world that these and similar principles have been talked about so much. They've been identified, digested, named, and codified. And now you can speak about them and people know what you mean. This kind of thing is strangely lacking in the world of functional programming.</p>
+<p>Why is this so? Perhaps it's that there hasn't been much use of functional programming in the software engineering industry in the last few decades. Some might say that these kinds of principles are not needed in FP. Regardless of why, it is a common frustration among people who switch from OOP to FP. I am often asked &quot;How do I structure my code?&quot; and &quot;Where are all of the design guidelines?&quot;</p>
+<p>Well, I want to say that functional programmers <em>do design their code</em>. And they do follow principles. There just hasn't been enough people churning through them all to come up with catchy acronyms and names. Many of the same principles apply.</p>
+<p>Today I'm going to go through the SOLID principles and show how they are manifest in Clojure. Let's do this one letter at a time.</p>
+<h3 id="single-responsbility-principle"><strong><em>S</em></strong>ingle Responsbility Principle</h3>
+<p>How much should one class do? The <em>Single Responsibility Principle (SRP)</em> says <em>one thing</em>. And the way you count the things it can do is by counting the <em>reasons it may change</em>. For instance, if you have a class that is responsible for reading in records from a database and displaying them to the user, that's actually <em>2 reasons to change</em>. One reason is if the database schema changes. The other is if the design of the display changes. That's a violation of the principle and you should consider splitting up that class along those two lines.</p>
+<p>Believe it or not, this comes up a lot in Clojure. You don't program much with classes, but you do program with functions. It's very common to see a function that reads in from a database then formats a string for display, maybe even printing it out!</p>
+<pre><code>(defn display-records []
+  (let [records (sql/query &quot;SELECT * FROM ...&quot;)
+        record-string (str/join &quot;\n&quot; (for [r records]
+                                       (str (:first-name r) (:last-name r) (:id r))))]
+    (println record-string)))</code></pre>
+<p>That's doing three things and it's pretty obviously violating the SRP. The fix in Clojure is to refactor this into separate functions.</p>
+<pre><code>(defn fetch-records []
+  (sql/query &quot;SELECT * FROM ...&quot;))</code></pre>
+<pre><code>(defn record-&gt;string [record]
+  (str (:first-name record) (:last-name record) (:id record)))</code></pre>
+<pre><code>(defn records-&gt;string [records]
+  (str/join &quot;\n&quot; (map record-&gt;string records)))</code></pre>
+<p>Then <code>display-records</code> just ties them together. You still need one that does everything. How many reasons does it have to change now? You don't need to change it if the schema changes. You don't need to change it if the format changes. I'll leave that as an exercise for you.</p>
+<pre><code>(defn display-records []
+  (-&gt; (fetch-records)
+      records-&gt;string
+      println))</code></pre>
+<h3 id="openclosed-principle"><strong><em>O</em></strong>pen/Closed Principle</h3>
+<p>What happens if you're using a library and you like what it does but you need to do it slightly differently? It would be terrible if you just changed the source code for that library. What else was depending on it? What might break? The <em>Open/Closed Principle (OCP)</em> states that we should be able to extend the functionality without changing the module.</p>
+<p>The OCP is something Clojure does extremely well. In Clojure, we can extend existing protocols and extend existing classes without breaking existing code. For instance, let's say I have written this nice protocol called <code>ToDate</code> that has one method that converts something to a <code>java.util.Date</code>.</p>
+<pre><code>(defprotocol ToDate
+  (to-date [x]))</code></pre>
+<p>Obviously, to make it useful I'll have to implement it somewhere. I can take this protocol and implement it with existing classes without modifying the classes themselves.</p>
+<pre><code>(extend-protocol ToDate
+  String ;; strings get parsed
+  (to-date [s]
+    (.parse (java.text.SimpleDateFormat. &quot;ddMMyyyy&quot;) s))
+  Long   ;; longs are unix timestamps
+  (to-date [l]
+    (java.util.Date. l))
+  java.util.Date ;; Dates are just returned
+  (to-date [d] d))</code></pre>
+<p>Look at that! Now I can run this:</p>
+<pre><code>(to-date &quot;08082015&quot;)
+
+;;=&gt; #inst &quot;2015-08-08T05:00:00.000-00:00&quot;</code></pre>
+<p>Or this:</p>
+<pre><code>(to-date 0)
+
+;;=&gt; #inst &quot;1970-01-01T00:00:00.000-00:00&quot;</code></pre>
+<h3 id="liskov-substitution-principle"><strong><em>L</em></strong>iskov Substitution Principle</h3>
+<p>Are queues and stacks subclasses of each other? They both have the same interface (<code>push</code> and <code>pop</code>), but semantically, they're quite different. Stacks are Last-In-First-Out and queues are First-In-First-Out. The <em>Liskov Substitution Principle (LSP)</em> states that a subclass should be able to be substituted for its superclass. You can't replace a stack with a queue (or vice versa), so they're not really subclasses of each other.</p>
+<p>LSP is mostly about subclass hierarchies, which are rare in Clojure. But Clojure is built on the class hierarchies of Java. And the core types, which are written in Java, are well-designed with respect to this principle.</p>
+<p>A simple example is the variety of <code>clojure.lang.APersistentMap</code> implementations. They each have different performance characteristics but they maintain the relevant semantics of maps. There are :</p>
+<ul>
+<li><code>PersistentArrayMap</code></li>
+<li><code>PersistentHashMap</code></li>
+<li><code>PersistentStructMap</code></li>
+<li><code>PersistentTreeMap</code></li>
+</ul>
+<p>Because they all have compatible semantics according to LSP, the runtime can choose between them freely without you ever having to know or care.</p>
+<h3 id="interface-segregation-principle"><strong><em>I</em></strong>nterface Segregation Principle</h3>
+<p>If I use some API and one of the methods I use changes, I can accept that I'll have to change my code. But if one of the methods <em>I didn't use</em> changes, it would be aggravating if I had to change something on my end. I shouldn't even have to know about those methods even existing. One way to prevent this nuissance is by applying the <em>Interface Segregation Principle (ISP)</em>. It states that you should split up your interfaces into smaller interfaces, typically so that they have <em>one reason to change</em>. Now clients are only affected by changes that are relevant to them.</p>
+<p>ISP is prevalent in Clojure. Much more so than in typical Java systems. Just look at the size of the interfaces in <code>clojure.lang</code>. So small! Here's a typical one:</p>
+<pre><code>class: clojure.lang.Associative
+
+methods: containsKey, entryAt, assoc</code></pre>
+<p>These methods correspond to the typical map operations of <code>containsKey</code>, <code>get</code>, and <code>put</code> respectively. These three methods are highly cohesive. Contrast this with <code>java.util.Map</code>, which has 13. Now, all of the functionality of Java maps are in Clojure maps, they're just segregated to different, reusable interfaces.</p>
+<p>For instance, the <code>size</code> method <code>java.util.Map</code> is a separate, 1-method interface called <code>clojure.lang.Counted</code>. Clojure applies the ISP very thoroughly, and ClojureScript slightly more so.</p>
+<h3 id="dependency-inversion-principle">*<strong>D</strong>ependency Inversion Principle</h3>
+<p>A module often depends on a lower-level module for the implementation details. This tightly couples the higher-level module to the decisions of the implementation module. For instance, if I have a reporting module that depends on the SQL query module to get its data, the reporting module is indirectly tied to the SQL database. The <em>Dependency Inversion Principle (DIP)</em> inserts an interface between layers. In our example, the reporting module will depend on a Data Source interface. And the SQL module will implement the Data Source interface. You could switch out the SQL module for a file-storage module and the reporting module wouldn't have to know.</p>
+<p>Clojure uses the DIP everywhere. For instance, the core function <code>map</code> does not operate on any fixed data type--only abstractions. It operates on the <code>clojure.lang.IFn</code> abstraction, which is the interface functions implement. It also operates on the <code>seq</code> abstraction, which defines orders for collections, iterables, and other types. This makes <code>map</code> decoupled from any particular type and thus more generally useful. The same principle holds for many of the core library functions. By applying DIP universally, Clojure is made more powerful because functions can be reused more often.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>The SOLID principles are important guidelines for designing software that will last. They guide us to make more useful, reusable components. However, they must be repeated a lot in language communities like Java because Java does not make them very easy to apply. In Clojure, the principles are present everywhere. One of the things I like about Clojure is how it seems to embody a lot of the lessons of the last 20 years of software engineering. And that's one of the things I like to bring up in the <a href="http://www.purelyfunctional.tv/mentoring"><em>PurelyFunctional.tv Online Mentoring</em></a> course. One of the reasons Clojure is making such big waves is that it has integrated good engineering principles, like SOLID, immutable values, and concurrency right into the core.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>SOLID Principles in Clojure</title>
+                  <guid isPermalink="false">http://www.lispcast.com/solid-principles-in-clojure</guid>
+                  <link>http://www.lispcast.com/solid-principles-in-clojure</link>
+                  <pubDate>Sun 09 Nov 2015 3:22:01 PM CST</pubDate>
+                  <description>
+                    The SOLID principles are guidelines for writing good Object-Oriented code. It turns out that these principles are followed and embodied in Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/solid-principles-in-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Where to find time to learn and practice Clojure</title>
                   <guid isPermalink="false">http://www.lispcast.com/where-to-find-time-to-learn-clojure</guid>
                   <link>http://www.lispcast.com/where-to-find-time-to-learn-clojure</link>
@@ -129,20 +143,6 @@
                     ClojureScript has some nice DOM manipulation options, including jQuery and more idiomatic libraries.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/cljs-dom-manipulation"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>What is React?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/what-is-react</guid>
-                  <link>http://www.lispcast.com/what-is-react</link>
-                  <pubDate>Sun 14 Sep 2015 01:00:45 PM CDT</pubDate>
-                  <description>
-                    React is a view library for web pages that makes DOM rendering in a functional style really easy. React makes web programming fun again.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-is-react"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

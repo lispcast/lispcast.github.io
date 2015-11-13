@@ -105,15 +105,16 @@
 <h3 id="warnings">Warnings</h3>
 <p>Just a few warnings before I continue. This is a very informal study. I didn't try to remove duplicate files. Some files failed to parse. And this obviously isn't all Clojure code on GitHub. It even misses quite a few important projects because they're not in Clojars. But, it's a large dataset and probably good enough for figuring out relative frequencies of forms.</p>
 <h3 id="results">Results</h3>
-<p>Here is a graph of the top 1000 symbols frequencies I found. Notice the nice hockey stick I expected.</p>
+<p>Here is a graph of the top 100 symbols frequencies I found. Notice the nice hockey stick I expected.</p>
 <div class="figure">
-<img src="http://www.lispcast.com/img/word%20frequency.png" alt="Top 1000 symbols ordered most frequent first" /><p class="caption">Top 1000 symbols ordered most frequent first</p>
+<img src="http://www.lispcast.com/img/word%20frequency%20100.png" alt="Top 100 symbols ordered most frequent first" /><p class="caption">Top 100 symbols ordered most frequent first</p>
 </div>
+<p>This means that learning to read and write forms at the left end of the graph will have an outsized impact on being able to read and write code in general.</p>
 <h3 id="top-25-forms">Top 25 Forms</h3>
 <h4 id="defn"><code>defn</code></h4>
-<p>It's no surprise that <code>[defn]</code> is the most frequently used form. It is the way we define toplevel functions in Clojure. Learn this for sure.</p>
+<p>It's no surprise that <a href="http://clojuredocs.org/clojure.core/defn"><code>defn</code></a> is the most frequently used form. It is the way we define toplevel functions in Clojure. Learn this for sure.</p>
 <h4 id="let"><code>let</code></h4>
-<p>If you want to name some local values, <code>[let]</code> is what you want.</p>
+<p>If you want to name some local values, <a href="http://clojuredocs.org/clojure.core/let"><code>let</code></a> is what you want.</p>
 <h4 id="section"><code>=</code></h4>
 <h4 id="is"><code>is</code></h4>
 <h4 id="if"><code>if</code></h4>

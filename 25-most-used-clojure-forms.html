@@ -105,17 +105,24 @@
 <h3 id="warnings">Warnings</h3>
 <p>Just a few warnings before I continue. This is a very informal study. I didn't try to remove duplicate files. Some files failed to parse. And this obviously isn't all Clojure code on GitHub. It even misses quite a few important projects because they're not in Clojars. But, it's a large dataset and probably good enough for figuring out relative frequencies of forms.</p>
 <h3 id="results">Results</h3>
-<p>Here is a graph of the top 100 symbols frequencies I found. Notice the nice hockey stick I expected.</p>
+<p>Here are successive graphs zooming in on the word frequencies. In each, I've ordered the forms by frequency and plotted the frequency. Notice the nice long tail curve.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/word%20frequency.png" alt="Top 1000 symbols ordered most frequent first" /><p class="caption">Top 1000 symbols ordered most frequent first</p>
+</div>
 <div class="figure">
 <img src="http://www.lispcast.com/img/word%20frequency%20100.png" alt="Top 100 symbols ordered most frequent first" /><p class="caption">Top 100 symbols ordered most frequent first</p>
 </div>
-<p>This means that learning to read and write forms at the left end of the graph will have an outsized impact on being able to read and write code in general.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/word%20frequency%2025.png" alt="Top 25 symbols ordered most frequent first" /><p class="caption">Top 25 symbols ordered most frequent first</p>
+</div>
+<p>This means that learning to read and write forms at the left end of the graph will have an outsized impact on being able to read and write code in general. Even the most frequent 25 forms are vastly more common than the rest. But looking at the forms by hand, I think if you learned about 200 of them, you'd be pretty good. Either way, you should start at the left hand side and work your way right.</p>
+<h3 id="section"></h3>
 <h3 id="top-25-forms">Top 25 Forms</h3>
 <h4 id="defn"><code>defn</code></h4>
 <p>It's no surprise that <a href="http://clojuredocs.org/clojure.core/defn"><code>defn</code></a> is the most frequently used form. It is the way we define toplevel functions in Clojure. Learn this for sure.</p>
 <h4 id="let"><code>let</code></h4>
 <p>If you want to name some local values, <a href="http://clojuredocs.org/clojure.core/let"><code>let</code></a> is what you want.</p>
-<h4 id="section"><code>=</code></h4>
+<h4 id="section-1"><code>=</code></h4>
 <h4 id="is"><code>is</code></h4>
 <h4 id="if"><code>if</code></h4>
 <h4 id="fn"><code>fn</code></h4>
@@ -124,7 +131,7 @@
 <h4 id="deftest"><code>deftest</code></h4>
 <h4 id="map"><code>map</code></h4>
 <h4 id="ns"><code>ns</code></h4>
-<h4 id="section-1"><code>-&gt; 46439</code></h4>
+<h4 id="section-2"><code>-&gt; 46439</code></h4>
 <h4 id="defn-"><code>defn-</code></h4>
 <h4 id="first"><code>first</code></h4>
 <h4 id="when"><code>when</code></h4>
@@ -137,7 +144,7 @@
 <h4 id="not"><code>not</code></h4>
 <h4 id="nil"><code>nil</code></h4>
 <h4 id="defmethod"><code>defmethod</code></h4>
-<h4 id="section-2"><code>+</code></h4>
+<h4 id="section-3"><code>+</code></h4>
 
 
         <div class="endmark">

@@ -97,9 +97,10 @@
 
         
 <p>Summary: <em>Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the forms in order of frequency of use.</em></p>
-<p>When I was learning Spanish, I liked to use <a href="###%20Method">Anki</a> to drill new vocabulary. It's a flashcard program. I found that someone had made a set of cards from an analysis of thousands of newspapers. They read in all of the words from the newspapers, counted them up, and figured out what the most common words are. The top 2000 made it into the deck.</p>
+<p>When I was learning Spanish, I liked to use <a href="http://ankisrs.net/">Anki</a> to drill new vocabulary. It's a flashcard program. I found that someone had made a set of cards from an analysis of thousands of newspapers. They read in all of the words from the newspapers, counted them up, and figured out what the most common words are. The top 2000 made it into the deck.</p>
 <p>It turns out that this is a very good strategy for learning words. Word frequency follows a hockey stick distribution. The most common words are used so much more than the less common words. If you've got limited time, you should learn those most common words first.</p>
 <p>People who are trying to learn Clojure have been asking me &quot;how do I learn all of this stuff? There's so much!&quot; It's a valid question and I haven't had a good answer. I remembered the Spanish newspaper analysis and I thought I'd try to do a similar analysis of Clojure forms.</p>
+<h3 id="method">Method</h3>
 <p>[Clojars] provides a list of all of their projects. Many of them include a git repo. So I got that list and fetched the git repo. There were over seven thousand git repos pointed to by Clojars. That was a lot of stuff, and git repos have a lot of data I wasn't interested in, so I filtered all the files looking for Clojure files. <code>/\.clj(s|c|x)?$/</code> That left 59,665 Clojure source files with over four million lines total.</p>
 <p>I read in all of the code in the files and parse it as Clojure. Then I walked it, looking for lists. I counted the head of all lists in each file, aggregating it all together. Then I sorted by frequency. I also only counted <em>symbols</em> in the head position.</p>
 <h3 id="warnings">Warnings</h3>

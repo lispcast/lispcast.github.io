@@ -101,7 +101,7 @@
 <p>It turns out that this is a very good strategy for learning words. Word frequency follows a hockey stick distribution. The most common words are used so much more than the less common words. If you've got limited time, you should learn those most common words first.</p>
 <p>People who are trying to learn Clojure have been asking me &quot;how do I learn all of this stuff? There's so much!&quot; It's a valid question and I haven't had a good answer. I remembered the Spanish newspaper analysis and I thought I'd try to do a similar analysis of Clojure forms.</p>
 <h3 id="method">Method</h3>
-<p>[Clojars] provides a list of all of their projects. Many of them include a git repo. So I got that list and fetched the git repo. There were over seven thousand git repos pointed to by Clojars. That was a lot of stuff, and git repos have a lot of data I wasn't interested in, so I filtered all the files looking for Clojure files. <code>/\.clj(s|c|x)?$/</code> That left 59,665 Clojure source files with over four million lines total.</p>
+<p><a href="https://clojars.org/">Clojars</a> provides a <a href="https://github.com/ato/clojars-web/wiki/Data#useful-extracts-from-the-poms">list of all of their projects</a>. Many of them include a git repo. So I got that list and fetched the git repo. There were over seven thousand git repos pointed to by Clojars. That was a lot of stuff, and git repos have a lot of data I wasn't interested in, so I filtered all the files looking for Clojure files. <code>/\.clj(s|c|x)?$/</code> That left 59,665 Clojure source files with over four million lines total.</p>
 <p>I read in all of the code in the files and parse it as Clojure. Then I walked it, looking for lists. I counted the head of all lists in each file, aggregating it all together. Then I sorted by frequency. I also only counted <em>symbols</em> in the head position.</p>
 <h3 id="warnings">Warnings</h3>
 <p>Just a few warnings before I continue. This is a very informal study. I didn't try to remove duplicate files. Some files failed to parse. And this obviously isn't all Clojure code on GitHub. It even misses quite a few important projects because they're not in Clojars. But, it's a large dataset and probably good enough for figuring out relative frequencies of forms.</p>
@@ -117,35 +117,32 @@
 <img src="http://www.lispcast.com/img/word%20frequency%2025.png" alt="Top 25 symbols ordered most frequent first" /><p class="caption">Top 25 symbols ordered most frequent first</p>
 </div>
 <p>This means that learning to read and write forms at the left end of the graph will have an outsized impact on being able to read and write code in general. Even the most frequent 25 forms are vastly more common than the rest. But looking at the forms by hand, I think if you learned about 200 of them, you'd be pretty good. Either way, you should start at the left hand side and work your way right.</p>
-<h3 id="section"></h3>
-<h3 id="top-25-forms">Top 25 Forms</h3>
-<h4 id="defn"><code>defn</code></h4>
-<p>It's no surprise that <a href="http://clojuredocs.org/clojure.core/defn"><code>defn</code></a> is the most frequently used form. It is the way we define toplevel functions in Clojure. Learn this for sure.</p>
-<h4 id="let"><code>let</code></h4>
-<p>If you want to name some local values, <a href="http://clojuredocs.org/clojure.core/let"><code>let</code></a> is what you want.</p>
-<h4 id="section-1"><code>=</code></h4>
-<h4 id="is"><code>is</code></h4>
-<h4 id="if"><code>if</code></h4>
-<h4 id="fn"><code>fn</code></h4>
-<h4 id="def"><code>def</code></h4>
-<h4 id="str"><code>str</code></h4>
-<h4 id="deftest"><code>deftest</code></h4>
-<h4 id="map"><code>map</code></h4>
-<h4 id="ns"><code>ns</code></h4>
-<h4 id="section-2"><code>-&gt; 46439</code></h4>
-<h4 id="defn-"><code>defn-</code></h4>
-<h4 id="first"><code>first</code></h4>
-<h4 id="when"><code>when</code></h4>
-<h4 id="testing"><code>testing</code></h4>
-<h4 id="or"><code>or</code></h4>
-<h4 id="apply"><code>apply</code></h4>
-<h4 id="assoc"><code>assoc</code></h4>
-<h4 id="count"><code>count</code></h4>
-<h4 id="and"><code>and</code></h4>
-<h4 id="not"><code>not</code></h4>
-<h4 id="nil"><code>nil</code></h4>
-<h4 id="defmethod"><code>defmethod</code></h4>
-<h4 id="section-3"><code>+</code></h4>
+<h3 id="conclusions">Conclusions</h3>
+<p>I think the results show that learning the most common 100 forms will have an outsized usefulness. If you're interested in learning Clojure, you should begin with those. I've created flashcards in PDF form that you can print, and also a CSV version that you can import into Anki for spaced repetition. You can get access to them, and other resources for learning Clojure,</p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/4434441/submissions" method="post" data-drip-embedded-form="4434441"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+PurelyFunctional.tv Online Mentoring
+</h3>
+    <div data-drip-attribute="description">
+      
+You're looking into a career change. But you worry that you will face difficulty trying to get your first job in Clojure, since the niche is small and you've got limited Functional Programming background.<br><br> <em>PurelyFunctional.tv Online Mentorship</em> is designed to smooth out the learning curve, get you programming as soon as possible, and fit into your busy schedule. The lessons cover a broad range of topics, from beginner skills to libraries to deploying production code. You get the skills to succeed with Clojure.
+</div>
+    
+<br>
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
 
 
         <div class="endmark">

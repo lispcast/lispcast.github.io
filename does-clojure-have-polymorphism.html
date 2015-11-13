@@ -1,0 +1,177 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Does Clojure have polymorphism? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Does Clojure have polymorphism?">
+
+    <meta property="og:title" content="Does Clojure have polymorphism?">
+    <meta property="og:description" content="">
+
+    <meta name="description" content="">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/does-clojure-have-polymorphism">
+            Does Clojure have polymorphism?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          November 11, 2015
+        </div>
+
+        
+<p>Summary: **</p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/4434441/submissions" method="post" data-drip-embedded-form="4434441"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+PurelyFunctional.tv Online Mentoring
+</h3>
+    <div data-drip-attribute="description">
+      
+You're looking into a career change. But you worry that you will face difficulty trying to get your first job in Clojure, since the niche is small and you've got limited Functional Programming background.<br><br> <em>PurelyFunctional.tv Online Mentorship</em> is designed to smooth out the learning curve, get you programming as soon as possible, and fit into your busy schedule. The lessons cover a broad range of topics, from beginner skills to libraries to deploying production code. You get the skills to succeed with Clojure.
+</div>
+    
+<br>
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

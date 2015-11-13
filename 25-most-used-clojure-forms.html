@@ -1,0 +1,193 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>The 25 Most Used Clojure Forms | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the forms in order of frequency of use.">
+    <meta name="twitter:title" content="The 25 Most Used Clojure Forms">
+
+    <meta property="og:title" content="The 25 Most Used Clojure Forms">
+    <meta property="og:description" content="Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the forms in order of frequency of use.">
+
+    <meta name="description" content="Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the forms in order of frequency of use.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/25-most-used-clojure-forms">
+            The 25 Most Used Clojure Forms
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          November 13, 2015
+        </div>
+
+        
+<p>Summary: <em>Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the forms in order of frequency of use.</em></p>
+<p>When I was learning Spanish, I liked to use <a href="###%20Method">Anki</a> to drill new vocabulary. It's a flashcard program. I found that someone had made a set of cards from an analysis of thousands of newspapers. They read in all of the words from the newspapers, counted them up, and figured out what the most common words are. The top 2000 made it into the deck.</p>
+<p>It turns out that this is a very good strategy for learning words. Word frequency follows a hockey stick distribution. The most common words are used so much more than the less common words. If you've got limited time, you should learn those most common words first.</p>
+<p>People who are trying to learn Clojure have been asking me &quot;how do I learn all of this stuff? There's so much!&quot; It's a valid question and I haven't had a good answer. I remembered the Spanish newspaper analysis and I thought I'd try to do a similar analysis of Clojure forms.</p>
+<p>[Clojars] provides a list of all of their projects. Many of them include a git repo. So I got that list and fetched the git repo. There were over seven thousand git repos pointed to by Clojars. That was a lot of stuff, and git repos have a lot of data I wasn't interested in, so I filtered all the files looking for Clojure files. <code>/\.clj(s|c|x)?$/</code> That left 59,665 Clojure source files with over four million lines total.</p>
+<p>I read in all of the code in the files and parse it as Clojure. Then I walked it, looking for lists. I counted the head of all lists in each file, aggregating it all together. Then I sorted by frequency. I also only counted <em>symbols</em> in the head position.</p>
+<h3 id="warnings">Warnings</h3>
+<p>Just a few warnings before I continue. This is a very informal study. I didn't try to remove duplicate files. Some files failed to parse. And this obviously isn't all Clojure code on GitHub. It even misses quite a few important projects because they're not in Clojars. But, it's a large dataset and probably good enough for figuring out relative frequencies of forms.</p>
+<h3 id="results">Results</h3>
+<p>Here is a graph of the top 1000 symbols frequencies I found. Notice the nice hockey stick I expected.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/word%20frequency.png" alt="Top 1000 symbols ordered most frequent first" /><p class="caption">Top 1000 symbols ordered most frequent first</p>
+</div>
+<h3 id="top-25-forms">Top 25 Forms</h3>
+<h4 id="defn"><code>defn</code></h4>
+<p>It's no surprise that <code>[defn]</code> is the most frequently used form. It is the way we define toplevel functions in Clojure. Learn this for sure.</p>
+<h4 id="let"><code>let</code></h4>
+<p>If you want to name some local values, <code>[let]</code> is what you want.</p>
+<h4 id="section"><code>=</code></h4>
+<h4 id="is"><code>is</code></h4>
+<h4 id="if"><code>if</code></h4>
+<h4 id="fn"><code>fn</code></h4>
+<h4 id="def"><code>def</code></h4>
+<h4 id="str"><code>str</code></h4>
+<h4 id="deftest"><code>deftest</code></h4>
+<h4 id="map"><code>map</code></h4>
+<h4 id="ns"><code>ns</code></h4>
+<h4 id="section-1"><code>-&gt; 46439</code></h4>
+<h4 id="defn-1"><code>defn</code></h4>
+<h4 id="first"><code>first</code></h4>
+<h4 id="when"><code>when</code></h4>
+<h4 id="testing"><code>testing</code></h4>
+<h4 id="or"><code>or</code></h4>
+<h4 id="apply"><code>apply</code></h4>
+<h4 id="assoc"><code>assoc</code></h4>
+<h4 id="count"><code>count</code></h4>
+<h4 id="and"><code>and</code></h4>
+<h4 id="not"><code>not</code></h4>
+<h4 id="nil"><code>nil</code></h4>
+<h4 id="defmethod"><code>defmethod</code></h4>
+<h4 id="section-2"><code>+</code></h4>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

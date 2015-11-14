@@ -86,6 +86,62 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://www.infoq.com/presentations/functional-pros-cons">
+            Deconstructing Functional Programming
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/deconstructing-functional-programming">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          December 22, 2013
+        </div>
+
+        
+<blockquote>
+<p>Because if you think about it, the stack itself is just an optimization. Right? There are these frames which contain information about each invocation. Each stack frame. Each activation record. And that's what they are--they're activation records. They're sort of objects. If you really have objects on the brain, like I do, then you realize that they're all just objects.</p>
+</blockquote>
+<blockquote>
+<p>And they should be treated uniformly. You can even build a language that works this way--as I have. If that's the case, this is really a garbage collection problem. Right? Your stack traces might go away if you don't need them. You do need them when it's not a tail call because you need to go back there and use that information. But if it's a tail call, you don't need them, you don't need a tail call back to that frame. You need a pointer back to the last frame that wasn't a tail call. And they might get collected.</p>
+</blockquote>
+<blockquote>
+<p>Which doesn't mean you actually have to implement it that way. Erlang sort of does. And there are many implementations that do that. They are not noted for their speed. If you can have real stacks, what happens when you run out of space? If you don't run out of space, it didn't really matter if you optimized the tail calls or not.</p>
+</blockquote>
+<blockquote>
+<p>When you run out of space, you should GC the damned stack. You shouldn't just throw up your hands and say you're dead. And for all the normal programs that people write where it didn't matter, they won't care. And for your tail recursive programs, well, they might be a bit slower, but they will work. And then it's a matter of flags to the garbage collector if in production you don't want to debug it if you're sure it's all going to be fine--then go ahead and tell it to don't bother and just slam it and overwrite those frames directly.</p>
+</blockquote>
+<p>Why is this so hard for implementers to do? Optimization is an optimization and should be optional.</p>
+<blockquote>
+<p>It's a cool algorithm, but there's nothing nice that I'm prepared to say about Hindley-Milner.</p>
+</blockquote>
+<p>He nails a lot of things I didn't like about Haskell.</p>
+<p>All in all, this talk gets a lot of things right.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
+<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
+<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
+<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/how-to-use-new-relic-with-clojure-on-heroku">
             How to Use New Relic with Clojure on Heroku
           </a>
@@ -129,10 +185,10 @@
 <p>Nice validation library plus very good motivational blog post.</p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
+<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
 <li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 </ul>
 
 
@@ -312,10 +368,10 @@
 <p>Way back in May 2012, Ambrose was beginning work on Typed Clojure for Google Summer of Code. I interviewed him to get an idea of what kind of type system we could expect. Since he's now running a very successful <a href="http://www.indiegogo.com/projects/typed-clojure">crowd funding campaign</a>, I thought I'd bring up this blast from the past.</p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
+<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
 <li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
-<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 </ul>
 
 
@@ -387,10 +443,10 @@
 <p>The imaginative process cuts through all of that and asks one question: is he lying. <strong>You are offloading the processing to the social part of your brain</strong>, which can easily do it if framed in the right way.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
+<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
 <li><a href="http://www.lispcast.com/learning-is-about-skills">How to avoid &quot;Makes sense if you already understand it.&quot;</a></li>
 <li><a href="http://www.lispcast.com/pre-west-elena-machkasova">Pre-West Prep: Elena Machkasova</a></li>
 <li><a href="http://www.lispcast.com/pre-west-interview-elena-machkasova">Pre-West Interview: Elena Machkasova</a></li>
-<li><a href="http://www.lispcast.com/tap-into-your-social-brain">Tap Into Your Social Brain</a></li>
 </ul>
 <div class="footnotes">
 <hr />
@@ -400,31 +456,6 @@
 </ol>
 </div>
 
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/use-your-imagination">
-            Use Your Imagination
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          September 17, 2013
-        </div>
-
-        You can transfer the outline of a skill by guiding someone through a structured use of their imagination.
 
         <div class="endmark">
           <a class="endmark-link"

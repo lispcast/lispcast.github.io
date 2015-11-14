@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>Parens vs Brackets in Clojure | LispCast</title>
+    <title>The 100 Most Used Clojure Expressions | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.">
-    <meta name="twitter:title" content="Parens vs Brackets in Clojure">
+    <meta name="twitter:description" content="Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the expressions in order of frequency of use.">
+    <meta name="twitter:title" content="The 100 Most Used Clojure Expressions">
 
-    <meta property="og:title" content="Parens vs Brackets in Clojure">
-    <meta property="og:description" content="Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.">
+    <meta property="og:title" content="The 100 Most Used Clojure Expressions">
+    <meta property="og:description" content="Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the expressions in order of frequency of use.">
 
-    <meta name="description" content="Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.">
+    <meta name="description" content="Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the expressions in order of frequency of use.">
 
     <meta name="author" content="Eric Normand">
 
@@ -86,80 +86,39 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/parens-vs-brackets-in-clojure">
-            Parens vs Brackets in Clojure
+             href="/100-most-used-clojure-expressions">
+            The 100 Most Used Clojure Expressions
           </a>
         </h2>
 
         <div class="timestamp">
-          November 02, 2015
+          November 14, 2015
         </div>
 
         
-<p>Summary: <em>Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.</em></p>
-<p>The other day someone asked me a very good question about Clojure. She was learning the syntax and was wondering what the significance was between parentheses and square brackets. She knew that square brackets can also make a vector. What she really wanted to know what in the more syntactic elements, like the square brackets in a <code>let</code> or <code>fn</code>, <strong>why did you use parens sometimes and brackets other times?</strong></p>
-<p>The answer is simple: parens are for enclosing function calls or macro calls, while the square brackets inside are <strong>data for the macro to use</strong>. For instance, in the following <code>let</code> form, the parens define the lexical scope of the bindings while the bindings themselves are in square brackets.</p>
-<pre id="let1" class="code-card"><code>(let [x 1
-      y 2
-      z 3]
-  (* z (+ x y)))</code></pre>
-<div class="annotation-down" for="let1" data-at="(l">
-here, parens mean &quot;start a <code>let</code> expression&quot;
+<p>Summary: <em>Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the expressions in order of frequency of use.</em></p>
+<p>When I was learning Spanish, I liked to use <a href="http://ankisrs.net/">Anki</a> to drill new vocabulary. It's a flashcard program. I found that someone had made a set of cards from an analysis of thousands of newspapers. They read in all of the words from the newspapers, counted them up, and figured out what the most common words were. The top 1000 made it into the deck.</p>
+<p>It turns out that this is a very good strategy for learning words. Word frequency follows a hockey stick distribution. The most common words are used so much more than the less common words. For instance, the <strong>100 most common English words make up more than 50% of text</strong>. If you've got limited time, <strong>you should learn those most common words first</strong>.</p>
+<p>People who are trying to learn Clojure have been asking me &quot;how do I learn all of this stuff? There's so much!&quot; It's a valid question and I haven't had a good answer. I remembered the Spanish newspaper analysis and I thought I'd try to do a similar analysis of Clojure expressions.</p>
+<h3 id="method">Method</h3>
+<p><a href="https://clojars.org/">Clojars</a> provides a <a href="https://github.com/ato/clojars-web/wiki/Data#useful-extracts-from-the-poms">list of all of their projects</a>. Many of them include a git repo. So I got that list and fetched the git repo. There were over seven thousand git repos pointed to by Clojars. That was a lot of stuff, and git repos have a lot of data I wasn't interested in, so I filtered all the files looking for Clojure files. <code>/\.clj(s|c|x)?$/</code> That left 59,665 Clojure source files with over four million lines total.</p>
+<p>I read in all of the code in the files and parse it as Clojure. Then I walked it, looking for lists. I counted the head of all lists in each file, aggregating it all together. Then I sorted by frequency. I also only counted <em>symbols</em> in the head position.</p>
+<h3 id="warnings">Warnings</h3>
+<p>Just a few warnings before I continue. This is a very informal study. I didn't try to remove duplicate files. Some files failed to parse. And this obviously isn't all Clojure code on GitHub. It even misses quite a few important projects because they're not in Clojars. But, it's a large dataset and probably good enough for figuring out relative frequencies of expressions to use for learning.</p>
+<h3 id="results">Results</h3>
+<p>Here are successive graphs zooming in on the word frequencies. In each, I've ordered the expressions by frequency and plotted the frequency. Notice the nice long tail curve.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/word%20frequency.png" alt="Top 1000 symbols ordered most frequent first" /><p class="caption">Top 1000 symbols ordered most frequent first</p>
 </div>
-
-<div class="annotation-left" for="let1" data-at="x 1">
-binding form gets meaning from <code>let</code>
+<div class="figure">
+<img src="http://www.lispcast.com/img/word%20frequency%20100.png" alt="Top 100 symbols ordered most frequent first" /><p class="caption">Top 100 symbols ordered most frequent first</p>
 </div>
-
-<div class="annotation-left" for="let1" data-at="z 3">
-bindings in square brackets
+<div class="figure">
+<img src="http://www.lispcast.com/img/word%20frequency%2025.png" alt="Top 25 symbols ordered most frequent first" /><p class="caption">Top 25 symbols ordered most frequent first</p>
 </div>
-
-<div class="annotation-left" for="let1" data-at="*">
-parens because body of <code>let</code> is more calls
-</div>
-
-<p>Notice the body <code>(* z ...)</code> is again in parens because it's function calls.</p>
-<p>In the following <code>defn</code>, we have the parens defining the whole form while the brackets define the data the function definition needs, namely the argument names.</p>
-<pre id="defn1" class="code-card"><code>(defn fib [x]
-  (cond
-    (= 0 x) 1
-    (= 1 x) 1
-    :else   (+ (fib (- x 1)) (fib (- x 2)))))</code></pre>
-<div class="annotation-down" for="defn1" data-at="(d">
-start a &quot;defn&quot; expression
-</div>
-
-<div class="annotation-left" for="defn1" data-at="[x]">
-agument list gets meaning from <code>defn</code>
-</div>
-
-<div class="annotation-left" for="defn1" data-at="cond">
-body is more parens
-</div>
-
-<p>Finally, we can see that brackets also mean &quot;create a vector&quot; in this expression:</p>
-<pre id="defn2" class="code-card"><code>(defn pair
-  &quot;Create a pair from the two arguments.&quot;
-  [a b]
-  [a b])</code></pre>
-<div class="annotation-left" for="defn2" data-at="pair">
-symbol <code>pair</code> is interpreted as name of function
-</div>
-
-<div class="annotation-left" for="defn2" data-at="arguments">
-a string after the name is interpreted as the docstring
-</div>
-
-<div class="annotation-left" for="defn2" data-at="[a b]">
-these are the arguments
-</div>
-
-<div class="annotation-left" for="defn2" data-at="])">
-everything else is the body; make and return a vector
-</div>
-
-<p>The first element of an expression is used to determine how to interpret the rest. Clojure is basically interpreters (and compilers) all the way down. It's one of the coolest things about Lisps. <strong>From the get-go, they're defined in terms of themselves, recursively.</strong> If you'd like to learn Clojure, join the <a href="http://purelyfunctional.tv/mentoring"><em>PurelyFunctional.tv Online Mentoring</em></a> program. It's an exploration in interactive instruction. When you join, you set the topics, you get help where you need it, to become a Clojure professional.</p>
+<p>This means that learning to read and write expressions at the left end of the graph will have an outsized impact on being able to read and write code in general. Even <strong>the most frequent 25 expressions are vastly more common than the rest</strong>. But looking at the expressions by hand, I think <strong>if you learned about 200 of them, you'd cover most code easily</strong>. Between 100 and 200, lots of third party library functions and lots of common variable names (<code>f</code> for function) start to show up. Either way, you should start at the left hand side and work your way right. Most of what you would learn in [<em>LispCast Introduction to Clojure</em>][intro] is included in the top 100.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>I think the results show that learning the most common 100 expressions will have an outsized usefulness. If you're interested in learning Clojure, you should begin with those. I've created <strong>flashcards in PDF</strong> form that you can print, and also a <strong>CSV version</strong> that you can import into Anki for spaced repetition. You can get access to them, and other resources for learning Clojure, by signing up in the form below.</p>
 <div class="subscribe-form-wrapper">
   <form action="https://www.getdrip.com/forms/1194631/submissions" method="post" data-drip-embedded-form="1194631"
         class="subscribe-form">
@@ -191,10 +150,10 @@ Sign up below and you'll get access to the <em>Clojure Resource Center</em> wher
 
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
-<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
 <li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
 <li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
 </ul>
 
 
@@ -217,12 +176,8 @@ Sign up below and you'll get access to the <em>Clojure Resource Center</em> wher
 
     <footer class="footer-banner">
       <a class="footer-previous"
-         href="http://www.lispcast.com/clj-refactor">
+         href="http://www.lispcast.com/solid-principles-in-clojure">
         previous
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/where-to-find-time-to-learn-clojure">
-        next
       </a>
     </footer>
 

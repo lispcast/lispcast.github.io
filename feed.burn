@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>The 100 Most Used Clojure Expressions</title>
+                  <guid isPermalink="false">http://www.lispcast.com/100-most-used-clojure-expressions</guid>
+                  <link>http://www.lispcast.com/100-most-used-clojure-expressions</link>
+                  <pubDate>Sat 14 Nov 2015 05:43:51 AM CST</pubDate>
+                  <description>
+                    Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the expressions in order of frequency of use.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/100-most-used-clojure-expressions"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>SOLID Principles in Clojure</title>
                   <guid isPermalink="false">http://www.lispcast.com/solid-principles-in-clojure</guid>
                   <link>http://www.lispcast.com/solid-principles-in-clojure</link>
@@ -129,20 +143,6 @@
                     ClojureScript's official build process is a simple shell command. There is also integration into Leiningen and Boot.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/building-clojurescript-process"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Are there any DOM manipulation libraries in ClojureScript?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/cljs-dom-manipulation</guid>
-                  <link>http://www.lispcast.com/cljs-dom-manipulation</link>
-                  <pubDate>Tue 15 Sep 2015 01:04:20 PM CDT</pubDate>
-                  <description>
-                    ClojureScript has some nice DOM manipulation options, including jQuery and more idiomatic libraries.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/cljs-dom-manipulation"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

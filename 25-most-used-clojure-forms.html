@@ -92,19 +92,19 @@
         </h2>
 
         <div class="timestamp">
-          November 13, 2015
+          November 14, 2015
         </div>
 
         
 <p>Summary: <em>Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the forms in order of frequency of use.</em></p>
-<p>When I was learning Spanish, I liked to use <a href="http://ankisrs.net/">Anki</a> to drill new vocabulary. It's a flashcard program. I found that someone had made a set of cards from an analysis of thousands of newspapers. They read in all of the words from the newspapers, counted them up, and figured out what the most common words are. The top 2000 made it into the deck.</p>
-<p>It turns out that this is a very good strategy for learning words. Word frequency follows a hockey stick distribution. The most common words are used so much more than the less common words. If you've got limited time, you should learn those most common words first.</p>
+<p>When I was learning Spanish, I liked to use <a href="http://ankisrs.net/">Anki</a> to drill new vocabulary. It's a flashcard program. I found that someone had made a set of cards from an analysis of thousands of newspapers. They read in all of the words from the newspapers, counted them up, and figured out what the most common words were. The top 1000 made it into the deck.</p>
+<p>It turns out that this is a very good strategy for learning words. Word frequency follows a hockey stick distribution. The most common words are used so much more than the less common words. For instance, the <em>100 most common English words make up more than 50% of text</em>. If you've got limited time, <em>you should learn those most common words first</em>.</p>
 <p>People who are trying to learn Clojure have been asking me &quot;how do I learn all of this stuff? There's so much!&quot; It's a valid question and I haven't had a good answer. I remembered the Spanish newspaper analysis and I thought I'd try to do a similar analysis of Clojure forms.</p>
 <h3 id="method">Method</h3>
 <p><a href="https://clojars.org/">Clojars</a> provides a <a href="https://github.com/ato/clojars-web/wiki/Data#useful-extracts-from-the-poms">list of all of their projects</a>. Many of them include a git repo. So I got that list and fetched the git repo. There were over seven thousand git repos pointed to by Clojars. That was a lot of stuff, and git repos have a lot of data I wasn't interested in, so I filtered all the files looking for Clojure files. <code>/\.clj(s|c|x)?$/</code> That left 59,665 Clojure source files with over four million lines total.</p>
 <p>I read in all of the code in the files and parse it as Clojure. Then I walked it, looking for lists. I counted the head of all lists in each file, aggregating it all together. Then I sorted by frequency. I also only counted <em>symbols</em> in the head position.</p>
 <h3 id="warnings">Warnings</h3>
-<p>Just a few warnings before I continue. This is a very informal study. I didn't try to remove duplicate files. Some files failed to parse. And this obviously isn't all Clojure code on GitHub. It even misses quite a few important projects because they're not in Clojars. But, it's a large dataset and probably good enough for figuring out relative frequencies of forms.</p>
+<p>Just a few warnings before I continue. This is a very informal study. I didn't try to remove duplicate files. Some files failed to parse. And this obviously isn't all Clojure code on GitHub. It even misses quite a few important projects because they're not in Clojars. But, it's a large dataset and probably good enough for figuring out relative frequencies of forms to use for learning.</p>
 <h3 id="results">Results</h3>
 <p>Here are successive graphs zooming in on the word frequencies. In each, I've ordered the forms by frequency and plotted the frequency. Notice the nice long tail curve.</p>
 <div class="figure">
@@ -116,9 +116,9 @@
 <div class="figure">
 <img src="http://www.lispcast.com/img/word%20frequency%2025.png" alt="Top 25 symbols ordered most frequent first" /><p class="caption">Top 25 symbols ordered most frequent first</p>
 </div>
-<p>This means that learning to read and write forms at the left end of the graph will have an outsized impact on being able to read and write code in general. Even the most frequent 25 forms are vastly more common than the rest. But looking at the forms by hand, I think if you learned about 200 of them, you'd be pretty good. Either way, you should start at the left hand side and work your way right.</p>
+<p>This means that learning to read and write forms at the left end of the graph will have an outsized impact on being able to read and write code in general. Even <em>the most frequent 25 forms are vastly more common than the rest</em>. But looking at the forms by hand, I think <em>if you learned about 200 of them, you'd cover most code easily</em>. Between 100 and 200, lots of third party library functions and lots of common variable names (<code>f</code> for function) start to show up. Either way, you should start at the left hand side and work your way right.</p>
 <h3 id="conclusions">Conclusions</h3>
-<p>I think the results show that learning the most common 100 forms will have an outsized usefulness. If you're interested in learning Clojure, you should begin with those. I've created flashcards in PDF form that you can print, and also a CSV version that you can import into Anki for spaced repetition. You can get access to them, and other resources for learning Clojure, by signing up in the form below.</p>
+<p>I think the results show that learning the most common 100 forms will have an outsized usefulness. If you're interested in learning Clojure, you should begin with those. I've created <em>flashcards in PDF</em> form that you can print, and also a <em>CSV version</em> that you can import into Anki for spaced repetition. You can get access to them, and other resources for learning Clojure, by signing up in the form below.</p>
 <div class="subscribe-form-wrapper">
   <form action="https://www.getdrip.com/forms/1194631/submissions" method="post" data-drip-embedded-form="1194631"
         class="subscribe-form">

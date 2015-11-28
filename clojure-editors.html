@@ -1,0 +1,201 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>3 Features of Clojure Editors Professionals Won't Do Without | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Professional Clojure programmers rely on certain features of their editors to help them program. When choosing an editor, it's important to pick one that has these three important features. REPL integration, structural editing, and refactoring.">
+    <meta name="twitter:title" content="3 Features of Clojure Editors Professionals Won't Do Without">
+
+    <meta property="og:title" content="3 Features of Clojure Editors Professionals Won't Do Without">
+    <meta property="og:description" content="Professional Clojure programmers rely on certain features of their editors to help them program. When choosing an editor, it's important to pick one that has these three important features. REPL integration, structural editing, and refactoring.">
+
+    <meta name="description" content="Professional Clojure programmers rely on certain features of their editors to help them program. When choosing an editor, it's important to pick one that has these three important features. REPL integration, structural editing, and refactoring.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure-editors">
+            3 Features of Clojure Editors Professionals Won't Do Without
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          November 28, 2015
+        </div>
+
+        
+<p>Summary: <em>Professional Clojure programmers rely on certain features of their editors to help them program. When choosing an editor, it's important to pick one that has these three important features. REPL integration, structural editing, and refactoring.</em></p>
+<p>The <a href="https://cognitect.wufoo.com/widgets/h1w98xtl0c9q903/">most popular Clojure editor</a> by far is Emacs. Unfortunately, Emacs has a pretty high learning curve. But there are some very good reasons, besides the normal reasons, why Clojure programmers choose Emacs. Fortunately, Emacs is not the only option. Just about tied for second place are Cursive and vim. The three of these editors have three important features that make them excellent choices for Clojure professionals.</p>
+<p><a href="#emacs">Emacs</a> was inspired by the old Lisp Machines, and so has been the choice of Lisp programmers for a long time. When Clojure came along, Emacs was quickly adapted to programming in it. Today, it stands as the most popular editor according to the <a href="https://cognitect.wufoo.com/widgets/h1w98xtl0c9q903/">most recent (in 2015) Clojure survey</a>.</p>
+<p><a href="https://cursiveclojure.com/">Cursive</a> is a different take on Clojure editing. It is built as a plugin for IntelliJ, a popular Java IDE. It leans on the IntelliJ framework for intelligent code navigation, refactoring, and project management.</p>
+<p><a href="http://www.vim.org/">vim</a> is also a popular editor among programmers, favored for its modal editing. It is programmable and there are many plugins that make it very powerful for editing Clojure.</p>
+<h3 id="repl-integration">1. REPL Integration</h3>
+<p>Clojure programmers often practice interactive development. That means programming at the REPL, performing experiments, and generally editing code with a fast feedback cycle. Interactive development helps us achieve a state of flow.</p>
+<p>It's common to run a REPL in the terminal and switch back and forth between the editor and the REPL. But there's a better way that the three popular editors allow: REPL integration.</p>
+<p>REPL integration comes in many flavors, but generally it means having a REPL in your editor, being able to compile code from files, and even looking up documentation (doc strings).</p>
+<h4 id="emacs">Emacs</h4>
+<p>Emacs has a package called <a href="https://github.com/clojure-emacs/cider"><em>Cider</em></a>. It allows you to compile your code, run tests, execute code at the REPL, format your stack traces, and access documentation. It's a very full-featured Clojure environment.</p>
+<h4 id="cursive">Cursive</h4>
+<p>Cursive has many options for using REPLs. You can learn more on <a href="https://cursiveclojure.com/userguide/repl.html">this page</a>.</p>
+<h4 id="vim">vim</h4>
+<p>vim has a package called <a href="https://github.com/tpope/vim-fireplace">fireplace</a> that handles REPL integration. It lets you compile code, lookup docs, and expand macros.</p>
+<h3 id="structural-editing">2. Structural Editing</h3>
+<p>A lot of people when beginning with Clojure have some problems with the parentheses. It's understandable since making sure all of them are closed can be a pain. And making sure you're at the right indentation level is yet another thing to keep in mind.</p>
+<p>Yet experienced Clojure programmers don't focus so much on closing parens. The reason isn't because they've become adept at counting parens. Instead, it's because the tools they use help them keep all of the parens balanced all the time. Instead of typing character by character, they manipulate entire expressions. <a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">These animations</a> show some of the more common structural editing operations.</p>
+<h4 id="emacs-1">Emacs</h4>
+<p>Paredit is the Emacs package for structural editing. <a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">These animations</a> are an awesome guide to the keystrokes for the operations. There is also a <a href="http://pub.gajendra.net/src/paredit-refcard.pdf">paredit reference card</a>. It's a little crowded but it does the job.</p>
+<h4 id="cursive-1">Cursive</h4>
+<p>Cursive has its own brand of structural editing, which is explained <a href="https://cursiveclojure.com/userguide/paredit.html">in the user guide</a>.</p>
+<h4 id="vim-1">vim</h4>
+<p>vim's structural editing plugin is called <a href="http://www.vim.org/scripts/script.php?script_id=3998">paredit.vim</a>. It is similar to the other editors.</p>
+<h3 id="refactoring">3. Refactoring</h3>
+<p>A recent addition to the Clojure editing world is what I'm lumping together under the umbrella of &quot;refactoring&quot;. This includes editing features that require a deeper understanding of the code. For instance, changing a deeply nested form into a form that uses a threading macro. Or looking up the uses of a particular function.</p>
+<h4 id="emacs-2">Emacs</h4>
+<p>Many useful code understanding features come built into Cider. But there is now a growing collection of refactoring commands in an Emacs package known as <a href="https://github.com/clojure-emacs/clj-refactor.el">clj-refactor</a>. You can also get <a href="http://www.lispcast.com/clj-refactor">a cheatsheet</a> for it.</p>
+<h4 id="cursive-2">Cursive</h4>
+<p>Cursive was created to take advantage of the IntelliJ platform. It parses your code and understands it at a deep level, which lets you find code that uses a particular function, rename functions across a project, and other powerful features.</p>
+<h4 id="vim-2">vim</h4>
+<p>vim is lagging behind in this arena. But there are several small attempts at it. I'm confident that it will catch up quickly.</p>
+<h3 id="more-information-on-emacs">More information on Emacs</h3>
+<ul>
+<li><a href="http://clojure-doc.org/articles/tutorials/emacs.html">A guide to setting up Emacs for Clojure</a></li>
+<li><a href="https://www.youtube.com/watch?v=4X-1fJm25Ww">A talk by the maintainer of Cider</a></li>
+<li><a href="http://www.braveclojure.com/basic-emacs/">An Emacs chapter from <em>Clojure for the Brave and True</em></a></li>
+</ul>
+<h3 id="more-information-on-vim">More information on vim</h3>
+<ul>
+<li><a href="http://neo.com/2014/02/25/getting-started-with-clojure-in-vim/">Getting started with Clojure in Vim</a></li>
+<li><a href="http://blog.venanti.us/clojure-vim/">Recommendations for Clojure setup</a></li>
+<li><a href="https://robots.thoughtbot.com/writing-clojure-in-vim">More recommendations from thoughtbot</a></li>
+</ul>
+<h3 id="more-information-on-cursive">More information on Cursive</h3>
+<ul>
+<li><a href="https://cursiveclojure.com/userguide/">The official Cursive User Guide</a></li>
+<li><a href="https://www.youtube.com/watch?v=vt1y2FbWQMg">A talk by the creator of Cursive</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>3 Features of Clojure Editors Professionals Won't Do Without</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-editors</guid>
+                  <link>http://www.lispcast.com/clojure-editors</link>
+                  <pubDate>Sat 28 Nov 2015 12:00:45 AM CST</pubDate>
+                  <description>
+                    Professional Clojure programmers rely on certain features of their editors to help them program. When choosing an editor, it's important to pick one that has these three important features. REPL integration, structural editing, and refactoring.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-editors"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>The 100 Most Used Clojure Expressions</title>
                   <guid isPermalink="false">http://www.lispcast.com/100-most-used-clojure-expressions</guid>
                   <link>http://www.lispcast.com/100-most-used-clojure-expressions</link>
@@ -129,20 +143,6 @@
                     ClojureScript builds can take a long time. But the extra time is worth it. It reduces the download size significantly.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojurescript-build-times"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Can building ClojureScript assets be integrated into my build process?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/building-clojurescript-process</guid>
-                  <link>http://www.lispcast.com/building-clojurescript-process</link>
-                  <pubDate>Wed 16 Sep 2015 03:52:12 PM CDT</pubDate>
-                  <description>
-                    ClojureScript's official build process is a simple shell command. There is also integration into Leiningen and Boot.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/building-clojurescript-process"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

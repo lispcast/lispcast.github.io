@@ -11,14 +11,14 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>LispCast</title>
+    <title>Keyword: editors | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
     <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
-    <meta name="twitter:title" content="LispCast">
+    <meta name="twitter:title" content="Keyword: editors">
 
-    <meta property="og:title" content="LispCast">
+    <meta property="og:title" content="Keyword: editors">
     <meta property="og:description" content="A blog about the simple joys of functional programming.">
 
     <meta name="description" content="A blog about the simple joys of functional programming.">
@@ -86,145 +86,16 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="http://clojurewest.org/">
-            Clojure/West
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/clojure-west">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
+             href="/clojure-editors">
+            3 Features of Clojure Editors Professionals Won't Do Without
           </a>
         </h2>
 
         <div class="timestamp">
-          December 08, 2011
+          November 28, 2015
         </div>
 
-        
-<blockquote>
-<p>Clojure/West is a new conference bringing the Clojure community together to discuss techniques, tools, and the state of the Clojure ecosystem March 16-17th for three tracks of sessions.</p>
-</blockquote>
-<p>I sure wish I could go hang out with other Clojurians. It's lonely here by myself. The conference looks like it will be fun and informative.</p>
-<p>Registration is open:</p>
-<ul>
-<li><a href="http://www.regonline.com/clojurewest2012">For the conference</a></li>
-<li><a href="http://www.regonline.com/clojurewest2012training">For the training</a></li>
-</ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="https://gist.github.com/1441520">
-            Seesaw REPL Tutorial
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/seesaw-repl-tutorial">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          December 08, 2011
-        </div>
-
-        
-<p>Dave Ray has written a commented source listing which guides you through building a simple GUI with Seesaw.</p>
-<blockquote>
-<pre><code>; How can we get to the radio buttons without using the rbs var? How about
-; with a selector:
-(select f [:JRadioButton])
-;=&gt; (#&lt;JRadioButton ... &gt; #&lt;JRadioButton ... &gt;)</code></pre>
-</blockquote>
-<p>. . .</p>
-<blockquote>
-<pre><code>; and, of course, you can register a listener for group selection changes
-(listen group :selection 
-    (fn [e] 
-      (when-let [s (selection group)] 
-        (println &quot;Selection is &quot; (id-of s)))))</code></pre>
-</blockquote>
-<p>I have only done a bit of GUI programming with Java (mostly in college). But rather than giving me flashbacks to that nightmare, <a href="https://github.com/daveray/seesaw">Seesaw</a> makes me feel secure that I could face the Swing dragon again.</p>
-<p>From the Seesaw readme:</p>
-<blockquote>
-<p>It's an experiment to see what I can do to make user interface development funner in Clojure.</p>
-</blockquote>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/lisp-academy">
-            A Bizarre and Beautiful Lisp Learning Tool
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          December 07, 2011
-        </div>
-
-        
-<p><a href="http://whalliburton.github.com/academy/">⚡ ⚕ Welcome to the academy. ⚛ ♬</a></p>
-<p>This appears to be a way to learn Common Lisp. It intrigues me because of the esoteric flavor of it.</p>
-<p>From the top of the page:</p>
-<blockquote>
-<p>Genesis</p>
-<p>In the beginning Man created the computer. Now the computer was formless and empty, darkness was over the surface of the deep, and the Spirit of Man was hovering over the terminal.</p>
-<p>And Man said, &quot;Let there be lisp,&quot; and there was lisp. Man saw that the lisp was good.</p>
-</blockquote>
-<p>It is followed by a rendering of the <a href="http://en.wikipedia.org/wiki/I_Ching">I Ching</a>, an inline rendering of the game of life, and references to movies and music.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/from-humble-beginnings">
-            Reborn!
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          December 06, 2011
-        </div>
-
-        
-<p>LispCast has been reborn from the ashes of its former existence.</p>
-<p>Please stay tuned.</p>
-
+        Professional Clojure programmers rely on certain features of their editors to help them program. When choosing an editor, it's important to pick one that has these three important features. REPL integration, structural editing, and refactoring.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -244,10 +115,6 @@
     </div>
 
     <footer class="footer-banner">
-      <a class="footer-next"
-         href="page31.html">
-        next
-      </a>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

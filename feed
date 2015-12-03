@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Have you seen these specific Ruby resources for learning about Clojure?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-ruby-videos</guid>
+                  <link>http://www.lispcast.com/clojure-ruby-videos</link>
+                  <pubDate>Wed 03 Dec 2015 10:51:00 AM CST</pubDate>
+                  <description>
+                    If you're a Rubyist and you've heard some buzz about Clojure, these videos and links will be just for you. Rubyists teaching Clojure, Clojurists introducing Clojure to Ruby programmers, and Rubyists pontificating on Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-ruby-videos"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>2 Features of Clojure Editors Professionals Won't Do Without</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojure-editors</guid>
                   <link>http://www.lispcast.com/clojure-editors</link>
@@ -129,20 +143,6 @@
                     Although it's still early, ClojureScript is rapidly maturing its testing story. There are a Leiningen plugin and a Boot task for autocompiling ClojureScript as it changes and running tests in a variety of engines.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/testing-clojurescript"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Will having ClojureScript, yet another asset type, slow down my deploys?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojurescript-build-times</guid>
-                  <link>http://www.lispcast.com/clojurescript-build-times</link>
-                  <pubDate>Wed 17 Sep 2015 1:14:49 PM CDT</pubDate>
-                  <description>
-                    ClojureScript builds can take a long time. But the extra time is worth it. It reduces the download size significantly.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojurescript-build-times"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

@@ -15,13 +15,13 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="Functional programming, from one perspective, is just a collection of habits that affect our programming. I've identified the cues for those habits and a routine for replacing imperative code with functional code.">
     <meta name="twitter:title" content="How to Switch from the Imperative Mindset">
 
     <meta property="og:title" content="How to Switch from the Imperative Mindset">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="Functional programming, from one perspective, is just a collection of habits that affect our programming. I've identified the cues for those habits and a routine for replacing imperative code with functional code.">
 
-    <meta name="description" content="">
+    <meta name="description" content="Functional programming, from one perspective, is just a collection of habits that affect our programming. I've identified the cues for those habits and a routine for replacing imperative code with functional code.">
 
     <meta name="author" content="Eric Normand">
 
@@ -92,18 +92,198 @@
         </h2>
 
         <div class="timestamp">
-          November 10, 2015
+          December 10, 2015
         </div>
 
         
-<p>Summary: **</p>
-<p>One of the most often-asked questions budding functional programmers ask me is &quot;how do I swatch from the imperative mindset?&quot;. They've learned to program in one paradigm and the switch to another is difficult. All of their habits of coding are now not helpful. What new habits should they learn?</p>
-<p>The imperative paradigm is quite intuitive in it's way. In it, programs are list of instructions to perform, one at a time, in order. Each instruction modifies the state of the computer in some way, or performs some action outside of the computer, until, after the final action, the answer you were calculating is there, or the effect you wanted has been achieved. The email has been sent, the missile has been launched, etc.</p>
-<p>You can think of imperative programming as giving instructions to someone who is changing a tire. First, get out the tire iron and spare. Then, get out the jack. Next, jack up the car, etc. Each step changes the world in some way, and at the end of the process, the tire has been changed.</p>
-<p>Now, obviously programs in a functional language do have to have effects, and those effects have to be in the right order. This kind of step-by-step instruction programming is necessary and entirely possible in Haskell and Clojure. In Haskell, you have the <code>IO</code> type, which represents actions like &quot;jack up the car&quot;. And in Clojure, you can always perform an effect as part of any function. So a job like changing the tire might actually be programmed entirely in an imperative way. That would be fine and very common, actually.</p>
-<p>But let's do a little thought experiment. Let's say that as we gave instructions to the person changing the tire, instead of performing them as we gave them, she just listened carefully until all of the instructions were given, then executed them. It becomes clear, with this example, that the <em>instructions are data</em>. They are information given to the worker, who can remember them, then execute them at a later time.</p>
-<p>Well, if she can remember them, why not do something more interesting? Why can't she try to optimize them? Maybe she can choose a different order. If she had dependency information between the steps (which is implicit but could be made explicit), she could figure out all possible orders. For instance, removing the tire is dependent on unscrewing the nuts. Perhaps</p>
-<p>// change to making something</p>
+<p>Summary: <em>Functional programming, from one perspective, is just a collection of habits that affect our programming. I've identified the cues for those habits and a routine for replacing imperative code with functional code.</em></p>
+<p>As programmers, we all have a history. Many of us coming to functional programming have learned imperative programming and want to switch to a functional mindset.</p>
+<p>Let me first say that <strong>any programming skills are a help</strong>, not a hinderance, to learning functional programming. It is much harder to learn to program the first time than to switch mindsets to a functional paradigm.</p>
+<p>That said, <strong>it will be a challenge</strong> to establish new habits and to break old ones. But once you do, functional programming will inform how you code everything you do. It will give you a new perspective with which to design your programs. And it is very common to hear people say that learning functional programming has made their software design better.</p>
+<p>I'm going to use the framework presented in <em>The Power of Habit</em> to help you build the new habits to replace your old one. The framework is simple: identify the <em>Cue</em> (or the trigger) for a behavior, then modify the <em>Routine</em>, then give a <em>Reward</em>. I'll let you come up with the reward, but I like to revel in the clarity of my code.</p>
+<h3 id="a-critical-decision">A critical decision</h3>
+<p>There's an important choice to make before you being this change. It depends on your temperament and circumstances. Do you prefer a drastic <em>all-or-nothing</em> approach or a more gradual approach?</p>
+<h4 id="all-or-nothing">All or nothing</h4>
+<p>Do you want to jump right in and be forced to program functionally? Maybe you want to totally get outside your comfort zone and start programming in Haskell. Haskell will force you to think functionally or you won't be programming at all, because Haskell is a purely functional language. <strong>Some people appreciate the all-or-nothing approach to prevent backsliding.</strong></p>
+<h4 id="step-by-step">Step by step</h4>
+<p>But if you want a gentler approach, maybe you want to try out <strong>functional programming in a language you're already familiar with</strong>. Perhaps you want to dip your toes in a little, test the waters, and move in gradually. This is also a valid strategy. You can begin to make a new program using functional techniques but in a language you feel comfortable in. Trust me, <strong>you can do functional programming in any language</strong>. The difference is in how much the language helps you to do it. The danger with this approach is that you've already got lots of established habits and it will be easiest simply to use those.</p>
+<p>You could also find some existing code that you're familiar with and refactor it into a functional style. This is also helpful. It will give you practice and improve a working system. Just make sure the code is working before you try this. Otherwise, you might think the functional refactoring has broken it.</p>
+<h3 id="disclaimer">Disclaimer</h3>
+<p>Before we get into the tools, I want to emphasize that I'm not saying that imperative habits are bad. It's easy to moralize habits, and that's not what I want to do. What I am suggesting is that having <strong>two ways to solve a problem is better than having one</strong>. And once you program in a functional style, you will find that it often has benefits over the imperative style. Sometimes it won't be better, but sometimes it will be shorter, clearer, and more often correct.</p>
+<h3 id="the-main-tools-of-functional-programming">The main tools of functional programming</h3>
+<p>There are three main tools that are universal among functional languages. These tools are always available to the functional programmer. If I meet someone who does not know these tools, this is where I start. They are:</p>
+<ol style="list-style-type: decimal">
+<li><code>map</code></li>
+<li><code>filter</code></li>
+<li><code>reduce</code> (sometimes called <code>fold</code>)</li>
+</ol>
+<p>Chances are, your language has something like these. We need to learn to identify when to use them and begin applying these functions right away.</p>
+<p>I'm going to use JavaScript for the examples because it's very popular and I know it. The functional examples will use <a href="http://underscorejs.org/">Underscore</a>.</p>
+<h4 id="map"><code>map</code></h4>
+<p><code>map</code> takes a function and one collection and returns another collection with the elements transformed by the function.</p>
+<p>The habit:</p>
+<p><em>Cue</em>: Applying a pure function (or method) on each element of a list.</p>
+<p><em>Routine</em>: Use <code>map</code> instead of a loop. Use the function as an argument to map, or create a function if it's a method call.</p>
+<p><strong>Example: Convert the names to upper case.</strong></p>
+<p>Non-functional:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+<span class="kw">var</span> i;
+
+<span class="kw">for</span>(i = <span class="dv">0</span>; i &lt; <span class="ot">names</span>.<span class="fu">length</span>; i++) {
+  names[i] = names[i].<span class="fu">toUpperCase</span>();
+}</code></pre>
+<p>We're applying the same method to every element of the list.</p>
+<p>Functional:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="kw">var</span> newNames = <span class="ot">_</span>.<span class="fu">map</span>(names, <span class="kw">function</span>(n) { <span class="kw">return</span> <span class="ot">n</span>.<span class="fu">toUpperCase</span>(); });</code></pre>
+<p>Because calling a method on elements of a list is so common in JavaScript, Underscore provides an even more concise (and still functional) way to do this (as long as the method is pure).</p>
+<p>Underscore alternative:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="kw">var</span> newNames = <span class="ot">_</span>.<span class="fu">invoke</span>(names, <span class="st">&#39;toUpperCase&#39;</span>);</code></pre>
+<p>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">ECMAScript 5.1 defines Array.prototype.map</a>, but that's not available in all browsers, so I've used the <a href="http://underscorejs.org/#map">Underscore version</a>.)</p>
+<h4 id="filter"><code>filter</code></h4>
+<p>The second tool in the toolbox is filter. When you want to keep only some of the items in a collection, this is what you grab.</p>
+<p><em>Cue</em>: An <code>if</code> with no else inside a loop over a list.</p>
+<p><em>Routine</em>: Use <code>filter</code> instead of a loop. Move the test of the conditional into a predicate function. Use the return value of <code>filter</code>.</p>
+<p><strong>Example: Make a list of the names that start with &quot;J&quot;.</strong></p>
+<p>Imperative:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="kw">var</span> JNames = [];
+
+<span class="kw">var</span> i;
+<span class="kw">for</span>(i = <span class="dv">0</span>; i &lt; <span class="ot">names</span>.<span class="fu">length</span>; i++) {
+  <span class="kw">if</span>(names[i].<span class="fu">indexOf</span>(<span class="st">&quot;J&quot;</span>) === <span class="dv">0</span>) {
+    <span class="ot">JNames</span>.<span class="fu">push</span>(names[i]);
+  }
+}</code></pre>
+<p>We see a <code>for</code> loop with an <code>if</code> statement inside. We're building up a new list with only some of the elements.</p>
+<p>Functional:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="kw">var</span> JNames = <span class="ot">_</span>.<span class="fu">filter</span>(names, <span class="kw">function</span>(n) { <span class="kw">return</span> <span class="ot">n</span>.<span class="fu">indexOf</span>(<span class="st">&quot;J&quot;</span>) === <span class="dv">0</span>; });</code></pre>
+<p>We replace the <code>for</code> loop with a call to <code>filter</code> with the same test we used before.</p>
+<h4 id="reduce"><code>reduce</code></h4>
+<p>The third tool, and arguably the most difficult to learn but the most rewarding, is <code>reduce</code>. <code>reduce</code> takes the elements of a collection and applies a function to each in turn, resulting in a single value. You could reduce a list of numbers with <code>+</code>, which gives you the sum of all of them. Or you could reduce it with <code>*</code>, which gives you the product.</p>
+<p><em>Cue</em>: Operating on an initialized variable for each element in a list.</p>
+<p><em>Routine</em>: Use <code>reduce</code> instead of a loop. Identify the initial state and identify the function. Use them as arguments to <code>reduce</code>.</p>
+<p><strong>Example: Count all the characters in the names.</strong></p>
+<p>Imperative:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="kw">var</span> charCount = <span class="dv">0</span>;
+
+<span class="kw">var</span> i;
+<span class="kw">for</span>(i = <span class="dv">0</span>; i &lt; <span class="ot">names</span>.<span class="fu">length</span>; i++) {
+  charCount = charCount + names[i].<span class="fu">length</span>;
+}</code></pre>
+<p>We see an initialized variable, a <code>for</code> loop, and an operation (<code>+</code>) on the variable for each element.</p>
+<p>Functional:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="kw">var</span> charCount = <span class="ot">_</span>.<span class="fu">reduce</span>(names, <span class="kw">function</span>(c, n) { <span class="kw">return</span> c + <span class="ot">n</span>.<span class="fu">length</span>; }, <span class="dv">0</span>);</code></pre>
+<p>The operation is adding the length and the initial value is 0.</p>
+<h3 id="using-all-three-together">Using all three together</h3>
+<p>Then, when you've learned to use them each alone, you will begin to see how they may be used together.</p>
+<p><strong>Example: Count the characters in names starting with &quot;J&quot;.</strong></p>
+<p>Imperative:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="kw">var</span> charCount = <span class="dv">0</span>;
+
+<span class="kw">var</span> i;
+<span class="kw">for</span>(i = <span class="dv">0</span>; i &lt; <span class="ot">names</span>.<span class="fu">length</span>; i++) {
+  <span class="kw">if</span>(names[i].<span class="fu">indexOf</span>(<span class="st">&quot;J&quot;</span>) === <span class="dv">0</span>) {
+    charCount = charCount + names[i].<span class="fu">length</span>;
+  }
+}</code></pre>
+<p>We can see all three cues: an <code>if</code> statement without an else, an operation on the elements, and an operation on an initialized variable.</p>
+<p>Functional:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="kw">var</span> charCount = <span class="ot">_</span>.<span class="fu">chain</span>(names)
+                 .<span class="fu">filter</span>(<span class="kw">function</span>(n)    { <span class="kw">return</span> <span class="ot">n</span>.<span class="fu">indexOf</span>(<span class="st">&quot;J&quot;</span>) === <span class="dv">0</span>; })
+                 .<span class="fu">map</span>(   <span class="kw">function</span>(n)    { <span class="kw">return</span> <span class="ot">n</span>.<span class="fu">length</span>; })
+                 .<span class="fu">reduce</span>(<span class="kw">function</span>(a, b) { <span class="kw">return</span> a + b; }, <span class="dv">0</span>)
+                 .<span class="fu">value</span>();</code></pre>
+<p>Here I've also used the <a href="http://underscorejs.org/#chain">Underscore <code>chain</code></a> function to chain operations together.</p>
+<p>There are many more functional operations, but these three are the core. And they all share a very import feature: they return a brand new array instead of modifying the arguments. They help you minimize mutation.</p>
+<h3 id="minimize-mutation">Minimize mutation</h3>
+<p>Mutation means changing a value in place. It's a type of side-effect that deserves its own mention. Unlike other kinds of side-effects, mutation doesn't have an effect on the outside world (like printing to the screen, sending an email, or launching a missile). It happens only inside the computer's memory. As such, it doesn't serve much purpose besides introducing an implicit order to an execution. <strong>An assignment statement implicitly divides the execution of a program into before the assignment and after the assignment.</strong> In a complex program with many assignments, it becomes difficult to follow that timeline. It's best to minimize the number of mutations you do.</p>
+<p>The habit:</p>
+<p><em>Cue</em>: Modifying a variable, list, or object in place.</p>
+<p><em>Routine</em>: Replace the mutation with operations on fresh copies, as you would get by using <code>map</code>, <code>filter</code>, <code>reduce</code>, and other pure functions.</p>
+<h3 id="minimize-implicit-dependencies">Minimize implicit dependencies</h3>
+<p>Sometimes you have some code that uses the value of a variable outside of its scope. That variable is changing, so the code executes differently every time. In functional programming, we seek to <strong>minimize code whose execution depends on things outside of its scope</strong>.</p>
+<p>The habit:</p>
+<p><em>Cue</em>: A function references the value of a variable outside of its scope.</p>
+<p><em>Routine</em>: Make the variable an argument to the function to make the dependency explicit.</p>
+<h3 id="isolate-side-effects">Isolate side-effects</h3>
+<p>The last habit to establish is to isolate side-effects. Side-effects are code that have an observable effect on the world. Launching a missile or printing to the screen are side-effects. Functional programming separates out side-effecting code from code without side-effects.</p>
+<p>We <em>need</em> side-effects to do interesting stuff. But we want to separate the side-effects out so that they aren't spread around our code. We want to be as confident as possible of what code can be run without fear of launching a missile.</p>
+<p>So here's our last habit:</p>
+<p><em>Cue</em>: We see some side-effect among our pure code.</p>
+<p><em>Routine</em>: Isolate the side-effecting code from the pure code. Make the non-side-effecting parts into a unit and the side-effecting parts into a unit, then combine them together.</p>
+<p><strong>Example: Print only names with five letters.</strong></p>
+<p>Imperative:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="kw">var</span> i;
+<span class="kw">for</span>(i = <span class="dv">0</span>; i &lt; <span class="ot">names</span>.<span class="fu">length</span>; i++) {
+  <span class="kw">if</span>(names[i].<span class="fu">length</span> === <span class="dv">5</span>) {
+    <span class="ot">console</span>.<span class="fu">log</span>(names[i]);
+  }
+}</code></pre>
+<p>More Functional:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> names = [<span class="st">&quot;Johnny&quot;</span>, <span class="st">&quot;Christine&quot;</span>, <span class="st">&quot;Frank&quot;</span>, <span class="st">&quot;Juliette&quot;</span>];
+
+<span class="co">// this function has a side-effect</span>
+<span class="kw">function</span> <span class="fu">printName</span>(name) {
+  <span class="ot">console</span>.<span class="fu">log</span>(name);
+}
+
+<span class="kw">function</span> <span class="fu">filterLength</span>(list, len) {
+  <span class="kw">return</span> <span class="ot">_</span>.<span class="fu">filter</span>(list, <span class="kw">function</span>(s) { <span class="kw">return</span> <span class="ot">s</span>.<span class="fu">length</span> === len; });
+}
+
+<span class="co">// side-effecting part</span>
+<span class="ot">_</span>.<span class="fu">each</span>(<span class="fu">filterLength</span>(names, <span class="dv">5</span>), printName);</code></pre>
+<p>Though this is a simplistic example, we can imagine a function like <code>filterLength</code> is useful elsewhere. Since it doesn't have any side-effects, we can use it without worrying about printing.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Functional programming, like other paradigms, can be seen as a bunch of habits that we apply during programming. I've identified several habits, along with some very common functional tools, that you can begin training in regardless of the language you use. You might find that learning these habits <strong>makes your code easier to read and easier to modify</strong>.</p>
+<p>You may also find that your language doesn't help much to minimize mutation. Or that using these functional idioms is very verbose. In those cases, you may want to <strong>try out a more functional language</strong> like Haskell or Clojure. If you're into Clojure, I've got a program called <a href="http://purelyfunctional.tv/mentoring"><em>PurelyFunctional.tv Online Mentoring</em></a>. It helps programmers become Clojure professionals. There's also my video course <a href="http://purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a> (which is included in <em>Online Mentoring</em>) that brings you from zero to Clojure, from the syntax through data-driven programming, with animations and exercises.</p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/4474202/submissions" method="post" data-drip-embedded-form="4474202"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+Free Getting Started with Clojure Email Course
+</h3>
+    <div data-drip-attribute="description">
+      
+It's designed to help you decide if Clojure will work for you, to get set up, and to explore some of its cooler features. <br /> <br /> Here are some of the topics:
+<ul>
+    <li>
+How to Read Code like a Clojure Expert
+</li>
+    <li>
+The Ultimate Guide to Learning Clojure for Free
+</li>
+    <li>
+How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popular
+</li>
+      </ul>
+    </div>
+    <div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" placeholder="Email" value="" /> <input type="submit" name="submit" value="Sign Up" data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
 
 
         <div class="endmark">

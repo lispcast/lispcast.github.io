@@ -92,7 +92,7 @@
         </h2>
 
         <div class="timestamp">
-          December 10, 2015
+          December 12, 2015
         </div>
 
         
@@ -143,6 +143,7 @@
 
 <span class="kw">var</span> newNames = <span class="ot">_</span>.<span class="fu">invoke</span>(names, <span class="st">&#39;toUpperCase&#39;</span>);</code></pre>
 <p>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">ECMAScript 5.1 defines Array.prototype.map</a>, but that's not available in all browsers, so I've used the <a href="http://underscorejs.org/#map">Underscore version</a>.)</p>
+<p>If you want more examples and practice, look at these resources: <a href="http://www.lispcast.com/annotated-map">1</a> and <a href="http://www.lispcast.com/tdd-clojure-core-map">2</a>.</p>
 <h4 id="filter"><code>filter</code></h4>
 <p>The second tool in the toolbox is filter. When you want to keep only some of the items in a collection, this is what you grab.</p>
 <p><em>Cue</em>: An <code>if</code> with no else inside a loop over a list.</p>
@@ -185,6 +186,7 @@
 
 <span class="kw">var</span> charCount = <span class="ot">_</span>.<span class="fu">reduce</span>(names, <span class="kw">function</span>(c, n) { <span class="kw">return</span> c + <span class="ot">n</span>.<span class="fu">length</span>; }, <span class="dv">0</span>);</code></pre>
 <p>The operation is adding the length and the initial value is 0.</p>
+<p><code>reduce</code> can be a doozy so I suggest these resources: <a href="http://www.lispcast.com/annotated-clojure-core-reduce">1</a>, <a href="http://www.lispcast.com/reduce-example-explained">2</a>, <a href="http://www.lispcast.com/lets-tdd-clojure-core-reduce">3</a>.</p>
 <h3 id="using-all-three-together">Using all three together</h3>
 <p>Then, when you've learned to use them each alone, you will begin to see how they may be used together.</p>
 <p><strong>Example: Count the characters in names starting with &quot;J&quot;.</strong></p>
@@ -285,6 +287,14 @@ How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popu
 
 
 
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/object-function-duals-dispatch">Object-Oriented Dispatch is the Dual of Functional Dispatch</a></li>
+<li><a href="http://www.lispcast.com/object-oriented-vs-functional-duals">Object-Oriented Programming is the Dual of Functional Programming</a></li>
+<li><a href="http://www.lispcast.com/paper-metaphor">The Paper Metaphor</a></li>
+<li><a href="http://www.lispcast.com/the-content-of-your-code">The Content of Your Code</a></li>
+</ul>
+
 
         <div class="endmark">
           <a class="endmark-link"
@@ -304,6 +314,10 @@ How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popu
     </div>
 
     <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/clojure-ruby-videos">
+        previous
+      </a>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

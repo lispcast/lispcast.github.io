@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>How to Switch from the Imperative Mindset</title>
+                  <guid isPermalink="false">http://www.lispcast.com/imperative-mindset</guid>
+                  <link>http://www.lispcast.com/imperative-mindset</link>
+                  <pubDate>Sat 12 Dec 2015 06:04:21 AM CST</pubDate>
+                  <description>
+                    Functional programming, from one perspective, is just a collection of habits that affect our programming. I've identified the cues for those habits and a routine for replacing imperative code with functional code.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/imperative-mindset"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Have you seen these specific Ruby resources for learning about Clojure?</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojure-ruby-videos</guid>
                   <link>http://www.lispcast.com/clojure-ruby-videos</link>
@@ -129,20 +143,6 @@
                     ClojureScript optimizes names by replacing them with shorter ones. Usually, that's a good thing. But it can get carried away. Externs are how you help it know what's unsafe to optimize.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojurescript-externs"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>How can you test ClojureScript applications and libraries?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/testing-clojurescript</guid>
-                  <link>http://www.lispcast.com/testing-clojurescript</link>
-                  <pubDate>Fri 19 Sep 2015 01:41:04 PM CDT</pubDate>
-                  <description>
-                    Although it's still early, ClojureScript is rapidly maturing its testing story. There are a Leiningen plugin and a Boot task for autocompiling ClojureScript as it changes and running tests in a variety of engines.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/testing-clojurescript"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

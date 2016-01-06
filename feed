@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Global Mutable State</title>
+                  <guid isPermalink="false">http://www.lispcast.com/global-mutable-state</guid>
+                  <link>http://www.lispcast.com/global-mutable-state</link>
+                  <pubDate>Wed 06 Jan 2016 05:13:43 PM CST</pubDate>
+                  <description>
+                    Global mutable state is one of the biggest drivers of complexity in software systems. We tackle a definition and how to reduce our reliance on it.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/global-mutable-state"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>How to Switch from the Imperative Mindset</title>
                   <guid isPermalink="false">http://www.lispcast.com/imperative-mindset</guid>
                   <link>http://www.lispcast.com/imperative-mindset</link>
@@ -129,20 +143,6 @@
                     As you get better with Clojure, it becomes easier to read. Why not jump ahead of the learning curve and read like an expert? Focus on the first thing, use the indentation, and read the evaluation order.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/how-to-read-code-like-a-clojure-expert"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Knowing this one ClojureScript gotcha will save you hours</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojurescript-externs</guid>
-                  <link>http://www.lispcast.com/clojurescript-externs</link>
-                  <pubDate>Sat 20 Sep 2015 01:00:02 PM CDT</pubDate>
-                  <description>
-                    ClojureScript optimizes names by replacing them with shorter ones. Usually, that's a good thing. But it can get carried away. Externs are how you help it know what's unsafe to optimize.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojurescript-externs"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

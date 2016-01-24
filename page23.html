@@ -86,6 +86,41 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://www.youtube.com/watch?v=A7de6pC-tnU">
+            David Nolen on Clojure's core.logic
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/david-nolen-on-clojure.core.logic">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 28, 2012
+        </div>
+
+        
+<p>A bootleg video of a talk from Strange Loop 2012.</p>
+<p>I do not think the official videos are up yet. For those of us who could not make it to the conference, this is great, even though it was recorded with an iPhone. You can hear Nolen well and see the slides.</p>
+<p>The presentation starts with a short review of how to use <a href="https://github.com/clojure/core.logic">core.logic</a> before Nolen goes into the implementation details. I still need to spend some time understanding the code myself. core.logic is based on miniKanren, described in <a href="http://www.amazon.com/Reasoned-Schemer-Daniel-P-Friedman/dp/0262562146?tag=lisp0b-20"><em>The Reasoned Schemer</em></a>.</p>
+<p>Actually, I have just bought a copy of <a href="http://www.amazon.com/Little-Schemer-Daniel-P-Friedman/dp/0262560992?tag=lisp0b-20"><em>The Little Schemer</em></a>, the first book in the series of which <a href="http://www.amazon.com/Reasoned-Schemer-Daniel-P-Friedman/dp/0262562146?tag=lisp0b-20"><em>The Reasoned Schemer</em></a> is a part. I am trying to catch up on all of these Lisp classics. I will write a review when I am finished, but so far so good.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.infoq.com/presentations/ClojureScript">
             ClojureScript Anatomy
           </a>
@@ -441,44 +476,6 @@
 <li><p>Behavior can change incrementally. You can still get up and running<br /> using the defaults and adapt the server's behavior to suit the problem<br /> later.</p></li>
 </ol>
 <p>I look forward to trying it out.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.250bpm.com/blog:8">
-            Why should I have written ZeroMQ in C, not C++ (part II)
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/why-should-i-have-written-zeromq-in-c">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 30, 2012
-        </div>
-
-        
-<p>In this post, Martin Sústrik makes a point about the performance of C compared to C++ (C++ is slower than C). While the performance point is valid, he makes some strong, dubious statements about Object-orientation and procedural programming.</p>
-<blockquote>
-<p>Object-orientedness is after all just a syntactic sugar on the top of procedural language, making the code more understandable to the human brain which seems to have evolved natural ability to deal with objects at the expense of dealing with entities such as flows, relations etc.</p>
-</blockquote>
-<p>Object-orientation is more than just syntactic sugar. OO uses message passing as its computational semantic, while procedural programming uses procedure calls.</p>
-<p>He then goes on to describe a scheme where one class can define fields in another class that only it can access, which he calls &quot;private in X&quot;. In this way, you can define a list which stores its pointers in the same memory as items of the list which still encapsulates the concerns.</p>
-<p>The benefit of OO is that by separating out concerns, you achieve more reuse. You write one list class and one person class, and now you can share persons in different lists. The problem with Sústrik's proposal is that it only allows for an item to be in one list at a time (or you have to write a new list class for every list you want them to be in). This is not Object-oriented. It is merely yet another feature bolted onto C++.</p>
 
 
         <div class="endmark">

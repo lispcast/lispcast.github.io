@@ -15,13 +15,13 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="There are many classics of functional programming that can help you take your thinking to the next level. My recommendations are for making you think in a new way.">
     <meta name="twitter:title" content="Recommendations for next-level Clojure">
 
     <meta property="og:title" content="Recommendations for next-level Clojure">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="There are many classics of functional programming that can help you take your thinking to the next level. My recommendations are for making you think in a new way.">
 
-    <meta name="description" content="">
+    <meta name="description" content="There are many classics of functional programming that can help you take your thinking to the next level. My recommendations are for making you think in a new way.">
 
     <meta name="author" content="Eric Normand">
 
@@ -103,34 +103,24 @@
 <p>I know that it's hard to grow in non-mainstream languages. Mainstream languages have lots of books, lots of stylists, lots of exploration about how best to structure your code. For instance, you can read <em>Design Patterns</em> for an intermediate level Object Oriented Design perspective which will take you pretty far down the road to becoming an advanced OO programmer. <strong>Where are all of the functional programming books?</strong></p>
 <p>Well, they're out there. The functional programming path will depart from the merely practical. You won't learn how long to make your methods or how to name them. Some of the things you'll learn are not practical at all. But you will <strong>learn general truths and principles that help you see the world in a new way</strong>.</p>
 <p>Here are some recommended books:</p>
-<ol style="list-style-type: decimal">
-<li><a href="https://mitpress.mit.edu/sicp/full-text/book/book.html">Structure and Interpretation of Computer Programs</a> (SICP)</li>
-</ol>
+<h3 id="structure-and-interpretation-of-computer-programssicp-sicp">1. <a href="https://mitpress.mit.edu/sicp/full-text/book/book.html">Structure and Interpretation of Computer Programs</a> (SICP)</h3>
 <p>SICP teaches the fundamental abstraction capabilities of Lisp-like languages. It will teach you a framework for understanding the abstractions of other languages. And it teaches the difficult idea higher-order programming. That means programming with functions as arguments and return values.</p>
 <p>By the end of the book: <strong>you'll have a new appreciation for the relationship between code and data. You will also learn the how and why of abstraction.</strong></p>
 <p>Common comment during reading: &quot;My entire CS education was a waste.&quot;</p>
-<ol start="2" style="list-style-type: decimal">
-<li><a href="http://www.amazon.com/Lisp-Small-Pieces-Christian-Queinnec/dp/0521545668">Lisp in Small Pieces</a></li>
-</ol>
+<h3 id="lisp-in-small-pieceslisp">2. <a href="http://www.amazon.com/Lisp-Small-Pieces-Christian-Queinnec/dp/0521545668">Lisp in Small Pieces</a></h3>
 <p>If you're curious about how to design a Lisp, this book is amazing. Lisp, being one of the oldest high-level languages, has a long history. In that history, versions of Lisp have been written and rewritten so many times, by so many people, that the design space has been very well explored. This book doesn't give a historical perspective, but instead systematically walks through the different design decisions that you will face while implementing your own Lisp. It's mind-expanding stuff for those interested in language design.</p>
 <p>By the end of the book: <strong>you will see the parts of any language as arbitrary choices and understand how they relate.</strong></p>
 <p>Common comment during reading: &quot;Lisp is a field of study in itself.&quot;</p>
-<ol start="3" style="list-style-type: decimal">
-<li><a href="http://norvig.com/paip.html">Paradigms of Artificial Intelligence Programming</a></li>
-</ol>
+<h3 id="paradigms-of-artificial-intelligence-programmingpaip">3. <a href="http://norvig.com/paip.html">Paradigms of Artificial Intelligence Programming</a></h3>
 <p>This book is about the old style of artificial intelligence that wasn't statistical. Instead, it was about rule engines, logic, and pattern matching. It's a study in data-driven programming, which basically means bootstrapping a language (DSL?) inside of Lisp. For instance, at the end you write a small Prolog interpreter. You'll learn how to recognize problems that are complex enough to warrant building their own language to solve them.</p>
 <p>By the end of the book: <strong>you'll know how to build DSLs that aren't merely for convenient syntax but instead give you new expressive power.</strong></p>
 <p>The oddest thing happens with this kind of knowledge. You can write a program to solve a problem with let's say 500 lines of code. Or you could write an interpreter for a language in 100 lines of code, then the solution to the problem in one or two more lines in your new language. Such is the power of linguistic abstraction.</p>
 <p>Common comment during reading: &quot;I could replace myself with a short interpreter.&quot;</p>
-<ol start="4" style="list-style-type: decimal">
-<li><a href="http://www.paulgraham.com/onlisp.html">On Lisp</a></li>
-</ol>
+<h3 id="on-lisp">4. <a href="http://www.paulgraham.com/onlisp.html">On Lisp</a></h3>
 <p>Before Paul Graham started his startup incubator, he was a well-respected Lisp popularizer. On Lisp is the best book on macros that I've read. It's Common Lisp macros, but the principles are applicable to Clojure. This book goes well-beyond convenience macros that just provide better syntax. It dives into some fairly complex macros, my favorite being the delimited continuation macro, that are similar to how the go macro works in core.async.</p>
 <p>By the end of this book: <strong>you'll be able to write such complex macros and won't want to use macros for mere syntactic sugar.</strong></p>
 <p>Common comment during reading: &quot;I will never again write code in a language without macros.&quot;</p>
-<ol start="5" style="list-style-type: decimal">
-<li><a href="http://www.amazon.com/To-Mock-Mockingbird-Other-Puzzles/dp/0192801422">To Mock a Mockingbird</a></li>
-</ol>
+<h3 id="to-mock-a-mockingbirdmock">5. <a href="http://www.amazon.com/To-Mock-Mockingbird-Other-Puzzles/dp/0192801422">To Mock a Mockingbird</a></h3>
 <p><em>I haven't actually read this, but I have been recommended it before.</em></p>
 <p>I hesitate to recommend this book because functional programming has a reputation of being impractical, abstract, and mathematical. But the more experienced functional programmers I talk to, the more I realize that it is very common to master this kind of thinking. You won't want to implement them directly in your production code. But by putting your brain through the paces of solving these puzzles, you will have a better appreciation for the power of lambdas.</p>
 <p>By the end of this book: <strong>you'll be able to develop systems of mostly of small, composable higher-order functions.</strong></p>

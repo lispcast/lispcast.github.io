@@ -122,12 +122,12 @@ getContentType()
 <pre><code>{:server-port 80
  :server-name &quot;example.com&quot;
  :remote-addr &quot;client.com&quot;
-  :uri &quot;/index.html&quot;
-  :query-string &quot;?hello=true&quot;
-  :query-params {&quot;hello&quot; &quot;true&quot;}
-  :scheme :https.
-  :request-method :get
-  :headers {&quot;accept&quot; &quot;text/html&quot;}}</code></pre>
+ :uri &quot;/index.html&quot;
+ :query-string &quot;?hello=true&quot;
+ :query-params {&quot;hello&quot; &quot;true&quot;}
+ :scheme :https.
+ :request-method :get
+ :headers {&quot;accept&quot; &quot;text/html&quot;}}</code></pre>
 <p>My point in showing this was not to say, look, Ring's is shorter. My point is that Ring is made of reusable parts. First, it's a hashmap. The Servlet is ostensibly a hashmap, because it has that <code>getAttribute()</code> method that takes a <code>String</code> and returns an <code>Object</code>. So it's no better. But instead of just making it a hashmap and simply reusing what was already there, what already worked, what was familiar, and what has lots of functions that would work with it already, they invented a whole new thing. <strong>It's like having to make a whole new mold from scratch each time you want to produce a new toy.</strong></p>
 <p>What the designers of Ring did was to <strong>decompose the problem</strong>, <strong>analyze its properties</strong>, and <strong>find existing parts that had those properties</strong>. &quot;HTTP headers? Well, they're just <code>String</code> keys to <code>String values</code>, per the HTTP spec. That would be perfectly represented by a hashmap.&quot; etc, etc. And when it is a hashmap, you can use all of the existing functionality of hashmap for free. Let me say that again: the <strong>headers hashmap works with all code that works with hashmaps</strong>: standard library code, your existing code, external libraries, and all future code.</p>
 <p>There's a lot more to say about composition and composable parts. But this is getting long now, so I'll wrap it up. Just know that in Clojure, <strong>the standard library is full of these kinds of parts</strong>. They do one small thing, they do it well, and they have a standard interface. Like Lego bricks. Sometimes you can build your entire system out of the existing parts in core.</p>

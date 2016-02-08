@@ -1,0 +1,194 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Composable parts | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Composition is an important idea in programming, and Functional Programming brings it to the forefront. But what does it mean to say things are composable?">
+    <meta name="twitter:title" content="Composable parts">
+
+    <meta property="og:title" content="Composable parts">
+    <meta property="og:description" content="Composition is an important idea in programming, and Functional Programming brings it to the forefront. But what does it mean to say things are composable?">
+
+    <meta name="description" content="Composition is an important idea in programming, and Functional Programming brings it to the forefront. But what does it mean to say things are composable?">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/composable-parts">
+            Composable parts
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          February 08, 2016
+        </div>
+
+        
+<p>Summary: <em>Composition is an important idea in programming, and Functional Programming brings it to the forefront. But what does it mean to say things are composable?</em></p>
+<p>You've heard that composition or composability is very highly valued in functional programming. But what does it mean to be composable? And why is it important?</p>
+<p>Composability is generally compared to legos. Legos are very composable. They are all engineered to a very high precision so that any two parts can fit together. They fit together in a certain way, and all the sizes are right, so that when you're building from two opposite sides, the two sides will meet in the middle. The pieces are designed to compose. You have a bunch of bricks that fit together, and <strong>while they all work together to build a structure, they are all still separate and decomposable</strong>. That is, you can take it back apart.</p>
+<div class="figure">
+<img src="http://lispcast.com/img/lego%20patent.jpg" alt="The Lego interface" /><p class="caption">The Lego interface</p>
+</div>
+<p>Why do you care if you can take it apart? Well, if you made a mistake building it, or somehow the thing needs to change (changing requirements?), you can pull out some bricks and build it again. Maybe you completely rebuild it. <strong>Even if you had to start over, at least you could reuse the bricks.</strong></p>
+<p>The same works for software. <strong>Composable parts of software work well together.</strong> They can be reused in different combinations. When something needs to change, you don't have to start over. You can just <strong>pull the parts apart and put them back together in a new way</strong>. Software maintenance is easy. New features are easy. A rewrite is easy. Well, that's the ideal, anyway.</p>
+<p>As far as metaphors go, it's pretty good. People are familiar with Legos and they are reusable components. But there's another side to composition that is often not talked about. <strong>It's very hard to talk about composition without talking about decomposition.</strong> They're two sides of the same coin. And while composing Legos is easy, I can only imagine <strong>designing new Lego bricks is very difficult</strong>. That metaphor extends to software, too. Putting composable software parts together is easy. But designing the parts in the first place is hard. And it's all about decomposition.</p>
+<p>Here's a story: <em>Big Toy Co</em> makes a really cool pirate ship that is a single piece of molded plastic. It's very cheap to make, once you have the mold. It took someone a long time to make the pirate ship mold. The company paid for that work and it's paying off. The toy sells really well.</p>
+<p><em>Constructo, Inc.</em> makes pirate ships, too. Theirs is made of hundreds of small parts. You spend hours putting it together before you can play with it. It's selling pretty well, too. In fact, both pirate ships are selling about the same.</p>
+<p>Then something happens. Pirate ships go out of style faster than you can say &quot;Aye, aye, captain!&quot;. What's cool now is spaceships! Both companies scramble to make a spaceship toy. <em>Big Toy Co</em> starts <strong>designing a completely new mold</strong> to make their toy spaceship. It's fast tracked through R&amp;D, but they estimate it will take 6 months to roll out.</p>
+<p>But the designers at <em>Constructo, Inc</em> realize that most of their parts would be useful in a new spaceship toy. They've got simple shapes like rectangles and squares. <strong>They just need to make one or two new pieces and they can build a spaceship out of what they have.</strong> They quickly design those pieces and begin shipping new spaceship kits within three weeks. They win the race to the toy stores and kids buy them. Meanwhile, the first company is still in the design phase.</p>
+<p>Why were they able to move so much faster? Because of all of the investment in reusable components.</p>
+<p>Look at the <a href="https://docs.oracle.com/javaee/6/api/javax/servlet/ServletRequest.html">Javadoc for a javax.servlet.ServletRequest</a>. Here is an excerpt of the methods: <sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<pre><code>getAttribute(String s)
+getParameter(String s)
+getScheme()
+getServerName()
+getContentType()
+...</code></pre>
+<p>Trust me, there's a lot to an HTTP request.</p>
+<p>Now, here's an excerpted Ring request. (I've left out most of the headers.)</p>
+<pre><code>{:server-port 80
+ :server-name &quot;example.com&quot;
+ :remote-addr &quot;client.com&quot;
+  :uri &quot;/index.html&quot;
+  :query-string &quot;?hello=true&quot;
+  :query-params {&quot;hello&quot; &quot;true&quot;}
+  :scheme :https.
+  :request-method :get
+  :headers {&quot;accept&quot; &quot;text/html&quot;}}</code></pre>
+<p>My point in showing this was not to say, look, Ring's is shorter. My point is that Ring is made of reusable parts. First, it's a hashmap. The Servlet is ostensibly a hashmap, because it has that <code>getAttribute()</code> method that takes a <code>String</code> and returns an <code>Object</code>. So it's no better. But instead of just making it a hashmap and simply reusing what was already there, what already worked, what was familiar, and what has lots of functions that would work with it already, they invented a whole new thing. <strong>It's like having to make a whole new mold from scratch each time you want to produce a new toy.</strong></p>
+<p>What the designers of Ring did was to <strong>decompose the problem</strong>, <strong>analyze its properties</strong>, and <strong>find existing parts that had those properties</strong>. &quot;HTTP headers? Well, they're just <code>String</code> keys to <code>String values</code>, per the HTTP spec. That would be perfectly represented by a hashmap.&quot; etc, etc. And when it is a hashmap, you can use all of the existing functionality of hashmap for free. Let me say that again: the <strong>headers hashmap works with all code that works with hashmaps</strong>: standard library code, your existing code, external libraries, and all future code.</p>
+<p>There's a lot more to say about composition and composable parts. But this is getting long now, so I'll wrap it up. Just know that in Clojure, <strong>the standard library is full of these kinds of parts</strong>. They do one small thing, they do it well, and they have a standard interface. Like Lego bricks. Sometimes you can build your entire system out of the existing parts in core.</p>
+<p>This aesthetic of building reusable components pervades the Clojure community. Not everything works this way, but a lot does. So very often you'll find you can use someone else's library. And sometimes you need to make new parts yourself. <strong>If you make them small and reusable, they will serve you well for a long time.</strong></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Thanks to <a href="https://www.youtube.com/watch?v=VSdnJDO-xdg">Rich Hickey</a> for this great example.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

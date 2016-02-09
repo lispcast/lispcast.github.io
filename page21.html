@@ -86,6 +86,47 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://blog.jacius.info/2012/05/29/a-personal-lisp-crisis/">
+            A Personal Lisp Crisis
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/a-personal-lisp-crisis">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 11, 2013
+        </div>
+
+        
+<blockquote>
+<p>There are other languages with healthier communities, more momentum, cleaner cores, and features on par with CL. So I have to ask myself, why bother with CL?</p>
+</blockquote>
+<p>I had a similar experience with Common Lisp. Great language, snobby community, little progress, needs more modern amenities.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/infinite-application">Infinite Application</a></li>
+<li><a href="http://www.lispcast.com/just-hack-something-together">Just Hack Something Together</a></li>
+<li><a href="http://www.lispcast.com/the-most-important-idea-in-computer-science">The Most Important Idea in Computer Science</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/why-technical-explanation-alone-is-not-enough">
             Why technical explanation alone is not enough
           </a>
@@ -480,73 +521,6 @@ How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popu
 
         
 <p>I like James Hague's writing. He writes concisely and offers a clear perspective on muddy subjects.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/monads-and-objects">
-            Monads and Objects
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          February 22, 2013
-        </div>
-
-        
-<p>If you went back to 1990 and asked a random programmer what an object was (as in OOP) what would he say? I bet he'd say something like &quot;I don't know. I want to learn them but I don't know where to start.&quot; If you told him &quot;Well, they're easy. Each object has a class. The class defines methods. The object encapsulates state . . .&quot;, then his eyes would glaze over. He receives a maelstrom of concepts and their relationships. In the end, he would learn nothing. <strong>It actually took a long time for OO to become the norm.</strong></p>
-<p>This is analagous to what is happening currently with monads. <strong>People want to learn, they get some high-concept explanation, they are unsatisfied.</strong> People try to explain. They really do. I still remember when I did not get monads, so I have a lot of sympathy.</p>
-<p>Perhaps, like with OOP, <strong>it will take a generation to become understandable to the mainstream</strong>.</p>
-<p>The best way I can think of to teach monads to a programmer is <strong>jQuery</strong>. You have to know jQuery to understand this example. And frankly, if you don't know jQuery, it is easier to go learn it and come back than to go read a monad tutorial.</p>
-<p>Here's a (not-so-)secret: <strong>jQuery objects are a monad</strong>. When you do <code>$('div')</code>, you get an object which &quot;contains&quot; all of the <code>div</code> elements in the document. There are many methods on the jQuery object which modify the set of elements contained in the object and return it. That's what makes it a monad: the methods return a value of the same type.</p>
-<p>Without the jQuery object, you have to follow (and re-follow--potentially repeating code) the logic of collections. The jQuery object controls the logic by which operations on the contained set of elements gets executed. You call a method, it changes all of the elements. If there is no element, nothing happens. If there is one element, it alone is changed. If there are many elements, they are all changed. And you don't need to know. If you call <code>$('&lt;div /&gt;')</code>, even though you are constructing an object with only one element, jQuery internally turns it into a list. <strong>jQuery is making sure you don't have to know if you have 0, 1, or many elements.</strong> And this turns out to be a useful abstraction.</p>
-<p>This logic is simple. You write this code all the time when you are dealing with collections of objects. But <strong>you have to write this all the time, over and over</strong>. And you have to remember to write it. The jQuery object does that for you.</p>
-<p>That is the job of the monad. It gives you a single place to express the logic for access (in this case, a kind of collection logic). <strong>Now we are going to make a monad and show how we can write this logic in only one place.</strong></p>
-<p>To make a monad, you actually need two things. One is typically called <code>return</code>, but <strong>in OOP it's the constructor</strong>. We know that the jQuery constructor is the <code>$</code> function.</p>
-<p>The second thing you need is <strong>a way to chain methods</strong>. All you need is to return a value constructed with that constructor. Then you can chain. In Haskell, this is called <code>bind</code>.</p>
-<p>But I promised that monads got rid of repetition. If <strong>all of your jQuery methods have to contain this collection logic and return logic</strong>, how does that get rid of repetition? Well, if you did it the way it's done in Haskell, you'd get rid of the repetition.</p>
-<p>Let's do it that way. Let's define a method on the jQuery called <code>bind</code>.</p>
-<pre><code>jQuery.prototype.bind = function (f) {
-  return $(f(this.get()));
-};</code></pre>
-<p>We construct a new jQuery object with the elements transformed by <code>f</code>. So I can write:</p>
-<pre><code>function filter_divs(els) {
-  var arr = [];
-  var i;
-  for(i = 0; i &lt; els.length; i++)
-    if(els[i].tagName === &#39;div&#39;)
-      arr.push(els[i]);
-  return arr;
-}
-
-$(&#39;.x&#39;).bind(filter_divs).addClass(&#39;hello&#39;);</code></pre>
-<p>Let's take it further. We can bind the function and store it in the prototype:</p>
-<pre><code>jQuery.prototype.bind_def = function (name, f) {
-  jQuery.prototype[name] = function () {
-    return $(f(this.get()));
-  };
-}</code></pre>
-<p>Now <strong>we can call it like a method</strong>.</p>
-<pre><code>$.bind_def(&#39;filter_divs&#39;, filter_divs);
-
-$(&#39;.x&#39;).filter_divs().addClass(&#39;hello&#39;);</code></pre>
-<p>So, now we can chain. <strong>We only have to write the logic once (in <code>bind</code> or <code>bind_def</code>).</strong> And we have a constructor. That's a monad.</p>
-<p>Now, imagine other bits of logic you could build into a method chain. What happens if a method returns <code>null</code>? If you call a method on it, it will throw an exception. <strong>You can capture the null check in a monad.</strong> That is called the Maybe Monad.</p>
-<p>There are other useful monads, but they all are simply <strong>structured ways of chaining</strong> by giving controlled access to the internals of the object.</p>
-<p>Thanks to <a href="http://www.youtube.com/watch?v=dkZFtimgAcM">Douglas Crockford</a> for some of these ideas.</p>
-<p>If you liked this essay, please check out the <a href="http://clojuregazette.org/">Clojure Gazette</a>.</p>
 
 
         <div class="endmark">

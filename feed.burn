@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Composable parts</title>
+                  <guid isPermalink="false">http://www.lispcast.com/composable-parts</guid>
+                  <link>http://www.lispcast.com/composable-parts</link>
+                  <pubDate>Mon 08 Feb 2016 06:07:28 PM CST</pubDate>
+                  <description>
+                    Composition is an important idea in programming, and Functional Programming brings it to the forefront. But what does it mean to say things are composable?
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/composable-parts"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Recommendations for Next-Level Clojure</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojure-the-next-level</guid>
                   <link>http://www.lispcast.com/clojure-the-next-level</link>
@@ -129,20 +143,6 @@
                     Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/parens-vs-brackets-in-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>clj-refactor cheatsheets</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clj-refactor</guid>
-                  <link>http://www.lispcast.com/clj-refactor</link>
-                  <pubDate>Wed 28 Oct 2015 05:31:10 PM CDT</pubDate>
-                  <description>
-                    I've made some cheatsheets to help me learn clj-refactor, some Emacs software that helps you make systematic changes to code.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clj-refactor"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

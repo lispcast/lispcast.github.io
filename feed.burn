@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Immutable Paper</title>
+                  <guid isPermalink="false">http://www.lispcast.com/immutable-paper</guid>
+                  <link>http://www.lispcast.com/immutable-paper</link>
+                  <pubDate>Wed 10 Feb 2016 12:37:56 PM CST</pubDate>
+                  <description>
+                    Immutable data may appear to contradict our observations of the real world. Things in the world are mutable, so shouldn't our data be mutable, too? It may be counterintuitive, but immutable data does a better job of modeling many of our expectations of the real world.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/immutable-paper"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Composable parts</title>
                   <guid isPermalink="false">http://www.lispcast.com/composable-parts</guid>
                   <link>http://www.lispcast.com/composable-parts</link>
@@ -129,20 +143,6 @@
                     Learning any new language is a challenge, and Clojure is no different. Finding the time to learn and practice is a real challenge, so we need to make the most of what time we have. These tips will help you immerse yourself in Clojure.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/where-to-find-time-to-learn-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Parens vs Brackets in Clojure</title>
-                  <guid isPermalink="false">http://www.lispcast.com/parens-vs-brackets-in-clojure</guid>
-                  <link>http://www.lispcast.com/parens-vs-brackets-in-clojure</link>
-                  <pubDate>Mon 02 Nov 2015 10:05:06 PM CST</pubDate>
-                  <description>
-                    Clojure uses both parentheses and square brackets as part of its syntax. It might at first appear to be arbitrary, but it's actually systematic. What's more, it reveals one of the coolest things about Clojure: expressions define how they interpret their arguments.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/parens-vs-brackets-in-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

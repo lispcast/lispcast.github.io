@@ -1,0 +1,194 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Immutable Paper | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Immutable data may appear to contradict our observations of the real world. Things in the world are mutable, so shouldn't our data be mutable, too? It may be counterintuitive, but immutable data does a better job of modeling many of our expectations of the real world.">
+    <meta name="twitter:title" content="Immutable Paper">
+
+    <meta property="og:title" content="Immutable Paper">
+    <meta property="og:description" content="Immutable data may appear to contradict our observations of the real world. Things in the world are mutable, so shouldn't our data be mutable, too? It may be counterintuitive, but immutable data does a better job of modeling many of our expectations of the real world.">
+
+    <meta name="description" content="Immutable data may appear to contradict our observations of the real world. Things in the world are mutable, so shouldn't our data be mutable, too? It may be counterintuitive, but immutable data does a better job of modeling many of our expectations of the real world.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/immutable-paper">
+            Immutable Paper
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          February 10, 2016
+        </div>
+
+        
+<p>Summary: <em>Immutable data may appear to contradict our observations of the real world. Things in the world are mutable, so shouldn't our data be mutable, too? It may be counterintuitive, but immutable data does a better job of modeling many of our expectations of the real world.</em></p>
+<p>I've said before that immutable data is easier to reason about because it's more like the real world. That seems counterintuitive because the world is mutable. I can move things around, erase a chalkboard, and even change my name. <strong>How, then, is immutable data more like the real world than mutable data?</strong></p>
+<p>Here are <strong>two stories that will explain my point</strong>. Imagine I take a clean sheet of looseleaf paper, the kind with blue lines. I take out a nice, fat marker, and write the word <em>banana</em> in big letters. Then I fold it up and hand it to Susan. &quot;This is very important&quot;, I say, &quot;so listen carefully. Put this in your pocket and don't let anyone touch it until you get home. Then you can take it out.&quot;</p>
+<p>Susan doesn't understand why, but she puts it in her pocket. She makes sure nobody goes in her pocket all day. When she gets home, she finds the paper folded there like she remembers it. She opens it up and reads it.</p>
+<p><strong>What will be written on it?</strong> (This is not a trick question.)</p>
+<p>Everyone will know the answer. It's the word <em>banana</em>. But how did you know? And how are you so sure? In fact, the world fulfills our expectations so many times, all day long, and we don't even think about it. <strong>We've learned these tendencies of the universe since we were babies.</strong> This kind of reasoning may even be baked into the structure of our nervous systems. Our understanding of the world is intuitive. You might say &quot;we can reason about it&quot;.</p>
+<p>Now, let me tell you another story. Let's say I construct an object P (for Paper), and set a property on it to the string <code>&quot;banana&quot;</code>. I pass the object to a method on a different object S (for Susan), which stores that object in a <em>private property</em>. The object S keeps that property protected, never letting anything write to it, and it makes sure that no method is ever called that can write to it. After a while, object S prints out the contents of P.</p>
+<p><strong>What do you expect to be stored in P?</strong> (This also is not a trick question.)</p>
+<p>The answer is &quot;I don't know&quot;. It could be <code>&quot;banana&quot;</code>. It could be something else if the object P was modified by something else that had a reference to it. We can't know what it will say because it's mutable and that lets in magical effects like &quot;action at a distance&quot;. <strong>We can no longer reason about it.</strong></p>
+<p>Many objects in our universe are constantly changing on their own. The locations of moving cars, the contents of a box of uranium (through decay), the brightness of a candle. Each time we look at it, we expect it to be different. But so, too, are <strong>many objects basically static unless acted upon by something else</strong>. A house, a glass of water, a piece of paper. The object persists virtually unchanged in any way I would care about. And this is the part of the world that immutable objects model better than immutable objects.</p>
+<p>The thing is, once you share two references to the same mutable object, <strong>you're way outside the world we live in and know</strong>. Two references to the same object would be like two people having the same paper in their pockets at the same time. You could do shared-nothing like Erlang does (everything is copied as it passes between actors), but Erlang also chooses to make things immutable. You could also always copy objects before you store them. This practice requires tough discipline and also <strong>undoes any efficiency advantage you gain by using mutable data in the first place</strong>.</p>
+<p>Mutable objects are important. They can model very common and useful things. For instance, you might model a filing cabinet as a mutable object because you can take stuff out and put stuff in. But you will want to model the papers inside as immutable because they can't change while they're inside. <strong>Having both is what makes it work.</strong></p>
+<p>Clojure makes it very easy to separate the two. Data structures like lists, vectors, hash maps, and sets are all immutable in Clojure. And Clojure has a toolbox of mutable things, too: atoms, refs, agents, and vars. These are good for modeling the <strong>current state of something shared and changing</strong>.</p>
+<p>Well, I hope these stories explain why immutable objects do act like real world objects in many useful cases, and how this is a key part of why people claim that Clojure code is easier to reason about. If you like this idea and want to explore it more, check out <a href="http://www.purelyfunctional.tv/mentoring"><em>PurelyFunctional.tv Online Mentoring</em></a>. It's step-by-step guidance from Clojure dabbler to professional. I answer your questions in video lessons using real-world language, metaphors, and exercises.</p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/1194631/submissions" method="post" data-drip-embedded-form="1194631"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+Free Clojure Learning Resources
+</h3>
+    <div data-drip-attribute="description">
+      <div style="float:right; width:250px; max-width:25%">
+        
+<img src="http://www.lispcast.com/img/clojure expr flashcard.png" style="width:100%"> <img src="http://www.lispcast.com/img/clj-refactor cheatsheet.png" style="width:100%">
+</div>
+      
+Sign up below and you'll get access to the <em>Clojure Resource Center</em> where I collect reference sheets and flashcards for learning Clojure, including the <b>Top 100 Clojure Expressions</b> flashcards and the <b>clj-refactor cheatsheet</b>. I'll also send you other information about learning Clojure and figuring out if Clojure is for you.
+</div>
+    
+<br>
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

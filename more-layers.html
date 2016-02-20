@@ -1,0 +1,209 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>How can more layers be more efficient? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="It's common that adding more layers of abstraction or indirection will make things slower. However, React and ClojureScript make web pages faster than doing it by hand -- essentially programming the bare web. The lesson is that if you choose your layers well, they can actually make your system faster.">
+    <meta name="twitter:title" content="How can more layers be more efficient?">
+
+    <meta property="og:title" content="How can more layers be more efficient?">
+    <meta property="og:description" content="It's common that adding more layers of abstraction or indirection will make things slower. However, React and ClojureScript make web pages faster than doing it by hand -- essentially programming the bare web. The lesson is that if you choose your layers well, they can actually make your system faster.">
+
+    <meta name="description" content="It's common that adding more layers of abstraction or indirection will make things slower. However, React and ClojureScript make web pages faster than doing it by hand -- essentially programming the bare web. The lesson is that if you choose your layers well, they can actually make your system faster.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/more-layers">
+            How can more layers be more efficient?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          February 20, 2016
+        </div>
+
+        
+<p>Summary: <em>It's common that adding more layers of abstraction or indirection will make things slower. However, React and ClojureScript make web pages faster than doing it by hand -- essentially programming the bare web. The lesson is that if you choose your layers well, they can actually make your system faster.</em></p>
+<p><a href="http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/">David Nolen produced an article</a> showing how, out of the box, using React with immutable data structures was faster than using the more common MVC frameworks, for instance Backbone. He demonstrated it using the popular <a href="http://todomvc.com/">TodoMVC</a>, which is a collection of many, many, many implementations of the same basic app. When implementing the TODO app in a straightforward way, <strong>React with ClojureScript beat the others when performing lots of operations</strong>.</p>
+<p>It's a bit of a perplexing problem. On the one hand, you've got the Backbone implementation that is a very thin layer and is manipulating the DOM directly. It's using mutable state. On the other hand, you've got React with ClojureScript. <strong>Everything in ClojureScript is <em>known</em> to be slower than everything in Backbone.</strong></p>
+<ul>
+<li>Backbone manipulates the DOM elements directly, while React generates a &quot;virtual dom&quot;, analyzes it, and modifies the DOM indirectly. React definitely does more work.</li>
+<li>Backbone was using regular JS arrays and objects. Modification and reading are very fast. ClojureScript, on the other hand, uses sophisticated immutable data structures that are known to be slower for random modification and access.</li>
+<li>Backbone was using vanilla JS. ClojureScript is compiled to JavaScript and so probably has some overhead compared to hand-written JS.</li>
+</ul>
+<p>So it's no wonder it's a little hard to believe. But there's some fact left out of the balance above.</p>
+<p>Before we go into those, I should mention that a lot of people argue with the results David Nolen got because he used a very uncommon use case that the other apps were not optimized for. He added a large number of TODO items at once. But David Nolen didn't optimize his for that, either. It only reinforces the point: <strong>why is it that when the number of operations gets large, React + CLJS starts to win?</strong></p>
+<p>The high level is this: each of the layers that React and ClojureScript add are <strong>optimizers</strong>. Insert some optimizers in the equation and things start getting faster.</p>
+<ul>
+<li>The React Virtual DOM is a <strong>DOM change optimizer</strong>. It turns out JavaScript is fast but the DOM is slow. If you can do some calculations in JavaScript that keep you from writing to the DOM, it's often a win. That's what the Virtual DOM does. It figures out the minimum set of DOM changes needed. And it does it faster than actually making those DOM changes. That's a big win.</li>
+<li>ClojureScript's immutable data structures are technically slower for each operation, but because they're immutable, you get something you could never have in a mutable data structure. How do you know if the data associated with your View has changed? If it's mutable, you have to walk through the data, all the way down to the leaves, and compare each thing to a copy that you have not changed. But with an immutable data structure? You just have to compare the pointers to your two values. If the pointers are the same, it hasn't changed, and you don't have to revisit that data. Immutable data structures are a <strong>change detection optimizer</strong>. It's a huge win that can cut out tons of work and repainting.</li>
+<li>Finally, the <strong>ClojureScript compiler itself has an optimization step</strong>. Naively compiled ClojureScript is not that bad performance-wise, but when you crank it through the Google Closure compiler, it churns out super-optimized code that screams. I don't think Google Closure contributes much to the TodoMVC example. But it certainly doesn't hurt. So even though ClojureScript is adding on a high-level layer, it's not slower than hand-written JavaScript. It's <em>potentially</em> faster than a clean, hand-written JavaScript implementation, especially as the logic gets more complicated. Because the optimization is done at compile time, you only pay the price once and your users never do.</li>
+</ul>
+<p>It's a bit like whether it's faster to fix your toilet yourself or to get a plumber to do it. Sure, there's some overhead of scheduling an appointment, travel, etc., but <strong>it might be faster in the long run for a plumber to do it</strong>. They know just how to diagnose the problem, where to buy replacement parts, and how to use the tools. If you did it yourself, I'm sure you could figure it out, but you'd be reading books, maybe you buy the wrong part, and your toilet might be out of commission for a while. A plumber is an <strong>optimizer that eliminates the wrong plumbing operations</strong>.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>That's my answer to the question of how React+ClojureScript is faster than MVC and sometimes even faster than React by itself. <strong>If you add optimizers that are faster than the operations they're eliminating, it's a performance win.</strong> Virtual DOM uses quick checks to eliminate expensive DOM operations. Immutable data uses fast pointer comparison to eliminate expensive whole-tree comparisons. It's not much of a paradox that as things get complicated, the more sophisticated system starts outperforming the brute-force approach.</p>
+<p>If you'd like to explore ClojureScript and React (through Om), I recommend the excellent [<em>LispCast Single Page Applications with ClojureScript and Om</em>][spa]. It's an interactive course with videos, exercises, and lots of source code. It takes you from zero to single page app.</p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/3325629/submissions" method="post" data-drip-embedded-form="3325629"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+Getting Started with Clojure core.async Email Course
+</h3>
+    <div data-drip-attribute="description">
+      
+Learning Clojure core.async can be a real challenge. How does it relate to other Clojure constructs? How do I use core.async without turning my code into spaghetti? What are some best practices? How do I learn it? <br /> <br /> This email course is designed to get you up and running with Clojure core.async. <br /> <br /> Here are some topics:
+<ul>
+    <li>
+How core.async Solves This One Major Browser Problem
+</li>
+    <li>
+Do You Know This Guideline for Using go blocks?
+</li>
+    <li>
+How core.async Turns Timing Problems into Clear Code
+</li>
+      </ul>
+      
+You'll also get access to the Clojure Resource Center where I publish free guides and reference sheets for learning Clojure, including the <em>core.async Reference Sheet</em>.
+</div>
+    
+<br />
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             placeholder="Email" /> <input type="submit" name="submit"
+             value="Sign Up" data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

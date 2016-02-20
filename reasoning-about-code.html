@@ -1,0 +1,174 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Reasoning About Code | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Functional programmers often use the term &quot;reason about code&quot;. It's not very well defined generally, but I use it myself to refer to our ability to use our real-world intuition in our own code.">
+    <meta name="twitter:title" content="Reasoning About Code">
+
+    <meta property="og:title" content="Reasoning About Code">
+    <meta property="og:description" content="Functional programmers often use the term &quot;reason about code&quot;. It's not very well defined generally, but I use it myself to refer to our ability to use our real-world intuition in our own code.">
+
+    <meta name="description" content="Functional programmers often use the term &quot;reason about code&quot;. It's not very well defined generally, but I use it myself to refer to our ability to use our real-world intuition in our own code.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/reasoning-about-code">
+            Reasoning About Code
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          February 20, 2016
+        </div>
+
+        
+<p>Summary: <em>Functional programmers often use the term &quot;reason about code&quot;. It's not very well defined generally, but I use it myself to refer to our ability to use our real-world intuition in our own code.</em></p>
+<p>A lot of people talk about &quot;reasoning about code&quot;. I certainly do. It's something that I don't think I ever heard when I was an OO programmer. <strong>What does it mean?</strong></p>
+<p>It's a tough question, because it's not one of those technical terms with a technical definition. It's just something people say when they are talking about the benefits of functional programming. But since I say it, too, I might as well give <strong>my understanding of the term</strong>.</p>
+<p>To me, &quot;reasoning about code&quot; is all about the <strong>limitations of the human mind</strong>. If we were hyper geniuses, we could read any amount of code and just understand it. But we're not and we can't. As programs get bigger, we can't help but lose track of what's happening in a program.</p>
+<p>People are used to interacting with the real world, where <strong>effects tend to be local</strong>. For instance, if I'm locked in my house, a person ten miles away cannot attack me. When we walk down the street at night, we know there are people who might hurt us somewhere in the world. But what we're concerned about is if they are close by. Instead of starting with the locations of all attackers and calculating the probability of each of them being able to harm us, we look around where we are and we evaluate the people we see. <strong>Humans think locally.</strong></p>
+<p>It's this sense of locality that we find in functional programming languages. When you look at functional code, several things help you localize yourself:</p>
+<ul>
+<li><strong>Scopes are localizing.</strong> Definitions cannot &quot;leak in&quot; from elsewhere.</li>
+<li><strong>Pure functions are localizing.</strong> Pure functions will act the same regardless of when they are called or how many times they are called.</li>
+<li><strong>Immutable values are localizing.</strong> No need to worry about other parts of the code modifying it.</li>
+<li><strong>Isolated and consolidated side-effects.</strong> At least they're happening in the same place.</li>
+</ul>
+<p>Since everything is relatively local, you have less to read and understand to be able to reason about what it's going to do. There are some <strong>common things that are non-localizing</strong> in programming languages.</p>
+<ul>
+<li><strong>Global mutable state.</strong> Anything, in any part of the code, can change it at any time. The opposite of local.</li>
+<li><strong>Scope leak.</strong> Variables can often be modified outside of their scope, or mutations in one scope are visible outside the scope.</li>
+<li><strong>Mutable objects.</strong> You are referencing an object that is changing out from under you.</li>
+<li><strong>Side effects.</strong> Well, once you send a message across the wire, or receive on, it's not so local.</li>
+</ul>
+<p><strong>So what should we do?</strong> Push state down from global to local. Make it as local as possible. Factor out pure functions from your code, which should isolate state change. Use immutable values whenever possible. Isolate and consolidate your side effects (so at least you know where they are happening).</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>People talk about &quot;reasoning about code&quot; a lot and it's not clear that it's meaningful. But I do use the term and when I do I mean &quot;things are more local so I can keep them in my head&quot;. It's a notion that serves me well. For instance, it acts like a code smell. If I'm not able to keep something in my head, <strong>it's time to make it more functional</strong>.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

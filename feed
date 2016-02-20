@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Reasoning About Code</title>
+                  <guid isPermalink="false">http://www.lispcast.com/reasoning-about-code</guid>
+                  <link>http://www.lispcast.com/reasoning-about-code</link>
+                  <pubDate>Sat 20 Feb 2016 04:37:09 PM CST</pubDate>
+                  <description>
+                    Functional programmers often use the term &quot;reason about code&quot;. It's not very well defined generally, but I use it myself to refer to our ability to use our real-world intuition in our own code.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/reasoning-about-code"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Immutable Paper</title>
                   <guid isPermalink="false">http://www.lispcast.com/immutable-paper</guid>
                   <link>http://www.lispcast.com/immutable-paper</link>
@@ -129,20 +143,6 @@
                     The SOLID principles are guidelines for writing good Object-Oriented code. It turns out that these principles are followed and embodied in Clojure.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/solid-principles-in-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Where to find time to learn and practice Clojure</title>
-                  <guid isPermalink="false">http://www.lispcast.com/where-to-find-time-to-learn-clojure</guid>
-                  <link>http://www.lispcast.com/where-to-find-time-to-learn-clojure</link>
-                  <pubDate>Wed 04 Nov 2015 02:44:41 PM CST</pubDate>
-                  <description>
-                    Learning any new language is a challenge, and Clojure is no different. Finding the time to learn and practice is a real challenge, so we need to make the most of what time we have. These tips will help you immerse yourself in Clojure.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/where-to-find-time-to-learn-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

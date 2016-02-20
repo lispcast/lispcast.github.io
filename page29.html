@@ -86,6 +86,70 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://thinkrelevance.com/blog/2012/04/09/thinkrelevance-the-podcast-episode-009-alan-dipert">
+            ThinkRelevance: The Podcast - Episode 009 - Alan Dipert
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/thinkrelevance-podcast-009-alan-dipert">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          April 16, 2012
+        </div>
+
+        
+<p>I wish they had more time to talk about function level programming. <a href="http://www.jsoftware.com/">J</a> is an example of a function level language.</p>
+<p>And a great <a href="http://www.cs.cmu.edu/~crary/819-f09/Backus78.pdf">article by Backus</a> about function-level programming introduces the idea and its benefits. The basic idea is that we stop talking about &quot;functions returning values&quot; and start talking about &quot;functions which behave like other functions&quot;. For instance, the function that constantly returns 1.</p>
+<p>The benefit is that you can create an algrebra of program transformations which allows two functions to be compared for equality. <sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p>For example:</p>
+<pre><code>(defn sum1 [l] (reduce + l))
+
+(defn sum2 [l] (reduce + l))</code></pre>
+<p>A compiler could easily check the equality of these functions since they have the same definition. Note that the Clojure compiler does not even do this simple kind of check.</p>
+<p>An even simpler example:</p>
+<pre><code>(def const1  (constantly 1))
+(def always1 (constantly 1))</code></pre>
+<p>These two functions are obviously equivalent and it could be trivial to make the compiler recognize this. These are examples of programming at the function level. At the function level, you program with at least first-order functions instead of with 0-order values.</p>
+<p>Let us imagine that we have this function that sums two lists:</p>
+<pre><code>(defn sumlists [l1 l2]
+  (reduce + (concat l1 l2)))</code></pre>
+<p>And an equivalent function:</p>
+<pre><code>(defn addlists [l1 l2]
+  (apply + [(reduce + l1) (reduce + l2)]))</code></pre>
+<p>It is easy to see that they do the same thing, but very difficult for the compiler to do so. (I used apply to make it first-order.) But with the proper transformation rules, these can be made equivalient:</p>
+<pre><code>if f is distributive then 
+  reduce f (concat l1 l2) &lt;=&gt; apply f [(reduce f l1) (reduce f l2)]
+
++ is distributive</code></pre>
+<p>This basically says that reduce is distributive over concat. Now we can transform one into the other and infer their equivalence. These transformations can allow the compiler to deeply optimize at a high level.</p>
+<p>Backus's idea is that we only program at first-order or higher so that we can guarantee to always be able to transform the programs and determine function identity. Clojure allows us to program at the 0-order (value) level. Many functions will not be able to participate in the function-level world.</p>
+<p>However, there is a large subset of most programs that are at the function-level, and some that are not that could easily be translated into that level. Could we augment the Clojure compiler to recognize this information and allow an <code>=</code> function for functions?</p>
+<p>Sounds like a job for <a href="https://github.com/clojure/core.logic">core.logic</a>.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Christophe Grand has discussed a good use case for equality of functions <a href="http://clj-me.cgrand.net/2011/10/17/valued-functions/">here</a>.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/introduction-to-haskell">
             Introduction to Haskell talk
           </a>
@@ -372,38 +436,6 @@
 <li>Pods - safely encapsulate state change</li>
 <li>Extensible reader - making Clojure a better format than JSON and XML</li>
 </ul>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="https://github.com/quil/quil">
-            Quil
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/quil">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          March 16, 2012
-        </div>
-
-        
-<p>Fine, fine work. I had a project I was doing in OpenGL that I will have to convert to Quil.</p>
 
 
         <div class="endmark">

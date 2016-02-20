@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>How can more layers be more efficient?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/more-layers</guid>
+                  <link>http://www.lispcast.com/more-layers</link>
+                  <pubDate>Sat 20 Feb 2016 05:19:12 PM CST</pubDate>
+                  <description>
+                    It's common that adding more layers of abstraction or indirection will make things slower. However, React and ClojureScript make web pages faster than doing it by hand -- essentially programming the bare web. The lesson is that if you choose your layers well, they can actually make your system faster.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/more-layers"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Reasoning About Code</title>
                   <guid isPermalink="false">http://www.lispcast.com/reasoning-about-code</guid>
                   <link>http://www.lispcast.com/reasoning-about-code</link>
@@ -129,20 +143,6 @@
                     Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the expressions in order of frequency of use.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/100-most-used-clojure-expressions"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>SOLID Principles in Clojure</title>
-                  <guid isPermalink="false">http://www.lispcast.com/solid-principles-in-clojure</guid>
-                  <link>http://www.lispcast.com/solid-principles-in-clojure</link>
-                  <pubDate>Sun 09 Nov 2015 3:22:01 PM CST</pubDate>
-                  <description>
-                    The SOLID principles are guidelines for writing good Object-Oriented code. It turns out that these principles are followed and embodied in Clojure.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/solid-principles-in-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

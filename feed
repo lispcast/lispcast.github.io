@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>What is Clojure?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/what-is-clojure</guid>
+                  <link>http://www.lispcast.com/what-is-clojure</link>
+                  <pubDate>Sat 27 Feb 2016 10:19:45 AM CST</pubDate>
+                  <description>
+                    Clojure is a general purpose programming language designed for the fast-approaching future.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-is-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>How can more layers be more efficient?</title>
                   <guid isPermalink="false">http://www.lispcast.com/more-layers</guid>
                   <link>http://www.lispcast.com/more-layers</link>
@@ -129,20 +143,6 @@
                     Professional Clojure programmers rely on certain features of their editors to help them program. When choosing an editor, it's important to pick one that has these two important features: REPL integration and structural editing.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-editors"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>The 100 Most Used Clojure Expressions</title>
-                  <guid isPermalink="false">http://www.lispcast.com/100-most-used-clojure-expressions</guid>
-                  <link>http://www.lispcast.com/100-most-used-clojure-expressions</link>
-                  <pubDate>Sat 14 Nov 2015 05:43:51 AM CST</pubDate>
-                  <description>
-                    Would you like to optimize your learning of Clojure? Would you like to focus on learning only the most useful parts of the language first? Take this lesson from second language learning: learn the expressions in order of frequency of use.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/100-most-used-clojure-expressions"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

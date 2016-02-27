@@ -1,0 +1,201 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>What is Clojure? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Clojure is a general purpose programming language designed for the fast-approaching future.">
+    <meta name="twitter:title" content="What is Clojure?">
+
+    <meta property="og:title" content="What is Clojure?">
+    <meta property="og:description" content="Clojure is a general purpose programming language designed for the fast-approaching future.">
+
+    <meta name="description" content="Clojure is a general purpose programming language designed for the fast-approaching future.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/what-is-clojure">
+            What is Clojure?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          February 27, 2016
+        </div>
+
+        
+<p>Summary: <em>Clojure is a general purpose programming language designed for the fast-approaching future.</em></p>
+<p>You're a programmer (or want to be one) curious about Clojure. Let me give you some background about it so you can explain it to your friends.</p>
+<p><a href="http://clojure.org">Clojure</a> is a general purpose programming language. It's used by many companies, large and small, including Amazon, Staples, and Walmart. It's particularly good at data processing and concurrent programming, two applications that are becoming increasingly relevant in computing.</p>
+<h3 id="who-makes-clojure">Who makes Clojure?</h3>
+<p>Clojure was originally written by Rich Hickey and released as open source in 2007. It is now maintained by Cognitect, the company at which Rich Hickey is co-founder and CTO, with the help of 125 contributors. The release cycle favors <strong>backwards compatibility and stability</strong>, yet the language continues to develop new and powerful features. Rich Hickey was dissatisfied with writing concurrent programs in Java and C++ and made several attempts to find a solution until finally writing Clojure.</p>
+<h3 id="what-makes-clojure-unique">What makes Clojure unique?</h3>
+<p>Clojure is unique in several ways. One is that it was designed to be a hosted language. Instead of defining its own platform (as Python, Ruby, Java, etc.) have done, Clojure was meant to <strong>take advantage of existing platforms</strong> and to build on top of them. Clojure currently is developed on two platforms, the Java Virtual Machine and JavaScript. This gives Clojure incredible reach. Clojure can run wherever Java does or any web browser.</p>
+<p>Clojure has innovated several <strong>high performance data structures</strong>. These data structures are used heavily in typical Clojure programs. They are <em>immutable</em>, meaning they can't change once they are made, and they are <em>persistent</em>, meaning making modified copies of them is inexpensive. Because they are immutable, they eliminate many typical errors found in most concurrent programming.</p>
+<p>Clojure has several powerful <strong>concurrency primitives</strong>. Concurrency primitives are objects that manage state in a concurrent environment. They make code that deals with multiple threads easy to write and read correctly. Most concurrent programming is based on locks, but locks are notoriously hard to get right. Clojure's concurrency primitives make <strong>taking advantage of multiple cores very easy</strong>.</p>
+<h3 id="what-is-the-tooling-like">What is the tooling like?</h3>
+<p>The <strong>tooling for Clojure is quite mature</strong>. Most programmers use the Emacs editor with an extension called <a href="https://github.com/clojure-emacs/cider">CIDER</a>, which gives powerful operations on code and running systems. However, there are a considerable number of <a href="https://github.com/tpope/vim-fireplace">vim</a> users and there's an extension for IntelliJ IDEA (a Java IDE) called <a href="https://cursive-ide.com/">Cursive</a> that gives a more traditional IDE experience.</p>
+<p>The main <strong>project management tool</strong> is called <a href="http://leiningen.org"><em>Leiningen</em></a>. It manages dependencies, deployments, and versioned releases. It hooks into Maven, where it has access to thousands of Java libraries. But typically, Clojure libraries are deployed to a community-run service called <a href="http://clojars.org/">Clojars</a>, which hosts mainly Clojure libraries.</p>
+<h3 id="what-applications-is-clojure-used-for">What applications is Clojure used for?</h3>
+<p>Clojure is used for everything from simple web sites to desktop applications to music synthesis systems to cloud-based Twitter analysis engines to high-frequency trading. It's a <strong>powerful tool for building high-leverage abstractions</strong>. And its simplicity makes it great for managing the complexity of the real-world. Long story short: <strong>Clojure is a great tool for mitigating risk</strong>.</p>
+<h3 id="what-are-the-principles-clojure-was-designed-with">What are the principles Clojure was designed with?</h3>
+<p>Rich Hickey has established several big ideas in the programming world since the inception of Clojure in 2007. One idea is an objective definition of <em>simplicity</em>, Simplicity is all about how intertwined the concepts and constructs are with each other. <strong>Clojure's notion of simplicity allows programmers to deconstruct problems into small parts and put together a solution from off-the-shelf components.</strong> It means more robust solutions faster</p>
+<p>Another idea that is gaining a lot of traction is the idea of &quot;learn once, write anywhere&quot;. It's a play on Java's &quot;write once, run anywhere&quot;, which never panned out. Instead, Clojure has some <strong>core concepts that you &quot;learn once&quot;, then can use them on the different platforms</strong> that Clojure sits on top of, namely the JVM and JavaScript. The idea has been adopted by Facebook's React, where instead of trying to write one app for all mobile platforms, you learn the basic concepts and write with the same tools on all the platforms.</p>
+<h3 id="what-is-the-clojure-user-base-like">What is the Clojure user-base like?</h3>
+<p>Well, Clojure is a growing community. There are 2 annual Clojure conferences in the US (<a href="http://clojure-conj.org/">Clojure/conj</a> and <a href="http://clojurewest.org/">Clojure/West</a>), <a href="https://skillsmatter.com/conferences/7430-clojure-exchange-2016">one in London</a>, and a few in continental Europe (<a href="http://euroclojure.org/">EuroClojure</a>, <a href="http://clojutre.org/">clojurTRE</a>, <a href="http://www.clojured.de/">:clojured</a>. Clojure has an active IRC channel (#clojure on Freenode) and an active <a href="http://clojurians.net/">Slack channel</a>. You can ask questions or just hang out. There are lots of resources for beginners out there. Clojure has healthy growth right now and everyone is committed to welcoming newcomers. I publish a weekly newsletter called the <a href="http://clojuregazette.com">Clojure Gazette</a>.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Clojure is a great language to get into right now. It's all set up for <strong>the future of multicore</strong> machines because of its focus on concurrency. And it's perfect for our world of ever more complicated software. It <strong>manages software complexity</strong> very well by giving you powerful tools of abstraction. And the community is smart, welcoming, and growing. <strong>It's the perfect time to get started with Clojure.</strong></p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/1194631/submissions" method="post" data-drip-embedded-form="1194631"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+Free Clojure Learning Resources
+</h3>
+    <div data-drip-attribute="description">
+      <div style="float:right; width:250px; max-width:25%">
+        
+<img src="http://www.lispcast.com/img/clojure expr flashcard.png" style="width:100%"> <img src="http://www.lispcast.com/img/clj-refactor cheatsheet.png" style="width:100%">
+</div>
+      
+Sign up below and you'll get access to the <em>Clojure Resource Center</em> where I collect reference sheets and flashcards for learning Clojure, including the <b>Top 100 Clojure Expressions</b> flashcards and the <b>clj-refactor cheatsheet</b>. I'll also send you other information about learning Clojure and figuring out if Clojure is for you.
+</div>
+    
+<br>
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

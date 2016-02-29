@@ -117,16 +117,16 @@
 <h3 id="relational-algebra-operations">Relational algebra operations</h3>
 <p>Relational algebra is what gave relational databases their name. If you imagine SQL tables are <em>sets</em> of records, you can see why these operations belong with other set operations. <code>clojure.set</code> has a complete set of the relational algebra basic operations. I don't use these nearly as often as I should, even though I know they're there. In <code>clojure.set</code> operations, <em>relations</em> are sets of maps, all with the same keys.</p>
 <p><code>(set/select (fn [row] (&gt;= (:age row) 18)) people)</code> is a set of all people 18 or over.</p>
-<p><code>(set/join movie-appearances actors)</code> is the natural <em>join</em> between <code>movie-appearances</code> and <code>actors</code>. Imagine if <code>movie-appearances</code> was a set of maps that looked like <code>{:actor_name &quot;Mark Hamill&quot; :movie_name &quot;Star Wars&quot; :character_name &quot;Luke Skywalker&quot; ...}</code> and <code>actors</code> was a map like <code>{:actor_name &quot;Mark Hamill&quot; :nationality &quot;USA&quot; ..}</code>. Well, to find the natural join, you union maps that have the same value for keys that are shared. Here, <code>:actor_name</code> is shared between both relations. This join would contain the map</p>
-<pre><code>{:actor_name &quot;Mark Hamill&quot;
- :movie_name &quot;Star Wars&quot;
- :character_name &quot;Luke Skywalker&quot;
+<p><code>(set/join movie-appearances actors)</code> is the natural <em>join</em> between <code>movie-appearances</code> and <code>actors</code>. Imagine if <code>movie-appearances</code> was a set of maps that looked like <code>{:actor-name &quot;Mark Hamill&quot; :movie-name &quot;Star Wars&quot; :character-name &quot;Luke Skywalker&quot; ...}</code> and <code>actors</code> was a map like <code>{:actor-name &quot;Mark Hamill&quot; :nationality &quot;USA&quot; ..}</code>. Well, to find the natural join, you union maps that have the same value for keys that are shared. Here, <code>:actor-name</code> is shared between both relations. This join would contain the map</p>
+<pre><code>{:actor-name &quot;Mark Hamill&quot;
+ :movie-name &quot;Star Wars&quot;
+ :character-name &quot;Luke Skywalker&quot;
  :nationality &quot;USA&quot;
  ...}</code></pre>
 <p>Sometimes, though, the keys aren't named right, or you just want to do a subset of the keys. In that case, you can pass in a map of key to key correspondences.</p>
-<p><code>(set/project movie-appearances [:actor_name :character_name])</code> is a relation without all the keys that aren't in that list. Remember, it's still a set (no duplicates) so it may have fewer tuples.</p>
-<p><code>(set/rename movie-appearances {:movie_name :movie_title})</code> is the same relation but with <code>:movie_name</code> changed to <code>:movie_title</code>.</p>
-<p><code>(set/index movie-appearances [:actor_name])</code> is a way to build an index of who was in what movie, looked up by the actor's name.</p>
+<p><code>(set/project movie-appearances [:actor-name :character-name])</code> is a relation without all the keys that aren't in that list. Remember, it's still a set (no duplicates) so it may have fewer tuples.</p>
+<p><code>(set/rename movie-appearances {:movie-name :movie-title})</code> is the same relation but with <code>:movie-name</code> changed to <code>:movie-title</code>.</p>
+<p><code>(set/index movie-appearances [:actor-name])</code> is a way to build an index of who was in what movie, looked up by the actor's name.</p>
 <h3 id="conclusions">Conclusions</h3>
 <p>Clojure comes with the standard set operations you're used to, plus some useful relational algebra operations if you're feeling frisky. Many <code>for</code> loops are actually set operations in disguise! And how many complex sprograms could be rewritten as a few relational algebra operations? We'll never know.</p>
 

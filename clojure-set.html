@@ -1,0 +1,185 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Let me tell you about clojure.set | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="clojure.set is part of the standard library that comes with Clojure. It has functions for doing set operations and relational algebra.">
+    <meta name="twitter:title" content="Let me tell you about clojure.set">
+
+    <meta property="og:title" content="Let me tell you about clojure.set">
+    <meta property="og:description" content="clojure.set is part of the standard library that comes with Clojure. It has functions for doing set operations and relational algebra.">
+
+    <meta name="description" content="clojure.set is part of the standard library that comes with Clojure. It has functions for doing set operations and relational algebra.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure-set">
+            Let me tell you about clojure.set
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          February 28, 2016
+        </div>
+
+        
+<p>Summary: <em><code>clojure.set</code> is part of the standard library that comes with Clojure. It has functions for doing set operations and relational algebra.</em></p>
+<p>Clojure comes with a namespace called <code>clojure.set</code> in the standard library. It's something I turn to all the time, even though it's not so big. The namespace is fundamentally about standard operations on sets. I want to give you a quick tour of the library.</p>
+<h3 id="including-the-library">Including the library</h3>
+<p>The library comes standard, so there's no extra dependency you have to add to your project. However, you will have to add a <code>:require</code> statement to your <code>ns</code> form at the top of namespaces where you want to use it. It's typically aliased to <code>set</code>.</p>
+<pre><code>(ns com.lispcast.my-ns
+  (:require [clojure.set :as set]))</code></pre>
+<h3 id="set-theoretic-operations">Set-theoretic operations</h3>
+<p>When I think about sets, I think back to my math classes where we learned to do certain set operations like <em>union</em>, <em>intersection</em>, and <em>difference</em>. These operations are all available in <code>clojure.set</code> and they act like your math teacher would expect.</p>
+<p><code>(set/union a b)</code> is the set containing all elements from both <code>a</code> and <code>b</code>.</p>
+<p><code>(set/intersection a b)</code> is the set containing only elements that are in <code>a</code> and <code>b</code>.</p>
+<p>And <code>(set/difference a b)</code> is a set containing things that are in <code>a</code> but not in <code>b</code>.</p>
+<p><code>(set/subset? a b)</code> is true if <code>b</code> has all the elements in <code>a</code>.</p>
+<p><code>(set/superset? a b)</code> is true if <code>a</code> has all the elements in <code>b</code>.</p>
+<p>Warning: these operations assume all the arguments are sets. They don't check the types.</p>
+<h3 id="a-few-map-operations">A few map operations</h3>
+<p>It may seem weird to put these in with the set operations, but these map operations were useful for implementing the operations in the next section. They're still public and handy when you need them.</p>
+<p><code>(set/rename-keys {:x 1 :y 2} {:x :a})</code> is a map where the key <code>:x</code> is swapped for <code>:a</code>, namely <code>{:a 1 :y 2}</code>.</p>
+<p><code>(set/map-invert {:x 1 :y 2})</code> is a map where the keys and values are swapped, namely <code>{1 :x 2 :y}</code>.</p>
+<h3 id="relational-algebra-operations">Relational algebra operations</h3>
+<p>Relational algebra is what gave relational databases their name. If you imagine SQL tables are <em>sets</em> of records, you can see why these operations belong with other set operations. <code>clojure.set</code> has a complete set of the relational algebra basic operations. I don't use these nearly as often as I should, even though I know they're there. In <code>clojure.set</code> operations, <em>relations</em> are sets of maps, all with the same keys.</p>
+<p><code>(set/select (fn [row] (&gt;= (:age row) 18)) people)</code> is a set of all people 18 or over.</p>
+<p><code>(set/join movie-appearances actors)</code> is the natural <em>join</em> between <code>movie-appearances</code> and <code>actors</code>. Imagine if <code>movie-appearances</code> was a set of maps that looked like <code>{:actor_name &quot;Mark Hamill&quot; :movie_name &quot;Star Wars&quot; :character_name &quot;Luke Skywalker&quot; ...}</code> and <code>actors</code> was a map like <code>{:actor_name &quot;Mark Hamill&quot; :nationality &quot;USA&quot; ..}</code>. Well, to find the natural join, you union maps that have the same value for keys that are shared. Here, <code>:actor_name</code> is shared between both relations. This join would contain the map</p>
+<pre><code>{:actor_name &quot;Mark Hamill&quot;
+ :movie_name &quot;Star Wars&quot;
+ :character_name &quot;Luke Skywalker&quot;
+ :nationality &quot;USA&quot;
+ ...}</code></pre>
+<p>Sometimes, though, the keys aren't named right, or you just want to do a subset of the keys. In that case, you can pass in a map of key to key correspondences.</p>
+<p><code>(set/project movie-appearances [:actor_name :character_name])</code> is a relation without all the keys that aren't in that list. Remember, it's still a set (no duplicates) so it may have fewer tuples.</p>
+<p><code>(set/rename movie-appearances {:movie_name :movie_title})</code> is the same relation but with <code>:movie_name</code> changed to <code>:movie_title</code>.</p>
+<p><code>(set/index movie-appearances [:actor_name])</code> is a way to build an index of who was in what movie, looked up by the actor's name.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Clojure comes with the standard set operations you're used to, plus some useful relational algebra operations if you're feeling frisky. Many <code>for</code> loops are actually set operations in disguise! And how many complex sprograms could be rewritten as a few relational algebra operations? We'll never know.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

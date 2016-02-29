@@ -108,13 +108,20 @@
 <li>Only shower during your allotted time.</li>
 </ol>
 <p>Amazingly, with a simple whiteboard calendar and a couple of rules, the bathroom sharing problems go away. That is, until season 4!</p>
-<p>In season 4, 4 new roommates show up for a total of 8. What chaos! With 4 people, a bit of coordination and some goodwill was all they needed. But with 8, the bathroom started to get messy. It was impossible. At all hours of the day you would see two or three people doing the pipi dance outside of the bathroom. Then when the door opened they all jumped at it and pushed and pulled and shoved to get in there. One poor person waited for four hours because they were just unlucky enough. They would wait for the door to open, but when it did somebody would jump in front and close the door. Good thing there was a lock or nobody would have had a turn in the bathroom. But it wasn't working.</p>
+<p>In season 4, 4 new roommates show up for a total of 8. What chaos! With 4 people, a bit of coordination and some goodwill was all they needed. But with 8, the bathroom started to get messy. It was impossible. At all hours of the day you would see two or three people doing the pipi dance outside of the bathroom. Then when the door opened they all jumped at it and pushed and pulled and shoved to get in there. One poor person waited for <em>four hours</em> because they were just unlucky enough. They would wait for the door to open, but when it did somebody would jump in front and close the door. Good thing there was a lock or <em>nobody</em> would have had a turn in the bathroom. But it clearly wasn't enough.</p>
 <p>The roommates got together for a meeting and devised a new, more sophisticated way to coordinate. The schedule was still there, but now there was a queue and tokens to represent each roommate. If you wanted to use the bathroom and the door was closed, you'd put your token into the queue and you could go back to what you were doing. When someone finished in the bathroom, they'd take the next token off the queue, shout the name, and you had 30 seconds to claim your spot!</p>
 <p>Ok, it's getting complicated but that worked for those 8. I don't even want to explain how they cleaned it. And just wait till next season when 16 people shared the bathroom. The drama. The humor. The smells!</p>
-<p>So, finally, we get to the point: locks are good. I occasionally use them in Clojure. But once things start really getting complicated, like they do in real world scenarios with lots of threads (and of course it's only getting more complicated with more and more cores every year), well, at that point you need more than locks.</p>
+<p>So, finally, we get to the point: locks are good. I occasionally use them in Clojure. But once things start really getting complicated, like they do in real world scenarios with lots of threads (and of course it's only getting more complicated with more and more cores every year), well, at that point <strong>you need more than locks</strong>.</p>
 <p>We use systems and rules in the real world to communicate and coordinate shared resources <em>all the time</em>. To say we just need locks is to throw away the notion of the line at the bank, the &quot;take a number&quot; system at the bakery, or the reservation system at a restaurant.</p>
 <p>Clojure gives you some <em>concurrency primitives</em> that implement the rules and systems that the metaphorical roommates used. There are atoms, refs, and agents so you don't have to implement them yourself. And don't forget about core.async, the mother of all concurrency primitives, that can <a href="http://www.lispcast.com/core-async-browser-motivation">save you from callback hell</a>.</p>
 <p>Well, I hope that answers the question. And I hope you got a laugh. The next time you're wondering about whether you need anything more than locks, remember that <strong>a bathroom queue is a great concurrency primitive</strong>. But don't forget to lock the door!</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+</ul>
 
 
         <div class="endmark">
@@ -135,6 +142,14 @@
     </div>
 
     <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/what-is-clojure">
+        previous
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/clojure-set">
+        next
+      </a>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

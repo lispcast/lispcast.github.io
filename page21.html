@@ -86,6 +86,31 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/lisp-with-macros-language-stack">
+            Lisp with Macros is Two Languages
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          October 08, 2013
+        </div>
+
+        Lisp with macros can be seen as two languages, each with different semantics. The base language can be interpreted directly, whereas the result of interpreting the macro language is to produce a new program in the base language.
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/making-true-false-easy">
             Making True/False Questions Easy
           </a>
@@ -422,112 +447,6 @@ D. ~X &amp;  Y  </code></pre>
         </div>
 
         Many of the cool parts of Clojure are written in Java. That means you can access those parts from any Java code. Just include the Clojure JAR, import the classes, and you've got better tools.
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/java-learn-from-clojure">
-            4 Things Java Programmers Can Learn from Clojure without learning Clojure
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          March 06, 2013
-        </div>
-
-        
-<p>I was trained in Java at University. The OOP matrix was firmly implanted in my thinking. I wanted to share some things that I have learned from Clojure that were certainly possible in Java but never became fundamental to my programming practice.</p>
-<p>Clojure certainly has learned a lot from Java. It might be cool if the learning went both ways. These are universal principles. In fact, these principles are actually well known in the OOP world. You probably already know them, so learning Clojure is not required (but it is recommended!).</p>
-<h3 id="use-immutable-values">1. Use immutable values</h3>
-<p>One of Clojure's claim to fame is its immutable data structures. But immutable values were appreciated even in the very early days of Java. <code>String</code> is immutable and was a bit controversial when Java came out. Back then, C and C++ strings were simply arrays which could be changed. Immutable Strings were seen as inefficient.</p>
-<p>However, looking back, immutable Strings seem to have been the right choice. Many of the mutable Java classes are now seen as mistakes. Take, for example, <code>java.util.Date</code>. What does it mean to change the month of a date?</p>
-<p>Let's go a little further. Let's imagine that I'm an object. You ask me when my birthday is. I hand you a piece of paper with July 18, 1981. You take that home, store it somewhere, and even let other people access that piece of paper.</p>
-<p>One of those people says &quot;cool, a date!&quot; And changes it to his birthday, April 2, 1976 using <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Date.html#setTime(long)"><code>setTime</code></a>. Now the next person who asks for my birthday actually gets that guy's birthday. What a disaster! Why did I give away that magic paper that changes my birthday?</p>
-<p>By making values mutable, this magical-changing-at-a-distance is always a possibility. One way to look at the reason it is actually wrong to use mutable values is that it breaks <em><a href="http://en.wikipedia.org/wiki/Information_hiding">the information hiding principle</a></em>. My birthdate is part of the state of my object. By giving direct access to the month, day, and year, I'm actually letting any class have direct access to my internal state.</p>
-<p>The answer, of course, is to not have any setters on an object. After construction, the object can't change. That way, my internal state remains encapsulated.</p>
-<p>This applies to collections as well. Have you ever read the docs for <code>Iterator</code>. Can you tell what happens when the underlying list changes? Neither can I. An immutable list would not have such a complicated interface.</p>
-<p><strong>Solution</strong>: Don't write setter methods. For collections, you have a couple of options. One easy thing to do is use the <a href="https://code.google.com/p/guava-libraries/">Google Guava</a> <code>Immutable...</code> classes. If using Guava is not an option, whenever you are returning a collection, make a copy, wrap it in a <code>java.util.Collections.unmodifiable...()</code>, and throw away the reference to the copy.</p>
-<pre><code>public static Map immutableMap(Map m) {
-  return Collections.unmodifiableMap(new HashMap(m));
-}</code></pre>
-<p>To learn more about immutable values, I suggest watching <a href="http://www.youtube.com/watch?v=-6BsiVyC1kM">The Value of Values</a>, a talk by Rich Hickey, the creator of Clojure.</p>
-<iframe width="900" height="506" src="http://www.youtube.com/embed/-6BsiVyC1kM" frameborder="0" allowfullscreen></iframe>
-
-<h3 id="do-no-work-in-the-constructor">2. Do no work in the constructor</h3>
-<p>Imagine this situation. Your <code>Person</code> class has a constructor that takes a bunch of information (first name, last name, address, etc.) and stores it in the object's state. Someone on your team needs to store that data to a file, so stores it as JSON. For convenience in creating a Person, you add a constructor that takes an <code>InputStream</code> and parses it as JSON, then sets up the state. Just because, you also add one that takes a <code>File</code>, reads in the file, then parses it. And then one that reads in a web request given a <code>URL</code>. Great! You've got a very convenient class.</p>
-<p>But wait! What is the responsibility of the <code>Person</code> class? Originally, it was &quot;represent personal information about a person&quot;. Now it is also responsible for:</p>
-<ul>
-<li>Parsing JSON</li>
-<li>Making web requests</li>
-<li>Reading files</li>
-<li>Handling errors</li>
-</ul>
-<p>What's more is that the class is now harder to test. How can you test the <code>File</code> constructor? First, you write a temporary file to the file system. Not too bad. How do you test the web request? Set up a web server, configure it to serve the file, then call the constructor.</p>
-<p>The problem is that <code>Person</code> violates <em><a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">the single responsibility principle</a></em>. <code>Person</code> is about keeping bits of information together, not permanent storage or serialization. It should be a data object, no more.</p>
-<p><strong>UPDATE: Solution</strong>: Keep your constructor free of logic. Separate out convenience constructors (like the one that parses JSON) into static factory methods.</p>
-<p>To learn more about this idea (and more!), I suggest you watch <a href="http://www.youtube.com/watch?v=acjvKJiOvXw">OO Design for Testability</a> by Miško Hevery, the creator of <a href="http://angularjs.org/">AngularJS</a>.</p>
-<iframe width="900" height="675" src="http://www.youtube.com/embed/acjvKJiOvXw" frameborder="0" allowfullscreen></iframe>
-
-<h3 id="program-to-small-interfaces">3. Program to small interfaces</h3>
-<p>One thing that Clojure has done very well is to define a set of very powerful, small interfaces which abstract a pattern of access. The interface allows many different types to participate in an &quot;ecosystem&quot;. Any function which applies to the interface can act on any type that implements that interface. Any new type can take advantage of all of the existing functionality already built in.</p>
-<p>Take for instance the <code>Iterable</code> interface. It generalizes anything that can be accessed sequentially (such as a list or set). If all a method needs to do is operate on something sequentially, it only needs to know that it implements this interface. That means it can operate on types that were not known to the programmer when the method was written.</p>
-<p>This aspect follows from <em><a href="http://www.oodesign.com/dependency-inversion-principle.html">the dependency inversion principle</a></em> which states that high-level logic should be written in terms of abstractions instead of the details of the lower-level logic. Interfaces capture this principle well. High-level logic should operate on interfaces which are implemented by the lower-level logic.</p>
-<p><strong>Solution</strong>: Think hard about the access patterns for classes and see if you can't abstract out small interfaces which pinpoint those access patterns. Then program to those interfaces. Remember, it takes two to use an interface: the implementor and the client. Make sure you use them from both sides as much as possible.</p>
-<p>Nothing increases maintainability and the future cost of code more than good interfaces. To learn more about this, I suggest watching <a href="https://www.youtube.com/watch?v=aAb7hSCtvGw">How To Design A Good API and Why It Matters</a>. It's an older (but good) talk by Joshua Bloch.</p>
-<iframe width="900" height="675" src="http://www.youtube.com/embed/aAb7hSCtvGw" frameborder="0" allowfullscreen></iframe>
-
-<h3 id="represent-computation-not-the-world">4. Represent computation, not the world</h3>
-<p>When I was in college, the teacher taught us that you should use classes to model objects in the world. The quintessential modeling problem was students registering for courses.</p>
-<p>A course can have many students and a student can be registered in many courses. A many-to-many relationship.</p>
-<p>The obvious choice is to make a <code>Student</code> class and a <code>Course</code> class. Each has a list of the other. Inclusion in that list represents registration. Methods like <code>register</code> and <code>listCourses</code> let a Student register or list the courses he's registered in.</p>
-<p>Professors would present this problem in order to discuss the tradeoffs of different design choices. None of the configurations of Student and Course were ideal. An astute data modeler would see the pattern of the many-to-many relationship and abstract that out. You can create a class called <code>ManyToMany&lt;X,Y&gt;</code> that manages the relationship. You can create a <code>ManyToMany&lt;CourseID, StudentID&gt;</code> and it solves your problem exactly.</p>
-<p>The issue is that this directly contradicts the teacher's lesson. A relationship is not an object in the real world. At best it is an abstract concept.</p>
-<p>What's more is that it solves the more general abstract problem as well. The <code>ManyToMany</code> class can be reused anywhere it is suited. Even better would be to make <code>ManyToMany</code> an interface with many possible implementations.</p>
-<p>I think my professor was wrong. The Java standard library contains many classes that are purely computational. Why can't application programmers write them as well? Further, look at the <a href="http://www.amazon.com/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=lisp0b-20">GOF Design Patterns Book</a>. Most (if not all) of the patterns are about abstracting computation, not &quot;objects in the real world&quot;. Take, for instance, <a href="http://en.wikipedia.org/wiki/Chain_of_responsibility_pattern">Chain-of-responsibility</a>, which Wikipedia describes as &quot;Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request.&quot;</p>
-<p><strong>Solution</strong>: look for repetitive patterns of code and build classes that take care of those patterns. Use those classes instead of repeating the pattern over and over in code.</p>
-<p>One reason I like Clojure is that it has a lot to teach. If you'd like to learn Clojure, you might like my <a href="http://www.purelyfunctional.tv/intro-to-clojure">Introduction to Clojure video course</a>.</p>
-<div class="subscribe-form-wrapper">
-  <form action="https://www.getdrip.com/forms/4474202/submissions" method="post" data-drip-embedded-form="4474202"
-        class="subscribe-form">
-    <h3 data-drip-attribute="headline">
-Free Getting Started with Clojure Email Course
-</h3>
-    <div data-drip-attribute="description">
-      
-It's designed to help you decide if Clojure will work for you, to get set up, and to explore some of its cooler features. <br /> <br /> Here are some of the topics:
-<ul>
-    <li>
-How to Read Code like a Clojure Expert
-</li>
-    <li>
-The Ultimate Guide to Learning Clojure for Free
-</li>
-    <li>
-How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popular
-</li>
-      </ul>
-    </div>
-    <div>
-      
-<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" placeholder="Email" value="" /> <input type="submit" name="submit" value="Sign Up" data-drip-attribute="sign-up-button"
-             class="subscribe-button"/>
-</div>
-  </form>
-</div>
-
-
-
 
         <div class="endmark">
           <a class="endmark-link"

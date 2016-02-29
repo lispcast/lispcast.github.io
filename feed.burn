@@ -23,6 +23,20 @@
 
 
                 <item>
+                  <title>Locks vs Concurrency Primitives</title>
+                  <guid isPermalink="false">http://www.lispcast.com/locks-v-concurrency-primitives</guid>
+                  <link>http://www.lispcast.com/locks-v-concurrency-primitives</link>
+                  <pubDate>Mon 29 Feb 2016 05:23:08 PM CST</pubDate>
+                  <description>
+                    Many people have asked me why Clojure has concurrency primitives. Aren't locks good enough? A humorous metaphor is elaborated.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/locks-v-concurrency-primitives"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>What is Clojure?</title>
                   <guid isPermalink="false">http://www.lispcast.com/what-is-clojure</guid>
                   <link>http://www.lispcast.com/what-is-clojure</link>
@@ -129,20 +143,6 @@
                     Functional programming, from one perspective, is just a collection of habits that affect our programming. I've identified the cues for those habits and a routine for replacing imperative code with functional code.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/imperative-mindset"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Clojure + Ruby</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-ruby-videos</guid>
-                  <link>http://www.lispcast.com/clojure-ruby-videos</link>
-                  <pubDate>Wed 03 Dec 2015 10:51:00 AM CST</pubDate>
-                  <description>
-                    If you're a Rubyist and you've heard some buzz about Clojure, these videos and links will be just for you. Rubyists teaching Clojure, Clojurists introducing Clojure to Ruby programmers, and Rubyists pontificating on Clojure.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-ruby-videos"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

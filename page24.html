@@ -86,6 +86,43 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html">
+            Class AbstractSingletonProxyFactoryBean
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/class-abstractsingletonproxyfactorybean">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 20, 2012
+        </div>
+
+        
+<p>From the docs:</p>
+<blockquote>
+<p>Convenient proxy factory bean superclass for proxy factory beans that create only singletons.</p>
+<p>Manages pre- and post-interceptors (references, rather than interceptor names, as in ProxyFactoryBean) and provides consistent interface management.</p>
+</blockquote>
+<p>Good thing this is &quot;convenient&quot;.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="https://vimeo.com/45136212">
             The Datomic Architecture and Data Model
           </a>
@@ -429,67 +466,6 @@
 
         
 <p>Cool talk on programming languages from 2001 featuring Paul Graham, John Maeda, Jonathan Reeves, and Guy Steele.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/introducing-playnice">
-            Introducing playnice
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 20, 2012
-        </div>
-
-        
-<h3 id="introduction">Introduction</h3>
-<p>Today I am happy to announce <a href="https://github.com/ericnormand/playnice"><code>playnice</code></a>, a Clojure library of tools to help build HTTP standards compliant servers.</p>
-<p>Existing libraries for developing web services focus mainly on ease. They try to make it easy to get started. They implement a naive, yet functional, version of the HTTP spec. It is basically the simplified understanding of HTTP that we all think in. A client makes requests to URLs, and the server responds with either an error or content.</p>
-<p>But the HTTP spec is more complete than merely matching URLs and methods. There are many error classes defined in the spec and much functionality dealing with the meta-level of the capabilities of the server itself. In addition, there are many <em>de facto</em> standards and workarounds that should be baked into the server.</p>
-<h3 id="philosophy">Philosophy</h3>
-<ol style="list-style-type: decimal">
-<li>Make it easier to serve HTTP standard responses without confounding HTTP logic with business logic.</li>
-<li>Make it easier for limited or non-standard clients to access resources.</li>
-<li>As much as possible separate orthogonal functionality into composable chunks.</li>
-</ol>
-<p><code>playnice</code> was named because it plays nice with others. The Web is a wide world, and there are lots of clients out there. You should follow the spec as closely as possible, but accept that not all clients are so strict. Also, there is a variety of input and output formats. You should play nice with them, if you can. <code>playnice</code> is a library to help Clojure programs play nice with the rest of the web.</p>
-<h3 id="playnice-opinions"><code>playnice</code> Opinions</h3>
-<ul>
-<li><p><em>URL first, method second.</em></p>
-<p>HTTP is about resources, which are identified by URLs. Different resources accept different methods. If a GET at a URL responds 200, but a POST is not supported, a 405 should be returned, not a 404.</p></li>
-<li><p><em>Routes are values that do not exist in the global namespace.</em></p>
-<p>Routes are immutable and first-class.</p></li>
-<li><p><em>The order of defining routes should not matter.</em></p>
-<p>Reordering my routes should not change the behavior of my server. Routes are declarative.</p></li>
-<li><p><em>Servers should support the OPTIONS method and correct handling of unsupported methods.</em></p>
-<p>OPTIONS returns the methods that are defined for a given URL.</p></li>
-<li><p><em>Servers should support the Accept and Content-type headers of requests.</em></p>
-<p>The handler is the wrong place to parse the Content-type header to figure out what kind of data you have been given. <code>playnice</code> currently supports HTML, JSON, TXT, and Clojure literals. I hope to have XML soon.</p></li>
-<li><p><em>Servers should support <em>de facto</em> standards and common workarounds.</em></p>
-<p>&quot;Redirecting after form post&quot; is a <em>de facto</em> standard for browsers. IE does not support DELETE method in AJAX, so the workaround is to do a POST with a special query parameter set to DELETE.</p></li>
-</ul>
-<h3 id="status">Status</h3>
-<p><code>playnice</code> is still in early development, but it already contains the following components:</p>
-<ul>
-<li>Route + method dispatch (replacing Compojure).</li>
-<li>Middleware for abstracting away input and output formats.</li>
-<li>Middleware for handling &quot;redirect after form post&quot;.</li>
-<li>Middleware for working around browser limitations.</li>
-</ul>
-<p>Please check out <a href="https://github.com/ericnormand/playnice"><code>playnice</code></a> if you need an HTTP compliant web server.</p>
 
 
         <div class="endmark">

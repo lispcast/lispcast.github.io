@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>All about clojure.set</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-set</guid>
+                  <link>http://www.lispcast.com/clojure-set</link>
+                  <pubDate>Sun 29 Feb 2016 9:00:54 PM CST</pubDate>
+                  <description>
+                    clojure.set is part of the standard library that comes with Clojure. It has functions for doing set operations and relational algebra.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-set"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>What is Clojure?</title>
                   <guid isPermalink="false">http://www.lispcast.com/what-is-clojure</guid>
                   <link>http://www.lispcast.com/what-is-clojure</link>
@@ -129,20 +143,6 @@
                     If you're a Rubyist and you've heard some buzz about Clojure, these videos and links will be just for you. Rubyists teaching Clojure, Clojurists introducing Clojure to Ruby programmers, and Rubyists pontificating on Clojure.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-ruby-videos"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>2 Features of Clojure Editors Professionals Won't Do Without</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-editors</guid>
-                  <link>http://www.lispcast.com/clojure-editors</link>
-                  <pubDate>Sat 28 Nov 2015 12:00:45 AM CST</pubDate>
-                  <description>
-                    Professional Clojure programmers rely on certain features of their editors to help them program. When choosing an editor, it's important to pick one that has these two important features: REPL integration and structural editing.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-editors"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

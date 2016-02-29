@@ -1,0 +1,171 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Locks vs Concurrency Primitives | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Many people have asked me why Clojure has concurrency primitives. Aren't locks good enough? A humorous metaphor is elaborated.">
+    <meta name="twitter:title" content="Locks vs Concurrency Primitives">
+
+    <meta property="og:title" content="Locks vs Concurrency Primitives">
+    <meta property="og:description" content="Many people have asked me why Clojure has concurrency primitives. Aren't locks good enough? A humorous metaphor is elaborated.">
+
+    <meta name="description" content="Many people have asked me why Clojure has concurrency primitives. Aren't locks good enough? A humorous metaphor is elaborated.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/locks-v-concurrency-primitives">
+            Locks vs Concurrency Primitives
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          February 29, 2016
+        </div>
+
+        
+<p>Summary: <em>Many people have asked me why Clojure has concurrency primitives. Aren't locks good enough? A humorous metaphor is elaborated.</em></p>
+<p>I've presented Clojure to small conferences before. When I start talking about using the Clojure concurrency primitives and how they help you write multi-threaded code, invariably, I mean every time, I get someone who asks &quot;Why not just use <code>synchronized</code>?&quot; or <strong>&quot;Can't I just use locks?&quot;</strong>. It's an honest question so I'll do my best to answer it. And of course, I'll have to use a nice metaphor.</p>
+<p>Let's imagine a house. It's a nice big house. But it only has one bathroom. And that's ok when there's one person living in the house. That person is free to use the bathroom whenever they please, for as long as they please. They might even <strong>leave the door open</strong> because it's their house and nobody is around.</p>
+<p>Then into that house we add another person, let's say a stranger, just to make it a little awkward. Hmm. That one bathroom is getting a little contention. A couple of times, a roommate opened the door on the other. Uh oh! Awkward! What's the solution? Right, <strong>a lock</strong>!</p>
+<p>Now, whenever one of them has to go to the bathroom, they open the door. At least they try, because it might be locked. If it's locked, well, they try again later. But if it's open, they go right in, lock the door, and get to business. When they're done, they open the lock and leave. <strong>Problem solved!</strong></p>
+<p>Well, not really. You see, I didn't tell you, but this whole setup is actually <strong>a reality TV show</strong>. Season 1 had one person in the house. Season 2 had 2 people in the house. Now it's time for Season 3 of 2^n Beds/1 Bath!! Season 3 has 4 roommates sharing a bathroom. (In Season 3, n=2. Bare with me!)</p>
+<p>Season 3 is a lot more entertaining. The lock sure works for keeping the door closed while you're showering, but there are three people outside who need to get ready to go to work. It's clear after a week of jiggling the doorknob that the lock is not enough. It's essential but it's not going to cut it. The roommates decide to get organized. They <em>coordinate</em> their hygiene schedules and lay down some ground rules.</p>
+<ol style="list-style-type: decimal">
+<li>Be courteous to each other. Don't do unnecessary stuff in the bathroom. Others might be waiting.</li>
+<li>Only shower during your allotted time.</li>
+</ol>
+<p>Amazingly, with a simple whiteboard calendar and a couple of rules, the bathroom sharing problems go away. That is, until season 4!</p>
+<p>In season 4, 4 new roommates show up for a total of 8. What chaos! With 4 people, a bit of coordination and some goodwill was all they needed. But with 8, the bathroom started to get messy. It was impossible. At all hours of the day you would see two or three people doing the pipi dance outside of the bathroom. Then when the door opened they all jumped at it and pushed and pulled and shoved to get in there. One poor person waited for four hours because they were just unlucky enough. They would wait for the door to open, but when it did somebody would jump in front and close the door. Good thing there was a lock or nobody would have had a turn in the bathroom. But it wasn't working.</p>
+<p>The roommates got together for a meeting and devised a new, more sophisticated way to coordinate. The schedule was still there, but now there was a queue and tokens to represent each roommate. If you wanted to use the bathroom and the door was closed, you'd put your token into the queue and you could go back to what you were doing. When someone finished in the bathroom, they'd take the next token off the queue, shout the name, and you had 30 seconds to claim your spot!</p>
+<p>Ok, it's getting complicated but that worked for those 8. I don't even want to explain how they cleaned it. And just wait till next season when 16 people shared the bathroom. The drama. The humor. The smells!</p>
+<p>So, finally, we get to the point: locks are good. I occasionally use them in Clojure. But once things start really getting complicated, like they do in real world scenarios with lots of threads (and of course it's only getting more complicated with more and more cores every year), well, at that point you need more than locks.</p>
+<p>We use systems and rules in the real world to communicate and coordinate shared resources <em>all the time</em>. To say we just need locks is to throw away the notion of the line at the bank, the &quot;take a number&quot; system at the bakery, or the reservation system at a restaurant.</p>
+<p>Clojure gives you some <em>concurrency primitives</em> that implement the rules and systems that the metaphorical roommates used. There are atoms, refs, and agents so you don't have to implement them yourself. And don't forget about core.async, the mother of all concurrency primitives, that can <a href="http://www.lispcast.com/core-async-browser-motivation">save you from callback hell</a>.</p>
+<p>Well, I hope that answers the question. And I hope you got a laugh. The next time you're wondering about whether you need anything more than locks, remember that <strong>a bathroom queue is a great concurrency primitive</strong>. But don't forget to lock the door!</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

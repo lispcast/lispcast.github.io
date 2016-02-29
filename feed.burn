@@ -9,20 +9,6 @@
 
 
                 <item>
-                  <title>All about clojure.set</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-set</guid>
-                  <link>http://www.lispcast.com/clojure-set</link>
-                  <pubDate>Sun 29 Feb 2016 9:00:54 PM CST</pubDate>
-                  <description>
-                    clojure.set is part of the standard library that comes with Clojure. It has functions for doing set operations and relational algebra.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-set"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
                   <title>Locks vs Concurrency Primitives</title>
                   <guid isPermalink="false">http://www.lispcast.com/locks-v-concurrency-primitives</guid>
                   <link>http://www.lispcast.com/locks-v-concurrency-primitives</link>
@@ -31,6 +17,20 @@
                     Many people have asked me why Clojure has concurrency primitives. Aren't locks good enough? A humorous metaphor is elaborated.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/locks-v-concurrency-primitives"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>All about clojure.set</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-set</guid>
+                  <link>http://www.lispcast.com/clojure-set</link>
+                  <pubDate>Sun 29 Feb 2016 4:00:54 AM CST</pubDate>
+                  <description>
+                    clojure.set is part of the standard library that comes with Clojure. It has functions for doing set operations and relational algebra.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-set"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

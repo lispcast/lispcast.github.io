@@ -101,7 +101,7 @@
 <p><em>In Clojure, <code>nil</code>, as a value, is nearly void of meaning. And it is all pervasive, because it can be returned from any Clojure function or Java method.</em></p>
 <p>Let's go through that last part bit by bit.</p>
 <ol style="list-style-type: decimal">
-<li><strong>It <em>is</em> a value.</strong> Java made the mistake of making <code>null</code> a lack of object even though it was pointed to by an object pointer. You can't call methods on it. It is not an object. It has a weird <em><a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/typesValues.html#4.1">nameless type</a></em>. Clojure did not make this mistake. It is a first-class value and type<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup>, meaning <em>it can be compared to other values</em>, <em>it can implement protocols</em>, and be used as <em>the key or value of a map</em>, etc. Using <code>nil</code> where it doesn't make sense in Clojure code is <em>usually</em> a type error, not a NullPointerException, just as using a number as a function is a type error.</li>
+<li><strong>It <em>is</em> a value.</strong> Java made the mistake of making <code>null</code> a lack of object even though it was pointed to by an object pointer. You can't call methods on it. It is not an object. It has a weird <em><a href="http://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.1">nameless type</a></em>. Clojure did not make this mistake. It is a first-class value and type<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup>, meaning <em>it can be compared to other values</em>, <em>it can implement protocols</em>, and be used as <em>the key or value of a map</em>, etc. Using <code>nil</code> where it doesn't make sense in Clojure code is <em>usually</em> a type error, not a NullPointerException, just as using a number as a function is a type error.</li>
 </ol>
 <ol start="2" style="list-style-type: decimal">
 <li><strong>It is nearly void of meaning.</strong> It means &quot;no answer&quot;, but not much more. Because of this, <em>it can take whatever form fits the context</em>. With proper wisdom in choosing what form it takes, <code>nil</code> can become an asset instead of a liability. Clojure takes nil-punning to an extreme.</li>
@@ -145,6 +145,7 @@ How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popu
 </div>
   </form>
 </div>
+
 
 
 <h3 id="you-might-also-like">You might also like</h3>

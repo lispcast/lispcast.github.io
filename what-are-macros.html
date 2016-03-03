@@ -1,0 +1,173 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>What are macros? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Macros are one of the most talked about features of Lisp. They are a powerful way to extend the language without modifying the compiler.">
+    <meta name="twitter:title" content="What are macros?">
+
+    <meta property="og:title" content="What are macros?">
+    <meta property="og:description" content="Macros are one of the most talked about features of Lisp. They are a powerful way to extend the language without modifying the compiler.">
+
+    <meta name="description" content="Macros are one of the most talked about features of Lisp. They are a powerful way to extend the language without modifying the compiler.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/what-are-macros">
+            What are macros?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          March 03, 2016
+        </div>
+
+        
+<p>Summary: <em>Macros are one of the most talked about features of Lisp. They are a powerful way to extend the language without modifying the compiler.</em></p>
+<p>You've heard of macros, and you've heard that they're awesome. But what are they?</p>
+<p>Let's say you're writing a compiler for a language called FOO. Now, you've got limited time because you've got a deadline. You're designing your language and <strong>you really want to get started coding in the language</strong>. What do you do?</p>
+<p>Well, one thing you could do is write a <em>very small language</em>. <strong>A small language has a small compiler</strong>, so you can finish faster. And in fact you build it quickly and start writing programs in it.</p>
+<p>Here's what your system looks like:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/foo-compiled.png" alt="FOO code compiles to Compiled code" /><p class="caption">FOO code compiles to Compiled code</p>
+</div>
+<p>After a while, you realize your decision to make a small language came with a serious drawback. You wish that there was <strong>a lot more syntactic sugar</strong>. You don't need much to make a computer language. But to make it convenient for people, you need some more niceties.</p>
+<p>So now you have a choice. <strong>Do you open up the compiler again to add more syntax and features?</strong> That scares you because compilers are not so easy and maybe you'll break something. You'll be working in the lower-level language you wrote the compiler in, and that is clearly worse than your new, shiny language. Or, <strong>you could try to live with the limits of the language you wrote</strong>. It's a spartan existence, but, well, you're tough. <strong>There's a third option, and it's the macro one.</strong></p>
+<p>What if you could leave the compiler alone <em>and</em> extend the language in your new, awesome language? That's macros. So you make one last addition to the FOO compiler and call it FOO-PRIME. Macros are functions that take FOO-PRIME code and return FOO-PRIME code. You can call them just like regular functions. The difference is that they run <em>before</em> the code is compiled.</p>
+<p>FOO-PRIME code ==Macroexpander==&gt; FOO code ==Compiler==&gt; Compiled Code</p>
+<p>Macros return FOO-PRIME code, but the Compiler still only knows FOO code. So the Macroexpander's job is to keep expanding macros until all it has left is FOO code, which the Compiler can handle.</p>
+<p>You've solved the problem! You can extend the language to make it sweeter, but you don't have to modify the compiler in the low level language. Yay! What's more, your language is getting better faster, and so your macros are easier to write, too! If done right, it's a good cycle, and can compound over time.</p>
+<p>And, in fact, macros really do let the Clojure language be extended without changing the compiler. Much of what we call Clojure is just macros. For instance, the <code>cond</code> form is just a macro. <code>defn</code> is just a macro. Lots of Clojure libraries have macros. And the killer macro library is core.async. In many languages, something like core.async would need to be done as a new release of the language. But in Clojure, it's just a library. It can be iterated separately from the language and imported only when needed. core.async is one of the more extreme examples, but macros are actually really common just to make life easier for the programmer.</p>
+<h3 id="disadvantages">Disadvantages</h3>
+<p>It's not all rosy. Macros do have some disadvantages. First, macros are called like functions but they don't have a runtime value like functions do. You can't pass them to other functions, store them for invocation later, and whatnot. It's actually very hard to even define what it would mean to call a macro at runtime, after the compiler has already run. Lots of research has tried to give semantics for it. So in Clojure, it just throws an exception.</p>
+<p>Another disadvantage is that you've got a Turing-complete language generating code. That means you can get into infinite loops and other not-so-recommended things. Be careful.</p>
+<p>And, finally, there's a lot of cognitive load writing and reading macro code. You have to distinguish <em>when</em> the code will run--at compile time or at runtime--and teasing all of those things apart can get intricate. Luckily, you can manually macroexpand code (check out <code>macroexpand</code> and <code>macroexpand-1</code>) so you can inspect the output.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Macros make it possible to extend the language without modifying the compiler. By inserting a macroexpansion step just before the compilation step, you can get a compounding expressivity cycle. It means you don't need to wait for new releases of the language to get new features. And if you think a language extension really would save you time, you can build it yourself.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

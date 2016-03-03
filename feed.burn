@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>What are macros?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/what-are-macros</guid>
+                  <link>http://www.lispcast.com/what-are-macros</link>
+                  <pubDate>Thu 03 Mar 2016 05:45:27 PM CST</pubDate>
+                  <description>
+                    Macros are one of the most talked about features of Lisp. They are a powerful way to extend the language without modifying the compiler.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-are-macros"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Locks vs Concurrency Primitives</title>
                   <guid isPermalink="false">http://www.lispcast.com/locks-v-concurrency-primitives</guid>
                   <link>http://www.lispcast.com/locks-v-concurrency-primitives</link>
@@ -129,20 +143,6 @@
                     Global mutable state is one of the biggest drivers of complexity in software systems. We tackle a definition and how to reduce our reliance on it.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/global-mutable-state"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>How to Switch from the Imperative Mindset</title>
-                  <guid isPermalink="false">http://www.lispcast.com/imperative-mindset</guid>
-                  <link>http://www.lispcast.com/imperative-mindset</link>
-                  <pubDate>Sat 12 Dec 2015 06:04:21 AM CST</pubDate>
-                  <description>
-                    Functional programming, from one perspective, is just a collection of habits that affect our programming. I've identified the cues for those habits and a routine for replacing imperative code with functional code.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/imperative-mindset"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

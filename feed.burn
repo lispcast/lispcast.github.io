@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>deftype vs defrecord</title>
+                  <guid isPermalink="false">http://www.lispcast.com/deftype-vs-defrecord</guid>
+                  <link>http://www.lispcast.com/deftype-vs-defrecord</link>
+                  <pubDate>Thu 03 Mar 2016 06:08:29 PM CST</pubDate>
+                  <description>
+                    There are two commonly used ways to create new data types in Clojure, deftype and defrecord. They are similar but are intended to be used in two distinct use cases. deftype is for programming constructs and defrecord is for domain constructs.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/deftype-vs-defrecord"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>What are macros?</title>
                   <guid isPermalink="false">http://www.lispcast.com/what-are-macros</guid>
                   <link>http://www.lispcast.com/what-are-macros</link>
@@ -129,20 +143,6 @@
                     There are many classics of functional programming that can help you take your thinking to the next level. My recommendations are for making you think in a new way.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-the-next-level"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Global Mutable State</title>
-                  <guid isPermalink="false">http://www.lispcast.com/global-mutable-state</guid>
-                  <link>http://www.lispcast.com/global-mutable-state</link>
-                  <pubDate>Wed 06 Jan 2016 05:13:43 PM CST</pubDate>
-                  <description>
-                    Global mutable state is one of the biggest drivers of complexity in software systems. We tackle a definition and how to reduce our reliance on it.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/global-mutable-state"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

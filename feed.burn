@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Why I start teaching Clojure with Imperative Programming</title>
+                  <guid isPermalink="false">http://www.lispcast.com/imperative-intro</guid>
+                  <link>http://www.lispcast.com/imperative-intro</link>
+                  <pubDate>Thu 03 Mar 2016 09:58:50 PM CST</pubDate>
+                  <description>
+                    LispCast Introduction to Clojure starts with 30 minutes of imperative programming. We write programs for their effects, so imperative is a great place to start.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/imperative-intro"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>deftype vs defrecord</title>
                   <guid isPermalink="false">http://www.lispcast.com/deftype-vs-defrecord</guid>
                   <link>http://www.lispcast.com/deftype-vs-defrecord</link>
@@ -129,20 +143,6 @@
                     Composition is an important idea in programming, and Functional Programming brings it to the forefront. But what does it mean to say things are composable?
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/composable-parts"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Recommendations for Next-Level Clojure</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-the-next-level</guid>
-                  <link>http://www.lispcast.com/clojure-the-next-level</link>
-                  <pubDate>Sun 24 Jan 2016 03:29:46 PM CST</pubDate>
-                  <description>
-                    There are many classics of functional programming that can help you take your thinking to the next level. My recommendations are for making you think in a new way.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-the-next-level"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

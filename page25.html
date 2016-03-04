@@ -86,6 +86,44 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://www.250bpm.com/blog:8">
+            Why should I have written ZeroMQ in C, not C++ (part II)
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/why-should-i-have-written-zeromq-in-c">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          August 30, 2012
+        </div>
+
+        
+<p>In this post, Martin Sústrik makes a point about the performance of C compared to C++ (C++ is slower than C). While the performance point is valid, he makes some strong, dubious statements about Object-orientation and procedural programming.</p>
+<blockquote>
+<p>Object-orientedness is after all just a syntactic sugar on the top of procedural language, making the code more understandable to the human brain which seems to have evolved natural ability to deal with objects at the expense of dealing with entities such as flows, relations etc.</p>
+</blockquote>
+<p>Object-orientation is more than just syntactic sugar. OO uses message passing as its computational semantic, while procedural programming uses procedure calls.</p>
+<p>He then goes on to describe a scheme where one class can define fields in another class that only it can access, which he calls &quot;private in X&quot;. In this way, you can define a list which stores its pointers in the same memory as items of the list which still encapsulates the concerns.</p>
+<p>The benefit of OO is that by separating out concerns, you achieve more reuse. You write one list class and one person class, and now you can share persons in different lists. The problem with Sústrik's proposal is that it only allows for an item to be in one list at a time (or you have to write a new list class for every list you want them to be in). This is not Object-oriented. It is merely yet another feature bolted onto C++.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://newartisans.com/2012/08/monads-in-pictures/">
             Monads in Pictures
           </a>
@@ -433,40 +471,6 @@
 <p><strong>Perhaps, Steve, you mean to say that you don't like when a programming language's opinion is imposed on the programmer?</strong></p>
 <p>I personally like some laws and dislike others. For instance, Clojure's immutability is great. <strong>It's not just great because it's possible. It's great because it is enforced.</strong> Nothing can change my values--not me, not you, not anyone! And I like Haskell's type system in production but not during development. I like that my program is guaranteed to have consistent types on production. But in development, I'd rather run it and debug it (for some definition of &quot;run&quot; for a type-inconsistent Haskell program).</p>
 <p><strong>If you say it like that, it ceases to be bullshit.</strong> And then we can get back into a discussion. Question: Which features should be imposed on the programmer and which should not? Discuss.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.infoq.com/presentations/Value-Values">
-            The Value of Values
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/the-value-of-values">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 14, 2012
-        </div>
-
-        
-<p>Rich Hickey is a force of nature. The mark he will leave on programming will reach much farther than the Clojure programming language. The agenda he is setting forth will have as much impact on the notion of state as McCarthy conditionals had on structured programming.</p>
-<p>Please listen closely. The main idea of this talk goes far deeper than &quot;immutable good, mutable bad&quot;.</p>
-<p>It is wonderful to be a part of this.</p>
 
 
         <div class="endmark">

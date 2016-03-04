@@ -1,0 +1,162 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>deftype vs defrecord | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="There are two commonly used ways to create new data types in Clojure, deftype and defrecord. They are similar but are intended to be used in two distinct use cases. deftype is for programming constructs and defrecord is for domain constructs.">
+    <meta name="twitter:title" content="deftype vs defrecord">
+
+    <meta property="og:title" content="deftype vs defrecord">
+    <meta property="og:description" content="There are two commonly used ways to create new data types in Clojure, deftype and defrecord. They are similar but are intended to be used in two distinct use cases. deftype is for programming constructs and defrecord is for domain constructs.">
+
+    <meta name="description" content="There are two commonly used ways to create new data types in Clojure, deftype and defrecord. They are similar but are intended to be used in two distinct use cases. deftype is for programming constructs and defrecord is for domain constructs.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/deftype-vs-defrecord">
+            deftype vs defrecord
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          March 03, 2016
+        </div>
+
+        
+<p>Summary: <em>There are two commonly used ways to create new data types in Clojure, <code>deftype</code> and <code>defrecord</code>. They are similar but are intended to be used in two distinct use cases. <code>deftype</code> is for programming constructs and <code>defrecord</code> is for domain constructs.</em></p>
+<p>In a recent lesson in [<em>PurelyFunctional.tv Online Mentoring</em>][ment], I briefly mentioned Clojure's <code>defrecord</code> and <code>deftype</code>, then quickly moved on. I think it's worth exploring what they're used for and what their differences are.</p>
+<p>To explain what the difference is, let's look at the field of accounting. Accounting is everywhere. Businesses of all types have accountants. An accountant at a hardware store definitely has to know accounting and also know a bit about hardware, which is the business domain. An accountant at an ice cream shop will probably learn about making and selling ice cream. But there is still a very clear division between accounting and the business domain. There are accounting terms and concepts that are clearly generic accounting terms. And then there are some ice cream-related terms that the accountant will use in the accounting. <strong>It's accounting <em>about</em> ice cream.</strong></p>
+<p>Clojure tries to help the programmer with the same conceptual division. When we're <em>programming</em> about ice cream, we're going to use a lot of computer/programming terms (&quot;vector&quot;, &quot;function&quot;, &quot;string&quot;, etc.). But there will also be some new terms in our language that are representations of the domain, like &quot;flavor&quot;, &quot;recipe&quot;, &quot;price&quot;, etc. <strong>Everything is divided into programming constructs and domain constructs.</strong></p>
+<p>If you're making a new <em>programming construct</em>, like a new data structure, you want to make a new class but retain low level control. You want to define the fields, say what protocols it implements, and how equality is defined. That's what <code>deftype</code> does. <code>deftype</code> defines a new type with specified fields (you can even make them mutable) and one constructor and nothing else. Very barebones. Of course you can implement protocols right inside the <code>deftype</code> to define functionality.</p>
+<p>If you're making a new <em>domain construct</em>, you don't want low level. That was a mistake Java made, forcing programmers to write tons of domain classes and deck them out with getters. Each class was a new thing, incompatible with any existing tools. In Clojure, you use <code>defrecord</code> if you want to create a domain type. You can think of records like hashmaps but with their own class.</p>
+<p>Like hashmaps, they have equality and hash semantics defined for you, as you would expect. And they can store arbitrary data using the same access patterns as hashmaps. You can <code>assoc</code>, <code>get</code>, <code>count</code>, etc, on any record. Records will have their own class and can implement protocols and interfaces. So you get the best of using reusable data structures and type-based polymorphism. If you don't need the polymorphism, you should probably just use a hashmap.</p>
+<p>This division between programming constructs and domain constructs is so helpful. It's an example of one beautiful thing about Clojure: it's a language helping you write software in a better way. You have different needs when you're making domain values and Clojure provides for those needs.</p>
+<p>So, to wrap up, <code>deftype</code> is for <em>programming constructs</em> and <code>defrecord</code> is for <em>domain constructs</em> that need a custom type. When you're engineering your software, it's useful to ask if you're building a programming construct or a domain construct and choose the right tool for that job.</p>
+<p>If you're interested in learning about how to use <code>deftype</code> and <code>defrecord</code>, I have several examples in the [<em>PurelyFunctional.tv Online Mentoring</em>][ment] program. It's a step-by-step program taking you from dabbler to Clojure professional. I release new lessons all the time, in video form. You can get access by [signing up here][ment].</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>The Importance of Embodied Metaphors | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="LispCast Introduction to Clojure teaches Clojure with an &quot;interactive bakery simulation&quot;. The reason is that metaphors that you can embody are a great way to learn abstract things like programming.">
+    <meta name="twitter:title" content="The Importance of Embodied Metaphors">
+
+    <meta property="og:title" content="The Importance of Embodied Metaphors">
+    <meta property="og:description" content="LispCast Introduction to Clojure teaches Clojure with an &quot;interactive bakery simulation&quot;. The reason is that metaphors that you can embody are a great way to learn abstract things like programming.">
+
+    <meta name="description" content="LispCast Introduction to Clojure teaches Clojure with an &quot;interactive bakery simulation&quot;. The reason is that metaphors that you can embody are a great way to learn abstract things like programming.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/interactive-baking">
+            The Importance of Embodied Metaphors
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          March 04, 2016
+        </div>
+
+        
+<p>Summary: <em>LispCast Introduction to Clojure teaches Clojure with an &quot;interactive bakery simulation&quot;. Metaphors that you can embody are a great way to learn abstract things like programming.</em></p>
+<p>In <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a>, the video starts off with an introduction of the main character. He's a robot named X5 who wants to learn to bake. Your job is to help him. He comes built in with some basic functions like grab, pour, and mix. It's your job to build up the routines for baking cakes and cookies.</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/x5.jpg" alt="X5 dreams of being a baker. Can you help him learn to bake?" /><p class="caption">X5 dreams of being a baker. Can you help him learn to bake?</p>
+</div>
+<p><strong>Starting at the REPL</strong>, you type in those commands and the environment changes. The bowl fills up with flour, eggs, and milk. You finally put the pan in the oven and it will tell you what comes out. Maybe you didn't follow the recipe and it's ruined. Maybe you made a nice cake.</p>
+<p>The reason I did that is to <strong>engage your imagination</strong> as much as I could. It's easy to imagine actions like pouring milk, scooping flour, and breaking eggs. Learning a new language has so many challenges. I wanted you, the learners, to be engaged in something you could intuitively get. And baking a cake is not only something you can imagine, but something you can imagine <em>doing</em>.</p>
+<p>There's a lot of research about learning something abstract by having a surrogate in that world. Seymour Papert's Logo programming language is a classic example<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. You learn to program by directing a turtle. The turtle isn't just a cute triangle on the screen. It's a visual representation that <strong>you can relate to</strong> and so use your own reasoning about space and movement to give it instructions. I wanted to tap into that same natural ability while learning Clojure.</p>
+<p>Besides it being intuitive, the baking metaphor was great in other ways. Concepts like &quot;add 1 egg&quot; built out of &quot;grab egg, squeeze egg (to crack it), add it to bowl&quot; are a great lesson in abstraction. And a <em>recipe</em> is a nice metaphor for a function. The metaphors don't end there, but you'll have to follow the course to see them.</p>
+<p>And I try to do that in everything I do. I use metaphors and the more intuitive the better. I <em>really</em> like physical metaphors that you can use your spatial intuition about. We've been learning to move since we were in the womb! It's not always easy to find a good physical metaphor for a topic, but I usually find something. Visual metaphors are great, too.</p>
+<p>I'm not talking about metaphors that &quot;dumb down&quot; the material. <strong>Some metaphors don't work that well.</strong> In the weak metaphors, you can see a slight connection between the thing you're learning and the thing in the metaphor. But once you try to apply the metaphor, it's full of holes. The metaphor is overstretched.</p>
+<p>The metaphors I look for are rock solid and really feel like <strong>something you can rely on until you develop your own experience</strong>. The metaphors in <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a> are pretty good, from cracking eggs to building a recipe database. The biggest thing I regret is that I couldn't make it more interactive and visual. It's all done with text, either at the terminal or a text editor.</p>
+<p>The richness of metaphors in <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a> is one of the reasons I say that it's the best way to learn Clojure for someone who has never programmed in Clojure before. <strong>It engages your imagination and your inherent desire to help a fellow robot in need.</strong> If you'd like to learn Clojure, <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>Intro to Clojure</em></a> is available as part of the <a href="http://www.purelyfunctional.tv/mentoring"><em>PurelyFunctional.tv Online Mentoring</em></a> program. And there's plenty of material there to continue your Clojure journey. I hope to see you in the program. :)</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Read <a href="http://www.amazon.com/Mindstorms-Children-Computers-Powerful-Ideas/dp/0465046746">Mindstorms</a> for a great introduction<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
+  </body>
+</html>

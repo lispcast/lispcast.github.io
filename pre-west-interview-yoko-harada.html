@@ -226,11 +226,11 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
       })();
 
       $(document).on('submitted.drip', function(ev, data){
-   if(mixpanel) {
-      mixpanel.register({Email: data['fields[email]']});
-      mixpanel.track('Drip Subscription');
-   }
-});
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+        }
+      });
     </script>
   </body>
 </html>

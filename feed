@@ -9,6 +9,34 @@
 
 
                 <item>
+                  <title>What my daughter's blocks teach us about learning</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-and-blocks</guid>
+                  <link>http://www.lispcast.com/clojure-and-blocks</link>
+                  <pubDate>Thu 10 Mar 2016 03:38:14 PM CST</pubDate>
+                  <description>
+                    My daughter's blocks taught her to match shapes with a lot of fast feedback. Fast feedback is a powerful tool to learn any skill. I analyze how the blocks helped my daughter learn and compare it to learning Clojure.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-and-blocks"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Master one skill at a time</title>
+                  <guid isPermalink="false">http://www.lispcast.com/master-one-skill-at-a-time</guid>
+                  <link>http://www.lispcast.com/master-one-skill-at-a-time</link>
+                  <pubDate>Thu 10 Mar 2016 03:36:58 PM CST</pubDate>
+                  <description>
+                    Research shows that developing mastery of a large skill is best done by mastering smaller skills that you can achieve 90% accuracy in very quickly. LispCast Introduction to Clojure has broken the skills you need down for you.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/master-one-skill-at-a-time"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Practice as soon as possible</title>
                   <guid isPermalink="false">http://www.lispcast.com/start-practicing-soon</guid>
                   <link>http://www.lispcast.com/start-practicing-soon</link>
@@ -115,34 +143,6 @@
                     Clojure is a general purpose programming language designed for the fast-approaching future.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-is-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>How can more layers be more efficient?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/more-layers</guid>
-                  <link>http://www.lispcast.com/more-layers</link>
-                  <pubDate>Sat 20 Feb 2016 06:19:12 PM CST</pubDate>
-                  <description>
-                    It's common that adding more layers of abstraction or indirection will make things slower. However, React and ClojureScript make web pages faster than doing it by hand -- essentially programming the bare web. The lesson is that if you choose your layers well, they can actually make your system faster.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/more-layers"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Reasoning About Code</title>
-                  <guid isPermalink="false">http://www.lispcast.com/reasoning-about-code</guid>
-                  <link>http://www.lispcast.com/reasoning-about-code</link>
-                  <pubDate>Sat 20 Feb 2016 04:37:09 PM CST</pubDate>
-                  <description>
-                    Functional programmers often use the term &quot;reason about code&quot;. It's not very well defined generally, but I use it myself to refer to our ability to use our real-world intuition in our own code.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/reasoning-about-code"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

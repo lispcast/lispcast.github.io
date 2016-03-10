@@ -1,0 +1,206 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>What my daughter's blocks teach us about learning | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="My daughter's blocks taught her to match shapes with a lot of fast feedback. Fast feedback is a powerful tool to learn any skill. I analyze how the blocks helped my daughter learn and compare it to learning Clojure.">
+    <meta name="twitter:title" content="What my daughter's blocks teach us about learning">
+
+    <meta property="og:title" content="What my daughter's blocks teach us about learning">
+    <meta property="og:description" content="My daughter's blocks taught her to match shapes with a lot of fast feedback. Fast feedback is a powerful tool to learn any skill. I analyze how the blocks helped my daughter learn and compare it to learning Clojure.">
+
+    <meta name="description" content="My daughter's blocks taught her to match shapes with a lot of fast feedback. Fast feedback is a powerful tool to learn any skill. I analyze how the blocks helped my daughter learn and compare it to learning Clojure.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure-and-blocks">
+            What my daughter's blocks teach us about learning
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          March 10, 2016
+        </div>
+
+        
+<p>Summary: <em>My daughter's blocks taught her to match shapes with a lot of fast feedback. Fast feedback is a powerful tool to learn any skill. I analyze how the blocks helped my daughter learn and compare it to learning Clojure.</em></p>
+<p>I have a daughter. As I write this, she's about three and a half years old. I've watched her learn so much. And most of what she's learned <strong>she's learned through direct feedback with the environment</strong>. If you watched her enough, you could almost read her thoughts as she played in the world.</p>
+<p>She had a toy with holes of different shapes. You're supposed to figure out what block can fit in which hole. It's something so obvious to an adult. I would watch and she would struggle. Sometimes she'd get frustrated. Sometimes she would ask me for help.</p>
+<p>It reminded me a lot about how much we take for obvious when programming. I've watched many people struggle with programming. It's often obvious to me how to solve a problem. But the programmer I'm pairing with just doesn't see how I see. It happens the other way, too, where they see stuff I can't. The parallels between the block toy and programming are instructive. <strong>What can we learn about the best way to learn to program?</strong></p>
+<p>Let's trace through the learning process with my daughter and see what lessons we can apply to how we learn software. I'm learning from this as I write it, but I'll also make references to <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a>, my beginner Clojure course, for examples.</p>
+<p>When my daughter first started with those blocks, there was a lot of confusion and frustration. Were the blocks supposed to go inside? She wanted to try and usually she would fail. You could almost read her thoughts. <em>Is getting this block through a hole even possible?</em> But then every now and then, she'd get the right block into the right hole, just by chance, and things would line up. It gave her hope.</p>
+<p>While there are valuable lessons for her in that struggle, as a tool for learning specifically about blocks and holes, I think the tool fails. Why the frustration? Why start with all of the uncertainty? Could it have <strong>started out with just one hole and one block</strong>? I think <em>Intro to Clojure</em> gets this right. It starts with just one goal that is guaranteed to be possible. That really helps start the learning off with confidence.</p>
+<p>Now, there's still <strong>plenty to learn with just one block</strong>. A lot of what my daughter had to learn was to hold the block in the right orientation and to line it up with the hole. When we're starting out with something new, we know we are failing but we don't know why. Did I put it in the wrong hole? Did I not hold it right? Should I try it again? All of this is part of learning. You're trying to recognize patterns and build neural structures to represent all the things that have to be right to solve the problem. But <strong>those mental structures can be built one at a time so you don't have to have uncertainty compounded on frustration</strong>.</p>
+<p><em>Intro to Clojure</em> focuses on these small victories. You learn one thing then you're trying it out immediately. There are so many skills that you need to pick up just to be able to define a function. Matching parens, whitespace between expressions, order of the arguments. And lots more. Half of them are <strong>being able to recognize your mistakes so you can correct them</strong>. When my daughter held the start block over the star hole, she had to realize, with time, that so much was already right. But it wasn't going in! What was wrong <em>this</em> time? Did it need to be jiggled? Did it need to be rotated? So many things to look for. The same happens when we learn to code. We type something wrong. The compiler tells us something is wrong. We look and we look and when we're first starting out with a new language, <strong>we don't even know what we should be looking for</strong>.</p>
+<p>Does whitespace matter? What about capitalization? Can that comma touch the keyword? There are so many things. That's why it's important to immerse yourself in the language. <strong>These things literally cannot be taught.</strong> I'm not talking about specific points of grammar. Those can be taught. I'm talking about your nervous system adapting to a new environment, not &quot;book learning&quot;. <strong>It just takes time.</strong></p>
+<p>But speaking of time, there's something the block game got right. My daughter had <strong>unlimited time to try whatever she wanted</strong>. She could hit the blocks. She did brute force techniques. She jiggled them. And each thing she tried gave her instant feedback about how it was working. Of course, <strong>it didn't tell her what was wrong</strong>. But she could tell if it worked. I think more programming systems could improve their feedback.</p>
+<p>Clojure comes with a REPL, which is pretty good for feedback. You type something in and it runs. It tells you the result. <em>Intro to Clojure</em> works exclusively in the REPL for the first lesson in the course. It's <strong>designed to give you that same feedback</strong> with the confidence that what you're typing <em>should</em> work.</p>
+<p>And there are two keys to fast feedback, to creating an environment where you feel comfortable learning. <strong>The first is information.</strong> You can't have feedback without information about the effect of your actions. That's why everything either prints &quot;ok&quot; or prints an informative error. It was a lot of work to put all of the reasons why something wasn't working. <strong>The second key is speed.</strong> You need speed of feedback. You need to know right away that what you did worked or didn't.</p>
+<p>And because the block game had fast feedback, <strong>my daughter could learn from it without anybody helping</strong>. The brute force approach (pick up a block and try every hole) worked pretty well because of the fast feedback. She could quickly find a success while she was figure out why that block went in at that time.</p>
+<p>Something else the block game got right was to make the entire problem space very tractable for its audience. You pick up a block and there are six possible holes it could fit in. <strong>That's really tractable.</strong> Worst case is you try every hole, which takes about 30 seconds. Contrast this with most programming language books that teach you the entire grammar of the language then ask you to do something. The worst case in that scenario is you have 34 different syntax cases to sort through to find the one that works. Not ideal.</p>
+<p>LispCast does something similar to the block game. You are taught <strong>only one small bit at a time</strong> (and often given a hint what bits you'll need). The space of programs you can write is limited, so it's often very clear how you would solve it. Complexity is built up very slowly.</p>
+<p>Well, my daughter got good at the blocks and you can get good at Clojure. Yes, it takes work, but the right tool can give you confidence and reduce frustration. I think <a href="http://www.purelyfunctional.tv/intro-to-clojure"><em>LispCast Introduction to Clojure</em></a> implements fast feedback better than anything else out there. I used to sell it individually but now it's rolled into [<em>PurelyFunctional.tv Online Mentoring</em>][ment]. With a $25/month subscription, you get access to <em>Intro to Clojure</em> and many more lessons. It's <strong>step-by-step guidance from Clojure Dabbler to Professional</strong>.</p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/4474202/submissions" method="post" data-drip-embedded-form="4474202"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+Free Getting Started with Clojure Email Course
+</h3>
+    <div data-drip-attribute="description">
+      
+It's designed to help you decide if Clojure will work for you, to get set up, and to explore some of its cooler features. <br /> <br /> Here are some of the topics:
+<ul>
+    <li>
+How to Read Code like a Clojure Expert
+</li>
+    <li>
+The Ultimate Guide to Learning Clojure for Free
+</li>
+    <li>
+How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popular
+</li>
+      </ul>
+    </div>
+    <div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" placeholder="Email" value="" /> <input type="submit" name="submit" value="Sign Up" data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+        }
+      });
+    </script>
+  </body>
+</html>

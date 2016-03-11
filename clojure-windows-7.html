@@ -133,18 +133,10 @@
 <p>Once you have downloaded the right Java version, run the executable you downloaded to install Java. Follow the installation wizard.</p>
 <h3 id="installing-leiningen">Installing Leiningen</h3>
 <p>Leiningen is a tool used on the command line to manage Clojure projects.</p>
-<p>Next, go back to <a href="http://leiningen-win-installer.djpowell.net/">the Leiningen Windows installer site</a> and download the file linked as &quot;leiningen-win-installer.&quot; Run this executable and follow the &quot;Detailed installation&quot; section at the Leiningen Windows Installer site. At the end of the installation, leave &quot;Run a Clojure REPL&quot; checked before you click &quot;Finish.&quot; If a terminal window opens that looks like the one on the Leiningen Windows installer site, then you are good to go.</p>
+<p>Next, go back to <a href="http://leiningen-win-installer.djpowell.net/">the Leiningen Windows installer site</a> and download the file linked as &quot;leiningen-win-installer.&quot; Run this executable and follow the &quot;Detailed installation&quot; section at the Leiningen Windows Installer site. At the end of the installation, leave &quot;Run a Clojure REPL&quot; checked before you click &quot;Finish.&quot; If a terminal window opens that looks like the one on the Leiningen Windows installer site, then you are good to go. If not, <a href="http://discuss.purelyfunctional.tv/">ask me for help</a>.</p>
 <h2 id="testing-your-setup">Testing your setup</h2>
 <p>You have set up Java and Leiningen on your computer--all the tools you will need to run Clojure. Before starting, we need to test them out. Make sure you have a command prompt open for testing. We will just call this a terminal from now on.</p>
 <p>Go to your command prompt and run the following command:</p>
-<p><code>git clone https://github.com/heroku/clojure-sample.git</code></p>
-<p>This will check out a sample Clojure application from GitHub, a central repository for lots of source code. Your terminal should look similar to this picture:</p>
-<div class="figure">
-<img src="http://www.lispcast.com/img/win7/testing-step1.png" alt="Testing git clone" /><p class="caption">Testing git clone</p>
-</div>
-<p>Then run the command:</p>
-<p><code>cd clojure-sample</code></p>
-<p>This will put you in the directory with the source code for this sample bit of Clojure code. After that completes, run:</p>
 <p><code>lein repl</code></p>
 <p>This could take a long time, and will download many other pieces of code it relies on. You should see lines that start with <code>Retrieving ...</code> on your screen. When it finishes, your terminal should look like the following:</p>
 <div class="figure">

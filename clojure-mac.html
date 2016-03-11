@@ -1,0 +1,214 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Installing Clojure on Mac OS X | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. I have adapted the Mac OS X instructions for my recommendations.">
+    <meta name="twitter:title" content="Installing Clojure on Mac OS X">
+
+    <meta property="og:title" content="Installing Clojure on Mac OS X">
+    <meta property="og:description" content="The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. I have adapted the Mac OS X instructions for my recommendations.">
+
+    <meta name="description" content="The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. I have adapted the Mac OS X instructions for my recommendations.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure-mac">
+            Installing Clojure on Mac OS X
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          March 11, 2016
+        </div>
+
+        
+<p>Summary: <em>The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. I have adapted the Mac OS X instructions for my recommendations.</em></p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>Start a terminal</li>
+<li>Make sure Java is installed</li>
+<li>Get Leiningen installed</li>
+<li>Test installation</li>
+</ul>
+<h3 id="starting-a-terminal">Starting a terminal</h3>
+<p>For these instructions, and for much of the class, you will need to have a terminal, or command line, open. This is a text-based interface to talk to your computer, and you can open it by running Terminal.app, which is found under <code>/Applications/Utilities</code>. If you have never used the terminal before, you may want to spend some time <a href="http://blog.teamtreehouse.com/command-line-basics">reading up on command-line basics</a>.</p>
+<p>Go ahead and open your terminal now. It should look something like this:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/os_x/blank_terminal.png" alt="blank terminal" /><p class="caption">blank terminal</p>
+</div>
+<p>The prompt (where you will type your commands) may look different: it usually shows the computer name and user name, as well as the folder or directory you are currently in.</p>
+<p>For the rest of this setup, I will tell you to run commands in your terminal. When I say that, I mean &quot;type the command into the terminal and press the Return key.&quot;</p>
+<h3 id="making-sure-java-is-installed">Making sure Java is installed</h3>
+<p>Run <code>java -version</code> in your terminal. If you do not have Java installed, OS X will prompt you to install it. Follow all of the directions OS X gives you, then return to this part of the tutorial and run <code>java -version</code> again.</p>
+<p>If Java is installed, you will see something like this in your terminal:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/os_x/java_version.png" alt="Java version" /><p class="caption">Java version</p>
+</div>
+<p>The details of Java's version may differ from what you see above; that is perfectly fine.</p>
+<h3 id="installing-leiningen">Installing Leiningen</h3>
+<p>Leiningen is a tool used on the command line to manage Clojure projects.</p>
+<p>To install <code>lein</code>, execute the following commands in your terminal. You will be prompted to enter your password.</p>
+<pre><code>curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein &gt; lein
+sudo mkdir -p /usr/local/bin/
+sudo mv lein /usr/local/bin/lein
+sudo chmod a+x /usr/local/bin/lein
+export PATH=$PATH:/usr/local/bin</code></pre>
+<p>After you run the above commands, run the <code>lein version</code> command. It should take a while to run, as it will download some resources it needs the first time. If it completes successfully, you are golden! If not, ask an instructor for help.</p>
+<h3 id="testing-your-setup">Testing your setup</h3>
+<p>You have set up Java and Leiningen on your computer--all the tools you will need to run Clojure. Before starting, we need to test them out.</p>
+<p>Go to your terminal and run the following command:</p>
+<pre><code>lein repl</code></pre>
+<p>This could take a long time, and will download many other pieces of code it relies on. You should see lines that start with <code>Retrieving ...</code> on your screen. When it finishes, your terminal should look like the following:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/os_x/testing-step2.png" alt="Testing lein repl" /><p class="caption">Testing lein repl</p>
+</div>
+<p>This is starting a REPL, which we will learn about soon. It's a special terminal for Clojure. At the REPL prompt, type <code>(+ 1 1)</code> and press Return. Did you get the answer <code>2</code> back? Great! Everything is working!</p>
+<p>For now, press the Control button and D button on your keyboard together (abbreviated as Ctrl+D). This should take you out of the Clojure REPL and back to your normal terminal prompt.</p>
+<p>Congratulations! You have Clojure working on your machine!</p>
+<h3 id="acknowledgements">Acknowledgements</h3>
+<p>These instructions have been adapated from the <a href="https://github.com/cndreisbach/clojurebridge-curriculum/blob/master/outline/setup.md">ClojureBridge Setup Guide</a>, part of the <a href="https://github.com/cndreisbach/clojurebridge-curriculum">ClojureBridge curriculum</a>. <a href="http://www.clojurebridge.org/">ClojureBridge</a> is an organization aimed at increasing the diversity of the Clojure community. They put on <a href="http://www.clojurebridge.org/">workshops around the world</a>. You should support them by <a href="http://www.clojurebridge.org/get-involved">volunteering</a> or <a href="http://www.clojurebridge.org/donate">donating</a>.</p>
+<p><a rel="license"
+href="http://creativecommons.org/licenses/by/4.0/deed.en_US"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br
+/><span xmlns:dct="http://purl.org/dc/terms/"
+href="http://purl.org/dc/dcmitype/Text" property="dct:title"
+rel="dct:type">ClojureBridge Curriculum</span> by <span
+xmlns:cc="http://creativecommons.org/ns#"
+property="cc:attributionName">ClojureBridge</span> is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a>.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+    <script src="/js/libs/codemirror.js" defer></script>
+    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
+    <script src="/js/mylibs/feedback.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+        }
+      });
+    </script>
+  </body>
+</html>

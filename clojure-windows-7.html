@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>Installing Clojure on Mac OS X | LispCast</title>
+    <title>Installing Clojure on Windows 7 | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Mac OS X instructions for my recommendations.">
-    <meta name="twitter:title" content="Installing Clojure on Mac OS X">
+    <meta name="twitter:description" content="The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Windows 7 instructions for my recommendations.">
+    <meta name="twitter:title" content="Installing Clojure on Windows 7">
 
-    <meta property="og:title" content="Installing Clojure on Mac OS X">
-    <meta property="og:description" content="The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Mac OS X instructions for my recommendations.">
+    <meta property="og:title" content="Installing Clojure on Windows 7">
+    <meta property="og:description" content="The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Windows 7 instructions for my recommendations.">
 
-    <meta name="description" content="The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Mac OS X instructions for my recommendations.">
+    <meta name="description" content="The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Windows 7 instructions for my recommendations.">
 
     <meta name="author" content="Eric Normand">
 
@@ -86,8 +86,8 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/clojure-mac">
-            Installing Clojure on Mac OS X
+             href="/clojure-windows-7">
+            Installing Clojure on Windows 7
           </a>
         </h2>
 
@@ -96,48 +96,61 @@
         </div>
 
         
-<p>Summary: <em>The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Mac OS X instructions for my recommendations.</em></p>
+<p>Summary: <em>The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Windows 7 instructions for my recommendations.</em></p>
 <h3 id="summary">Summary</h3>
 <ul>
-<li>Start a terminal</li>
-<li>Make sure Java is installed</li>
+<li>Start a command prompt</li>
+<li>Get Java installed</li>
 <li>Get Leiningen installed</li>
 <li>Test installation</li>
 </ul>
-<h3 id="starting-a-terminal">Starting a terminal</h3>
-<p>For these instructions, you will need to have a terminal, or command line, open. This is a text-based interface to talk to your computer, and you can open it by running Terminal.app, which is found under <code>/Applications/Utilities</code>. If you have never used the terminal before, you may want to spend some time <a href="http://blog.teamtreehouse.com/command-line-basics">reading up on command-line basics</a>.</p>
-<p>Go ahead and open your terminal now. It should look something like this:</p>
+<h3 id="starting-a-command-prompt">Starting a command prompt</h3>
+<p>For these instructions, you will need to have a command prompt open. This is a text-based interface to talk to your computer. Go to the Start Menu and type &quot;command&quot; in the search box. Choose the &quot;Command Prompt&quot; program, like in this screenshot:</p>
 <div class="figure">
-<img src="http://www.lispcast.com/img/os_x/blank_terminal.png" alt="blank terminal" /><p class="caption">blank terminal</p>
+<img src="http://www.lispcast.com/img/win7/starting-command-prompt.png" alt="Starting a command prompt" /><p class="caption">Starting a command prompt</p>
 </div>
-<p>The prompt (where you will type your commands) may look different: it usually shows the computer name and user name, as well as the folder or directory you are currently in.</p>
-<p>For the rest of this setup, I will tell you to run commands in your terminal. When I say that, I mean &quot;type the command into the terminal and press the Return key.&quot;</p>
-<h3 id="making-sure-java-is-installed">Making sure Java is installed</h3>
-<p>Run <code>java -version</code> in your terminal. If you do not have Java installed, OS X will prompt you to install it. Follow all of the directions OS X gives you, then return to this part of the tutorial and run <code>java -version</code> again.</p>
-<p>If Java is installed, you will see something like this in your terminal:</p>
+<p>When you choose &quot;Command Prompt,&quot; your screen should look similar to this:</p>
 <div class="figure">
-<img src="http://www.lispcast.com/img/os_x/java_version.png" alt="Java version" /><p class="caption">Java version</p>
+<img src="http://www.lispcast.com/img/win7/command-prompt.png" alt="Command prompt" /><p class="caption">Command prompt</p>
 </div>
-<p>The details of Java's version may differ from what you see above; that is perfectly fine.</p>
+<p>If you have never used the command prompt before, you may want to spend some time <a href="http://dosprompt.info/">reading up on command prompt basics</a>. For the rest of this setup, I will tell you to run commands in your command prompt. When I say that, I mean &quot;type the command into the command prompt and press the Return key.&quot;</p>
+<p>On other operating systems, the command prompt is called the terminal. We will use the terms terminal, command prompt, and command line interchangably.</p>
+<h3 id="installing-java">Installing Java</h3>
+<p>Go to <a href="http://leiningen-win-installer.djpowell.net/">the Leiningen Windows installer site</a>. You should see two links, one for installing Java and another for &quot;leiningen-win-installer.&quot; Click the Java link. Then, you should see a screen like the following:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/win/java-download1.png" alt="First page of Java download" /><p class="caption">First page of Java download</p>
+</div>
+<p>Click the button above &quot;Java Platform (JDK),&quot; as you can see in the above picture. Then you will come to a page that will have the following table on it:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/win/java-download2.png" alt="Second page of Java download" /><p class="caption">Second page of Java download</p>
+</div>
+<p>Click the radio button to accept the license agreement, and then download one of the two Windows choices. If you are running 32-bit Windows, choose &quot;Windows x86.&quot; If you are running 64-bit Windows, choose &quot;Windows x64.&quot;</p>
+<p>If you do not know if you are running 32-bit or 64-bit Windows, go to the Control Panel (Start Menu - Control Panel) and choose &quot;System and Security&quot; and then &quot;System.&quot; You should see a window like the following:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/win7/system-properties.png" alt="Windows My Computer properties" /><p class="caption">Windows My Computer properties</p>
+</div>
+<p>You should see if you are running 32- or 64-bit Windows beside &quot;System Type.&quot;</p>
+<p>Once you have downloaded the right Java version, run the executable you downloaded to install Java. Follow the installation wizard.</p>
 <h3 id="installing-leiningen">Installing Leiningen</h3>
 <p>Leiningen is a tool used on the command line to manage Clojure projects.</p>
-<p>To install <code>lein</code>, execute the following commands in your terminal. You will be prompted to enter your password.</p>
-<pre><code>curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein &gt; lein
-sudo mkdir -p /usr/local/bin/
-sudo mv lein /usr/local/bin/lein
-sudo chmod a+x /usr/local/bin/lein
-export PATH=$PATH:/usr/local/bin</code></pre>
-<p>After you run the above commands, run the <code>lein version</code> command. It should take a while to run, as it will download some resources it needs the first time. If it completes successfully, you are golden! If not, ask an instructor for help.</p>
-<h3 id="testing-your-setup">Testing your setup</h3>
-<p>You have set up Java and Leiningen on your computer--all the tools you will need to run Clojure. Before starting, we need to test them out. Make sure you have a terminal open for testing.</p>
-<p>Go to your terminal and run the following command:</p>
-<pre><code>lein repl</code></pre>
+<p>Next, go back to <a href="http://leiningen-win-installer.djpowell.net/">the Leiningen Windows installer site</a> and download the file linked as &quot;leiningen-win-installer.&quot; Run this executable and follow the &quot;Detailed installation&quot; section at the Leiningen Windows Installer site. At the end of the installation, leave &quot;Run a Clojure REPL&quot; checked before you click &quot;Finish.&quot; If a terminal window opens that looks like the one on the Leiningen Windows installer site, then you are good to go.</p>
+<h2 id="testing-your-setup">Testing your setup</h2>
+<p>You have set up Java and Leiningen on your computer--all the tools you will need to run Clojure. Before starting, we need to test them out. Make sure you have a command prompt open for testing. We will just call this a terminal from now on.</p>
+<p>Go to your command prompt and run the following command:</p>
+<p><code>git clone https://github.com/heroku/clojure-sample.git</code></p>
+<p>This will check out a sample Clojure application from GitHub, a central repository for lots of source code. Your terminal should look similar to this picture:</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/win7/testing-step1.png" alt="Testing git clone" /><p class="caption">Testing git clone</p>
+</div>
+<p>Then run the command:</p>
+<p><code>cd clojure-sample</code></p>
+<p>This will put you in the directory with the source code for this sample bit of Clojure code. After that completes, run:</p>
+<p><code>lein repl</code></p>
 <p>This could take a long time, and will download many other pieces of code it relies on. You should see lines that start with <code>Retrieving ...</code> on your screen. When it finishes, your terminal should look like the following:</p>
 <div class="figure">
-<img src="http://www.lispcast.com/img/os_x/testing-step2.png" alt="Testing lein repl" /><p class="caption">Testing lein repl</p>
+<img src="http://www.lispcast.com/img/win7/testing-step2.png" alt="Testing lein repl" /><p class="caption">Testing lein repl</p>
 </div>
-<p>This is starting a REPL, which we will learn about soon. It's a special terminal for Clojure. At the REPL prompt, type <code>(+ 1 1)</code> and press Return. Did you get the answer <code>2</code> back? Great! Everything is working!</p>
-<p>For now, press the Control button and D button on your keyboard together (abbreviated as Ctrl+D). This should take you out of the Clojure REPL and back to your normal terminal prompt.</p>
+<p>This is starting a REPL, which we will learn about soon. It's a special terminal for Clojure. At the REPL prompt, type <code>(+ 1 1)</code> and hit enter. Did you get the answer <code>2</code> back? You will learn more about that in the course. For now, press the Control button and D button on your keyboard together (abbreviated as Ctrl+D). This should take you out of the Clojure REPL and back to your normal terminal prompt.</p>
 <p>Congratulations! You have Clojure working on your machine!</p>
 <h3 id="acknowledgements">Acknowledgements</h3>
 <p>These instructions have been adapated from the <a href="https://github.com/cndreisbach/clojurebridge-curriculum/blob/master/outline/setup.md">ClojureBridge Setup Guide</a>, part of the <a href="https://github.com/cndreisbach/clojurebridge-curriculum">ClojureBridge curriculum</a>. <a href="http://www.clojurebridge.org/">ClojureBridge</a> is an organization aimed at increasing the diversity of the Clojure community. They put on <a href="http://www.clojurebridge.org/">workshops around the world</a>. You should support them by <a href="http://www.clojurebridge.org/get-involved">volunteering</a> or <a href="http://www.clojurebridge.org/donate">donating</a>.</p>

@@ -86,6 +86,149 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://www.youtube.com/playlist?list=PL7664379246A246CB&amp;feature=plcp">
+            Douglas Crockford on Javascript
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/douglas-crockford-amazing">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 21, 2012
+        </div>
+
+        
+<p>These are amazing. I learned so much about the browser and Javascript that I want to weep for the web.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/data-reusability">
+            On the configurations of data and functions
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 21, 2012
+        </div>
+
+        
+<p>Rich Hickey recently commented (I cannot remember where) that there are a limited number of useful configurations of data. He claimed that the Clojure literal syntax is just about right. The one thing to add to it is the extensibility that we now have with 1.4.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p>Part of the context was that we as programmers should be separating data from process. The separation makes our data more reusable. A string is a string in any language. An array is an array. Data is data and should be regarded as such. This allows for much more reuse than object oriented programming ever has. We can see the tremendous success of JSON as a case in point: a well-defined, constrained data language that gets it mostly right.</p>
+<p>But Hickey's point goes a little farther, I think. It is not just data that is reusable, but functions as well. Look at the enormous savings in the amount of code required to get a Swing app running when you use <a href="https://github.com/daveray/seesaw">Seesaw</a>. I am not just talking only about the incessant boilerplate anonymous class declarations Swing forces you to write. I am talking also about the fact that I can use any function to handle an event. I do not need to figure out what class the thing is expecting. Defining a subclass of a single class is inherently non-reusable.</p>
+<p>And it is not just that I don't need to know the class. I can use a function written in a library that has no dependencies on Swing or Seesaw at all. A function is just a function. It is universal and reusable, not because of some well-modeled domain classes, but because it is abstract and applies to no domain in particular.</p>
+<p>While Hickey is working on a universal, extensible data format, who is working on the universal function format?</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>See also <a href="https://github.com/edn-format/edn">EDN</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html">
+            Class AbstractSingletonProxyFactoryBean
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/class-abstractsingletonproxyfactorybean">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 20, 2012
+        </div>
+
+        
+<p>From the docs:</p>
+<blockquote>
+<p>Convenient proxy factory bean superclass for proxy factory beans that create only singletons.</p>
+<p>Manages pre- and post-interceptors (references, rather than interceptor names, as in ProxyFactoryBean) and provides consistent interface management.</p>
+</blockquote>
+<p>Good thing this is &quot;convenient&quot;.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="https://vimeo.com/45136212">
+            The Datomic Architecture and Data Model
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/the-datomic-architecture-and-data-model">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 20, 2012
+        </div>
+
+        
+<p>Rich Hickey:</p>
+<blockquote>
+<p>This is not a schema<em>less</em> system. There's no such thing as a schema<em>less</em> system. There are systems where you write your schema down and ones where you don't. There's no such thing as a schemaless database. So we do require you to be explicit about this part of your database.</p>
+</blockquote>
+<p>The issue is not whether a database needs an explicit schema. The issue is whether the language you write down your schema in can express the data model you would like to use.</p>
+<p>That said, the <a href="http://docs.datomic.com/schema.html">Datomic schemas</a>, along with the &quot;datom&quot; model, do look expressive.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.infoq.com/presentations/The-DCI-Architecture">
             The DCI Architecture: Lean and Agile at the Code Level
           </a>
@@ -328,180 +471,6 @@
         
 <p>Monads are not hard. But they are entirely abstract, and that makes them hard to grasp. Just as it requires a whole year of Algebra to accept that you can do math with letters instead of numbers, Monads usually defy written explanation.</p>
 <p>In this post, John Wiegly does a good job of explaining how Monads work with pictures. The visual explanation is slightly better than words. I think, though, that it just takes time, practice, and patience to build the necessary abstraction structures in your brain.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.infoq.com/presentations/Faith-Evolution-Programming-Languages">
-            Faith, Evolution, and Programming Languages
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/faith-evolution-and-programming-languages">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 21, 2012
-        </div>
-
-        
-<p>Philip Wadler explains the relationship between logic and programming, why everything is discovered twice, and what a programming language in an alternate universe might look like. (Hint: it's lambda calculus).</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.youtube.com/watch?v=agw-wlHGi0E">
-            Dynamic Languages Wizards Series - Panel on Language Design
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/dynamic-languages-wizards-series">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 20, 2012
-        </div>
-
-        
-<p>Cool talk on programming languages from 2001 featuring Paul Graham, John Maeda, Jonathan Reeves, and Guy Steele.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/introducing-playnice">
-            Introducing playnice
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 20, 2012
-        </div>
-
-        
-<h3 id="introduction">Introduction</h3>
-<p>Today I am happy to announce <a href="https://github.com/ericnormand/playnice"><code>playnice</code></a>, a Clojure library of tools to help build HTTP standards compliant servers.</p>
-<p>Existing libraries for developing web services focus mainly on ease. They try to make it easy to get started. They implement a naive, yet functional, version of the HTTP spec. It is basically the simplified understanding of HTTP that we all think in. A client makes requests to URLs, and the server responds with either an error or content.</p>
-<p>But the HTTP spec is more complete than merely matching URLs and methods. There are many error classes defined in the spec and much functionality dealing with the meta-level of the capabilities of the server itself. In addition, there are many <em>de facto</em> standards and workarounds that should be baked into the server.</p>
-<h3 id="philosophy">Philosophy</h3>
-<ol style="list-style-type: decimal">
-<li>Make it easier to serve HTTP standard responses without confounding HTTP logic with business logic.</li>
-<li>Make it easier for limited or non-standard clients to access resources.</li>
-<li>As much as possible separate orthogonal functionality into composable chunks.</li>
-</ol>
-<p><code>playnice</code> was named because it plays nice with others. The Web is a wide world, and there are lots of clients out there. You should follow the spec as closely as possible, but accept that not all clients are so strict. Also, there is a variety of input and output formats. You should play nice with them, if you can. <code>playnice</code> is a library to help Clojure programs play nice with the rest of the web.</p>
-<h3 id="playnice-opinions"><code>playnice</code> Opinions</h3>
-<ul>
-<li><p><em>URL first, method second.</em></p>
-<p>HTTP is about resources, which are identified by URLs. Different resources accept different methods. If a GET at a URL responds 200, but a POST is not supported, a 405 should be returned, not a 404.</p></li>
-<li><p><em>Routes are values that do not exist in the global namespace.</em></p>
-<p>Routes are immutable and first-class.</p></li>
-<li><p><em>The order of defining routes should not matter.</em></p>
-<p>Reordering my routes should not change the behavior of my server. Routes are declarative.</p></li>
-<li><p><em>Servers should support the OPTIONS method and correct handling of unsupported methods.</em></p>
-<p>OPTIONS returns the methods that are defined for a given URL.</p></li>
-<li><p><em>Servers should support the Accept and Content-type headers of requests.</em></p>
-<p>The handler is the wrong place to parse the Content-type header to figure out what kind of data you have been given. <code>playnice</code> currently supports HTML, JSON, TXT, and Clojure literals. I hope to have XML soon.</p></li>
-<li><p><em>Servers should support <em>de facto</em> standards and common workarounds.</em></p>
-<p>&quot;Redirecting after form post&quot; is a <em>de facto</em> standard for browsers. IE does not support DELETE method in AJAX, so the workaround is to do a POST with a special query parameter set to DELETE.</p></li>
-</ul>
-<h3 id="status">Status</h3>
-<p><code>playnice</code> is still in early development, but it already contains the following components:</p>
-<ul>
-<li>Route + method dispatch (replacing Compojure).</li>
-<li>Middleware for abstracting away input and output formats.</li>
-<li>Middleware for handling &quot;redirect after form post&quot;.</li>
-<li>Middleware for working around browser limitations.</li>
-</ul>
-<p>Please check out <a href="https://github.com/ericnormand/playnice"><code>playnice</code></a> if you need an HTTP compliant web server.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.free-variable.org/2012/08/i-remember-the-time-before-monads/">
-            I remember the time before monads
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/I-remember-the-time-before-monads">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 17, 2012
-        </div>
-
-        
-<p>Paul Callaghan:</p>
-<blockquote>
-<p>Callaghan’s 1st Law: the need for mutable state in a language is inversely proportional to its flexibility in manipulating data</p>
-<p>Put another way, mutable state is a lower-level idea and becomes less important when your language supports higher-level ways of working.</p>
-</blockquote>
-<p>Agreed.</p>
-<blockquote>
-<p>Experienced Haskell programmers know that the type system is a tool for getting work done, and a great language for playing with designs, and they exploit these aspects to help them get their work done.</p>
-</blockquote>
-<p>The key word in the sentence above is &quot;Experienced&quot;. It does take a long time to begin using the type system to your advantage.</p>
-<blockquote>
-<p>It was however a time of exploration, when researchers explored various ideas to find a good way of both having our cake and eating it. Monads are one of the solutions they found, and essentially gave us a small but flexible API for working with “computations” (like IO operations or state modifications, or various combinations thereof) as opposed to simple data values, and did so elegantly <em>within</em> the standard langage (ie. no ad hoc extensions needed). It got even better when syntactic sugar was added.</p>
-</blockquote>
-<p>Nice history lesson.</p>
-<p>The piece ends with some good advice:</p>
-<blockquote>
-<p>As a new explorer (very warm welcome, by the way!), when you look at Haskell material you may see some very unusual or scary-looking stuff. But do bear in mind that a lot of it is just playing around with abstractions on top of the core language, and probably does translate to something more intelligible. Try to work out what is being said about the data being manipulated, and then it might not look so bad.</p>
-</blockquote>
 
 
         <div class="endmark">

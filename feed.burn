@@ -9,6 +9,62 @@
 
 
                 <item>
+                  <title>Installing Clojure on Windows 8</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-windows-8</guid>
+                  <link>http://www.lispcast.com/clojure-windows-8</link>
+                  <pubDate>Fri 11 Mar 2016 11:29:43 AM CST</pubDate>
+                  <description>
+                    The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Windows 8 instructions for my recommendations.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-windows-8"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Installing Clojure on Mac OS X</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-mac</guid>
+                  <link>http://www.lispcast.com/clojure-mac</link>
+                  <pubDate>Fri 11 Mar 2016 11:28:57 AM CST</pubDate>
+                  <description>
+                    The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Mac OS X instructions for my recommendations.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-mac"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Installing Clojure on Ubuntu</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-ubuntu</guid>
+                  <link>http://www.lispcast.com/clojure-ubuntu</link>
+                  <pubDate>Fri 11 Mar 2016 11:27:10 AM CST</pubDate>
+                  <description>
+                    The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Ubuntu instructions for my recommendations.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-ubuntu"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
+                  <title>Installing Clojure on Windows 7</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-windows-7</guid>
+                  <link>http://www.lispcast.com/clojure-windows-7</link>
+                  <pubDate>Fri 11 Mar 2016 11:26:17 AM CST</pubDate>
+                  <description>
+                    The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Windows 7 instructions for my recommendations.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-windows-7"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>What my daughter's blocks teach us about learning</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojure-and-blocks</guid>
                   <link>http://www.lispcast.com/clojure-and-blocks</link>
@@ -87,62 +143,6 @@
                     There are two commonly used ways to create new data types in Clojure, deftype and defrecord. They are similar but are intended to be used in two distinct use cases. deftype is for programming constructs and defrecord is for domain constructs.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/deftype-vs-defrecord"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>What are macros?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/what-are-macros</guid>
-                  <link>http://www.lispcast.com/what-are-macros</link>
-                  <pubDate>Thu 03 Mar 2016 05:45:27 PM CST</pubDate>
-                  <description>
-                    Macros are one of the most talked about features of Lisp. They are a powerful way to extend the language without modifying the compiler.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-are-macros"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Locks vs Concurrency Primitives</title>
-                  <guid isPermalink="false">http://www.lispcast.com/locks-v-concurrency-primitives</guid>
-                  <link>http://www.lispcast.com/locks-v-concurrency-primitives</link>
-                  <pubDate>Mon 29 Feb 2016 05:23:08 PM CST</pubDate>
-                  <description>
-                    Many people have asked me why Clojure has concurrency primitives. Aren't locks good enough? A humorous metaphor is elaborated.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/locks-v-concurrency-primitives"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>All about clojure.set</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-set</guid>
-                  <link>http://www.lispcast.com/clojure-set</link>
-                  <pubDate>Sun 29 Feb 2016 4:00:54 AM CST</pubDate>
-                  <description>
-                    clojure.set is part of the standard library that comes with Clojure. It has functions for doing set operations and relational algebra.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-set"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>What is Clojure?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/what-is-clojure</guid>
-                  <link>http://www.lispcast.com/what-is-clojure</link>
-                  <pubDate>Sat 27 Feb 2016 10:19:45 AM CST</pubDate>
-                  <description>
-                    Clojure is a general purpose programming language designed for the fast-approaching future.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-is-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

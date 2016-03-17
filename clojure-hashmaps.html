@@ -15,13 +15,13 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="Clojure hashmaps are one of the workhorse data structures in Clojure. There are two main patterns commonly used. We also discuss">
+    <meta name="twitter:description" content="Clojure hashmaps are one of the workhorse data structures in Clojure. There are two main patterns commonly used. We also discuss some interesting properties.">
     <meta name="twitter:title" content="Clojure Hashmaps">
 
     <meta property="og:title" content="Clojure Hashmaps">
-    <meta property="og:description" content="Clojure hashmaps are one of the workhorse data structures in Clojure. There are two main patterns commonly used. We also discuss">
+    <meta property="og:description" content="Clojure hashmaps are one of the workhorse data structures in Clojure. There are two main patterns commonly used. We also discuss some interesting properties.">
 
-    <meta name="description" content="Clojure hashmaps are one of the workhorse data structures in Clojure. There are two main patterns commonly used. We also discuss">
+    <meta name="description" content="Clojure hashmaps are one of the workhorse data structures in Clojure. There are two main patterns commonly used. We also discuss some interesting properties.">
 
     <meta name="author" content="Eric Normand">
 
@@ -86,7 +86,7 @@
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/clojure-hash-maps">
+             href="/clojure-hashmaps">
             Clojure Hashmaps
           </a>
         </h2>
@@ -96,29 +96,28 @@
         </div>
 
         
-<p>some interesting properties.</p>
 <p>Summary: <em>Clojure hashmaps are one of the workhorse data structures in Clojure. There are two main patterns commonly used. We also discuss some interesting properties.</em></p>
 <p>Let's talk about the Clojure <em>hashmap</em>. It's one of the workhorses of Clojure. It's used for so many things, including records and indexes, two important patterns in any Clojure code. They also have some super powers in Clojure that make them interesting.</p>
-<p>Hashmaps are pretty common in languages these days. Sometimes they're called <em>maps</em>, <em>dictionaries</em>, or <em>associative arrays</em>. They associate keys to values. But that's a confusing way to put it because everything is a &quot;value&quot;, even the keys. That's what programmers say, though, and the APIs call it that, so let's just continue with the common nomenclature.</p>
-<p>Hashmaps are called dictionaries because they're kind of like a vocabulary dictionary. You have a word and you want to look up the definition. The dictionary is arranged in alphabetical order so it's fast to find the definition. It's similar in a hashmap. It's really fast to look up the key and get the value back. Going the other way is slow. If you know the definition, how do you find the word? You'd basically have to read the whole dictionary. It's the same for hashmaps. Finding the key given a value is super slow. You have to go through everything one at a time.</p>
+<p>Hashmaps are pretty common in languages these days. Sometimes they're called <em>maps</em>, <em>dictionaries</em>, or <em>associative arrays</em>. <strong>They associate keys to values.</strong> But that's a confusing way to put it because everything is a &quot;value&quot;, even the keys. That's what programmers say, though, and the APIs call it that, so let's just continue with the common nomenclature.</p>
+<p>Hashmaps are called dictionaries because they're kind of like a vocabulary dictionary. You have a word and you want to look up the definition. The dictionary is arranged in alphabetical order so it's fast to find the definition. It's similar in a hashmap. It's really fast to look up the key and get the value back. Going the other way is slow. If you know the definition, how do you find the word? You'd basically have to read the whole dictionary. It's the same for hashmaps. <strong>Finding the key given a value is super slow.</strong> You have to go through everything one at a time.</p>
 <p>In Clojure, hashmaps are used mainly in two different ways. The first way I'm going to call the <em>Record</em> pattern. The hashmap in the <em>Record</em> pattern is like a form you fill out at a doctor's office. Each form field has a name (the key) and a blank (where you put the value). When you fill it out, it becomes a record of your information. The doctor gets every patient to fill one out. They all have the same keys but different information.</p>
 <p>In Clojure, you could do something like this:</p>
 <pre id="patient1" class="code-card"><code>(def john {:first-name &quot;John&quot;
            :last-name &quot;Lennon&quot;
            :date-of-birth #inst &quot;1940-10-09&quot;})</code></pre>
-<div class="annotation-top" for="patient1" data-at="john">
+<div class="annotation-down" for="patient1" data-at="def j">
 name this value
 </div>
 
-<div class="annotation-top" for="patient1" data-at=":first">
+<div class="annotation-down" for="patient1" data-at=":first">
 keys are keywords
 </div>
 
-<div class="annotation-left" for="patient1" data-at="Eric">
+<div class="annotation-left" for="patient1" data-at="John">
 key/value pair
 </div>
 
-<div class="annotation-left" for="patient1" data-at="Normand">
+<div class="annotation-left" for="patient1" data-at="Lennon">
 key/value pair
 </div>
 
@@ -137,22 +136,30 @@ key/value pair
 <p>Now we can look up the patients by last name like so <code>(get by-last-name &quot;Harrison&quot;)</code>. If we have a bunch of patients and we want to index them, we can do it like this:</p>
 <pre id="zipmap" class="code-card"><code>(zipmap (map :last-name patients)
         patients)</code></pre>
-<div class="annotation-top" for="zipmap" data-at="zipmap">
+<div class="annotation-down" for="zipmap" data-at="z">
 make a hashmap
 </div>
 
-<div class="annotation-top" for="patient1" data-at=":first">
+<div class="annotation-left" for="zipmap" data-at=":last-name pa">
 list of keys
 </div>
 
-<div class="annotation-left" for="patient1" data-at="Eric">
+<div class="annotation-left" for="zipmap" data-at="patients">
 list of values
 </div>
 
 <p>See <a href="http://clojuredocs.org/clojure.core/zipmap"><code>zipmap</code></a> for more details.</p>
 <p>The <em>Index</em> pattern is a lot like a filing cabinet for patient records. The records themselves are filed by some identifier (in this case, last name). There are two things to note. 1. The types of keys are consistent (here, last name) and 2. the types of values are consistent (patient records). The notion of type, however, must be taken flexibly like it is in Clojure. The nice thing in Clojure is that the same record can be indexed in multiple places (it's just data, after all).</p>
 <p>Right, so those are the two main usage patterns for hashmaps in Clojure. You might also see a hybrid approach where the two patterns are combined. Hashmaps are so flexible that you often see these two patterns mixed and blended. I'm not a big fan of that but it does have its uses.</p>
-<p>Hashmaps are used so much in Clojure that it's required knowledge. But it's hard sometimes to know how hashmaps should be used. I hope identifying these two patterns helps you on your Clojure journey.</p>
+<p>Clojure hashmaps have some nice properties that you might want to rely on. Hashmaps, like other Clojure data structures, are <em>immutable</em>. That means they cannot change after they are created. When you want to add a new key/value pair, you make a new hashmap. That might seem expensive, but Clojure hashmaps are <em>persistent</em>, which means a hashmap that is modified from another hashmap shares most of the underlying data with the old one. That makes it very cheap to make modified copies. Finally, hashmaps can be called like functions. You pass the key as an argument and you get the value in return. This is sometimes useful.</p>
+<p>Hashmaps are used so much in Clojure that it's required knowledge. And it's hard sometimes to know how hashmaps should be used. I hope identifying these two patterns helps you on your Clojure journey. Clojure's hashmaps are also very powerful. They're immutable and fast.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+</ul>
 
 
         <div class="endmark">
@@ -173,6 +180,10 @@ list of values
     </div>
 
     <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/clojure-windows-8">
+        previous
+      </a>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

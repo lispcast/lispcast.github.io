@@ -197,9 +197,6 @@ You'll also get some free Clojure goodies and information about upcoming courses
 
     </script>
     <script src="/js/mylibs/annotated-code.js" defer></script>
-    <script src="/js/libs/codemirror.js" defer></script>
-    <link rel="stylesheet" href="/css/feedback.css" type="text/css">
-    <script src="/js/mylibs/feedback.js" defer></script>
 
     <!-- Drip -->
     <script type="text/javascript">
@@ -222,5 +219,16 @@ You'll also get some free Clojure goodies and information about upcoming courses
         }
       });
     </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+</script>
   </body>
 </html>

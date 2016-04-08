@@ -242,7 +242,10 @@ You'll also get some free Clojure goodies and information about upcoming courses
         if(mixpanel) {
           mixpanel.register({Email: data['fields[email]']});
           mixpanel.track('Drip Subscription');
-        }
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
       });
     </script>
     <script>

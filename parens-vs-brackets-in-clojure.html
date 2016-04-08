@@ -277,7 +277,10 @@ Sign up below and you'll get access to the <em>Clojure Resource Center</em> wher
         if(mixpanel) {
           mixpanel.register({Email: data['fields[email]']});
           mixpanel.track('Drip Subscription');
-        }
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
       });
     </script>
     <script>

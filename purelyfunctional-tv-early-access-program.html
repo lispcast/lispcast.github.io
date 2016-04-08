@@ -240,7 +240,10 @@ No spam. Ever.
         if(mixpanel) {
           mixpanel.register({Email: data['fields[email]']});
           mixpanel.track('Drip Subscription');
-        }
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
       });
     </script>
     <script>

@@ -220,7 +220,10 @@ How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popu
         if(mixpanel) {
           mixpanel.register({Email: data['fields[email]']});
           mixpanel.track('Drip Subscription');
-        }
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
       });
     </script>
     <script>

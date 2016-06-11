@@ -123,17 +123,20 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>clojure.spec takes a different approach. It's not a Data DSL. Specs do not aim to look like the data they are describing. The library is a collection of small tools that do different jobs that can be used together. There is a tool for maps (called <a href="https://clojure.github.io/clojure/branch-master/clojure.spec-api.html#clojure.spec/keys"><code>keys</code></a>) that checks for the presence of required and optional keys and checks that their values conform to the named attribute. There is a tool for sequences that uses regular expression operators. And, at bottom, conformance is checked by predicate functions.</p>
 <pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="co">;; Schema</span>
 (<span class="kw">def</span><span class="fu"> Person </span>{<span class="kw">:first-name</span> s/String
-                     <span class="kw">:last-name</span> s/String
-                     <span class="kw">:email</span> <span class="st">#&quot;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}&quot;</span>
-                     (s/optional-key <span class="kw">:phone</span>) s/String})</code></pre>
+             <span class="kw">:last-name</span> s/String
+             <span class="kw">:email</span> <span class="st">#&quot;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}&quot;</span>
+             (s/optional-key <span class="kw">:phone</span>) s/String})</code></pre>
 <pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="co">;; clojure.spec</span>
 (s/def <span class="kw">:com</span>.lispcast.person/first-name <span class="kw">string?</span>)
 (s/def <span class="kw">:com</span>.lispcast.person/last-name <span class="kw">string?</span>)
 (s/def <span class="kw">:com</span>.lispcast.person/email (s/and <span class="kw">string?</span> #(<span class="kw">re-matches</span> <span class="st">#&quot;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}&quot;</span> %)))
 (s/def <span class="kw">:com</span>.lispcast.person/phone <span class="kw">string?</span>)
 
-(s/def <span class="kw">:com</span>.lispcast/person (s/keys <span class="kw">:req</span> [<span class="kw">:com</span>.lispcast.person/first-name <span class="kw">:com</span>.lispcast.person/last-name <span class="kw">:com</span>.lispcast.person/email]
-                                                        <span class="kw">:opt</span> [<span class="kw">:com</span>.lispcast.person/phone]))</code></pre>
+(s/def <span class="kw">:com</span>.lispcast/person
+  (s/keys <span class="kw">:req</span> [<span class="kw">:com</span>.lispcast.person/first-name
+                <span class="kw">:com</span>.lispcast.person/last-name
+                <span class="kw">:com</span>.lispcast.person/email]
+          <span class="kw">:opt</span> [<span class="kw">:com</span>.lispcast.person/phone]))</code></pre>
 <p>This example is borrowed and modified from the <a href="http://clojure.org/guides/spec">spec Guide</a>.</p>
 <p>In this simple example, I think I prefer Schema. Its intention is much clearer. However, once the Schema meets the real world, it turns out that you can throw the &quot;your Schema looks like the data&quot; pipe dream out the window. For instance, what if we need <em>either</em> an email <em>or</em> a phone <em>or both</em>. In Schema, that means they're both optional, but that you need an extra check afterward, which kind of ruins the elegance of the DSL. You're trying to specify that <strong>the phone and email have a relationship</strong> to each other. The presence of the keys are interdependent. There are several ways to do it in Schema. And I don't like any of them.</p>
 <p>In clojure.spec, the <code>and</code> can operate on the values already parsed. Carin Meier has a great example of constraining different values to be in relationship in <a href="http://gigasquidsoftware.com/blog/2016/05/29/one-fish-spec-fish/">One Fish Spec Fish</a>.</p>

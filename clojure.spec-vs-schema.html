@@ -15,13 +15,13 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="Schema and clojure.spec aim to solve similar problems. There are significant differences, though, that might not be obvious at first.">
     <meta name="twitter:title" content="5 Differences between clojure.spec and Schema">
 
     <meta property="og:title" content="5 Differences between clojure.spec and Schema">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="Schema and clojure.spec aim to solve similar problems. There are significant differences, though, that might not be obvious at first.">
 
-    <meta name="description" content="">
+    <meta name="description" content="Schema and clojure.spec aim to solve similar problems. There are significant differences, though, that might not be obvious at first.">
 
     <meta name="author" content="Eric Normand">
 
@@ -114,9 +114,9 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
         </div>
 
         
-<p>Summary: **</p>
-<p>Schema came out in 2014 and I started using it right away. At the company I was working at, we had a few API endpoints and we were having the classic problem of having to write custom checkers for our data. Schema seemed to solve the problem of describing the shape of the data, along with expected types at the leaves. Because it was mostly just data, it composed well. For instance, you could <code>def</code> an <code>Address</code> schema and reuse it wherever you needed an address. We also experimented with the coercion facilities of Schema to convert data from the JSON endpoint into better Clojure equivalents. For instance, we converted date strings to <code>java.util.Date</code> objects.</p>
-<p>That was two years ago and Schema has since been used quite widely. It's used in many talks at Clojure conferences. And in general, it felt like it solved the problem pretty well, across Clojure and ClojureScript. Now, out of the blue, the Clojure team <a href="http://blog.cognitect.com/blog/2016/5/23/introducing-clojurespec">announced clojure.spec</a>. I know when Rich Hickey writes a blog post, it's something important and insightful. So I take it seriously and try to parse it. And let me say, I had some trouble. It's apparent that <strong>Rich went deeper than I have on this problem</strong>.</p>
+<p>Summary: <em>Schema and clojure.spec aim to solve similar problems. There are significant differences, though, that might not be obvious at first.</em></p>
+<p>Schema came out in 2013 and I started using it right away. At the company I was working at, we had a few API endpoints and we were having the classic problem of having to write custom checkers for our data. Schema seemed to solve the problem of describing the shape of the data, along with expected types at the leaves. Because it was mostly just data, it composed well. For instance, you could <code>def</code> an <code>Address</code> schema and reuse it wherever you needed an address. We also experimented with the coercion facilities of Schema to convert data from the JSON endpoint into better Clojure equivalents. For instance, we converted date strings to <code>java.util.Date</code> objects.</p>
+<p>That was three years ago and Schema has since been used quite widely. It's used in many talks at Clojure conferences. And in general, it felt like it solved the problem pretty well, across Clojure and ClojureScript. Now, out of the blue, the Clojure team <a href="http://blog.cognitect.com/blog/2016/5/23/introducing-clojurespec">announced clojure.spec</a>. I know when Rich Hickey writes a blog post, it's something important and insightful. So I take it seriously and try to parse it. And let me say, I had some trouble. It's apparent that <strong>Rich went deeper than I have on this problem</strong>.</p>
 <p>In order to understand clojure.spec a little better, it helped me to compare it to Schema, which I already understood. Here are the main points of similarity and differences:</p>
 <h3 id="clojure.spec-is-not-a-data-dsl.">1. clojure.spec is not a &quot;data dsl&quot;.</h3>
 <p>Schema focuses foremost on describing a data shape by using data in that shape. It is a &quot;Data DSL&quot;, where a map means &quot;expect a map&quot; and a vector means &quot;expect a vector&quot;. That means that the schema looks similar to the data it specifies.</p>

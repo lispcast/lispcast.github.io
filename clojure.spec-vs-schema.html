@@ -146,8 +146,7 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p><strong>Takeaway:</strong> Rich Hickey clearly stated that we should be naming specs for global consumption in the <a href="http://blog.cognitect.com/cognicast/103">Cognicast interview</a>. I'm not sure what my position is on this, but I trust he's thought about it more than I have. I will definitely have to play with it before I come to an opinion.</p>
 <h3 id="clojure.spec-has-powerful-sequence-validation.">3. clojure.spec has powerful sequence validation.</h3>
 <p>clojure.spec has a full suite of regular expression operators for describing data in a sequence. While in general, vectors tend to be either <em>homogeneous</em> (e.g., a vector of Strings) or used as <em>tuples</em> (e.g., <code>[:person &quot;Luke&quot; &quot;Skywalker&quot;]</code>), clojure.spec does not forget that code is data, too. And code means complex lists. Look at the usage string from <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/defn"><code>clojure.core/defn</code></a>:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">defn</span><span class="fu"> name </span>doc-string? attr-map? ([params*] prepost-map?
-body) <span class="kw">+</span> attr-map?) </code></pre>
+<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">defn</span><span class="fu"> name </span>doc-string? attr-map? ([params*] prepost-map? body) <span class="kw">+</span> attr-map?) </code></pre>
 <p>It is clearly expressed with regex operations in mind. It uses <code>?</code>, <code>*</code>, and <code>+</code>, which are classical symbols for regex operators. clojure.spec makes writing a checker to validate <code>defn</code> forms a straightforward translation of this documentation.</p>
 <p>Schema did have some useful <a href="https://github.com/plumatic/schema#sequence-schema-details">operators for talking about heterogeneous vectors</a>. But they were nowhere near as powerful as regular expressions.</p>
 <pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="co">;; Schema spec with heretogeneous vector</span>
@@ -167,6 +166,34 @@ body) <span class="kw">+</span> attr-map?) </code></pre>
 <p><strong>Takeaway:</strong> I will be more confident in my code when I use clojure.spec. I think it's going to make generative testing more accessible, as well. It's not that generative testing is hard, but the learning curve on spec is easier. <a href="https://clojure.github.io/clojure/branch-master/clojure.spec-api.html#clojure.spec/fdef"><code>clojure.spec/fdef</code></a> and <a href="https://clojure.github.io/clojure/branch-master/clojure.spec-api.html#clojure.spec/fspec"><code>clojure.spec/fspec</code></a> will test functions given specs.</p>
 <p><strong>Conclusions</strong></p>
 <p>I'll confess: when I first saw clojure.spec, I was neither impressed nor excited. I was more baffled than anything. Was <em>this</em> what the Clojure team was working on? Weren't there more pressing matters? But when I read what the core team had produced, worked through the API docs, and listened to the Rich Hickey interview, I started to see some exciting possibilities. I'm really happy this is getting attention as a language feature. It shows that the team is listening to the community.</p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/1194631/submissions" method="post" data-drip-embedded-form="1194631"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+Free Clojure Learning Resources
+</h3>
+    <div data-drip-attribute="description">
+      <div style="float:right; width:250px; max-width:25%">
+        
+<img src="http://www.lispcast.com/img/clojure expr flashcard.png" style="width:100%"> <img src="http://www.lispcast.com/img/clj-refactor cheatsheet.png" style="width:100%">
+</div>
+      
+Sign up below and you'll get access to the <em>Clojure Resource Center</em> where I collect reference sheets and flashcards for learning Clojure, including the <b>Top 100 Clojure Expressions</b> flashcards and the <b>clj-refactor cheatsheet</b>. I'll also send you other information about learning Clojure and figuring out if Clojure is for you.
+</div>
+    
+<br>
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
 
 
         <div class="endmark">

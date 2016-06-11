@@ -1,0 +1,241 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>5 Differences between clojure.spec and Schema | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="5 Differences between clojure.spec and Schema">
+
+    <meta property="og:title" content="5 Differences between clojure.spec and Schema">
+    <meta property="og:description" content="">
+
+    <meta name="description" content="">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure.spec-vs-schema">
+            5 Differences between clojure.spec and Schema
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          June 11, 2016
+        </div>
+
+        
+<p>Summary: **</p>
+<p>Schema came out in 2014 and I started using it right away. At the company I was working at, we had a few API endpoints and we were having the classic problem of having to write custom checkers for our data. Schema seemed to solve the problem of describing the shape of the data, along with expected types at the leaves. Because it was mostly just data, it composed well. For instance, you could <code>def</code> an <code>Address</code> schema and reuse it wherever you needed an address. We also experimented with the coercion facilities of Schema to convert data from the JSON endpoint into better Clojure equivalents. For instance, we converted date strings to <code>java.util.Date</code> objects.</p>
+<p>That was two years ago and Schema has since been used quite widely. It's used in many talks at Clojure conferences. And in general, it felt like it solved the problem pretty well, across Clojure and ClojureScript. Now, out of the blue, the Clojure team <a href="http://blog.cognitect.com/blog/2016/5/23/introducing-clojurespec">announced clojure.spec</a>. I know when Rich Hickey writes a blog post, it's something important and insightful. So I take it seriously and try to parse it. And let me say, I had some trouble. It's apparent that <strong>Rich went deeper than I have on this problem</strong>.</p>
+<p>In order to understand clojure.spec a little better, it helped me to compare it to Schema, which I already understood. Here are the main points of similarity and differences:</p>
+<h3 id="clojure.spec-is-not-a-data-dsl.">1. clojure.spec is not a &quot;data dsl&quot;.</h3>
+<p>Schema focuses foremost on describing a data shape by using data in that shape. It is a &quot;Data DSL&quot;, where a map means &quot;expect a map&quot; and a vector means &quot;expect a vector&quot;. That means that the schema looks similar to the data it specifies.</p>
+<p>clojure.spec takes a different approach. It's not a Data DSL. Specs do not aim to look like the data they are describing. The library is a collection of small tools that do different jobs that can be used together. There is a tool for maps (called <a href="https://clojure.github.io/clojure/branch-master/clojure.spec-api.html#clojure.spec/keys"><code>keys</code></a>) that checks for the presence of required and optional keys and checks that their values conform to the named attribute. There is a tool for sequences that uses regular expression operators. And, at bottom, conformance is checked by predicate functions.</p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="co">;; Schema</span>
+(<span class="kw">def</span><span class="fu"> Person </span>{<span class="kw">:first-name</span> s/String
+                     <span class="kw">:last-name</span> s/String
+                     <span class="kw">:email</span> <span class="st">#&quot;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}&quot;</span>
+                     (s/optional-key <span class="kw">:phone</span>) s/String})</code></pre>
+<pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="co">;; clojure.spec</span>
+(s/def <span class="kw">:com</span>.lispcast.person/first-name <span class="kw">string?</span>)
+(s/def <span class="kw">:com</span>.lispcast.person/last-name <span class="kw">string?</span>)
+(s/def <span class="kw">:com</span>.lispcast.person/email (s/and <span class="kw">string?</span> #(<span class="kw">re-matches</span> <span class="st">#&quot;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}&quot;</span> %)))
+(s/def <span class="kw">:com</span>.lispcast.person/phone <span class="kw">string?</span>)
+
+(s/def <span class="kw">:com</span>.lispcast/person (s/keys <span class="kw">:req</span> [<span class="kw">:com</span>.lispcast.person/first-name <span class="kw">:com</span>.lispcast.person/last-name <span class="kw">:com</span>.lispcast.person/email]
+                                                        <span class="kw">:opt</span> [<span class="kw">:com</span>.lispcast.person/phone]))</code></pre>
+<p>This example is borrowed and modified from the <a href="http://clojure.org/guides/spec">spec Guide</a>.</p>
+<p>In this simple example, I think I prefer Schema. Its intention is much clearer. However, once the Schema meets the real world, it turns out that you can throw the &quot;your Schema looks like the data&quot; pipe dream out the window. For instance, what if we need <em>either</em> an email <em>or</em> a phone <em>or both</em>. In Schema, that means they're both optional, but that you need an extra check afterward, which kind of ruins the elegance of the DSL. You're trying to specify that <strong>the phone and email have a relationship</strong> to each other. The presence of the keys are interdependent. There are several ways to do it in Schema. And I don't like any of them.</p>
+<p>In clojure.spec, the <code>and</code> can operate on the values already parsed. Carin Meier has a great example of constraining different values to be in relationship in <a href="http://gigasquidsoftware.com/blog/2016/05/29/one-fish-spec-fish/">One Fish Spec Fish</a>.</p>
+<p><strong>Takeaway:</strong> I'm interested to see what uses these smaller pieces can be put to. I don't understand them well enough yet. I look forward to experimenting with them.</p>
+<h3 id="clojure.spec-prefers-namespaced-keywords.">2. clojure.spec prefers namespaced keywords.</h3>
+<p>While both clojure.spec and Schema allow namespaced and un-namespaced keywords, clojure.spec clearly encourages a global semantic for a unique keyword. The <code>keys</code> function takes a list of required keywords which must be namespaced. Those keywords play double-duty. They check for the presence of required keys <em>and</em> they name the spec that the value must conform to. Schema is more relaxed and does not show that preference for namespaced keys.</p>
+<p><strong>Takeaway:</strong> Rich Hickey clearly stated that we should be naming specs for global consumption in the <a href="http://blog.cognitect.com/cognicast/103">Cognicast interview</a>. I'm not sure what my position is on this, but I trust he's thought about it more than I have. I will definitely have to play with it before I come to an opinion.</p>
+<h3 id="clojure.spec-has-powerful-sequence-validation.">3. clojure.spec has powerful sequence validation.</h3>
+<p>clojure.spec has a full suite of regular expression operators for describing data in a sequence. While in general, vectors tend to be either <em>homogeneous</em> (e.g., a vector of Strings) or used as <em>tuples</em> (e.g., <code>[:person &quot;Luke&quot; &quot;Skywalker&quot;]</code>), clojure.spec does not forget that code is data, too. And code means complex lists. Look at the usage string from <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/defn"><code>clojure.core/defn</code></a>: <code>clojure (defn name doc-string? attr-map? ([params*] prepost-map? body) + attr-map?)</code> It is clearly expressed with regex operations in mind. It uses <code>?</code>, <code>*</code>, and <code>+</code>, which are classical symbols for regex operators. clojure.spec makes writing a checker to validate <code>defn</code> forms a straightforward translation of this documentation.</p>
+<p>Schema did have some useful <a href="https://github.com/plumatic/schema#sequence-schema-details">operators for talking about heterogeneous vectors</a>. But they were nowhere near as powerful as regular expressions.</p>
+<pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="co">;; Schema spec with heretogeneous vector</span>
+(<span class="kw">def</span><span class="fu"> FancySeq</span>
+  <span class="st">&quot;A sequence that starts with a String, followed by an optional Keyword,</span>
+<span class="st">   followed by any number of Numbers.&quot;</span>
+  [(s/one s/Str <span class="st">&quot;s&quot;</span>)
+   (s/optional s/Keyword <span class="st">&quot;k&quot;</span>)
+   s/Num])</code></pre>
+<p>This example comes from the <a href="https://github.com/plumatic/schema#sequence-schema-details">Schema readme</a>.</p>
+<p><strong>Takeaway:</strong> Because it will be so easy to describe the expected arguments to a macro, we should expect better error messages in macros in the core library and beyond. <a href="https://www.youtube.com/watch?v=o75g9ZRoLaw">Jonathan Claggett and Chris Houser demonstrated</a> something similar with <a href="https://github.com/jclaggett/seqex">Sequence Expressions</a>. And <a href="https://www.youtube.com/watch?v=kt4haSH2xcs">Colin Fleming uses full recursive grammars</a> to parse macros in Cursive. Another bonus is that specs can be attached to functions and macros without modifying code using <a href="https://clojure.github.io/clojure/branch-master/clojure.spec-api.html#clojure.spec/fdef"><code>clojure.spec/fdef</code></a>.</p>
+<h3 id="clojure.spec-combines-checking-with-parsing.">4. clojure.spec combines checking with parsing.</h3>
+<p>So often, when writing a macro, I need to parse out the pieces of the arguments that I need for each section of logic. clojure.spec requires that you name each piece of the regular expression. <code>clojure.spec/conform</code> uses those names to create a map of all of the pieces. So you're checking that the arguments conform as well as parsing it into parts. And since it's a regular expression, it's pretty powerful. Schema doesn't really check sequences like that. Check out <a href="http://swannodette.github.io/2016/06/03/tools-for-thought">David Nolen's comments on clojure.spec</a> for an example of parsing.</p>
+<p><strong>Takeaway:</strong> The parsing feature is going to be really important. Regular expressions are great for defining a set of inputs far larger than the expression itself. There are branching and backtracking built in. I'm really excited for what this means for macros. They'll be easier to make and have better error messages.</p>
+<h3 id="clojure.spec-has-tight-test.check-integration.">5. clojure.spec has tight test.check integration.</h3>
+<p>test.check is Clojure's implementation of generative testing. I really like generative testing. It covers a large number of cases with higher-order properties. clojure.spec specs can automatically be turned into test.check generators. If you define specs for the arguments and return value of a function, the function can be tested automatically.</p>
+<p><strong>Takeaway:</strong> I will be more confident in my code when I use clojure.spec. I think it's going to make generative testing more accessible, as well. It's not that generative testing is hard, but the learning curve on spec is easier. <a href="https://clojure.github.io/clojure/branch-master/clojure.spec-api.html#clojure.spec/fdef"><code>clojure.spec/fdef</code></a> and <a href="https://clojure.github.io/clojure/branch-master/clojure.spec-api.html#clojure.spec/fspec"><code>clojure.spec/fspec</code></a> will test functions given specs.</p>
+<p><strong>Conclusions</strong></p>
+<p>I'll confess: when I first saw clojure.spec, I was neither impressed nor excited. I was more baffled than anything. Was <em>this</em> what the Clojure team was working on? Weren't there more pressing matters? But when I read what the core team had produced, worked through the API docs, and listened to the Rich Hickey interview, I started to see some exciting possibilities. I'm really happy this is getting attention as a language feature. It shows that the team is listening to the community.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

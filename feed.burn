@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>5 Differences between clojure.spec and Schema</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure.spec-vs-schema</guid>
+                  <link>http://www.lispcast.com/clojure.spec-vs-schema</link>
+                  <pubDate>Sat 11 Jun 2016 01:06:47 PM CDT</pubDate>
+                  <description>
+                    Schema and clojure.spec aim to solve similar problems. There are significant differences, though, that might not be obvious at first.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure.spec-vs-schema"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Clojure Hashmaps</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojure-hashmaps</guid>
                   <link>http://www.lispcast.com/clojure-hashmaps</link>
@@ -129,20 +143,6 @@
                     LispCast Introduction to Clojure teaches Clojure with an &quot;interactive bakery simulation&quot;. The reason is that metaphors that you can embody are a great way to learn abstract things like programming.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/interactive-baking"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Why I start teaching Clojure with Imperative Programming</title>
-                  <guid isPermalink="false">http://www.lispcast.com/imperative-intro</guid>
-                  <link>http://www.lispcast.com/imperative-intro</link>
-                  <pubDate>Thu 03 Mar 2016 09:58:50 PM CST</pubDate>
-                  <description>
-                    LispCast Introduction to Clojure starts with 30 minutes of imperative programming. We write programs for their effects, so imperative is a great place to start.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/imperative-intro"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

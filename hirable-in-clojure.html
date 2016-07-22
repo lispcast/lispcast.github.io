@@ -1,0 +1,270 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>What do I have to learn to be hirable in Clojure? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="You actually need to learn nothing. But it's more complicated than that. This article will show you what can set you apart.">
+    <meta name="twitter:title" content="What do I have to learn to be hirable in Clojure?">
+
+    <meta property="og:title" content="What do I have to learn to be hirable in Clojure?">
+    <meta property="og:description" content="You actually need to learn nothing. But it's more complicated than that. This article will show you what can set you apart.">
+
+    <meta name="description" content="You actually need to learn nothing. But it's more complicated than that. This article will show you what can set you apart.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/hirable-in-clojure">
+            What do I have to learn to be hirable in Clojure?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          July 22, 2016
+        </div>
+
+        
+<p>Summary: <em>You actually need to learn nothing. But it's more complicated than that. This article will show you what can set you apart.</em></p>
+<p>From a reader:</p>
+<blockquote>
+<p>I'm currently working as a software developer in Ruby but I would love to work in Clojure, though I'm not very good at it. Unfortunately, I don't think my company would be switching to Clojure any time soon. And I also don't have much free time to work on Clojure. What do I have to learn to be hirable in Clojure?</p>
+</blockquote>
+<p>This is kind of a trick question. The reason it's a trick question is technically you need <em>zero</em> Clojure knowledge to get a job in Clojure. I know this because I just met someone who was hired right out of a Rails internship into an existing Clojure codebase. <sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> He had absolutely no Clojure experience.</p>
+<p>I talk to a lot of people who work in Clojure and are hiring for Clojure. There's two broad categories of experience requirements for those jobs.</p>
+<h3 id="they-want-experienced-clojure-programmers.">1. They want experienced Clojure programmers.</h3>
+<p>You'll find jobs like this for a couple of reasons. Sometimes they want to <strong>replace an experienced programmer who is leaving</strong>. And sometimes they're just starting up and want to <strong>hit the ground running</strong>. I have also seen it where the CTO likes Clojure but wants <strong>someone better than them</strong> because Clojure is new ground.</p>
+<p>For these jobs, they're really looking for someone with a solid Clojure skills.</p>
+<h3 id="there-is-no-clojure-experience-required.">2. There is no Clojure experience required.</h3>
+<p>This category is more interesting. You'll often hear them say they're <strong>&quot;looking for good people&quot;</strong>. They know it will be *<em>hard to find experienced Clojure programmers</em>.</p>
+<p>For these jobs they are willing to invest time and money <em>making you a Clojure programmer</em>. You will be paid to learn Clojure, often working with mentors.</p>
+<p>Clojure experience will help, of course. I can only imagine the second type gets way more applications, so you'll want to stand out. But still, you don't need Clojure experience. Here are some things that will make you stand out. These are arranged roughly in order from the most powerful to the least.</p>
+<h3 id="clojure-experience.">1. Clojure experience.</h3>
+<p><strong>&quot;Finished&quot; projects on Github.</strong></p>
+<p>These don't have to take long. They don't need to be complicated. Just show that you can make things happen with Clojure.</p>
+<p><em>Bonus points for</em></p>
+<ul>
+<li><a href="https://purelyfunctional.tv/web-dev-in-clojure/making-a-complete-app/">Using a database</a></li>
+<li><a href="https://purelyfunctional.tv/clojure-in-one-hour/clojure-twitter-bot/">Hitting an external API</a></li>
+<li><a href="https://purelyfunctional.tv/courses/concurrency/">Using multiple threads</a></li>
+<li><a href="https://purelyfunctional.tv/web-dev-in-clojure/lets-get-a-server-up-and-running-in-the-cloud/">Deploying to Heroku/a server</a></li>
+<li>Writing a <a href="https://purelyfunctional.tv/clojure-in-one-hour/luminus-in-one-hour/">web app with Clojure</a> + <a href="https://purelyfunctional.tv/clojure-in-one-hour/re-frame-in-one-hour/">ClojureScript</a></li>
+</ul>
+<h3 id="other-lisps">2. Other Lisps</h3>
+<p>At the very least, this shows that you know what you're getting into. Even a college course or some completed exercises in SICP would help.</p>
+<p><em>Bonus points for</em></p>
+<ul>
+<li><a href="https://purelyfunctional.tv/courses/clojure-macros/">Macros</a></li>
+<li>Solving interesting problems (with code on GitHub!)</li>
+</ul>
+<h3 id="other-functional-programming-experience">3. Other Functional Programming experience</h3>
+<p>Haskell, Erlang, Scala -- heck,e ven functional JavaScript or Java 8 streams will be impressive.</p>
+<p><em>Bonus points for</em></p>
+<ul>
+<li>Knowing your <a href="https://purelyfunctional.tv/courses/3-functional-tools/">3 functional tools</a> (map, filter, reduce)</li>
+<li>Using <a href="https://purelyfunctional.tv/courses/modeling-solitaire-in-clojure/">immutable data structures</a> to model a problem</li>
+</ul>
+<h3 id="jvm-experience">4. JVM experience</h3>
+<p>Clojure runs on the JVM, and there's just a lot of little details about how objects work, how the JVM is deployed, and all of that stuff that comes in handy when programming Clojure. It could help you stand out a little.</p>
+<p><em>Bonus points for</em></p>
+<ul>
+<li>Delpying JVM applications</li>
+<li>Using JVM languages besides Java</li>
+<li>Programming with Java 8 streams</li>
+<li>Configuring the JVM</li>
+</ul>
+<h3 id="javascript-experience">5. JavaScript experience</h3>
+<p>If you're going to use ClojureScript at this job, knowledge of the browser, the DOM API, and all of the issues with JavaScript deployment will be helpful.</p>
+<p><em>Bonus points for</em></p>
+<ul>
+<li>Using other compile-to-js languages</li>
+<li>Building React applications</li>
+<li>Using Immutable.js or Mori</li>
+</ul>
+<h3 id="multiple-languages">6. Multiple languages</h3>
+<p>If you're goint to be learning a new language on the job, show that you can actually do that. The best candidates will have at least 4 languages under their belts with a variety of paradigms.</p>
+<p><em>Bonus points for</em></p>
+<ul>
+<li>Two or more paradigms (OOP, FP, procedural, logic)</li>
+<li>Two or more syntax families (C vs Python vs Ruby vs Haskell)</li>
+</ul>
+<p>Other than that, the number 1 reason people don't get hired is they don't apply to enough jobs. Get your resume together, trudge through your work/school/side project memories and find things from the list above to highlight. Then apply to lots of jobs, bring those things up in the cover letter and interview.</p>
+<p>Here are good sources of Clojure jobs:</p>
+<ul>
+<li><a href="https://jobs.braveclojure.com/">Brave Clojure Jobs</a></li>
+<li><a href="https://functionaljobs.com/">Functional Jobs</a></li>
+<li><a href="https://www.google.com/webhp?#q=hacker%20news%20who%27s%20hiring">Hacker News Who's Hiring</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Seriously, I never would have thought there would be multiple companies hiring for Clojure in New Orleans. They all happened entirely without me.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

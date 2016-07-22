@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>What do I have to learn to be hirable in Clojure?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/hirable-in-clojure</guid>
+                  <link>http://www.lispcast.com/hirable-in-clojure</link>
+                  <pubDate>Fri 22 Jul 2016 11:25:39 AM CDT</pubDate>
+                  <description>
+                    You actually need to learn nothing. But it's more complicated than that. This article will show you what can set you apart.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/hirable-in-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>5 Differences between clojure.spec and Schema</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojure.spec-vs-schema</guid>
                   <link>http://www.lispcast.com/clojure.spec-vs-schema</link>
@@ -129,20 +143,6 @@
                     Much of the difficulty of learning a new language is caused by knowing more than you are comfortable doing. It's so important to get started practicing real programming as soon as possible.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/start-practicing-soon"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>The Importance of Embodied Metaphors</title>
-                  <guid isPermalink="false">http://www.lispcast.com/interactive-baking</guid>
-                  <link>http://www.lispcast.com/interactive-baking</link>
-                  <pubDate>Fri 04 Mar 2016 08:48:52 PM CST</pubDate>
-                  <description>
-                    LispCast Introduction to Clojure teaches Clojure with an &quot;interactive bakery simulation&quot;. The reason is that metaphors that you can embody are a great way to learn abstract things like programming.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/interactive-baking"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

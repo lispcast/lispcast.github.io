@@ -104,6 +104,47 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://www.infoq.com/presentations/ClojureScript">
+            ClojureScript Anatomy
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/clojurescript-anatomy">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 27, 2012
+        </div>
+
+        
+<p>Michael Fogus:</p>
+<blockquote>
+<p>What is the greatest limitation of Haskell's type system? The greatest limitation in Haskell's type system is it only does Haskell's type system.</p>
+</blockquote>
+<p>I totally agree. Almost two years of working in Haskell has convinced me of the benefit of static type analysis. It can catch a lot of bugs. But Haskell's type system also increases the amount of code and the surface area of your interface. The types become a point of coupling. They become hard to change without changing everything that uses them.</p>
+<p>This rigidity is where their power comes from, and also their annoyance. Well-chosen types can stabilize a system in a good way. Mistakes in the types, or changes in their requirements, stabilize the system in a bad way.</p>
+<p>I would love to see a type checker that could handle non-discriminated union types (Haskell has discriminated unions, which force you to box and unbox values, adding to code size and coupling to the types). It would be nice to have the type checker say &quot;Function foo takes either a String or a Number, but on line 34 you pass it a String or Number or HashMap.&quot;</p>
+<p>Another type of analysis I would like to see is whether a function is pure, does IO, or accesses mutable state. You can tag all basic IO operations as IO. Then anything that calls one of those operations also gets the tag IO. Similarly for mutable state. Haskell makes IO a type so that it can be statically checked, because Haskell only does type checking. It is not really a type, though, and does not need static type analysis.</p>
+<p>Another great advantage of static checking in a dynamic language is that the definition of functions can change at any time. So function foo could compile, but with a warning that it calls function bar incorrectly. When you correct function bar, the warning goes away automatically.</p>
+<p>Those are some ideas I had watching that video and thinking about static analysis in Clojure. I am quite excited.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.youtube.com/playlist?list=PL7664379246A246CB&amp;feature=plcp">
             Douglas Crockford on Javascript
           </a>
@@ -456,39 +497,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>Object-orientation is more than just syntactic sugar. OO uses message passing as its computational semantic, while procedural programming uses procedure calls.</p>
 <p>He then goes on to describe a scheme where one class can define fields in another class that only it can access, which he calls &quot;private in X&quot;. In this way, you can define a list which stores its pointers in the same memory as items of the list which still encapsulates the concerns.</p>
 <p>The benefit of OO is that by separating out concerns, you achieve more reuse. You write one list class and one person class, and now you can share persons in different lists. The problem with Sústrik's proposal is that it only allows for an item to be in one list at a time (or you have to write a new list class for every list you want them to be in). This is not Object-oriented. It is merely yet another feature bolted onto C++.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://newartisans.com/2012/08/monads-in-pictures/">
-            Monads in Pictures
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/monads-in-pictures">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 22, 2012
-        </div>
-
-        
-<p>Monads are not hard. But they are entirely abstract, and that makes them hard to grasp. Just as it requires a whole year of Algebra to accept that you can do math with letters instead of numbers, Monads usually defy written explanation.</p>
-<p>In this post, John Wiegly does a good job of explaining how Monads work with pictures. The visual explanation is slightly better than words. I think, though, that it just takes time, practice, and patience to build the necessary abstraction structures in your brain.</p>
 
 
         <div class="endmark">

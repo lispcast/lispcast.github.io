@@ -104,6 +104,46 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/programming-language-stages-of-development">
+            Programming Languages and Piaget's Stages of Cognitive Development
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          June 13, 2012
+        </div>
+
+        
+<p>I rewatched <a href="http://video.google.com/videoplay?docid=-533537336174204822">Doing with Images makes Symbols</a> recently and there was one bit that I had not absorbed before.</p>
+<p>In the talk, he explains the cryptic title. He took a simplified model of <a href="http://www.simplypsychology.org/piaget.html">Piaget's Stages of Cognitive Development</a>: corporal -&gt; visual -&gt; symbolic. He wanted to bring these three stages into relation with each other, so he made a sentence: &quot;Doing with Images makes Symbols&quot;. Doing, of course, is the body stage. Images is the visual stage. And symbols is the abstract symbolic stage.</p>
+<h3 id="doing">Doing</h3>
+<p>Imagine the <a href="http://el.media.mit.edu/logo-foundation/index.html">Logo programming language</a>. Logo is perfect for small children because it helps tie the visual and symbolic to their main mode of experience. Young children are primarily focused on their own bodily experience. They have trouble thinking from other points of view. But by translating their own actions (moving around) into symbolic instructions (Logo code), they can <em>see</em> the turtle performing the actions. Logo's turtle takes on the child's point of view and makes it visual. <strong>The child learns to see his/her own perspective from the outside</strong>. The coordinate system is egocentric. For example, the <code>FORWARD</code> command moves the turtle in the direction it is facing.</p>
+<p>Smalltalk includes the same egocentric perspective. Each object has its own perspective of the other objects in the system. Smalltalk objects could ask &quot;who are my neighbors in the list I am in&quot;. Squeak simulates a space that the objects inhabit which includes collision detection. This perspective, I would argue, is one of the unsung benefits of Object-Oriented Programming: the ability to program from the <strong>perspective of a single object at a time</strong>, freeing your mind from thinking about the inner workings of the rest of the objects. Objects are not just meant to be strung together but can be &quot;embodied&quot; by their programmer who sees from their unique perspective.</p>
+<h3 id="symbols">Symbols</h3>
+<p>The other end of the developmental spectrum is the symbolic. The obvious choice for symbolic programming is Lisp. Programs take on a very abstract quality and require advanced programming techniques. In this perspective, the programmer has a god-like, symbolic semantic of the workings of the system and <strong>builds abstractions in a calculus with simple yet powerful rules</strong>. Further, the programmer manipulates code in code. The coordinate system is abstract and relational. Shapes are manipulated in an abstract representation, not as pixels occupying space. A value may encode abstract knowledge (line between a and b) instead of specific coordinates.</p>
+<h3 id="images">Images</h3>
+<p>In the middle is the visual stage. I am going out on a limb, but I would like to posit that Java exemplifies this middle-ground perspective. In this perspective, you think and understand visually. You draw diagrams. <strong>You think in terms of archetypal interactions</strong> (client-server, MVC, etc). You can simultaneously conceptualize several roles in a single group of interacting objects. The coordinate system is cartesian, taking an external, objective perspective.</p>
+<p>This is not to say that Java does not include any corporal perspective, nor that Lisp is all symbolic. I am talking in broad generalities about <em>predominance</em>.</p>
+<h3 id="not-one-at-a-time-but-all-at-once">Not one-at-a-time but all-at-once</h3>
+<p>The interesting thing about Piaget's stages are that they are stages of dominance, not a rocket-stage-jettison progression. That is, we can still, as adults, think in terms of any of the prior levels. In fact, <strong>the most successful scientists and mathematicians work on the earliest levels (corporal/visual)</strong>. Einstein claimed he had body sensations about relativity and his disabilities with abstract symbols is well documented. These three types of thinking are done by different <em>parts</em> of the brain. The parts are always there but take dominant roles at different times in your life.</p>
+<p>How this relates to programming language design is that when we are designing a programming system, <strong>we should include all of these ways of thinking</strong> so that the programmer can choose the best way to think about the problem. The easiest way to draw a circle is from a self-centered perspective in terms of motion and gross actions. The easiest way to plan a protocol is visually with boxes and lines or swim lane diagrams. Once translated into symbolic code, syntactic and semantic abstractions become evident, and can be manipulated as such.</p>
+<p>The trick of good language design is to facilitate programming at any level and translation into the other levels. <strong>How can we perform this trick?</strong></p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.infoq.com/presentations/Why-is-a-Monad-Like-a-Writing-Desk">
             Why is a Monad Like a Writing Desk?
           </a>
@@ -386,38 +426,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
         
 <p>Doh! This looks like a library that I have that is 90% ready to release. Though mine takes a slightly different tack.</p>
 <p>I guess I will have to get it ready for release.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://precog.io/">
-            Precog
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/precog-io">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          May 11, 2012
-        </div>
-
-        
-<p>I can think of many uses for this. Store datapoints in the cloud. Prebaked analysis plugins. Some relational semantics in the query language.</p>
 
 
         <div class="endmark">

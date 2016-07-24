@@ -104,6 +104,108 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/monads-and-objects">
+            Monads and Objects
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          February 22, 2013
+        </div>
+
+        
+<p>If you went back to 1990 and asked a random programmer what an object was (as in OOP) what would he say? I bet he'd say something like &quot;I don't know. I want to learn them but I don't know where to start.&quot; If you told him &quot;Well, they're easy. Each object has a class. The class defines methods. The object encapsulates state . . .&quot;, then his eyes would glaze over. He receives a maelstrom of concepts and their relationships. In the end, he would learn nothing. <strong>It actually took a long time for OO to become the norm.</strong></p>
+<p>This is analagous to what is happening currently with monads. <strong>People want to learn, they get some high-concept explanation, they are unsatisfied.</strong> People try to explain. They really do. I still remember when I did not get monads, so I have a lot of sympathy.</p>
+<p>Perhaps, like with OOP, <strong>it will take a generation to become understandable to the mainstream</strong>.</p>
+<p>The best way I can think of to teach monads to a programmer is <strong>jQuery</strong>. You have to know jQuery to understand this example. And frankly, if you don't know jQuery, it is easier to go learn it and come back than to go read a monad tutorial.</p>
+<p>Here's a (not-so-)secret: <strong>jQuery objects are a monad</strong>. When you do <code>$('div')</code>, you get an object which &quot;contains&quot; all of the <code>div</code> elements in the document. There are many methods on the jQuery object which modify the set of elements contained in the object and return it. That's what makes it a monad: the methods return a value of the same type.</p>
+<p>Without the jQuery object, you have to follow (and re-follow--potentially repeating code) the logic of collections. The jQuery object controls the logic by which operations on the contained set of elements gets executed. You call a method, it changes all of the elements. If there is no element, nothing happens. If there is one element, it alone is changed. If there are many elements, they are all changed. And you don't need to know. If you call <code>$('&lt;div /&gt;')</code>, even though you are constructing an object with only one element, jQuery internally turns it into a list. <strong>jQuery is making sure you don't have to know if you have 0, 1, or many elements.</strong> And this turns out to be a useful abstraction.</p>
+<p>This logic is simple. You write this code all the time when you are dealing with collections of objects. But <strong>you have to write this all the time, over and over</strong>. And you have to remember to write it. The jQuery object does that for you.</p>
+<p>That is the job of the monad. It gives you a single place to express the logic for access (in this case, a kind of collection logic). <strong>Now we are going to make a monad and show how we can write this logic in only one place.</strong></p>
+<p>To make a monad, you actually need two things. One is typically called <code>return</code>, but <strong>in OOP it's the constructor</strong>. We know that the jQuery constructor is the <code>$</code> function.</p>
+<p>The second thing you need is <strong>a way to chain methods</strong>. All you need is to return a value constructed with that constructor. Then you can chain. In Haskell, this is called <code>bind</code>.</p>
+<p>But I promised that monads got rid of repetition. If <strong>all of your jQuery methods have to contain this collection logic and return logic</strong>, how does that get rid of repetition? Well, if you did it the way it's done in Haskell, you'd get rid of the repetition.</p>
+<p>Let's do it that way. Let's define a method on the jQuery called <code>bind</code>.</p>
+<pre><code>jQuery.prototype.bind = function (f) {
+  return $(f(this.get()));
+};</code></pre>
+<p>We construct a new jQuery object with the elements transformed by <code>f</code>. So I can write:</p>
+<pre><code>function filter_divs(els) {
+  var arr = [];
+  var i;
+  for(i = 0; i &lt; els.length; i++)
+    if(els[i].tagName === &#39;div&#39;)
+      arr.push(els[i]);
+  return arr;
+}
+
+$(&#39;.x&#39;).bind(filter_divs).addClass(&#39;hello&#39;);</code></pre>
+<p>Let's take it further. We can bind the function and store it in the prototype:</p>
+<pre><code>jQuery.prototype.bind_def = function (name, f) {
+  jQuery.prototype[name] = function () {
+    return $(f(this.get()));
+  };
+}</code></pre>
+<p>Now <strong>we can call it like a method</strong>.</p>
+<pre><code>$.bind_def(&#39;filter_divs&#39;, filter_divs);
+
+$(&#39;.x&#39;).filter_divs().addClass(&#39;hello&#39;);</code></pre>
+<p>So, now we can chain. <strong>We only have to write the logic once (in <code>bind</code> or <code>bind_def</code>).</strong> And we have a constructor. That's a monad.</p>
+<p>Now, imagine other bits of logic you could build into a method chain. What happens if a method returns <code>null</code>? If you call a method on it, it will throw an exception. <strong>You can capture the null check in a monad.</strong> That is called the Maybe Monad.</p>
+<p>There are other useful monads, but they all are simply <strong>structured ways of chaining</strong> by giving controlled access to the internals of the object.</p>
+<p>Thanks to <a href="http://www.youtube.com/watch?v=dkZFtimgAcM">Douglas Crockford</a> for some of these ideas.</p>
+<p>If you liked this essay, please check out the <a href="http://clojuregazette.org/">Clojure Gazette</a>.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="http://www.youtube.com/watch?v=dkZFtimgAcM">
+            Monads & Gonads
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/monads-and-gonads">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          February 21, 2013
+        </div>
+
+        
+<p>Douglas Crockford gives his version of the obligatory monad tutorial. His version is in Javascript with hopes of needed demystification.</p>
+<p>I have to appreciate the freshness of his approach. He says a monad is just an object with certain properties (the monad laws). That's a great way to explain it in an object-oriented context. Objects are the unit of encapsulation. Monads serve the purpose of encapsulating state and allowing structured access to that state.</p>
+<p>There is one thing that bothers me about his presentation. He uses mutable objects. I guess that is to be expected in Javascript. But mutating state in a monad seriously limits their possibilities, as mutation does in most uses.</p>
+<p>Either way, it is an entertaining watch and a good explanation of monads. Perhaps the most down-to-earth I have seen.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.indiegogo.com/projects/redline-smalltalk-v1-0?website_name=smalltalk">
             Redline Smalltalk
           </a>
@@ -351,77 +453,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>In Haskell, type information exists only at compile time. That is, the compiler figures out the type of everything, decides whether to allow the program, then compiles it (if it is allowed). <strong>Types are complected with semantics.</strong> Types determine what code is run. Further, because the type checker has to be able to infer all types, the language has been limited to the subset of possible programs that are checkable. The semantics of the language are limited by the type system.</p>
 <p>So what we have is a semantics that is independent of types (Clojure) which we can augment with different static type analyses and potentially catch errors, or we have a language that has already compromised its semantics to the type system and add runtime type annotations, which are effectively useless.</p>
 <p>Just one last word: I am not a dynamic typing zealot. I use Haskell more than Clojure. And I am very excited to see static analysis come to Clojure. However, the static typing crowd seems to have the rhetorical upper hand at the moment. I just want to have better discussions.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.infoq.com/presentations/Impedance-Mismatch">
-            The Impedance Mismatch is Our Fault
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/the-impedance-mismatch-is-our-fault">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          October 05, 2012
-        </div>
-
-        
-<p>Stuart Halloway continues the world-round campaign of iconoclastic and well-argumented presentations that spring from Clojure's programming model and now Datomic's architecture. Stuart gives hard-hitting, reasoned practices that make our software better in measurable ways.</p>
-<p>This is just one of the many ways Clojure is having (and will have) a huge impact on programming in any language. Immutable data by default is obvious. A model of time, while not so obvious, will seem like manual memory management does now. Sure, you can work with it, but who would give up garbage collection? Similarly, having a better model of state change (transactional or otherwise) enforced by the language will be something we will not want to live without.</p>
-<p>Separating data from code will take years, maybe a generation, to catch on. Our field has drilled the Java model of Object-Orientation into students for years. But the change has already started. Though not being led by Clojure, JSON is now a universal data format accepted by nearly every language, and the fact that the standard does not allow code in JSON is significant.</p>
-<p>But this talk goes a little further and proposes that we think of databases differently. Stuart does a good job of breaking down why OO and RDBMS don't fit well together, and proposes a solution that leaves them both in the dust.</p>
-<p>Enjoy.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.youtube.com/watch?v=A7de6pC-tnU">
-            David Nolen on Clojure's core.logic
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/david-nolen-on-clojure.core.logic">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          September 28, 2012
-        </div>
-
-        
-<p>A bootleg video of a talk from Strange Loop 2012.</p>
-<p>I do not think the official videos are up yet. For those of us who could not make it to the conference, this is great, even though it was recorded with an iPhone. You can hear Nolen well and see the slides.</p>
-<p>The presentation starts with a short review of how to use <a href="https://github.com/clojure/core.logic">core.logic</a> before Nolen goes into the implementation details. I still need to spend some time understanding the code myself. core.logic is based on miniKanren, described in <a href="http://www.amazon.com/Reasoned-Schemer-Daniel-P-Friedman/dp/0262562146?tag=lisp0b-20"><em>The Reasoned Schemer</em></a>.</p>
-<p>Actually, I have just bought a copy of <a href="http://www.amazon.com/Little-Schemer-Daniel-P-Friedman/dp/0262560992?tag=lisp0b-20"><em>The Little Schemer</em></a>, the first book in the series of which <a href="http://www.amazon.com/Reasoned-Schemer-Daniel-P-Friedman/dp/0262562146?tag=lisp0b-20"><em>The Reasoned Schemer</em></a> is a part. I am trying to catch up on all of these Lisp classics. I will write a review when I am finished, but so far so good.</p>
 
 
         <div class="endmark">

@@ -41,6 +41,22 @@
     <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
       for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
                   mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
                   </head>
 
   <body>
@@ -165,29 +181,27 @@ test a big list
 <h3 id="conclusion">Conclusion</h3>
 <p>I hope you like it. If you liked this, you may like <a href="http://www.purelyfunctional.tv/intro-to-clojure">LispCast Introduction to Clojure</a>. It's a video course about Clojure, starting from the ground up. It has exercises, animations, visuals, and code. Try it!</p>
 <div class="subscribe-form-wrapper">
-  <form action="https://www.getdrip.com/forms/4474202/submissions" method="post" data-drip-embedded-form="4474202"
+  <form action="https://www.getdrip.com/forms/1194631/submissions" method="post" data-drip-embedded-form="1194631"
         class="subscribe-form">
     <h3 data-drip-attribute="headline">
-Free Getting Started with Clojure Email Course
+Free Clojure Learning Resources
 </h3>
     <div data-drip-attribute="description">
+      <div style="float:right; width:250px; max-width:25%">
+        
+<img src="http://www.lispcast.com/img/clojure expr flashcard.png" style="width:100%"> <img src="http://www.lispcast.com/img/clj-refactor cheatsheet.png" style="width:100%">
+</div>
       
-It's designed to help you decide if Clojure will work for you, to get set up, and to explore some of its cooler features. <br /> <br /> Here are some of the topics:
-<ul>
-    <li>
-How to Read Code like a Clojure Expert
-</li>
-    <li>
-The Ultimate Guide to Learning Clojure for Free
-</li>
-    <li>
-How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popular
-</li>
-      </ul>
-    </div>
-    <div>
+Sign up below and you'll get access to the <em>Clojure Resource Center</em> where I collect reference sheets and flashcards for learning Clojure, including the <b>Top 100 Clojure Expressions</b> flashcards and the <b>clj-refactor cheatsheet</b>. I'll also send you other information about learning Clojure and figuring out if Clojure is for you.
+</div>
+    
+<br>
+<div>
       
-<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" placeholder="Email" value="" /> <input type="submit" name="submit" value="Sign Up" data-drip-attribute="sign-up-button"
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
              class="subscribe-button"/>
 </div>
   </form>
@@ -256,9 +270,6 @@ How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popu
 
     </script>
     <script src="/js/mylibs/annotated-code.js" defer></script>
-<script src="/js/libs/codemirror.js" defer></script>
-<link rel="stylesheet" href="/css/feedback.css" type="text/css">
-<script src="/js/mylibs/feedback.js" defer></script>
 
     <!-- Drip -->
     <script type="text/javascript">
@@ -278,8 +289,15 @@ How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popu
         if(mixpanel) {
           mixpanel.register({Email: data['fields[email]']});
           mixpanel.track('Drip Subscription');
-        }
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
       });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
     </script>
     <script type="text/javascript">
   (function() {
@@ -292,19 +310,5 @@ How to Choose a Clojure IDE <em>plus</em> Guides for Installing the 3 Most Popu
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
   })();
     </script>
-    <!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init', '1085559841510143');
-fbq('track', "PageView");</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Facebook Pixel Code -->
   </body>
 </html>

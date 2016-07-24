@@ -122,19 +122,27 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <h3 id="tdd">TDD</h3>
 <div class="feedback">
 <div class="settings">
-<code class="fname"> my-reduce </code> <code class="init"> (and js/window js/window.cljs js/window.cljs.user (js-delete js/window.cljs.user &quot;my_reduce&quot;)) </code> <code>value ;; This is a live editor. Make changes to turn the tests above green. (defn my-reduce [f init coll])</code>
+<pre class="fname"><code>my-reduce</code></pre>
+<pre class="init"><code>(and js/window
+js/window.cljs
+js/window.cljs.user
+(js-delete js/window.cljs.user &quot;my_reduce&quot;))</code></pre>
+<pre class="value"><code>;; This is a live editor. Make changes to turn the tests above green.
+(defn my-reduce [f init coll])</code></pre>
 </div>
 <div class="test">
 <h4>
 empty list returns init
 </h4>
-<code class="test-expression">(my-reduce + 0 [])</code> <code class="expected">0</code>
+<pre class="test-expression"><code>(my-reduce + 0 [])</code></pre>
+<pre class="expected"><code>0</code></pre>
 </div>
 <div class="test">
 <h4>
 0 + 1
 </h4>
-<code class="test-expression">(my-reduce + 0 [1])</code> <code class="expected">1</code>
+<pre class="test-expression"><code>(my-reduce + 0 [1])</code></pre>
+<pre class="expected"><code>1</code></pre>
 </div>
 <div class="test">
 <h4>

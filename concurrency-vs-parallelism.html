@@ -1,0 +1,260 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Concurrency and Parallelism in the Real World | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Concurrency and parallelism are concepts that we make use of every day off of the computer. I give some real world examples and we analyze them for concurrency and parallelism.">
+    <meta name="twitter:title" content="Concurrency and Parallelism in the Real World">
+
+    <meta property="og:title" content="Concurrency and Parallelism in the Real World">
+    <meta property="og:description" content="Concurrency and parallelism are concepts that we make use of every day off of the computer. I give some real world examples and we analyze them for concurrency and parallelism.">
+
+    <meta name="description" content="Concurrency and parallelism are concepts that we make use of every day off of the computer. I give some real world examples and we analyze them for concurrency and parallelism.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/concurrency-vs-parallelism">
+            Concurrency and Parallelism in the Real World
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          August 01, 2016
+        </div>
+
+        
+<p>Summary: <em>Concurrency and parallelism are concepts that we make use of every day off of the computer. I give some real world examples and we analyze them for concurrency and parallelism.</em></p>
+<p>What is the difference between concurrency and parallelism? There are a lot of explanations out there but most of them are more confusing than helpful. The thing is, you see concurrency and parallelism all the time in the world outside of the computer. When you learn what it is, you'll see it everywhere!</p>
+<p>Ah, the Olympic games. So exciting! So much running!</p>
+<div class="figure">
+<img src="http://lispcast.com/img/cvp/running.jpg" alt="So much running!" /><p class="caption">So much running!</p>
+</div>
+<p>So much jumping!</p>
+<div class="figure">
+<img src="http://lispcast.com/img/cvp/jumping.jpg" alt="So much jumping!" /><p class="caption">So much jumping!</p>
+</div>
+<p>So much ... sitting? <img src="http://lispcast.com/img/cvp/sitting.JPG" alt="So much sitting?" /></p>
+<p>Hundreds of people compete for the 100-meter dash. But do they all run at the same time? No. How many run at the same time is based on how many lanes there are on the track. And what do those people who aren't running do when they're not running? They wait.</p>
+<p><strong>What is parallelism?</strong> How many people can run at the same time. <strong>What is concurrency?</strong> How many runners are competing for that event.</p>
+<p>But how can more people compete than the number of running lanes? The answer is there are lots of people handling the bookkeeping -- tables of &quot;heats&quot; -- that decide who runs when. If you follow the table, everybody runs at some point and a winner can be chosen.</p>
+<p>On a computer, <strong>the parallelism is equal to the number of cpus or cores</strong>. Four cores means you can do four things at the same time. But there's often much more work tasks than cpus. So you need some kind of concurrency system to keep track of all of the work.</p>
+<p>Let's look at another example. Imagine a bank from 1900, where there are no computers. All of the work is done by people. How much parallelism is there? How much work can be done at the same time? The answer is simple: <strong>it's the number of bankers</strong>.</p>
+<div class="figure">
+<img src="http://lispcast.com/img/cvp/bank.jpg" alt="Bankers" /><p class="caption">Bankers</p>
+</div>
+<p>But there are many more transactions than bankers. People are coming to the bank to deposit, to transfer, to withdraw. There are peak times when it seems like the line is endless. And there are other times when the bank is quiet. What makes it possible to let six bankers handle hundreds of transactions?</p>
+<p>In the bank's case, the answer is usually queues. <strong>Queues are a concurrency mechanism that &quot;store&quot; work to be done later.</strong> Work is pulled off of the queue by the banker, processed, and usually put onto another queue. At any given time, most of the work is waiting.</p>
+<div class="figure">
+<img src="http://lispcast.com/img/cvp/queue.png" alt="Queue" /><p class="caption">Queue</p>
+</div>
+<p>Queues are very powerful because they can detach the producer from the consumer. They can each work at their own pace.</p>
+<p>Queues are everywhere in the real world. People line up for bathrooms. In this picture, what's the parallelism? How many people can go at the same time?</p>
+<div class="figure">
+<img src="http://lispcast.com/img/cvp/potty.jpg" alt="Potties" /><p class="caption">Potties</p>
+</div>
+<p>A food booth at a festival is a great display of parallelism and concurrency. There are many different jobs to be done. Usually one person handles one job. They communicate and pass work around. People wait in queues to order, then they wait in another queue to get their food. Sometimes, all of the cooks do all jobs. They are constantly switching. That can work, too.</p>
+<div class="figure">
+<img src="http://lispcast.com/img/cvp/foodbooth.jpg" alt="Food booth" /><p class="caption">Food booth</p>
+</div>
+<p>Languages like Clojure give you the tools you need to build little kitchens like that. Different threads working, communicating, and passing work around.</p>
+<p>Some of the tools Clojure gives you are threads, atoms, refs, agents, core.async, persistent data structures (including persistent queues), and futures. It can be fun to figure out ways to arrange them to get the job done.</p>
+<p>Here's one of the reasons parallelism and concurrency are confusing: modern operating systems and languages simulate parallelism with concurrency. You can have many more programs running than you have cpus. Internally, the OS is using a concurrency system to switch quickly between different programs.</p>
+<p>If you ask for a thousand threads in your program, the OS will give them to you. Ostensibly threads are a way to get parallelism, but really they're just another concurrency primitive. Each defines work (in terms of code) that is queued up for the CPUs to work on.</p>
+<p>The next time you see people working together, ask yourself where the parallelism is and where is the concurrency. Parallelism is easy: it's the number of workers who can work at the same time. The concurrency is harder to spot, but often you'll see papers or charts, work lined up, buffers, and other ways to keep track of the work and push it through the process.</p>
+<div class="subscribe-form-wrapper">
+  <form action="https://www.getdrip.com/forms/1194631/submissions" method="post" data-drip-embedded-form="1194631"
+        class="subscribe-form">
+    <h3 data-drip-attribute="headline">
+Free Clojure Learning Resources
+</h3>
+    <div data-drip-attribute="description">
+      <div style="float:right; width:250px; max-width:25%">
+        
+<img src="http://www.lispcast.com/img/clojure expr flashcard.png" style="width:100%"> <img src="http://www.lispcast.com/img/clj-refactor cheatsheet.png" style="width:100%">
+</div>
+      
+Sign up below and you'll get access to the <em>Clojure Resource Center</em> where I collect reference sheets and flashcards for learning Clojure, including the <b>Top 100 Clojure Expressions</b> flashcards and the <b>clj-refactor cheatsheet</b>. I'll also send you other information about learning Clojure and figuring out if Clojure is for you.
+</div>
+    
+<br>
+<div>
+      
+<label for="fields[email]">Email Address: </label> <input type="email" name="fields[email]" value=""
+             id="fields[email]"
+             placeholder="Email" /> <input type="submit" name="submit" value="Sign Up"
+             data-drip-attribute="sign-up-button"
+             class="subscribe-button"/>
+</div>
+  </form>
+</div>
+
+
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

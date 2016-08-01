@@ -118,13 +118,13 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>What is the difference between concurrency and parallelism? There are a lot of explanations out there but most of them are more confusing than helpful. The thing is, you see concurrency and parallelism all the time in the world outside of the computer. When you learn what it is, you'll see it everywhere!</p>
 <p>Ah, the Olympic games. So exciting! So much running!</p>
 <div class="figure">
-<img src="http://www.lispcast.com/img/cvp/running.jpg" alt="So much running!" /><p class="caption">So much running!</p>
+<img src="http://www.lispcast.com/img/cvp/running.jpg" alt="Running" /><p class="caption">Running</p>
 </div>
 <p>So much jumping!</p>
 <div class="figure">
-<img src="http://www.lispcast.com/img/cvp/jumping.jpg" alt="So much jumping!" /><p class="caption">So much jumping!</p>
+<img src="http://www.lispcast.com/img/cvp/jumping.jpg" alt="Jumping" /><p class="caption">Jumping</p>
 </div>
-<p>So much ... sitting? <img src="http://www.lispcast.com/img/cvp/sitting.JPG" alt="So much sitting?" /></p>
+<p>So much ... sitting? <img src="http://www.lispcast.com/img/cvp/sitting.JPG" alt="Sitting" /></p>
 <p>Hundreds of people compete for the 100-meter dash. But do they all run at the same time? No. How many run at the same time is based on how many lanes there are on the track. And what do those people who aren't running do when they're not running? They wait.</p>
 <p><strong>What is parallelism?</strong> How many people can run at the same time. <strong>What is concurrency?</strong> How many runners are competing for that event.</p>
 <p>But how can more people compete than the number of running lanes? The answer is there are lots of people handling the bookkeeping -- tables of &quot;heats&quot; -- that decide who runs when. If you follow the table, everybody runs at some point and a winner can be chosen.</p>
@@ -136,7 +136,7 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>But there are many more transactions than bankers. People are coming to the bank to deposit, to transfer, to withdraw. There are peak times when it seems like the line is endless. And there are other times when the bank is quiet. What makes it possible to let six bankers handle hundreds of transactions?</p>
 <p>In the bank's case, the answer is usually queues. <strong>Queues are a concurrency mechanism that &quot;store&quot; work to be done later.</strong> Work is pulled off of the queue by the banker, processed, and usually put onto another queue. At any given time, most of the work is waiting.</p>
 <div class="figure">
-<img src="http://lispcast.com/img/cvp/queue.png" alt="Queue" /><p class="caption">Queue</p>
+<img src="http://www.lispcast.com/img/cvp/queue.png" alt="Queue" /><p class="caption">Queue</p>
 </div>
 <p>Queues are very powerful because they can detach the producer from the consumer. They can each work at their own pace.</p>
 <p>Queues are everywhere in the real world. People line up for bathrooms. In this picture, what's the parallelism? How many people can go at the same time?</p>

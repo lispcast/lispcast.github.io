@@ -124,9 +124,12 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <div class="figure">
 <img src="http://www.lispcast.com/img/cvp/jumping.jpg" alt="Jumping" /><p class="caption">Jumping</p>
 </div>
-<p>So much ... sitting? <img src="http://www.lispcast.com/img/cvp/sitting.JPG" alt="Sitting" /></p>
+<p>So much ... sitting?</p>
+<div class="figure">
+<img src="http://www.lispcast.com/img/cvp/sitting.JPG" alt="Sitting" /><p class="caption">Sitting</p>
+</div>
 <p>Hundreds of people compete for the 100-meter dash. But do they all run at the same time? No. How many run at the same time is based on how many lanes there are on the track. And what do those people who aren't running do when they're not running? They wait.</p>
-<p><strong>What is parallelism?</strong> How many people can run at the same time. <strong>What is concurrency?</strong> How many runners are competing for that event.</p>
+<p><strong>What is parallelism?</strong> How many people can run at the same time. <strong>What is concurrency?</strong> How many runners are competing in that event.</p>
 <p>But how can more people compete than the number of running lanes? The answer is there are lots of people handling the bookkeeping -- tables of &quot;heats&quot; -- that decide who runs when. If you follow the table, everybody runs at some point and a winner can be chosen.</p>
 <p>On a computer, <strong>the parallelism is equal to the number of cpus or cores</strong>. Four cores means you can do four things at the same time. But there's often much more work tasks than cpus. So you need some kind of concurrency system to keep track of all of the work.</p>
 <p>Let's look at another example. Imagine a bank from 1900, where there are no computers. All of the work is done by people. How much parallelism is there? How much work can be done at the same time? The answer is simple: <strong>it's the number of bankers</strong>.</p>
@@ -181,6 +184,14 @@ Sign up below and you'll get access to the <em>Clojure Resource Center</em> wher
 
 
 
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/atom-problem">Atom code explanation</a></li>
+<li><a href="http://www.lispcast.com/locks-v-concurrency-primitives">Locks vs Concurrency Primitives</a></li>
+<li><a href="http://www.lispcast.com/pre-west-interview-leon-barrett">Pre-West Interview: Leon Barrett</a></li>
+<li><a href="http://www.lispcast.com/pre-west-leon-barrett">Pre-West Prep: Leon Barrett</a></li>
+</ul>
+
 
         <div class="endmark">
           <a class="endmark-link"
@@ -200,6 +211,10 @@ Sign up below and you'll get access to the <em>Clojure Resource Center</em> wher
     </div>
 
     <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/hirable-in-clojure">
+        previous
+      </a>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

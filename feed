@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Concurrency and Parallelism in the Real World</title>
+                  <guid isPermalink="false">http://www.lispcast.com/concurrency-vs-parallelism</guid>
+                  <link>http://www.lispcast.com/concurrency-vs-parallelism</link>
+                  <pubDate>Mon 01 Aug 2016 06:20:00 PM CDT</pubDate>
+                  <description>
+                    Concurrency and parallelism are concepts that we make use of every day off of the computer. I give some real world examples and we analyze them for concurrency and parallelism.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/concurrency-vs-parallelism"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>What do I have to learn to be hirable in Clojure?</title>
                   <guid isPermalink="false">http://www.lispcast.com/hirable-in-clojure</guid>
                   <link>http://www.lispcast.com/hirable-in-clojure</link>
@@ -129,20 +143,6 @@
                     Research shows that developing mastery of a large skill is best done by mastering smaller skills that you can achieve 90% accuracy in very quickly. LispCast Introduction to Clojure has broken the skills you need down for you.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/master-one-skill-at-a-time"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Practice as soon as possible</title>
-                  <guid isPermalink="false">http://www.lispcast.com/start-practicing-soon</guid>
-                  <link>http://www.lispcast.com/start-practicing-soon</link>
-                  <pubDate>Thu 10 Mar 2016 02:56:26 PM CST</pubDate>
-                  <description>
-                    Much of the difficulty of learning a new language is caused by knowing more than you are comfortable doing. It's so important to get started practicing real programming as soon as possible.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/start-practicing-soon"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

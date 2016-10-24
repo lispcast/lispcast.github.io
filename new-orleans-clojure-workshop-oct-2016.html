@@ -1,0 +1,272 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>New Orleans Clojure Workshop Retrospective | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="We organized a Clojure workshop. Here's what went right and what we should do next time.">
+    <meta name="twitter:title" content="New Orleans Clojure Workshop Retrospective">
+
+    <meta property="og:title" content="New Orleans Clojure Workshop Retrospective">
+    <meta property="og:description" content="We organized a Clojure workshop. Here's what went right and what we should do next time.">
+
+    <meta name="description" content="We organized a Clojure workshop. Here's what went right and what we should do next time.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/new-orleans-clojure-workshop-oct-2016">
+            New Orleans Clojure Workshop Retrospective
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          October 23, 2016
+        </div>
+
+        
+<p>Summary: <em>We organized a Clojure workshop. Here's what went right and what we should do next time.</em></p>
+<p>One week ago, my friends and I organized a free Clojure workshop. It was a success, with over-capacity attendance. We plan on doing more in the future, so I wanted to write down my thoughts on how it went, what went well, and what we should do next time before I forget them.</p>
+<h3 id="planning">Planning</h3>
+<p>We started planning the event about three months before. There were lots of variables in the planning. One of them, that we discovered was vitally important, was what our motivations were for running the workshop. My motivation was simply to increase the awareness of Clojure in the New Orleans community. We've already got a strong Clojure presence (four companies and counting), which I believe is ahead of the curve when you look at the size of our software engineering community as a whole (it's very small). More Clojure programmers means 1) better attendance at the New Orleans Functional Club, a monthly meeting I host, 2) more people to talk to about Clojure, and 3) a larger labor pool for those companies that use Clojure. The last one aligns us with potential sponsors.</p>
+<p>Also, my motivation was to get some practice teaching Clojure in person to non-programmers. I teach a lot on video, but it's most definitely different when you're watching someone have trouble closing parens. I plan on running paid workshops in other places, so I wanted to work out the kinks at home beforehand.</p>
+<p>We were four: myself, Hunter, who programs in Clojure professionally and just loves to help people learn about Lisps, Alba, who is an active tech community member and organizes lots of workshops (not a programmer), and Jaelle, PhD student in Computer Science, interested in learning Clojure/FP and also active in organizing.</p>
+<p>At first, we wanted to do a Clojure Bridge. We also wanted to partner with New Orleans Women in Technology (WIT), a local group advancing women's issues in the community. Both Alba and Jaelle were members. Immediately there was a tension between the goals of Clojure Bridge and New Orleans Women in Technology. Clojure Bridge aims to create an environment where women can feel safe by maximizing the percentage of women at the workshop. WIT, on the other hand, believes that because women need to work with men, you shouldn't segregate. Another difference was that Clojure Bridge does not allow workshops to accept payment. WIT encourages it, because it increases the commitment from the participants and makes it less reliant on sponsorship. We didn't wind up charging.</p>
+<p>It took us a while to work out all of these differences and decide that it was either Clojure Bridge or WIT. We thought about it but it was actually an easy decision. What does being an official Clojure Bridge actually offer to us? Meanwhile, WIT was there with local resources, a large mailing list, and people planning and taking action. I think it really comes down to our motivations being not aligned with Clojure Bridge's charter. Clojure Bridge provides a lot of resources for planning and running an event--including a curriculum, complete guides for planning the event, and help in the mailing list. We used the planning guides for a rough idea of what to expect and ran with it.</p>
+<p>It will be an easy decision not to make it a Clojure Bridge next time. We know how to run it, we made our own curriculum, and we have connections on the ground. Clojure Bridge is still a great option if you'd like their support.</p>
+<h3 id="ramp-up">Ramp up</h3>
+<p>Part of the difficulty of running an event for the first time is that it's hard to know everything you'll face until you face it. That meant it was hard to divide up work. We couldn't even list the work we were going to do. The Clojure Bridge guide was helpful in this regard because we could see a few things we needed:</p>
+<ol style="list-style-type: decimal">
+<li>A location</li>
+<li>Sponsors</li>
+<li>Food</li>
+<li>Publicity</li>
+<li>Curriculum</li>
+<li>Teaching assistants (I would teach it)</li>
+</ol>
+<p>Jaelle got a great location where workshops are often held donated for free. Alba had estimated the food costs and we added in some schwag that we wanted to get. It came out to about $1,000. I decided that four sponsors should be enough, so I braced myself to ask for $250 from each. That turned out to be one of the easiest parts of the work. I asked 5 local companies and one non-local and got four yeses (all local) within a few days. Having a budget was a huge relief.</p>
+<p>Hunter started working on the template we'd build on during the workshop. We had the idea to make a ClojureScript app that would let you build card games. The morning we would guide them through making a simple game like Memory. Then the afternoon, we'd give them some challenges but mostly it would be about having fun making their own game on their own. There were some vague plans about a server where you could build multiplayer games, but I couldn't figure out how to make it worthwhile while making it easy enough to learn and experiment with. Maybe next time :)</p>
+<p>We started asking teaching assistants and got a few easy signups. Some people said they'd ask at work, and we kept reminding them weekly but mostly it did not grow. Teaching assistants were probably the hardest part because it was largely out of our control. Some teaching assistants dropped out at the last minute. Some people seemed afraid that they were not advanced enough to teach. We pressed harder and got more people to commit. I think they were glad they did it. They saw that the people who needed help were having trouble not with Clojure, but with the very basic things like typing symbols, getting the braces right, and indentation. Any professional programmer would have no problems guiding someone through that. All in all, four people could handle 23 patient students. It would have been faster with more volunteers, which is important. There was a lot of time spent waiting for a teaching assistant to debug one student's system, only to then hop to another student needing help. I think the ideal ratio would be 3 students to 1 teaching assistant.</p>
+<h3 id="one-month-out">One month out</h3>
+<p>Hunter made an example memory game pretty quickly. One weekend I worked with it but because it was a library I wasn't familiar with, I couldn't figure out how to get some changes I wanted to make working. Time was pressing to finish the curriculum. So I switched it to Re-frame. One thing that we lost because of the time pressure was that we didn't want to expose any HTML. We wanted it to be a card game library. But the way I made it, the workshop turned into building the re-frame components themselves, ending in a complete game. I'll talk more about how this worked out after.</p>
+<p>We started the publicity around this time. We made a meetup event (in the New Orleans Functional Programming Club (NoFUN) Meetup), we made a Facebook event, we made an event at the local New Orleans Tech Week (NOTW) site (because it happened to fall during tech week), and we made an Eventbrite event to manage tickets and the waitlist. The publicity all worked better than expected. But it also was a big source of stress. All of those systems have their own form of registration/RSVPs. We tried to make it clear that you needed an Eventbrite ticket to reserve your spot. But who reads to the bottom? People just clicked RSPV on whatever page they were on and thought they were registered. We were worried that we'd have lots of unregistered guests. We tried to modify the descriptions to reflect that, but it was too late; the damage was done. We wound up getting a few extra people than we expected, which was manageable in the moment. The worst part is people who thought they were registered then learned too late that they were not. My apologies to those people.</p>
+<p>We're looking for a better solution to this. How do we promote it as an event on the various platforms but make it clear that there is one canonical location for registration?</p>
+<p>The other thing that happened was that the popularity of the event caused an unexpected consequence. We all started promoting it in an uncoordinated way. I promoted it to the NoFUN meetup, Alba promoted it on Facebook, and we put it on NOTW. It filled up very quickly. By the time Alba and Jaelle got permission to publish it to the WIT mailing list, it was full, so they decided not to publish it to the WIT list (mostly women), which we learned very late. This disappointed me and I think it was a mistake. There was a waiting list, which was nearly empty, but which gradually grew over time. As people canceled their tickets, people from the waiting list were offered a ticket. Approximately 8 people got a ticket from the waiting list. If those people had been from the WIT mailing list, they probably all would have been women. We had a decent (but improvable) ratio of women to men at first, about 8 to 12. But more women than men canceled their tickets, and they were almost all replaced by men. I think in the end we had seven women out of twenty-three. Next time we will promote the event to WIT first.</p>
+<p>Another thing we discussed was reserving 50% of the spots for women, and giving women on the waiting list priority for those spots as they were freed up. I did do this when I could (when there was a name I could identify as female on the waiting list). We could have done this more easily if we had collected gender information, but we didn't. Identifying gender by name is full of problems. I don't think there was any overt bias in our selection, but the lack of coordination reflected the underlying bias of the industry. The solution would be to promote it in the WIT list and overwhelm the tickets and waiting list. We'll have to decide on collecting gender information for next time.</p>
+<p>We planned food. I made a run to Costco to buy non-perishables and get prices on things we were going to need. We used that to plan the final stuff, that all actually came together in the last week.</p>
+<h3 id="one-week-out">One week out</h3>
+<p>One week out we were short on volunteers so we pressed harder to get people to show up. I doublechecked with everyone who had given a firm no that it was still a no, and started asking more people who had some experience in Clojure, however slight. We got someone and just had to live with fewer voluneteers. Like I said before, we did okay with what we had but we could have gone faster if we could help people through the issues faster.</p>
+<p>We finalized the curriculum in the last week, meaning making slides and knowing exactly what steps we would go through. It would have been nice to have gone through it with someone, but I think it was fine without that. Those kinds of things are usually more trouble than they're worth, since there's a lot of cost coordinating it and requiring the curriculum ahead of time.</p>
+<p>Part of the workshop was an install fest the night before. We had settled on Atom with various Clojure plugins for our IDE. The idea was that it was production ready. We were giving people a real development environment on their machine. That's part of the benefit of attending the workshop. But the Monday before the workshop, Nightlight was released. We had already had some trouble getting Atom with Clojure set up. None of the organizers had ever used Atom. The Clojure instructions we were following were kind of involved with lots of copy-paste and manually changing settings. We had gone through it with a couple of people beforehand and, not knowing the editor very well, we just weren't confident what the settings did or why we were changing them. When Nightlight came out, we took a look at it and it gave us 90% of what we wanted (it's not a professional IDE) with 0 setup. Literally zero setup. It's just included in as a plugin in our Leiningen template. That dropped the setup steps to two (install JDK and install Leiningen). It's also a simple enough editor (read: few features) that we didn't think we'd be fighting it during the workshop.</p>
+<p>So, with less than a week left, we switched to Nightlight. It was not made for ClojureScript, but it worked fine. We just never opened any Clojure files. It has an instarepl for Clojure files. We tried running figwheel inside of the Nightlight REPL, but it always crashed it somehow. I played with the settings, but I just never found a configuration that worked. So we had to run two commands in separate terminal windows: <code>lein nightlight</code> (for the editor) and <code>lein figwheel</code>. Then open two browser windows, one for the app and one for the editor.</p>
+<p>The editor had a few challenges. It wasn't working right in IE. For a brand new app, that kind of thing is expected. There were no issues in Firefox, Safari, or Chrome that the volunteers heard about. The editor includes quite a large right sidebar for REPL results, I believe, but since we weren't using it, it mostly got in the way and looked funny to have such a big space left blank, especially since we were opening the web app side-by-side with it. I'll see about adding a switch to close it. I've already mentioned that I couldn't get figwheel running in it. It also did not appear to obey the Leinginen REPL options set in the <code>project.clj</code>. And finally, Parinfer was a little challenging for beginners. That said, I think Parinfer and indentation is easier for everyone (including beginners) than manually balancing parens. So it's a challenge, but one everyone will have to overcome as they learn to program, not one specific to the editor.</p>
+<p>But the editor overall was awesome. Try it out. It has nearly zero features. It doesn't even let you make or delete files. You can't hide stuff accidentally. It has autosave, which is great for working with Figwheel. It was so easy to install, run, and use. For a one-day workshop, I recommend using it every time.</p>
+<h3 id="the-night-before">The night before</h3>
+<p>The install fest was okay. We had it at the same location. Lots of things went wrong. I'll just list them out. I planned on picking up some perishable food on the way to the install fest, with plenty of time to set things up. I picked up the food, but the pizza place I was going to order from was closed for renovation. Uh oh! Time was running out. Luckily, we had reviewed several options and I just picked one that we had looked at. It was approximately 2x the price, but we had some padding in the budget for this kind of thing. I ordered the pizza for delivery.</p>
+<p>The next thing that went wrong was we had planned it on Tulane University's campus which has free parking after 5:30pm and on weekends. Except Friday there was a football game and the streets were blocked. They weren't even going to let us go in to drop off the four or five carries of food. We eventually convinced the police to let us pull up in front of the building. We unloaded and I rushed off to find a parking spot. It was getting close to time now, and as I was parking, others started calling me about where they should park. I got back and got a call from the pizza that they were a few minutes away. I waited downstairs but it took ten to fifteen minutes because they couldn't get past the barricades. By the time we got upstairs, it was past time, and people had been coming in early. That left Hunter to manage about ten of the attendees and get them started, since the other volunteers were still trying to park. Big job, which he did well. Jaelle and I finished bringing everything upstairs and then started helping. Jaelle did a great job setting up the food while we were all installing. Some people had to pay $20 for parking. Just a little chaos. I'm not sure we could have prevented any of it except to have planned it on a better day. Besides that, everything went well. After everyone left, we set up the tables and chairs to face the projector.</p>
+<p>The biggest thing we could have done to prepare more would have been to have printed instructions for the major platforms. We were running around telling people what commands to type. But we could have had printouts. In fact, we could have had a welcome person hand out a sheet and a wifi password as they came in.</p>
+<h3 id="the-day-of">The day of</h3>
+<p>The day of we had another parking problem. One street had a 5k foot race. The other side of campus had a bicycle race. So about 50 nice parking spots right in front of the building were empty and inaccessible. Did we anger the parking gods? There was breakfast ready and we got started on time.</p>
+<p>A note about one person's setup, since it provides some valuable lessons. One woman brought a laptop to the install fest that had Windows XP, which was very old and we had trouble installing a recent JDK on it. For the workshop, I brought a spare laptop, as did Hunter, just in case. In the morning, she had been surprised by her family with a brand new laptop. It was still in the box when she brought it. As you probably know, a brand new laptop is not ready to do much of anything for a while. Hunter stuck with her while we started the app, then he caught her up. Again, more volunteers would have made this kind of thing easier.</p>
+<p>Another lesson is to make it easy to catch up. Someone suggested we have all of the code at each step in different directories, but most people who get behind are not good at switching directories, etc. Same goes with git tags. Someone suggested that the teaching assistants could have printouts with all of the code people would need to type in. They could sit with people who needed to catch up and refer directly to them. One of the problems was that everyone was reading the code from the projector, so I couldn't advance while they were typing it in. Also, at the back of the class it was sometimes hard to see stuff like the difference between a curly brace and paren. Having it all right there to refer to would have been nicer. However, I think other oblique solutions may be better.</p>
+<p>The food went smoothly during the workshop, but I think it could have been better. The main problem was that the teaching assistants and I were busy right up until lunch, so then we had to rush to set up lunch. If we had a documented lunch, I could have delegated lunch setup so that it was done while people were still working and I was still teaching. But it wasn't documented. It was all in my head. Some things fell through the cracks but everyone was well fed.</p>
+<p>The pace of the workshop was too slow for advanced programmers. Most people were idle most of the time, waiting for the people who got stuck to get help or just for the slow typists to finish. I'm not sure what to do about that. We've discussed some options. One option is to just make it for beginners, to make it clear that you will be extremely bored if you have significant programming experience. We could make another workshop for advanced students at a different time. Another idea was simply to split them up during the workshop. That would have been possible but challenging in our space. There could be some activities to do for advanced students as they wait for the rest of the class. I think there's also room to improve the curriculum. I'll talk about the curriculum later.</p>
+<p>The last hour of the workshop was spent talking about the sponsors, how they could continue their study of Clojure, and deepening their connection to the community. We signed people up for the local developer chat room, we told them about the NoFUN meetup, and we got them to sign up for the two video sponsors (PurelyFunctional.tv and Lambda Island (thanks!)). I give free access codes to all Clojure Bridge workshops. Some have zero signups, some have a lot. I figured the ones who have a lot are the ones who gave time during the workshop to load up the page, register, and put in the code. So that's what we did.</p>
+<p>No Starch Press donated 20 copies of <em>Clojure for the Brave and True</em> (thanks!) which we passed out. Unfortunately we didn't have enough copies for the ones who didn't have a ticket, but some people said they prefer to read online so we worked it out. We talked about Clojure/conj, but it was too late to sign people up for the diversity scholarship.</p>
+<p>Some people stuck around to help clean up, which made it really easy. Thanks!</p>
+<h3 id="after-party">After party</h3>
+<p>The after party was a partial success. The whole point was for people to celebrate what they've learned and to meet potential employers. The employers did not show up :( We planned the party for 40 people. It was hosted at the Southern Food and Beverage Museum, which they donated. We had looked at other options, but private parties at most places would have cost half of the budget, so we went with something I could get for free (the founder and director is my mother).</p>
+<p>There's not much to say about the party. It was just a party :) Some people weren't clear on where it was, but I don't know what I could have done. Send a fifth email with the location? But the people who made it had a good time.</p>
+<h3 id="wrap-up-and-aftermath">Wrap up and aftermath</h3>
+<p>So you think after all that work, it's done? Wrong! I got home after the party and packed up all of the leftover food that I brought home. Others brought some home, too. Lots of freezing. I'll talk about that later.</p>
+<p>I took Sunday to be with my family. On Monday I started again with emails thanking the sponsors, sending emails to the attendees to thank the sponsors, a survey to the attendees to help improve (good stuff and very minor negative comments when we solicited them). I still need to send out the code and slides to the attendees.</p>
+<p>Then I needed to do the accounting to see how well we did on the budget with all of those last-minute purchases. I also wanted to document a bit about the food to do better next time.</p>
+<p>And of course, writing this massive retrospective document ;)</p>
+<h3 id="things-to-improve-for-next-time">Things to improve for next time</h3>
+<p>Are we going to do another one? That's what everyone was asking. Always a good sign. In the week since the workshop, after recovering a bit, yes, I think I will. I think Q1 of 2017 is a good range for now. With all that we've learned and documented, it will be 25% of the work to redo what we did. Knowing myself, I'll probably try to outdo it.</p>
+<h4 id="html">HTML</h4>
+<p>I mentioned before that the day was spent building a memory game (which we didn't finish). A lot of it was building re-frame components, re-frame subscriptions, and re-frame event handlers. I think it's nice that they were building something real out of the parts that they would use professionally. But so many people were not ready to work professionally, so I'm not sure how relevant that was for them. I've heard from an attendee that people next to him were confused the whole time about why we were making <code>&lt;div&gt;</code>s and what the CSS classes had to do with anything. Basically, since they didn't know HTML, they could differentiate between what was HTML and what was ClojureScript.</p>
+<p>I said before that the original goal was to completely wrap up the HTML in a library for building card games. You'd just be in the card-game domain the whole time, never dropping down to HTML or re-frame. I think that's the sweet spot. It will mean less lecture-style teaching and more experimentation and play. People will get to make something faster and spend more time developing their own games. Beginners and advanced students will be decoupled and can go at their own paces (holy grail for any learning). My goal is that with only a few lines of code, a complete memory game with flipping cards and score can be built in an hour or two, leaving the rest of the time for challenges and extra learning. But mostly individual and group work.</p>
+<h4 id="refrigeration">Refrigeration</h4>
+<p>One thing we didn't think about until close to the event was refrigeration. Make sure there's enough room in the fridge at the venue to load up on the food for the next day.</p>
+<h4 id="too-much-food">Too much food</h4>
+<p>We had too much food. We overestimated. I and others brought a lot home. I'd love to free up some of the food money for stuff people can take home with them. Some of the stuff will keep till the next one, but most won't.</p>
+<h4 id="party">Party</h4>
+<p>I'm not sure how to get more sponsors to the party. I downplayed the amount of food and alcohol because we were unsure about the amount of food. But both food and alcohol were adundant. I should have made it sound more appealing.</p>
+<h4 id="more-schwag">More schwag</h4>
+<p>We got to give the attendees some great stuff. They each got a book, subscriptions to two video services, and some stickers. But I wish I could have given more stuff. We will have more money in reserves if we cut back on the food.</p>
+<h4 id="handouts">Handouts</h4>
+<p>One thing I wanted to give was handouts. Like a cheat sheet with all of the syntax and functions you will need during the workshop, a list of great resources to use after you go home, etc. Really, it wasn't done because I put it off until there were more important things to do. Maybe next time.</p>
+<h4 id="teaching">Teaching</h4>
+<p>One thing I didn't expect was how many of the basic skills I take for granted were not present in the beginners. I'm talking about things like typing curly braces. How many times do you type a curly brace when you're not programming? My curriculum was designed to teach a concept and then have the students apply it. It was too much. I started adapting. About halfway through, I got more into a rhythm of presenting the exercise, then saying &quot;if you want to do it yourself, go ahead; if you want to follow along with me, watch me.&quot; Then I'd do it slowly and talk about each little step, including opening braces, spaces, and indentation. I think this took a lot less time overall. But of course it was still a lot more time than the advanced students needed.</p>
+<h4 id="organization">Organization</h4>
+<p>I'm confident that next time we'll know exactly what needs to be done. What food to buy at what stores. I'll be able to hand a volunteer a shopping list and they'll be able to go shopping and contribute. Also the curriculum will be easier since it mostly exists.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>It was a lot of work but totally doable with some long hours and persistence. I definitely stretched myself but it was a success so I'm very happy. I'm glad I'm writing all of this down to remember for next time. And it's feeling very satisfying right now. Some twenty people have been introduced to Clojure, have Leiningen on their machine, and can say they've built something. That's something to be proud of. You should run a workshop, too.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

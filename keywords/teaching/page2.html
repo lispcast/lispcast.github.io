@@ -11,14 +11,14 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>Keyword: brain | LispCast</title>
+    <title>Keyword: teaching | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
     <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
-    <meta name="twitter:title" content="Keyword: brain">
+    <meta name="twitter:title" content="Keyword: teaching">
 
-    <meta property="og:title" content="Keyword: brain">
+    <meta property="og:title" content="Keyword: teaching">
     <meta property="og:description" content="A blog about the simple joys of functional programming.">
 
     <meta name="description" content="A blog about the simple joys of functional programming.">
@@ -104,45 +104,69 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/making-true-false-easy">
-            Making True/False Questions Easy
+             href="/why-technical-explanation-alone-is-not-enough">
+            Why technical explanation alone is not enough
           </a>
         </h2>
 
         <div class="timestamp">
-          September 21, 2013
+          September 09, 2013
         </div>
 
         
-<p>When I was training as a teacher, I gave a simple quiz with True/False (T/F) questions. The results were terrible. Worse than chance. On one question, <strong>about 20% of the class got it right</strong>.</p>
-<p>I had asked a simple question involving a logical AND:</p>
+<p>Here's a problem you might see on a standardized test:</p>
+<p><center>
+<img src="http://www.lispcast.com/img/logic-puzzle.png" alt="Choose the answer that makes the following statement FALSE: If the Triangle is Red, then the Square is Blue." />
+</center></p>
+
+<p>Go ahead and try to solve it. Choose an answer.</p>
+<p>When people answer this question on a test, the most common answer is C. Yellow triangle and red square. They try to make the statement false by negating all of the colors.</p>
+<p>This is wrong. Actually, the correct answer is A. It is the only one that makes the statement false. Why?</p>
+<p>This is a propositional logic problem. The colors and shapes are a red herring. The rule for implication (if-then statement) is:</p>
 <blockquote>
-<p>True or False?<br />A parallelogram has parallel opposite sides AND it has five sides.</p>
+<p>An implication is false if the antecedant is true and the consequent is false.</p>
 </blockquote>
-<p>Eighty percent of the class chose 'True', even though all parallelograms have four sides. The other teachers told me the question was difficult because it was a T/F question. <strong>They said they never give T/F questions because they only confuse the kids.</strong> They said I should just forget about T/F and try a different type of question. But it was my class and my time to explore teaching and I knew that this question was not that hard. Several connections became clear in my mind: <a href="http://lispcast.com/why-technical-explanation-alone-is-not-enough">using the right part of their brains</a>, <a href="http://lispcast.com/tap-into-your-social-brain">making the problem about people</a>, and <a href="http://lispcast.com/use-your-imagination">using their imaginations effectively</a>. I wanted to give it a shot.</p>
-<p>I planned the next class around answering True/False questions. There would be an <strong>experiment</strong> to confirm my suspicion (that the kids were using the wrong part of their brains), a lesson using an <strong>imaginative process</strong>, and then a <strong>similar quiz</strong> to see how it worked.</p>
-<p>The next morning in class, I wrote the T/F question on the blackboard and called a student up to answer it. He read it and said 'True' (the wrong answer). I asked him &quot;what about this part?&quot;, pointing to the false part. He was clearly confused. The part about five sides was obviously false to him. He then began <em>looking around</em><sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> through the question and stopped at the first part (the true part). He pointed at it and said 'True', as if it negated the fact that the other part was false. It's hard to describe, but I was convinced that he was simply looking for something that was true to make the whole question true. <strong>And he thought that it was the right answer.</strong> My hypothesis was confirmed: he was using a visual strategy when it was not called for.</p>
-<p>I then demonstrated an imagination process for solving True/False questions. It went like this:</p>
-<blockquote>
-<p>When solving a True/False question, I first imagine someone standing in front of me. He says the statement from the question to me. If he is lying, the answer is <em>False</em>. If he is telling the truth, the answer is <em>True</em>.</p>
-</blockquote>
-<p>I asked a couple of people to carry out the process while narrating it to me. They seemed to be able to do it (and they got it right). So then I gave the quiz.</p>
-<p>The result? Correct answers went <strong>from 20% to 80%</strong>. I felt like I was finally testing their knowledge of the material and not their understanding of test-taking strategies.</p>
-<p>How did it work? By <strong>converting the problem from a logic skill to a social skill</strong>, the students could totally bypass the need to process difficult symbolic rules. And we could solve it as a social problem by using a structured process of imagination.</p>
-<p>True/False questions are difficult because there are <strong>so many levels of binary confusion</strong>. First, you are looking for the correct (as opposed to the incorrect) answer. Then you must determine the truth value of the whole statement, which is a function of the truth values of the sub-statements. It's just a lot of levels to keep in your head.</p>
-<p>The imaginative process cuts through all of that and asks one question: is he lying. <strong>You are offloading the processing to the social part of your brain</strong>, which can easily do it if framed in the right way.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<p>Kind of boring and therefore hard to understand if you don't already know the rule. It is unlikely that any amount of explanation will help, though you should try to understand if you don't already. Here, try this. If the triangle isn't red, then the statement doesn't apply, so it is true by irrelevance. That eliminates C and D. B obviously makes the statement true, so it must be A.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p>Researchers found that explanations alone do not help. I read an article<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> about a study where similar questions were asked to a group of students. The students were hooked up to <a href="http://en.wikipedia.org/wiki/Electroencephalography">EEG (Electroencephalography)</a> machines to measure what parts of their brains were active during each question. They also asked them to say which ones they thought they got right.</p>
+<p><center>
+<img src="http://www.lispcast.com/img/eeg.jpg" alt="EEG setup also labeling reasoning/visual areas." />
+</center>  
+Photo credit: <a href="http://en.wikipedia.org/wiki/File:EEG_recording.jpg">Petter Kallioinen</a>
+</p>
+
+<p>What they found was that most of the people who answered A were <em>using their frontal and temporal lobes</em>: the parts of the brain responsible for <em>logic, reasoning, and language</em>. Most of the people who answered C were using their <em>occipital lobes</em>, which is responsible for <em>vision</em>.</p>
+<p><strong>Moral #1:</strong> Recognize what type of problem you need to solve. If possible, use the right part of your brain for that problem.</p>
+<p>The people who used their vision centers were doing visual pattern matching, <em>looking for shapes and colors</em>. This is typical of a fight-or-flight response, where you are running from a tiger and need to quickly spot it in the jungle.</p>
+<p><strong>Moral #2:</strong> Don't get nervous during a test. Anxiety makes some parts of your brain more active--usually the wrong ones.</p>
+<p>In addition, the people who used their vision center to answer the question <em>thought they got the answer right</em> just as much as the people who actually got it right.</p>
+<p><strong>Moral #3:</strong> The different parts of your brain are good at different tasks. If you ask the occipital lobe to do pattern matching, it will, and it will think it did a good job--even if it is not a pattern matching task.</p>
+<p>The second part of the study tried to teach those who got it wrong to do it better next time. They broke them into a control group and an experimental group. The control group got an explanation like the boring one above on how to make an implication false. The experimental group got the same explanation plus they were trained with a little <em>bio-feedback to use the right part of the brain</em>.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup></p>
+<p>The result was that the control group didn't make any gains. And they <em>still</em> thought they got it right. The experimental group did significantly better. They scored higher and were more likely to say they got the wrong answer when they did get the wrong answer.</p>
+<p><strong>Moral #4:</strong> Explanation alone is basically worthless. Even practice is not enough. The key is to recognize what type of problem it is, use the right part of your brain, and don't listen to the rest of your brain. Only then is explanation useful.</p>
+<p>Now, this is easier said than done. I don't have an EEG machine. I've never done bio-feedback. But the <em>idea</em> has helped me tremendously when teaching math. <em>It is not hard to recognize when someone is using the wrong part of their brain.</em> First, they <em>confidently</em> get the wrong answer. Second, they are getting the basic mechanics of the problem wrong. They're <em>looking</em> for something. They find the closest thing to what they want. They're done.</p>
+<p><em>Logic problems aren't about looking.</em> They're more abstract. Common helpers for doing logic problems are mouthing words, making gestures, and looking <em>away</em> from the problem.</p>
+<p>Recognizing whether someone is using the right part of their brain is easy. But now you know explaining won't help. The hard part is to get them <strong>to use the correct part of the brain</strong>. That's what I'll talk about next time.</p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
 <li><a href="http://www.lispcast.com/interactive-baking">The Importance of Embodied Metaphors</a></li>
 <li><a href="http://www.lispcast.com/learning-is-about-skills">How to avoid &quot;Makes sense if you already understand it.&quot;</a></li>
-<li><a href="http://www.lispcast.com/new-orleans-clojure-workshop-oct-2016">New Orleans Clojure Workshop Retrospective</a></li>
+<li><a href="http://www.lispcast.com/making-true-false-easy">Making True/False Questions Easy</a></li>
 </ul>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Looking indicates visual thinking. <a href="http://lispcast.com/why-technical-explanation-alone-is-not-enough">Use the right part of the brain.</a><a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>In my last post, I hinted at a better way to teach how to determine whether a function is a pure function. The better way is to imagine a robot in front of you. Can he run that function &quot;in his head&quot;? Or does he need to effect the outside world?<a href="#fnref2">↩</a></p></li>
+<li id="fn1"><p>If you still don't get it, I'll share one more trick. Convert it into a purely symbolic puzzle to switch off your occipital lobe.</p>
+<p>Choose the answer that makes the following statement FALSE:</p>
+<pre><code>X -&gt; Y
+
+A.  X &amp; ~Y  
+B.  X &amp;  Y  
+C. ~X &amp; ~Y  
+D. ~X &amp;  Y  </code></pre>
+<a href="#fnref1">↩</a></li>
+<li id="fn2"><p>I read it back in 2002 and have lost the reference. I tried searching for it and could not find it. The reason I bring it up, even without a citation, is that it has been very important to my thinking about learning. If you know this or a similar study, please let me know.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Yes, it was double-blind. In fact, if I remember correctly, they were all in the same classroom listening to the same lecture. The control group was moved to a room to practice. The experimental group was moved to a different room to practice with EEG bio-feedback machines. Then they took a similar test again.<a href="#fnref3">↩</a></p></li>
 </ol>
 </div>
 
@@ -165,6 +189,10 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
     </div>
 
     <footer class="footer-banner">
+      <a class="footer-next"
+         href="index.html">
+        next
+      </a>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

@@ -104,6 +104,41 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="https://google-styleguide.googlecode.com/svn/trunk/lispguide.xml">
+            Google Common Lisp Style Guide
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/google-common-lisp-style-guide">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          October 11, 2012
+        </div>
+
+        
+<p>In April 2011, Google acquired ITA Software. ITA provides airline flight search for several of the major companies. The interesting thing is that ITA's search engine was written in Common Lisp.</p>
+<p>This style guide shows that Google is adopting the existing Lisp code base instead of rewriting it. Not so surprising since the code is, from what I have heard, well-engineered. But a bit surprising since Google chose Python over Lisp some time ago. Peter Norvig explains the choice a bit on <a href="http://www.youtube.com/watch?v=hE7k0_9k0VA#t=03m20s">Reddit</a> and <a href="http://news.ycombinator.com/item?id=1803815">Hacker News</a>.</p>
+<p>In addition, it also shows that Google is affecting ITA with its culture, to some degree. Google uses this format for <a href="https://google-styleguide.googlecode.com/svn/trunk/">all of its style guides</a>.</p>
+<p>Anyway, I love style guides!</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="https://oracleus.activeevents.com/connect/sessionDetail.ww?SESSION_ID=3242">
             Clojure/ClojureScript: One Language to Rule the Web
           </a>
@@ -417,82 +452,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 </blockquote>
 <p>The issue is not whether a database needs an explicit schema. The issue is whether the language you write down your schema in can express the data model you would like to use.</p>
 <p>That said, the <a href="http://docs.datomic.com/schema.html">Datomic schemas</a>, along with the &quot;datom&quot; model, do look expressive.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.infoq.com/presentations/The-DCI-Architecture">
-            The DCI Architecture: Lean and Agile at the Code Level
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/the-dci-architecture-lean-and-agile-at-the-code-level">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          September 20, 2012
-        </div>
-
-        
-<p>James Coplien's criticism of Java (that it cannot do proper object-oriented programming) is my essential criticism of static languages in general: <em>what if the model of programs that your language enforces does not allow you to program well?</em></p>
-<p>Coplien describes a style of programming that, although not especially encouraged by Smalltalk, was at least possible as an architectural convention. And listening to Alan Kay, I get the impression that the early Smalltalk group was programming with a concept like Roles in mind, though there was no explicit construct for it in the language.</p>
-<p>That concept was what we now refer to as &quot;duck typing&quot;. To fulfill a &quot;methodful role&quot;, you simply needed to have all of the required methods defined.</p>
-<p>Now, how would Clojure handle DCI? Well, quite naturally, actually. There are three building block concepts in DCI described in the video, each with a terrible name.</p>
-<ol style="list-style-type: decimal">
-<li>Classes (data)</li>
-<li>Methodful Roles (interfaces)</li>
-<li>Methodless Roles (variables)</li>
-</ol>
-<p>In Clojure, &quot;classes&quot; are simply data, perhaps validated to conform to a schema, perhaps wrapped in a <code>ref</code> to get state. &quot;Methodful roles&quot; are groups of functions that can operate on data. If you're feeling frisky, you can use protocols. &quot;Methodless roles&quot; are variables in your program, each assigned to the data which will play that role.</p>
-<p>Let's look at the main example in Clojure.</p>
-<pre><code>;; money source role: debit and balance
-(defn debit [source amount]
-  (update-in source [:balance] #(- % amount)))
-
-(defn balance [source]
-  (:balance source))
-
-;; money destination role: credit
-(defn credit [dest amount]
-    (update-in dest [:balance] #(+ % amount)))
-
-;; the use case for doing a transfer    
-(defn transfer [amount source destination]
-  (dosync
-    (when (&lt; (balance @source) amount)
-      (throw (ex-info &quot;Insufficient funds.&quot; {:account @source :amount amount})))
-    (alter   source       debit amount) ;; debiting is not commutative if we check balance
-    (commute destination credit amount)))
-
-;; our two accounts
-(def savings  (ref {:balance 1000}))
-(def checking (ref {:balance 25}))
-
-;; we can transfer 20 bucks from savings to checking
-(transfer 20 savings checking)</code></pre>
-<p>I wrote this just to make sure I was not kidding myself that &quot;DCI&quot; is dead-obvious if your language does not get in the way. Object-oriented conventions today make this complicated enough that you need to read books on it to understand. How many files would you need to write in Java to do this?</p>
-<ol style="list-style-type: decimal">
-<li>MoneySource interface</li>
-<li>MondeyDestination interface</li>
-<li>Transfer Use Case</li>
-<li>Account Class (or two, depending on the differences between savings and checking)</li>
-</ol>
-<p>If you can modify the account class(es) to implement the interfaces, you should be ok with those files. But if you can't, you'll have to use the &quot;Bridge&quot; pattern that I learned in school. Basically, you make a new class for each combination of class and interface. So you would have SavingsAccountMoneySource, SavingsAccountMoneyDestination, CheckingAccountMoneySource, and CheckingAccountMoneyDestination. And OOP was supposed to need less code!</p>
-<p>This video tells me that object-oriented programming as it is taught today has been going way down the wrong track. The lessons the static object-oriented languages have learned from the dynamic ones are the wrong lessons. Duck typing allowed programmers to elegantly implement these ideas without restrictions from the compiler. And inheritance was about reuse more than subtyping. Modern OO style takes and does not give back.</p>
 
 
         <div class="endmark">

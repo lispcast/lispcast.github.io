@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Building Composable Abstractions Rehearsal 3</title>
+                  <guid isPermalink="false">http://www.lispcast.com/building-composable-abstractions-3</guid>
+                  <link>http://www.lispcast.com/building-composable-abstractions-3</link>
+                  <pubDate>Sun 13 Nov 2016 03:36:36 PM CST</pubDate>
+                  <description>
+                    My third rehearsal for my upcoming Clojure/conj talk.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/building-composable-abstractions-3"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Two rehearsals for my Clojure/conj talk</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojure-conj-rehearsal</guid>
                   <link>http://www.lispcast.com/clojure-conj-rehearsal</link>
@@ -129,20 +143,6 @@
                     The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Ubuntu instructions for my recommendations.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-ubuntu"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Installing Clojure on Windows 7</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-windows-7</guid>
-                  <link>http://www.lispcast.com/clojure-windows-7</link>
-                  <pubDate>Fri 11 Mar 2016 11:26:17 AM CST</pubDate>
-                  <description>
-                    The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Windows 7 instructions for my recommendations.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-windows-7"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

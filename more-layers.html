@@ -122,7 +122,7 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <li>Backbone was using regular JS arrays and objects. Modification and reading are very fast. ClojureScript, on the other hand, uses sophisticated immutable data structures that are known to be slower for random modification and access.</li>
 <li>Backbone was using vanilla JS. ClojureScript is compiled to JavaScript and so probably has some overhead compared to hand-written JS.</li>
 </ul>
-<p>So it's no wonder it's a little hard to believe. But there's some fact left out of the balance above.</p>
+<p>So it's no wonder it's a little hard to believe. But there's some facts left out of the balance above.</p>
 <p>Before we go into those, I should mention that a lot of people argue with the results David Nolen got because he used a very uncommon use case that the other apps were not optimized for. He added a large number of TODO items at once. But David Nolen didn't optimize his for that, either. It only reinforces the point: <strong>why is it that when the number of operations gets large, React + CLJS starts to win?</strong></p>
 <p>The high level is this: each of the layers that React and ClojureScript add are <strong>optimizers</strong>. Insert some optimizers in the equation and things start getting faster.</p>
 <ul>

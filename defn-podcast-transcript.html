@@ -1,0 +1,740 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Defn Podcast Transcript | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="I was on the Defn Podcast. We talked about Clojure, testing, and PHP :) Here is a transcript.">
+    <meta name="twitter:title" content="Defn Podcast Transcript">
+
+    <meta property="og:title" content="Defn Podcast Transcript">
+    <meta property="og:description" content="I was on the Defn Podcast. We talked about Clojure, testing, and PHP :) Here is a transcript.">
+
+    <meta name="description" content="I was on the Defn Podcast. We talked about Clojure, testing, and PHP :) Here is a transcript.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/defn-podcast-transcript">
+            Defn Podcast Transcript
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          May 11, 2017
+        </div>
+
+        
+<p>Summary: <em>I was on the Defn Podcast. We talked about Clojure, testing, and PHP :) Here is a transcript.</em></p>
+<p>I was interviewed on the <a href="https://defn.audio/2017/04/11/episode-20-eric-normand/">Defn Podcast Episode 20</a>. What follows is a transcript. Sorry for the typos!</p>
+<p>[background music]</p>
+<p>Ray McDermott: Yes, here we go. Show number fucking 20.</p>
+<p>Eric Normand: Yay.</p>
+<p>Ray: I shall start again because maybe &quot;fucking&quot; shouldn't be the first word we say.</p>
+<p>Eric: Put the f-bomb in there.</p>
+<p>[laughter]</p>
+<p>Ray: Welcome to show number 20. Hello, and we have Mr. Eric Normand over in the US of A, I believe.</p>
+<p>Eric: Hello, hello, yes in New Orleans.</p>
+<p>Ray: Coming from Trumpsylvania.</p>
+<p>[laughter]</p>
+<p>Ray: We won't go there, today.</p>
+<p>Eric: I guess I could just pull a Brexit joke, or something.</p>
+<p>Ray: So, Ray in Belgium. Vijay, you're not in Holland are you, actually?</p>
+<p>Vijay Kiran: No. I'm not in Holland, I'm in Germany. I'm in Munich for the rest of the week. I just landed today, so I'll be here for the rest of the week. This is the first time that Defn, half of it, is on the road. Pretty cool.</p>
+<p>Ray: That's awesome.</p>
+<p>Vijay: I'm at a nice Airbnb with a lot of books. It's going to be fun.</p>
+<p>Ray: Last week, we started with off with the weather. We could go there again, because that's always a great subject. I figured, just to try a different tack, I thought I'd recount something that I did today that was just really interesting.</p>
+<p>It turns out I needed to move some compost from a compost box near my house to a composting site away from my house.</p>
+<p>[laughter]</p>
+<p>Vijay: We started from weather and now...</p>
+<p>Ray: It was really an awesome job. [laughs]</p>
+<p>Vijay: We thought the weather discussion was shit and this is now literal shit. This is proper...</p>
+<p>Ray: It's literal shit.</p>
+<p>Vijay: Awesome. I don't think we can go below this in terms of building crap.</p>
+<p>Eric: Don't challenge yourselves too hard, because you're going to...</p>
+<p>[laughter]</p>
+<p>Vijay: I think we have plenty of stuff. We can talk about curling. We can talk about Scala. We can talk about a lot of things that can bore people out, but anyway...</p>
+<p>Eric: Java. Java classes and type hierarchy.</p>
+<p>Vijay: Exactly.</p>
+<p>Ray: You're trying to tell me that composting is not interesting, just to be clear? [laughs]</p>
+<p>Vijay: Whatever works for you.</p>
+<p>Eric: Was it warm composting or was it some other kind of compost?</p>
+<p>Ray: Just natural, vegetable and papers and stuff like that. Organic compost.</p>
+<p>Eric: Organic. Do you throw your coffee grinds in there?</p>
+<p>Ray: Oh yeah. Absolutely.</p>
+<p>Eric: That's the good stuff.</p>
+<p>Ray: See, you're your getting in there.</p>
+<p>Vijay: This is the best podcast, ever.</p>
+<p>Ray: In Belgium, the communes give regular training courses on how to do composting.</p>
+<p>Eric: Nice.</p>
+<p>Ray: This is what a great country this is.</p>
+<p>Vijay: Yeah.</p>
+<p>Eric: How to avoid the rats coming into your compost?</p>
+<p>Ray: Well, you never put meat in there, or anything cooked.</p>
+<p>Eric: Oh, nothing cooked, because the rats like their food cooked. Is that why?</p>
+<p>Ray: Yeah.</p>
+<p>Eric: OK.</p>
+<p>Ray: I saw that on a film actually.</p>
+<p>Eric: Was it a Belgium film?</p>
+<p>Vijay: What , did they give you the videos and stuff, or...</p>
+<p>Ray: It was called &quot;Ratatouille.&quot;</p>
+<p>[laughter]</p>
+<p>Eric: Aw, man.</p>
+<p>Ray: Boom. OK, let's move on.</p>
+<p>Vijay: OK. Let's move to less boring stuff now.</p>
+<p>Ray: This wasn't as funny the second time around. OK, it doesn't matter.</p>
+<p>[laughter]</p>
+<p>Ray: Open parenthesis, Eric, a warm welcome.</p>
+<p>Eric: Thank you. Thank you.</p>
+<p>Vijay: Welcome to Defn, episode number 20. Eric, please introduce yourself and then tell us what exciting things you've been working on so far in the past, in the future, and present.</p>
+<p>Eric: So, I'm Eric Normand...</p>
+<p>Ray: ...Shitload of stuff to do with Eric Normand.</p>
+<p>Eric: Yes. I live in New Orleans. I'm a functional programmer. My current language of choice, right now, is closure, and...</p>
+<p>Ray: Can I just rewind a second, Eric?</p>
+<p>Eric: Yeah.</p>
+<p>Ray: It's off topic, but what the hell. New Orleans. That was Hurricane Katrina?</p>
+<p>Eric: That's correct. Yeah.</p>
+<p>Ray: Before we go into the whole closure, functional programming stuff, I remember watching a program, a T.V. series about New Orleans after the Katrina...From the guys that did &quot;The Wire.&quot; I can't remember what was called now...</p>
+<p>Eric: Treme?</p>
+<p>Ray: Treme. Yeah. Awesome, awesome series. One of the best series I've watched. What was your experience like, of that situation?</p>
+<p>Eric: Of Katrina?</p>
+<p>Ray: Yeah. And the recovery and everything.</p>
+<p>Eric: I'm actually kind of glad you brought it up, because there's a lot of stuff that people don't know about. People often are like, &quot;Why is there even a city there? It's underwater. It's under sea level.&quot;</p>
+<p>Well, it turns out that one of the main things that was a cause...There were a lot of causes for what happened, but one of the things was that a wall broke, a retaining wall in one of the canals.</p>
+<p>This canal was built to service the river and the lake, and have some kind of way between them. But the wall hadn't been repaired, and there were some repairs that were supposed to go in before Katrina was supposed to happen.</p>
+<p>In the budget, it was vetoed, a line-item veto by George W. Bush. He redirected the funds to the war. They repaired it with some concrete. That's what they were going to do, pour new concrete. It caused billions of dollars of damage, because he didn't want to pay for some concrete.</p>
+<p>We're kind of pissed about that. It's something that doesn't get talked about outside of New Orleans. There's all these things that were so avoidable. That canal was there to help ship goods to the rest of the country, so it was kind of a sacrifice we made for the economic benefit of the rest of the country. Then we weren't supported when it needed a little bit of maintenance.</p>
+<p>Ray: There were shocking pictures coming from the aftermath, when people were in a horrible, horrible situation. How were you personally affected by it?</p>
+<p>Eric: I was actually not in town, just by chance. I was in the Peace Corps. I was in West Africa when it happened. I didn't know it was going to happen. I would have been home. I just missed it, and no reason to go back afterwards, so I just stayed in West Africa until my Peace Corps tour was over.</p>
+<p>Ray: Did you move to New Orleans afterwards, then? I'm confused.</p>
+<p>Eric: No, I'm from here. I grew up here.</p>
+<p>Ray: You're family was affected, then?</p>
+<p>Eric: That's right. My family had to leave, I think for a few months. Then eventually, they started opening up the neighborhoods one by one, as they could bring power and water back to them. Luckily, their house was closer to the river, so it didn't flood, because it's like a bowl. The closer you are to the river, the higher up you are.</p>
+<p>Ray: Yeah, of course.</p>
+<p>Eric: They were closer to the river. Their house did not flood, so they could move back pretty quickly. There are still abandoned houses around.</p>
+<p>Ray: Sure. The only thing about Tremé I always remember was the music. The soul of the city was all about the music, the jazz, and that kind of stuff. Do you enjoy a bit of that in the evening, while you're in between Functional Programming?</p>
+<p>Eric: Yeah. What's really nice about New Orleans is, you hear people, like they're in a school band or something, and they're practicing their trumpet on the way home from school. They're just walking back home and practicing. It's a very musical city. It's everywhere. There's neighborhood bands and stuff. It's good.</p>
+<p>Ray: All right, cool.</p>
+<p>[crosstalk]</p>
+<p>Vijay: Let's talk about the programming stuff. When did you start programming, and how did you get into programming?</p>
+<p>Eric: Wow, programming. I've got to go back in time. I was a kid...</p>
+<p>Ray: Don't go about that far back. We're not interested...</p>
+<p>[laughter]</p>
+<p>Eric: I was a kid, and I think I saw something on Mr. Wizard, if you know that show.</p>
+<p>Ray: No idea.</p>
+<p>Eric: It was a science show for kids, on a kid's TV channel, and he talked about programming on there. It was in Logo, and somehow I knew that's the kind of thing I wanted to do, come up with some symbolic description of a different world.</p>
+<p>Vijay: Yeah. Maybe let me scope it down. When did you start getting paid for writing code?</p>
+<p>Eric: Ah, OK.</p>
+<p>Ray: Yeah, when did it stop being fun?</p>
+<p>[laughter]</p>
+<p>Vijay: Exactly.</p>
+<p>Eric: I guess in college is when I...Well, high school. End of high school, beginning of college, I started getting paid. I was doing, let's see, some web programming in C.</p>
+<p>Vijay: Oh, wow!</p>
+<p>Ray: Oh my God!</p>
+<p>Eric: That was '98 or '99. I did some Visual Basic. That was still a thing, Windows 95, the booter. That was my job.</p>
+<p>Ray: It's a sad story, isn't it?</p>
+<p>[laughter]</p>
+<p>Eric: People don't know how good they have it now that there's remote jobs out at San Francisco that they can just get while they're in college.</p>
+<p>Vijay: I think doing VB and all of the things...If you know &quot;Calvin and Hobbes,&quot; the comic, it builds character. Every time Calvin doesn't like something, his dad says, &quot;It builds character.&quot; Of course, working with VB builds character. [laughs]</p>
+<p>Eric: You know what? VB was not that bad. I mean, in a lot of ways it was way easier than a Web stack.</p>
+<p>Vijay: Yeah, that's true in those days especially...</p>
+<p>Eric: All the languages you have to learn...You just draw a button. You literally would drag a rectangle out and it would turn into a button. You could just say, &quot;This what happens when you click it.&quot;</p>
+<p>Vijay: Exactly. [laughs] When did you get into function programming?</p>
+<p>Ray: There are still people programming in shit like PHP, you know.</p>
+<p>Eric: I think PHP is a regression from VB.</p>
+<p>Vijay: [laughs]</p>
+<p>Ray: That's what I mean. I said to my kids that people think that poverty is over, or illness is over, but actually there's a shitload of it in the world today. It's just like...</p>
+<p>Eric: You know what's...</p>
+<p>Ray: We're living in a future with Clojure but there's just a lot people suffering with PHP out there. You have to feel sorry for them a little bit.</p>
+<p>Eric: There is a book I read recently called, &quot;Refactoring to Collections.&quot; It is functional programming in PHP. Apparently with PHP 7, they've sped up the garbage collector and the functional calls...Believe it or not, functional calls have been pretty slow in PHP. There's enough speed up in the function calls, and the collections, and the garbage collector that they can do...</p>
+<p>I think of it more like underscore style functional programming, where you can write your own map function, and your own filter function, and a for each instead of doing a for loop. It was actually a pretty good book, in terms of...</p>
+<p>If you're a PHP programmer and you want to make your life easier, here's some stuff from the functional world that you can just take and make your own. I'm actually happy to see that. Functional programming is going to have a big influence for us as a software industry, to get to the next level.</p>
+<p>Ray: Didn't Facebook take PHP and make this hack language?</p>
+<p>Eric: Yeah.</p>
+<p>Ray: It was a bit more compiled, a little bit functional as well?</p>
+<p>Eric: Right. I'm not totally 100 percent of the timeline, but I believe they tried to compile PHP. They did as much statically as they could. That was their strategy for making it faster. Then eventually, they gave up on that and they decided to make just the VM faster.</p>
+<p>It's still dynamic and it's still interpreted, but the VM is way...Better garbage collector, faster function calls, stuff like that.</p>
+<p>Ray: Isn't it the old joke then [laughs] people are, &quot;Yeah, PHP is a piece of crap. Yeah. It doesn't scale.&quot; Facebook...</p>
+<p>Eric: Exactly.</p>
+<p>Ray: ...Biggest website in the entire world ever which is...</p>
+<p>Eric: Exactly. I mean...</p>
+<p>Ray: You know what it's like. [laughs] Oh my God!</p>
+<p>Eric: I mean, if you look at it as an engineering decision -- a business decision maybe is better the way to put it -- it is really solid. It does what it says on the box. It scales in an interesting way because it has this...One request is one process model. You don't have to worry about concurrency. It's just one process.</p>
+<p>If you want to scale, you can just call your own HTTP end points back with a local loop back network or whatever. You're scaling out like that. It's basically like HTML with some code in it. You just hit refresh on your browser and you see the new thing when you change your code. All those things are good.</p>
+<p>Ray: I like VB. It's got a very slippery entrance, hasn't it? It's very easy. The entry into the pool is quite straightforward.</p>
+<p>Eric: Exactly. Any HTML file is valid PHP. [laughs]</p>
+<p>Vijay: Yeah. Yeah. Well, as long as you put the tag on the top, I think. PHP is good.</p>
+<p>Ray: [laughs] Screw Clojure. Let's just talk about PHP from now on. [laughs]</p>
+<p>Vijay: I think now we have cross the boarding to the next level now.</p>
+<p>Eric: [laughs]</p>
+<p>Vijay: Talking about PHP on a Clojure podcast. Functional programming, when did you get into functional programming and how?</p>
+<p>Eric: It was in college. I want to write a game. The thing about programming games that I always found annoying was that everything was in C and C++. Just the power you have there is very low. I want to be thinking about the monsters I'm creating. Instead, I'm like, &quot;How do I make sure I can free this memory when it's done.&quot;</p>
+<p>One idea I had was, &quot;Why don't I make my own language?&quot; That would let me just say, &quot;I want a monster,&quot; and then it will run around and shoot people, right?</p>
+<p>Vijay: Yeah.</p>
+<p>Eric: I started looking at that and I came across an interview with Richard Stallman, who said something like, &quot;WISP is so easy. You can make one in a weekend.&quot; I took him up on that challenge, because I thought, &quot;If I make a Lisp in C, I could just call out any C functions I want.&quot; I made one. I made a little Lisp and it actually was more fun than actually getting the game thing working.</p>
+<p>Vijay: [laughs]</p>
+<p>Eric: I just kept working on it. I made a GC. I made a HashMap implementation. I had a little Lisp interpreter.</p>
+<p>Vijay: Nice.</p>
+<p>Eric: Yeah. It was a great education. I'd never written a language before and that was cool.</p>
+<p>Vijay: Yeah. Also building Lisp is fairly less amount of work compared to building other languages, because...</p>
+<p>Eric: You don't need a parser.</p>
+<p>Vijay: Exactly.</p>
+<p>Eric: It's just simple. It's so simple.</p>
+<p>Vijay: Yeah. Lisp is your entry to the functional programming language or functional programming?</p>
+<p>Eric: That's right.</p>
+<p>Vijay: OK. What is your commercial experience? I mean, getting paid for this stuff?</p>
+<p>Eric: My first actual job in functional programming was in Haskell. I was actually on your side of the pond, over in Europe. I was travelling around. I was tired of software.</p>
+<p>This was back in 2009. There's just wasn't a lot here in New Orleans. I was just tired of it, so I was considering another option. I also wanted to clear my head. I was, &quot;I'm going around the world. Sell all my stuff.&quot;</p>
+<p>My girlfriend came with me. We were in Europe working at a hostel. Someone had a startup, and it turns out that he was...The CTO had chosen Haskell. I was, &quot;OK, I'm interested, but I have to be able to travel.&quot; He said, &quot;Oh, yeah, no problem.&quot;</p>
+<p>I installed Haskell in my laptop and started hacking on their code. Haskell is quite a lot to learn, but I'm glad I did. I was already into Clojure at that point, but I was not getting paid to do it.</p>
+<p>Vijay: From Clojure's side, what is your experience so far with Clojure? You started with Clojure, and then Clojure started almost?</p>
+<p>Eric: Yeah, it was in 2008 when I got into Clojure. I was very early.</p>
+<p>Vijay: Very much, like the first version of it.</p>
+<p>Eric: I remember at one point. It all came out.</p>
+<p>Ray: You could keep up with IRC. [laughs]</p>
+<p>Eric: See, I'm not a big chatter. I'm not a very super-connected person, wired. I'm not texting people all the time like I see some people. I'll try to do IRC for like a week, and then I'm, &quot;Oh, I forgot.&quot;</p>
+<p>It'll be two months, and then I'm, &quot;Oh, I forgot to turn on IRC today.&quot; Or in the last two months, &quot;When was the last time I were...&quot; Of course, people are trying to get in touch me and stuff. [laughs] &quot;Oh, sorry. I didn't know.&quot;</p>
+<p>Anyway, that was 2008. I went to a conference on Lisp. It was the 50th anniversary of Lisp in 2008, if you'd count from the first paper that was published in 1958. I went to this conference that was celebrating the birthday of Lisp.</p>
+<p>To be honest, it was quite boring. It was a lot of old people that were celebrating their accomplishments that happened 30 years before. Except, there was Ritiki, and he gave a talk. There was a panel on the future of Lisp. He presented Clojure at this thing, at this conference, and then the future of Lisp panel.</p>
+<p>He basically said something like, &quot;We need to start over. You can't go from common Lisp and bring it into the future. We just need to make notes of all the lessons that we need to bring over, throw the code away, and start over.&quot;</p>
+<p>I was skeptical, but someone in the audience said, &quot;Are you into Clojure?&quot; I was, &quot;No. I haven't done it.&quot; He's like, &quot;You should try it.&quot; I went home and I tried it, and I haven't looked back. There you go.</p>
+<p>Ray: What did you think about all these other guys doing...Definitely, Common Lisp was a thing. It still is, but there was also Scheme and...</p>
+<p>Vijay: Racket.</p>
+<p>Ray: ...All those kinds of things [indecipherable 21:55] . It eventually became Racket. Do you follow those offshoots from the Lisp world as well?</p>
+<p>Eric: Not really. I know that the Common Lisp at the time was the biggest hope, because it was a standard that had a lot of commercial support, at least in the '80s and '90s when it was...</p>
+<p>Scheme is great, but it's came out of an educational environment. It's really stayed simple so that it's easy to teach, and it has been one of its strong point is that it's great for teaching functional programming.</p>
+<p>Common Lisp, just using it, you've felt like this is a professional environment. It has its warts, but it is a well-engineered thing. That was one of the reasons why I was skeptical, especially, &quot;Oh, JVM.&quot; You're just taking on all of this baggage, but you take on some baggage for a huge benefit.</p>
+<p>One person in the audience...This is back in 2008. I don't know what the state of the Common Lisp world is, but he's was, &quot;I've been trying to start a startup with Common Lisp. Every time I'm this close to making a sale to a big company for my software, they're like, 'Oh, can you do SOAP?' I'm, 'Oh, no. You can't do SOAP.'&quot; Just being on the JVM, &quot;Yeah, we can do SOAP. We can do it.&quot;</p>
+<p>Vijay: The ecosystem that makes Clojure way more valuable, compared to the other ones.</p>
+<p>Eric: Right, just being able to hook into money, basically, like businesses that are using this stuff. Whether it's a good technology or not, the fact that a company is using it, and is willing to pay money, maybe more of it to a better technology, [laughs] that's a big thing. It's huge.</p>
+<p>Vijay: Did you do any Clojure commercial projects back then? How did your professional Clojure evolve?</p>
+<p>Eric: After working at this Haskell startup, I was looking for something more local, because they were based in Sweden, and there was just a big time difference. There was a pay difference too. I was getting paid how a Swede gets paid, and it's just different.</p>
+<p>Someone approached me with a startup here in New Orleans, and he wanted to do it in Clojure. I said, &quot;Yes,&quot; and then eventually it happen. I left my old job, and went to that one.</p>
+<p>Vijay: You're also producing a lot of screen-casts and Colossus, right?</p>
+<p>Eric: Yeah.</p>
+<p>Vijay: LispCast and then of course the functional TV. Can you tell a bit about LispCast and these things? What are you trying to do there, and how is it going so far?</p>
+<p>Eric: What I'm I trying to do? The big vision is I want something like 100,000 people to do functional programming. The language itself, I'm not that interested in, because I believe that functional programming will outlive any particular language.</p>
+<p>Of course, in the moment, you have to choose a language. It has to be practical. I'm all in, right now, on Clojure. I'm teaching Clojure as a transition language, so you can go from a career in software engineering to a career in functional software engineering.</p>
+<p>That's my main focus right now, is to help people who want to make the leap, but they've got a family and a lot of obligations. They don't have time to just dig in, and learn it. They've got to keep their current job going, and they want to transition to functional program. That's where I'm focused right now.</p>
+<p>Ray: Well, didn't you hear the other day that Clojure programmers are the best-paid programmers in the world?</p>
+<p>Eric: Yes, I did see that.</p>
+<p>Ray: They should be knocking your doors down.</p>
+<p>Eric: They did do that. This was a &quot;Stack Overflow...&quot;</p>
+<p>Ray: [laughs] I really don't think it's the truth, but you know...</p>
+<p>[laughter]</p>
+<p>Eric: It's a Stack Overflow survey, to name the source. They asked programmers all over the world what their salaries were, and what technology they were using primarily. Yeah, Clojure came up to the top, in worldwide. I don't know what it was in the US, because most of their people are in the US.</p>
+<p>[crosstalk]</p>
+<p>Vijay: It should be in the US, because most of the Clojure jobs are driven by the US market anyway, less and less if you go the East.</p>
+<p>Eric: I think that's what it is. Right, the US is dominating that segment there.</p>
+<p>Vijay: It's pretty much skewed. What are you working on these days? Is the LispCast and everything your full-time stuff?</p>
+<p>Eric: Yep, I'm working on it full-time. I'm making videos and courses. It's growing. That's as good as I can hope for right now. It is not quite where I want it to be, but plan B is just I get a job in Clojure. There are plenty of jobs. I'm seeing how far I can take it.</p>
+<p>Vijay: What are your plans for this one then, for LispCast and these ones? Do you want to keep touching up on different topics?</p>
+<p>Eric: Yeah, my plan is to have a complete suite of Clojure courses like that a beginner could just jump in and go, and then have enough for them...Once they get a job, they still want to learn more. They're still a subscribed.</p>
+<p>I should say that it's a subscription offering. You can buy the courses individually, at least some of them. I'm trying to get them all on there, because apparently, some companies don't like subscriptions. They'd rather pay for it, a one-off thing.</p>
+<p>Ray: It's an interesting business. What are the things that you're trying to suggest to the world that functional programming is? Why is it a superior approach to, let's say, either procedural programming, or object-oriented programming? Where's the battle? Where's the hearts and minds that where they're currently are, and how do you...</p>
+<p>This is a very long question, rumbling. I'll ask you one question first. What do you think the selling points, the major pinpoints are that people should be hearing, and feeling that motivates them to move to a functional programming model?</p>
+<p>Eric: That is a really hard question. It's a good question, and maybe we could hash this out, because I have trouble with this all the time.</p>
+<p>Ray: Screw it. We've got time. We're only half an hour in. We've got plenty of time. If we can't nail this, where else are we going to find out the answer to these things?</p>
+<p>Eric: Let's do it.</p>
+<p>Ray: I'm up for it. [laughs]</p>
+<p>Eric: The place where I start now, because I've tried...</p>
+<p>Ray: Has anyone else thought about this, by the way? This is all new, isn't it? Yeah, let's make it off. [laughs] We've got Eric. Eric, go on.</p>
+<p>Eric: I don't want to sell something that doesn't make sense. I went through the object-oriented hype cycle back in the '90s. I also went through the XML hype cycle in the early 2000s. I don't want to sell anything like that.</p>
+<p>I do think that there's something to the new multi-core world that were living in where we have to think about concurrency upfront, and stuff like how hard it is in Java to do concurrency, even though it's easier than it was compared to Clojure.</p>
+<p>Clojure is a read-me whereas in Java, it is this thick book with all these things to keep in mind, basically like, &quot;Oh, you already did it wrong. What are you going to do now?&quot; There's no path. [laughs]</p>
+<p>Ray: Just before you go there though, I've heard that argument about the parallel programming, but if I talk to like executives at company, I'm finding it hard to discover where the Give a Fuck button is because they're just not there. I'm pushing every type of button, but they're just, &quot;Ah, who cares?&quot;</p>
+<p>Eric: You have the same problem in every language, every paradigm. Wikipedia, Flickr, Facebook, they're all written in PHP and they're huge. Why is this scaling problem really an issue? Another thing that I try to sell is that it's more power.</p>
+<p>Meaning, in each person's hands, you can have a small team do Flickr, for instance, as opposed to the however many thousands of people working in the PHP coal mines there are.</p>
+<p>[laughter]</p>
+<p>Eric: It's more like Alan Thicke.</p>
+<p>Ray: Every problem is tractable, let's say. Every problem is eventually tractable. It's just a question of how much power your tools will give you to work through that problem at a good speed.</p>
+<p>Eric: Exactly. I just came back from Clojure West. Great conference, by the way. We can talk about it in a little bit. I was talking to the people who work at Wal-Mart, who do Clojure. There's a nine-person team, and they have several products now. I didn't know that.</p>
+<p>One of their main products is something that processes all the receipts from every Wal-Mart store around the world. That's a big, complicated, important system that is nine people. It's that kind of leverage that you would just never imagine doing that in Java. In Java, this is...</p>
+<p>Ray: Teams and teams of people.</p>
+<p>Eric: Hundreds of people. It's teams of teams. You have the battalion, then you have the unit, the brigade...I don't even know you divide things up in the army. To be able to say a small team can build and manage it, and add features and fix bugs and stuff, on their own, that's a huge win for business.</p>
+<p>Ray: Do you think, though, that in the end, you have to sell it to programmers first and businesses second? Or do you think you could really...Like I say, I think businesses find it hard to really understand what the difference is between Language A and Language B.</p>
+<p>You can tell them until your blue in the face. Unless they already come from a pretty technical background, businesses just don't understand.</p>
+<p>Eric: I think it's really hard. That's why I was trying to avoid the hype cycle. Back in the '90s, I remember the big thing about object-oriented programming was it was supposed to have so much reuse that, maybe you pay some upfront costs, but then after a while, you're just reusing stuff that already exists.</p>
+<p>That just hasn't turned out to be the case with most languages. The reuse happens now in libraries, but those are relatively expensive to develop. They take a lot of time, just calendar time.</p>
+<p>Ray: Don't you think there's also an issue with libraries as well? There's a lot of magic sometimes because often they're not libraries, they're frameworks. A lot of the object-oriented ones, especially, even the big data ones that you get in these days. They're still infested with this state and this kind of magic box that you have to comply with.</p>
+<p>Eric: You get a lot of benefit, but not what they said. You still have to read a book on Doda time, for instance. To do time for real, you have to become an expert at the calendar and all the crazy stuff in there.</p>
+<p>[laughter]</p>
+<p>Eric: Some days don't have a midnight. Or some days have two midnights. Don't check if it's midnight. Check if it's equal to the first second of the day and crazy stuff like that. Go ahead.</p>
+<p>Vijay: You also have this newsletter, right? That you send out about Clojure and Functional Programming?</p>
+<p>Eric: I do. I started that back in 2011, I think. 2012, it must've been, 2012.</p>
+<p>Vijay: Almost five years.</p>
+<p>Eric: Five years. It used to be called &quot;The Clojure Gazette.&quot; It's evolved over time, but right now it's 10 links to stuff I've been reading that week. I curate it and I try to tie it in to bigger trends. I've never said it's news. I call it a newsletter, but it's not like, &quot;This is the 10 top most important things that happened this week.&quot;</p>
+<p>I like the long term view, like, &quot;This is important in a long trajectory of stuff.&quot; I can see where it falls in, and it's made to inspire Clojure programmers. It's not all Clojure. I like to put a little commentary in there about how it fits in.</p>
+<p>Vijay: Of course, when I subscribed to your newsletter, obviously [indecipherable 36:12] . I remember I also saw plenty of your videos because I participated in the Clojure Cup.</p>
+<p>Eric: Oh cool, right. You won.</p>
+<p>Vijay: Yeah. I was second or something and I got access to all of your videos. I downloaded everything and I watched them. It was pretty cool actually. Sorry I didn't pay for it, but I won.</p>
+<p>[laughs]</p>
+<p>Eric: No. No. No. That's great.</p>
+<p>Vijay: OK. Cool.</p>
+<p>Eric: Yeah. I sponsored it, so all the winners got a year's subscription or something.</p>
+<p>Vijay: Yeah. That was pretty cool. I learned a lot from those videos. Before we transition into the other thing, you were at Clojure West, so we'll talk about Clojure West. The biggest question that probably everybody using Clojure is asking, Emacs or some other shit?</p>
+<p>[laughter]</p>
+<p>Eric: I think the answer is very clear. Emacs.</p>
+<p>Vijay: Yes. Obviously. That said, let's move on to Clojure West.</p>
+<p>[laughter]</p>
+<p>Eric: Enough said, right?</p>
+<p>Vijay: Exactly.</p>
+<p>Ray: This is one of the reasons why the functional programming shit is struggling to get adopted.</p>
+<p>[crosstalk]</p>
+<p>Ray: ...You got to use this old crappy text biz and it's on some black-and-white screen. That's the weedy way you have to make it work.</p>
+<p>Eric: At Clojure West, someone had a really good point, which was that...It works for VIM too. He can work remotely on anybody's machine, because all he has to do is SSH to some server, and he can load up Emacs. Then you can also tmux and do all sorts of good stuff.</p>
+<p>I don't do that. I use Emacs, the GUI. If I'm ever in a terminal and I need to pull up an editor, I'm glad I have Emacs because I know all the key bindings.</p>
+<p>Ray: Emacs is not on most machines, is it? It's not on most servers for a fact now.</p>
+<p>Eric: Neither is Vim.</p>
+<p>Ray: V-I.</p>
+<p>Eric: Most servers have V-I, the original, old-school...</p>
+<p>Vijay: Why do you even need to get a shell into the server? Because you just use tramp and then just connect to the remote...</p>
+<p>Eric: Tramp is not very good on Mac. It's slow enough where it's...</p>
+<p>Vijay: Loading the remote files.</p>
+<p>Eric: Yeah. You hit Save and then...</p>
+<p>Vijay: [laughs] You just need to wait for it.</p>
+<p>Eric: I've heard it's much better on other systems.</p>
+<p>Vijay: On Linux, it's pretty good, I think. Anyway, let's get back to...Now that the serious question is answered...</p>
+<p>Eric: I know that was a joke, right? I'm really glad that there are a lot of good editors now. There's Atom, I've heard a lot of good things.</p>
+<p>Ray: The funny thing is, I was at company doing some Clojure last week and there were these eight people there doing Clojure. I was using Cursive. One guy was using Emacs. Another guy was using V-I or Vim. Two other guys were using Sublime Text. It's just like no one gives a shit anymore.</p>
+<p>Vijay: Yeah. Of course.</p>
+<p>Ray: You can use any text editor, and people will develop their own tests.</p>
+<p>Eric: Right. That's very nice.</p>
+<p>Ray: That is really awesome actually.</p>
+<p>Vijay: I think that the nicest part is the repl integration. As long as your editor basic repl integration, you're done. That's pretty much what your tool chain needs.</p>
+<p>Eric: That's right. I'd really sympathize with people who are trying to learn Emacs. I have the same issue with Cursive. I open it up, and I don't know what to do. I don't know what to click.</p>
+<p>People are, &quot;Just open the browser.&quot; I click on something and they're, &quot;No, that's the navigator! Never open the navigator! That's not the browser!&quot; &quot;Oh, I'm sorry. I'm sorry.&quot; It takes 20 minutes to get back to where I was. [laughs]</p>
+<p>Vijay: I did try using some other editors, every now and then, obviously. I use even weirder shit. I use Spacemacs with the V-I key bindings. In Emacs, when I'm editing, it's Emacs key bindings. When I'm going through the stuff and I'm moving around, it's V-I [indecipherable 40:23] mode.</p>
+<p>I was, &quot;OK, everybody's saying Sublime Text is the shit. I should be using it.&quot; I started using it for...Well, not using it, but trying it out for a couple of weeks. You have these things burned into your fingers forever, and then that's very difficult to get rid of. I'm going to give it a try again and then see, what to learn and what am I missing. Anyway, editors are...</p>
+<p>Ray: I think you're right, Eric. I think the main thing is that you shouldn't be worried about the tooling. As long as the tooling is good, like you see a feature. You got a good repl integration. You can do your editing in your own style, then let's discuss the actual problems in the languages that you use and not these other tools.</p>
+<p>Eric: Exactly.</p>
+<p>Vijay: Also, you're interested in building software, not interested in always thinking about editor. Once that phase is gone, you're focused on your code and then you're just trying to build stuff, not really worried about the editor.</p>
+<p>Ray: Maybe, Eric has the [indecipherable 21:43] because you've written your own programming language. Then, the obvious thing is to write your own editor. Storm and wear. Storm and wear.</p>
+<p>[laughter]</p>
+<p>Eric: Right. I could write Emacs in my own Lisp.</p>
+<p>Ray: Did you do that?</p>
+<p>Eric: No, I did not get that far.</p>
+<p>[laughter]</p>
+<p>Vijay: There is still effort, right, to do the Emacs in Clojure. I don't know how far it is now. Maybe it was there. Anyway, let's not digress that much. Clojure West, how was it? Give us some impression firsthand.</p>
+<p>Eric: It was great. It was great. I just got back yesterday. I think I saw one and a half talks. I gave a talk. I was there too. I'm more of a hall boy, try-it guy. The talks come out so fast. I actually also enjoy the talks more when I watch them on YouTube. I can watch them, I don't know. It's like TiVO versus watching live TV.</p>
+<p>Vijay: [laughs] You're in control.</p>
+<p>Eric: I can watch it on my own time. Talking to people, I mean, Clojure is growing. There were so many sponsors, companies basically are hiring. They had a table there at the conference. They're all looking to grow, looking to just meet everybody in the Clojure community. It's great. I think I really am going to see some good growth in the next few years because of this.</p>
+<p>Ray: Sorry. I think we're looking forward to hockey puck growth, aren't we?</p>
+<p>Eric: Yes. Yes. Hockey puck growth? All the way back around? Like circular growth?</p>
+<p>Vijay: Is it?</p>
+<p>Ray: We're going to where the puck is moving...</p>
+<p>Vijay: Wait. Is it hockey puck or hockey stick? I thought it was hockey stick.</p>
+<p>Eric: Hockey stick. Hockey stick.</p>
+<p>Ray: That was the joke from Karen last week. That was the...Come on.</p>
+<p>[laughter]</p>
+<p>Vijay: It's round.</p>
+<p>[laughter]</p>
+<p>Vijay: It's fast.</p>
+<p>Ray: It's fast and it's round. Going really fast.</p>
+<p>[laughter]</p>
+<p>Ray: You hit that hockey puck, and that guy goes.</p>
+<p>Vijay: Exactly.</p>
+<p>[laughter]</p>
+<p>Ray: I like that better than hockey stick.</p>
+<p>Eric: It's on a frictionless surface. It just doesn't stop.</p>
+<p>Ray: Exactly. Once it gets momentum, there's no stopping the shit. I love it. I'm preferring hockey puck growth all the way.</p>
+<p>[laughter]</p>
+<p>Vijay: By the way, speaking of conferences, I don't know, I was talking about this on previous episode as well, that we ran Dutch Clojure Day here on March 25th. It was phenomenal. It was really nice. [claps] We really enjoyed it.</p>
+<p>Eric: Awesome.</p>
+<p>Ray: It was awesome. We had a lot of fun.</p>
+<p>Vijay: We had a lot of fun. Talks were really nice. The venue was great. There were plenty of people, full house. A lot of discussions, I think.</p>
+<p>Eric: Were the talks recorded?</p>
+<p>Vijay: Yeah. They were recorded. We'll be putting them online pretty soon. As soon as we...</p>
+<p>Ray: Big names, as well. Big names. James Reeves.</p>
+<p>Vijay: Yeah. James Reeves.</p>
+<p>Eric: Oh cool.</p>
+<p>Vijay: Yeah. We got mostly the European speakers. Of course, we got one speaker all the way from the US as well, from MojoTech, I think. It was very nice at atmosphere.</p>
+<p>Eric: I'm jealous, because there are more Clojure conferences in Europe than in the US.</p>
+<p>Vijay: Is it?</p>
+<p>Eric: Yeah. The US just has two.</p>
+<p>Ray: I guess, yeah. London. Berlin. Yeah.</p>
+<p>Eric: You all have a lot. You have the...</p>
+<p>Ray: Sweden or Norway...</p>
+<p>Vijay: In the US, you have Conj and West.</p>
+<p>Eric: That's right. They're both Cognitect. There is an open invitation by the top of Cognitect, guys at the top, they say please do more conferences. We don't want a monopoly on them.</p>
+<p>Vijay: Maybe we should take Clojure Days to US. That would be fun.</p>
+<p>Eric: Yeah. [laughs]</p>
+<p>Vijay: The thing with Clojure Days is that we were insisting on making it free and keeping it free and completely community driven. It was a challenge last year. I think we were negative 60 euros or 10 euros or something.</p>
+<p>Eric: Who had to shell that out?</p>
+<p>Vijay: One of us. This year, it was slightly better. Not slightly better, really green. We're also thinking of writing out how we organized it and publishing everything, including the finances and everything. What did we do with what and how it went.</p>
+<p>If other people want to organize this kind of conference, it will be a bit more helpful for the other guys as well. Other folks.</p>
+<p>Eric: That would be great.</p>
+<p>Vijay: That is one of the things that we are thinking of.</p>
+<p>Ray: You said, Vijay, that the sponsorship, or was it Carlos, said that this function was much easier this time around?</p>
+<p>[crosstalk]</p>
+<p>Vijay: Yeah. This time people came to us selling...They sent us email saying, hey Vijay, or whatever, we want to sponsor Clojure Days. Last year, we were there as attendees. We really like it. We want to sponsor it. There were other company as well.</p>
+<p>The couple of companies we had this year, before they left, they told me, &quot;Next time we want to sponsor. Keep us in your mind.&quot; That was really, really nice. It's really a community thing. We want to help other people to come here and learn about Clojure. Anyway, we'll publish a blog post about those details and other things.</p>
+<p>Speaking of conferences, first I want to ask you, how did your talk go? You were talking about test.check, right, at the conference?</p>
+<p>Eric: That's right. test.check. It went well. I, of course, felt like I missed so many important points.</p>
+<p>Vijay: It's always with the...</p>
+<p>Eric: Yeah. One of the things is...</p>
+<p>Ray: Did you not write it down beforehand, Eric? Was that not one of those things you...</p>
+<p>Eric: I'm not reading it.</p>
+<p>[crosstalk]</p>
+<p>Eric: I do try to...</p>
+<p>[laughter]</p>
+<p>Eric: No. The thing I wanted to complain a little about is my own problem. Every time I rehearsed it, I was a little over. I stopped making slides and just revised the slides I had at that point. Then I prepared a little apology for not getting more. I did the apology in the talk, live. It was at the end.</p>
+<p>[laughter]</p>
+<p>Eric: Then I look down at the clock and there are six minutes left. &quot;Oh no. How did that happen?&quot; This is my second real talk. I have to get better at that. I have to get better at that.</p>
+<p>Ray: The test.check thing, because that's interesting these days with spec, isn't it? Because obviously, that's...</p>
+<p>Eric: Tightly integrated.</p>
+<p>Ray: That whole thing is becoming very front and center of the selling story that's about Clojure. I guess, test.check is a line Haskell and all these other functional programming languages as well. It's a general kind of meme, let's say, in the functional programming world.</p>
+<p>What do you think the reception is for that kind of testing in the outside world? I still feel like people are very much driven into unit testing, that they're still in that mode. Do you think there's a reception there for this kind of stuff?</p>
+<p>Eric: There is a reception. The biggest thing and one of the reasons I did this talk was people don't know where to start. There's a lot of false starts, let's put it that way. People try it and they're like, &quot;I don't know what properties to do.&quot; That was what I was trying to get at in my talk.</p>
+<p>The properties that you want to do, they can be the same properties as you do with your unit tests, with your example-based tests, but you can generate random data. Then you can start taking it further and further and testing the whole system and getting a cohesive view of your whole system and testing it that way.</p>
+<p>Vijay: You also talked about concurrent system testing, right? It's not just about testing, using test.check.</p>
+<p>Eric: Right.</p>
+<p>Vijay: Of course, I will watch the talk online, but I'm curious about what is the fundamental difference or what are the challenges testing the concurrent systems using test.check?</p>
+<p>Eric: You can test something sequentially by reifying the operations. You generate operations and run them on your system that you're testing. Then you also run it on a model that has the properties that you're interested in. Then you compare them at the end.</p>
+<p>To make it concurrent, you can just run those operations in different threads. You make two threads' worth of operations and run those in different threads. The challenges are things like making sure all the threads start at the same time and waiting for them all to finish. Now if you're trying to suss out race conditions because that's concurrent problem, right?</p>
+<p>Vijay: Yeah.</p>
+<p>Eric: What you want to do is run it multiple times, run the same test multiple times to try to find that race condition in there, and make it more repeatable. Those are the main things. Those are the main challenges of this.</p>
+<p>Vijay: I remember watching a talk from one of the Quickcheck creators about, especially, the difficulties in testing the concurrent systems with this kind of methodology.</p>
+<p>Eric: With timing and stuff?</p>
+<p>Vijay: Yeah, with timing and, of course, it's very difficult to predict.</p>
+<p>Eric: Right. Timing does get into it. I think you're talking about John Hughes.</p>
+<p>Vijay: Yeah. John Hughes' talk.</p>
+<p>Eric: He invented generative testing.</p>
+<p>Vijay: Exactly.</p>
+<p>Eric: He calls it property-based testing. He gives a lot of talks about how to actually do it. One of the things that he tested was a chat server. It was in Erlang. You have this thing where someone logs out, and the message that they have logged out takes time to get to the server that records that he's actually logged out.</p>
+<p>There's a time between when the user logged out, and when it's actually registered that he's logged out, that he's not actually logged out in any real sense. If you were writing a test, it's, &quot;OK, log the user out, then check, did he get this? Send him a message and check if he got it.&quot;</p>
+<p>It could happen faster than that message got that he was logged out. You have to actually model that in your model. All of that knowledge that things take time has to go into your model.</p>
+<p>The way he did it was he made up different predicates, then just logged in or logged out. He made up stuff like could be logged out, meaning we sent the log down message, but we don't know if it's gotten there yet.</p>
+<p>That period is empirically determined to be 100 milliseconds. There is a time after you send the message where he might not actually be logged out yet. It's actually doable pretty simply.</p>
+<p>Vijay: OK, cool stuff. I think of course I'll take a look at...I will watch the talk and I will learn couple of thing because I've never done any...</p>
+<p>Eric: I wish I could get into more of that stuff. That was the stuff I had to apologize for that I couldn't get into.</p>
+<p>Vijay: Are you planning to make an episode about it on your course?</p>
+<p>Eric: I do want to make a course, especially now that it has spec integration. I've held off on making a spec course because I've been burned in the past with Alpha software. You spend all this time on the course and then...</p>
+<p>Vijay: Yeah, the changes...That's true.</p>
+<p>Ray: Its Alpha 14 now.</p>
+<p>Vijay: 19, I think.</p>
+<p>Ray: No, it's 14, I think. Oh 19, wow, OK. But it's a very high number of alphas so definitely, things are evolving.</p>
+<p>Eric: Right. The API is still considered Alpha. It's not like they're just fixing bugs in that Alpha. They're actually changing stuff.</p>
+<p>Ray: We spoke to Alex...What, September or something, last year? I think they said that it would be out like this year, but now we're in March. April now in fact.</p>
+<p>Vijay: It's still this year.</p>
+<p>[laughter]</p>
+<p>Eric: December 31.</p>
+<p>Vijay: Exactly.</p>
+<p>Ray: It's really. This is taking a long time to settle down, isn't it?</p>
+<p>Eric: Yeah, for sure.</p>
+<p>Ray: I think they're of the opinion that they won't get a second chance to do it, so better take a bit more time to cook it properly.</p>
+<p>Eric: Right. Yeah, it's true. They want it to be part of Clojure itself. Yeah, that's enough talking about that.</p>
+<p>Vijay: Staying on the Clojure thing, apart from writing Clojure code and being involved in Clojure for a long time, you saw how the language is evolving and everything. You're very familiar with all the features of Clojure because not only you're working on it, but you're also teaching. That means you have a higher level of understanding.</p>
+<p>What are your favorite, maybe one or two favorite, features of Clojure? You already did Common Lisp a lot and Lisp World. What would be the interesting thing?</p>
+<p>Ray: This is the new Favorite Features section?</p>
+<p>Eric: The Favorite Features.</p>
+<p>[laughter]</p>
+<p>Ray: [imitates background music]</p>
+<p>Vijay: That is a new section in this podcast now.</p>
+<p>Ray: &quot;Favorite Features of Clojure&quot; section.</p>
+<p>[laughter]</p>
+<p>Eric: Favorite features. Well, I really like the literal data structures and I like that they're immutable. I guess that's one feature. Common Lisp just had one literal data structure, which was the list. You had to quote it if you wanted to use it, which meant unquoting stuff inside. It's not the best experience.</p>
+<p>[laughter]</p>
+<p>Eric: Because you have vectors that everything inside gets evaluated, you can actually do that much more easily.</p>
+<p>The fact that they're immutable just makes you divide up your problem better. Makes you think about how...Or I guess you don't even have to think about how it's going to be used in other threads and worrying about who should be able to see this? Do I have to make a copy? Things like that.</p>
+<p>Vijay: OK, cool. Just before the show we were talking and then you said there's some interesting things that you're working on and you said you're going to announce it now or at least pre-announce it or...</p>
+<p>Eric: Right. OK, I'll pre-announce it.</p>
+<p>Vijay: Yay!</p>
+<p>[laughter]</p>
+<p>Eric: At Clojure/West, I used a lot of the talking to people, the conversations, to figure out whether there was enough interest in a Clojure conference in New Orleans.</p>
+<p>Vijay: Sweet.</p>
+<p>Eric: Right. When it should be, and what it should be about, and how it should be structured...</p>
+<p>Vijay: It's going to called Clojure Jazz or something, I don't know.</p>
+<p>Ray: Oh man, that would be so good.</p>
+<p>[laughter]</p>
+<p>[crosstalk]</p>
+<p>Vijay: That would be cool.</p>
+<p>Eric: I haven't come up with a name yet. I like the hallway track and a lot of people I talk to say that it's their favorite part, and that's why they go. I just want to cut out the pretense of having the talks at all and just do hallway track.</p>
+<p>Ray: [laughs]</p>
+<p>Eric: Actually, this conversational format might be the best way to explain this. There's a system of conference organization called Open Space Technologies. Basically, you set a theme for the conference. At the beginning of the conference, the first thing you do is you all sit in a circle facing in, and someone opens the space.</p>
+<p>Meaning, they say, &quot;Who has an issue they want to talk about?&quot; You write it on a piece of paper. You stand up. You say it to the group and then you go put it on a board so it doesn't get lost. Then after everyone's aired all of their issues, then you divide up or you group up, and start addressing those issues.</p>
+<p>I feel it solves a lot of the problems with the hallway track. I mean, I could see a lot of people who were just shy, who were just, &quot;I wish I were talking to someone. I like it, but I'm too afraid to introduce myself or I'm maybe tired,&quot; or, &quot;I just don't have that in me anymore.&quot; I bet there's people who are sitting in the talks who wish they weren't...</p>
+<p>Ray: [laughs]</p>
+<p>Eric: ...Distracted by the talk and wanted to go talk to people. This is sad, but some of the sponsors who paid thousands of dollars to sponsor, they were just sitting behind the table waiting for someone to come up to them. Why aren't they talking to people? There are people in the room. Just walk up to them.</p>
+<p>I want to remove all of that, just say, &quot;Look, there's stuff to talk about. You heard what that person said they want to talk about. You know where they are. They're in that corner talking about it. You don't have to say anything. Just go sit in that group and participate.&quot;</p>
+<p>Vijay: Cool. I don't know if it's still running, because I remember I think in 2000 or something, somewhere when I was still in India, there was this bar camps going on. Bar camps were pretty much like that. You go there, there is a board, and then you just propose what you're going to talk about or the issue on a sticky, and then just put it there, and then people will vote on it.</p>
+<p>Then whoever gets at least three or four votes, they get a room and then they talk about it. Bar camp was one of those things. I was part of at least two or three back in Bangalore in India, a long time ago. It sounds a similar idea.</p>
+<p>Eric: It's very similar.</p>
+<p>Vijay: Yeah, yeah. It's pretty cool.</p>
+<p>Eric: I've been to a couple of bar camps and I'm sure they're all different.</p>
+<p>Vijay: Yeah. Yeah. Yeah. Of course.</p>
+<p>Eric: It's just their nature. The ones I've been to, people prepare slides and stuff beforehand, and they arrived early so that they can get on the board at the spot that they want. That is not what I want. I don't want it to be talks that no one curated. That's the opposite of what I want. I want something where...</p>
+<p>The theme of the conference is going to be, Clojure at Work. The idea is to bring in the employers, the employees, and people who want to work in Clojure, and have them actually talk about the issues they're having.</p>
+<p>It might be tooling, it might be hiring, it might be finding a job, it might be training, and have them say, &quot;We've tried to hire someone and we don't know where to look. We've hired someone before and they were a bad fit. They didn't actually know Clojure.&quot;</p>
+<p>Just bring up these issues and have the employers talk to each other. Have them come up with something more than just talking. Halfway through the first hour, they're like, &quot;We need to make a guide or we need to have an association where we...&quot; They just start working on it. That's my main thing. Less talk. It's not chit-chat. It's not like, &quot;Oh, how did you like the weather today?&quot;</p>
+<p>Vijay: [laughs]</p>
+<p>Eric: &quot;How was the party last night?&quot; [laughs]</p>
+<p>Ray: What's wrong with that?</p>
+<p>[laughter]</p>
+<p>Eric: &quot;Nice breakfast that they have at this conference.&quot; I want it to be much more productive. The big challenge that I've heard that I will face -- and I believe it. I think that this is a big thing -- is that a lot of people get their work to pay to go to the conference, because they can point to a speaker and say, &quot;Look, they're talking about...&quot;</p>
+<p>Vijay: They're coming in...Yeah.</p>
+<p>Eric: &quot;...Datomic and we're doing Datomic. Send me here and I'll learn what I need to learn.&quot;</p>
+<p>Vijay: Yeah. Yeah. Yeah. That's true.</p>
+<p>Eric: I need to come up with some other way of saying, &quot;You will learn something that you can sell to your boss.&quot;</p>
+<p>Vijay: Yeah. Yeah. Maybe it could be a combination, but anyway, it sounds really nice. I hope it solidifies and then you get the right way to go about it.</p>
+<p>Eric: I got a lot of good feedback. A lot of people, &quot;Oh, you're doing one? I'm going. Tell me when it is.&quot;</p>
+<p>Vijay: Perfect. You already have a...</p>
+<p>Eric: That's a good sign.</p>
+<p>Ray: It's really good. Sometimes you start these things off relatively small. If you can get 50 people and then...Sometimes these things do scale, sometimes they don't scale. Maybe it's a better format just to have, like you say, 20, 30, 40, 50 people maximum, and then people can work in those groups.</p>
+<p>Eric: Up the price of the ticket.</p>
+<p>Ray: If you got a thousand people...</p>
+<p>Eric: Then make a Ted Talk style, &quot;It costs $10,000 to be in this room.&quot;</p>
+<p>[laughter]</p>
+<p>Ray: Yeah. That's the way they sell it to the bosses. &quot;You can't get this anywhere else.&quot;</p>
+<p>[laughter]</p>
+<p>Eric: Awesome.</p>
+<p>Ray: Price people in. [laughs]</p>
+<p>Vijay: OK. I think I don't have any more questions or comments to make. Thanks a lot for joining all the way from the US, you know, taking the time. It was fun. Obviously as I said, I would love to check out your more videos.</p>
+<p>These days, I'm swamped with all this stuff, but the people who are listening, I'm pretty sure they're familiar with your name already, because yours were one of the first courses that talk about Clojure and taught Clojure to the people.</p>
+<p>Eric: You'd be surprised. You'd be surprised. Just a little story. Before Clojure/conj...I went there too back in November. Before then, I was gung-ho about expanding outside of Clojure, because I felt there's no room to grow. When I got there, I met a ton of people who had never heard of me. A lot of people had, of course, but a lot of people were like, &quot;No, I never heard that.&quot;</p>
+<p>I worked for a 40-person Clojure company. I'm like, &quot;OK. [laughs] There's a lot of stuff going on that I don't know about and here's my card.&quot; [laughs]</p>
+<p>Vijay: That's one of the things, right? I mean, there is not enough exposure, but hopefully I think people who are listening to this podcast...We get thousand plays. It's actually not a thousand people, or maybe. I don't know. [laughs] This is one way to reach out to the people, I think.</p>
+<p>Eric: I think a lot of people are downloading this off BitTorrent.</p>
+<p>[laughter]</p>
+<p>Eric: We can't see them. It's probably...</p>
+<p>Vijay: Piracy.</p>
+<p>Eric: Yeah, I think there's some pirate rebroadcast on low-power FM.</p>
+<p>Ray: I think there's piracy. That's a dark energy in the universe. There's a lot of it out there that we just can't see. We know it's there. Mathematically we know it's there, but we just can't work it out. That's how I'm measuring anyway.</p>
+<p>[laughter]</p>
+<p>Eric: There's people who were doing text-to-speech on the...What's it called? They do...</p>
+<p>Ray: The transcripts.</p>
+<p>Eric: The transcripts. Thank you.</p>
+<p>Ray: We haven't got one of them.</p>
+<p>Vijay: [laughs]</p>
+<p>Eric: They feed it through Siri and they have Siri read it back to them.</p>
+<p>Ray: Yeah. That's what's happening.</p>
+<p>Vijay: Because they hate our voices obviously.</p>
+<p>Ray: [laughs]</p>
+<p>Eric: They can get it faster.</p>
+<p>Vijay: It's been fun. I think we are reaching enough people. I was actually surprised by a couple of people sending email saying, &quot;Oh you're the guy who's doing this podcast.&quot; I'm like, &quot;Yes. I'm sorry.&quot; I always start with, &quot;I'm really sorry.&quot; They're, &quot;No, no, no. It's good.&quot; &quot;Oh, OK. Thank you.&quot;</p>
+<p>[laughter]</p>
+<p>Eric: &quot;I apologize for your ears.&quot;</p>
+<p>Vijay: Exactly. &quot;I apologize for wasting one hour every now and then.&quot; They're, &quot;No, no, no. It's OK. It's really good.&quot; &quot;OK, thank you.&quot; Moving on.</p>
+<p>Ray: [laughs]</p>
+<p>Eric: No, it is really good, and you're the only Clojure podcast as far as I know.</p>
+<p>[laughter]</p>
+<p>Vijay: There is another one... [laughs]</p>
+<p>Ray: You're serving a good role in the...</p>
+<p>Vijay: Specific demographics, yes. Oh, Cognitect is doing Cognicast. I think that is not purely Clojure as far as I can tell. It's all about all other things. They even have the [indecipherable 67:00] guy on the show. I mean, we're not going to do that.</p>
+<p>[laughter]</p>
+<p>Vijay: If we have him, we'll make him talk about Clojure. That's pretty much it.</p>
+<p>Ray: As far as I'm concerned, we've given enough time to PHP on this podcast for us to qualify as polyglot programming.</p>
+<p>Vijay: Exactly.</p>
+<p>Ray: I don't think we can get any complains. We're polyglot friendly.</p>
+<p>Vijay: But we're in a committed relationship with Clojure.</p>
+<p>Ray: Exactly. [laughs]</p>
+<p>Vijay: Yeah. Anyway, I think that's it for me today from Munich. I have a busy week ahead. Anything else from you, Ray? The end credits. We should roll on the credits now.</p>
+<p>Ray: Yeah probably. [laughs]</p>
+<p>Vijay: OK.</p>
+<p>Ray: I could start talking about composting again.</p>
+<p>Vijay: [laughs] Please don't.</p>
+<p>[laughter]</p>
+<p>Vijay: I think we can make another podcast about composting.</p>
+<p>Ray: Just before we go actually, I just want to thank you because I think it's very kind of you to say that we're doing something good, but I think you've been doing it for a lot longer, and I think you're very consistent. I think Clojure owes a lot to people like you and you in particular, to help grow the word.</p>
+<p>I think you're right. I think Clojure is catching a bit of a fire. Maybe it's this year or next year, I think we'll see more progress in this, because people aren't getting into...The penny is dropping, I think, out there.</p>
+<p>Eric: It's never going to be as popular as PHP or Java. I think one of the curses is...</p>
+<p>Ray: Yeah. It doesn't matter.</p>
+<p>Eric: Exactly. It doesn't matter. Another thing that I really love about Clojure is that it's having such an influence on the rest of the industry.</p>
+<p>Even if we're just there holding down the philosophy, or whatever you want to call it, that is radiating out to other languages and...I mean, spec came out and people are rewriting it on JavaScript. They're re-writing it because they wanted it, and they couldn't use it. That's cool.</p>
+<p>Eric: As Ray was saying, I second every word you said. I mean, you've been doing it for forever. I'm also a subscriber of your newsletter and I keep looking up to using your countless videos and everything that you made. It is very helpful for people who want to get into Clojure.</p>
+<p>I hope more and more people at least subscribe and then see what you're doing, the good work of spreading Clojure. Of course, the music that you're hearing for the show is by PTZERY and all the technical magic is done by Mr. Wouter Dullaert. Did I pronounce it correctly? No?</p>
+<p>[background music]</p>
+<p>Ray: Who knows. It's just so bad. [laughs]</p>
+<p>Vijay: He'll patch it up.</p>
+<p>Ray: Wouter, Walter.</p>
+<p>[laughter]</p>
+<p>Eric: In post.</p>
+<p>Vijay: Exactly. In post-production.</p>
+<p>[laughter]</p>
+<p>Vijay: It's going to be like, &quot;The post production is done by...</p>
+<p>Robot SFX: Walter</p>
+<p>[laughter]</p>
+<p>Eric: Yes, exactly.</p>
+<p>[laughter]</p>
+<p>Vijay: Something like that. That's it from us today, and hope you have a nice week ahead.</p>
+<p>Eric: Awesome.</p>
+<p>[background music]</p>
+<p>Ray: You're halfway there, Vijay. It'll be perfect by episode 40.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/building-composable-abstractions-3">
+        previous
+      </a>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

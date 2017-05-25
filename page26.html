@@ -104,6 +104,43 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="/data-reusability">
+            On the configurations of data and functions
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 21, 2012
+        </div>
+
+        
+<p>Rich Hickey recently commented (I cannot remember where) that there are a limited number of useful configurations of data. He claimed that the Clojure literal syntax is just about right. The one thing to add to it is the extensibility that we now have with 1.4.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p>Part of the context was that we as programmers should be separating data from process. The separation makes our data more reusable. A string is a string in any language. An array is an array. Data is data and should be regarded as such. This allows for much more reuse than object oriented programming ever has. We can see the tremendous success of JSON as a case in point: a well-defined, constrained data language that gets it mostly right.</p>
+<p>But Hickey's point goes a little farther, I think. It is not just data that is reusable, but functions as well. Look at the enormous savings in the amount of code required to get a Swing app running when you use <a href="https://github.com/daveray/seesaw">Seesaw</a>. I am not just talking only about the incessant boilerplate anonymous class declarations Swing forces you to write. I am talking also about the fact that I can use any function to handle an event. I do not need to figure out what class the thing is expecting. Defining a subclass of a single class is inherently non-reusable.</p>
+<p>And it is not just that I don't need to know the class. I can use a function written in a library that has no dependencies on Swing or Seesaw at all. A function is just a function. It is universal and reusable, not because of some well-modeled domain classes, but because it is abstract and applies to no domain in particular.</p>
+<p>While Hickey is working on a universal, extensible data format, who is working on the universal function format?</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>See also <a href="https://github.com/edn-format/edn">EDN</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html">
             Class AbstractSingletonProxyFactoryBean
           </a>
@@ -452,38 +489,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 
         
 <p>Philip Wadler explains the relationship between logic and programming, why everything is discovered twice, and what a programming language in an alternate universe might look like. (Hint: it's lambda calculus).</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.youtube.com/watch?v=agw-wlHGi0E">
-            Dynamic Languages Wizards Series - Panel on Language Design
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/dynamic-languages-wizards-series">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 20, 2012
-        </div>
-
-        
-<p>Cool talk on programming languages from 2001 featuring Paul Graham, John Maeda, Jonathan Reeves, and Guy Steele.</p>
 
 
         <div class="endmark">

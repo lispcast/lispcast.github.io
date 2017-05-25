@@ -1,0 +1,287 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Should Cognitect do More for Clojure? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Poor open-source development practices, neglect for the beginner experience, and lack of communication have come up as complaints against how Cognitect stewards Clojure. I address the complaints with a plea that we do more as a community.">
+    <meta name="twitter:title" content="Should Cognitect do More for Clojure?">
+
+    <meta property="og:title" content="Should Cognitect do More for Clojure?">
+    <meta property="og:description" content="Poor open-source development practices, neglect for the beginner experience, and lack of communication have come up as complaints against how Cognitect stewards Clojure. I address the complaints with a plea that we do more as a community.">
+
+    <meta name="description" content="Poor open-source development practices, neglect for the beginner experience, and lack of communication have come up as complaints against how Cognitect stewards Clojure. I address the complaints with a plea that we do more as a community.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/cognitect-clojure">
+            Should Cognitect do More for Clojure?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          May 25, 2017
+        </div>
+
+        
+<p>Summary: <em>Poor open-source development practices, neglect for the beginner experience, and lack of communication have come up as complaints against how Cognitect stewards Clojure. I address the complaints with a plea that we do more as a community.</em></p>
+<p>In a recent <a href="https://purelyfunctional.tv/issues/purelyfunctional-tv-newsletter-225-spec-deep-learning-new-orleans/">issue of my newsletter</a>, I mentioned that I wonder if anything is inhibiting Clojure's growth. I got a flood of responses, mostly about the difficulty of learning Clojure and lack of jobs. But several people said that Cognitect actually impedes Clojure's growth.</p>
+<p>I've been following the language since 2008. I've written about it on my blog since then. I started studying it more closely since I started my Clojure newsletter in 2012. In other words, I've been observing for a while. I have some opinions on these complaints.</p>
+<p>I think we should take all complaints seriously. They need to be examined and understood. Complaints point to deeper problems bubbling below the surface, even if the specifics of the complaints themselves don't hold up to scrutiny. I'm particularly concerned with complaints that indicate that Clojure is not a good language for beginners, that it's not friendly, or that it's not growing. I've built my business on the assumption that Clojure will grow, so it's important that I can to make sure it does. So let's go through the complaints one-by-one.</p>
+<h2 id="complaint">Complaint</h2>
+<p><em>Clojure should be &quot;more open-source&quot;. They don't involve the community enough. They should accept more patches and let programmers contribute more easily. Bugs languish for years in Jira with no activity. Look at what happened to Zach Tellman and Kyle Kingsbury.</em></p>
+<p>This one is hard to address. I have to admit that I've never done serious work on an open source project. Sure, I've submitted a patch here and there, but I've never worked on anything long term. A lot of the complaints about this baffle me, and I know it.</p>
+<p>However, from the outside, it looks a lot like what I see happening in other open source communities. People complain about the practices of maintainers, question the priorities of the project, and talk about how slowly things move. I've seen it in the Python community, in the Ruby and Rails community, and in many non-language projects. Since I haven't participated much, it all looks the same to me. Complaints are often louder than appreciation.</p>
+<p>However, I have it on good authority that other projects encourage much more involvement from the community. Further, those projects explain the process better up front, and therefore they have a better reputation. As the number of languages approaches infinity, the outliers are getting better and better. Clojurists who want to contribute to a language might be jumping ship to languages with more participation. And this is troubling. If other languages do it better, we could lose the same great programmers that made the community shine.</p>
+<p>Rich Hickey made Clojure for himself. He wanted to have a language he could deliver good software in. Concurrency was a major concern and very difficult to get right in Java. Being on the JVM let him work with enterprise clients. We're essentially working with software that is a gift from Rich Hickey.</p>
+<p>Rich Hickey appears to value stability and backwards compatibility above everything. His <a href="https://www.youtube.com/watch?v=oyLBGkS5ICk">recent keynote</a> talked about this directly, and this was the topic of Brian Goetz's <a href="https://www.youtube.com/watch?v=2y5Pv4yN0b0">keynote in 2014</a>. Many change requests are quickly denied because of backwards compatibility.</p>
+<p>After that, the next priority seems to be design coherence. Clojure is one of the best-designed languages in the world. Writing a compiler is complicated. It requires a lot of hammock time and a lot of experience. Rich Hickey is a bottleneck on the development, but he's honestly the only one I trust to maintain the quality. I can imagine trusting others, but I can't think of anyone at the moment. As I've watched Clojure develop over the years, I've been constantly amazed by the implementation of original ideas directly from Rich. Having him as a bottleneck is a feature.</p>
+<p>Are tickets languishing? When I look into the tickets they are referring to, I can see why you'd think they are languishing. There was a flurry of activity at first, lots of comments, some back-and-forth with the poster, and then nothing for months. What is going on? They might be ignoring it. The worst case is like what happened to Zach Tellman, who did lots of work on a patch, and also backed it up with many hours of work benchmarking it, then silence from the Clojure team for months, only to find out later that Rich developed his own solution.</p>
+<p>I think everyone agrees that this is a communication issue and a serious one. Expectations are not being managed appropriately. This is troubling because it is whittling away the good will of well-meaning contributors. I'll address communication more below.</p>
+<p>There is one mitigating factor that is very rarely addressed: Clojure is a Lisp. Changes to the core language are not as necessary as in other languages. You can release a library that does things the original designer of the language never dreamed without adversely affecting others. Not everything is possible, but more is possible in Clojure than in other types of languages. <strong>Perhaps the Clojure team is nudging us to use this feature instead of requesting changes to the language.</strong> Even if they are not, it is how I prefer to work. Give me a good core, like Clojure, and I'll build what I need.</p>
+<h2 id="complaint-1">Complaint</h2>
+<p><em>Clojure should focus on the beginner developer experience and developer ergonomics. The two biggest frustrations in the <a href="http://blog.cognitect.com/blog/2017/1/31/state-of-clojure-2016-results">State of Clojure Survey</a> are error messages and docs, followed by startup time, which appear to not be worked on at all. Do they even care?</em></p>
+<p>Let me say this flat out: Clojure's error messages are bad. The stack traces are huge and full of stuff irrelevant to solving the problem. You <em>can</em> learn to read them over time, but many times that involves learning some trivial detail of how a function was implemented. It creates a kind of Stockholm syndrome where people are proud of their battle scars and arcane knowledge. I can totally see how a language like <a href="http://elm-lang.org/">Elm</a>, which has been working <a href="http://elm-lang.org/blog/compiler-errors-for-humans">explicitly on error messages</a>, looks mighty attractive right now. Not only do their error messages look nice, they signal that the language cares about beginners.</p>
+<p>I'm not making any excuses for Clojure, but survey the landscape of languages, and you'll find that good error messages are rare. Elm is the outlier. Elm has shown that with a simpler type system, a focus on the problem, and some elbow grease, static typing information can be turned into really nice errors that help you learn why your code is not compiling. Elm has managed to leapfrog off of the work done in Haskell (who leapfrogged off of Miranda and ML).</p>
+<p>I don't think it's fair to say that the Clojure core team doesn't care about error messages. Better error messages have been a small but consistent theme at Clojure conferences for years. See <a href="https://www.youtube.com/watch?v=o75g9ZRoLaw"><em>Illuminated Macros</em></a>, <a href="https://www.youtube.com/watch?v=kt4haSH2xcs"><em>Improving Clojure's Error Messages with Grammars</em></a>, and <a href="https://www.youtube.com/watch?v=k5erDyDPzgc"><em>Adapting Clojure to an Intro CS Classroom</em></a>. Clojure.spec was <a href="https://clojure.org/news/2016/05/23/introducing-clojure-spec">announced</a> almost exactly one year ago with the explict goal of &quot;a greatly improved experience for users [of Clojure] when errors occur&quot;. They obviously do care about error messages and they are innovating ways to bring them to us. It sucks that it's taking so long, but it's just a matter of time.</p>
+<p>I am concerned, however, that spec by itself won't be enough. The messages will get better, but not quickly enough from the core team. The industry is growing at a tremendous pace, and that constantly increases the need for a better beginner experience. At any point, half of all programmers have less than five years of experience. Clojure attracted a lot of experienced programmers at its beginning. They helped define the terrain we see today. They built Leiningen, Clojars, Ring, nREPL, and the rest of the ecosystem. As Clojure becomes more mainstream, a focus on ergonomics will help it attract new programmers.</p>
+<p>I said that spec is not enough. We should not rely on the core Clojure team to focus enough effort on this aspect. However, I think Clojure is uniquely suited for community-driven ergonomic improvements. I mean, I think the core team will focus plenty on it, I just don't want to rely on them for the growth I'll need for my business. We should see spec, the speccing of Clojure's library functions and macros, and the error messages they produce as powerful tools on which to build a better beginner experience. That's how I see them, and I have some ideas for improving error messages without modifying the language. I think there's lots of room for accelerating Clojure's growth here. <strong>Clojure has the potential to lead other language in the quality of error messages.</strong></p>
+<p>A great example of error messages in the Clojure world is Figwheel, the ClojureScript autocompilation tool. It does a good job of learning from Elm to provide great error messages. It is an example of <strong>someone from the community stepping up and making things better</strong>. There have been several attempts at improving the stack traces. Nothing seems to have stuck.</p>
+<p>Docstrings aren't meant to teach you how to use something. They're for quickly getting info at the REPL without leaving flow. For their purpose, they work, and for other purposes, the <a href="http://clojuredocs.org/">community has stepped up</a>. However, docstrings could become tools for learning the language. I've done some experiments with modifying docstrings at runtime and with a lot of wrting, all docstrings could be swapped out for more beginner-friendly documentation without modifying the language.</p>
+<p>The startup time is slow. It's way worse than average. I've lived with it so long and found so many workarounds, I have trouble seeing the problem anymore. Basically, I restart so rarely and when I know I will need to start a new REPL, I do it before I need it. But I am sympathetic. The long startup times make editor integration a requirement, and asking someone to use a new editor and learn a new language is unfair.</p>
+<p>The Clojure team is working on it, but Clojure startup time is going to be slow for the foreseeable future. Obviously, if there were an easy solution, they would release it. I don't have any ideas about how to make the experience better without requiring editor integration.</p>
+<p>One alternative is to use the community-developed ClojureScript repls, including <a href="http://planck-repl.org/">Planck</a> and <a href="https://github.com/anmonteiro/lumo">Lumo</a>. They're really fast to start and are suitable for shell scripting using ClojureScript. But they're only for ClojureScript.</p>
+<p>Some other aspects of Clojure ergonomics are also addressed by the community. IDE's, project tools, and installation are handled by third parties. There's definitely room for improvement, but that just means there are more opportunities to shine.</p>
+<h2 id="complaint-2">Complaint</h2>
+<p><em>The Clojure team communicates poorly. They are terse in their communication on Jira tickets. They often close them with only a quick, unhelpful message. I don't feel listened to, and worse sometimes I feel outright disrespected. Many times, communication stops for a long time, and I don't know what's going on. I know they're busy, but I also am busy and put a lot of time into those Jira tickets or other communication. Even if I view these in the best possible light, I fear that others might not and that it may scare people away.</em></p>
+<p>Okay, we're finally getting to this one. This issue underlies a ton of the other problems. If people had more information about what was happening, or they at least felt heard, the other complaints wouldn't have to be so loud.</p>
+<p>Luckily, this is one of the easiest to improve incrementally. Many language communities do much more active blog campaigns. Cognitect's blog is not that active. A short blog once a month about interesting issues they're working on would do wonders. It would simultaneously reveal the development process and humanize the team. I'm not trying to put any work on people's busy agendas, just making a suggestion.</p>
+<p>Another thing that could help is a little bit of elaboration. I've seen some pretty terse responses from the Clojure team in Jira. Again, I'm not trying to give anyone more work to do, but this is something that I've learned doing customer support for my own company. As a programmer, I tend to think that short and direct means there's less room for misinterpretation. That's what happens with a compiler, after all. Plus, this isn't personal. It's software. However, people are not like that! The less information they have, the more their imagination fills in the details. And, let me tell you, their imaginations are not generous.</p>
+<p>They start to think about whether you care, whether they offended you, whether you were rude, <a href="http://ashtonkemerling.com/blog/2016/06/11/my-increasing-frustration-with-clojure/#comment-2725685873">whether you even understood what they meant</a>, etc. It's best just to avoid all of that misunderstanding up front. Someone could be very generous 99 times and not take it personally. But that one time they have a bad day and misinterpret it could wreck the whole thing. Our gooey emotional cores are sensitive like that. A little bit of care can avoid resentment on both sides.</p>
+<p>What kind of elaboration am I talking about? For instance, after a user sends me a bug report, I could say &quot;This is fixed in a release going out tomorrow.&quot; Short and sweet! Not! There's so much blank space to fill in. I thought I was saving my and their time, and that they'd understand that I was directly addressing their concern. Over time, I learned that you actually want to fill in all of that blank space. You should say something like this:</p>
+<blockquote>
+<p>Hi Jane,</p>
+<p>Thanks for being a customer. We appreciate your business.</p>
+<p>So sorry you found a bug, but thanks for reporting it! It's nice to know you care. We count on our users to let us know when something isn't working that we don't know about.</p>
+<p>Today, you're in luck. We have fixed the bug and you can expect it to be released tomorrow.</p>
+<p>Please don't hesitate if you find anything else. We're here to serve.</p>
+<p>Take care,<br />Eric</p>
+</blockquote>
+<p>You set up everything in a positive way. There's no room for misinterpretation, at least on the emotional, relational side. Now, I know that you're thinking that this would take forever. If you typed out messages like that for every bug report, that would be a full time job. True! But you don't have to type them.</p>
+<p>I've seen some companies with a bot that posts a canned first response to every bug report. People prefer a polite bot to a terse human any day. The bot reminds them of the most important parts of the contribution policy. Instead of linking to a contribution document, which can be interpreted as passive aggressive, the bot kindly reminds the nice contributor of a few points, like please have a test case, and please check to see if a similar ticket already exists, and please remember that the tickets will all be reviewed as soon as we can, and also we love you. I don't use a bot, but I do use canned snippets. They don't take any longer to type but they can save a ton of heartache.</p>
+<p>There's also that other type of case, where the Jira ticket goes quiet for a while and an unexpected patch drops after some time. In that case, the thing I'd recommend is to communicate as soon as possible. For instance, if a customer asks me for something, instead of thinking &quot;I'm busy now, I'll get to that next week&quot;, I write (with polite and flowery prelude) &quot;I'm busy now, but I'll get to that next week.&quot; And then next week when I can't actually get to it, I write &quot;It's next week and I can't actually get to it.&quot; It's crazy how just them knowing something makes everything better. They just want to feel heard and in the loop. Telling Zach &quot;Thanks for the patch. I'll be honest, I don't think I'll have a look at this for a long time&quot; may have made the difference.</p>
+<p>Some projects accept every patch that passes all tests. Others are so conservative as to not accept anything not written by the core team. A few people mentioned that they had different expectations of the Clojure contribution process. They did a lot of work and only later realized that the process was not what they thought. Cognitect could do a better job managing these expectations.</p>
+<p>There's one other thing to address, which is users sending messages in a tone that suggests they are ungrateful or entitled. They don't craft messages with care, so why should I? It takes <em>a lot</em> of patience to deal with those. But I just lay it on extra thick. Fight ingrates with gratitude, I guess.</p>
+<p>Communication is hard. It takes time. It is something Cognitect could do better. It would make people feel better and even though we're trying to be professional engineers, feelings are still an important factor in choosing a language.</p>
+<h2 id="now-my-plea">Now, my plea</h2>
+<p>The reasoning that a more community-oriented development process would drive growth goes like this:</p>
+<p><em>Some people really care about the developer experience. If Clojure allowed more contributions, those people could improve Clojure for beginners. A better beginner experience would attract more developers.</em></p>
+<p>It's a good argument, but it forgets that Clojure can be extended from the outside. My plea is that we, as experienced members of the community, channel the energy from complaints directly into community action. No language can be successful without its community members actively building it out. Clojure is an excellent core to build on. The engineering principles and design choices inspire countless people in all language communities. Clojure itself is incredibly stable. And it provides features that many languages can only dream of having. Further, it can be extended with libraries when other languages need core changes.</p>
+<p>Clojure had a lot of prolific, brilliant programmers in the early days. Clojure opened a door for latent lispers--people who were into Lisp but didn't have an outlet. They were the <a href="https://en.wikipedia.org/wiki/Technology_adoption_life_cycle">&quot;innovators&quot; and &quot;early adopters&quot;</a>. They built out a huge amount of stuff, like Leiningen, Clojars, ClojureDocs, and 4Clojure. Stuff we take for granted today. We'll never have such a density of brilliance again.</p>
+<p>Meanwhile, the Clojure community is growing. There are more jobs than ever. Conference attendance is high, with half attendees being first-timers and half using Clojure for less than a year. Beginners are giving Clojure a chance and we need to welcome them warmly.</p>
+<p>There are exactly <a href="https://purelyfunctional.tv/functional-programming-conferences/">two Clojure conferences</a> in the US. Europe has more variety, for some reason. Europe, good job! There's one in India. Great! We, the community, need to step up to this one. Cognitect has <a href="http://blog.cognitect.com/cognicast/116">openly invited more Clojure conferences</a>.</p>
+<p>I realize that I could do more to help the community. I'm looking into several projects to address some of the issues. I'm particularly interested in the beginner developer experience and developer ergonomics. If you'd like to help, <script type="text/javascript">
+<!--
+h='&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x65;&#114;&#x69;&#x63;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'let me know'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#108;&#x65;&#116;&#32;&#x6d;&#x65;&#32;&#x6b;&#110;&#x6f;&#x77;&#32;&#40;&#x65;&#114;&#x69;&#x63;&#32;&#x61;&#116;&#32;&#108;&#x69;&#x73;&#112;&#x63;&#x61;&#x73;&#116;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript>. We all have unique resources to bring to Clojure. What can you do to help? Further, how can you use Clojure's strengths to make it accessible to more people?</p>
+<div class="article-cg-box">
+  <h3>
+You may like the PurelyFunctional.tv Newsletter
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to functional programmers, get the free PurelyFunctional.tv Newsletter.
+</p>
+
+<p><a href="https://purelyfunctional.tv/newsletter/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The PurelyFunctional.tv Newsletter shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/defn-podcast-transcript">
+        previous
+      </a>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

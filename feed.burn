@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Should Cognitect do More for Clojure?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/cognitect-clojure</guid>
+                  <link>http://www.lispcast.com/cognitect-clojure</link>
+                  <pubDate>Thu 25 May 2017 07:10:48 AM CDT</pubDate>
+                  <description>
+                    Poor open-source development practices, neglect for the beginner experience, and lack of communication have come up as complaints against how Cognitect stewards Clojure. I address the complaints with a plea that we do more as a community.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/cognitect-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Defn Podcast Transcript</title>
                   <guid isPermalink="false">http://www.lispcast.com/defn-podcast-transcript</guid>
                   <link>http://www.lispcast.com/defn-podcast-transcript</link>
@@ -129,20 +143,6 @@
                     The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Windows 8 instructions for my recommendations.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-windows-8"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Installing Clojure on Mac OS X</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-mac</guid>
-                  <link>http://www.lispcast.com/clojure-mac</link>
-                  <pubDate>Fri 11 Mar 2016 11:28:57 AM CST</pubDate>
-                  <description>
-                    The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Mac OS X instructions for my recommendations.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-mac"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

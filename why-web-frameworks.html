@@ -1,0 +1,254 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Why do we use Web Frameworks? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="While contemplating a Clojure web framework, I explore the reasons we use web frameworks in general. I conclude that the framework should support a learnable development process.">
+    <meta name="twitter:title" content="Why do we use Web Frameworks?">
+
+    <meta property="og:title" content="Why do we use Web Frameworks?">
+    <meta property="og:description" content="While contemplating a Clojure web framework, I explore the reasons we use web frameworks in general. I conclude that the framework should support a learnable development process.">
+
+    <meta name="description" content="While contemplating a Clojure web framework, I explore the reasons we use web frameworks in general. I conclude that the framework should support a learnable development process.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/why-web-frameworks">
+            Why do we use Web Frameworks?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          June 19, 2017
+        </div>
+
+        
+<p>Summary: <em>While contemplating a Clojure web framework, I explore the reasons we use web frameworks in general. I conclude that the framework should support a learnable development process.</em></p>
+<p>People often lament the lack of a Clojure web framework, despite several alternatives existing. The choices must not be meeting their needs. I've been thinking about what a Clojure web framework should look like. That got me thinking about what the purpose of a web framework is, and what the needs are that are not met.</p>
+<h3 id="why-do-we-use-web-frameworks-in-general">Why do we use web frameworks in general?</h3>
+<p><strong>The web is complicated.</strong> You've got to know HTML, CSS, JavaScript, your backend language, probably SQL. And there are security holes everywhere. The HTTP spec is huge and full of corner cases. We would like something to reduce this complexity by handling it for us. Clojure has HTTP libraries but they require a good understanding of how the web works. Further, they only add to the number of things you need to learn (learn HTTP <em>and</em> Ring). A framework can turn 1000 things to learn into 30.</p>
+<p><strong>There are many expected features not provided by the spec.</strong> Many apps need user signup, password reset, authorization, API's, logging, database persistence, sending emails, payment processing, metrics gathering, deployment, input validation, ... We would like to implement them once and reuse them if possible. A framework means even the integration of those implementations is trivial.</p>
+<p><strong>The web is full of security holes.</strong> Rolling your own security is costly and dangerous. A framework can integrate security features into its operation and aggregate bug fixing efforts to make something more robust. A framework, at least in theory, can be secure by default.</p>
+<p><strong>Writing an app requires many small decisions.</strong> Many, if not most, of those decisions are arbitrary. For example, how to name your tables, the specific routes you choose, what file to put your code in, etc. If the framework made those decisions for you, then you would reduce the cognitive burden on the programmer and leave more brainpower for the important decisions.</p>
+<h3 id="the-1-real-reason-to-use-a-framework">The #1 real reason to use a framework</h3>
+<p>These are all good arguments and solving these things would really help web development in Clojure. However, I have come to believe that there is an even more important reason, which comes from discussions with <a href="http://jennifereliuk.com/">Jen Eliuk</a> and others.</p>
+<dl>
+  <dt>
+<a href="https://www.merriam-webster.com/dictionary/framework">framework</a>
+</dt>
+  <dd>
+a: a basic conceptional structure (as of ideas)
+</dd>
+  <dd>
+b: a skeletal, openwork, or structural frame
+</dd>
+</dl>
+
+<p>A framework is primarily cognitive and secondarily physical. The &quot;conceptional structure&quot; is more important than the code. <strong>The framework gives you a process for turning an idea into code.</strong> On the other hand, a bunch of libraries gives you code out of which to build your ideas, but no process. You must understand each library enough to get them to work together. A framework inverts that and says &quot;understand this process and we'll take care of the rest&quot;.</p>
+<p>As an example, in Rails the process is about breaking up your feature into three parts. Your <em>Controller</em>, your <em>Model</em>, and your <em>View</em>. The View is your HTML with no logic. The Model is the &quot;business rules&quot;. The Controller is the code that converts a web request into actions on the Model, then displays the View.</p>
+<p>As experts, we tend to want control of the entire system. We ask &quot;What if I don't want to use MVC?&quot; We understand so much, from years of experience, and know how we want things to work. So we trade ease for control. We say &quot;I don't mind if it's hard because I know how it should work.&quot;</p>
+<p>Beginners, on the other hand, would much rather have something be easy. They're willing to learn, but they have limits. They will accept something less than perfect as long as they can solve their problems. They much prefer ease over control. Even the choice of which file to put some code in can be a big decision for a beginner. The easier you can make it on them, the more forward motion they can have.</p>
+<p>Am I saying that a framework caters to beginners? Partly, yes. Since the number of professional programmers is doubling every five years, at any point in time, half of programmers have less than five years of experience. They need a process to follow at first which will let them gain experience. On the other hand, ease benefits everyone, including experts.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>People use a framework primarily to lessen the mental burden of developing on the web. By giving people a learnable process, the framework should allow beginners to make progress and experts to progress quickly. The process should be the primary focus; the framework should exist only to support it. What could this process look like in the Clojure world? How can we keep it learnable?</p>
+<div class="article-cg-box">
+  <h3>
+You may like the PurelyFunctional.tv Newsletter
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to functional programmers, get the free PurelyFunctional.tv Newsletter.
+</p>
+
+<p><a href="https://purelyfunctional.tv/newsletter/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The PurelyFunctional.tv Newsletter shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
+<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
+<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/json-serialization-api-clojure">JSON Serialization for APIs in Clojure</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/cognitect-clojure">
+        previous
+      </a>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+      _dcq.push(['track', 'Page visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

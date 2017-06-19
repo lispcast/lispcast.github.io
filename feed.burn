@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Why do we use Web Frameworks?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/why-web-frameworks</guid>
+                  <link>http://www.lispcast.com/why-web-frameworks</link>
+                  <pubDate>Mon 19 Jun 2017 08:15:33 AM CDT</pubDate>
+                  <description>
+                    While contemplating a Clojure web framework, I explore the reasons we use web frameworks in general. I conclude that the framework should support a learnable development process.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/why-web-frameworks"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Should Cognitect do More for Clojure?</title>
                   <guid isPermalink="false">http://www.lispcast.com/cognitect-clojure</guid>
                   <link>http://www.lispcast.com/cognitect-clojure</link>
@@ -129,20 +143,6 @@
                     Clojure hashmaps are one of the workhorse data structures in Clojure. There are two main patterns commonly used. We also discuss some interesting properties.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-hashmaps"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Installing Clojure on Windows 8+</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-windows-8</guid>
-                  <link>http://www.lispcast.com/clojure-windows-8</link>
-                  <pubDate>Fri 11 Mar 2016 11:29:43 AM CST</pubDate>
-                  <description>
-                    The ClojureBridge curriculum includes excellent instructions for installing Clojure on a variety of systems. They are well suited for beginners. I have adapted the Windows 8 instructions for my recommendations.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-windows-8"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

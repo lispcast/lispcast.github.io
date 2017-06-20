@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>Why do we use Web Frameworks? | LispCast</title>
+    <title>The arguments against web frameworks | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="While contemplating a Clojure web framework, I explore the reasons we use web frameworks in general. I conclude that the framework should support a learnable development process.">
-    <meta name="twitter:title" content="Why do we use Web Frameworks?">
+    <meta name="twitter:description" content="We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.">
+    <meta name="twitter:title" content="The arguments against web frameworks">
 
-    <meta property="og:title" content="Why do we use Web Frameworks?">
-    <meta property="og:description" content="While contemplating a Clojure web framework, I explore the reasons we use web frameworks in general. I conclude that the framework should support a learnable development process.">
+    <meta property="og:title" content="The arguments against web frameworks">
+    <meta property="og:description" content="We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.">
 
-    <meta name="description" content="While contemplating a Clojure web framework, I explore the reasons we use web frameworks in general. I conclude that the framework should support a learnable development process.">
+    <meta name="description" content="We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.">
 
     <meta name="author" content="Eric Normand">
 
@@ -104,44 +104,30 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/why-web-frameworks">
-            Why do we use Web Frameworks?
+             href="/arguments-against-frameworks">
+            The arguments against web frameworks
           </a>
         </h2>
 
         <div class="timestamp">
-          June 19, 2017
+          June 20, 2017
         </div>
 
         
-<p>Summary: <em>While contemplating a Clojure web framework, I explore the reasons we use web frameworks in general. I conclude that the framework should support a learnable development process.</em></p>
-<p>People often lament the lack of a Clojure web framework, despite several alternatives existing. The choices must not be meeting their needs. I've been thinking about what a Clojure web framework should look like. That got me thinking about what the purpose of a web framework is, and what the needs are that are not met.</p>
-<h3 id="why-do-we-use-web-frameworks-in-general">Why do we use web frameworks in general?</h3>
-<p><strong>The web is complicated.</strong> You've got to know HTML, CSS, JavaScript, your backend language, probably SQL. And there are security holes everywhere. The HTTP spec is huge and full of corner cases. We would like something to reduce this complexity by handling it for us. Clojure has HTTP libraries but they require a good understanding of how the web works. Further, they only add to the number of things you need to learn (learn HTTP <em>and</em> Ring). A framework can turn 1000 things to learn into 30.</p>
-<p><strong>There are many expected features not provided by the spec.</strong> Many apps need user signup, password reset, authorization, API's, logging, database persistence, sending emails, payment processing, metrics gathering, deployment, input validation, ... We would like to implement them once and reuse them if possible. A framework means even the integration of those implementations is trivial.</p>
-<p><strong>The web is full of security holes.</strong> Rolling your own security is costly and dangerous. A framework can integrate security features into its operation and aggregate bug fixing efforts to make something more robust. A framework, at least in theory, can be secure by default.</p>
-<p><strong>Writing an app requires many small decisions.</strong> Many, if not most, of those decisions are arbitrary. For example, how to name your tables, the specific routes you choose, what file to put your code in, etc. If the framework made those decisions for you, then you would reduce the cognitive burden on the programmer and leave more brainpower for the important decisions.</p>
-<h3 id="the-1-real-reason-to-use-a-framework">The #1 real reason to use a framework</h3>
-<p>These are all good arguments and solving these things would really help web development in Clojure. However, I have come to believe that there is an even more important reason, which comes from discussions with <a href="http://jennifereliuk.com/">Jen Eliuk</a> and others.</p>
-<dl>
-  <dt>
-<a href="https://www.merriam-webster.com/dictionary/framework">framework</a>
-</dt>
-  <dd>
-a: a basic conceptional structure (as of ideas)
-</dd>
-  <dd>
-b: a skeletal, openwork, or structural frame
-</dd>
-</dl>
-
-<p>A framework is primarily cognitive and secondarily physical. The &quot;conceptional structure&quot; is more important than the code. <strong>The framework gives you a process for turning an idea into code.</strong> On the other hand, a bunch of libraries gives you code out of which to build your ideas, but no process. You must understand each library enough to get them to work together. A framework inverts that and says &quot;understand this process and we'll take care of the rest&quot;.</p>
-<p>As an example, in Rails the process is about breaking up your feature into three parts. Your <em>Controller</em>, your <em>Model</em>, and your <em>View</em>. The View is your HTML with no logic. The Model is the &quot;business rules&quot;. The Controller is the code that converts a web request into actions on the Model, then displays the View.</p>
-<p>As experts, we tend to want control of the entire system. We ask &quot;What if I don't want to use MVC?&quot; We understand so much, from years of experience, and know how we want things to work. So we trade ease for control. We say &quot;I don't mind if it's hard because I know how it should work.&quot;</p>
-<p>Beginners, on the other hand, would much rather have something be easy. They're willing to learn, but they have limits. They will accept something less than perfect as long as they can solve their problems. They much prefer ease over control. Even the choice of which file to put some code in can be a big decision for a beginner. The easier you can make it on them, the more forward motion they can have.</p>
-<p>Am I saying that a framework caters to beginners? Partly, yes. Since the number of professional programmers is doubling every five years, at any point in time, half of programmers have less than five years of experience. They need a process to follow at first which will let them gain experience. On the other hand, ease benefits everyone, including experts.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>People use a framework primarily to lessen the mental burden of developing on the web. By giving people a learnable process, the framework should allow beginners to make progress and experts to progress quickly. The process should be the primary focus; the framework should exist only to support it. What could this process look like in the Clojure world? How can we keep it learnable?</p>
+<p>Summary: <em>We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.</em></p>
+<p>Although web frameworks are extremely popular, they are not without their detractors. I would like to go over three common arguments against frameworks.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Each argument, when taken as a challenge to be overcome, points the way to a better framework--one that scales better, teaches better, and reflects the values of the language. This article is a continuation of a line of thought which started <a href="http://www.lispcast.com/why-web-frameworks">here</a>.</p>
+<p><strong>Frameworks don't scale.</strong> We often reject frameworks after working on a project that outgrew the framework. Code changes became difficult. The very structure that helped you get so far now seems to be holding you back. The thought inevitably crosses your mind: if I had only written this myself without a framework, I wouldn't have these problems now.</p>
+<p>Of course, we know this is hogwash. Imagine if I said &quot;my factory won't fit in this warehouse anymore. If only I had built my factory in a bigger warehouse from the beginning.&quot; But could you have afforded the bigger warehouse at the beginning? Wasn't having a smaller warehouse part of your early success? Scaling problems are good problems because something is going right.</p>
+<p>The fact is: programming is full of nonlinearities. That's a fancy way of saying that nothing scales forever. Exponential curves look linear before they hit the elbow. But you never know where you'll encounter elbows until it's too late. Elbows lurk everywhere.</p>
+<p>We can choose to see elbow ubiquity as a reason to reject frameworks, or we can see it as a challenge. A framework can aggregate knowlege from multiple apps and try to give you a long linear runway in several dimensions. Some problems are known not to scale within the framework, so we should document those and make evaluating the framework easy.</p>
+<p>Some fear that <strong>frameworks teach people the wrong stuff.</strong> We all have seen those questions on Stack Overflow where the asker obviously doesn't know where Ruby ends and Rails begins. Rails monkey patches a bunch, so it's really hard to know what comes included in the language.</p>
+<p>People say that frameworks encourage such ignorance. But that's balderdash. The people who don't know the difference are called <em>beginners</em>. They, by definition, don't know as much as experts. Everyone starts somewhere and the fact that they're even playing in the same sandbox as experts should send shivers of gratitude through the experts' spines. Be nice to beginners and help them solve their problems. If it really is important to distinguish the language from the framework, it is the framework's job to teach them to distinguish it on their own.</p>
+<p>Some people claim that <strong>a framework disgraces the art of programming.</strong> By enforcing a process and standards, and by removing decision points, the craft of programming is lost. The craft, they say, is the act of making all of those decisions.</p>
+<p>I'm quite sympathetic to this argument, but it's baloney. Experts want control because they know what to do with the control. A &quot;real programmer&quot; doesn't need niceties, and to prove it, goes without. These arguments have been made since the beginning of symbolic assemblers.</p>
+<p>Imagine if I said &quot;a real farmer digs with a shovel; a real dweller builds their own house&quot;. Give me a break. Of course the expert wants control. They've mastered the parts and they want to put them together in precise ways. But in no way does empowering someone with a tractor or a pre-made house detract from the craft of farming or householding.</p>
+<p>On the contrary, a framework can elevate the craft. You can focus on the functionality of your app instead of the mundane work of wiring up the low-level features. We often confuse the motions with the craft. The farmer is not a dirt digger. That is simply the motion a farmer must make to cultivate crops. The farmer who is not toiling with a shovel, who instead moves dirt with a tractor, can care more for his or her plants--which is the real work. Similarly, a good framework may free up the programmer's mind to build more beautiful software. We shouldn't confuse the motion of gluing libraries with the craft of solving problems with computers.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Frameworks have problems, that is for sure. But they also enable so much! Instead of seeing the shortcomings of existing frameworks as strikes against the notion of frameworks in general, we should see them as warning signs for what to avoid. We know that we want a learnable process and we know that it should scale, should help people learn, and should elevate the craft of software engineering. So what would a Clojure web framework look like? We'll get to that next time!</p>
 <div class="article-cg-box">
   <h3>
 You may like the PurelyFunctional.tv Newsletter
@@ -164,11 +150,17 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
-<li><a href="http://www.lispcast.com/arguments-against-frameworks">The arguments against web frameworks</a></li>
-<li><a href="http://www.lispcast.com/cascading-separation-abstraction">Separation, Abstraction, and Cascading in CSS</a></li>
-<li><a href="http://www.lispcast.com/clojure-web-security">Clojure Web Security</a></li>
-<li><a href="http://www.lispcast.com/hiccup-tips">Hiccup Tips</a></li>
+<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 </ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>There are probably more. Please let me know which ones I've missed.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
 
 
         <div class="endmark">
@@ -190,12 +182,8 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 
     <footer class="footer-banner">
       <a class="footer-previous"
-         href="http://www.lispcast.com/cognitect-clojure">
+         href="http://www.lispcast.com/why-web-frameworks">
         previous
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/arguments-against-frameworks">
-        next
       </a>
     </footer>
 

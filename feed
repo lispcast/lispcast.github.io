@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>The arguments against web frameworks</title>
+                  <guid isPermalink="false">http://www.lispcast.com/arguments-against-frameworks</guid>
+                  <link>http://www.lispcast.com/arguments-against-frameworks</link>
+                  <pubDate>Tue 20 Jun 2017 06:30:36 AM CDT</pubDate>
+                  <description>
+                    We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/arguments-against-frameworks"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Why do we use Web Frameworks?</title>
                   <guid isPermalink="false">http://www.lispcast.com/why-web-frameworks</guid>
                   <link>http://www.lispcast.com/why-web-frameworks</link>
@@ -129,20 +143,6 @@
                     Schema and clojure.spec aim to solve similar problems. There are significant differences, though, that might not be obvious at first.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure.spec-vs-schema"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Clojure Hashmaps</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-hashmaps</guid>
-                  <link>http://www.lispcast.com/clojure-hashmaps</link>
-                  <pubDate>Thu 17 Mar 2016 11:10:52 AM CDT</pubDate>
-                  <description>
-                    Clojure hashmaps are one of the workhorse data structures in Clojure. There are two main patterns commonly used. We also discuss some interesting properties.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-hashmaps"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

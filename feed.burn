@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>What should a Clojure framework look like?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/clojure-web-framework</guid>
+                  <link>http://www.lispcast.com/clojure-web-framework</link>
+                  <pubDate>Wed 21 Jun 2017 09:30:38 AM CDT</pubDate>
+                  <description>
+                    After exploring why frameworks and why not frameworks, I dive into the design priorities I think a web framework should have.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-web-framework"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>The arguments against web frameworks</title>
                   <guid isPermalink="false">http://www.lispcast.com/arguments-against-frameworks</guid>
                   <link>http://www.lispcast.com/arguments-against-frameworks</link>
@@ -129,20 +143,6 @@
                     You actually need to learn nothing. But it's more complicated than that. This article will show you what can set you apart.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/hirable-in-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>5 Differences between clojure.spec and Schema</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure.spec-vs-schema</guid>
-                  <link>http://www.lispcast.com/clojure.spec-vs-schema</link>
-                  <pubDate>Sat 11 Jun 2016 01:06:47 PM CDT</pubDate>
-                  <description>
-                    Schema and clojure.spec aim to solve similar problems. There are significant differences, though, that might not be obvious at first.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure.spec-vs-schema"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>The arguments against web frameworks | LispCast</title>
+    <title>Keyword: clojure | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.">
-    <meta name="twitter:title" content="The arguments against web frameworks">
+    <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
+    <meta name="twitter:title" content="Keyword: clojure">
 
-    <meta property="og:title" content="The arguments against web frameworks">
-    <meta property="og:description" content="We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.">
+    <meta property="og:title" content="Keyword: clojure">
+    <meta property="og:description" content="A blog about the simple joys of functional programming.">
 
-    <meta name="description" content="We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.">
+    <meta name="description" content="A blog about the simple joys of functional programming.">
 
     <meta name="author" content="Eric Normand">
 
@@ -104,50 +104,22 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/arguments-against-frameworks">
-            The arguments against web frameworks
+             href="http://logaan.github.io/clojure/validations/vlad/2013/11/25/what-to-look-for-in-validations.html">
+            What to look for in validations
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/what-to-look-for-in-validations">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
           </a>
         </h2>
 
         <div class="timestamp">
-          June 20, 2017
+          November 25, 2013
         </div>
 
         
-<p>Summary: <em>We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.</em></p>
-<p>Although web frameworks are extremely popular, they are not without their detractors. I would like to go over three common arguments against frameworks.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Each argument, when taken as a challenge to be overcome, points the way to a better framework--one that scales better, teaches better, and reflects the values of the language. This article is a continuation of a line of thought which started <a href="http://www.lispcast.com/why-web-frameworks">here</a>.</p>
-<p><strong>Frameworks don't scale.</strong> We often reject frameworks after working on a project that outgrew the framework. Code changes became difficult. The very structure that helped you get so far now seems to be holding you back. The thought inevitably crosses your mind: if I had only written this myself without a framework, I wouldn't have these problems now.</p>
-<p>Of course, we know this is hogwash. Imagine if I said &quot;my factory won't fit in this warehouse anymore. If only I had built my factory in a bigger warehouse from the beginning.&quot; But could you have afforded the bigger warehouse at the beginning? Wasn't having a smaller warehouse part of your early success? Scaling problems are good problems because something is going right.</p>
-<p>The fact is: programming is full of nonlinearities. That's a fancy way of saying that nothing scales forever. Exponential curves look linear before they hit the elbow. But you never know where you'll encounter elbows until it's too late. Elbows lurk everywhere.</p>
-<p>We can choose to see elbow ubiquity as a reason to reject frameworks, or we can see it as a challenge. A framework can aggregate knowlege from multiple apps and try to give you a long linear runway in several dimensions. Some problems are known not to scale within the framework, so we should document those and make evaluating the framework easy.</p>
-<p>Some fear that <strong>frameworks teach people the wrong stuff.</strong> We all have seen those questions on Stack Overflow where the asker obviously doesn't know where Ruby ends and Rails begins. Rails monkey patches a bunch, so it's really hard to know what comes included in the language.</p>
-<p>People say that frameworks encourage such ignorance. But that's balderdash. The people who don't know the difference are called <em>beginners</em>. They, by definition, don't know as much as experts. Everyone starts somewhere and the fact that they're even playing in the same sandbox as experts should send shivers of gratitude through the experts' spines. Be nice to beginners and help them solve their problems. If it really is important to distinguish the language from the framework, it is the framework's job to teach them to distinguish it on their own.</p>
-<p>Some people claim that <strong>a framework disgraces the art of programming.</strong> By enforcing a process and standards, and by removing decision points, the craft of programming is lost. The craft, they say, is the act of making all of those decisions.</p>
-<p>I'm quite sympathetic to this argument, but it's baloney. Experts want control because they know what to do with the control. A &quot;real programmer&quot; doesn't need niceties, and to prove it, goes without. These arguments have been made since the beginning of symbolic assemblers.</p>
-<p>Imagine if I said &quot;a real farmer digs with a shovel; a real dweller builds their own house&quot;. Give me a break. Of course the expert wants control. They've mastered the parts and they want to put them together in precise ways. But in no way does empowering someone with a tractor or a pre-made house detract from the craft of farming or householding.</p>
-<p>On the contrary, a framework can elevate the craft. You can focus on the functionality of your app instead of the mundane work of wiring up the low-level features. We often confuse the motions with the craft. The farmer is not a dirt digger. That is simply the motion a farmer must make to cultivate crops. The farmer who is not toiling with a shovel, who instead moves dirt with a tractor, can care more for his or her plants--which is the real work. Similarly, a good framework may free up the programmer's mind to build more beautiful software. We shouldn't confuse the motion of gluing libraries with the craft of solving problems with computers.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Frameworks have problems, that is for sure. But they also enable so much! Instead of seeing the shortcomings of existing frameworks as strikes against the notion of frameworks in general, we should see them as warning signs for what to avoid. We know that we want a learnable process and we know that it should scale, should help people learn, and should elevate the craft of software engineering. So what would a Clojure web framework look like? We'll get to that next time!</p>
-<div class="article-cg-box">
-  <h3>
-You may like the PurelyFunctional.tv Newsletter
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to functional programmers, get the free PurelyFunctional.tv Newsletter.
-</p>
-
-<p><a href="https://purelyfunctional.tv/newsletter/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The PurelyFunctional.tv Newsletter shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
+<p>Nice validation library plus very good motivational blog post.</p>
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
@@ -155,12 +127,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
 <li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
 </ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>There are probably more. Please let me know which ones I've missed.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
 
 
         <div class="endmark">
@@ -181,12 +147,8 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
     </div>
 
     <footer class="footer-banner">
-      <a class="footer-previous"
-         href="http://www.lispcast.com/why-web-frameworks">
-        previous
-      </a>
       <a class="footer-next"
-         href="http://www.lispcast.com/clojure-web-framework">
+         href="page8.html">
         next
       </a>
     </footer>

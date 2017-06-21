@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>The arguments against web frameworks | LispCast</title>
+    <title>What should a Clojure framework look like? | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.">
-    <meta name="twitter:title" content="The arguments against web frameworks">
+    <meta name="twitter:description" content="After exploring why frameworks and why not frameworks, I dive into the design priorities I think a web framework should have.">
+    <meta name="twitter:title" content="What should a Clojure framework look like?">
 
-    <meta property="og:title" content="The arguments against web frameworks">
-    <meta property="og:description" content="We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.">
+    <meta property="og:title" content="What should a Clojure framework look like?">
+    <meta property="og:description" content="After exploring why frameworks and why not frameworks, I dive into the design priorities I think a web framework should have.">
 
-    <meta name="description" content="We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.">
+    <meta name="description" content="After exploring why frameworks and why not frameworks, I dive into the design priorities I think a web framework should have.">
 
     <meta name="author" content="Eric Normand">
 
@@ -104,30 +104,35 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/arguments-against-frameworks">
-            The arguments against web frameworks
+             href="/clojure-web-framework">
+            What should a Clojure framework look like?
           </a>
         </h2>
 
         <div class="timestamp">
-          June 20, 2017
+          June 21, 2017
         </div>
 
         
-<p>Summary: <em>We explore three arguments against frameworks, address them, then turn them into challenges to be overcome.</em></p>
-<p>Although web frameworks are extremely popular, they are not without their detractors. I would like to go over three common arguments against frameworks.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> Each argument, when taken as a challenge to be overcome, points the way to a better framework--one that scales better, teaches better, and reflects the values of the language. This article is a continuation of a line of thought which started <a href="http://www.lispcast.com/why-web-frameworks">here</a>.</p>
-<p><strong>Frameworks don't scale.</strong> We often reject frameworks after working on a project that outgrew the framework. Code changes became difficult. The very structure that helped you get so far now seems to be holding you back. The thought inevitably crosses your mind: if I had only written this myself without a framework, I wouldn't have these problems now.</p>
-<p>Of course, we know this is hogwash. Imagine if I said &quot;my factory won't fit in this warehouse anymore. If only I had built my factory in a bigger warehouse from the beginning.&quot; But could you have afforded the bigger warehouse at the beginning? Wasn't having a smaller warehouse part of your early success? Scaling problems are good problems because something is going right.</p>
-<p>The fact is: programming is full of nonlinearities. That's a fancy way of saying that nothing scales forever. Exponential curves look linear before they hit the elbow. But you never know where you'll encounter elbows until it's too late. Elbows lurk everywhere.</p>
-<p>We can choose to see elbow ubiquity as a reason to reject frameworks, or we can see it as a challenge. A framework can aggregate knowlege from multiple apps and try to give you a long linear runway in several dimensions. Some problems are known not to scale within the framework, so we should document those and make evaluating the framework easy.</p>
-<p>Some fear that <strong>frameworks teach people the wrong stuff.</strong> We all have seen those questions on Stack Overflow where the asker obviously doesn't know where Ruby ends and Rails begins. Rails monkey patches a bunch, so it's really hard to know what comes included in the language.</p>
-<p>People say that frameworks encourage such ignorance. But that's balderdash. The people who don't know the difference are called <em>beginners</em>. They, by definition, don't know as much as experts. Everyone starts somewhere and the fact that they're even playing in the same sandbox as experts should send shivers of gratitude through the experts' spines. Be nice to beginners and help them solve their problems. If it really is important to distinguish the language from the framework, it is the framework's job to teach them to distinguish it on their own.</p>
-<p>Some people claim that <strong>a framework disgraces the art of programming.</strong> By enforcing a process and standards, and by removing decision points, the craft of programming is lost. The craft, they say, is the act of making all of those decisions.</p>
-<p>I'm quite sympathetic to this argument, but it's baloney. Experts want control because they know what to do with the control. A &quot;real programmer&quot; doesn't need niceties, and to prove it, goes without. These arguments have been made since the beginning of symbolic assemblers.</p>
-<p>Imagine if I said &quot;a real farmer digs with a shovel; a real dweller builds their own house&quot;. Give me a break. Of course the expert wants control. They've mastered the parts and they want to put them together in precise ways. But in no way does empowering someone with a tractor or a pre-made house detract from the craft of farming or householding.</p>
-<p>On the contrary, a framework can elevate the craft. You can focus on the functionality of your app instead of the mundane work of wiring up the low-level features. We often confuse the motions with the craft. The farmer is not a dirt digger. That is simply the motion a farmer must make to cultivate crops. The farmer who is not toiling with a shovel, who instead moves dirt with a tractor, can care more for his or her plants--which is the real work. Similarly, a good framework may free up the programmer's mind to build more beautiful software. We shouldn't confuse the motion of gluing libraries with the craft of solving problems with computers.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Frameworks have problems, that is for sure. But they also enable so much! Instead of seeing the shortcomings of existing frameworks as strikes against the notion of frameworks in general, we should see them as warning signs for what to avoid. We know that we want a learnable process and we know that it should scale, should help people learn, and should elevate the craft of software engineering. So what would a Clojure web framework look like? We'll get to that next time!</p>
+<p>Summary: <em>After exploring why frameworks and why not frameworks, I dive into the design priorities I think a web framework should have.</em></p>
+<p>I've been exploring the idea of web frameworks. Specifically, I've explored <a href="http://www.lispcast.com/why-web-frameworks">why we use web frameworks</a> and <a href="http://www.lispcast.com/arguments-against-frameworks">why we don't like them</a>. With that behind me, I'm thinking a lot about what a Clojure web framework should look like. These are the design priorities that I think are most important.</p>
+<h3 id="learnable-process">1. Learnable process</h3>
+<p>First and foremost, there should be a process for going from idea to code. It doesn't have to be the best process. It simply needs to be good enough and learnable. The entire framework should be built around this process and should support this process. A programmer should be able to identify some functionality or change that would be valuable to them and, while going through the process, should only have to focus on that functionality. Concerns that are orthogonal should be taken care of by the framework.</p>
+<p>To support that proces, the programmer must trade control for ease.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> HTTP allows for a lot of control, for instance, but the framework should make it easy. There are a lot of choices for how to do user authentication, but the framework should make it easy.</p>
+<p>There are really two different types of functionality that the framework needs to support. The first is the type of functionality that a programmer would expect to already exist since it solves a common problem. User authentication and sessions fall into this category. My preference for how to make these things easy is to use a plugin system. The framework will set up hooks that plugins can register for and a user can discover and choose plugins that solve their need.</p>
+<p>The second type of functionality is the stuff that a programmer wouldn't reasonably expect people to have solved before. This is stuff that makes their application unique. The process should be clear and learnable for how to analyze their feature and turn it into code. The process is considerably more challenging to design than a plugin system. It will require a lot of experimentation to make it work.</p>
+<h3 id="forward-progress">2. Forward progress</h3>
+<p>The framework should prioritize forward progress over understanding. This is a pragmatic choice that might ruffle some feathers in the programming community. The framework should help you get the job done even if you don't understand how it works. People often deride this as <em>magic</em>. But if the magic is simple and straightforward under the hood, what's the problem? I believe people have been burned by poorly implemented magic and have thrown the baby out with the bathwater.</p>
+<p>However, if this framework is successful, there will be many beginners who gain some expertise in Clojure while working in the framework. Many of these people will start to want the control and understanding that the framework doesn't allow. That's great! There are two options. 1. You can revel in the help the framework gave you along the way and start to dig into the magic for understanding. 2. You can ditch the framework and use your new knowledge to compose libraries the old-fashioned way. Both of these will be considered a success.</p>
+<h3 id="limited-scope">3. Limited scope</h3>
+<p>The framework should work for and prioritize the &quot;80%&quot; of cases. This really just means that the framework does its best to handle common cases but has an out when people try to apply it where it won't work well. It cannot work well everywhere, so some &quot;20%&quot; of cases are traded for working well in the other 80. That 80% should scale well in all reasonable dimensions: code size, team size, number of features, and request load.</p>
+<p>Over time, I hope that we can make it clear what the framework is good for, so people don't choose it by mistake and get burned. I also believe we could provide workarounds outside of the framework for some of the remaining 20%.</p>
+<h3 id="clojure-flavored">4. Clojure-flavored</h3>
+<p>The framework should use idiomatic Clojure and make use of Clojure's strengths. There's no reason to recreate Rails in Clojure. Rails already exists and is good at what it does. But Clojure does have a lot of strengths that would be interesting to have in a framework. Clojure's values will definitely make it unique. The framework could be an introduction to the Clojure way of doing things.</p>
+<h3 id="other-concerns">Other concerns</h3>
+<p>There are a bunch of things that fall out of these four priorities. Backwards compatibility is important for supporting a healthy plugin ecosystem. The development experience should be good out of the box. You shouldn't have to restart the JVM, even when including new libraries. The system should deploy out of the box.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>I'm not sure a Clojure web framework needs to exist. I don't know if it will help the Clojure community grow. But many, many people ask for one. They want it! The most common response is that Clojure prefers libraries that you compose yourself. This is a lot to ask of a beginner to Clojure. Having a framework does not invalidate that philosophy. In fact, I believe that a framework can help introduce people to the values of Clojure in a gentle way and be something unique.</p>
 <div class="article-cg-box">
   <h3>
 You may like the PurelyFunctional.tv Newsletter
@@ -158,7 +163,7 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>There are probably more. Please let me know which ones I've missed.<a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p>This is different from the <em>simple vs easy</em> tradeoff we often see in the Clojure community.<a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
 
@@ -182,12 +187,8 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 
     <footer class="footer-banner">
       <a class="footer-previous"
-         href="http://www.lispcast.com/why-web-frameworks">
+         href="http://www.lispcast.com/arguments-against-frameworks">
         previous
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/clojure-web-framework">
-        next
       </a>
     </footer>
 

@@ -104,6 +104,52 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://stackoverflow.com/questions/10947636/idiomatic-way-to-represent-sum-type-either-a-b-in-clojure/10951001#10951001">
+            Idiomatic way to represent sum type (Either a b) in Clojure
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/idiomatic-way-to-represent-either">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          June 13, 2012
+        </div>
+
+        
+<blockquote>
+<p>how do you represent sum types, also known as tagged unions and variant records? Something like <code>Either a b</code> in Haskell or <code>Either[+A, +B]</code> in Scala.</p>
+</blockquote>
+<p><code>Either</code> has two uses: to return a value of one of two types or to return two values of the same type that should have different semantics based on the tag.</p>
+<p>The first use is only important when using a static type system. <code>Either</code> is basically the minimum solution possible given the constraints of the Haskell type system. With a dynamic type system, you can return values of any type you want. <code>Either</code> is not needed.</p>
+<p>The second use <em>is</em> significant but can be accomplished quite simply in two (or more) ways:</p>
+<ol style="list-style-type: decimal">
+<li><code>{:tag :left :value 123} {:tag :right :value &quot;hello&quot;}</code></li>
+<li><code>{:left 123}             {:right &quot;hello&quot;}</code></li>
+</ol>
+<blockquote>
+<p>What I'd like to ensure, is that :tag is always there, and it can take only one of the specified values, and corresponding value is consistently of the same type/behaviour and cannot be nil, and there is an easy way to see that I took care of all cases in the code.</p>
+</blockquote>
+<p>If you would like to ensure this statically, Clojure is probably not your language. The reason is simple: expressions do not have types until runtime--until they return a value.</p>
+<p>The reason a macro will not work is that at macro expansion time, you do not have runtime values--and hence runtime types. You have compile-time constructs like symbols, atoms, sexpressions, etc. You can <code>eval</code> them, but using <code>eval</code> is considered bad practice for a number of reasons.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="/programming-language-stages-of-development">
             Programming Languages and Piaget's Stages of Cognitive Development
           </a>
@@ -393,39 +439,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>I hope this makes reducers easier to understand, use and define.</p>
 </blockquote>
 <p>It does.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://twitch.nervestaple.com/2012/05/07/bishop/">
-            Bishop: Makes Your Web Service Shiny
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/bishop">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          May 11, 2012
-        </div>
-
-        
-<p>Doh! This looks like a library that I have that is 90% ready to release. Though mine takes a slightly different tack.</p>
-<p>I guess I will have to get it ready for release.</p>
 
 
         <div class="endmark">

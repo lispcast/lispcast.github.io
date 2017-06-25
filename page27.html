@@ -104,6 +104,45 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://clojure-liberator.github.com/">
+            Liberator
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/liberator">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 06, 2012
+        </div>
+
+        
+<p>Writing HTTP compliant servers is hard in any language. There is a lot to do for each request: content type negotiation, handling the wide variety of problems with requests, and the rest of the HTTP spec goodness. Usually, we just ignore it and simplify down to three types of responses: 200 Ok and 404 Not Found and 500 Server Error. There is a lot more to the spec than this, but it often costs more to implement it correctly than to stick with this limited set of statuses.</p>
+<p>Liberator looks like it might have found the leverage point between navigating the essential complexity of HTTP and managing the requirements of your server.</p>
+<p>Two things look promising:</p>
+<ol style="list-style-type: decimal">
+<li><p>There seems to be a lot of potential for reuse. That means you can<br /> decide server-wide policies instead of per-handler policies.</p></li>
+<li><p>Behavior can change incrementally. You can still get up and running<br /> using the defaults and adapt the server's behavior to suit the problem<br /> later.</p></li>
+</ol>
+<p>I look forward to trying it out.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.250bpm.com/blog:8">
             Why should I have written ZeroMQ in C, not C++ (part II)
           </a>
@@ -440,55 +479,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>With these six constructors, you can make all of JSON.</p>
 <p>It's interesting because JSON is a point of intersection between Javascript and Haskell. Javascript is very dynamic, with a very weak sense of type. Haskell has strong typing. On close analysis, JSON is statically and strongly typed. In fact, JSON <em>is</em> a type.</p>
 <p>Could its ADT nature be one of the secrets to JSON's success?</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="https://plus.google.com/u/0/110981030061712822816/posts/KaSKeg4vQtz">
-            Notes from the Mystery Machine Bus
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/notes-from-the-mystery-machine-bus">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 14, 2012
-        </div>
-
-        
-<p>Steve Yegge:</p>
-<blockquote>
-<p>Software engineering has its own political axis, ranging from conservative to liberal.</p>
-</blockquote>
-<p>Steve, I am so often with you. Typically, you write stuff that is very concrete and easy to agree with. In fact, I agree with most of what you have written in your very long rants.</p>
-<p>But this, I am afraid, is bullshit. Not right, not wrong, just <em>bullshit</em>.</p>
-<p>I was giving you the benefit of the doubt until I read your list of categorized features, either conservative or liberal. That list made absolutely no objective sense. <strong>There is not one shred of a good idea in the dichotomy you gave.</strong></p>
-<p>The dichotomy conflates so many different dichotomies into a single one in the name of clarifying a terrible mess. In that way, it makes the same mistake as classifying people into conservative and liberal does. It does not help explain anything. And <strong>it only creates more fighting by arming people with names to call each other</strong>.</p>
-<p>Which is more &quot;liberal&quot;, Common Lisp or C? Common Lisp protects against the most common types of C errors: memory leaks and buffer overflows. Does that make Common Lisp more conservative because it protects the programmer from errors? But C has compile-time type checks! And &quot;conservative&quot; syntax! Bullshit!</p>
-<p>But then came the clincher. When you said that Clojure was a conservative language, <strong>I came up with something which may actually have some merit: how <em>opinionated</em> the language is</strong>.</p>
-<p>Clojure is strongly opinionated. So is Python. So is Haskell.</p>
-<p>Clojure's opinions: state changes should be explicit, values should be immutable, functions should be separated from data, etc.</p>
-<p>Python's opinion: code should be well-indented.</p>
-<p>Haskell's opinions: functions should be pure, types should be consistent.</p>
-<p>These languages may appear conservative because, in their respective worlds, <strong>the opinions are solidified into laws and imposed on the programmer</strong>. Python does not allow you to write unindented code. Haskell does not allow you to write programs with inconsistent types. You cannot mutate a Clojure map.</p>
-<p><strong>Perhaps, Steve, you mean to say that you don't like when a programming language's opinion is imposed on the programmer?</strong></p>
-<p>I personally like some laws and dislike others. For instance, Clojure's immutability is great. <strong>It's not just great because it's possible. It's great because it is enforced.</strong> Nothing can change my values--not me, not you, not anyone! And I like Haskell's type system in production but not during development. I like that my program is guaranteed to have consistent types on production. But in development, I'd rather run it and debug it (for some definition of &quot;run&quot; for a type-inconsistent Haskell program).</p>
-<p><strong>If you say it like that, it ceases to be bullshit.</strong> And then we can get back into a discussion. Question: Which features should be imposed on the programmer and which should not? Discuss.</p>
 
 
         <div class="endmark">

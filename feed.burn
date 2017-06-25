@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>What is an abstraction?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/what-is-abstraction</guid>
+                  <link>http://www.lispcast.com/what-is-abstraction</link>
+                  <pubDate>Sun 25 Jun 2017 16:50:44 AM CDT</pubDate>
+                  <description>
+                    We explore some of the background behind the meaning of the word abstraction and why we do it.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/what-is-abstraction"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>What should a Clojure framework look like?</title>
                   <guid isPermalink="false">http://www.lispcast.com/clojure-web-framework</guid>
                   <link>http://www.lispcast.com/clojure-web-framework</link>
@@ -129,20 +143,6 @@
                     Concurrency and parallelism are concepts that we make use of every day off of the computer. I give some real world examples and we analyze them for concurrency and parallelism.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/concurrency-vs-parallelism"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>What do I have to learn to be hirable in Clojure?</title>
-                  <guid isPermalink="false">http://www.lispcast.com/hirable-in-clojure</guid>
-                  <link>http://www.lispcast.com/hirable-in-clojure</link>
-                  <pubDate>Fri 22 Jul 2016 11:25:39 AM CDT</pubDate>
-                  <description>
-                    You actually need to learn nothing. But it's more complicated than that. This article will show you what can set you apart.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/hirable-in-clojure"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

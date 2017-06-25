@@ -1,0 +1,238 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>What is an abstraction? | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="We explore some of the background behind the meaning of the word abstraction and why we do it.">
+    <meta name="twitter:title" content="What is an abstraction?">
+
+    <meta property="og:title" content="What is an abstraction?">
+    <meta property="og:description" content="We explore some of the background behind the meaning of the word abstraction and why we do it.">
+
+    <meta name="description" content="We explore some of the background behind the meaning of the word abstraction and why we do it.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/what-is-abstraction">
+            What is an abstraction?
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          June 25, 2017
+        </div>
+
+        
+<p>Summary: <em>We explore some of the background behind the meaning of the word abstraction and why we do it.</em></p>
+<p>For a term we use so much in our field, there are very few definitions of <em>abstraction</em>. And when I gave my talk called <a href="https://www.youtube.com/watch?v=jJIUoaIvD20"><em>Building Composable Abstractions</em></a>, that was a persistent question: what did I mean by <em>abstraction</em>? I'm going to be talking about abstractions a lot, both on this site, and in verbal discussions. I'd like to know what I'm talking <em>about</em>. Instead of searching for a precise definition, I'd like to expand on the background ideas that make it so difficult to define.</p>
+<p>There are two uses of abstraction that I think will serve well to begin this discussion. The first is from one of my favorite programming books, <a href="http://mitpress.mit.edu/sicp/"><em>Structure and Interpretation of Computer Programs</em></a> by Abelson and Sussman (<a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_sec_1.1">Section 1.1</a>).</p>
+<blockquote>
+<p><strong>means of abstraction</strong>, by which compound elements can be named and manipulated as units.</p>
+</blockquote>
+<p>In their &quot;definition&quot;, abstraction is about <em>naming</em>. Naming is a funny thing. It's used for identity--as in the name of a person--and also to impart a meaning--as in to name an idea. We have a tendency as humans to come up with new terms. They are new names for perhaps new meanings. It is part of our natural linguistic abilities. When we program, we do this all the time. Whenever we create a variable or name a function, we're inventing a new term and assigning it a meaning.</p>
+<p>Its meaning, in our program, is its behavior. What does this thing do? When should I use it? How do I use it? A function calculates a return value based on its arguments. You use the function by calling it or passing it as an argument to something that will call it. In Clojure, you call a function by putting its name in the first position in parens. In Clojure, functions can also have effects.</p>
+<p>Programming language theorists call enumerating all of this meaning the <em>semantics</em> of the language. But it's just another word for meaning. Giving a descriptive name to a thing is all about giving it a clear meaning.</p>
+<p>How are Clojure functions implemented by the compiler? We mostly don't care. We write functions and call them without much regard for the things they compile to. Insofar as we can ignore those implementation details, we call the abstraction <em>robust</em>. When that implementation becomes important and we can't trust the abstraction to work as it is intended, we call the abstraction <em>leaky</em>. A robust abstraction is able to hide the details from us and give us a new basis on which to base other abstractions.</p>
+<p>That brings me to the second &quot;definition&quot;, this one by <a href="https://en.wikipedia.org/wiki/Edsger_W._Dijkstra">Edsger Dijkstra</a>.</p>
+<blockquote>
+<p>The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise.</p>
+</blockquote>
+<p>Dijkstra's quote goes right to the matter of its purpose, which we have yet to go into. We want to create a new <em>semantic level</em> (meaning again) where we can be precise. My reading of the word <em>precise</em> is that we need to be able to say exactly what we mean and no more. We want our compound elements to be exactly suited to their purpose.</p>
+<p>I believe this is the hard part of programming that we always talk about. We are simultaneously inventing a new purpose and the thing which is supposed to be suited to it. Then we have to name it to make that purpose clear. Three things we're doing simultaneously. That's a lot of degrees of freedom that can lead us to an imprecise abstraction.</p>
+<p>There is a lot of distrust of abstraction in our industry, and I think rightly so. We have been burned time and again by abstraction for abstraction's sake and abstractions that hide problems. These are abstractions that don't fulfill their purpose and should be distrusted. But we should not distrust all abstractions. Part of our job is to learn what constitutes a good one.</p>
+<p>Here's a great example of the distrust of abstractions. Joel Spolsky, internet entrepreneur, coined an aphorism he called &quot;<a href="https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/">The Law of Leaky Abstractions</a>&quot;:</p>
+<blockquote>
+<p>All non-trivial abstractions, to some degree, are leaky.</p>
+</blockquote>
+<p>He gives the example of TCP: the abstraction is &quot;make a TCP connection and send data reliably, despite lost packets and other vagaries of networks&quot;. It's a great abstraction except it has a leak: what if you pull the network cable? Nothing will get through! According to the law, the mechanism will always &quot;leak&quot; through eventually. It reminds me that metaphors can only be stretched so far and that <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems">there will be some true things we cannot prove</a>.</p>
+<p>I think the law has a lot of truth in it, but his examples are a bit of a strawman. Why? Well, sockets handle a lot for you, and they also have well-defined errors. If the connection is severed, your socket will raise an error. So the socket abstraction is not actually hiding that network cable problem from you. On the contrary, it's building it into its fabric. Perhaps the real problem is that errors can so easily be ignored in our programming language. So I like to think about what I call an &quot;Inverse Spolksy's Law&quot;:</p>
+<blockquote>
+<p>All too-trivial abstractions, to some degree, are leaky.</p>
+</blockquote>
+<p>The idea is that the abstractions that are leaky are the ones that are not precise in the way Dijkstra specified. They're hiding something they really can't hide. To make it more precise, you need to hoist more into the higher abstraction level than you would ideally want to. And this is the number one sin I find in abstractions: they hide too much.</p>
+<p>Abstraction is something we also see in Algebra. We give a value a name, though we don't know what that value might be. We call these <em>variables</em> in Algebra. We can manipulate these names like values and arrive at sensible answers. This shows a very beautiful relationship between mechanical symbolic manipulation, meaning representation, and mechanical calculation. Abstractions have laws in themselves. Hence I can manipulate a program algebraically and talk about its properties, all without running it. The abstraction becomes a thing to talk about.</p>
+<p>Something in there points to the roots of intelligence, and <a href="http://www.goodreads.com/book/show/248189.Fluid_Concepts_and_Creative_Analogies">many books</a> have been written about this. The reason it is so hard to talk about is that we don't have very good introspection into how we think. We're still understanding it after trying for thousands of years. We're better at <em>doing it</em> than <em>knowing what we're doing</em>.</p>
+<p>The thing I love about programming is that we deal so directly in meaning, like an artist or a philosopher does. We know that, in the end, we are building a mechanism to control electron flow in our computers. Yet we work in the world of ideas. My brain wants nothing more than to escape from the mundanity of logic gates and build sculptures of thought.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>We deal in abstractions every day as programmers. We're either using them, creating them, or debugging them. Abstractions are a natural extension of our linguistic abilities. They let us name concepts so that we can use them to form bigger ideas. Much of language design and industry programming books are about how exactly to make these abstractions. How do we go about making these things? Are there better and worse ways? These are some of the things we must understand better as software takes over more and more of our lives.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/avoid-naming-at-all-costs">Avoid Naming at All Costs</a></li>
+<li><a href="http://www.lispcast.com/lambda-abstraction">Lambda Abstraction</a></li>
+<li><a href="http://www.lispcast.com/imperative-intro">Why I start teaching Clojure with Imperative Programming</a></li>
+<li><a href="http://www.lispcast.com/stop-refactoring-and-start-factoring">Stop Refactoring and Start Factoring</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/clojure-web-framework">
+        previous
+      </a>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+      _dcq.push(['track', 'Page visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

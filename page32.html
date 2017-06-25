@@ -104,6 +104,38 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://www.meteor.com/screencast">
+            Meteor
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/meteor">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          April 13, 2012
+        </div>
+
+        
+<p>It looks like a pretty sweet web server that lets you do all front-end development.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.chris-granger.com/2012/04/12/light-table---a-new-ide-concept/">
             Light Table
           </a>
@@ -393,85 +425,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>The Clojure community is incredibly inspiring. It is at once <strong>pragmatic</strong> and <strong>philosophical</strong>. It looks to the <strong>future</strong> and learns from <strong>history</strong>. It adheres to its own vision while drawing from other languages. I wanted to create something that enhanced these wonderful features of the Clojure community.</p>
 <p>The <em>Clojure Gazette</em> is a mix of links to news, lectures, papers, libraries, and more that gives a weekly taste of the swirls of activity surrounding Clojure.</p>
 <p><a href="http://www.clojuregazette.com/">Click here to subscribe. It's free.</a></p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/paradigms-as-subtractive">
-            Programming Paradigms and Expressive Power
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          February 09, 2012
-        </div>
-
-        
-<p>I recently watched a <a href="http://skillsmatter.com/podcast/agile-testing/bobs-last-language">talk by Uncle Bob Martin called <em>The Last Programming Language</em></a>. Since I had just written a post relating <a href="/indirection">indirection mechanisms to expressive power</a>, I was intrigued by Uncle Bob's idea and wanted to explore it further.</p>
-<p>Uncle Bob gives a brief history of programming paradigms. Here are the ones he mentions:</p>
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Modular_programming">Modular Programming</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Structured_programming">Structured Programming</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented Programming</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Functional_programming">Functional Programming</a></li>
-</ul>
-<p>His perspective was that programming paradigms are generally subtractive.</p>
-<ul>
-<li>Modular programming removed large programs</li>
-<li>Structured programming removed GOTOs</li>
-<li>Object Oriented programming removed hand-rolled vtables</li>
-<li>Functional programming removed mutable state</li>
-</ul>
-<p>He concludes by saying that there's nothing left to take away and a language of the future would have to have all of these.</p>
-<blockquote>
-<p>Perspective is worth 80 IQ points. -- Alan Kay</p>
-</blockquote>
-<p>The idea that paradigms are subtractive is interesting. It is interesting to look at what is taken away. However, I would rather say that paradigms replace a manual, error-prone pattern with a more reliable one (usually through <a href="/indirection">indirection</a>). Structured programming didn't just ban GOTO. It also encouraged conditionals and loops. Object Oriented programming didn't just prohibit tables of function pointers, it gave a unified syntax and semantics for message dispatch. But, still, I do appreciate the perspective.</p>
-<p>On the other hand, I think Uncle Bob has left out many interesting paradigms from his history. <a href="http://en.wikipedia.org/wiki/Programming_paradigm">Wikipedia lists 59 paradigms</a> in a hierarchy. (Note that they are not mutually exclusive!) Let's see if we can apply his subtractive perspective to those paradigms.</p>
-<h3 id="aspect-oriented-programmingaop"><a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">Aspect-oriented programming</a></h3>
-<p><strong>. . . aims to increase modularity by allowing the separation of cross-cutting concerns.</strong></p>
-<h4 id="what-does-it-remove">What does it remove?</h4>
-<p>The mixing of concerns.</p>
-<h3 id="concatenative-programmingcp"><a href="http://en.wikipedia.org/wiki/Concatenative_programming_language">Concatenative programming</a></h3>
-<p><strong>A concatenative programming language is a point-free programming language in which all expressions denote functions and the juxtaposition of expressions denotes function composition.</strong></p>
-<h4 id="what-does-it-remove-1">What does it remove?</h4>
-<p>Explicit arguments to functions (point-free!).</p>
-<h3 id="constraint-programmingconp"><a href="http://en.wikipedia.org/wiki/Constraint_programming">Constraint programming</a></h3>
-<p><strong>. . . is where relations between variables are stated in the form of constraints.</strong></p>
-<h4 id="what-does-it-remove-2">What does it remove?</h4>
-<p>Specifying the sequence of steps to execute.</p>
-<h3 id="logic-programminglogic"><a href="http://en.wikipedia.org/wiki/Logic_programming">Logic programming</a></h3>
-<p><strong>. . . is the use of mathematical logic for computer programming.</strong></p>
-<h4 id="what-does-it-remove-3">What does it remove?</h4>
-<p>Much like constraints, it removes the explicit steps to execute.</p>
-<h3 id="array-programmingarray"><a href="http://en.wikipedia.org/wiki/Array_programming">Array programming</a></h3>
-<p><strong>. . . is the generalization of operations on scalar values to apply transparently to vectors, matrices, and higher dimensional arrays.</strong></p>
-<h4 id="what-does-it-remove-4">What does it remove?</h4>
-<p>The distinction between scalar and vector quantities.</p>
-<h3 id="language-oriented-programminglop"><a href="http://en.wikipedia.org/wiki/Language-oriented_programming">Language-oriented programming</a></h3>
-<p><strong>. . . is the creation of a domain-specific language for the problem, then solve the problem in that language.</strong></p>
-<h4 id="what-does-it-remove-5">What does it remove?</h4>
-<p>General purpose programming languages.</p>
-<p>One more.</p>
-<h3 id="event-driven-programmingep"><a href="http://en.wikipedia.org/wiki/Event-driven_programming">Event-driven programming</a></h3>
-<p><strong>. . . means the flow of the program is determined by response to events.</strong></p>
-<h4 id="what-does-it-remove-6">What does it remove?</h4>
-<p>The <code>main</code> function?</p>
-<p>The perspective has some merits. But it also has flaws. I've already mentioned that it does not specify what the removed thing is replaced with, which may be more important than the removal itself. Also, the perspective probably does not apply to all programming paradigms, as Uncle Bob claims. He's exhibiting a blindness toward the possibility of future change because he can't imagine it.</p>
-<p>I also don't think we have come to the end of programming paradigms. Although I can't predict what paradigms will be invented in the future (if I could, I'd just invent it), I don't think we're looking at mere incremental improvement. It's just that after racking my brain I can't come up with much.</p>
-<p><a href="http://www.infoq.com/presentations/We-Really-Dont-Know-How-To-Compute">This video</a> holds some ideas.</p>
 
 
         <div class="endmark">

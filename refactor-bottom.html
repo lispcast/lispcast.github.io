@@ -1,0 +1,235 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>When in doubt, refactor at the bottom | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="We explore when it is safe to extract out an abstraction and when you need to go deeper and rebuild it from scratch.">
+    <meta name="twitter:title" content="When in doubt, refactor at the bottom">
+
+    <meta property="og:title" content="When in doubt, refactor at the bottom">
+    <meta property="og:description" content="We explore when it is safe to extract out an abstraction and when you need to go deeper and rebuild it from scratch.">
+
+    <meta name="description" content="We explore when it is safe to extract out an abstraction and when you need to go deeper and rebuild it from scratch.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/refactor-bottom">
+            When in doubt, refactor at the bottom
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          June 26, 2017
+        </div>
+
+        
+<p>Summary: <em>We explore when it is safe to extract out an abstraction and when you need to go deeper and rebuild it from scratch.</em></p>
+<p>I was recently in a discussion on <a href="https://devchat.tv/js-jabber">JavaScript Jabber</a>. <a href="https://twitter.com/Aimee_Knight">Aimee Knight</a> had been reading my articles about abstraction and asked a really poignant question, which I will paraphrase:</p>
+<blockquote>
+<p>When do you think it's okay to extract out an abstraction?</p>
+</blockquote>
+<p>I wasn't really prepared to answer this question. I was expecting to talk about ClojureScript. I gave the question a shot, but of course, after the recording I had a better idea of what to say.</p>
+<p>One way to refactor code is to look for repetition. You look for blocks of code that are similar, then extract the common parts into a function. People justify this type of refactoring as supporting the principle of <em>Don't Repeat Yourself</em>. They call it <em>DRYing up</em> your code.</p>
+<p>DRYing up your code has become so common that now there is advice against doing it too much. Sandi Metz's advice is very popular:</p>
+<blockquote>
+<p>Duplication is far cheaper than the wrong abstraction.</p>
+</blockquote>
+<p><a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction">Her article</a> explains the problems very well. Go read it.</p>
+<p>The situation goes like this: you see ten lines of code that are almost the same as ten lines of code somewhere else. They're doing something similar and you think you could extract out the common parts into a function and make the uncommon parts into parameters to the function. You do so, your code gets shorter, and you're happy.</p>
+<p>Metz goes on to talk about the follow-on effects, which are that someone wants to reuse that abstraction but needs those ten lines to be different in just one more way, so they add another parameter. Parameters aggregate over time until the code is a mess.</p>
+<p>People have different ways to mitigate this. Some people will say &quot;wait until the code is repeated three times before you extract it&quot;. It is much more likely to be used a fourth time, and you're more likely to capture all of the parameters the first time.</p>
+<p>This method does <a href="http://www.lispcast.com/what-is-abstraction">count as an abstraction</a> since you are naming a function. The name, of course, is of vital importance. Many people say that if you can't think of a good name for your abstraction, it's probably not a thing. I'm a fan of that, but naming is hard. Sometimes I can't think of a good name when it really is a thing.</p>
+<p>But there's a deeper problem. I actually think ten lines of code is too big for an abstraction (<a href="https://www.youtube.com/watch?v=npOGOmkxuio">Metz agrees</a>). Ten lines of code that happen to be repeated are so unlikely to have any interesting properties, including being bug-free, reusable, and composable, that you should be very skeptical of being able to factor the whole thing out as common. However, don't despair! You can more often than not find lots of one-, two-, or three-line bits of code that are 1.) easy to name and 2.) reusable. If you break enough of those out, you may start to see some underlying structure to those repeated ten lines as they become replaced by your new, small abstractions.</p>
+<p>When people ask me &quot;how do I refactor this?&quot;, that's my first response. Start naming the small bits, even if they're not repeated. Names give meaning to you code. It organizes your code and your thinking. And even if the named bit is never reused, it's still valuable to have a name attached. If you get some reuse out of it, that's gravy.</p>
+<p>This process is a purely mechanical, almost statistical way of finding reusability. You're betting that <a href="https://purelyfunctional.tv/issues/clojure-gazette-173-dealers-of-abstraction/">smaller abstractions are more likely to be reusable than big ones</a>. It's a good bet to make,. However, refactoring cannot fix code that's broken. It can only improve the quality of the code, not its underlying meaning.</p>
+<p>Sometimes that's all you want to do. You've got some existing code. It works. You just want to clean it up. That's fine. It's like making your desk neater. You can stack up the papers more neatly, arrange the stapler and pencil holder. Throw away the old coke cans. You can do all of that without really knowing what the work is that is done at the desk.</p>
+<p>But sometimes you need to look at the meaning of the code, and really do some work at that level. If you want to file those papers away, you have to know where to file them. You have to know what the paper is about and why you have it. Do we need this stapler? Maybe it's not used in this line of work? Maybe it needs to be a longer stapler. We need to know much more about the meaning of that stapler in the work being done.</p>
+<p>At this point, simple metrics about how many times something is repeated or how many lines of code are extracted won't cut it. In fact, simply extracting existing code won't cut it at all. We need to go deeper into what we're trying to do and find the structure there--not in our code itself. When you're at that point, there isn't much advice. Here is what I've found/created.</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Domain-driven_design">Domain-Driven Design</a> is a methodology for developing code alongside domain experts to really get into the &quot;what and why&quot; of your abstractions.</li>
+<li><a href="https://www.youtube.com/watch?v=bmKYiUOEo2A">Denotational Design</a> is a method for thinking deeply about abstractions using Category Theory.</li>
+<li><a href="https://www.youtube.com/watch?v=jJIUoaIvD20">Building Composable Abstractions</a> is my attempt at beginning to elaborate a process for designing abstractions that doesn't require complex math. It relies heavily on your intution of physical systems and delays writing code as long as possible.</li>
+</ul>
+<p>I appreciate these methods because they force us to revisit the domain in deep ways.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Repetition in our code can be a sign that there is an abstraction lurking in our code, ready to be extracted. Although the sign may be clear, we can't always be sure how best to extract it. If you're unsure, don't extract it. The longer the abstraction is, the more likely it won't be reusable. But every ten-line bit of repeated code has nine two-line bits and eight three-line bits. There's probably something there to extract. Start there, with smaller abstractions. Start refactoring at the bottom! Finally, there are limits to refactoring. Sometimes you need to revisit the meaning of your abstractions, not just the current code.</p>
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/avoid-naming-at-all-costs">Avoid Naming at All Costs</a></li>
+<li><a href="http://www.lispcast.com/lambda-abstraction">Lambda Abstraction</a></li>
+<li><a href="http://www.lispcast.com/what-is-abstraction">What is an abstraction?</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/what-is-abstraction">
+        previous
+      </a>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+      _dcq.push(['track', 'Page visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

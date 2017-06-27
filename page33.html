@@ -104,6 +104,46 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://blip.tv/clojure/rich-hickey-keynote-5970064">
+            Rich Hickey: Keynote
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/rich-hickey-keynote">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          March 16, 2012
+        </div>
+
+        
+<p>I just rewatched this great talk where Rich Hickey talks about some future directions for Clojure.</p>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>Different build targets - leaner and fatter builds of Clojure for deployment and development</li>
+<li>Clojure in Clojure - protocols, records, and deftype at the bottom</li>
+<li>Code analysis using core.logic - type checking, other analysis</li>
+<li>Pods - safely encapsulate state change</li>
+<li>Extensible reader - making Clojure a better format than JSON and XML</li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="https://github.com/quil/quil">
             Quil
           </a>
@@ -506,113 +546,6 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'contact me'+'<\/'+'a'+'>')
 <p>A funny and painfully true look at language development.</p>
 <p>I still think developing your own language is a great learning process.</p>
 <p>via <a href="http://news.ycombinator.org/user?id=akoumjian">akoumjian</a></p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="/modern-language-wishlist">
-            Modern Language Wishlist
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          February 02, 2012
-        </div>
-
-        
-<p>I was brainstorming the other day about features that I expect to be easy in modern programming languages (plus libraries).</p>
-<p>Some of them are very common, some less common, and some might not exist yet. Some are basic services of the runtime and some are more conveniences for interacting with the modern networked world.</p>
-<p>None of them are impossible. I can point to examples of each of them in popular programming languages. But there is no language that has all of them. A lot of progress could be made with fortuitous curation of existing libraries.</p>
-<ul>
-<li><p>String manipulation</p>
-<p>String manipulation should be incredibly convenient. It's so common to parse something out of a string, or build up a new string. It should be so easy it disappears.</p>
-<ul>
-<li>Regular expressions</li>
-<li>Splitting</li>
-<li>Joining</li>
-<li>Replacing</li>
-</ul></li>
-<li><p>Polymorphism</p>
-<p>Polymorphism, as I'm describing it here, means the specific type of a value is an implementation detail that I can ignore. I can program to an &quot;interface&quot; and two values that implement the same interface can be treated interchangeably.</p></li>
-<li><p>Basic &quot;container&quot; types</p>
-<p>I don't think it's a stretch to say that we know enough, as a science and industry, to know exactly what we need from our containers. +1 for convenient syntax.</p>
-<ul>
-<li>Linked list</li>
-<li>Dynamic array</li>
-<li>Hash map</li>
-<li>Set</li>
-</ul></li>
-<li><p>Input/output</p>
-<p>It's still a little hard in some languages to read and write files. Especially binary.</p></li>
-<li><p>Web requests</p>
-<p>Our computers are approaching 100% time on the Internet. And the web is ubiquitous. You should be able to do web requests with one line.</p></li>
-<li><p>URL Manipulation</p>
-<p>URL's are very structured strings, but that doesn't mean we should be concatenating the strings ourselves. There needs to be a way to build URL's and break them into their individual components.</p></li>
-<li><p>Garbage Collection</p>
-<p>I just don't want to worry about memory management anymore.</p></li>
-<li><p>Namespaces</p>
-<p>It is convenient to avoid naming conflicts as your library ecosystem grows.</p></li>
-<li><p>Homoiconic</p>
-<p>Code can be manipulated as data.</p></li>
-<li><p>Extensible syntax</p>
-<p>I find I don't use macros much anymore. I do more with data-driven programming. But it is nice to have when you need it.</p></li>
-<li><p>Math-oriented numeric types</p>
-<p>There are times when I want numbers that are defined by their machine representations, such as C <code>int</code> and <code>double</code>. I'll call this &quot;machine-oriented numbers&quot;. There are times when I want a more abstract representation of numbers, that act like they taught me in Math class. I'll call this &quot;math-oriented numbers&quot;.</p>
-<p>With math-oriented numbers, the fear of overflowing should not exist and division is division.</p>
-<p>While we're at it, we could add in matrices, vectors, and even equations.</p></li>
-<li><p>Units</p>
-<p>Numeric values should be able to be qualified with a unit. You should be able to convert between units of the same kind.</p>
-<ul>
-<li>Mass</li>
-<li>Time</li>
-<li>Distance</li>
-<li>Temperature</li>
-<li>and combinations of the above (speed, acceleration, etc.)</li>
-</ul></li>
-<li><p>Time</p>
-<p>Time, dates, and calendars are hard. The language should solve the hard part for us.</p></li>
-<li><p>Error</p>
-<p>A number is rarely 100% accurate. There should be ways to represent the error and have it accumulate when combining different values. +1 for tracing the sources of error.</p></li>
-<li><p>Unification / pattern matching</p>
-<p>It's just for convenience. The important thing is how unification errors are dealt with. Hopefully, there is something better than catching an exception.</p></li>
-<li><p>Before / after functions</p>
-<p>This is sometimes known as aspects. But there is a lot of value being able to add functionality to existing functions without modifying the original code.</p></li>
-<li><p>Parser</p>
-<p>Convenient way to define parser grammars that generate AST's available in the language.</p></li>
-<li><p>CSV library</p>
-<p>CSV is a very common way to store tabular data, but it's not really a standard. There is enough variability in the format that a library is called for.</p></li>
-<li><p>Good error messages</p>
-<p>Good error messages need to help you locate and solve the problem. It's actually really hard to get right. You can see this a lot in newer languages. Languages with helpful errors are typically mature.</p></li>
-<li><p>Immutable values</p>
-<p>Values are values. They shouldn't change.</p></li>
-<li><p>Explicit model of time</p>
-<p>It is very rare to find in programming languages. Time needs to be modeled by the programming language so that we can sanely deal with concurrency. This is one of the bigger mini-revolutions happening in programming at the moment.</p></li>
-<li><p>Graphics</p>
-<p>Most languages make it really hard to draw on the screen. This just needs to be easier. Displaying images, shapes, colors, text, video, and associated manipulations: scaling, rotation, translation.</p></li>
-<li><p>Sound</p>
-<p>Same goes for sound: playing sounds should be easy! Listening to the microphone should be easy!</p></li>
-<li><p>Common file formats</p>
-<p>Reading common formats should be easy. At the very least, there should be a framework/convention for libraries for common formats to follow.</p></li>
-<li><p>Game input</p>
-<p>By this, I mean getting raw events about key down, key up, mouse movement, etc.</p></li>
-<li><p>GUI</p></li>
-<li><p>First-class functions</p>
-<p>Higher-order programming is an obvious win. +1 for lexical closures. +1 if you can store the functions to disk and read them back in!</p></li>
-<li><p>Easy way to store data in flat text files</p>
-<p>I don't want to have to write my own serialization routines.</p></li>
-</ul>
 
 
         <div class="endmark">

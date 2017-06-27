@@ -107,6 +107,20 @@
 
 
                 <item>
+                  <title>The Bootstrapping Mindset</title>
+                  <guid isPermalink="false">http://www.lispcast.com/bootstrapping-mindset</guid>
+                  <link>http://www.lispcast.com/bootstrapping-mindset</link>
+                  <pubDate>Tue 16 Mar 2017 06:48:01 AM CDT</pubDate>
+                  <description>
+                    One of the great things about very robust and powerful abstractions is that they can give you tremendous leverage. The leverage can be so great that you can build something much greater than the sum of its parts. However, I worry that the web is an end to this kind of abstraction. I'd like to explore why that is and what we can do about it.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/bootstrapping-mindset"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>The Idea of Lisp</title>
                   <guid isPermalink="false">http://www.lispcast.com/idea-of-lisp</guid>
                   <link>http://www.lispcast.com/idea-of-lisp</link>
@@ -129,20 +143,6 @@
                     My third rehearsal for my upcoming Clojure/conj talk.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/building-composable-abstractions-3"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Two rehearsals for my Clojure/conj talk</title>
-                  <guid isPermalink="false">http://www.lispcast.com/clojure-conj-rehearsal</guid>
-                  <link>http://www.lispcast.com/clojure-conj-rehearsal</link>
-                  <pubDate>Sun 06 Nov 2016 08:30:54 PM CST</pubDate>
-                  <description>
-                    My upcoming Clojure/conj talk is fast approaching. I recorded two rehearsals in two days. Watch them!
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-conj-rehearsal"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

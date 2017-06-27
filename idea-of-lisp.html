@@ -121,34 +121,34 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 </div>
 <p>He defines 5 primitive operations (<code>atom</code>, <code>eq</code>, <code>cons</code>, <code>car</code>, and <code>cdr</code>) along with a conditional expression. It also assumes the ability to define functions. And then he uses those to define <em>an entire programming language</em>, defined in itself. Let me say that again: John McCarthy wrote 6 easy things in machine code, then combined them to make a programming language. Before that, the only higher-level programming language was Fortran, which took <a href="https://books.google.com/books?id=I79N-8QTzjwC&amp;pg=PA226&amp;lpg=PA226&amp;source=bl&amp;ots=OW8aT_7WJd&amp;sig=GHvEmUF-UWUMwQDvvf_aPe-pW9g&amp;hl=en&amp;sa=X&amp;ved=0ahUKEwjVp538__HQAhXsyVQKHYxdCkkQ6AEIIjAC#v=onepage&amp;q&amp;f=false">18 man-years to develop</a>. Fortran was a big achievement, but Lisp was a big <em>idea</em>.</p>
 <p>Let's unpack this tremendous idea a bit:</p>
-<h2 id="the-bootstrapping-material-was-very-small.">The bootstrapping material was very small.</h2>
+<h3 id="the-bootstrapping-material-was-very-small.">The bootstrapping material was very small.</h3>
 <p>These 6 things give you lists of symbols which can be interpreted. They define a very small &quot;kernel&quot; which can be easily ported to other systems. It is a small &quot;fixed point&quot; of agreement. All other meaning can be defined in terms of them.</p>
-<h2 id="the-language-was-defined-in-terms-of-itself-as-an-interpreter.">The language was defined in terms of itself as an interpreter.</h2>
+<h3 id="the-language-was-defined-in-terms-of-itself-as-an-interpreter.">The language was defined in terms of itself as an interpreter.</h3>
 <p>This is a proof by construction that the language is <em>universal</em>. The idea of Turing Completeness actually has two parts. The first is that you can compute anything computable. That one is satisfied by just about all programming languages (Lisp included since it has recursive functions). However, the second part is much more special. Turing Machines can be seen as <em>universal</em> when they can interpret any other Turing Machine. Well, Lisp is defined as an interpreter in terms of itself from the get-go, just like a Universal Turing Machine. Lisp is a universal language because it can interpret its own code. While you can certainly write a JavaScript interpreter in JavaScript, none of the work is done for you.</p>
-<h2 id="the-meaning-of-expressions-in-the-language-is-defined-by-the-interpreter.">The meaning of expressions in the language is defined by the interpreter.</h2>
+<h3 id="the-meaning-of-expressions-in-the-language-is-defined-by-the-interpreter.">The meaning of expressions in the language is defined by the interpreter.</h3>
 <p>You could write your own interpreter that assigned different meanings to the expressions. This is Alan Kay's notion of &quot;late binding&quot;. Since we don't know much about how to program well, it would be a mistake to build in too many assumptions into the base of the language. So we want a system that will allow us to swap out the assumptions as we learn more without having to throw it all away.</p>
-<h2 id="the-expressions-are-written-in-data-structures-usable-in-the-language.">The expressions are written in data structures usable in the language.</h2>
+<h3 id="the-expressions-are-written-in-data-structures-usable-in-the-language.">The expressions are written in data structures usable in the language.</h3>
 <p>The expressions are written as recursive linked lists. The 5 primitives are all you need to walk these data structures and interpret them.</p>
 <p>Lispers have enjoyed working with this highly flexible &quot;kernel&quot;, though most Lisp systems make practical compromises, like compiling the expressions to machine code instead of interpreting it each time. Here are some of the features of Lisp that follow directly from the <em>Idea of Lisp</em>.</p>
-<h2 id="macros">Macros</h2>
+<h3 id="macros">Macros</h3>
 <p>Macros are functions that take code and return code. They are code transformers. They extend the expressiveness of the language and allow you to do computation at compile time.</p>
-<h2 id="data-driven-programming">Data-Driven Programming</h2>
+<h3 id="data-driven-programming">Data-Driven Programming</h3>
 <p>Lispers often write their own interpreters in Lisp for new languages they create. They re-enact the bootstrapping of Lisp for their own languages. These can be seen as Domain-Specific Languages.</p>
-<h2 id="programming-language-experimentation">Programming language experimentation</h2>
+<h3 id="programming-language-experimentation">Programming language experimentation</h3>
 <p>Because it was made to write its own interpreter, Lisp is great for experimenting with alternative semantics for languages.</p>
 <p>We're all too forgetful of the history of our field. The most significant languages in our industry are changed every so often. The new hot language will be gone in 15 years. But Lisp, the idea, endures. Its most promising incarnation at the moment is Clojure, which runs on the JVM and in JavaScript.</p>
 <p>However, the ideas of Lisp actually live on in your favorite language:</p>
-<h2 id="the-repl">The REPL</h2>
+<h3 id="the-repl">The REPL</h3>
 <p>REPL stands for Read-Eval-Print-Loop, which are the names of the four Lisp constructs that defined it. If your language has an interactive prompt where you can type in code and see it run, that comes from Lisp.</p>
 <h2 id="recursive-functions">Recursive functions</h2>
 <p>Computer Scientists in 1960 knew that recursive functions were possible, but they thought they would be too expensive. Fortran, the other major language at the time, did not have recursive functions back then. Now recursive functions are table stakes.</p>
-<h2 id="garbage-collection">Garbage collection</h2>
+<h3 id="garbage-collection">Garbage collection</h3>
 <p>Lisp was the first language with garbage collection, mainly because the language created a lot of temporary objects and it ran for a long time.</p>
-<h2 id="conditional-expressions">Conditional expressions</h2>
+<h3 id="conditional-expressions">Conditional expressions</h3>
 <p>Yes, John McCarthy invented the conditional expression. He lobbied the Algol committee to add them to Algol, from which most languages got them today.</p>
-<h2 id="multi-character-variable-names">Multi-character variable names</h2>
+<h3 id="multi-character-variable-names">Multi-character variable names</h3>
 <p>I mentioned this before, but it bears repeating: programmers were following math's lead and using one-letter variable names before McCarthy came along.</p>
-<h2 id="literal-data-structures">Literal data structures</h2>
+<h3 id="literal-data-structures">Literal data structures</h3>
 <p>Can you write arrays and maps directly with syntax in your language? Well, Lisp did that first using parens <code>()</code>.</p>
 <p>Here's the full quote from Alan Kay:</p>
 <blockquote>

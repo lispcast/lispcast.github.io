@@ -1,0 +1,273 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>The Idea of Lisp | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="How a programming language can be an idea.">
+    <meta name="twitter:title" content="The Idea of Lisp">
+
+    <meta property="og:title" content="The Idea of Lisp">
+    <meta property="og:description" content="How a programming language can be an idea.">
+
+    <meta name="description" content="How a programming language can be an idea.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/idea-of-lisp">
+            The Idea of Lisp
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          December 13, 2016
+        </div>
+
+        
+<p>Summary: <em>How a programming language can be an idea.</em></p>
+<p>LISP. It conjures up visions of a bygone age of computers the size of refrigerators, ALL CAPS CODE, and parentheses. Oh! so many parentheses! So why is Object-Oriented Programming's creator so enamored with <em>the idea</em> of Lisp? And what can he mean by a programming language being an idea anyway? Should I blame my Computer Science education for not teaching it to me?</p>
+<p>Lisp was first introduced to the world in a paper called <a href="https://www.brinckerhoff.org/clements/csc530-sp09/Readings/mccarthy-1960.pdf"><em>Recursive Functions of Symbolic Expressions and Their Interpretation by Machines, Part I</em></a>, written by John McCarthy. In it, McCarthy introduces many new ideas to programming. Among them are <em>conditional expressions</em> (that's right, <em>if/then/else</em>) and using more than one letter--sometimes even words and phrases--for variables (like they <em>still</em> do in math). Your favorite programming language owes those two features to John McCarthy. But there is an even deeper idea lurking in the definition of Lisp itself.</p>
+<div class="figure">
+<img src="https://cdn.slashgear.com/wp-content/uploads/2011/10/mccarthy.png" alt="John McCarthy" /><p class="caption">John McCarthy</p>
+</div>
+<p>He defines 5 primitive operations (<code>atom</code>, <code>eq</code>, <code>cons</code>, <code>car</code>, and <code>cdr</code>) along with a conditional expression. It also assumes the ability to define functions. And then he uses those to define <em>an entire programming language</em>, defined in itself. Let me say that again: John McCarthy wrote 6 easy things in machine code, then combined them to make a programming language. Before that, the only higher-level programming language was Fortran, which took <a href="https://books.google.com/books?id=I79N-8QTzjwC&amp;pg=PA226&amp;lpg=PA226&amp;source=bl&amp;ots=OW8aT_7WJd&amp;sig=GHvEmUF-UWUMwQDvvf_aPe-pW9g&amp;hl=en&amp;sa=X&amp;ved=0ahUKEwjVp538__HQAhXsyVQKHYxdCkkQ6AEIIjAC#v=onepage&amp;q&amp;f=false">18 man-years to develop</a>. Fortran was a big achievement, but Lisp was a big <em>idea</em>.</p>
+<p>Let's unpack this tremendous idea a bit:</p>
+<h2 id="the-bootstrapping-material-was-very-small.">The bootstrapping material was very small.</h2>
+<p>These 6 things give you lists of symbols which can be interpreted. They define a very small &quot;kernel&quot; which can be easily ported to other systems. It is a small &quot;fixed point&quot; of agreement. All other meaning can be defined in terms of them.</p>
+<h2 id="the-language-was-defined-in-terms-of-itself-as-an-interpreter.">The language was defined in terms of itself as an interpreter.</h2>
+<p>This is a proof by construction that the language is <em>universal</em>. The idea of Turing Completeness actually has two parts. The first is that you can compute anything computable. That one is satisfied by just about all programming languages (Lisp included since it has recursive functions). However, the second part is much more special. Turing Machines can be seen as <em>universal</em> when they can interpret any other Turing Machine. Well, Lisp is defined as an interpreter in terms of itself from the get-go, just like a Universal Turing Machine. Lisp is a universal language because it can interpret its own code. While you can certainly write a JavaScript interpreter in JavaScript, none of the work is done for you.</p>
+<h2 id="the-meaning-of-expressions-in-the-language-is-defined-by-the-interpreter.">The meaning of expressions in the language is defined by the interpreter.</h2>
+<p>You could write your own interpreter that assigned different meanings to the expressions. This is Alan Kay's notion of &quot;late binding&quot;. Since we don't know much about how to program well, it would be a mistake to build in too many assumptions into the base of the language. So we want a system that will allow us to swap out the assumptions as we learn more without having to throw it all away.</p>
+<h2 id="the-expressions-are-written-in-data-structures-usable-in-the-language.">The expressions are written in data structures usable in the language.</h2>
+<p>The expressions are written as recursive linked lists. The 5 primitives are all you need to walk these data structures and interpret them.</p>
+<p>Lispers have enjoyed working with this highly flexible &quot;kernel&quot;, though most Lisp systems make practical compromises, like compiling the expressions to machine code instead of interpreting it each time. Here are some of the features of Lisp that follow directly from the <em>Idea of Lisp</em>.</p>
+<h2 id="macros">Macros</h2>
+<p>Macros are functions that take code and return code. They are code transformers. They extend the expressiveness of the language and allow you to do computation at compile time.</p>
+<h2 id="data-driven-programming">Data-Driven Programming</h2>
+<p>Lispers often write their own interpreters in Lisp for new languages they create. They re-enact the bootstrapping of Lisp for their own languages. These can be seen as Domain-Specific Languages.</p>
+<h2 id="programming-language-experimentation">Programming language experimentation</h2>
+<p>Because it was made to write its own interpreter, Lisp is great for experimenting with alternative semantics for languages.</p>
+<p>We're all too forgetful of the history of our field. The most significant languages in our industry are changed every so often. The new hot language will be gone in 15 years. But Lisp, the idea, endures. Its most promising incarnation at the moment is Clojure, which runs on the JVM and in JavaScript.</p>
+<p>However, the ideas of Lisp actually live on in your favorite language:</p>
+<h2 id="the-repl">The REPL</h2>
+<p>REPL stands for Read-Eval-Print-Loop, which are the names of the four Lisp constructs that defined it. If your language has an interactive prompt where you can type in code and see it run, that comes from Lisp.</p>
+<h2 id="recursive-functions">Recursive functions</h2>
+<p>Computer Scientists in 1960 knew that recursive functions were possible, but they thought they would be too expensive. Fortran, the other major language at the time, did not have recursive functions back then. Now recursive functions are table stakes.</p>
+<h2 id="garbage-collection">Garbage collection</h2>
+<p>Lisp was the first language with garbage collection, mainly because the language created a lot of temporary objects and it ran for a long time.</p>
+<h2 id="conditional-expressions">Conditional expressions</h2>
+<p>Yes, John McCarthy invented the conditional expression. He lobbied the Algol committee to add them to Algol, from which most languages got them today.</p>
+<h2 id="multi-character-variable-names">Multi-character variable names</h2>
+<p>I mentioned this before, but it bears repeating: programmers were following math's lead and using one-letter variable names before McCarthy came along.</p>
+<h2 id="literal-data-structures">Literal data structures</h2>
+<p>Can you write arrays and maps directly with syntax in your language? Well, Lisp did that first using parens <code>()</code>.</p>
+<p>Here's the full quote from Alan Kay:</p>
+<blockquote>
+<p>Most people who graduate with CS degrees don’t understand the significance of Lisp. Lisp is the most important idea in computer science.</p>
+</blockquote>
+<p>I didn't graduate with that significance. It took a lot of reading and exploration after university to feel like I had a proper education in Computer Science. I try to share what I'm learning in <a href="https://purelyfunctional.tv/newsletter">my newsletter</a>. The more I read and learn, the more fascinated I am by the depth and breadth of what was done over forty years ago.</p>
+<p>If you're interested in the big ideas in Computer Science, the history of programming, or Lisp, you should check out the <a href="https://purelyfunctional.tv/newsletter">PurelyFunctional.tv Newsletter</a>. It's a weekly romp through the history, present, and future of Lisp and functional programming.</p>
+<div class="article-cg-box">
+  <h3>
+You may like the PurelyFunctional.tv Newsletter
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to functional programmers, get the free PurelyFunctional.tv Newsletter.
+</p>
+
+<p><a href="https://purelyfunctional.tv/newsletter/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The PurelyFunctional.tv Newsletter shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/infinite-application">Infinite Application</a></li>
+<li><a href="http://www.lispcast.com/just-hack-something-together">Just Hack Something Together</a></li>
+<li><a href="http://www.lispcast.com/the-most-important-idea-in-computer-science">The Most Important Idea in Computer Science</a></li>
+<li><a href="http://www.lispcast.com/a-personal-lisp-crisis">A Personal Lisp Crisis</a></li>
+</ul>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/building-composable-abstractions-3">
+        previous
+      </a>
+      <a class="footer-next"
+         href="http://www.lispcast.com/defn-podcast-transcript">
+        next
+      </a>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+      _dcq.push(['track', 'Page visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

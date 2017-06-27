@@ -104,6 +104,46 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="http://www.haskell.org/ghc/docs/7.6.1/html/users_guide/defer-type-errors.html">
+            Deferring Type Errors to Runtime
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/deferring-type-errors-to-runtime">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 07, 2012
+        </div>
+
+        
+<p>Haskell just got a whole lot more useful for prototyping. One of my biggest gripes with Haskell was how much code had to be changed if a single type was altered<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>, since the compiler was always looking for consistent types. There were ways to work around it<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>, but they were always tedious and unsatisfactory.</p>
+<p>This new development in 7.6 lets you compile and run the code, changing type signatures many times, before you have to propagate the change through the rest of the code.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This is the classical definition of tight coupling. That's right: static typing introduces coupling.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>How to do it? Never change a type signature. Instead, create a new name with the same value, and modify that. Then, when it has settled into its permanent type signature, rename it to the old name, recompile, and let the error messages guide you.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="https://github.com/manuel/wat-js">
             Wat
           </a>
@@ -439,38 +479,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <blockquote>
 <p>Clojure now has a true double click experience for getting started.</p>
 </blockquote>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.infoq.com/presentations/gosling-jvm-lang-summit-keynote">
-            How The JVM Spec Came To Be
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/how-the-jvm-spec-came-to-be">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 17, 2012
-        </div>
-
-        
-<p>James Gosling speaking about what influenced the JVM. Fascinating. The world was a different place, then. And the amount of optimization that the JVM does is truly impressive.</p>
 
 
         <div class="endmark">

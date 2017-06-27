@@ -107,6 +107,20 @@
 
 
                 <item>
+                  <title>The Idea of Lisp</title>
+                  <guid isPermalink="false">http://www.lispcast.com/idea-of-lisp</guid>
+                  <link>http://www.lispcast.com/idea-of-lisp</link>
+                  <pubDate>Tue 13 Dec 2016 06:41:42 AM CDT</pubDate>
+                  <description>
+                    How a programming language can be an idea.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/idea-of-lisp"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Building Composable Abstractions Rehearsal 3</title>
                   <guid isPermalink="false">http://www.lispcast.com/building-composable-abstractions-3</guid>
                   <link>http://www.lispcast.com/building-composable-abstractions-3</link>
@@ -129,20 +143,6 @@
                     My upcoming Clojure/conj talk is fast approaching. I recorded two rehearsals in two days. Watch them!
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/clojure-conj-rehearsal"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>New Orleans Clojure Workshop Retrospective</title>
-                  <guid isPermalink="false">http://www.lispcast.com/new-orleans-clojure-workshop-oct-2016</guid>
-                  <link>http://www.lispcast.com/new-orleans-clojure-workshop-oct-2016</link>
-                  <pubDate>Sun 23 Oct 2016 08:46:35 PM CDT</pubDate>
-                  <description>
-                    We organized a Clojure workshop. Here's what went right and what we should do next time.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/new-orleans-clojure-workshop-oct-2016"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

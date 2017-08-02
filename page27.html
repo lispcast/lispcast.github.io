@@ -103,6 +103,43 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
+             href="https://vimeo.com/45136212">
+            The Datomic Architecture and Data Model
+          </a>
+          <a class="loguito"
+             href="http://www.lispcast.com/the-datomic-architecture-and-data-model">
+            <img class="lambda-loguito"
+                 src="/img/dot.png" />
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          September 20, 2012
+        </div>
+
+        
+<p>Rich Hickey:</p>
+<blockquote>
+<p>This is not a schema<em>less</em> system. There's no such thing as a schema<em>less</em> system. There are systems where you write your schema down and ones where you don't. There's no such thing as a schemaless database. So we do require you to be explicit about this part of your database.</p>
+</blockquote>
+<p>The issue is not whether a database needs an explicit schema. The issue is whether the language you write down your schema in can express the data model you would like to use.</p>
+<p>That said, the <a href="http://docs.datomic.com/schema.html">Datomic schemas</a>, along with the &quot;datom&quot; model, do look expressive.</p>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
              href="http://www.infoq.com/presentations/The-DCI-Architecture">
             The DCI Architecture: Lean and Agile at the Code Level
           </a>
@@ -470,55 +507,6 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <li>Middleware for working around browser limitations.</li>
 </ul>
 <p>Please check out <a href="https://github.com/ericnormand/playnice"><code>playnice</code></a> if you need an HTTP compliant web server.</p>
-
-
-        <div class="endmark">
-          <a class="endmark-link"
-             href="/">
-            <img class="endmark-lambda"
-                 src="/img/dot.png" />
-          </a>
-        </div>
-
-      </article>
-
-
-      <article class="article">
-        <h2 class="article-title-wrapper">
-          <a class="article-title"
-             href="http://www.free-variable.org/2012/08/i-remember-the-time-before-monads/">
-            I remember the time before monads
-          </a>
-          <a class="loguito"
-             href="http://www.lispcast.com/I-remember-the-time-before-monads">
-            <img class="lambda-loguito"
-                 src="/img/dot.png" />
-          </a>
-        </h2>
-
-        <div class="timestamp">
-          August 17, 2012
-        </div>
-
-        
-<p>Paul Callaghan:</p>
-<blockquote>
-<p>Callaghan’s 1st Law: the need for mutable state in a language is inversely proportional to its flexibility in manipulating data</p>
-<p>Put another way, mutable state is a lower-level idea and becomes less important when your language supports higher-level ways of working.</p>
-</blockquote>
-<p>Agreed.</p>
-<blockquote>
-<p>Experienced Haskell programmers know that the type system is a tool for getting work done, and a great language for playing with designs, and they exploit these aspects to help them get their work done.</p>
-</blockquote>
-<p>The key word in the sentence above is &quot;Experienced&quot;. It does take a long time to begin using the type system to your advantage.</p>
-<blockquote>
-<p>It was however a time of exploration, when researchers explored various ideas to find a good way of both having our cake and eating it. Monads are one of the solutions they found, and essentially gave us a small but flexible API for working with “computations” (like IO operations or state modifications, or various combinations thereof) as opposed to simple data values, and did so elegantly <em>within</em> the standard langage (ie. no ad hoc extensions needed). It got even better when syntactic sugar was added.</p>
-</blockquote>
-<p>Nice history lesson.</p>
-<p>The piece ends with some good advice:</p>
-<blockquote>
-<p>As a new explorer (very warm welcome, by the way!), when you look at Haskell material you may see some very unusual or scary-looking stuff. But do bear in mind that a lot of it is just playing around with abstractions on top of the core language, and probably does translate to something more intelligible. Try to work out what is being said about the data being manipulated, and then it might not look so bad.</p>
-</blockquote>
 
 
         <div class="endmark">

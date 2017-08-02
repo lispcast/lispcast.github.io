@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>Object-Oriented Programming is the Dual of Functional Programming | LispCast</title>
+    <title>Can I do FP in my language? | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="Object-Oriented Programming is often shown in contrast to Functional Programming. But they are so exactly opposite that they are duals, and so equivalent in important ways. Which one to use should be left up to the programmer, as is done in Clojure and Javascript.">
-    <meta name="twitter:title" content="Object-Oriented Programming is the Dual of Functional Programming">
+    <meta name="twitter:description" content="We address the question directly, but then look deeper to the beliefs behind the question.">
+    <meta name="twitter:title" content="Can I do FP in my language?">
 
-    <meta property="og:title" content="Object-Oriented Programming is the Dual of Functional Programming">
-    <meta property="og:description" content="Object-Oriented Programming is often shown in contrast to Functional Programming. But they are so exactly opposite that they are duals, and so equivalent in important ways. Which one to use should be left up to the programmer, as is done in Clojure and Javascript.">
+    <meta property="og:title" content="Can I do FP in my language?">
+    <meta property="og:description" content="We address the question directly, but then look deeper to the beliefs behind the question.">
 
-    <meta name="description" content="Object-Oriented Programming is often shown in contrast to Functional Programming. But they are so exactly opposite that they are duals, and so equivalent in important ways. Which one to use should be left up to the programmer, as is done in Clojure and Javascript.">
+    <meta name="description" content="We address the question directly, but then look deeper to the beliefs behind the question.">
 
     <meta name="author" content="Eric Normand">
 
@@ -103,51 +103,30 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
       <article class="article">
         <h2 class="article-title-wrapper">
           <a class="article-title"
-             href="/object-oriented-vs-functional-duals">
-            Object-Oriented Programming is the Dual of Functional Programming
+             href="/fp-in-my-language">
+            Can I do FP in my language?
           </a>
         </h2>
 
         <div class="timestamp">
-          February 08, 2015
+          August 02, 2017
         </div>
 
         
-<p>Summary: <em>Object-Oriented Programming is often shown in contrast to Functional Programming. But they are so exactly opposite that they are duals, and so equivalent in important ways. Which one to use should be left up to the programmer, as is done in Clojure and Javascript.</em></p>
-<p>Let's take a quick look at programming from an interesting perspective. Let's say that programs are divided into <em>code</em> and <em>data</em>. <sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> <strong>These are the two main axes</strong>: structuring code and structuring data.</p>
-<p>Now, let's design a language. First decisions: <strong>which axis is primary, which is secondary</strong>?</p>
-<center>
-
-<table>
-<thead>
-<tr class="header">
-<th align="left">Style</th>
-<th align="left">Data</th>
-<th align="left">Code</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">OOP</td>
-<td align="left">Primary</td>
-<td align="left">Secondary</td>
-</tr>
-<tr class="even">
-<td align="left">FP</td>
-<td align="left">Secondary</td>
-<td align="left">Primary</td>
-</tr>
-</tbody>
-</table>
-</center>
-
-<p>In an OOP-style approach, we have <strong>a pointer to an object which is the <em>data</em></strong>. And the data also tells you where the <em>code</em> is to access it (methods in the vtable). An FP-style approach will make <strong>functions (<em>code</em>) primary</strong>, with <em>data</em> referred to by the closures (the captured lexical environment).</p>
-<p>I'm positive I'm not the first person to remark on this, but I think it's pretty cool that <strong>they are duals of each other</strong>. <strong>A simple transformation will switch one in the table with the other.</strong></p>
-<p>Perhaps the next obvious question is &quot;which one is better?&quot;. Many arguments about OOP vs FP focus on this choice, about which axis should be primary. Because a compiler could easily transform between them, the decision is not quite so important as we might think at first. I think that <strong>a language should make both available and let the programmer choose</strong>. The programmer is then free to choose whichever best models the problem.</p>
-<p>For instance, in Clojure, fns are closures, so they are really FP-style -- code meant to be executed which happens to refer to some data. But collections are data which refer to code which knows how to access the data. <strong>Both coexist quite cooperatively.</strong></p>
-<p>And <strong>Clojure gives you, the programmer, ways of expressing both styles</strong>. When you want to create some code to be executed, <code>fn</code> lets you define lexical closures. But sometimes you want to make a new data structure which acts like others. For instance, a new type of sequence. <code>deftype</code> lets you define data with interface and protocol implementations. I use both <code>fn</code> and <code>deftype</code> very often.</p>
-<p>Interestingly, <strong>Javascript gives you these two options as well.</strong> <code>function</code> defines lexical closures, making code primary. But very often you define an object which contains (or refers to) data and secondary accessor functions. It's one of the nicer things about Javascript, included in <a href="http://www.amazon.com/dp/0596517742">Javascript, the Good Parts</a>.</p>
-<p><strong>How does your language prioritize these two axes?</strong> Is there a way to choose which to use to best implement your design? If you're interested in this kind of topic, you would probably enjoy the <a href="http://www.clojuregazette.com/">Clojure Gazette</a>. It's a weekly newsletter filled with content to inspire Clojure programmers. It's completely free and it's easy to unsubscribe.</p>
+<p>Summary: <em>We address the question directly, but then look deeper to the beliefs behind the question.</em></p>
+<p>A very common question I get from experienced programmers is &quot;What does an FP language give me that I don't already have? Can't I just do FP in my language?&quot; This is a great question and I hope I have an equally great answer.</p>
+<p>I really sympathize with this question. JavaScript has <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>map</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><code>filter</code></a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce"><code>reduce</code></a>. Java 8 has the <a href="http://www.oracle.com/technetwork/articles/java/ma14-java-se-8-streams-2177646.html">stream library</a>. It seems like every language is adding more and more functional features, including immutable data structures, first-class functions, function composition, destructuring, and sophisticated type systems.</p>
+<p>And I agree: <strong>You <em>can</em> do Functional Programming in any language.</strong></p>
+<p>Functional Programming is just another paradigm. So just like you can do Procedural Programming in any language, or you can do Object Oriented Programming in any language, or Logic Programming in any language, you can do Functional Programming in any language.</p>
+<p>But wait. That answers the question, but does it answer the deeper assumptions <em>behind</em> the question?</p>
+<p>So let me ask you this: can I do OOP in C? According to my statement above, the answer is &quot;yes&quot;. In fact, I've built small object systems in C before. So why would I need an OO language if I can do it in C? I feel like my object system gave me all of the advantages I needed to do OOP. But here's the thing: could I have programmed OOP in C without already knowing OOP? I don't think so.</p>
+<p>These paradigms are called <em>paradigms</em> because they are wholistic perspectives about how to approach problems. OOP breaks problems into objects that communicate with messages. FP breaks problems down into data that represents the state of the process being modeled. Procedural breaks a problem into a series of steps that can solve the problem. Each paradigm has a different approach to solving problems. By &quot;doing FP in Java&quot; without already mastering FP, you're implying that FP isn't a paradigm, it's just a set of features (immutable data, pure functions, function composition, etc).</p>
+<p>I've seen it many times. People say they're doing FP in JavaScript. What they mean is they sprinkle <code>reduce</code> and <code>map</code> around and they use some pure functions. There's a lot of value in that. But otherwise their code is procedural. They have not learned the paradigm, only the features.</p>
+<p>The value of a language that strongly enforces a paradigm is that it immerses you in that approach to solving problems. The more it enforces the paradigm, the more you are forced to attempt solutions using that paradigm. The more functional your language, the more training you get in approaching problems in a functional way. The same goes for OOP and Procedural. In essence, you get more practice because you can't rely on the other paradigms you already know.</p>
+<p>So let me say this, more controversial statement: outside of languages labeled <em>functional</em> (Clojure, Haskell, Elm, Scala, Erlang, etc.), I don't see much depth in the functional programming being done. Unless they're already familiar with functional programming by working for a long time in a functional language, programmers are borrowing only little bits of the FP paradigm and missing the best part, which is the change in perspective on approaching problems.</p>
+<p>That's not to say it's not possible to learn real FP in JavaScript. But it will take lots of discipline and <a href="https://github.com/stoeffel/awesome-fp-js">help</a>. The language won't guide you. You'll need to guide yourself or find someone who will guide you.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>All of the paradigms are great because a <a href="https://www.folklore.org/StoryView.py?project=Macintosh&amp;story=Creative_Think.txt">&quot;point of view is worth 80 IQ points&quot;</a>. You can do any paradigm in any language. But it is very hard to learn a paradigm without immersing yourself. And it's hard to immerse yourself in a paradigm without using a language that strongly encourages the paradigm. Until you do that, you might be borrowing features of the paradigm, but you're not approaching the problem in a new way. In short, Functional Programming is not a set of features. If you want to learn it, jump in the deep end and be immersed.</p>
 <div class="article-cg-box">
   <h3>
 You may like the PurelyFunctional.tv Newsletter
@@ -168,19 +147,14 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 
 
 
+
 <h3 id="you-might-also-like">You might also like</h3>
 <ul>
 <li><a href="http://www.lispcast.com/composable-parts">Composable parts</a></li>
-<li><a href="http://www.lispcast.com/fp-in-my-language">Can I do FP in my language?</a></li>
 <li><a href="http://www.lispcast.com/global-mutable-state">Global Mutable State</a></li>
 <li><a href="http://www.lispcast.com/imperative-mindset">How to Switch from the Imperative Mindset</a></li>
+<li><a href="http://www.lispcast.com/more-layers">How can more layers be more efficient?</a></li>
 </ul>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>I don't want to go down the code-is-data rabbit hole. Let's stick to one floor in the tower of languages model.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
 
 
         <div class="endmark">
@@ -202,12 +176,8 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
 
     <footer class="footer-banner">
       <a class="footer-previous"
-         href="http://www.lispcast.com/clojure-gazette-looking-forward-2015">
+         href="http://www.lispcast.com/refactor-bottom">
         previous
-      </a>
-      <a class="footer-next"
-         href="http://www.lispcast.com/parts-of-ring">
-        next
       </a>
     </footer>
 

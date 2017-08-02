@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Can I do FP in my language?</title>
+                  <guid isPermalink="false">http://www.lispcast.com/fp-in-my-language</guid>
+                  <link>http://www.lispcast.com/fp-in-my-language</link>
+                  <pubDate>Tue 02 Aug 2017 02:24:20 PM CDT</pubDate>
+                  <description>
+                    We address the question directly, but then look deeper to the beliefs behind the question.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/fp-in-my-language"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>When in doubt, refactor at the bottom</title>
                   <guid isPermalink="false">http://www.lispcast.com/refactor-bottom</guid>
                   <link>http://www.lispcast.com/refactor-bottom</link>
@@ -129,20 +143,6 @@
                     How a programming language can be an idea.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/idea-of-lisp"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>Building Composable Abstractions Rehearsal 3</title>
-                  <guid isPermalink="false">http://www.lispcast.com/building-composable-abstractions-3</guid>
-                  <link>http://www.lispcast.com/building-composable-abstractions-3</link>
-                  <pubDate>Sun 13 Nov 2016 03:36:36 PM CST</pubDate>
-                  <description>
-                    My third rehearsal for my upcoming Clojure/conj talk.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/building-composable-abstractions-3"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

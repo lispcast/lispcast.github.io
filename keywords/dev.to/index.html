@@ -11,17 +11,17 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <title>Can I do FP in my language? | LispCast</title>
+    <title>Keyword: dev.to | LispCast</title>
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@ericnormand">
     <meta name="twitter:creator" content="@ericnormand">
-    <meta name="twitter:description" content="We address the question directly, but then look deeper to the beliefs behind the question.">
-    <meta name="twitter:title" content="Can I do FP in my language?">
+    <meta name="twitter:description" content="A blog about the simple joys of functional programming.">
+    <meta name="twitter:title" content="Keyword: dev.to">
 
-    <meta property="og:title" content="Can I do FP in my language?">
-    <meta property="og:description" content="We address the question directly, but then look deeper to the beliefs behind the question.">
+    <meta property="og:title" content="Keyword: dev.to">
+    <meta property="og:description" content="A blog about the simple joys of functional programming.">
 
-    <meta name="description" content="We address the question directly, but then look deeper to the beliefs behind the question.">
+    <meta name="description" content="A blog about the simple joys of functional programming.">
 
     <meta name="author" content="Eric Normand">
 
@@ -112,50 +112,7 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
           August 02, 2017
         </div>
 
-        
-<p>Summary: <em>We address the question directly, but then look deeper to the beliefs behind the question.</em></p>
-<p>A very common question I get from experienced programmers is &quot;What does an FP language give me that I don't already have? Can't I just do FP in my language?&quot; This is a great question and I hope I have an equally great answer.</p>
-<p>I really sympathize with this question. JavaScript has <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>map</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><code>filter</code></a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce"><code>reduce</code></a>. Java 8 has the <a href="http://www.oracle.com/technetwork/articles/java/ma14-java-se-8-streams-2177646.html">stream library</a>. It seems like every language is adding more and more functional features, including immutable data structures, first-class functions, function composition, destructuring, and sophisticated type systems.</p>
-<p>And I agree: <strong>You <em>can</em> do Functional Programming in any language.</strong></p>
-<p>Functional Programming is just another paradigm. So just like you can do Procedural Programming in any language, or you can do Object Oriented Programming in any language, or Logic Programming in any language, you can do Functional Programming in any language.</p>
-<p>But wait. That answers the question, but does it answer the deeper assumptions <em>behind</em> the question?</p>
-<p>So let me ask you this: can I do OOP in C? According to my statement above, the answer is &quot;yes&quot;. In fact, I've built small object systems in C before. So why would I need an OO language if I can do it in C? I feel like my object system gave me all of the advantages I needed to do OOP. But here's the thing: could I have programmed OOP in C without already knowing OOP? I don't think so.</p>
-<p>These paradigms are called <em>paradigms</em> because they are wholistic perspectives about how to approach problems. OOP breaks problems into objects that communicate with messages. FP breaks problems down into data that represents the state of the process being modeled. Procedural breaks a problem into a series of steps that can solve the problem. Each paradigm has a different approach to solving problems. By &quot;doing FP in Java&quot; without already mastering FP, you're implying that FP isn't a paradigm, it's just a set of features (immutable data, pure functions, function composition, etc).</p>
-<p>I've seen it many times. People say they're doing FP in JavaScript. What they mean is they sprinkle <code>reduce</code> and <code>map</code> around and they use some pure functions. There's a lot of value in that. But otherwise their code is procedural. They have not learned the paradigm, only the features.</p>
-<p>The value of a language that strongly enforces a paradigm is that it immerses you in that approach to solving problems. The more it enforces the paradigm, the more you are forced to attempt solutions using that paradigm. The more functional your language, the more training you get in approaching problems in a functional way. The same goes for OOP and Procedural. In essence, you get more practice because you can't rely on the other paradigms you already know.</p>
-<p>So let me say this, more controversial statement: outside of languages labeled <em>functional</em> (Clojure, Haskell, Elm, Scala, Erlang, etc.), I don't see much depth in the functional programming being done. Unless they're already familiar with functional programming by working for a long time in a functional language, programmers are borrowing only little bits of the FP paradigm and missing the best part, which is the change in perspective on approaching problems.</p>
-<p>That's not to say it's not possible to learn real FP in JavaScript. But it will take lots of discipline and <a href="https://github.com/stoeffel/awesome-fp-js">help</a>. The language won't guide you. You'll need to guide yourself or find someone who will guide you.</p>
-<h2 id="conclusions">Conclusions</h2>
-<p>All of the paradigms are great because a <a href="https://www.folklore.org/StoryView.py?project=Macintosh&amp;story=Creative_Think.txt">&quot;point of view is worth 80 IQ points&quot;</a>. You can do any paradigm in any language. But it is very hard to learn a paradigm without immersing yourself. And it's hard to immerse yourself in a paradigm without using a language that strongly encourages the paradigm. Until you do that, you might be borrowing features of the paradigm, but you're not approaching the problem in a new way. In short, Functional Programming is not a set of features. If you want to learn it, jump in the deep end and be immersed.</p>
-<div class="article-cg-box">
-  <h3>
-You may like the PurelyFunctional.tv Newsletter
-</h3>
-  <p class="article-cg-box-text">
-    
-For more inspiration, history, interviews, and trends of interest to functional programmers, get the free PurelyFunctional.tv Newsletter.
-</p>
-
-<p><a href="https://purelyfunctional.tv/newsletter/"
-     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
-
-<p>
-    
-Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The PurelyFunctional.tv Newsletter shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
-</p>
-</div>
-
-
-
-
-<h3 id="you-might-also-like">You might also like</h3>
-<ul>
-<li><a href="http://www.lispcast.com/composable-parts">Composable parts</a></li>
-<li><a href="http://www.lispcast.com/global-mutable-state">Global Mutable State</a></li>
-<li><a href="http://www.lispcast.com/hirable-in-clojure">What do I have to learn to be hirable in Clojure?</a></li>
-<li><a href="http://www.lispcast.com/imperative-mindset">How to Switch from the Imperative Mindset</a></li>
-</ul>
-
+        We address the question directly, but then look deeper to the beliefs behind the question.
 
         <div class="endmark">
           <a class="endmark-link"
@@ -175,10 +132,6 @@ Clojure pulls in ideas from many different languages and paradigms, and also fro
     </div>
 
     <footer class="footer-banner">
-      <a class="footer-previous"
-         href="http://www.lispcast.com/refactor-bottom">
-        previous
-      </a>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

@@ -121,36 +121,38 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <h2 id="what-is-a-programing-paradigm">What is a programing paradigm?</h2>
 <blockquote>
 <p>paradigm</p>
-<p>a philosophical and theoretical framework of a scientific school or discipline within which theories, laws, and generalizations and the experiments performed in support of them are formulated -- <a href="https://www.merriam-webster.com/dictionary/paradigm">Merriam-Webster</a></p>
+<p>a philosophical and theoretical framework of a scientific school or discipline within which theories, laws, and generalizations and the experiments performed in support of them are formulated</p>
+<p><a href="https://www.merriam-webster.com/dictionary/paradigm">Merriam-Webster</a></p>
 </blockquote>
 <blockquote>
 <p>paradigm</p>
 <ol style="list-style-type: lower-alpha">
 <li>a framework containing the basic assumptions, ways of thinking, and methodology that are commonly accepted by members of a scientific community.</li>
-<li>such a cognitive framework shared by members of any discipline or group: the company’s business paradigm. -- <a href="http://www.dictionary.com/browse/paradigm">Dictionary.com</a></li>
+<li>such a cognitive framework shared by members of any discipline or group: the company’s business paradigm.</li>
 </ol>
+<p><a href="http://www.dictionary.com/browse/paradigm">Dictionary.com</a></p>
 </blockquote>
 <p>Most of the time, programming paradigms are described in terms of their features or constraints. I think this is a useful perspective. Languages associated with a paradigm often share many features. For instance, functional languages typically have first-class functions.</p>
-<p>But there is a much better way to think of the paradigms that doesn't reduce it to a list of features. The way I see it, each of the major paradigms is a wholistic approach to solving problems with code. The paradigms are <em>frameworks containing basic assumptions, ways of thinking, and methodology</em>. To define a paradigm in terms of the features of a language (OO is encapsulation, FP is no state) is to ignore the definition of <em>paradigm</em> as a way of thinking. It is a totally mental thing, which is why <a href="http://www.lispcast.com/fp-in-my-language">you can program any paradigm in any language</a>.</p>
+<p>But there is a much better way to think of the paradigms that doesn't reduce them to lists of features. Each of the major paradigms is a wholistic approach to solving problems with code. The paradigms are <em>frameworks containing basic assumptions, ways of thinking, and methodology</em>. To define a paradigm in terms of the features of a language (OO is encapsulation, FP is no state) is to ignore the definition of <em>paradigm</em> as a way of thinking. It is a totally mental thing, which is why <a href="http://www.lispcast.com/fp-in-my-language">you can program any paradigm in any language</a>.</p>
 <p>I'd like to go through the three predominant paradigms (procedural, object-oriented, and functional) and describe both their features and their wholistic methodologies. Along the way, we'll explore why the definitions of the paradigms are so hard to define.</p>
-<h2 id="procedural-programming">Procedural Programming</h2>
+<h3 id="procedural-programming">Procedural Programming</h3>
 <p>Procedural Programming is a very solid programming paradigm that has proven its viability in industry. It doesn't get as much credit as it deserves these days.</p>
-<h3 id="the-features">The features</h3>
+<p><strong>The features</strong></p>
 <p>Procedural Programming is characterized by <em>statements</em> which each have an <em>effect</em>. For instance, the effect could be setting the value of a variable or it could be printing a line to the terminal. You often see procedural languages have <em>subroutines</em> (sometimes called functions) which contain other statements. Subroutines allow you to build your own effects from other effects, give them names, and call them like any another statement. You get reuse and abstraction.</p>
-<h3 id="the-methodology">The methodology</h3>
+<p><strong>The methodology</strong></p>
 <p>The Procedural Programming approach to solving problems with software is to treat any solution like a series of steps to be performed. Each step could actually be a complex subtask that includes many smaller steps. I really like the this approach to solving problems. It corresponds so well to a very common way of describing a solution: a list of steps to take to arrive at the solution.</p>
 <p>It's very much like the grade school exercises of describing in detail how to make a sandwich. It's a very complex procedure if you try to write it out. Let's assume you are only allowed to give instructions in terms of gross body movements like &quot;pick up&quot;, &quot;grasp&quot;, and &quot;turn your arm&quot;. You could painstakingly describe every action that you needed to perform to make a sandwich. In order to make it more tractable, you'd probably want to break down common actions as subroutines and name them appropriately. It's the only way to manage the number of steps.</p>
 <p>Many everyday solutions are given in terms of steps to accomplish. Recipes in cookbooks. Furniture assembly instructions. Directions to the library. Any How-To material. It's something we all are very familiar with.</p>
-<h3 id="the-paradox">The paradox</h3>
-<p>Another reason I like it is that the language features map so well to the paradigm. Statements in series (on subsequent lines) mean sequential steps. Subtasks are defined and named with subroutines. Repeating steps are done with loops. And that's basically it. Any other features of the language are just niceties on top.</p>
+<p><strong>The paradox</strong></p>
+<p>Another reason I like Procedural is that the language features map so well to the paradigm. Statements in series (on subsequent lines) mean sequential steps. Subtasks are defined and named with subroutines. Repeating steps are done with loops. And that's basically it. Any other features of the language are just niceties on top.</p>
 <p>And this close match between language features and metaphor is actually another feature. Tasks and subtasks match so well with statements and subroutines. You can teach the features and the paradigm in one go!</p>
 <p>There is such a correspondence between them that it can feel like there is no paradigm at all. And this is what I'll call the <em>Procedural Paradox</em>. When your language is so well-suited to the paradigm that you can't distinguish between them, you're winning, yet the paradigm is invisible. The Procedural Paradox gets us used to talking about features, not metaphors and thought processes. It becomes difficult to talk about paradigms that aren't as well-matched to the language.</p>
-<h2 id="object-oriented-programming">Object Oriented Programming</h2>
+<h3 id="object-oriented-programming">Object Oriented Programming</h3>
 <p>I really like Object Oriented Programming. I studied it a lot at University and I tinkered with different ways of setting up solutions to problems. I explored Design Patterns.</p>
 <p>After I got out of college, though, I started to read more about it. I came across the work of Alan Kay, the inventor of Object Oriented Programming. He talked about Object Oriented Programming in a way that none of my professors had. And I learned that Alan Kay does not consider Java to be Object Oriented. It was the language I used the most in my OO Design classes. That caused a deep rift in my soul that I've tried to mend since. If Java isn't OO, then what is?</p>
 <p>Of course the answer is Smalltalk. Apparently Smalltalk was so glamorous that other languages took on some of the features of Smalltalk to call themselves OO. Those languages became what people learned instead of Smalltalk. So now we refer to Java and C++ and others as Object Oriented, even though they're not.</p>
 <p>I've watched a lot of talks by Alan Kay. Some several times. I recommend them, though he's a deep thinker and doesn't lay it all out for you. I had to log many hours of Kay's talks to really start to understand what he was talking about. Well worth it, though. I'll make reference to his work because I think he's good at distinguishing the thought process from the features.</p>
-<h3 id="the-features-1">The features</h3>
+<p><strong>The features</strong></p>
 <p>Many people have tried to decipher what Alan Kay actually meant by the term OOP. Luckily, he pops up on the internet every now and then to answer questions like these. There's <a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en">an email where he lists the features of OO as he sees it</a>:</p>
 <ol style="list-style-type: decimal">
 <li>Message passing</li>
@@ -161,13 +163,13 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>Encapsulation is the idea that an object can maintain its own state and keep it internally consistent. The only way to read or change the state is by sending a message. Java actually does this as a feature.</p>
 <p>Message passing is interesting. A message sent must be received and decoded on the other side. I believe this features is absent in Java and many other OO languages. Methods in Java are little more than functions executed inside of the object's scope. There is no receipt of a message which must be interpreted. That interpretation step is very important because it allows different objects to interpret the message in different ways--not just the standard way objects typically interpret messages by looking them up in a <code>vtable</code>. For instance, it could have a <code>method missing</code> method that does something else. The message has to exist for this to work.</p>
 <p>So those are the features. What's the approach to solving problems?</p>
-<h3 id="the-methodology-1">The methodology</h3>
-<p>The approach to solving problems is a little harder to decipher. We have some clues, like that Java is not it. And I have watched a lot of talks and read everything I could from Kay. It turns out that <a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en">the email</a> has a lot of clues.</p>
+<p><strong>The methodology</strong></p>
+<p>The approach to solving problems is a little harder to decipher. We have some clues, like that Java is not it. And I have watched a lot of talks and read everything I could from Kay. It turns out that <a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en">the email</a> I mentioned before has a lot of clues.</p>
 <ol style="list-style-type: decimal">
 <li>Cells/network of computers</li>
 </ol>
 <p>When Alan Kay was trying to create a new programming system, he was inspired by cells in a body. The number of cells is huge. The number of faults is huge (cells die or misbehave all the time). Yet the organism is surprisingly resilient (though also not perfect). Cells in our body are self-contained and send chemical signals to each other. It's an interesting metaphor for both the size of the object (cells are tiny) and the scale we can achieve (trillions of cells). Likewise, another metaphor he brings up often is individual computers on a network. Each computer sends and receives messages.</p>
-<p>So we're looking at an approach to solving a problem which breaks the problem down into objects that send each other messages. If you wanted to find an analogue in the real world, you'd probably have to look to org charts or other diagrams of communication. For instance, the guest tells the waiter what she wants to eat. The waiter tells the cook. Then the cook tells the waiter when the food is ready, etc. Each of those steps is a message passed.</p>
+<p>So we're looking at an approach to solving a problem which breaks the problem down into objects that send each other messages. If you wanted to find an analogue in the real world, you'd probably have to look to org charts or other diagrams of communication. For instance, the restaurant guest tells the waiter what she wants to eat. The waiter tells the cook. Then the cook tells the waiter when the food is ready, etc. Each of those steps is a message passed.</p>
 <p>From <a href="http://worrydream.com/EarlyHistoryOfSmalltalk/"><em>The Early History of Smalltalk</em></a>:</p>
 <blockquote>
 <p>The last thing you wanted any programmer to do is mess with internal state even if presented figuratively. Instead, the objects should be presented as <em>sites of higher level behaviors more appropriate for use as dynamic components</em>.</p>
@@ -198,7 +200,7 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 </blockquote>
 <p>Perhaps aligning the features with the techniques will help programmers do &quot;real OOP&quot; more often and we can dispense with the arguments about OO Design. For instance, maybe we could call methods &quot;goals&quot; and interfaces &quot;algebras&quot;.</p>
 <h2 id="functional-programming">Functional Programming</h2>
-<h3 id="the-features-2">The features</h3>
+<h3 id="the-features">The features</h3>
 <p>The features of Functional Programming are easily apparent:</p>
 <ol style="list-style-type: decimal">
 <li>Immutable data</li>
@@ -208,7 +210,7 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <li>...</li>
 </ol>
 <p>Not all functional languages have all of these features, just like not all OOP languages have classes. They're just more commonly used in functional languages.</p>
-<h3 id="the-methodology-2">The methodology</h3>
+<h3 id="the-methodology">The methodology</h3>
 <p>The approach to problem solving is less mapped out. There have been many attempts and I will try my hand here. Whereas procedural programming expresses a solution as a series of steps, and OOP expresses a solution as communicating objects, Functional Programming expresses solutions as data, calculations, and effects.</p>
 <ol style="list-style-type: decimal">
 <li>Data</li>

@@ -1,0 +1,329 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Programming Paradigms and the Procedural Paradox | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="I break down two perspectives (their features and their methodology) for the three most common paradigms. I also explore why paradigms are so easy to argue about, and what we can do about it.">
+    <meta name="twitter:title" content="Programming Paradigms and the Procedural Paradox">
+
+    <meta property="og:title" content="Programming Paradigms and the Procedural Paradox">
+    <meta property="og:description" content="I break down two perspectives (their features and their methodology) for the three most common paradigms. I also explore why paradigms are so easy to argue about, and what we can do about it.">
+
+    <meta name="description" content="I break down two perspectives (their features and their methodology) for the three most common paradigms. I also explore why paradigms are so easy to argue about, and what we can do about it.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/procedural-paradox">
+            Programming Paradigms and the Procedural Paradox
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          August 23, 2017
+        </div>
+
+        
+<p>Summary: <em>I break down two perspectives (their features and their methodology) for the three most common paradigms. I also explore why paradigms are so easy to argue about, and what we can do about it.</em></p>
+<p>I'm a collector of perspectives. I think each perspective we have within reach is another option we have to solve problems. We should all learn as many as possible. Each one increases the number and quality of solutions we can create.</p>
+<p>Programming paradigms are different perspectives on solving a problem with software. Each of the paradigms is valuable. But they seem so hard to define. People will discuss endlessly what each paradigm means, trying to be inclusive of what they consider important and what they don't. To take an example, we get definitions of functional programming which are satisfying to the definer but not to everyone. And we get people pointing fingers, saying &quot;that's not <em>real</em> object-oriented programming&quot;. These discussions are unsatisfying because they rehash the same tired ideas and never reach any firm conclusions.</p>
+<p>I'd like to take a broader perspective and try to shed some light on why they are so hard to define. That might help me understand how to define them well.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p>[1]: For another perspective on the paradigms themselves, please read <a href="http://www.lispcast.com/paradigms-as-subtractive">Programming Paradigms and Expressive Power</a>.</p>
+<h2 id="what-is-a-programing-paradigm">What is a programing paradigm?</h2>
+<blockquote>
+<p>paradigm</p>
+<p>a philosophical and theoretical framework of a scientific school or discipline within which theories, laws, and generalizations and the experiments performed in support of them are formulated -- <a href="https://www.merriam-webster.com/dictionary/paradigm">Merriam-Webster</a></p>
+</blockquote>
+<blockquote>
+<p>paradigm</p>
+<ol style="list-style-type: lower-alpha">
+<li>a framework containing the basic assumptions, ways of thinking, and methodology that are commonly accepted by members of a scientific community.</li>
+<li>such a cognitive framework shared by members of any discipline or group: the company’s business paradigm. -- <a href="http://www.dictionary.com/browse/paradigm">Dictionary.com</a></li>
+</ol>
+</blockquote>
+<p>Most of the time, programming paradigms are described in terms of their features or constraints. I think this is a useful perspective. Languages associated with a paradigm often share many features. For instance, functional languages typically have first-class functions.</p>
+<p>But there is a much better way to think of the paradigms that doesn't reduce it to a list of features. The way I see it, each of the major paradigms is a wholistic approach to solving problems with code. The paradigms are <em>frameworks containing basic assumptions, ways of thinking, and methodology</em>. To define a paradigm in terms of the features of a language (OO is encapsulation, FP is no state) is to ignore the definition of <em>paradigm</em> as a way of thinking. It is a totally mental thing, which is why <a href="http://www.lispcast.com/fp-in-my-language">you can program any paradigm in any language</a>.</p>
+<p>I'd like to go through the three predominant paradigms (procedural, object-oriented, and functional) and describe both their features and their wholistic methodologies. Along the way, we'll explore why the definitions of the paradigms are so hard to define.</p>
+<h2 id="procedural-programming">Procedural Programming</h2>
+<p>Procedural Programming is a very solid programming paradigm that has proven its viability in industry. It doesn't get as much credit as it deserves these days.</p>
+<h3 id="the-features">The features</h3>
+<p>Procedural Programming is characterized by <em>statements</em> which each have an <em>effect</em>. For instance, the effect could be setting the value of a variable or it could be printing a line to the terminal. You often see procedural languages have <em>subroutines</em> (sometimes called functions) which contain other statements. Subroutines allow you to build your own effects from other effects, give them names, and call them like any another statement. You get reuse and abstraction.</p>
+<h3 id="the-methodology">The methodology</h3>
+<p>The Procedural Programming approach to solving problems with software is to treat any solution like a series of steps to be performed. Each step could actually be a complex subtask that includes many smaller steps. I really like the this approach to solving problems. It corresponds so well to a very common way of describing a solution: a list of steps to take to arrive at the solution.</p>
+<p>It's very much like the grade school exercises of describing in detail how to make a sandwich. It's a very complex procedure if you try to write it out. Let's assume you are only allowed to give instructions in terms of gross body movements like &quot;pick up&quot;, &quot;grasp&quot;, and &quot;turn your arm&quot;. You could painstakingly describe every action that you needed to perform to make a sandwich. In order to make it more tractable, you'd probably want to break down common actions as subroutines and name them appropriately. It's the only way to manage the number of steps.</p>
+<p>Many everyday solutions are given in terms of steps to accomplish. Recipes in cookbooks. Furniture assembly instructions. Directions to the library. Any How-To material. It's something we all are very familiar with.</p>
+<h3 id="the-paradox">The paradox</h3>
+<p>Another reason I like it is that the language features map so well to the paradigm. Statements in series (on subsequent lines) mean sequential steps. Subtasks are defined and named with subroutines. Repeating steps are done with loops. And that's basically it. Any other features of the language are just niceties on top.</p>
+<p>And this close match between language features and metaphor is actually another feature. Tasks and subtasks match so well with statements and subroutines. You can teach the features and the paradigm in one go!</p>
+<p>There is such a correspondence between them that it can feel like there is no paradigm at all. And this is what I'll call the <em>Procedural Paradox</em>. When your language is so well-suited to the paradigm that you can't distinguish between them, you're winning, yet the paradigm is invisible. The Procedural Paradox gets us used to talking about features, not metaphors and thought processes. It becomes difficult to talk about paradigms that aren't as well-matched to the language.</p>
+<h2 id="object-oriented-programming">Object Oriented Programming</h2>
+<p>I really like Object Oriented Programming. I studied it a lot at University and I tinkered with different ways of setting up solutions to problems. I explored Design Patterns.</p>
+<p>After I got out of college, though, I started to read more about it. I came across the work of Alan Kay, the inventor of Object Oriented Programming. He talked about Object Oriented Programming in a way that none of my professors had. And I learned that Alan Kay does not consider Java to be Object Oriented. It was the language I used the most in my OO Design classes. That caused a deep rift in my soul that I've tried to mend since. If Java isn't OO, then what is?</p>
+<p>Of course the answer is Smalltalk. Apparently Smalltalk was so glamorous that other languages took on some of the features of Smalltalk to call themselves OO. Those languages became what people learned instead of Smalltalk. So now we refer to Java and C++ and others as Object Oriented, even though they're not.</p>
+<p>I've watched a lot of talks by Alan Kay. Some several times. I recommend them, though he's a deep thinker and doesn't lay it all out for you. I had to log many hours of Kay's talks to really start to understand what he was talking about. Well worth it, though. I'll make reference to his work because I think he's good at distinguishing the thought process from the features.</p>
+<h3 id="the-features-1">The features</h3>
+<p>Many people have tried to decipher what Alan Kay actually meant by the term OOP. Luckily, he pops up on the internet every now and then to answer questions like these. There's <a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en">an email where he lists the features of OO as he sees it</a>:</p>
+<ol style="list-style-type: decimal">
+<li>Message passing</li>
+<li>Encapsulation of local state</li>
+<li>Late binding</li>
+</ol>
+<p>Late binding is easy to explain. A common compiler trick is to figure out exactly what instructions need to be called so you can optimize. So you do lookups as soon as possible, sometimes as soon as compile time. You might see a compiler building a table of all functions and their names. Then it might even inline those functions if it guesses it's faster code. For example, Java will inline method calls. Late binding means you can't do that. You have to wait till the message is received to look up the method definition, because it could change its meaning at any point.</p>
+<p>Encapsulation is the idea that an object can maintain its own state and keep it internally consistent. The only way to read or change the state is by sending a message. Java actually does this as a feature.</p>
+<p>Message passing is interesting. A message sent must be received and decoded on the other side. I believe this features is absent in Java and many other OO languages. Methods in Java are little more than functions executed inside of the object's scope. There is no receipt of a message which must be interpreted. That interpretation step is very important because it allows different objects to interpret the message in different ways--not just the standard way objects typically interpret messages by looking them up in a <code>vtable</code>. For instance, it could have a <code>method missing</code> method that does something else. The message has to exist for this to work.</p>
+<p>So those are the features. What's the approach to solving problems?</p>
+<h3 id="the-methodology-1">The methodology</h3>
+<p>The approach to solving problems is a little harder to decipher. We have some clues, like that Java is not it. And I have watched a lot of talks and read everything I could from Kay. It turns out that <a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en">the email</a> has a lot of clues.</p>
+<ol style="list-style-type: decimal">
+<li>Cells/network of computers</li>
+</ol>
+<p>When Alan Kay was trying to create a new programming system, he was inspired by cells in a body. The number of cells is huge. The number of faults is huge (cells die or misbehave all the time). Yet the organism is surprisingly resilient (though also not perfect). Cells in our body are self-contained and send chemical signals to each other. It's an interesting metaphor for both the size of the object (cells are tiny) and the scale we can achieve (trillions of cells). Likewise, another metaphor he brings up often is individual computers on a network. Each computer sends and receives messages.</p>
+<p>So we're looking at an approach to solving a problem which breaks the problem down into objects that send each other messages. If you wanted to find an analogue in the real world, you'd probably have to look to org charts or other diagrams of communication. For instance, the guest tells the waiter what she wants to eat. The waiter tells the cook. Then the cook tells the waiter when the food is ready, etc. Each of those steps is a message passed.</p>
+<p>From <a href="http://worrydream.com/EarlyHistoryOfSmalltalk/"><em>The Early History of Smalltalk</em></a>:</p>
+<blockquote>
+<p>The last thing you wanted any programmer to do is mess with internal state even if presented figuratively. Instead, the objects should be presented as <em>sites of higher level behaviors more appropriate for use as dynamic components</em>.</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Getting rid of data</li>
+</ol>
+<p>At the time Smalltalk was conceived, much of Computer Science and programming had to do with data structures. That basically meant algorithms for walking pointers and keeping things organized in memory. For instance, you would write a loop that traversed a linked list by following the <code>next</code> pointer. He saw the object as a way to avoid having to organize things so intricately. Objects managed their own, small states and knew how to access them.</p>
+<blockquote>
+<p>However, doing encapsulation right is a commitment not just to abstraction of state, but to eliminate state oriented metaphors from programming. -- <a href="http://worrydream.com/EarlyHistoryOfSmalltalk/"><em>The Early History of Smalltalk</em></a></p>
+</blockquote>
+<p>This idea of avoiding state-oriented metaphors is very reminiscent of the <a href="https://martinfowler.com/bliki/TellDontAsk.html">Tell-Don't-Ask</a> principle that we hear about a lot in the Ruby community.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Algebras</li>
+</ol>
+<p>Alan Kay had a degree in Mathematics. Very briefly, <a href="https://en.wikipedia.org/wiki/Universal_algebra#Basic_idea">an algebra</a> is a set of elements and the operations on those elements. So an object could belong to many such sets, and so belong to many algebras. Just as a simple example, a String could belong to the algebra of text and also the algebra of lists (of characters).</p>
+<h3 id="some-other-possible-interpretations">Some other possible interpretations</h3>
+<p>Many people refer to Object Oriented Programming as very intuitive because the world is made of objects. They talk about nouns (classes) and verbs (methods). This doesn't really work, though. Sure, the world is made of objects, but it doesn't solve any of the hard parts of programming. For instance, the supermarket is full of objects. There are cheeses and broccolis. And I can buy them and eat them. In fact, I'm in the super market. Do I call buy on myself (the subject of the verb) and make the object of the action the cheese? As in <code>self.buy(cheese)</code>? Or do I call <code>cheese.buy()</code> like so many do?</p>
+<p>All of that is to say that it's not quite as intuitive as people say. <em>To buy</em> is a verb, but it's a complex interaction involving more than the objects mentioned in the sentence &quot;Eric buys the cheese.&quot; For instance, there is no <em>to buy</em> without a <em>to sell</em>. Where's the <code>sell</code> method? Then we can always turn the verb into a noun. <em>To buy</em> becomes a <em>Purchase</em> and <em>to sell</em> becomes a <em>Sale</em>. The grade-school grammar notion of verb and noun might be a useful pedogogical crutch, but <a href="https://www.youtube.com/watch?v=cdAVWYw-dO0">it is not a valid paradigm</a>.</p>
+<p>It takes a lot of study to be able to turn &quot;Eric buys the cheese&quot; into a working OO solution. It's not as intuitive as people make it out to be. I would also like to point out that this idea contradicts the paradigm that Alan Kay himself described. If we call the <code>buy</code> method on <code>cheese</code>, then we're passing a cheese a buy message? In the real world, I can buy a cheese without ever sending it a message. Putting a <code>buy</code> method on cheese either contradicts the paradigm or it is unintuitive.</p>
+<p>In fact, if I had one beef with the OOP education I got, it was this faulty notion of message passing. We can model much of the world as messages passed. Checks are messages to the bank to transfer money. Pressing an elevator button sends a message to the elevator controller. But the cheese is not a message receiver. Neither is the broccoli. There are lots of messages passed when I shop, but these are rarely modeled in our analysis. It's always cheese object with a buy method. I learned this after many years of inquiry and I invite you to actually map out the messages in a supermarket. It's a good exercise in the message-passing perspective.</p>
+<h3 id="the-resolution">The resolution</h3>
+<p>Okay, having ranted a bit about that, I should say I really like the paradigm as espoused in Smalltalk and Alan Kay's work. And the torch is carried on, at least partially, by the Ruby community. But even there, it is touch-and-go. Why is that?</p>
+<p>I think the reason is the <em>Procedural Paradox</em>. The supporting features of the paradigm do not map well with the assumptions and thought processes of the paradigm. Sure, the features support that kind of thinking, but they don't correspond one-to-one. In procedural programming, the methodology of &quot;procedural abstraction&quot; (breaking a task into subtasks) corresponds so well with &quot;use more subroutines&quot;. However, no imperative in the OO methodology corresponds to a simple imperative to use the features. We need books to describe <a href="https://martinfowler.com/bliki/TellDontAsk.html">Tell-Don't-Ask</a>, <a href="https://martinfowler.com/bliki/CommandQuerySeparation.html">Command-Query-Separation</a>, and many of the Design Patterns.</p>
+<p>Alan Kay talks about some of these failings which were evident way back in 1993 in <a href="http://worrydream.com/EarlyHistoryOfSmalltalk/"><em>The Early History of Smalltalk</em></a>. What was clear was that just borrowing the features without the methodology was not going to get you Object Oriented Programming, though many people still call it that.</p>
+<blockquote>
+<p>Four techniques used together—persistent state, polymorphism, instantiation, and methods-as-goals for the object—account for much of the power. None of these require an &quot;object-oriented language&quot; to be employed—ALGOL 68 can almost be turned to this style—an OOPL merely focuses the designer's mind in a particular fruitful direction. -- <a href="http://worrydream.com/EarlyHistoryOfSmalltalk/"><em>The Early History of Smalltalk</em></a></p>
+</blockquote>
+<p>Perhaps aligning the features with the techniques will help programmers do &quot;real OOP&quot; more often and we can dispense with the arguments about OO Design. For instance, maybe we could call methods &quot;goals&quot; and interfaces &quot;algebras&quot;.</p>
+<h2 id="functional-programming">Functional Programming</h2>
+<h3 id="the-features-2">The features</h3>
+<p>The features of Functional Programming are easily apparent:</p>
+<ol style="list-style-type: decimal">
+<li>Immutable data</li>
+<li>First-class functions</li>
+<li>Lexical closures</li>
+<li>Pure functions</li>
+<li>...</li>
+</ol>
+<p>Not all functional languages have all of these features, just like not all OOP languages have classes. They're just more commonly used in functional languages.</p>
+<h3 id="the-methodology-2">The methodology</h3>
+<p>The approach to problem solving is less mapped out. There have been many attempts and I will try my hand here. Whereas procedural programming expresses a solution as a series of steps, and OOP expresses a solution as communicating objects, Functional Programming expresses solutions as data, calculations, and effects.</p>
+<ol style="list-style-type: decimal">
+<li>Data</li>
+</ol>
+<p>Data goes back to the very beginnings of writing where people would mark down how many cattle they traded. They would draw a picture or tie a knot for each head. The number was permanently recorded in the medium--hence we want data to be immutable.</p>
+<p>Data plays a similar role in computer programs. You record something, such as user input, or you fetch a stored record, say from the database, and it is passed around and used in calculations. Most programs use data in some way, but it is not explicitly called out in the paradigm like it is in Functional Programming.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Calculation</li>
+</ol>
+<p>Functional Programming makes a distinction between effectful operations and pure calculation. Calculations take data as input and return data as output. I like to think of them as &quot;thinking&quot; separated from &quot;acting&quot;. You can think about what you need in the store as you are shopping. Or you can take some time to calculate what you need before you go to the store.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Effects</li>
+</ol>
+<p>Effects are the reasons we run programs. We run programs for their effects, generally. That means we want to see something on the screen or send an email or do something in the world.</p>
+<p>By separating out these three ideas, we decompose a problem. For instance, serving up a web page may look something like this:</p>
+<pre><code>Query DB =&gt; Data =&gt; Render HTML =&gt; HTML =&gt; Send response
+  Effect    Data    Calculation    Data      Effect</code></pre>
+<p>Why separate things along these boundaries? Well, it's because of how they compose. For instance, two effects can be composed either in series (one after the other) or in parallel (same time), but the composed thing is a new effect. Let's write this very roughly as <code>Effect + Effect =&gt; Effect</code>.</p>
+<p>Two calculations can be composed in a similar way. I can take two functions and chain them in series (<code>function (x) { return f(g(x)); }</code>). Or I can run them both and return both answers (<code>function (x) { return [f(x), g(x)]; }</code>). In either case, I get a new calculation. <code>Calculation + Calculation =&gt; Calculation</code>.</p>
+<p>And, just to be complete, there are many ways to combine data (hashmaps, lists, tuples, etc.), but I always get data out. <code>Data + Data =&gt; Data</code>.</p>
+<p>The interesting thing is when we combine two things from different groups. I can compose a calculation, like uppercasing a string, with an effect, like printing. <code>function (s) { println(uppercase(s)); }</code>. In the FP paradigm, that would be seen as a new effect. So <code>Calculation + Effect =&gt; Effect</code>.</p>
+<p>Similarly, I could combine data with a calculation. This makes what's called a <em>closure</em>, which is just another kind of calculation. <code>Data + Calculation =&gt; Calculation</code>.</p>
+<p>Finally if I do a partial application, let's say I make a new thing that always prints (Effect) &quot;Hello&quot; (Data) (e.g., <code>function() { println(&quot;Hello&quot;); }</code>), that new thing would be an Effect, <code>Data + Effect =&gt; Effect</code>.</p>
+<p>But then it really gets fun ... because you can make everything first class. You can have effects in your data, calculations as arguments to other calculations, etc. A function is just data until you call it. And applying a function to complex data is akin to interpreting code in a language. Remember these ideas are all in your mind.</p>
+<p>And of course, if you can compose, you can decompose. Making code more functional usually involves separating out parts of your code along these three boundaries. Take an Effect and pull out some Calculation from it. Pull out some Data from your Calculation, etc.</p>
+<p><em>State</em> (a thing that varies with time) may deserve a place among those three. But as some people have said, you can always create State from Effects, so we'll just bundle it in there for now.</p>
+<h3 id="the-problems">The problems</h3>
+<p>One of the problems is that many functional languages lack a strict correspondence between language features and these three key concepts. For instance, in Clojure there really is no distinction between Calculations and Effects. We use <code>fn</code>s for both. Haskell does it the best with its <code>IO</code> type which marks a clear and useful line around what it considers an Effect.</p>
+<p>Notice that I can say something like &quot;separate this calculation from this effect&quot;.</p>
+<p>Another problem is that I can't find anyone else who breaks things down this way. People often talk about a lack of state or a lack of side-effects, but this is clearly not true. Functional programs are run for their side effects just like programs from other paradigms. Some people talk about programming with first-class functions, which hints at the idea of combining calculations, but that leaves out the other two ideas.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>I think I'm on to something here. We need to be aware of the difference between the features and the methodologies. When we argue, we need to be aware that it doesn't make much sense to argue about which features define a paradigm. The paradigm is mental and often hard to express, which is why we talk about &quot;real OOP&quot; and doing &quot;FP in my language&quot;.</p>
+<p>There is perhaps hope to break the curse of the Procedural Paradox. Can we make the languages better expressions of the paradigm? Or, more generally, what does starting with the paradigm tell us about how to design languages? There is no doubt that all of these paradigms are useful and that they are not mutually exclusive. They are simply different perspectives on the same thing--solving problems with code. The language and its features should be more clearly framed as support for expressing our thinking, regardless of paradigm.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>1<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+      _dcq.push(['track', 'Page visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>

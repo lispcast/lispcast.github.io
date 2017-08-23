@@ -119,12 +119,12 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>I'd like to take a broader perspective and try to shed some light on why they are so hard to define. That might help me understand how to define them well.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
 <h2 id="what-is-a-programing-paradigm">What is a programing paradigm?</h2>
 <blockquote>
-<p>paradigm</p>
+<p><em>paradigm</em></p>
 <p>a philosophical and theoretical framework of a scientific school or discipline within which theories, laws, and generalizations and the experiments performed in support of them are formulated</p>
 <p><a href="https://www.merriam-webster.com/dictionary/paradigm">Merriam-Webster</a></p>
 </blockquote>
 <blockquote>
-<p>paradigm</p>
+<p><em>paradigm</em></p>
 <ol style="list-style-type: lower-alpha">
 <li>a framework containing the basic assumptions, ways of thinking, and methodology that are commonly accepted by members of a scientific community.</li>
 <li>such a cognitive framework shared by members of any discipline or group: the company’s business paradigm.</li>
@@ -186,22 +186,18 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <li>Algebras</li>
 </ol>
 <p>Alan Kay had a degree in Mathematics. Very briefly, <a href="https://en.wikipedia.org/wiki/Universal_algebra#Basic_idea">an algebra</a> is a set of elements and the operations on those elements. So an object could belong to many such sets, and so belong to many algebras. Just as a simple example, a String could belong to the algebra of text and also the algebra of lists (of characters).</p>
-<h3 id="some-other-possible-interpretations">Some other possible interpretations</h3>
-<p>Many people refer to Object Oriented Programming as very intuitive because the world is made of objects. They talk about nouns (classes) and verbs (methods). This doesn't really work, though. Sure, the world is made of objects, but it doesn't solve any of the hard parts of programming. For instance, the supermarket is full of objects. There are cheeses and broccolis. And I can buy them and eat them. In fact, I'm in the super market. Do I call buy on myself (the subject of the verb) and make the object of the action the cheese? As in <code>self.buy(cheese)</code>? Or do I call <code>cheese.buy()</code> like so many do?</p>
-<p>All of that is to say that it's not quite as intuitive as people say. <em>To buy</em> is a verb, but it's a complex interaction involving more than the objects mentioned in the sentence &quot;Eric buys the cheese.&quot; For instance, there is no <em>to buy</em> without a <em>to sell</em>. Where's the <code>sell</code> method? Then we can always turn the verb into a noun. <em>To buy</em> becomes a <em>Purchase</em> and <em>to sell</em> becomes a <em>Sale</em>. The grade-school grammar notion of verb and noun might be a useful pedogogical crutch, but <a href="https://www.youtube.com/watch?v=cdAVWYw-dO0">it is not a valid paradigm</a>.</p>
-<p>It takes a lot of study to be able to turn &quot;Eric buys the cheese&quot; into a working OO solution. It's not as intuitive as people make it out to be. I would also like to point out that this idea contradicts the paradigm that Alan Kay himself described. If we call the <code>buy</code> method on <code>cheese</code>, then we're passing a cheese a buy message? In the real world, I can buy a cheese without ever sending it a message. Putting a <code>buy</code> method on cheese either contradicts the paradigm or it is unintuitive.</p>
-<p>In fact, if I had one beef with the OOP education I got, it was this faulty notion of message passing. We can model much of the world as messages passed. Checks are messages to the bank to transfer money. Pressing an elevator button sends a message to the elevator controller. But the cheese is not a message receiver. Neither is the broccoli. There are lots of messages passed when I shop, but these are rarely modeled in our analysis. It's always cheese object with a buy method. I learned this after many years of inquiry and I invite you to actually map out the messages in a supermarket. It's a good exercise in the message-passing perspective.</p>
-<h3 id="the-resolution">The resolution</h3>
-<p>Okay, having ranted a bit about that, I should say I really like the paradigm as espoused in Smalltalk and Alan Kay's work. And the torch is carried on, at least partially, by the Ruby community. But even there, it is touch-and-go. Why is that?</p>
-<p>I think the reason is the <em>Procedural Paradox</em>. The supporting features of the paradigm do not map well with the assumptions and thought processes of the paradigm. Sure, the features support that kind of thinking, but they don't correspond one-to-one. In procedural programming, the methodology of &quot;procedural abstraction&quot; (breaking a task into subtasks) corresponds so well with &quot;use more subroutines&quot;. However, no imperative in the OO methodology corresponds to a simple imperative to use the features. We need books to describe <a href="https://martinfowler.com/bliki/TellDontAsk.html">Tell-Don't-Ask</a>, <a href="https://martinfowler.com/bliki/CommandQuerySeparation.html">Command-Query-Separation</a>, and many of the Design Patterns.</p>
-<p>Alan Kay talks about some of these failings which were evident way back in 1993 in <a href="http://worrydream.com/EarlyHistoryOfSmalltalk/"><em>The Early History of Smalltalk</em></a>. What was clear was that just borrowing the features without the methodology was not going to get you Object Oriented Programming, though many people still call it that.</p>
+<p>Kay was trying to provide a means of expressing generic behaviors that objects could participate in. We see an attempt at this with Java-style interfaces. But a more sophisticated version is Ruby's pervasive Duck Typing.</p>
+<p><strong>The problem</strong></p>
+<p>I should say I really like the paradigm as espoused in Smalltalk and Alan Kay's work. The torch is carried on, at least partially, by the Ruby community. But even there, it is touch-and-go. Why is that?</p>
+<p>I think the reason is the <em>Procedural Paradox</em>. The supporting features of the paradigm do not map well with the assumptions and thought processes of the paradigm. Sure, the features support that kind of thinking, but they don't correspond one-to-one. In procedural programming, the methodology of &quot;procedural abstraction&quot; (breaking a task into subtasks) corresponds so well with &quot;use more subroutines&quot;. However, no imperative in the OO methodology corresponds to a simple imperative to use the features. I can't say &quot;use more late binding&quot; and expect more algebras to develop. In order to learn &quot;OO Design&quot;, we need books to describe <a href="https://martinfowler.com/bliki/TellDontAsk.html">Tell-Don't-Ask</a>, <a href="https://martinfowler.com/bliki/CommandQuerySeparation.html">Command-Query-Separation</a>, and many of the Design Patterns which explain how they map down to features of the paradigm.</p>
+<p>Alan Kay talks about some of these failings of OO, which were evident way back in 1993, in <a href="http://worrydream.com/EarlyHistoryOfSmalltalk/"><em>The Early History of Smalltalk</em></a>. What was clear was that just borrowing the features without the methodology was not going to get you Object Oriented Programming, though many people still call it that.</p>
 <blockquote>
 <p>Four techniques used together—persistent state, polymorphism, instantiation, and methods-as-goals for the object—account for much of the power. None of these require an &quot;object-oriented language&quot; to be employed—ALGOL 68 can almost be turned to this style—an OOPL merely focuses the designer's mind in a particular fruitful direction.</p>
 <p>-- <a href="http://worrydream.com/EarlyHistoryOfSmalltalk/"><em>The Early History of Smalltalk</em></a></p>
 </blockquote>
 <p>Perhaps aligning the features with the techniques will help programmers do &quot;real OOP&quot; more often and we can dispense with the arguments about OO Design. For instance, maybe we could call methods &quot;goals&quot; and interfaces &quot;algebras&quot;.</p>
-<h2 id="functional-programming">Functional Programming</h2>
-<h3 id="the-features">The features</h3>
+<h3 id="functional-programming">Functional Programming</h3>
+<p><strong>The features</strong></p>
 <p>The features of Functional Programming are easily apparent:</p>
 <ol style="list-style-type: decimal">
 <li>Immutable data</li>
@@ -211,7 +207,7 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <li>...</li>
 </ol>
 <p>Not all functional languages have all of these features, just like not all OOP languages have classes. They're just more commonly used in functional languages.</p>
-<h3 id="the-methodology">The methodology</h3>
+<p><strong>The methodology</strong></p>
 <p>The approach to problem solving is less mapped out. There have been many attempts and I will try my hand here. Whereas procedural programming expresses a solution as a series of steps, and OOP expresses a solution as communicating objects, Functional Programming expresses solutions as data, calculations, and effects.</p>
 <ol style="list-style-type: decimal">
 <li>Data</li>
@@ -234,17 +230,17 @@ src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
 <p>And, just to be complete, there are many ways to combine data (hashmaps, lists, tuples, etc.), but I always get data out. <code>Data + Data =&gt; Data</code>.</p>
 <p>The interesting thing is when we combine two things from different groups. I can compose a calculation, like uppercasing a string, with an effect, like printing. <code>function (s) { println(uppercase(s)); }</code>. In the FP paradigm, that would be seen as a new effect. So <code>Calculation + Effect =&gt; Effect</code>.</p>
 <p>Similarly, I could combine data with a calculation. This makes what's called a <em>closure</em>, which is just another kind of calculation. <code>Data + Calculation =&gt; Calculation</code>.</p>
-<p>Finally if I do a partial application, let's say I make a new thing that always prints (Effect) &quot;Hello&quot; (Data) (e.g., <code>function() { println(&quot;Hello&quot;); }</code>), that new thing would be an Effect, <code>Data + Effect =&gt; Effect</code>.</p>
+<p>If let's say I make a new thing that always prints (Effect) &quot;Hello&quot; (Data) (e.g., <code>function() { println(&quot;Hello&quot;); }</code>), that new thing would be an Effect, <code>Data + Effect =&gt; Effect</code>.</p>
+<p>These are just some examples of how things can compose.</p>
 <p>But then it really gets fun ... because you can make everything first class. You can have effects in your data, calculations as arguments to other calculations, etc. A function is just data until you call it. And applying a function to complex data is akin to interpreting code in a language. Remember these ideas are all in your mind.</p>
 <p>And of course, if you can compose, you can decompose. Making code more functional usually involves separating out parts of your code along these three boundaries. Take an Effect and pull out some Calculation from it. Pull out some Data from your Calculation, etc.</p>
 <p><em>State</em> (a thing that varies with time) may deserve a place among those three. But as some people have said, you can always create State from Effects, so we'll just bundle it in there for now.</p>
-<h3 id="the-problems">The problems</h3>
+<p><strong>The problems</strong></p>
 <p>One of the problems is that many functional languages lack a strict correspondence between language features and these three key concepts. For instance, in Clojure there really is no distinction between Calculations and Effects. We use <code>fn</code>s for both. Haskell does it the best with its <code>IO</code> type which marks a clear and useful line around what it considers an Effect.</p>
-<p>Notice that I can say something like &quot;separate this calculation from this effect&quot;.</p>
-<p>Another problem is that I can't find anyone else who breaks things down this way. People often talk about a lack of state or a lack of side-effects, but this is clearly not true. Functional programs are run for their side effects just like programs from other paradigms. Some people talk about programming with first-class functions, which hints at the idea of combining calculations, but that leaves out the other two ideas.</p>
-<h2 id="conclusions">Conclusions</h2>
-<p>I think I'm on to something here. We need to be aware of the difference between the features and the methodologies. When we argue, we need to be aware that it doesn't make much sense to argue about which features define a paradigm. The paradigm is mental and often hard to express, which is why we talk about &quot;real OOP&quot; and doing &quot;FP in my language&quot;.</p>
-<p>There is perhaps hope to break the curse of the Procedural Paradox. Can we make the languages better expressions of the paradigm? Or, more generally, what does starting with the paradigm tell us about how to design languages? There is no doubt that all of these paradigms are useful and that they are not mutually exclusive. They are simply different perspectives on the same thing--solving problems with code. The language and its features should be more clearly framed as support for expressing our thinking, regardless of paradigm.</p>
+<p>Another problem is that I can't find anyone else who breaks things down this way. People often talk about a lack of state or a lack of side-effects, but this is clearly not what defines FP. Functional programs are run for their side effects just like programs from other paradigms. Some people talk about programming with first-class functions, which hints at the idea of combining calculations, but that leaves out the other two ideas.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>We need to distinguish between the features and the methodologies. When we argue, we need to be aware that it doesn't make much sense to argue about which features define a paradigm. The paradigm is mental and often hard to express, which is why we talk about &quot;real OOP&quot; and doing &quot;FP in my language&quot;.</p>
+<p>There is perhaps hope to break the curse of the Procedural Paradox. Can we make the languages better expressions of the paradigm? Or, more generally, what does starting with the paradigm tell us about how to design languages? There is no doubt that all of these paradigms are useful and that they are not mutually exclusive. They are simply different perspectives on the same thing--solving problems with code. A language and its features should be more clearly framed as support for expressing our thinking, regardless of paradigm.</p>
 <div class="footnotes">
 <hr />
 <ol>

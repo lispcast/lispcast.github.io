@@ -9,6 +9,20 @@
 
 
                 <item>
+                  <title>Programming Paradigms and the Procedural Paradox</title>
+                  <guid isPermalink="false">http://www.lispcast.com/procedural-paradox</guid>
+                  <link>http://www.lispcast.com/procedural-paradox</link>
+                  <pubDate>Wed 30 Aug 2017 14:07:44 AM CDT</pubDate>
+                  <description>
+                    I break down two perspectives (their features and their methodologies) for the three most common paradigms. I also explore why paradigms are so easy to argue about, and what we can do about it.
+
+                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/procedural-paradox"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+                  </description>
+                </item>
+
+
+                <item>
                   <title>Can I do FP in my language?</title>
                   <guid isPermalink="false">http://www.lispcast.com/fp-in-my-language</guid>
                   <link>http://www.lispcast.com/fp-in-my-language</link>
@@ -129,20 +143,6 @@
                     One of the great things about very robust and powerful abstractions is that they can give you tremendous leverage. The leverage can be so great that you can build something much greater than the sum of its parts. However, I worry that the web is an end to this kind of abstraction. I'd like to explore why that is and what we can do about it.
 
                     &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/bootstrapping-mindset"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
-
-                  </description>
-                </item>
-
-
-                <item>
-                  <title>The Idea of Lisp</title>
-                  <guid isPermalink="false">http://www.lispcast.com/idea-of-lisp</guid>
-                  <link>http://www.lispcast.com/idea-of-lisp</link>
-                  <pubDate>Tue 13 Dec 2016 06:41:42 AM CDT</pubDate>
-                  <description>
-                    How a programming language can be an idea.
-
-                    &lt;p&gt;&lt;center&gt;&lt;a href="http://www.lispcast.com/idea-of-lisp"&gt;Read full post&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
 
                   </description>
                 </item>

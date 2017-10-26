@@ -1,0 +1,294 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Clojure vs. The Static Typing World | LispCast</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ericnormand">
+    <meta name="twitter:creator" content="@ericnormand">
+    <meta name="twitter:description" content="Rich Hickey explained the design choices behind Clojure and made many statements about static typing along the way. Share an interesting perspective and some stories from my time as a Haskell programmer. I conclude with a design challenge for the statically typed world.">
+    <meta name="twitter:title" content="Clojure vs. The Static Typing World">
+
+    <meta property="og:title" content="Clojure vs. The Static Typing World">
+    <meta property="og:description" content="Rich Hickey explained the design choices behind Clojure and made many statements about static typing along the way. Share an interesting perspective and some stories from my time as a Haskell programmer. I conclude with a design challenge for the statically typed world.">
+
+    <meta name="description" content="Rich Hickey explained the design choices behind Clojure and made many statements about static typing along the way. Share an interesting perspective and some stories from my time as a Haskell programmer. I conclude with a design challenge for the statically typed world.">
+
+    <meta name="author" content="Eric Normand">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+    <link rel="alternate" type="application/rss+xml"
+          title="LispCast" href="/feed" />
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+                  mixpanel.init("ffad2bd88d2cb690edbbba6cf30b2958");</script><!-- end Mixpanel -->
+
+                      <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1085559841510143');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1085559841510143&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+                  </head>
+
+  <body>
+    <header class="banner">
+      <h1 class="banner-logo">
+        <a href="/">
+          <img class="banner-logo-img"
+               src="/img/Logo@2x.png"
+               alt="LispCast" />
+        </a>
+      </h1>
+
+      <div class="meta-data">
+        <img class="bio-img"
+             src="/img/eric_bio.jpg" />
+        <a class="twitter-link"
+           href="http://twitter.com/ericnormand">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a class="github-link"
+           href="https://github.com/ericnormand">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="mail-link"
+           href="mailto:eric@lispcast.com">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a class="rss-link"
+           href="/feed">
+          <i class="fa fa-rss-square"></i>
+        </a>
+        <a class="rss-link"
+           href="/archive.html">
+          <i class="fa fa-list"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <div class="main-container">
+
+
+
+      <article class="article">
+        <h2 class="article-title-wrapper">
+          <a class="article-title"
+             href="/clojure-and-types">
+            Clojure vs. The Static Typing World
+          </a>
+        </h2>
+
+        <div class="timestamp">
+          October 26, 2017
+        </div>
+
+        
+<p>Summary: <em>Rich Hickey explained the design choices behind Clojure and made many statements about static typing along the way. Share an interesting perspective and some stories from my time as a Haskell programmer. I conclude with a design challenge for the statically typed world.</em></p>
+<p><a href="https://www.youtube.com/watch?v=2V1FtfBDsLU">Rich Hickey's Keynote at Clojure/conj 2017</a> has stirred up the embers of some old flame wars, particularly the static vs. dynamic typing debate. I happen to have an interesting perspective, having worked professionally in both Clojure and Haskell. Some people on each side of the debate seem to be confused about what he was getting at, so I thought I'd share my interpretation of what he meant.<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> I want to shed some light on the spirit of his argument, using some of my experiences.</p>
+<h2 id="context">Context</h2>
+<p>Clojure was designed to make a certain kind of software easier to write. That kind of software can be characterized as:</p>
+<ul>
+<li>solving a real-world problem =&gt; must use non-elegant models</li>
+<li>running all the time =&gt; must deal with state and time</li>
+<li>interacting with the world =&gt; must have effects and be affected</li>
+<li>everything is changing =&gt; must change in ways you can't predict</li>
+</ul>
+<p>Everything Rich talks about in his presentation is within this design context. I think that is lost in some of the discussions I've seen online, so I'm just highlighting it here.</p>
+<p>He's never really talking in the context of dynamic typing vs. static typing. It's always Clojure vs. type systems available to him (though he never explicitly said that, it's easily understood from his language). This is just a guess, but at the time he wrote Clojure, those type systems most likely were Java-style (Java, C++, C#) and Haskell. It's not an attack on the theory of type systems or what they are capable of in the general sense. It is a pragmatic argument about whether any existing systems fit his design requirements. Although his language does not perfectly precisely address it, the <em>spirit</em> of his comments are answers to the question &quot;Why invent Clojure when you could just use Haskell or Java?&quot;</p>
+<p>But more on this later.</p>
+<h2 id="json-and-adts">JSON and ADTs</h2>
+<p>When I was working on Haskell-based web software, we dealt with a lot of JSON, as one does. Haskell had a really neat way of representing JSON as an Abstract Data Type (ADT). It's nice because <a href="http://www.lispcast.com/json-and-adt">JSON is well-specified as a recursive type</a>.</p>
+<p>Any JSON value could be represented using that ADT. It was totally well-typed. Except that, even though you knew the type, you still knew nothing about the structure of that JSON. The type system couldn't help you there.</p>
+<p>What we wound up doing was nesting pattern matching to get at the value we wanted. The deeper the JSON nesting, the deeper our pattern matching. We wrote functions to wrap this up and make it easier. But in general, it was a slog. The tools Haskell gives you are great at some things, but dealing with arbitrarily nested ADTs is not one of them.</p>
+<p>Some people say that this is the cost of having well-typed code elsewhere--dealing with the untyped stuff is terrible. But imagine if more and more of your code is dealing with JSON. It would be nice if there were some easier way.</p>
+<h2 id="types-positional-semantics-and-coupling">Types, positional semantics, and coupling</h2>
+<blockquote>
+<p>If you have a procedure with 10 parameters, you probably missed some.</p>
+<p>-- Alan Perlis</p>
+</blockquote>
+<p>Rich had some good points about positional semantics. When defining an ADT, positional semantics make it hard to read the code. If you've got seven arguments to your ADT's constructor, you've probably got them in the wrong order and you've forgotten one.</p>
+<p>So the answer is &quot;don't use positional constructors&quot;. Haskell does have constructors with named arguments. And that's fine, except in a real system, you start with a simple ADT that has two arguments--very easy to keep track of. You use it all over the place, using pattern matching. Its structure is now coupled all over the code.</p>
+<p>Then, you need to add one more piece of information. You add a third argument. Then you follow down all of the compiler errors, adding that third argument to your pattern matching statements. Great! Everything is good now.</p>
+<p>Except, over time, you add a fourth and a fifth. Pretty soon, you've got seven or eight of them. Good thing you have a type system to keep track of all of that. And don't get me started about merge conflicts when two branches want to modify the ADT at the same time. That's a digression.</p>
+<p>The fact is, in real systems, these ADTs do accrete new arguments. We had a central type called <code>Document</code> that had a bunch. I don't remember how many now. It has been a few years. Seven? Ten? It was a lot. And I remembered every single one of them because we processed documents, so most code was about <code>Document</code>s.</p>
+<p>You may catch them early and give them names. But in some cases, you don't. So you file a ticktetto change from positional to named, and then to rewrite pattern match expressions in almost every file. And when you prioritize that backlog, that task is probably not as important as adding a new feature. So it stays.</p>
+<p>My recommendation to those of you writing Haskell style guides is to disallow positional constructors with more than three arguments. Put a linter on it.</p>
+<h2 id="maybe-string"><code>Maybe String</code></h2>
+<p>Rich mentioned that <code>Maybe</code> wasn't a good solution to lack of knowledge. He said &quot;You either have it or you don't.&quot; This one is the most baffling to me. It's baffling because it seems very right to me but I can't say why. I also don't have any stories handy to explain my experiences with <code>Maybe</code>. Unfortunately, he doesn't go very deeply into it.</p>
+<p>As some people online mentioned have mentioned, <code>Maybe String</code> means precisely &quot;I may (or may not) have a String&quot;. But that's missing the point. Let me try to explain why.</p>
+<p><code>Maybe</code> is a very neat idea. It's a type that represents having a value or not. It's often used as a replacement for nullable fields. In a world where types, classes, or fixed records are used to hold information about an entity, using a <code>Maybe</code> for the optional fields is a way to represent that optionality.</p>
+<p>In the kinds of systems Rich is talking about, any data could possibly be missing--if not now then at some point in the future when requirements change. At the limit, you would need to make everything <code>Maybe</code>. And if that's the case, I would propose that maybe, for this context, you want to move that <em>optionality</em> into the information model, not the domain model. Your <code>Person</code> type is part of the domain model (it says: these are the bits of information we care about for people). The fact that any bit of information could be missing is part of the information model. The information model might contain other data, like when the information entered the system.</p>
+<p>I'm reminded of my friend's company. They do medical record software. The standards for medical records have hundreds of types. And each version that comes out changes things slightly. On top of that, you're getting data from systems that don't implement things properly. And on top of <em>that</em>, humans are entering the data incorrectly, which isn't surprising since the spec is hundreds of pages long.</p>
+<p>In a system like that, you can't write correct types for every kind of entity. You'd never finish before the new spec came out. Instead, you need to think at an information level. One approach is to do your best with the information you need to work with and pass along the rest as-is. Regardless of how you decide to handle it, sprinkling <code>Maybe</code>s around isn't going to cut it. Nor are fixed entity types. You really need to take it up a level to build a robust information model.</p>
+<h2 id="types-as-concretions">Types as concretions</h2>
+<p>Rich talked about types, such as Java classes and Haskell ADTs, as <em>concretions</em>, not <em>abstractions</em>. I very much agree with him on this point, so much so that I didn't know it wasn't common sense.</p>
+<p>But, on further consideration, I guess I'm not that surprised. People often talk about a <code>Person</code> class <em>representing</em> a person. But it doesn't. It represents <em>information about a person</em>. A <code>Person</code> type, with certain fields of given types, is a concrete choice about what information you want to keep out of all of the possible choices of what information to track about a person. An abstraction would ignore the particulars and let you store any information about a person. And while you're at it, it might as well let you store information about anything. There's something deeper there, which is about having a higher-order notion of data.</p>
+<h2 id="a-focus-on-composable-information-constructs">A focus on composable information constructs</h2>
+<p>Sure, we get very few guarantees about the data we have in Clojure. We get that. But if we assume we've got some basic things right, like that we have a map when we think we have a map, we do get some nice guarantees. For instance, <code>assoc</code>ing the same key and value is idempotent. That we can access the value for any key in constant time.</p>
+<p>And Haskell has that for ADTs. But can Haskell merge two ADTs together as an associative operation, like we can with maps? Can Haskell select a subset of the keys? Can Haskell iterate through the key-value pairs?</p>
+<p>Of course, you could build a type with all of those properties and more in Haskell. A universal information model, with a convenient library of functions for dealing with them. That universal information model would look something like the JSON datatype or a richer one like an EDN data type. And your library of functions for dealing with them would look something like Clojure's standard library. But just like with the JSON type, you'd have very few static guarantees. At some point you're just re-implementing Clojure.</p>
+<h2 id="types-are-a-design-space">Types are a design space</h2>
+<p>Okay, now for some pontification. A type system gives you a new design space. It lets you express things, like type constraints, that you simply don't have to in untyped languages. That gives you a lot more choices to make. Choices can be good. But they can also be a distraction.</p>
+<p>Rich Hickey mentioned puzzles as being addictive, implying that it's fun to do stuff in the type system because it's like a puzzle. It's similar to the Object-Oriented practice of really puzzling out those isA relationships. It very much is like a puzzle: you've got some rules and an objective. Can you figure out a solution? Meanwhile, it gets you no closer to the goal.</p>
+<p>I've definitely experienced this myself in Haskell, both as the puzzler and on onlooker. This may have changed in the four years since I've done Haskell professionally, but I often found Haskell libraries to be puzzle solutions. Someone wanted to figure out how to type some protocol to &quot;make it safe&quot;. They usually succeeded at getting a partial implementation before giving up. On many occasions, after looking through several attempted implementations of a simple protocol, no existing libraries fit our bill.</p>
+<p>Like I said, this may have changed. But I'm confident in asserting that there's a danger with getting carried away with the complexity of your types. Haskell gives you plenty of rope to do that.</p>
+<h2 id="type-systems-are-a-design-space">Type systems are a design space</h2>
+<p>The language's type system itself is a design space. In addition to the syntax and runtime semantics of the language, typed languages add on an additional space for exploration. This inherently makes them harder to design. They simply have more choices to make. I would say that Clojure and Haskell are both well-designed languages. And now, thanks to the talk, we know what Clojure was designed for. What was Haskell designed for?</p>
+<h2 id="what-haskell-was-designed-for">What Haskell was designed for</h2>
+<p>I don't think it's any secret that Haskell was designed as a <em>lingua franca</em> for functional programming and type theory research. It famously &quot;avoids success at all costs&quot; by sticking to its principles of purity and typeability.</p>
+<p>Of course, many people and companies are successful using Haskell. People have learned to wield the tremendous power of the type system. I think that points to something inherently valuable about Haskell and the other typed languages. Lots of parts of a system are inherently typeable--meaning they do have small, clear, and stable types. Those parts aren't as chaotic as the outside world. They can be well understood and codified into precise types to great advantage. And there's no reason the information model <em>couldn't</em> be either. Of course it's <em>possible</em>. But has it been done?</p>
+<h2 id="design-challenge">Design challenge</h2>
+<p>It's easy to hear critiques of static typing and interpret them as &quot;static typing is bad&quot;. Rich Hickey was certainly not doing that. He had a particular problem to solve and was noting how static typing was not particularly well-suited to that problem. <code>Maybe</code> doesn't solve the problem. <code>Person</code> and other entity types don't solve the problem. They are useful for some things, but not for this particular problem.</p>
+<p>I see the gist of his talk not as a condemnation of static typing, but instead as a design challenge to Haskellers and language designers. Many people online brought up Haskell extensions or row polymorphism, or some feature of Purescript, etc. These are all great. The challenge is to piece together an actual solution to the problem of &quot;situated programs&quot;, not just point to features that might address one issue. Perhaps you can do it in pure Haskell. Maybe you need some extensions. Maybe it's an entirely new language. Or maybe you dismiss the challenge as unimportant--that his description of &quot;situated programs&quot; is not the right way to look at things.</p>
+<p>But I don't see people doing any of those things. What people are doing is saying &quot;but of course that's possible in principle, so the argument against static typing is invalid&quot;. It's not about what's possible, it's about the particular designs of the actual languages we have to choose from. He criticized particular features used for particular purposes. <code>Maybe</code> is not it. Pattern matching is not it. Entity types are not it. What is the static typing solution to the entire problem?</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>When I was working on the Haskell system, I really missed having a more flexible model of information. So much of our code was about taking form fields and making sense of them. That usually involved trying to fit them into a type so they could be processed by the system. Like Rich mentioned, the information-processing part dominated the codebase.</p>
+<p>When I moved into a Clojure job, I felt such a sense of freedom. I could treat information as information and not have to prove anything to a type checker. However, I had the benefit of having traversed the gauntlet of a strict static type system. My mind had been seeded with the thought-pathways of type correctness. My Clojure code benefited and I still look in horror on some Clojure code that plays too much with types.</p>
+<p>I sometimes wish I could tighten down some Clojure code with static type guarantees. These are in small, remote portions of the code that have intricate algorithms. Static types would be very useful there. But that's the exception. In general, I like the flexible information model approach of Clojure better than the statically-typed approach of Haskell.</p>
+<p>Elm's design seems superbly crafted for its purpose of building rich, interactive web interfaces. Is it possible with our current understanding to build a statically-typed language that rivals Clojure for its intended purpose? What would such a language look like? What types would it have? Who will build it?</p>
+<div class="article-cg-box">
+  <h3>
+You may like the PurelyFunctional.tv Newsletter
+</h3>
+  <p class="article-cg-box-text">
+    
+For more inspiration, history, interviews, and trends of interest to functional programmers, get the free PurelyFunctional.tv Newsletter.
+</p>
+
+<p><a href="https://purelyfunctional.tv/newsletter/"
+     class="article-cg-box-button js-clojuregazette">Learn More</a></p>
+
+<p>
+    
+Clojure pulls in ideas from many different languages and paradigms, and also from the broader world, including music and philosophy. The PurelyFunctional.tv Newsletter shares that vision and weaves a rich tapestry of ideas from the daily flow of library releases to the deep historical roots of computer science.
+</p>
+</div>
+
+
+
+<h3 id="you-might-also-like">You might also like</h3>
+<ul>
+<li><a href="http://www.lispcast.com/100-most-used-clojure-expressions">The 100 Most Used Clojure Expressions</a></li>
+<li><a href="http://www.lispcast.com/3-things-java-can-steal-from-clojure">3 Things Java Programmers Can Steal from Clojure</a></li>
+<li><a href="http://www.lispcast.com/annotated-clojure-core-reduce">Some Annotated clojure.core/reduce Examples</a></li>
+<li><a href="http://www.lispcast.com/annotated-map">Annotated map</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>I've watched the talk a couple of times to understand as much as I can, and I've looked at some online discussions of the talk to see where people were confused. But these are <em>my interpretations</em> of the ideas he presented. I can't speak for Rich Hickey or anyone else in the Clojure community.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+        <div class="endmark">
+          <a class="endmark-link"
+             href="/">
+            <img class="endmark-lambda"
+                 src="/img/dot.png" />
+          </a>
+        </div>
+
+      </article>
+
+
+      <div class="notes">
+
+      </div>
+
+    </div>
+
+    <footer class="footer-banner">
+      <a class="footer-previous"
+         href="http://www.lispcast.com/procedural-paradox">
+        previous
+      </a>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+
+
+
+    <script>
+
+      mixpanel.register({URL: window.location.pathname,
+      Title: $("title").text()});
+
+      mixpanel.track("Page Visit");
+
+    </script>
+    <script src="/js/mylibs/annotated-code.js" defer></script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {};
+      _dcs.account = '3651717';
+
+      (function() {
+      var dc = document.createElement('script');
+      dc.type = 'text/javascript'; dc.async = true;
+      dc.src = '//tag.getdrip.com/3651717.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(dc, s);
+      })();
+
+      $(document).on('submitted.drip', function(ev, data){
+        if(mixpanel) {
+          mixpanel.register({Email: data['fields[email]']});
+          mixpanel.track('Drip Subscription');
+      }
+      window._pq = window._pq || [];
+      _pq.push(['track', 'email-list']);
+
+      });
+    </script>
+    <script>
+      window._pq = window._pq || [];
+      _pq.push(['track', 'blog-visit']);
+      _dcq.push(['track', 'Page visit']);
+    </script>
+    <script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/57028dd785ca5224980000a6.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+    </script>
+  </body>
+</html>
